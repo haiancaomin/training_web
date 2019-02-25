@@ -11,7 +11,6 @@
               </el-carousel-item>
             </el-carousel>
           </div>
-		  eee
         </el-col>
         <el-col :span="8">
           <div class="grid-content login-box">
