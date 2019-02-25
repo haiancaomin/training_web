@@ -20,6 +20,7 @@
               </el-row>
               <el-row class="regist">
                 还没账号？
+				sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                 <a href class="regist-now">立即注册</a>
               </el-row>
             </template>
