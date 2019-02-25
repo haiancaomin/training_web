@@ -12,7 +12,6 @@
             </el-carousel>
           </div>
 		  
-		  ffffffffggggggggggggggggggggggggggggggggggggggggggg
         </el-col>
         <el-col :span="8">
           <div class="grid-content login-box">
