@@ -19,7 +19,7 @@
                 <el-button type="primary" class="login-btn">登录</el-button>
               </el-row>
               <el-row class="regist">
-                还没账号？哈哈哈
+                还没账号？
                 <a href class="regist-now">立即注册</a>
               </el-row>
             </template>
