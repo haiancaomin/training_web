@@ -11,6 +11,7 @@
               </el-carousel-item>
             </el-carousel>
           </div>
+          少时诵诗书所
         </el-col>
         <el-col :span="8">
           <div class="grid-content login-box">
