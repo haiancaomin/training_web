@@ -1,7 +1,7 @@
 <template>
   <el-container>
-    <UserLogin v-bind:dialogVisible="dialogVisible"></UserLogin>
-    <UserRegister v-bind:regDialogVisible="regDialogVisible"></UserRegister>
+    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
+    <user-register :regDialogVisible="regDialogVisible" v-on:regclosed="closeRegDialog" v-on:goToLog="goToLogin"></user-register>
 
     <top-nav></top-nav>
     <el-main>
@@ -228,8 +228,6 @@ export default {
     return {
       dialogVisible:false,
       regDialogVisible:false,
-      showLogin: false,
-      showRegister: false,
       bannerLists: [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
@@ -269,15 +267,26 @@ export default {
     },
     clickRegister: function() {
       this.dialogVisible= false;
-      this.regDialogVisible = false;
       this.regDialogVisible = true;
     },
     clickLogin: function() {
       this.regDialogVisible = false;
-      this.dialogVisible= false;
       this.dialogVisible= true;
       
+    },
+    closeDialog:function(msg){
+      this.dialogVisible=msg
+    },
+    closeRegDialog:function(msg){
+      this.regDialogVisible=msg
+    },
+    goToRegist:function(msg){
+      this.regDialogVisible=msg
+    },
+    goToLogin:function(msg){
+      this.dialogVisible=msg
     }
+    
   }
 };
 </script>

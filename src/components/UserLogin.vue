@@ -1,45 +1,40 @@
 <template>
   <div class="User-Login">
-
-    <!-- <el-button type="text" @click="dialogVisible = true">登录</el-button> -->
-
-    <el-dialog title="账号登录" :visible.sync="dialogVisible" width="450px">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm">
-        
+    <el-dialog title="账号登录" :visible.sync="logshow" width="450px" @closed="closeDialog">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="80px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="用户名: " prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        
         <el-form-item label="密码: " prop="password">
           <el-input v-model="ruleForm.password"></el-input>
         </el-form-item>
         <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
         </el-form-item>
-
       </el-form>
-      <a class='forgetpwd' href='#'>忘记密码？</a>
-      <a class='register' href='#' @click="clickRegister">去注册<span class='el-icon-arrow-right'></span></a>
-      
-     
+      <a class="forgetpwd" href="#">忘记密码？</a>
+      <a class="register" href="javascript:;" @click="clickRegister">去注册
+        <span class="el-icon-arrow-right"></span>
+      </a>
     </el-dialog>
-
-
   </div>
 </template>
 
 <script>
 import UserRegister from "@/components/UserRegister";
 export default {
-  name: "UserLogin",
-
   data() {
     return {
-      // dialogVisible:true,
-      regDialogVisible:false,
+      logshow: false,
       ruleForm: {
-        name: '',
-        password: ''
+        name: "",
+        password: ""
       },
       rules: {
         name: [
@@ -53,12 +48,18 @@ export default {
       }
     };
   },
+  watch: {
+    dialogVisible: function(val) {
+      this.logshow = val;
+    }
+  },
   methods: {
-    
+    closeDialog: function() {
+      this.$emit("closed", false);
+    },
     clickRegister: function() {
-      this.dialogVisible= false;
-      this.regDialogVisible = false;
-      this.regDialogVisible = true;
+      this.logshow = false;
+      this.$emit("goToReg", true);
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -69,26 +70,12 @@ export default {
           return false;
         }
       });
-    },
-    openReg: function() {
-      this.$emit("clickRegister",true)
     }
-    
-
   },
   components: {
-    // TopNav
-    
     UserRegister
   },
-  // props: {
-  //   dialogVisible: {
-  //     type:bool,
-  //     required:true
-  //   }
-  // }
-  props: ['dialogVisible']
-  
+  props: ["dialogVisible"]
 };
 </script>
 
@@ -99,7 +86,7 @@ a {
 }
 .el-input {
   width: 80%;
-  margin: 0px 55px 0px 0px
+  margin: 0px 55px 0px 0px;
 }
 
 .el-button {
@@ -107,7 +94,7 @@ a {
   font-size: 18px;
   font-family: fantasy;
   font-weight: bold;
-  margin: 0px 55px 0px 0px
+  margin: 0px 55px 0px 0px;
 }
 
 .el-row {
@@ -133,12 +120,13 @@ a {
   color: darkgrey;
   font-size: 12px;
   padding: 0 40px 0 0;
-  margin: 0 0 0 25px
+  margin: 0 0 0 25px;
 }
 .register {
   font-size: 12px;
-  padding: 0 0 0 120px
+  padding: 0 0 0 120px;
 }
-a{ text-decoration:none} 
-
+a {
+  text-decoration: none;
+}
 </style>
