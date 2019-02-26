@@ -1,6 +1,6 @@
 <template>
   <div class="User-Register">
-    <el-dialog title="账号注册" :visible.sync="regDialogVisible" width="480px" id="regDialog">
+    <el-dialog title="账号注册" :visible.sync="regshow" width="480px" id="regDialog" @closed="closeDialog">
       <el-form
         :model="ruleForm"
         :rules="rules"
@@ -11,33 +11,26 @@
         <el-form-item label="姓名: " prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-
         <el-form-item label="性别: " prop="sex" id="regSex">
           <el-radio-group v-model="ruleForm.sex">
             <el-radio label="男"></el-radio>
             <el-radio label="女"></el-radio>
           </el-radio-group>
         </el-form-item>
-
         <el-form-item label="身份证号:  " prop="IDCardNuM">
           <el-input v-model="ruleForm.IDCardNuM"></el-input>
         </el-form-item>
-
         <el-form-item label="出生日期:" required>
           <el-form-item prop="birthday">
             <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birthday"></el-date-picker>
           </el-form-item>
-        </el-form-item>
-        
+        </el-form-item>       
         <el-form-item label="籍贯:  " prop="native">
           <el-input v-model="ruleForm.native"></el-input>
         </el-form-item>
-        
-
         <el-form-item label="现工作地:  " prop="workingSpace">
           <el-input v-model="ruleForm.workingSpace"></el-input>
         </el-form-item>
-
         <el-form-item label="学历:   " prop="education">
           <el-select v-model="ruleForm.education" education="请选择学历">
             <el-option label="小学及以下" value="0"></el-option>
@@ -50,41 +43,30 @@
             <el-option label="博士及以上" value="7"></el-option>
           </el-select>
         </el-form-item>
-
         <el-form-item label="毕业学校:  " prop="graduteSchool">
           <el-input v-model="ruleForm.graduteSchool"></el-input>
         </el-form-item>
-
         <el-form-item label="职位:  " prop="position">
           <el-input v-model="ruleForm.position"></el-input>
         </el-form-item>
-
         <el-form-item label="工种:  " prop="workType">
           <el-input v-model="ruleForm.workType"></el-input>
         </el-form-item>
-
         <el-form-item label="移动电话:  " prop="mobile">
           <el-input v-model="ruleForm.mobile"></el-input>
         </el-form-item>
-
         <el-form-item label="手机验证码:  " prop="verification" id="regVerification">
           <el-input v-model="ruleForm.verification"></el-input>
         </el-form-item>
-
         <el-form-item label="邮箱:  " prop="mail">
           <el-input v-model="ruleForm.mail"></el-input>
         </el-form-item>
-
         <el-form-item label="所在公司:  " prop="company">
           <el-input v-model="ruleForm.company"></el-input>
-        </el-form-item>
-
-        
+        </el-form-item>       
         <el-form-item label="从业资格证书:  " prop="qualification" id="regQualification">
           <el-input v-model="ruleForm.qualification"></el-input>
         </el-form-item>
-        
-
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">注&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
         </el-form-item>
@@ -99,12 +81,9 @@
 
 <script>
 export default {
-  name: "UserRegister",
-
   data() {
     return {
-      
-
+      regshow:false,
       ruleForm: {
         name: "",
         IDCardNuM: "",
@@ -149,9 +128,19 @@ export default {
       }
     };
   },
+  props:['regDialogVisible'],
+  watch:{
+    regDialogVisible:function(val){
+      this.regshow=val
+    }
+  },
   methods: {
+    closeDialog:function(){
+      this.$emit('regclosed', false)
+    },
     go() {
-      this.$router.push("/UserLogin");
+      this.regshow=false
+      this.$emit('goToLog',true)
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -163,8 +152,7 @@ export default {
         }
       });
     }
-  },
-  props: ['regDialogVisible']
+  }
 };
 </script>
 
