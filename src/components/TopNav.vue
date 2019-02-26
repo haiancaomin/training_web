@@ -15,7 +15,10 @@
       <el-menu-item index="1">
         <a href="https://www.ele.me" target="_blank">主页</a>
       </el-menu-item>
-      <el-submenu index="2">
+      <el-menu-item index="2">
+        <a href="https://www.ele.me" target="_blank">关于我们</a>
+      </el-menu-item>
+      <!-- <el-submenu index="2">
         <template slot="title">关于我们</template>
         <el-menu-item index="2-1">机构介绍</el-menu-item>
         <el-menu-item index="2-2">培训理念</el-menu-item>
@@ -23,8 +26,8 @@
         <el-menu-item index="2-4">资质荣誉</el-menu-item>
         <el-menu-item index="2-5">管理体系</el-menu-item>
         <el-menu-item index="2-6">招贤纳士</el-menu-item>
-      </el-submenu>
-      <el-submenu index="3">
+      </el-submenu> -->
+      <!-- <el-submenu index="3">
         <template slot="title">课程分类</template>
         <el-submenu index="3-1">
           <template slot="title">生产</template>
@@ -38,7 +41,10 @@
           <el-menu-item index="3-2-2">吊装</el-menu-item>
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
-      </el-submenu>
+      </el-submenu> -->
+      <el-menu-item index="3">
+        <a href="https://www.ele.me" target="_blank">课程分类</a>
+      </el-menu-item>
       <el-menu-item index="4">
         <a href="https://www.ele.me" target="_blank">师资力量</a>
       </el-menu-item>
