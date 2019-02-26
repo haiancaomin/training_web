@@ -1,5 +1,8 @@
 <template>
   <el-container>
+    <UserLogin v-bind:dialogVisible="dialogVisible"></UserLogin>
+    <UserRegister v-bind:regDialogVisible="regDialogVisible"></UserRegister>
+
     <top-nav></top-nav>
     <el-main>
       <el-row :gutter="20">
@@ -16,11 +19,11 @@
           <div class="grid-content login-box">
             <template v-if="1">
               <el-row>
-                <el-button type="primary" class="login-btn">登录</el-button>
+                <el-button type="primary" class="login-btn" @click="clickLogin">登录</el-button>
               </el-row>
               <el-row class="regist">
                 还没账号？
-                <a href class="regist-now">立即注册</a>
+                <a href='javascript:;' class="regist-now" @click="clickRegister">立即注册</a>
               </el-row>
             </template>
             <template v-if="0">
@@ -218,9 +221,15 @@
 
 <script>
 import TopNav from "../components/TopNav";
+import UserLogin from "@/components/UserLogin";
+import UserRegister from "@/components/UserRegister";
 export default {
   data() {
     return {
+      dialogVisible:false,
+      regDialogVisible:false,
+      showLogin: false,
+      showRegister: false,
       bannerLists: [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
@@ -242,7 +251,9 @@ export default {
     };
   },
   components: {
-    TopNav
+    TopNav,
+    UserLogin,
+    UserRegister
   },
   computed: {
     swiper() {
@@ -255,6 +266,17 @@ export default {
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
+    },
+    clickRegister: function() {
+      this.dialogVisible= false;
+      this.regDialogVisible = false;
+      this.regDialogVisible = true;
+    },
+    clickLogin: function() {
+      this.regDialogVisible = false;
+      this.dialogVisible= false;
+      this.dialogVisible= true;
+      
     }
   }
 };
