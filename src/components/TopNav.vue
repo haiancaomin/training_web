@@ -4,19 +4,20 @@
       <img src="../assets/favicon.png" alt>
     </div>
     <el-menu
-      :default-active="activeIndex"
+      :default-active="$route.path"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      router
     >
-      <el-menu-item index="1">
-        <a href="https://www.ele.me" target="_blank">主页</a>
+      <el-menu-item index="/">
+        <a href="javascript:;">主页</a>
       </el-menu-item>
       <el-menu-item index="2">
-        <a href="https://www.ele.me" target="_blank">关于我们</a>
+        <a href="javascript:;">关于我们</a>
       </el-menu-item>
       <!-- <el-submenu index="2">
         <template slot="title">关于我们</template>
@@ -42,23 +43,23 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
       </el-submenu> -->
-      <el-menu-item index="3">
-        <a href="https://www.ele.me" target="_blank">课程分类</a>
+      <el-menu-item index="/course">
+        <a href="javascript:;">课程分类</a>
       </el-menu-item>
       <el-menu-item index="4">
-        <a href="https://www.ele.me" target="_blank">师资力量</a>
+        <a href="javascript:;">师资力量</a>
       </el-menu-item>
       <el-menu-item index="5">
-        <a href="https://www.ele.me" target="_blank">服务和团队</a>
+        <a href="javascript:;">服务和团队</a>
       </el-menu-item>
       <el-menu-item index="6">
-        <a href="https://www.ele.me" target="_blank">认证体系</a>
+        <a href="javascript:;">认证体系</a>
       </el-menu-item>
       <el-menu-item index="7">
-        <a href="https://www.ele.me" target="_blank">基地展示</a>
+        <a href="javascript:;">基地展示</a>
       </el-menu-item>
       <el-menu-item index="8">
-        <a href="https://www.ele.me" target="_blank">报名入口</a>
+        <a href="javascript:;">报名入口</a>
       </el-menu-item>
     </el-menu>
   </el-header>
@@ -68,12 +69,13 @@
 export default {
   data() {
     return {
-      activeIndex: "1"
+      
     };
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      console.log(key, keyPath,this.$router.path);
+      
     }
   }
 };
