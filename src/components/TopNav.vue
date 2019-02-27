@@ -46,7 +46,7 @@
       <el-menu-item index="/course">
         <a href="javascript:;">课程分类</a>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="/teacher">
         <a href="javascript:;">师资力量</a>
       </el-menu-item>
       <el-menu-item index="5">
