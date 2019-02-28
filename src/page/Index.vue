@@ -2,8 +2,6 @@
   <el-container>
     <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
     <user-register :regDialogVisible="regDialogVisible" v-on:regclosed="closeRegDialog" v-on:goToLog="goToLogin"></user-register>
-
-    <top-nav></top-nav>
     <el-main>
       <el-row :gutter="20">
         <el-col :span="16">
@@ -220,7 +218,6 @@
 </template>
 
 <script>
-import TopNav from "../components/TopNav";
 import UserLogin from "@/components/UserLogin";
 import UserRegister from "@/components/UserRegister";
 export default {
@@ -249,7 +246,6 @@ export default {
     };
   },
   components: {
-    TopNav,
     UserLogin,
     UserRegister
   },

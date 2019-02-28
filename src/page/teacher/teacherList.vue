@@ -1,6 +1,5 @@
 <template>
   <el-container>
-    <top-nav></top-nav>
     <el-main>
       <div class="teacher-container">
         <h1 class="teacher-title">教师风采</h1>
@@ -123,15 +122,12 @@
   </el-container>
 </template>
 <script>
-import TopNav from "../../components/TopNav";
 
 export default {
   data() {
     return {};
   },
-  components: {
-    TopNav
-  }
+  
 };
 </script>
 

@@ -1,6 +1,5 @@
 <template>
   <el-container>
-    <top-nav></top-nav>
     <el-main>
       <div class="course-container">
         <el-tabs type="border-card" stretch>
@@ -161,15 +160,12 @@
   </el-container>
 </template>
 <script>
-import TopNav from "../../components/TopNav";
 
 export default {
   data() {
     return {};
   },
-  components: {
-    TopNav
-  }
+  
 };
 </script>
 

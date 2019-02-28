@@ -1,5 +1,6 @@
 <template>
-  <el-header>
+<div>
+<el-header>
     <div class="logo">
       <img src="../assets/favicon.png" alt>
     </div>
@@ -13,7 +14,7 @@
       active-text-color="#ffd04b"
       router
     >
-      <el-menu-item index="/">
+      <el-menu-item index="/index">
         <a href="javascript:;">主页</a>
       </el-menu-item>
       <el-menu-item index="2">
@@ -52,8 +53,8 @@
       <el-menu-item index="5">
         <a href="javascript:;">服务和团队</a>
       </el-menu-item>
-      <el-menu-item index="6">
-        <a href="javascript:;">认证体系</a>
+      <el-menu-item index="/download">
+        <a href="javascript:;">资料下载</a>
       </el-menu-item>
       <el-menu-item index="7">
         <a href="javascript:;">基地展示</a>
@@ -63,6 +64,9 @@
       </el-menu-item>
     </el-menu>
   </el-header>
+  <router-view></router-view>
+</div>
+  
 </template>
 
 <script>
@@ -74,7 +78,7 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath,this.$router.path);
+      console.log(key, keyPath,this.$route.path);
       
     }
   }
