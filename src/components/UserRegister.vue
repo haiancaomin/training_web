@@ -8,65 +8,27 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="姓名: " prop="name">
+        <el-form-item label="用户名: " prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="性别: " prop="sex" id="regSex">
-          <el-radio-group v-model="ruleForm.sex">
-            <el-radio label="男"></el-radio>
-            <el-radio label="女"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="身份证号:  " prop="IDCardNuM">
+       
+        <el-form-item label="密码:  " prop="IDCardNuM">
           <el-input v-model="ruleForm.IDCardNuM"></el-input>
         </el-form-item>
-        <el-form-item label="出生日期:" required>
-          <el-form-item prop="birthday">
-            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birthday"></el-date-picker>
-          </el-form-item>
-        </el-form-item>       
-        <el-form-item label="籍贯:  " prop="native">
-          <el-input v-model="ruleForm.native"></el-input>
-        </el-form-item>
-        <el-form-item label="现工作地:  " prop="workingSpace">
+        
+        <el-form-item label="确认密码:  " prop="workingSpace">
           <el-input v-model="ruleForm.workingSpace"></el-input>
         </el-form-item>
-        <el-form-item label="学历:   " prop="education">
-          <el-select v-model="ruleForm.education" education="请选择学历">
-            <el-option label="小学及以下" value="0"></el-option>
-            <el-option label="初中" value="1"></el-option>
-            <el-option label="高中" value="2"></el-option>
-            <el-option label="中专" value="3"></el-option>
-            <el-option label="本科" value="4"></el-option>
-            <el-option label="大专" value="5"></el-option>
-            <el-option label="硕士" value="6"></el-option>
-            <el-option label="博士及以上" value="7"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="毕业学校:  " prop="graduteSchool">
-          <el-input v-model="ruleForm.graduteSchool"></el-input>
-        </el-form-item>
-        <el-form-item label="职位:  " prop="position">
-          <el-input v-model="ruleForm.position"></el-input>
-        </el-form-item>
-        <el-form-item label="工种:  " prop="workType">
-          <el-input v-model="ruleForm.workType"></el-input>
-        </el-form-item>
-        <el-form-item label="移动电话:  " prop="mobile">
+       
+        <el-form-item label="手机号码:  " prop="mobile">
           <el-input v-model="ruleForm.mobile"></el-input>
         </el-form-item>
-        <el-form-item label="手机验证码:  " prop="verification" id="regVerification">
-          <el-input v-model="ruleForm.verification"></el-input>
+        <el-form-item label="验证码:  " prop="verification" id="regVerification"> 
+
+          <el-input v-model="ruleForm.verification" class="identification-num"></el-input> 
+          <button type="button" class="test-but">获取验证码</button>
         </el-form-item>
-        <el-form-item label="邮箱:  " prop="mail">
-          <el-input v-model="ruleForm.mail"></el-input>
-        </el-form-item>
-        <el-form-item label="所在公司:  " prop="company">
-          <el-input v-model="ruleForm.company"></el-input>
-        </el-form-item>       
-        <el-form-item label="从业资格证书:  " prop="qualification" id="regQualification">
-          <el-input v-model="ruleForm.qualification"></el-input>
-        </el-form-item>
+        
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">注&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
         </el-form-item>
@@ -225,13 +187,27 @@ a {
 .el-radio-group {
   padding: 0px 300px 0px 0px;
 }
-
+.User-Register {
+  text-align: center;
+}
+.test-but {
+      position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 42px;
+    width: 120px;
+    height: 36px;
+    margin: auto;
+    line-height: 36px;
+    text-align: center;
+}
 </style>
 <style>
   #regDialog .el-dialog__title {
   font-size: 25px ;
   font-weight: bold;
   color: royalblue;
+  text-align:center;
 }
 </style>
 

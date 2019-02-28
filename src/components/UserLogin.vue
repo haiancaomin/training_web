@@ -83,6 +83,7 @@ export default {
 <style scoped>
 a {
   color: #42b983;
+  text-decoration: none;
 }
 .el-input {
   width: 80%;
@@ -126,7 +127,8 @@ a {
   font-size: 12px;
   padding: 0 0 0 120px;
 }
-a {
-  text-decoration: none;
+.User-Login {
+  text-align: center;
 }
 </style>
+
