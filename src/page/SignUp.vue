@@ -1,6 +1,5 @@
 <template>
   <div id="signup">
-    <top-nav></top-nav>
     <el-steps :active="active" finish-status="success" simple style="margin-top: 80px">
       <el-step title="报名信息"></el-step>
       <el-step title="套餐选择"></el-step>
@@ -519,7 +518,6 @@
 </template>
 
 <script>
-import TopNav from "../components/TopNav";
 export default {
   name: "Signup",
   data() {
@@ -598,9 +596,7 @@ export default {
       }
     };
   },
-  components: {
-    TopNav
-  },
+  
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
