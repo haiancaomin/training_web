@@ -17,8 +17,17 @@
       <el-menu-item index="/index">
         <a href="javascript:;">主页</a>
       </el-menu-item>
+      <el-menu-item index="/course">
+        <a href="javascript:;">课程分类</a>
+      </el-menu-item>
+      <el-menu-item index="7">
+        <a href="javascript:;">基地展示</a>
+      </el-menu-item>
+      <el-menu-item index="/teacher">
+        <a href="javascript:;">师资力量</a>
+      </el-menu-item>
       <el-menu-item index="2">
-        <a href="javascript:;">关于我们</a>
+        <a href="javascript:;">证书查询</a>
       </el-menu-item>
       <!-- <el-submenu index="2">
         <template slot="title">关于我们</template>
@@ -44,23 +53,21 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
       </el-submenu> -->
-      <el-menu-item index="/course">
-        <a href="javascript:;">课程分类</a>
-      </el-menu-item>
-      <el-menu-item index="/teacher">
-        <a href="javascript:;">师资力量</a>
+      <el-menu-item index="5">
+        <a href="javascript:;">高端考察</a>
       </el-menu-item>
       <el-menu-item index="5">
-        <a href="javascript:;">服务和团队</a>
+        <a href="javascript:;">资讯</a>
+      </el-menu-item>
+      <el-menu-item index="5">
+        <a href="javascript:;">人力资源服务</a>
       </el-menu-item>
       <el-menu-item index="/download">
         <a href="javascript:;">资料下载</a>
       </el-menu-item>
-      <el-menu-item index="7">
-        <a href="javascript:;">基地展示</a>
-      </el-menu-item>
+      
       <el-menu-item index="8">
-        <a href="javascript:;">报名入口</a>
+        <a href="javascript:;">联系我们</a>
       </el-menu-item>
     </el-menu>
   </el-header>

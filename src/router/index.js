@@ -5,6 +5,7 @@ import Index from '@/page/Index'
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
+import fileDetail from '@/page/downloads/fileDetail'
 
 Vue.use(Router)
 
@@ -27,6 +28,9 @@ export default new Router({
     }, {
       path: '/download',
       component: fileList
+    }, {
+      path: '/download-action',
+      component: fileDetail
     }, ]
   }]
 })

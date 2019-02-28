@@ -5,15 +5,15 @@
         <h1 class="file-title">文件列表</h1>
         <ul class="file-box">
           <li>
-            <a href="/download">江苏省住房和城乡建设厅装配式文件</a>
+            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件</router-link>
             <span class="date">2019-2-28</span>
           </li>
           <li>
-            <a href="javascript:;">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</a>
+            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</router-link>
             <span class="date">2019-2-28</span>
           </li>
           <li>
-            <a href="javascript:;">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</a>
+            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</router-link>
             <span class="date">2019-2-28</span>
           </li>
         </ul>
@@ -41,9 +41,7 @@ export default {
 .el-row {
   padding: 20px 0;
 }
-.bottom-line {
-  border-bottom: 1px solid #eee;
-}
+
 .file-container {
   padding: 20px;
   background: #fff;
