@@ -276,7 +276,7 @@
     <!-- 支付页面page4 -->
     <div class="pay" v-show="fourthPage == 1">
       <div class="pay-head">
-        <sapn>您可以选择</sapn>
+        <span>您可以选择</span>
         <el-button type="primary" @click="onliePayment">在线支付</el-button>
         <span>或者</span>
         <el-button type="success" @click="offliePayment">转账汇款</el-button>

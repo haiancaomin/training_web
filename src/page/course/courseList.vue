@@ -26,7 +26,9 @@
                     </el-col>
                     <el-col :span="4">
                       <div class="grid-content">
-                        <el-button type="primary">点我报名</el-button>
+                        <router-link to="/SignUp">
+                          <el-button type="primary">点我报名</el-button>
+                        </router-link>
                       </div>
                     </el-col>
                   </el-row>
@@ -75,7 +77,9 @@
                     </el-col>
                     <el-col :span="4">
                       <div class="grid-content">
-                        <el-button type="primary">点我报名</el-button>
+                        <router-link to="/SignUp">
+                          <el-button type="primary">点我报名</el-button>
+                        </router-link>
                       </div>
                     </el-col>
                   </el-row>
@@ -126,7 +130,9 @@
                     </el-col>
                     <el-col :span="4">
                       <div class="grid-content">
-                        <el-button type="primary">点我报名</el-button>
+                        <router-link to="/SignUp">
+                          <el-button type="primary">点我报名</el-button>
+                        </router-link>
                       </div>
                     </el-col>
                   </el-row>
@@ -160,12 +166,10 @@
   </el-container>
 </template>
 <script>
-
 export default {
   data() {
     return {};
-  },
-  
+  }
 };
 </script>
 
