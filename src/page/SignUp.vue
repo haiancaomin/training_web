@@ -796,7 +796,7 @@ export default {
 }
 
 #native .el-select {
-  width: 113px;
+  width: 119px;
 }
 
 #test-region .el-select {
