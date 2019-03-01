@@ -11,100 +11,125 @@
 
     <!-- 报名信息页面page1 -->
     <div class="sign-up-info" v-show="firstPage == 1">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="350px"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+      <el-tabs type="border-card">
+        <el-tab-pane label="个人报名">
+          <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="350px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="身份证号" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="身份证号" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="性别" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="男"></el-radio>
-            <el-radio label="女"></el-radio>
-          </el-radio-group>
-        </el-form-item>
+            <el-form-item label="性别" prop="resource">
+              <el-radio-group v-model="ruleForm.resource">
+                <el-radio label="男"></el-radio>
+                <el-radio label="女"></el-radio>
+              </el-radio-group>
+            </el-form-item>
 
-        <el-form-item label="出生日期" required>
-          <el-form-item prop="date1">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="ruleForm.date1"
-              style="width: 300px;"
-            ></el-date-picker>
-          </el-form-item>
-        </el-form-item>
+            <el-form-item label="出生日期" required>
+              <el-form-item prop="date1">
+                <el-date-picker
+                  type="date"
+                  placeholder="选择日期"
+                  v-model="ruleForm.date1"
+                  style="width: 300px;"
+                ></el-date-picker>
+              </el-form-item>
+            </el-form-item>
 
-        <el-form-item label="籍贯" prop="native" id="native">
-          <el-col :span="5">
-            <el-select v-model="ruleForm.native" placeholder="省份">
-              <el-option label="省份1" value="shanghai"></el-option>
-              <el-option label="省份2" value="beijing"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="2">&nbsp;</el-col>
-          <el-col :span="5">
-            <el-select v-model="ruleForm.native" placeholder="城市" id="city">
-              <el-option label="城市1" value="shanghai"></el-option>
-              <el-option label="城市2" value="beijing"></el-option>
-            </el-select>
-          </el-col>
-        </el-form-item>
+            <el-form-item label="籍贯" prop="native" id="native">
+              <el-col :span="5">
+                <el-select v-model="ruleForm.native" placeholder="省份">
+                  <el-option label="省份1" value="shanghai"></el-option>
+                  <el-option label="省份2" value="beijing"></el-option>
+                </el-select>
+              </el-col>
+              <el-col :span="2">&nbsp;</el-col>
+              <el-col :span="5">
+                <el-select v-model="ruleForm.native" placeholder="城市" id="city">
+                  <el-option label="城市1" value="shanghai"></el-option>
+                  <el-option label="城市2" value="beijing"></el-option>
+                </el-select>
+              </el-col>
+            </el-form-item>
 
-        <el-form-item label="现工作地" prop="native">
-          <el-input v-model="ruleForm.native"></el-input>
-        </el-form-item>
+            <el-form-item label="现工作地" prop="native">
+              <el-input v-model="ruleForm.native"></el-input>
+            </el-form-item>
 
-        <el-form-item label="学历" prop="region" id="education">
-          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-            <el-option label="省份1" value="shanghai"></el-option>
-            <el-option label="省份2" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
+            <el-form-item label="学历" prop="region" id="education">
+              <el-select v-model="ruleForm.region" placeholder="请选择学历">
+                <el-option label="省份1" value="shanghai"></el-option>
+                <el-option label="省份2" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
 
-        <el-form-item label="毕业学校" prop="native">
-          <el-input v-model="ruleForm.native"></el-input>
-        </el-form-item>
+            <el-form-item label="毕业学校" prop="native">
+              <el-input v-model="ruleForm.native"></el-input>
+            </el-form-item>
 
-        <el-form-item label="职位" prop="native">
-          <el-input v-model="ruleForm.native"></el-input>
-        </el-form-item>
+            <el-form-item label="职位" prop="native">
+              <el-input v-model="ruleForm.native"></el-input>
+            </el-form-item>
 
-        <el-form-item label="工种" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="工种" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="移动电话" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="移动电话" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="邮箱" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="邮箱" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="所在公司" prop="native">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="所在公司" prop="native">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item label="从业资格证书" prop="native">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+            <el-form-item label="从业资格证书" prop="native">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
 
-        <el-form-item>
-          <div class="nextPage1">
-            <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+            <el-form-item>
+              <div class="nextPage1">
+                <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+              </div>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="批量报名">
+          <div calss="batch-sign-up">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或
+              <em>点击上传</em>
+            </div>
+            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
+          </el-upload>
           </div>
-        </el-form-item>
-      </el-form>
+          <div class="nextPage1-2">
+                <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+              </div>
+        </el-tab-pane>
+        
+      </el-tabs>
+    
     </div>
 
     <!-- 套餐选择页面page2 -->
@@ -430,7 +455,8 @@
     <!-- 发票开具 page5 -->
     <div class="Invoice" v-show="fifthPage == 1">
       <div class="Invoice-notice">
-        <p>如需开具发票请填写下列信息，如无此需求请点击
+        <p>
+          如需开具发票请填写下列信息，如无此需求请点击
           <a href="javascript:;" @click="skip5" class="skip-a">跳过</a>，稍后您也可以进入
           <a href="javascript:;" class="person-a">个人中心</a>索取发票
         </p>
@@ -546,7 +572,7 @@ export default {
         // identification:"",
         // sex: "",
         // birthday: "",
-        native:"",
+        native: ""
         // workspace:"",
         // education:"",
         // school:"",
@@ -596,7 +622,7 @@ export default {
       }
     };
   },
-  
+
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -757,11 +783,9 @@ export default {
   width: 1000px;
   height: 950px;
   margin: 0px auto;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #fff;
-  border: 1px solid #e7e7e7;
-  padding: 20px 0px 0px 10px;
-  margin: 10px 0px 0px 0px;
+
+  padding: 10px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 .el-input {
   width: 300px;
@@ -789,6 +813,10 @@ export default {
 
 .nextPage1 {
   margin: 0px 0px 0px 100px;
+}
+.nextPage1-2 {
+  margin: 0px 0px 0px 0px;
+  text-align: center;
 }
 
 .meal-choice {
@@ -1113,27 +1141,33 @@ export default {
   margin: 20px 36px;
 }
 .sign-up-suc-notice {
-  text-align:center;
+  text-align: center;
   font-family: "微软雅黑";
   font-size: 40px;
   font-weight: bold;
-  color:#42b983;
+  color: #42b983;
   margin: 100px 0px 0px 0px;
 }
 
 .success-context {
-  text-align:center;
+  text-align: center;
   font-family: "微软雅黑";
   font-size: 18px;
   margin: 10px 0px 0px 0px;
-  
-
 }
 
 .success-other {
-  text-align:center;
+  text-align: center;
   font-family: "微软雅黑";
   font-size: 14px;
   margin: 200px 0px 0px 0px;
 }
+.upload-demo {
+  text-align: center;
+  height: 320px;
+  margin: 50px 0px 0px 0px;
+}
+
 </style>
+
+
