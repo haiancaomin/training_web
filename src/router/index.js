@@ -7,6 +7,7 @@ import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
+import Test from '@/page/Test'
 
 
 Vue.use(Router)
@@ -26,7 +27,13 @@ export default new Router({
         path: '/SignUp',
         name: 'SignUp',
         component: SignUp
-      }, {
+      },
+      {
+        path: '/Test',
+        name: 'Test',
+        component: Test
+      },
+      {
         path: '/course',
         component: courseList
       }, {
