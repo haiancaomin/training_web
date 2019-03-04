@@ -7,6 +7,7 @@ import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
+import baseShow from '@/page/base/baseShow'
 
 
 Vue.use(Router)
@@ -38,7 +39,10 @@ export default new Router({
       }, {
         path: '/download-action',
         component: fileDetail
-      },
+      }, {
+        path: '/base',
+        component: baseShow
+      }
     ]
   }]
 })
