@@ -57,10 +57,34 @@
             </el-carousel-item>
           </el-carousel>
         </el-collapse-item>
-        <el-collapse-item title="质量员实训区" name="3">
-          <div>简化流程：设计简洁直观的操作流程；</div>
-          <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-          <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+        <el-collapse-item title="质量员实训区" name="3" class="quality-worker">
+          <div class="quality-worker-pic clearfix">
+            <swiper :options="swiperOption2" ref="mySwiper">
+              <!-- slides -->
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature2.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature3.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature4.jpg" alt>
+              </swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div>
+          <div class="quality-worker-content">
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+          </div>
+          
         </el-collapse-item>
         <el-collapse-item title="吊装实训模拟区" name="4">
           <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
@@ -81,6 +105,9 @@ export default {
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
       ],
       swiperOption: {
+        autoplay: {
+          disableOnInteraction: false
+        },
         effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
@@ -91,6 +118,16 @@ export default {
           depth: 100,
           modifier: 1,
           slideShadows: true
+        }
+      },
+      swiperOption2: {
+        autoplay: {
+          disableOnInteraction: false
+        },
+        effect: "flip",
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination"
         }
       }
     };
@@ -162,6 +199,28 @@ export default {
 }
 .guanjiang-content p {
   width: 400px;
+}
+.quality-worker img {
+  width: 100%;
+  height: 100%;
+}
+.quality-worker .swiper-container {
+  float: left;
+  position: relative;
+  padding: 50px;
+  width: 400px;
+  height: 400px;
+}
+.quality-worker-pic{
+  float: left;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.quality-worker-content{
+  padding: 50px 0;
 }
 </style>
 <style>
