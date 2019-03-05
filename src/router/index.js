@@ -7,6 +7,8 @@ import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
+import Inspection from '@/page/inspection/Inspection'
+import InspectionDetail from '@/page/inspection/InspectionDetail'
 
 import Test from '@/page/Test'
 
@@ -52,6 +54,12 @@ export default new Router({
       }, {
         path: '/base',
         component: baseShow
+      }, {
+        path: '/Inspection',
+        component: Inspection
+      },{
+        path: '/InspectionDetail',
+        component: InspectionDetail
       }
     ]
   }]
