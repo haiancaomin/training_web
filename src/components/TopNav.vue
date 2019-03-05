@@ -53,7 +53,7 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
         </el-submenu>-->
-        <el-menu-item index="5">
+        <el-menu-item index="/Inspection">
           <a href="javascript:;">高端考察</a>
         </el-menu-item>
         <el-menu-item index="5">
