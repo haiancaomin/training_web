@@ -77,19 +77,49 @@
             </swiper>
           </div>
           <div class="quality-worker-content">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
           </div>
-          
         </el-collapse-item>
-        <el-collapse-item title="吊装实训模拟区" name="4">
+        <el-collapse-item title="吊装实训模拟区" name="4" class="quality-worker">
+          <div class="quality-worker-pic clearfix">
+            <swiper :options="swiperOption3" ref="mySwiper">
+              <!-- slides -->
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature2.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature3.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature4.jpg" alt>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="https://www.swiper.com.cn/demo/img/nature5.jpg" alt>
+              </swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div>
+          <div class="quality-worker-content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
+          </div>
+        </el-collapse-item>
+        <!-- <el-collapse-item title="吊装实训模拟区" name="5">
           <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
           <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-        </el-collapse-item>
+        </el-collapse-item>-->
       </el-collapse>
     </div>
   </div>
@@ -126,6 +156,22 @@ export default {
         },
         effect: "flip",
         grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination"
+        }
+      },
+      swiperOption3: {
+        autoplay: {
+          disableOnInteraction: false
+        },
+        effect: "cube",
+        grabCursor: true,
+        cubeEffect: {
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94
+        },
         pagination: {
           el: ".swiper-pagination"
         }
@@ -211,13 +257,16 @@ export default {
   width: 400px;
   height: 400px;
 }
-.quality-worker-pic{
+.quality-worker-pic {
   float: left;
 }
 .clearfix:after {
   content: "";
   display: block;
   clear: both;
+}
+.quality-worker-content {
+  padding-top: 50px;
 }
 </style>
 <style>
