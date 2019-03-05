@@ -219,9 +219,6 @@ export default {
   display: block;
   clear: both;
 }
-.quality-worker-content{
-  padding: 50px 0;
-}
 </style>
 <style>
 .base-box .el-collapse-item__header {
