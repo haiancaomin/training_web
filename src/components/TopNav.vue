@@ -66,7 +66,7 @@
           <a href="javascript:;">资料下载</a>
         </el-menu-item>
 
-        <el-menu-item index="8">
+        <el-menu-item index="/contact">
           <a href="javascript:;">联系我们</a>
         </el-menu-item>
       </el-menu>

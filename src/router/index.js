@@ -9,6 +9,7 @@ import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
 import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
+import contactUs from '@/page/contactUs'
 
 import Test from '@/page/Test'
 
@@ -60,6 +61,9 @@ export default new Router({
       },{
         path: '/InspectionDetail',
         component: InspectionDetail
+      },{
+        path: '/contact',
+        component: contactUs
       }
     ]
   }]
