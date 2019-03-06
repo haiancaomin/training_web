@@ -1,9 +1,9 @@
 <template>
   <div id="inspection">
-    <el-col :span="23">
+    <el-col :span="24">
     <h1 class="inspection-label">高端考察</h1>
     </el-col>
-    <el-col :span="23">
+    <el-col :span="24">
       <el-card shadow="hover">
         <img src="../../assets/inspection1.jpg" class="inspection-picture">
         <p class="inspection-title">2017年赴日装配式建筑技术高端专业考察</p>
@@ -55,7 +55,7 @@ export default {
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
-  padding: 20px 0px 0px 20px;
+  padding: 20px 20px 0px 20px;
 }
 .el-card {
   height: 300px;
