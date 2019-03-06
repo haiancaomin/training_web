@@ -1,7 +1,7 @@
 <template>
   <div id="inspection">
     <el-col :span="24">
-    <h1 class="inspection-label">高端考察</h1>
+      <h1 class="inspection-label">高端考察</h1>
     </el-col>
     <el-col :span="24">
       <el-card shadow="hover">
@@ -21,11 +21,7 @@
       </el-card>
     </el-col>
     <el-col :span="24">
-      <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="1000">
-</el-pagination>
+      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
     </el-col>
   </div>
 </template>
@@ -38,11 +34,9 @@ export default {
   },
 
   methods: {
-    gotoDetail(){
-
-  		this.$router.push('/InspectionDetail')
-
-  	}
+    gotoDetail() {
+      this.$router.push("/InspectionDetail");
+    }
   }
 };
 </script>
@@ -88,18 +82,17 @@ export default {
 }
 .el-pagination {
   text-align: center;
-  margin:30px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
 .inspection-label {
-    font-size: 18px;
-    line-height: 40px;
-    border: 1px solid #e4e7ed;
-    background: #e4e7ed;
-    padding: 0 15px;
-    border-radius: 3px;
-    margin: 0px 0px 10px 0px;
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #e4e7ed;
+  background: #e4e7ed;
+  padding: 0 15px;
+  border-radius: 3px;
+  margin: 0px 0px 10px 0px;
 }
-
 </style>
 
 
