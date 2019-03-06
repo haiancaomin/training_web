@@ -20,7 +20,11 @@ export default {
     // 初始化地图
     initMap() {
       var map = new BMap.Map("map");
-      map.centerAndZoom("南通市", 15); // 初始化地图,设置中心点坐标和地图级别
+      var point = new BMap.Point(116.404, 39.915);
+      map.centerAndZoom(point, 15);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker);
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE); 
       //添加地图类型控件
       map.addControl(
         new BMap.MapTypeControl({
@@ -29,6 +33,7 @@ export default {
       );
       map.setCurrentCity("南通市"); // 设置地图显示的城市 此项是必须设置的
       map.enableScrollWheelZoom(true);
+
       // map.addEventListener("click", function(e) {
       //   map.clearOverlays();
       //   var lng = e.point.lng;
