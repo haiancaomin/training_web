@@ -9,16 +9,13 @@ import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
 import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
-<<<<<<< HEAD
 import contactUs from '@/page/contactUs'
-=======
 import PersonalCenter from '@/page/personalCenter/PersonalCenter'
 import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
 import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
->>>>>>> 878e8117d0d4ce3e870e1154511eee76abf42739
 
 import Test from '@/page/Test'
 
@@ -67,32 +64,30 @@ export default new Router({
       }, {
         path: '/Inspection',
         component: Inspection
-      },{
+      }, {
         path: '/InspectionDetail',
         component: InspectionDetail
-      },{
-<<<<<<< HEAD
+      }, {
         path: '/contact',
         component: contactUs
-=======
+      }, {
         path: '/PersonalCenter',
         component: PersonalCenter
-      },{
+      }, {
         path: '/PesronalScoreSearch',
         component: PesronalScoreSearch
-      },{
+      }, {
         path: '/PersonalExpressSearch',
         component: PersonalExpressSearch
-      },{
+      }, {
         path: '/PersonalInvoice',
         component: PersonalInvoice
-      },{
+      }, {
         path: '/PersonalPassword',
         component: PersonalPassword
-      },{
+      }, {
         path: '/PersonalMail',
         component: PersonalMail
->>>>>>> 878e8117d0d4ce3e870e1154511eee76abf42739
       }
     ]
   }]
