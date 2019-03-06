@@ -9,6 +9,12 @@ import fileList from '@/page/downloads/fileList'
 import fileDetail from '@/page/downloads/fileDetail'
 import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
+import PersonalCenter from '@/page/personalCenter/PersonalCenter'
+import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
+import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
+import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
+import PersonalPassword from '@/page/personalCenter/PersonalPassword'
+import PersonalMail from '@/page/personalCenter/PersonalMail'
 
 import Test from '@/page/Test'
 
@@ -60,6 +66,24 @@ export default new Router({
       },{
         path: '/InspectionDetail',
         component: InspectionDetail
+      },{
+        path: '/PersonalCenter',
+        component: PersonalCenter
+      },{
+        path: '/PesronalScoreSearch',
+        component: PesronalScoreSearch
+      },{
+        path: '/PersonalExpressSearch',
+        component: PersonalExpressSearch
+      },{
+        path: '/PersonalInvoice',
+        component: PersonalInvoice
+      },{
+        path: '/PersonalPassword',
+        component: PersonalPassword
+      },{
+        path: '/PersonalMail',
+        component: PersonalMail
       }
     ]
   }]
