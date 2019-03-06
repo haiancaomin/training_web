@@ -26,8 +26,8 @@
         <el-menu-item index="/teacher">
           <a href="javascript:;">师资力量</a>
         </el-menu-item>
-        <el-menu-item index="2">
-          <a href="javascript:;">证书查询</a>
+        <el-menu-item index="/PersonalCenter">
+          <a href="javascript:;">个人中心</a>
         </el-menu-item>
         <!-- <el-submenu index="2">
         <template slot="title">关于我们</template>
