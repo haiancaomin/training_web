@@ -1,8 +1,6 @@
 <template>
   <div id="HRServiceJobSeekerIndex">
-    <router-link to="/HRServiceJobSeekerIndex">
-      <el-button type="primary">求职者</el-button>
-      </router-link>
+    
 
     <el-table
     :data="tableData"
