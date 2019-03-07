@@ -59,7 +59,7 @@
         <el-menu-item index="5">
           <a href="javascript:;">资讯</a>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="/HRServiceTypeChoice">
           <a href="javascript:;">人力资源服务</a>
         </el-menu-item>
         <el-menu-item index="/download">

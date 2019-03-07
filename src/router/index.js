@@ -16,6 +16,11 @@ import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
+import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
+import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
+import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
+import HRServiceJobSeekerResume from '@/page/HRService/HRServiceJobSeekerResume'
+import HRServiceJobSeekerResumeInfo from '@/page/HRService/HRServiceJobSeekerResumeInfo'
 
 import Test from '@/page/Test'
 
@@ -88,6 +93,21 @@ export default new Router({
       }, {
         path: '/PersonalMail',
         component: PersonalMail
+      }, {
+        path: '/HRServiceTypeChoice',
+        component: HRServiceTypeChoice
+      }, {
+        path: '/HRServiceJobSeekerIndex',
+        component: HRServiceJobSeekerIndex
+      }, {
+        path: '/HRServiceHRIndex',
+        component: HRServiceHRIndex
+      }, {
+        path: '/HRServiceJobSeekerResume',
+        component: HRServiceJobSeekerResume
+      }, {
+        path: '/HRServiceJobSeekerResumeInfo',
+        component: HRServiceJobSeekerResumeInfo
       }
     ]
   }]
