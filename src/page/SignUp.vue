@@ -790,7 +790,7 @@
     <div class="success" v-show="sixth == 1">
       <div class="suc">
         <p class="sign-up-suc-notice">报名成功！</p>
-        <p class="success-context">我们会在确认具体开课时间后会联系您，请保持电话或邮箱畅通</p>
+        <p class="success-context">我们会在确认具体开课时间后联系您，请保持电话或邮箱畅通</p>
       </div>
       <div class="success-other">
         <router-link to="/index"><el-button type="primary" @click="onliePayment">返回首页</el-button></router-link>
