@@ -11,6 +11,263 @@
     <!-- 报名信息页面page1 -->
     <div class="sign-up-info" v-show="firstPage == 1">
       <el-tabs type="border-card">
+
+        <el-tab-pane label="公司报名">
+          <div calss="batch-sign-up">
+            <div class="batch-sign-up-notice">
+            <p class="info-notice">注：请将下列报名条件相同的人员信息填写在报名模板中，并上传。如报名条件不同，可以通过点击添加按钮选择新的报名条件并上传报名文件。</p>
+            </div>
+            <a class="download" href="javascript:;" download title="下载">点击下载模板</a>
+            <el-form class="demo-ruleForm">
+              <ol>
+                <el-button type="primary" @click="addNew0" v-if="but0">添加</el-button>
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form1" id="divZone1">
+                    <li class="form1">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number v-model="num1" :min="1" :max="9999" label="描述文字"></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-upload
+                            class="upload-demo"
+                            drag
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            multiple
+                          >
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">
+                              将文件拖到此处，或
+                              <em>点击上传</em>
+                            </div>
+                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
+                          </el-upload>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="deletes1()" class="div-delete">删除</el-button>
+                            <el-button
+                              type="primary"
+                              @click="addNew1"
+                              v-if="but1"
+                              class="div-add"
+                            >添加</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form2">
+                    <li class="form2">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字"></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-upload
+                            class="upload-demo"
+                            drag
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            multiple
+                          >
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">
+                              将文件拖到此处，或
+                              <em>点击上传</em>
+                            </div>
+                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
+                          </el-upload>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="deletes2()" class="div-delete">删除</el-button>
+                            <el-button
+                              type="primary"
+                              @click="addNew2"
+                              v-if="but2"
+                              class="div-add"
+                            >添加</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form3">
+                    <li class="form3">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number v-model="num3" :min="1" :max="9999" label="描述文字"></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-upload
+                            class="upload-demo"
+                            drag
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            multiple
+                          >
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">
+                              将文件拖到此处，或
+                              <em>点击上传</em>
+                            </div>
+                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
+                          </el-upload>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="deletes3()" class="div-delete">删除</el-button>
+                            <el-button
+                              type="primary"
+                              @click="addNew3"
+                              v-if="but3"
+                              class="div-add"
+                            >添加</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form4">
+                    <li class="form4">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number v-model="num4" :min="1" :max="9999" label="描述文字"></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-upload
+                            class="upload-demo"
+                            drag
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            multiple
+                          >
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">
+                              将文件拖到此处，或
+                              <em>点击上传</em>
+                            </div>
+                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
+                          </el-upload>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="deletes4()" class="div-delete">删除</el-button>
+                            <el-button
+                              type="primary"
+                              @click="addNew4"
+                              v-if="but4"
+                              class="div-add"
+                            >添加</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+                <el-col :span="24">
+                  <div class="nextPage1-batch">
+                    <el-form-item>
+                      <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+                    </el-form-item>
+                  </div>
+                </el-col>
+              </ol>
+            </el-form>
+          </div>
+        </el-tab-pane>
+
         <el-tab-pane label="个人报名">
           <el-form
             :model="ruleForm"
@@ -129,242 +386,7 @@
           </el-form>
         </el-tab-pane>
 
-        <el-tab-pane label="批量报名">
-          <div calss="batch-sign-up">
-            <a class="download" href="javascript:;" download title="下载">点击下载模板</a>
-            <el-form class="demo-ruleForm">
-              <ol>
-                <el-button type="primary" @click="addNew0" v-if="but0">添加</el-button>
-                <div class="div-zone">
-                  <el-col :span="12" v-if="form1" id="divZone1">
-                    <li class="form1">
-                      <div class="info-need">
-                        <el-form-item label="培训地点" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="地点1" value="shanghai"></el-option>
-                            <el-option label="地点2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-
-                        <el-form-item label="课程选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="课程1" value="shanghai"></el-option>
-                            <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                        <el-form-item label="套餐选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="套餐1" value="shanghai"></el-option>
-                            <el-option label="套餐2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-
-                      <div class="div-upload">
-                        <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
-                          >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
-                          <div class="div-delete">
-                            <el-button type="primary" @click="deletes1()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew1"
-                              v-if="but1"
-                              class="div-add"
-                            >添加</el-button>
-                          </div>
-                        </el-form-item>
-                      </div>
-                    </li>
-                  </el-col>
-                </div>
-
-                <div class="div-zone">
-                  <el-col :span="12" v-if="form2">
-                    <li class="form2">
-                      <div class="info-need">
-                        <el-form-item label="培训地点" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="地点1" value="shanghai"></el-option>
-                            <el-option label="地点2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-
-                        <el-form-item label="课程选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="课程1" value="shanghai"></el-option>
-                            <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                        <el-form-item label="套餐选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="套餐1" value="shanghai"></el-option>
-                            <el-option label="套餐2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-
-                      <div class="div-upload">
-                        <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
-                          >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
-                          <div class="div-delete">
-                            <el-button type="primary" @click="deletes2()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew2"
-                              v-if="but2"
-                              class="div-add"
-                            >添加</el-button>
-                          </div>
-                        </el-form-item>
-                      </div>
-                    </li>
-                  </el-col>
-                </div>
-
-                <div class="div-zone">
-                  <el-col :span="12" v-if="form3">
-                    <li class="form3">
-                      <div class="info-need">
-                        <el-form-item label="培训地点" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="地点1" value="shanghai"></el-option>
-                            <el-option label="地点2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-
-                        <el-form-item label="课程选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="课程1" value="shanghai"></el-option>
-                            <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                        <el-form-item label="套餐选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="套餐1" value="shanghai"></el-option>
-                            <el-option label="套餐2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-
-                      <div class="div-upload">
-                        <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
-                          >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
-                          <div class="div-delete">
-                            <el-button type="primary" @click="deletes3()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew3"
-                              v-if="but3"
-                              class="div-add"
-                            >添加</el-button>
-                          </div>
-                        </el-form-item>
-                      </div>
-                    </li>
-                  </el-col>
-                </div>
-
-                <div class="div-zone">
-                  <el-col :span="12" v-if="form4">
-                    <li class="form4">
-                      <div class="info-need">
-                        <el-form-item label="培训地点" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="地点1" value="shanghai"></el-option>
-                            <el-option label="地点2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-
-                        <el-form-item label="课程选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="课程1" value="shanghai"></el-option>
-                            <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                        <el-form-item label="套餐选择" prop="region" id="education">
-                          <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                            <el-option label="套餐1" value="shanghai"></el-option>
-                            <el-option label="套餐2" value="beijing"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-
-                      <div class="div-upload">
-                        <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
-                          >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
-                          <div class="div-delete">
-                            <el-button type="primary" @click="deletes4()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew4"
-                              v-if="but4"
-                              class="div-add"
-                            >添加</el-button>
-                          </div>
-                        </el-form-item>
-                      </div>
-                    </li>
-                  </el-col>
-                </div>
-                <el-col :span="24">
-                  <div class="nextPage1-batch">
-                    <el-form-item>
-                      <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
-                    </el-form-item>
-                  </div>
-                </el-col>
-              </ol>
-            </el-form>
-          </div>
-        </el-tab-pane>
+        
       </el-tabs>
     </div>
 
@@ -468,54 +490,54 @@
         <div class="info-scan">
           <el-col :span="12">
             <div class="training-project">
-            <label>报名项目</label>
+            <label class="test-info-label">报名项目</label>
             <el-input placeholder="灌浆工" :disabled="true"></el-input>
             </div>
           </el-col>
 
           <el-col :span="12">
-            <label>预计培训开始时间</label>
+            <label class="test-info-label">预计培训开始时间</label>
             <el-input placeholder="2019-3-2" :disabled="true"></el-input>
           </el-col>
 
           <el-col :span="12">
             <div class="scan-meal">
-            <label>选择套餐</label>
+            <label class="test-info-label">选择套餐</label>
             <el-input placeholder="培训+考试" :disabled="true" id="test-input2"></el-input>
             </div>
           </el-col>
 
           <el-col :span="12">
             <div class="training-time">
-              <label>培训时长</label>
+              <label class="test-info-label">培训时长</label>
               <el-input placeholder="10天" :disabled="true" id="test-input2"></el-input>
             </div>
           </el-col>
 
           <el-col :span="12">
             <div class="test-scan-money">
-              <label>费用</label>
+              <label class="test-info-label">费用</label>
               <el-input placeholder="2000元" :disabled="true"></el-input>
             </div>
           </el-col>
 
           <el-col :span="12">
             <div class="scan-test-time">
-              <label>预计考试时间</label>
+              <label class="test-info-label">预计考试时间</label>
               <el-input placeholder="2019-3-15" :disabled="true"></el-input>
             </div>
           </el-col>
           
           <el-col :span="12">
             <div class="scan-mobile">
-              <label>联系方式</label>
+              <label class="test-info-label">联系方式</label>
               <el-input placeholder="123456789" :disabled="true"></el-input>
             </div>
           </el-col>
 
           <el-col :span="12">
             <div class="test-place">
-              <label>考试地点</label>
+              <label class="test-info-label">考试地点</label>
               <el-input placeholder="智聚" :disabled="true"></el-input>
             </div>
           </el-col>
@@ -771,7 +793,7 @@
         <p class="success-context">我们会在确认具体开课时间后会联系您，请保持电话或邮箱畅通</p>
       </div>
       <div class="success-other">
-        <el-button type="primary" @click="onliePayment">返回首页</el-button>
+        <router-link to="/index"><el-button type="primary" @click="onliePayment">返回首页</el-button></router-link>
       </div>
     </div>
   </div>
@@ -784,9 +806,9 @@ export default {
     return {
       but0: false,
       form1: true,
-      but1: true,
-      form2: false,
-      but2: false,
+      but1: false,
+      form2: true,
+      but2: true,
       form3: false,
       but3: false,
       form4: false,
@@ -803,6 +825,10 @@ export default {
       payOffline: 0,
       active: 0,
       maxSetp: 6,
+      num1: 1,
+      num2: 1,
+      num3: 1,
+      num4: 1,
       ruleForm: {
         name: "",
         region: "",
@@ -1190,7 +1216,7 @@ export default {
 
 .pay {
   width: 1000px;
-  height: 560px;
+  height: 400px;
   margin: 0px auto;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
@@ -1327,9 +1353,9 @@ export default {
 }
 
 .test-notice {
-  width: 790px;
+  width: 854px;
   height: 280px;
-  margin: 23px 0px 0px 109px;
+  margin: 23px 0px 15px 50px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
@@ -1339,7 +1365,6 @@ export default {
 
 .nextPage3 {
   text-align: center;
-  margin: 0px 0px 0px 0px;
 }
 
 .test-result {
@@ -1413,11 +1438,11 @@ export default {
   margin: 30px 140px 0px 0px;
 }
 .nextPage4 {
-  margin: 173px 150px 0px 0px;
+  margin: 13px 150px 0px 0px;
   text-align: center;
 }
 .nextPage4-2 {
-  margin: 237px 150px 0px 0px;
+  margin: 77px 150px 0px 0px;
   text-align: center;
 }
 .offline-context {
@@ -1517,7 +1542,7 @@ export default {
 }
 .div-delete {
   text-align: center;
-  margin: 0px 0px 30px 0px;
+  margin: 0px 0px 10px 0px;
 }
 .info-need {
   margin: 0px 0px 0px 49px;
@@ -1550,7 +1575,25 @@ export default {
 .info-scan>.el-col {
   margin: 0px 0px 12px 0px;
 }
-    
+.sign-num {
+      text-align: right;
+    float: left;
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.el-input-number {
+  width: 300px;
+}
+.batch-sign-up-notice {
+  margin: 0px 0px 15px 0px;
+}
+.test-info-label {
+  margin:0px 5px 0px 0px;
+}
 </style>
 
 
