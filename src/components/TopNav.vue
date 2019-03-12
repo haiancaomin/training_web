@@ -9,7 +9,7 @@
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#0a6998"
+        background-color="#242e68"
         text-color="#fff"
         active-text-color="#ffd04b"
         router
@@ -91,7 +91,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header {
-  background: #0a6998;
+  background: #242e68;
   color: #fff;
   line-height: 60px;
   position: fixed;
