@@ -211,35 +211,40 @@
         
         <el-row class="no-margin-b">
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list1" @mouseenter="enter1()" @mouseleave="leave1()">
+    <div class="index-course-list" id="index-course-list1">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection1.jpg" class="index-course-img1">
     </div>
     <div class="index-course-tit">
        <span>工艺员</span>
        <span>|</span>
-       <span class="index-signup-but" >点击报名</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
     </div>
     <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+      </a></router-link>
     </div>
     </el-col>
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list2" @mouseenter="enter2()" @mouseleave="leave2()">
+    <div class="index-course-list" id="index-course-list2">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection2.png" class="index-course-img1">
     </div>
     <div class="index-course-tit">
        <span>质量员</span>
        <span>|</span>
-       <span class="index-signup-but" >点击报名</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
     </div>
     <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+      </a></router-link>
     </div>
     </el-col>
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list3" @mouseenter="enter3()" @mouseleave="leave3()">
+    <div class="index-course-list" id="index-course-list3">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection1.jpg" class="index-course-img1">
     </div>
@@ -250,10 +255,12 @@
     </div>
     <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+      </a></router-link>
     </div>
     </el-col>
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list4" @mouseenter="enter4()" @mouseleave="leave4()">
+    <div class="index-course-list" id="index-course-list4">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection2.png" class="index-course-img1">
     </div>
@@ -264,10 +271,12 @@
     </div>
     <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+      </a></router-link>
     </div>
     </el-col>
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list5" @mouseenter="enter5()" @mouseleave="leave5()">
+    <div class="index-course-list" id="index-course-list5">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection1.jpg" class="index-course-img1">
     </div>
@@ -278,10 +287,12 @@
     </div>
     <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </a></router-link>
     </div>
     </el-col>
     <el-col :span="8">
-    <div class="index-course-list" id="index-course-list6" @mouseenter="enter6()" @mouseleave="leave6()">
+    <div class="index-course-list" id="index-course-list6">
+      <router-link to="/course"><a href="javascript:;">
     <div class="index-course-img">
         <img src="../assets/inspection2.png" class="index-course-img1">
     </div>
@@ -292,6 +303,7 @@
     </div>
     <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
     <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </a></router-link>
     </div>
     </el-col>
         </el-row>
@@ -309,7 +321,8 @@
       <el-row class="pad20 bg-white" id="index-base-background">
         <el-col :span="6">
           <router-link to="/base">
-    <div class="index-base-list" id="index-base-list1" @mouseenter="baseEnter1()" @mouseleave="baseLeave1()">
+          <a href="javascript:;">
+    <div class="index-base-list" id="index-base-list1">
       <img src="../assets/inspection1.jpg" class="index-base-img">
       
         <div class="index-base-name">
@@ -319,11 +332,13 @@
           南通实训基地位于南通，主要培训项目有工艺员、质量员等。
         </div>
     </div>
+          </a>
           </router-link>
   </el-col>
   <el-col :span="6">
     <router-link to="/base">
-    <div class="index-base-list" id="index-base-list2" @mouseenter="baseEnter2()" @mouseleave="baseLeave2()">
+    <a href="javascript:;">
+    <div class="index-base-list" id="index-base-list2">
       <img src="../assets/inspection2.png" class="index-base-img">
       
         <div class="index-base-name">
@@ -333,11 +348,13 @@
           南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。
         </div>
     </div>
+    </a>
     </router-link>
   </el-col>
   <el-col :span="6">
     <router-link to="/base">
-    <div class="index-base-list" id="index-base-list3" @mouseenter="baseEnter3()" @mouseleave="baseLeave3()">
+    <a href="javascript:;">
+    <div class="index-base-list" id="index-base-list3">
       <img src="../assets/inspection1.jpg" class="index-base-img">
       
         <div class="index-base-name">
@@ -347,11 +364,13 @@
           徐州实训基地位于南通，主要培训项目有工艺员、质量员等。
         </div>
     </div>
+    </a>
     </router-link>
   </el-col>
   <el-col :span="6">
     <router-link to="/base">
-    <div class="index-base-list" id="index-base-list4" @mouseenter="baseEnter4()" @mouseleave="baseLeave4()">
+    <a href="javascript:;">
+    <div class="index-base-list" id="index-base-list4">
       <img src="../assets/inspection2.png" class="index-base-img">
       
         <div class="index-base-name">
@@ -361,6 +380,7 @@
           徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。
         </div>
     </div>
+    </a>
     </router-link>
   </el-col>
 
@@ -482,67 +502,8 @@ export default {
     },
     goToLogin:function(msg){
       this.dialogVisible=msg
-    },
-    enter1() {
-        document.getElementById("index-course-list1").style.boxShadow='0 0 2px #c7c5c5'; 
-    },
-     leave1() {
-        document.getElementById("index-course-list1").style.boxShadow='0 0 0px #fff';
-    },
-     enter2() {
-        document.getElementById("index-course-list2").style.boxShadow='0 0 2px #c7c5c5';
-    },
-     leave2() {
-       document.getElementById("index-course-list2").style.boxShadow='0 0 0px #fff';
-    },
-     enter3() {
-        document.getElementById("index-course-list3").style.boxShadow='0 0 2px #c7c5c5';
-    },
-     leave3() {
-        document.getElementById("index-course-list3").style.boxShadow='0 0 0px #fff';
-    },
-     enter4() {
-        document.getElementById("index-course-list4").style.boxShadow='0 0 2px #c7c5c5';
-    },
-     leave4() {
-        document.getElementById("index-course-list4").style.boxShadow='0 0 0px #fff';
-    },
-     enter5() {
-       document.getElementById("index-course-list5").style.boxShadow='0 0 2px #c7c5c5';
-    },
-     leave5() {
-        document.getElementById("index-course-list5").style.boxShadow='0 0 0px #fff';
-    },
-     enter6() {
-        document.getElementById("index-course-list6").style.boxShadow='0 0 2px #c7c5c5';
-    },
-     leave6() {
-        document.getElementById("index-course-list6").style.boxShadow='0 0 0px #fff';
-    },
-    baseEnter1() {
-        document.getElementById("index-base-list1").style.boxShadow='0 0 8px #c7c5c5';
-    },
-    baseLeave1() {
-        document.getElementById("index-base-list1").style.boxShadow='0 0 2px #c7c5c5';
-    },
-    baseEnter2() {
-        document.getElementById("index-base-list2").style.boxShadow='0 0 8px #c7c5c5';
-    },
-    baseLeave2() {
-        document.getElementById("index-base-list2").style.boxShadow='0 0 2px #c7c5c5';
-    },
-    baseEnter3() {
-        document.getElementById("index-base-list3").style.boxShadow='0 0 8px #c7c5c5';
-    },
-    baseLeave3() {
-        document.getElementById("index-base-list3").style.boxShadow='0 0 2px #c7c5c5';
-    },
-    baseEnter4() {
-        document.getElementById("index-base-list4").style.boxShadow='0 0 8px #c7c5c5';
-    },
-    baseLeave4() {
-        document.getElementById("index-base-list4").style.boxShadow='0 0 2px #c7c5c5';
-    },
+    }
+    
     
     
   }
@@ -984,6 +945,12 @@ body > .el-container {
 }
 .index-mobile {
   margin:10px 0px 0px 0px;
+}
+.index-course-list:hover {
+  box-shadow:0 0 2px #c7c5c5;
+}
+.index-base-list:hover {
+  box-shadow:0 0 8px #c7c5c5;
 }
 </style>
 
