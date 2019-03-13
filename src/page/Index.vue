@@ -955,7 +955,7 @@ body > .el-container {
   box-shadow:0 0 8px #c7c5c5;
 }
 .index-base-list:hover .index-base-img {
-  transform: scale(1.1)
+  transform: scale(1.04)
 }
 </style>
 
