@@ -11,16 +11,18 @@
     <!-- 报名信息页面page1 -->
     <div class="sign-up-info" v-show="firstPage == 1">
       <el-tabs type="border-card">
-
         <el-tab-pane label="公司报名">
           <div calss="batch-sign-up">
             <div class="batch-sign-up-notice">
-            <p class="info-notice">注：请将下列报名条件相同的人员信息填写在报名模板中，并上传。如报名条件不同，可以通过点击添加按钮选择新的报名条件并上传报名文件。</p>
+              <p id="signup-no-info-notice1">企业报名请确认已在个人中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击<router-link to="/PersonalCenter"><span class="signup-here">这里</span></router-link>进入个人中心填写。</p>
+              <p
+                class="info-notice" id="signup-no-info-notice2"
+              >注：如报名条件不同，可以通过点击添加报名按钮选择新的报名条件进行报名。</p>
             </div>
-            <a class="download" href="javascript:;" download title="下载">点击下载模板</a>
             <el-form class="demo-ruleForm">
               <ol>
-                <el-button type="primary" @click="addNew0" v-if="but0">添加</el-button>
+                
+                <span class="el-icon-plus" id="el-icon-plus1" @click="addNew0" v-if="but0"></span>
                 <div class="div-zone">
                   <el-col :span="12" v-if="form1" id="divZone1">
                     <li class="form1">
@@ -37,6 +39,8 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
+                          <span class="el-icon-plus" id="el-icon-plus1" @click="addNew1" v-if="but1"></span>
+                          <span class="el-icon-minus" id="el-icon-minus1" @click="deletes1()"></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -46,40 +50,41 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num1" :min="1" :max="9999" label="描述文字"></el-input-number>
+                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
                         </el-form-item>
                       </div>
 
                       <div class="div-upload">
                         <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible"
+                            width="30%"
+                            center
                           >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
+                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <ul>
+      <li v-for="city in cities" :label="city" :key="city">
+    <el-checkbox>{{city}}</el-checkbox>
+      </li>
+    </ul>
+  </el-checkbox-group>
+
+                            <el-button type="primary" class="sign-submit">提交</el-button>
+                          
+                          </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="deletes1()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew1"
-                              v-if="but1"
-                              class="div-add"
-                            >添加</el-button>
+                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
+                            
                           </div>
                         </el-form-item>
                       </div>
                     </li>
                   </el-col>
                 </div>
-
+               
                 <div class="div-zone">
                   <el-col :span="12" v-if="form2">
                     <li class="form2">
@@ -95,7 +100,9 @@
                           <el-select v-model="ruleForm.region" placeholder="请选择课程">
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>
+                          </el-select>     
+                          <span class="el-icon-plus" id="el-icon-plus2" @click="addNew2" v-if="but2"></span>
+                          <span class="el-icon-minus" id="el-icon-minus2" @click="deletes2()" ></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -105,33 +112,34 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字"></el-input-number>
+                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
                         </el-form-item>
                       </div>
 
                       <div class="div-upload">
                         <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible"
+                            width="30%"
+                            center
                           >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
+                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <ul>
+      <li v-for="city in cities" :label="city" :key="city">
+    <el-checkbox>{{city}}</el-checkbox>
+      </li>
+    </ul>
+  </el-checkbox-group>
+
+                            <el-button type="primary" class="sign-submit">提交</el-button>
+                          
+                          </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="deletes2()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew2"
-                              v-if="but2"
-                              class="div-add"
-                            >添加</el-button>
+                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
+                            
                           </div>
                         </el-form-item>
                       </div>
@@ -155,6 +163,8 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
+                          <span class="el-icon-plus" id="el-icon-plus3" @click="addNew3" v-if="but3"></span>
+                          <span class="el-icon-minus" id="el-icon-minus3" @click="deletes3()"></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -164,33 +174,34 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num3" :min="1" :max="9999" label="描述文字"></el-input-number>
+                          <el-input-number v-model="num3" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
                         </el-form-item>
                       </div>
 
                       <div class="div-upload">
                         <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible"
+                            width="30%"
+                            center
                           >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
+                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <ul>
+      <li v-for="city in cities" :label="city" :key="city">
+    <el-checkbox>{{city}}</el-checkbox>
+      </li>
+    </ul>
+  </el-checkbox-group>
+
+                            <el-button type="primary" class="sign-submit">提交</el-button>
+                          
+                          </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="deletes3()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew3"
-                              v-if="but3"
-                              class="div-add"
-                            >添加</el-button>
+                            
+                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
@@ -214,6 +225,8 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
+                          <span class="el-icon-plus" id="el-icon-plus4" @click="addNew4" v-if="but4"></span>
+                          <span class="el-icon-minus" id="el-icon-minus4" @click="deletes4()"></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -223,33 +236,33 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num4" :min="1" :max="9999" label="描述文字"></el-input-number>
+                          <el-input-number v-model="num4" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
                         </el-form-item>
                       </div>
 
                       <div class="div-upload">
                         <el-form-item>
-                          <el-upload
-                            class="upload-demo"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            multiple
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible"
+                            width="30%"
+                            center
                           >
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">
-                              将文件拖到此处，或
-                              <em>点击上传</em>
-                            </div>
-                            <div class="el-upload__tip" slot="tip">请按照批量上传模板要求上传，文件大小不得超过20M</div>
-                          </el-upload>
+                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <ul>
+      <li v-for="city in cities" :label="city" :key="city">
+    <el-checkbox>{{city}}</el-checkbox>
+      </li>
+    </ul>
+  </el-checkbox-group>
+
+                            <el-button type="primary" class="sign-submit">提交</el-button>
+                          
+                          </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="deletes4()" class="div-delete">删除</el-button>
-                            <el-button
-                              type="primary"
-                              @click="addNew4"
-                              v-if="but4"
-                              class="div-add"
-                            >添加</el-button>
+                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
@@ -385,8 +398,6 @@
             </el-form-item>
           </el-form>
         </el-tab-pane>
-
-        
       </el-tabs>
     </div>
 
@@ -490,8 +501,8 @@
         <div class="info-scan">
           <el-col :span="12">
             <div class="training-project">
-            <label class="test-info-label">报名项目</label>
-            <el-input placeholder="灌浆工" :disabled="true"></el-input>
+              <label class="test-info-label">报名项目</label>
+              <el-input placeholder="灌浆工" :disabled="true"></el-input>
             </div>
           </el-col>
 
@@ -502,8 +513,8 @@
 
           <el-col :span="12">
             <div class="scan-meal">
-            <label class="test-info-label">选择套餐</label>
-            <el-input placeholder="培训+考试" :disabled="true" id="test-input2"></el-input>
+              <label class="test-info-label">选择套餐</label>
+              <el-input placeholder="培训+考试" :disabled="true" id="test-input2"></el-input>
             </div>
           </el-col>
 
@@ -527,7 +538,7 @@
               <el-input placeholder="2019-3-15" :disabled="true"></el-input>
             </div>
           </el-col>
-          
+
           <el-col :span="12">
             <div class="scan-mobile">
               <label class="test-info-label">联系方式</label>
@@ -543,7 +554,7 @@
           </el-col>
         </div>
         <el-col :span="24">
-        <div class="test-notice">这里是公告位，正式上线后根据用户选择动态生成信息</div>
+          <div class="test-notice">这里是公告位，正式上线后根据用户选择动态生成信息</div>
         </el-col>
 
         <div class="nextPage3">
@@ -671,7 +682,7 @@
                   <img src="../assets/youzheng.gif">
                 </div>
               </el-radio>
-            </div> -->
+            </div>-->
           </el-radio-group>
         </div>
         <div class="zhifubao">
@@ -682,8 +693,7 @@
         </div>
         <!-- <div class="wangyinzhifu">
           <strong>3、网银支付</strong>
-        </div> -->
-
+        </div>-->
         <div class="nextPage4">
           <el-button style="margin-top: 12px;" @click="page4Primary">上一步</el-button>
           <el-button type="primary" @click="submitForm4('ruleForm')">下一步</el-button>
@@ -793,22 +803,32 @@
         <p class="success-context">我们会在确认具体开课时间后联系您，请保持电话或邮箱畅通</p>
       </div>
       <div class="success-other">
-        <router-link to="/index"><el-button type="primary" @click="onliePayment">返回首页</el-button></router-link>
+        <router-link to="/index">
+          <el-button type="primary" @click="onliePayment">返回首页</el-button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const cityOptions = ['张三', '李四', '王五', '赵六'];
+
 export default {
   name: "Signup",
   data() {
     return {
+      checkAll: false,
+        checkedCities: ['上海', '北京'],
+        cities: cityOptions,
+        isIndeterminate: true,
+
+      centerDialogVisible: false,
       but0: false,
       form1: true,
-      but1: false,
-      form2: true,
-      but2: true,
+      but1: true,
+      form2: false,
+      but2: false,
       form3: false,
       but3: false,
       form4: false,
@@ -894,6 +914,15 @@ export default {
   },
 
   methods: {
+    handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      },
     addNew0() {
       this.but0 = false;
 
@@ -905,6 +934,7 @@ export default {
 
       this.form2 = true;
       this.but2 = true;
+     
     },
     deletes1() {
       this.form1 = false;
@@ -1023,7 +1053,6 @@ export default {
           this.fifthPage = 0;
           this.sixth = 0;
         } else {
-
           console.log("error submit!!");
           return false;
         }
@@ -1360,7 +1389,6 @@ export default {
   background: #fff;
   border: 1px solid #e7e7e7;
   padding: 23px 0px 0px 10px;
-  
 }
 
 .nextPage3 {
@@ -1572,27 +1600,56 @@ export default {
 .test-place {
   padding: 0px 0px 0px 56px;
 }
-.info-scan>.el-col {
+.info-scan > .el-col {
   margin: 0px 0px 12px 0px;
 }
 .sign-num {
-      text-align: right;
-    float: left;
-    font-size: 14px;
-    color: #606266;
-    line-height: 40px;
-    padding: 0 12px 0 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+  text-align: right;
+  float: left;
+  font-size: 14px;
+  color: #606266;
+  line-height: 40px;
+  padding: 0 12px 0 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .el-input-number {
-  width: 300px;
+  width: 250px;
 }
 .batch-sign-up-notice {
   margin: 0px 0px 15px 0px;
 }
 .test-info-label {
-  margin:0px 5px 0px 0px;
+  margin: 0px 5px 0px 0px;
+}
+#el-icon-plus1, #el-icon-plus2,#el-icon-plus3,#el-icon-plus4{
+  border: 1px solid #ddd;
+    border-radius: 6px;
+    padding:12px;
+    cursor: pointer;
+}
+#el-icon-minus1,#el-icon-minus2,#el-icon-minus3,#el-icon-minus4 {
+  border: 1px solid #ddd;
+    border-radius: 6px;
+    padding:12px;
+    cursor: pointer;
+}
+.div-zone .el-select {
+  width: 250px;
+}
+.sign-submit {
+  margin: 0px 0px 0px 110px;
+}
+.signup-here {
+  color: #616bf7;
+  font-weight: bold;
+  font-size: 17px;
+}
+#signup-no-info-notice1 {
+  margin:10px 0px 0px 60px;
+}
+#signup-no-info-notice2 {
+  margin:20px 0px 30px 60px;
 }
 </style>
 

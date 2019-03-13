@@ -1,12 +1,16 @@
 <template>
-  <el-container>
+  <div>
+    
     <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
     <user-register :regDialogVisible="regDialogVisible" v-on:regclosed="closeRegDialog" v-on:goToLog="goToLogin"></user-register>
+    <div class="index-body">
     <el-main>
+      
+      <router-link to="/SignUp"><a href="javascript:;" class="index-sign-up1">报名入口&gt;&gt;</a></router-link>
       <el-row :gutter="20">
         <el-col :span="16">
-          <div class="grid-content">
-            <el-carousel :interval="5000">
+          <div class="grid-content" id="index-carousel">
+            <el-carousel :interval="5000" height="330px">
               <el-carousel-item v-for="(item,key) in bannerLists" :key="key">
                 <img :src="item" class="banner-img">
               </el-carousel-item>
@@ -14,32 +18,55 @@
           </div>
         </el-col>
         <el-col :span="8">
-          <div class="grid-content login-box">
-            <template v-if="1">
+          <div class="index-login-signup">
+            <el-col :span="24">
+            <div class="sign-up-main-outline">
+            <el-card shadow="hover">
+               <div class="sign-up-main">
+              <router-link to="/SignUp"><a href="javascript:;" class="index-sign-up2">报名入口&gt;&gt;</a></router-link>  
+              <p class="signip-con">填写报名信息, 缴纳费用, 即可参加培训或考试</p>
+              </div>
+            </el-card>
+            </div>
+            
+            </el-col>
+            <el-col :span="24">
+            <el-card shadow="hover">
+              
+              <div v-if="1" class="login-welcome">
+              <el-col :span="24">
               <el-row>
                 <el-button type="primary" class="login-btn" @click="clickLogin">登录</el-button>
               </el-row>
+              <div class="index-register">
               <el-row class="regist">
                 还没账号？
                 <a href='javascript:;' class="regist-now" @click="clickRegister">立即注册</a>
               </el-row>
-            </template>
-            <template v-if="0">
+              </div>
+              </el-col>
+            </div>
+            <div v-if="0" class="login-welcome">
+              <el-col :span="24">
               <el-row>
                 <p class="welcome">欢迎回来，test！</p>
               </el-row>
-            </template>
+              </el-col>
+            </div>  
+            </el-card>
+            </el-col>
           </div>
-        </el-col>
+          
+          </el-col> 
       </el-row>
-      <el-row class="no-margin-b">
+      <!-- <el-row class="no-margin-b">
         <el-col :span="24">
           <div class="grid-content">
             <h1 class="index-floor-title">资讯</h1>
           </div>
         </el-col>
-      </el-row>
-      <el-row class="pad20 bg-white">
+      </el-row> -->
+      <!-- <el-row class="pad20 bg-white">
         <el-col :span="9">
           <div class="grid-content">
             <img
@@ -47,7 +74,7 @@
               class="hot-news-img"
             >
             <swiper :options="swiperOption" ref="mySwiper">
-              <!-- slides -->
+              
               <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
               <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
               <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
@@ -174,36 +201,202 @@
             </el-tabs>
           </div>
         </el-col>
-      </el-row>
+      </el-row> -->
+     
+        <el-col :span="24">
+          <div class="grid-content">
+            <h1 class="index-floor-title">课程分类</h1>
+          </div>
+        </el-col>
+        
+        <el-row class="no-margin-b">
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list1" @mouseenter="enter1()" @mouseleave="leave1()">
+    <div class="index-course-img">
+        <img src="../assets/inspection1.jpg" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>工艺员</span>
+       <span>|</span>
+       <span class="index-signup-but" >点击报名</span>
+    </div>
+    <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list2" @mouseenter="enter2()" @mouseleave="leave2()">
+    <div class="index-course-img">
+        <img src="../assets/inspection2.png" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>质量员</span>
+       <span>|</span>
+       <span class="index-signup-but" >点击报名</span>
+    </div>
+    <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list3" @mouseenter="enter3()" @mouseleave="leave3()">
+    <div class="index-course-img">
+        <img src="../assets/inspection1.jpg" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>资料员</span>
+       <span>|</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
+    </div>
+    <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list4" @mouseenter="enter4()" @mouseleave="leave4()">
+    <div class="index-course-img">
+        <img src="../assets/inspection2.png" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>深化员</span>
+       <span>|</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
+    </div>
+    <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list5" @mouseenter="enter5()" @mouseleave="leave5()">
+    <div class="index-course-img">
+        <img src="../assets/inspection1.jpg" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>灌浆工</span>
+       <span>|</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
+    </div>
+    <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+    <el-col :span="8">
+    <div class="index-course-list" id="index-course-list6" @mouseenter="enter6()" @mouseleave="leave6()">
+    <div class="index-course-img">
+        <img src="../assets/inspection2.png" class="index-course-img1">
+    </div>
+    <div class="index-course-tit">
+       <span>吊装工</span>
+       <span>|</span>
+       <router-link to="/SignUp"><span class="index-signup-but" >点击报名</span></router-link>
+    </div>
+    <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
+    <div class="index-course-other">最近开课时间： 2019-04-01</div>
+    </div>
+    </el-col>
+        </el-row>
+        
       <el-row class="no-margin-b">
         <el-col :span="24">
           <div class="grid-content">
-            <h1 class="index-floor-title">基地展示</h1>
+            <h1 class="index-floor-title">基地展示
+              <router-link to="/base"><a href="javascript:;" class="index-base-more">更多&gt;&gt;</a></router-link> 
+              
+              </h1>
           </div>
         </el-col>
       </el-row>
-      <el-row class="pad20 bg-white">
-        <el-col :span="6" v-for="o in 4" :key="o" class="teacher-wall">
-          <el-card :body-style="{ padding: '0px' }">
-            <img src="http://element-cn.eleme.io/static/hamburger.50e4091.png" class="image">
-            <div style="padding: 14px;">
-              <span>好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ currentDate }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
+      <el-row class="pad20 bg-white" id="index-base-background">
+        <el-col :span="6">
+          <router-link to="/base">
+    <div class="index-base-list" id="index-base-list1" @mouseenter="baseEnter1()" @mouseleave="baseLeave1()">
+      <img src="../assets/inspection1.jpg" class="index-base-img">
+      
+        <div class="index-base-name">
+        南通实训基地
+        </div>
+        <div class="index-base-con">
+          南通实训基地位于南通，主要培训项目有工艺员、质量员等。
+        </div>
+    </div>
+          </router-link>
+  </el-col>
+  <el-col :span="6">
+    <router-link to="/base">
+    <div class="index-base-list" id="index-base-list2" @mouseenter="baseEnter2()" @mouseleave="baseLeave2()">
+      <img src="../assets/inspection2.png" class="index-base-img">
+      
+        <div class="index-base-name">
+        南通实地基地
+        </div>
+        <div class="index-base-con">
+          南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。
+        </div>
+    </div>
+    </router-link>
+  </el-col>
+  <el-col :span="6">
+    <router-link to="/base">
+    <div class="index-base-list" id="index-base-list3" @mouseenter="baseEnter3()" @mouseleave="baseLeave3()">
+      <img src="../assets/inspection1.jpg" class="index-base-img">
+      
+        <div class="index-base-name">
+        徐州实训基地
+        </div>
+        <div class="index-base-con">
+          徐州实训基地位于南通，主要培训项目有工艺员、质量员等。
+        </div>
+    </div>
+    </router-link>
+  </el-col>
+  <el-col :span="6">
+    <router-link to="/base">
+    <div class="index-base-list" id="index-base-list4" @mouseenter="baseEnter4()" @mouseleave="baseLeave4()">
+      <img src="../assets/inspection2.png" class="index-base-img">
+      
+        <div class="index-base-name">
+        徐州实地基地
+        </div>
+        <div class="index-base-con">
+          徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。
+        </div>
+    </div>
+    </router-link>
+  </el-col>
+
       </el-row>
-      <el-row class="no-margin-b">
-        <el-col :span="24">
+      <el-col :span="24">
           <div class="grid-content">
-            <h1 class="index-floor-title">师资力量</h1>
+            <h1 class="index-floor-title">友情链接</h1>
           </div>
         </el-col>
+      
+      <el-row class="no-margin-b">
+        <div class="index-friend">
+        <el-col :span="5">
+        <div class="index-friend1">
+        <a href="http://www.zhongnangroup.cn" target="_blank" ><img src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png" alt="" width="190" height="38" border="0"></a>
+        </div>
+        </el-col>
+        <el-col :span="7">
+          <div class="index-friend2">
+        <a href="http://prefabcenter.tongji.edu.cn/" target="_blank"><img src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png" alt="" width="260" height="46" border="0"></a>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="index-friend3">
+          <a href="http://www.tjprefab.com.cn" target="_blank"><img src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png" alt="" width="170" height="72" border="0"></a>
+          </div>
+        </el-col>
+          
+        <el-col :span="6">
+          <div class="index-friend4">
+          <a href="http://www.ntadi.cc/index.html" target="_blank"><img src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png" alt="" width="190" height="83" border="0"></a>
+          </div>
+        </el-col>
+        </div>
       </el-row>
-      <el-row class="pad20 bg-white">
+      <!-- <el-row class="pad20 bg-white">
         <el-carousel :interval="4000" type="card" height="370px" width="650px" class="teacher-box">
           <el-carousel-item v-for="(item,key) in teachers" :key="key">
             <img :src="item" class="index-teacher-img">
@@ -212,9 +405,16 @@
             <p class="detail">2005年首登电视荧屏，开始参演各类综艺节目</p>
           </el-carousel-item>
         </el-carousel>
-      </el-row>
+      </el-row> -->
     </el-main>
-  </el-container>
+    
+    </div>
+    <div class="index-footer">
+      <p>©2018-2019 智聚 版权所有</p>
+      <p class="index-mobile">联系电话： 18234211234</p>
+    </div>
+  </div>
+
 
 </template>
 
@@ -282,7 +482,68 @@ export default {
     },
     goToLogin:function(msg){
       this.dialogVisible=msg
-    }
+    },
+    enter1() {
+        document.getElementById("index-course-list1").style.boxShadow='0 0 2px #c7c5c5'; 
+    },
+     leave1() {
+        document.getElementById("index-course-list1").style.boxShadow='0 0 0px #fff';
+    },
+     enter2() {
+        document.getElementById("index-course-list2").style.boxShadow='0 0 2px #c7c5c5';
+    },
+     leave2() {
+       document.getElementById("index-course-list2").style.boxShadow='0 0 0px #fff';
+    },
+     enter3() {
+        document.getElementById("index-course-list3").style.boxShadow='0 0 2px #c7c5c5';
+    },
+     leave3() {
+        document.getElementById("index-course-list3").style.boxShadow='0 0 0px #fff';
+    },
+     enter4() {
+        document.getElementById("index-course-list4").style.boxShadow='0 0 2px #c7c5c5';
+    },
+     leave4() {
+        document.getElementById("index-course-list4").style.boxShadow='0 0 0px #fff';
+    },
+     enter5() {
+       document.getElementById("index-course-list5").style.boxShadow='0 0 2px #c7c5c5';
+    },
+     leave5() {
+        document.getElementById("index-course-list5").style.boxShadow='0 0 0px #fff';
+    },
+     enter6() {
+        document.getElementById("index-course-list6").style.boxShadow='0 0 2px #c7c5c5';
+    },
+     leave6() {
+        document.getElementById("index-course-list6").style.boxShadow='0 0 0px #fff';
+    },
+    baseEnter1() {
+        document.getElementById("index-base-list1").style.boxShadow='0 0 8px #c7c5c5';
+    },
+    baseLeave1() {
+        document.getElementById("index-base-list1").style.boxShadow='0 0 2px #c7c5c5';
+    },
+    baseEnter2() {
+        document.getElementById("index-base-list2").style.boxShadow='0 0 8px #c7c5c5';
+    },
+    baseLeave2() {
+        document.getElementById("index-base-list2").style.boxShadow='0 0 2px #c7c5c5';
+    },
+    baseEnter3() {
+        document.getElementById("index-base-list3").style.boxShadow='0 0 8px #c7c5c5';
+    },
+    baseLeave3() {
+        document.getElementById("index-base-list3").style.boxShadow='0 0 2px #c7c5c5';
+    },
+    baseEnter4() {
+        document.getElementById("index-base-list4").style.boxShadow='0 0 8px #c7c5c5';
+    },
+    baseLeave4() {
+        document.getElementById("index-base-list4").style.boxShadow='0 0 2px #c7c5c5';
+    },
+    
     
   }
 };
@@ -292,8 +553,7 @@ export default {
 <style scoped>
 .el-main {
   color: #333;
-  text-align: center;
-  padding-top: 60px;
+  
 }
 
 body > .el-container {
@@ -310,6 +570,7 @@ body > .el-container {
 .grid-content {
   border-radius: 4px;
   background: #fff;
+  margin:10px 0px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -328,7 +589,8 @@ body > .el-container {
 }
 .login-btn {
   width: 80%;
-  margin-top: 100px;
+  margin: 25px 25px 0px 25px;
+  
 }
 
 .welcome {
@@ -486,6 +748,242 @@ body > .el-container {
   color: #bbb;
   font-size: 14px;
   text-align: left;
+}
+.el-main {
+  width: 1100px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 80px auto 0px auto;
+}
+.index-body {
+  
+  
+  padding: 5px;
+  
+}
+.index-sign-up1 {
+    width: 177px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    display: block;
+    position:relative;
+    left: 260px;
+    top: 230px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    z-index: 1;
+}
+.index-sign-up1 a {
+    text-decoration: none;
+    color: #393939;
+    cursor: pointer;
+}
+.index-sign-up1:hover {
+  background:#fff;
+  color: #393939;
+}
+.index-sign-up2 {
+    width: 177px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid #0a6998;
+    border-radius: 6px;
+    display: block;
+    position:relative;
+    left: 50px;
+    top: 20px;
+    cursor: pointer;
+    background: #0a6998;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    z-index: 1;
+}
+.index-sign-up2 a {
+    text-decoration: none;
+    color: #393939;
+    cursor: pointer;
+}
+.index-sign-up2:hover {
+  background:#fff;
+  color: #0a6998;
+}
+.el-carousel {
+  z-index: 0;
+}
+#index-carousel {
+  margin: -50px 0px 0px 0px;
+}
+.sign-up-main {
+  height:115px;
+  
+}
+.login-welcome {
+  height:115px;
+}
+.index-login-signup {
+  margin: -50px 0px 0px 0px;
+}
+.sign-up-main-outline {
+  margin: 0px 0px 16px 0px;
+}
+.signip-con {
+  color: #aaa;
+  font-size: 13px;
+  position:relative;
+    top: 50px;
+}
+.index-course-list {
+    display: inline-block;
+    padding: 12px;
+    margin-right: 24px;
+    width: 340px;
+    font-size: 0;
+    vertical-align: top;
+    margin-bottom: 4px;
+}
+
+.index-course-img {
+    float: left;
+    margin-right: 20px;
+    height: 80px;
+    width: 80px;
+    font-size: 0;
+}
+.index-course-img1 {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+.index-course-tit {
+    position: relative;
+    margin: 0px 0px 8px 0px;
+    font-size: 14px;
+    line-height: 19px;
+    color: #333;
+}
+.index-course-content {
+    position: relative;
+    margin: 0px 0px 8px 100px;
+    font-size: 16px;
+    line-height: 24px;
+    word-break: break-all;
+    color: #333;
+    width: 220px; 
+    
+}
+.index-course-other {
+    position: relative;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0px 0px 8px 100px;
+}
+.index-signup-but {
+    color: #49af4f;
+    cursor: pointer;
+}
+.index-register {
+  text-align: center;
+}
+#index-course-list1, #index-course-list2,#index-course-list3,#index-course-list4,#index-course-list5,#index-course-list6{
+  border: 1px solid #fff;
+}
+.index-base-img {
+      display: block;
+    width: 232px;
+    height: 185px;
+}
+.index-base-con {
+  width: 180px;
+    font-size: 14px;
+    color: #888;
+    line-height: 22px;
+    margin: 10px auto;
+    height: 62px;
+    text-align: center;
+    
+}
+.index-base-name {
+    font-size: 16px;
+    color: #333333;
+    margin: 10px 0px;
+    height: 31px;
+    text-align: center;  
+}
+.index-base-list {
+  width: 232px;
+  height:320px;
+  background: #fff;
+  box-shadow: 0 0 2px #c7c5c5;
+}
+#index-base-background {
+  padding: 0px 0px 0px 20px;
+}
+.index-base-more {
+  margin:0px 0px 0px 870px;
+  
+  color: #666;
+    font-size: 14px;
+    line-height: 31px;
+    
+}
+.index-base-more:hover {
+  color:#0a6995;
+  font-weight: bold;
+}
+.index-friend1 {
+  margin:40px 0px 0px 30px;
+  box-shadow: 0 0 2px #c7c5c5;
+  width: 200px;
+  height:42px;
+}
+.index-friend2 {
+  margin:37px 0px 0px 50px;
+  box-shadow: 0 0 2px #c7c5c5;
+  width: 260px;
+  height:47px;
+}
+.index-friend3 {
+  margin:20px 0px 0px 42px;
+  box-shadow: 0 0 2px #c7c5c5;
+  width: 200px;
+  height:77px;
+  padding: 0px 0px 0px 18px;
+}
+.index-friend4 {
+  margin:20px 0px 20px 24px;
+  box-shadow: 0 0 2px #c7c5c5;
+  width: 200px;
+  height:77px;
+  padding: 0px 0px 0px 4px;
+}
+.index-footer {
+  width:100%;
+  height:150px;
+  background: #242e68;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 50px 0px 0px 0px;;
+}
+.index-mobile {
+  margin:10px 0px 0px 0px;
 }
 </style>
 
