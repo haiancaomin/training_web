@@ -312,8 +312,7 @@
         <el-col :span="24">
           <div class="grid-content">
             <h1 class="index-floor-title">基地展示
-              <router-link to="/base"><a href="javascript:;" class="index-base-more">更多&gt;&gt;</a></router-link> 
-              
+              <router-link to="/base" class="index-base-more">更多&gt;&gt;</router-link> 
               </h1>
           </div>
         </el-col>
@@ -869,6 +868,7 @@ body > .el-container {
       display: block;
     width: 232px;
     height: 185px;
+    transition: all ease-in-out .5s;
 }
 .index-base-con {
   width: 180px;
@@ -892,6 +892,7 @@ body > .el-container {
   height:320px;
   background: #fff;
   box-shadow: 0 0 2px #c7c5c5;
+  overflow: hidden;
 }
 #index-base-background {
   padding: 0px 0px 0px 20px;
@@ -951,6 +952,9 @@ body > .el-container {
 }
 .index-base-list:hover {
   box-shadow:0 0 8px #c7c5c5;
+}
+.index-base-list:hover .index-base-img {
+  transform: scale(1.04)
 }
 </style>
 
