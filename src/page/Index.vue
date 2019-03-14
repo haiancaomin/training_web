@@ -897,8 +897,8 @@ body > .el-container {
   padding: 0px 0px 0px 20px;
 }
 .index-base-more {
-  margin:0px 0px 0px 870px;
-  
+  margin:0px 50px 0px 0px;
+  float:right;
   color: #666;
     font-size: 14px;
     line-height: 31px;
