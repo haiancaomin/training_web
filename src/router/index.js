@@ -16,6 +16,7 @@ import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
+import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
 import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
 import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
 import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
@@ -108,6 +109,9 @@ export default new Router({
       }, {
         path: '/HRServiceJobSeekerResumeInfo',
         component: HRServiceJobSeekerResumeInfo
+      }, {
+        path: '/PersonalCenterAddPerson',
+        component: PersonalCenterAddPerson
       }
     ]
   }]
