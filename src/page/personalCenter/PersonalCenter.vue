@@ -19,6 +19,10 @@
             <i class="el-icon-search"></i>
             <span slot="title">成绩查询</span>
           </el-menu-item>
+          <el-menu-item @click="activeAdd" index="555">
+            <i class="el-icon-circle-plus-outline"></i>
+            <span slot="title">人员添加</span>
+          </el-menu-item>
           <el-menu-item @click="activeExpress" index="22">
             <i class="el-icon-document"></i>
             <span slot="title">历史单号查询</span>
@@ -53,6 +57,20 @@
           
         </div>
 
+        <!-- page6 添加人员 -->
+        <div class="personal-add" v-show="personalAdd == 1">
+          <el-col :span="24">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item>个人中心</el-breadcrumb-item>
+            <el-breadcrumb-item>添加人员</el-breadcrumb-item>
+            
+          </el-breadcrumb>
+          </el-col>
+
+          <PersonalCenterAddPerson></PersonalCenterAddPerson>
+          
+          
+        </div>
         <!-- page3 历史单号查询 -->
         <div class="personal-express" v-if="personalExpress==1">
           <el-col :span="24">
@@ -103,7 +121,8 @@
 import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch';
 import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch';
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice';
-import PersonalPassword from '@/page/personalCenter/PersonalPassword'
+import PersonalPassword from '@/page/personalCenter/PersonalPassword';
+import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
 export default {
   
   name: "PersonalCenter",
@@ -123,14 +142,16 @@ export default {
       personalScore: 1,
       personalExpress: 0,
       personalInvoice: 0,
-      personalPassword: 0
+      personalPassword: 0,
+      personalAdd: 0,
     };
   },
   components: {
     PesronalScoreSearch,
     PersonalExpressSearch,
     PersonalInvoice,
-    PersonalPassword
+    PersonalPassword,
+    PersonalCenterAddPerson
   },
   methods: {
     activeScore() {
@@ -138,6 +159,15 @@ export default {
         (this.personalScore = 1),
         (this.personalExpress = 0),
         (this.personalInvoice = 0),
+        this.personalAdd = 0,
+        (this.personalPassword = 0);
+    },
+    activeAdd() {
+      (this.personalIndex = 0),
+        (this.personalScore = 0),
+        (this.personalExpress = 0),
+        (this.personalInvoice = 0),
+        this.personalAdd = 1,
         (this.personalPassword = 0);
     },
     activeExpress() {
@@ -145,6 +175,7 @@ export default {
         (this.personalScore = 0),
         (this.personalExpress = 1),
         (this.personalInvoice = 0),
+        this.personalAdd = 0,
         (this.personalPassword = 0);
     },
     activeInvoice() {
@@ -152,6 +183,7 @@ export default {
         (this.personalScore = 0),
         (this.personalExpress = 0),
         (this.personalInvoice = 1),
+        this.personalAdd = 0,
         (this.personalPassword = 0);
     },
     activePassword() {
@@ -159,6 +191,7 @@ export default {
         (this.personalScore = 0),
         (this.personalExpress = 0),
         (this.personalInvoice = 0),
+        this.personalAdd = 0,
         (this.personalPassword = 1);
     }
   }
@@ -183,6 +216,13 @@ export default {
   padding: 20px 20px 0px 20px;
 }
 .personal-score {
+  height: 590px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  padding: 20px 20px 0px 20px;
+}
+.personal-add {
   height: 590px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
