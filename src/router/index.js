@@ -25,7 +25,8 @@ import HRServiceJobSeekerResumeInfo from '@/page/HRService/HRServiceJobSeekerRes
 
 import Test from '@/page/Test'
 
-import baseShow from '@/page/base/baseShow'
+import baseMenu from '@/page/base/baseMenu'
+import baseShow1 from '@/page/base/baseShow1'
 
 
 
@@ -66,7 +67,11 @@ export default new Router({
         component: fileDetail
       }, {
         path: '/base',
-        component: baseShow
+        component: baseMenu,
+        children:[{
+          path:'show1',
+          component: baseShow1,
+        }]
       }, {
         path: '/Inspection',
         component: Inspection
