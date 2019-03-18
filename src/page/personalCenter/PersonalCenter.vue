@@ -32,13 +32,10 @@
             <span slot="title">人员添加</span>
       </el-menu-item>
 
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-tickets"></i>
-              <span>发票相关</span>
-            </template>
-            <el-menu-item index="/personalCenter/PersonalCenterInvoiceShow"><span class="in-submenu">发票信息</span></el-menu-item>
-          </el-submenu>
+      <el-menu-item index="/personalCenter/PersonalCenterInvoiceShow">
+        <i class="el-icon-tickets"></i>
+            <span slot="title">发票信息</span>
+      </el-menu-item>
           
           <el-menu-item index="/personalCenter/PersonalPassword">
         <i class="el-icon-setting"></i>
