@@ -99,8 +99,14 @@ export default {
 </script>
 
 <style scoped>
-.PersonalCenterInvoiceShow {
-    
+#PersonalCenterInvoiceShow {
+     width: 830px;
+     
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 0px 0px 0px 20px;
+  padding: 0px 0px 20px 0px;
 }
 table {
     text-align: center;

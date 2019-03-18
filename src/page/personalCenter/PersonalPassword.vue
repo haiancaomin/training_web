@@ -3,7 +3,7 @@
     <div class="PersonalPassword-change">
         <el-form
         :model="ruleForm"
-        :rules="rules"
+        
         ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"

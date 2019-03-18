@@ -1,5 +1,4 @@
 <template>
-  <el-container>
     <el-main>
       <div class="file-container">
         <h1 class="file-title">文件列表</h1>
@@ -22,7 +21,6 @@
         </el-row>
       </div>
     </el-main>
-  </el-container>
 </template>
 <script>
 
@@ -37,6 +35,8 @@ export default {
 <style scoped>
 .el-main {
   padding-top: 60px;
+  width: 1000px;
+  margin: 0 auto
 }
 .el-row {
   padding: 20px 0;
