@@ -14,6 +14,7 @@ import PersonalCenter from '@/page/personalCenter/PersonalCenter'
 import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
 import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
+import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
@@ -117,6 +118,9 @@ export default new Router({
       }, {
         path: '/PersonalCenterAddPerson',
         component: PersonalCenterAddPerson
+      }, {
+        path: '/PersonalCenterInvoiceShow',
+        component: PersonalCenterInvoiceShow
       }
     ]
   }]
