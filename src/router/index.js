@@ -27,6 +27,7 @@ import HRServiceJobSeekerResumeInfo from '@/page/HRService/HRServiceJobSeekerRes
 import Test from '@/page/Test'
 
 import baseMenu from '@/page/base/baseMenu'
+import baseOverView from '@/page/base/baseOverView'
 import baseShow1 from '@/page/base/baseShow1'
 
 
@@ -70,6 +71,12 @@ export default new Router({
         path: '/base',
         component: baseMenu,
         children:[{
+          path:'',
+          redirect: 'overview',
+        },{
+          path:'overview',
+          component: baseOverView,
+        },{
           path:'show1',
           component: baseShow1,
         }]
