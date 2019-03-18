@@ -15,6 +15,7 @@ import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
 import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
 import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
+import PersonalCenterTakeInvoice from '@/page/personalCenter/PersonalCenterTakeInvoice'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
@@ -81,6 +82,37 @@ export default new Router({
           component: baseShow1,
         }]
       }, {
+        path: '/PersonalCenter',
+        component: PersonalCenter,
+        children:[{
+          path:'',
+          redirect: 'PesronalScoreSearch',
+        },{
+          path:'PesronalScoreSearch',
+          component: PesronalScoreSearch,
+        },{
+          path:'PersonalCenterAddPerson',
+          component: PersonalCenterAddPerson,
+        },{
+          path:'PersonalExpressSearch',
+          component: PersonalExpressSearch,
+        },{
+          path:'PersonalCenterInvoiceShow',
+          component: PersonalCenterInvoiceShow,
+        },{
+          path:'PersonalCenterTakeInvoice',
+          component: PersonalCenterTakeInvoice,
+        }
+        ,{
+          path:'PersonalPassword',
+          component: PersonalPassword,
+        }
+        ,{
+          path:'show1',
+          component: baseShow1,
+        }]
+      }
+      , {
         path: '/Inspection',
         component: Inspection
       }, {
