@@ -169,7 +169,7 @@
                   </el-col>
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item :title="'授课老师'" name="2">
+                  <el-collapse-item title="授课老师" name="2">
                     <div class="clearfix teacher-box">
                       <div class="teacher-img">
                         <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
@@ -294,7 +294,7 @@
                   </el-col>
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item :title="'授课老师'" name="3">
+                  <el-collapse-item title="授课老师" name="3">
                     <div class="clearfix teacher-box">
                       <div class="teacher-img">
                         <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
@@ -383,7 +383,8 @@
 export default {
   data() {
     return {
-      activeNames: []
+      activeNames: [],
+      teachers:['张三','李四']
     };
   },
   methods: {
