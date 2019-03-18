@@ -107,7 +107,6 @@ export default {
   data() {
     return {
       activeNames: ["1"],
-      menuopen:['1'],
       guanjiangPic: [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
@@ -157,12 +156,7 @@ export default {
     };
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
+   
     handleChange(val) {
       console.log(val);
     }
@@ -171,15 +165,6 @@ export default {
 </script>
 
 <style scoped>
-.base-container {
-  width: 1200px;
-  margin: 0 auto;
-  padding-top: 80px;
-  display: flex;
-}
-.tac .el-col {
-  width: 250px;
-}
 .base-box {
   margin-left: 30px;
   flex: 1;

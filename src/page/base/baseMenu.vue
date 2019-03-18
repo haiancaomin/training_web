@@ -3,7 +3,7 @@
     <el-row class="tac">
       <el-col :span="12">
         <el-menu
-          default-active="/base/show1"
+          :default-active="$route.path"
           :default-openeds="menuopen"
           class="el-menu-vertical-demo"
           @open="handleOpen"
@@ -14,6 +14,7 @@
             <template slot="title">
               <span>实训基地</span>
             </template>
+            <el-menu-item index="/base/overview">实训基地概览</el-menu-item>
             <el-menu-item index="/base/show1">实训基地1</el-menu-item>
             <el-menu-item index="1-2">实训基地2</el-menu-item>
           </el-submenu>
@@ -21,6 +22,7 @@
             <template slot="title">
               <span>实地基地</span>
             </template>
+            <el-menu-item index="2-1">实地基地概览</el-menu-item>
             <el-menu-item index="2-1">实地基地1</el-menu-item>
             <el-menu-item index="2-2">实地基地2</el-menu-item>
           </el-submenu>
