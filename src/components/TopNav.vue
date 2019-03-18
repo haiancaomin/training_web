@@ -18,16 +18,19 @@
           <a href="javascript:;">主页</a>
         </el-menu-item>
         <el-menu-item index="/course">
-          <a href="javascript:;">课程分类</a>
+          <a href="javascript:;">课程介绍</a>
         </el-menu-item>
         <el-menu-item index="/base">
           <a href="javascript:;">基地展示</a>
         </el-menu-item>
-        <el-menu-item index="/teacher">
+        <!-- <el-menu-item index="/teacher">
           <a href="javascript:;">师资力量</a>
+        </el-menu-item> -->
+        <el-menu-item index="/Inspection">
+          <a href="javascript:;">高端考察</a>
         </el-menu-item>
         <el-menu-item index="/PersonalCenter">
-          <a href="javascript:;">个人中心</a>
+          <a href="javascript:;">客户中心</a>
         </el-menu-item>
         <!-- <el-submenu index="2">
         <template slot="title">关于我们</template>
@@ -53,9 +56,7 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
         </el-submenu>-->
-        <el-menu-item index="/Inspection">
-          <a href="javascript:;">高端考察</a>
-        </el-menu-item>
+        
         <el-menu-item index="5">
           <a href="javascript:;">资讯</a>
         </el-menu-item>
