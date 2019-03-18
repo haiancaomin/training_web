@@ -34,7 +34,8 @@
   <div class="PesronalScoreSearch-result">
       <el-table
       :data="tableData"
-      style="width: 100%">
+      border
+    style="width: 100%">
       <el-table-column
         prop="name"
         label="姓名"
@@ -47,7 +48,9 @@
       </el-table-column>
       <el-table-column
         prop="subject"
-        label="科目">
+        label="科目"
+        width="80"
+        >
       </el-table-column>
       <el-table-column
         prop="testDate"
@@ -55,11 +58,13 @@
       </el-table-column>
       <el-table-column
         prop="score"
-        label="分数">
+        label="分数"
+        width="60">
       </el-table-column>
       <el-table-column
         prop="passFlag"
-        label="是否及格">
+        label="是否及格"
+        width="100">
       </el-table-column>
     </el-table>
 
@@ -75,7 +80,7 @@ export default {
     return { 
         tableData: [{
             name: '老王',
-            id: '12345678909877',
+            id: '320999888877656765',
             subject: '灌浆工',
             testDate: '2019-03-05',
             score: '99',
@@ -102,6 +107,16 @@ export default {
 </script>
 
 <style scoped>
+#PesronalScoreSearch {
+     width: 830px;
+     
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 0px 0px 0px 20px;
+  padding: 0px 0px 20px 0px;
+  
+}
     .PesronalScoreSearch-info {
         margin: 50px 0px 0px 170px;
     }
@@ -109,7 +124,10 @@ export default {
         margin: 0px 0px 0px 60px;
     }
     .PesronalScoreSearch-result {
-        margin: 50px 0px 0px 0px;
+        margin: 50px 20px 0px 20px;
+    }
+    .el-table th>.cell {
+      text-align: center;
     }
 </style>
 

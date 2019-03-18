@@ -15,10 +15,13 @@ import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
 import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
 import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
 import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
-import PersonalCenterTakeInvoice from '@/page/personalCenter/PersonalCenterTakeInvoice'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
+import PersonalCenterAllOrder from '@/page/personalCenter/PersonalCenterAllOrder'
+import PersonalCenterUncompletedOrder from '@/page/personalCenter/PersonalCenterUncompletedOrder'
+import PersonalCenterNotInvoice from '@/page/personalCenter/PersonalCenterNotInvoice'
+import PersonalCenterHaveInvoice from '@/page/personalCenter/PersonalCenterHaveInvoice'
 import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
 import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
 import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
@@ -86,7 +89,7 @@ export default new Router({
         component: PersonalCenter,
         children:[{
           path:'',
-          redirect: 'PesronalScoreSearch',
+          redirect: '/personalCenter/PersonalCenterAllOrder',
         },{
           path:'PesronalScoreSearch',
           component: PesronalScoreSearch,
@@ -100,16 +103,20 @@ export default new Router({
           path:'PersonalCenterInvoiceShow',
           component: PersonalCenterInvoiceShow,
         },{
-          path:'PersonalCenterTakeInvoice',
-          component: PersonalCenterTakeInvoice,
-        }
-        ,{
           path:'PersonalPassword',
           component: PersonalPassword,
-        }
-        ,{
-          path:'show1',
-          component: baseShow1,
+        },{
+          path:'PersonalCenterAllOrder',
+          component: PersonalCenterAllOrder,
+        },{
+          path:'PersonalCenterUncompletedOrder',
+          component: PersonalCenterUncompletedOrder,
+        },{
+          path:'PersonalCenterNotInvoice',
+          component: PersonalCenterNotInvoice,
+        },{
+          path:'PersonalCenterHaveInvoice',
+          component: PersonalCenterHaveInvoice,
         }]
       }
       , {
