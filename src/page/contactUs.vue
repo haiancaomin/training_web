@@ -52,7 +52,7 @@ export default {
 </script>
 <style scoped>
 .container {
-  width: 1140px;
+  width: 1100px;
   padding: 60px 15px 15px;
   margin: 0 auto;
 }
@@ -73,7 +73,7 @@ export default {
   padding: 20px 0;
 }
 #map {
-  height: 400px;
+  height: 450px;
 }
 </style>
 
