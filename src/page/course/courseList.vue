@@ -46,8 +46,16 @@
                   </el-col>
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item title="授课老师" name="1">
-                    <div class="clearfix teacher-box">
+                  <el-collapse-item name="1">
+                    <template slot="title">
+                      <el-col :span="3">
+                        <div class="grid-content bold text-right">授课老师</div>
+                      </el-col>
+                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
+                        <div class="grid-content">{{val}}</div>
+                      </el-col>
+                    </template>
+                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
                       <div class="teacher-img">
                         <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
                       </div>
@@ -57,44 +65,7 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                    <div class="clearfix teacher-box">
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">授课老师</div>
@@ -169,8 +140,16 @@
                   </el-col>
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item title="授课老师" name="2">
-                    <div class="clearfix teacher-box">
+                  <el-collapse-item name="2">
+                    <template slot="title">
+                      <el-col :span="3">
+                        <div class="grid-content bold text-right">授课老师</div>
+                      </el-col>
+                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
+                        <div class="grid-content">{{val}}</div>
+                      </el-col>
+                    </template>
+                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
                       <div class="teacher-img">
                         <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
                       </div>
@@ -180,44 +159,7 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                    <div class="clearfix teacher-box">
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">授课老师</div>
@@ -294,8 +236,16 @@
                   </el-col>
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item title="授课老师" name="3">
-                    <div class="clearfix teacher-box">
+                  <el-collapse-item name="3">
+                    <template slot="title">
+                      <el-col :span="3">
+                        <div class="grid-content bold text-right">授课老师</div>
+                      </el-col>
+                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
+                        <div class="grid-content">{{val}}</div>
+                      </el-col>
+                    </template>
+                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
                       <div class="teacher-img">
                         <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
                       </div>
@@ -305,44 +255,7 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                    <div class="clearfix teacher-box">
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">授课老师</div>
@@ -384,7 +297,7 @@ export default {
   data() {
     return {
       activeNames: [],
-      teachers:['张三','李四']
+      teachers: ["张三", "李四"]
     };
   },
   methods: {
@@ -462,8 +375,7 @@ export default {
 }
 .course-container .el-collapse-item__header {
   font-size: 14px;
-  font-weight: bold;
-  padding-left: 12px;
+  margin: 0 -10px;
 }
 .course-container .el-collapse-item__content {
   padding-bottom: 0;
