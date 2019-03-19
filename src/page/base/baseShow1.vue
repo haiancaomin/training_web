@@ -115,6 +115,7 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        loop: true,
         effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
@@ -131,6 +132,7 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        loop: true,
         effect: "flip",
         grabCursor: true,
         pagination: {
@@ -141,6 +143,7 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        loop: true,
         effect: "cube",
         grabCursor: true,
         cubeEffect: {
@@ -156,7 +159,6 @@ export default {
     };
   },
   methods: {
-   
     handleChange(val) {
       console.log(val);
     }
