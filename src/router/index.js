@@ -18,6 +18,7 @@ import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoi
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
 import PersonalMail from '@/page/personalCenter/PersonalMail'
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
+import PersonalCenterPersonInfo from '@/page/personalCenter/PersonalCenterPersonInfo'
 import PersonalCenterAllOrder from '@/page/personalCenter/PersonalCenterAllOrder'
 import PersonalCenterUncompletedOrder from '@/page/personalCenter/PersonalCenterUncompletedOrder'
 import PersonalCenterNotInvoice from '@/page/personalCenter/PersonalCenterNotInvoice'
@@ -43,131 +44,134 @@ export default new Router({
     path: '/',
     component: TopNav,
     children: [{
+      path: '',
+      redirect: '/index'
+    }, {
+      path: '/index',
+      component: Index
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: SignUp
+    },
+    {
+      path: '/Test',
+      name: 'Test',
+      component: Test
+    },
+    {
+      path: '/course',
+      component: courseList
+    }, {
+      path: '/teacher',
+      component: teacherList
+    }, {
+      path: '/download',
+      component: fileList
+    }, {
+      path: '/download-action',
+      component: fileDetail
+    }, {
+      path: '/base',
+      component: baseMenu,
+      children: [{
         path: '',
-        redirect: '/index'
+        redirect: 'overview',
       }, {
-        path: '/index',
-        component: Index
-      },
-      {
-        path: '/SignUp',
-        name: 'SignUp',
-        component: SignUp
-      },
-      {
-        path: '/Test',
-        name: 'Test',
-        component: Test
-      },
-      {
-        path: '/course',
-        component: courseList
+        path: 'overview',
+        component: baseOverView,
       }, {
-        path: '/teacher',
-        component: teacherList
+        path: 'show1',
+        component: baseShow1,
+      }]
+    }, {
+      path: '/PersonalCenter',
+      component: PersonalCenter,
+      children: [{
+        path: '',
+        redirect: '/personalCenter/PersonalCenterAllOrder',
       }, {
-        path: '/download',
-        component: fileList
+        path: 'PesronalScoreSearch',
+        component: PesronalScoreSearch,
       }, {
-        path: '/download-action',
-        component: fileDetail
+        path: 'PersonalCenterAddPerson',
+        component: PersonalCenterAddPerson,
       }, {
-        path: '/base',
-        component: baseMenu,
-        children:[{
-          path:'',
-          redirect: 'overview',
-        },{
-          path:'overview',
-          component: baseOverView,
-        },{
-          path:'show1',
-          component: baseShow1,
-        }]
+        path: 'PersonalCenterPersonInfo',
+        component: PersonalCenterPersonInfo,
       }, {
-        path: '/PersonalCenter',
-        component: PersonalCenter,
-        children:[{
-          path:'',
-          redirect: '/personalCenter/PersonalCenterAllOrder',
-        },{
-          path:'PesronalScoreSearch',
-          component: PesronalScoreSearch,
-        },{
-          path:'PersonalCenterAddPerson',
-          component: PersonalCenterAddPerson,
-        },{
-          path:'PersonalExpressSearch',
-          component: PersonalExpressSearch,
-        },{
-          path:'PersonalCenterInvoiceShow',
-          component: PersonalCenterInvoiceShow,
-        },{
-          path:'PersonalPassword',
-          component: PersonalPassword,
-        },{
-          path:'PersonalCenterAllOrder',
-          component: PersonalCenterAllOrder,
-        },{
-          path:'PersonalCenterUncompletedOrder',
-          component: PersonalCenterUncompletedOrder,
-        },{
-          path:'PersonalCenterNotInvoice',
-          component: PersonalCenterNotInvoice,
-        },{
-          path:'PersonalCenterHaveInvoice',
-          component: PersonalCenterHaveInvoice,
-        }]
-      }
+        path: 'PersonalExpressSearch',
+        component: PersonalExpressSearch,
+      }, {
+        path: 'PersonalCenterInvoiceShow',
+        component: PersonalCenterInvoiceShow,
+      }, {
+        path: 'PersonalPassword',
+        component: PersonalPassword,
+      }, {
+        path: 'PersonalCenterAllOrder',
+        component: PersonalCenterAllOrder,
+      }, {
+        path: 'PersonalCenterUncompletedOrder',
+        component: PersonalCenterUncompletedOrder,
+      }, {
+        path: 'PersonalCenterNotInvoice',
+        component: PersonalCenterNotInvoice,
+      }, {
+        path: 'PersonalCenterHaveInvoice',
+        component: PersonalCenterHaveInvoice,
+      }]
+    }
       , {
-        path: '/Inspection',
-        component: Inspection
-      }, {
-        path: '/InspectionDetail',
-        component: InspectionDetail
-      }, {
-        path: '/contact',
-        component: contactUs
-      }, {
-        path: '/PersonalCenter',
-        component: PersonalCenter
-      }, {
-        path: '/PesronalScoreSearch',
-        component: PesronalScoreSearch
-      }, {
-        path: '/PersonalExpressSearch',
-        component: PersonalExpressSearch
-      }, {
-        path: '/PersonalInvoice',
-        component: PersonalInvoice
-      }, {
-        path: '/PersonalPassword',
-        component: PersonalPassword
-      }, {
-        path: '/PersonalMail',
-        component: PersonalMail
-      }, {
-        path: '/HRServiceTypeChoice',
-        component: HRServiceTypeChoice
-      }, {
-        path: '/HRServiceJobSeekerIndex',
-        component: HRServiceJobSeekerIndex
-      }, {
-        path: '/HRServiceHRIndex',
-        component: HRServiceHRIndex
-      }, {
-        path: '/HRServiceJobSeekerResume',
-        component: HRServiceJobSeekerResume
-      }, {
-        path: '/HRServiceJobSeekerResumeInfo',
-        component: HRServiceJobSeekerResumeInfo
-      }, {
-        path: '/PersonalCenterAddPerson',
-        component: PersonalCenterAddPerson
-      }, {
-        path: '/PersonalCenterInvoiceShow',
-        component: PersonalCenterInvoiceShow
-      }
+      path: '/Inspection',
+      component: Inspection
+    }, {
+      path: '/InspectionDetail',
+      component: InspectionDetail
+    }, {
+      path: '/contact',
+      component: contactUs
+    }, {
+      path: '/PersonalCenter',
+      component: PersonalCenter
+    }, {
+      path: '/PesronalScoreSearch',
+      component: PesronalScoreSearch
+    }, {
+      path: '/PersonalExpressSearch',
+      component: PersonalExpressSearch
+    }, {
+      path: '/PersonalInvoice',
+      component: PersonalInvoice
+    }, {
+      path: '/PersonalPassword',
+      component: PersonalPassword
+    }, {
+      path: '/PersonalMail',
+      component: PersonalMail
+    }, {
+      path: '/HRServiceTypeChoice',
+      component: HRServiceTypeChoice
+    }, {
+      path: '/HRServiceJobSeekerIndex',
+      component: HRServiceJobSeekerIndex
+    }, {
+      path: '/HRServiceHRIndex',
+      component: HRServiceHRIndex
+    }, {
+      path: '/HRServiceJobSeekerResume',
+      component: HRServiceJobSeekerResume
+    }, {
+      path: '/HRServiceJobSeekerResumeInfo',
+      component: HRServiceJobSeekerResumeInfo
+    }, {
+      path: '/PersonalCenterAddPerson',
+      component: PersonalCenterAddPerson
+    }, {
+      path: '/PersonalCenterInvoiceShow',
+      component: PersonalCenterInvoiceShow
+    }
     ]
   }]
 })

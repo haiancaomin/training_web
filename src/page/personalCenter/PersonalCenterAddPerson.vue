@@ -1,112 +1,49 @@
 <template>
   <div id="PersonalCenterAddPerson">
-      <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="100px"
-            class="demo-ruleForm"
-          >
-    
+    <div class="crumb">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">公司人员</el-breadcrumb-item>
+        <el-breadcrumb-item>人员信息</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <el-form
+      :model="ruleForm"
+      :rules="rules"
+      ref="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
 
-            <el-form-item label="姓名" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
+      <el-form-item label="身份证号" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
 
-            <el-form-item label="身份证号" prop="name" id="add-id">
-              
-              <el-input v-model="ruleForm.name"></el-input>
-               
-            </el-form-item>
-            
-            <el-form-item label="性别" prop="resource">
-              <el-radio-group v-model="ruleForm.resource">
-                <el-radio label="男"></el-radio>
-                <el-radio label="女"></el-radio>
-              </el-radio-group>
-            </el-form-item>
+      <el-form-item label="性别" prop="resource">
+        <el-radio-group v-model="ruleForm.resource">
+          <el-radio label="男"></el-radio>
+          <el-radio label="女"></el-radio>
+        </el-radio-group>
+      </el-form-item>
 
-            <el-form-item label="出生日期" required id="add-birthday">
-              <el-form-item prop="date1">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="ruleForm.date1"
-                  style="width: 300px;"
-                ></el-date-picker>
-              </el-form-item>
-            </el-form-item>
-
-            <el-form-item label="籍贯" prop="native" id="native">
-              <el-col :span="8">
-                <el-select v-model="ruleForm.native" placeholder="省份">
-                  <el-option label="省份1" value="shanghai"></el-option>
-                  <el-option label="省份2" value="beijing"></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="2">&nbsp;</el-col>
-              <el-col :span="5">
-                <el-select v-model="ruleForm.native" placeholder="城市" id="city">
-                  <el-option label="城市1" value="shanghai"></el-option>
-                  <el-option label="城市2" value="beijing"></el-option>
-                </el-select>
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label="现工作地" prop="native" id="add-workspace">
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="学历" prop="region" id="education">
-              <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                <el-option label="省份1" value="shanghai"></el-option>
-                <el-option label="省份2" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="毕业学校" prop="native" id="add-school"> 
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="职位" prop="native">
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="工种" prop="name" id="add-workType">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="移动电话" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="邮箱" prop="name" id="add-mail">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="所在公司" prop="native">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="从业资格证书" prop="native" id="add-qualification">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item>
-              <div class="nextPage1">
-                <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
-              </div>
-            </el-form-item>
-          </el-form>
+      <el-form-item>
+        <div class="worker-add">
+          <el-button type="primary">添加</el-button>
+        </div>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
-    name: "PersonalCenterAddPerson",
+  name: "PersonalCenterAddPerson",
   data() {
-    return { 
-       ruleForm: {
+    return {
+      ruleForm: {
         name: "",
         region: "",
         date1: "",
@@ -167,54 +104,73 @@ export default {
         ],
         desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }]
       }
-
     };
   },
-  methods: {
-      
-  },
- 
+  methods: {}
 };
 </script>
 
 <style scoped>
-   #native .el-select {
+#PersonalCenterAddPerson {
+  width: 830px;
+
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 0px 0px 0px 20px;
+  padding: 0px 0px 20px 0px;
+}
+#native .el-select {
   width: 119px;
-  margin:0px 100px 0px 0px;
+  margin: 0px 100px 0px 0px;
 }
-#add-id {
-    float:right;
-    margin:-100px 0px 0px 0px;
-}
+
 #add-birthday {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 #add-workspace {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 #add-school {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 #add-workType {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 #add-mail {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 #add-qualification {
-    float:right;
-    margin:-100px 0px 0px 0px;
+  float: right;
+  margin: -100px 0px 0px 0px;
 }
 .el-input {
-    width: 220px;
+  width: 220px;
 }
 .el-form {
-    margin: 50px 0px 0px 0px;
+  margin: 50px 0px 0px 180px;
+}
+.crumb {
+  padding: 10px 0px 10px 0px;
+  font-size: 20px;
+  text-align: left;
+  margin: 20px;
+  border-left: 2px solid #409eff;
+  line-height: 40px;
+  padding-left: 15px;
+  background: #e4e7ed;
+}
+.el-breadcrumb {
+  background: #e4e7ed;
+}
+.worker-add {
+  text-align: center;
+  margin: 0px 250px 0px 0px;
 }
 </style>
 

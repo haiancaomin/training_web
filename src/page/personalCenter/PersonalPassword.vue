@@ -1,34 +1,33 @@
 <template>
   <div id="PersonalPassword">
+    <div class="crumb">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
+        <el-breadcrumb-item>修改密码</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <div class="PersonalPassword-change">
-        <el-form
-        :model="ruleForm"
-        
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      > 
+      <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="新密码:  " prop="IDCardNuM">
           <el-input v-model="ruleForm.IDCardNuM"></el-input>
         </el-form-item>
-        
+
         <el-form-item label="确认新密码:  " prop="workingSpace">
           <el-input v-model="ruleForm.workingSpace"></el-input>
         </el-form-item>
-       
+
         <el-form-item label="手机号码:  " prop="mobile">
           <el-input v-model="ruleForm.mobile"></el-input>
         </el-form-item>
-        <el-form-item label="验证码:  " prop="verification" id="regVerification"> 
-
-          <el-input v-model="ruleForm.verification" class="identification-num"></el-input> 
+        <el-form-item label="验证码:  " prop="verification" id="regVerification">
+          <el-input v-model="ruleForm.verification" class="identification-num"></el-input>
           <button type="button" class="test-but">获取验证码</button>
         </el-form-item>
-        
+
         <div class="PersonalPassword-change-commit">
-        <el-form-item>
-          <el-button type="primary">确认更改</el-button>
-        </el-form-item>
+          <el-form-item>
+            <el-button type="primary">确认更改</el-button>
+          </el-form-item>
         </div>
       </el-form>
     </div>
@@ -37,10 +36,10 @@
 
 <script>
 export default {
-    name: "PersonalPassword",
+  name: "PersonalPassword",
   data() {
-    return { 
-       ruleForm: {
+    return {
+      ruleForm: {
         name: "",
         IDCardNuM: "",
         sex: "",
@@ -56,39 +55,56 @@ export default {
         mail: "",
         company: "",
         qualification: ""
-      },
-      
+      }
     };
   },
-  methods: {
-      
-  },
- 
+  methods: {}
 };
 </script>
 
 <style scoped>
- .el-input {
-     width: 300px;
- }
- .PersonalPassword-change {
-     margin: 50px 0px 0px 100px;
- }
- .PersonalPassword-change-commit {
-     text-align: center;
-     margin: 0px 170px 0px 0px;
- }
- .test-but {
-      position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 178px;
-    width: 120px;
-    height: 36px;
-    margin: auto;
-    line-height: 36px;
-    text-align: center;
-    
+#PersonalPassword {
+  width: 830px;
+
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 0px 0px 0px 20px;
+  padding: 0px 0px 20px 0px;
+}
+.el-input {
+  width: 300px;
+}
+.PersonalPassword-change {
+  margin: 50px 0px 0px 100px;
+}
+.PersonalPassword-change-commit {
+  text-align: center;
+  margin: 0px 200px 0px 0px;
+}
+.test-but {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 230px;
+  width: 120px;
+  height: 36px;
+  margin: auto;
+  line-height: 36px;
+  text-align: center;
+}
+.crumb {
+  padding: 10px 0px 10px 0px;
+  font-size: 20px;
+  text-align: left;
+  margin: 20px;
+  border-left: 2px solid #409eff;
+  line-height: 40px;
+  padding-left: 15px;
+  background: #e4e7ed;
+}
+.el-breadcrumb {
+  background: #e4e7ed;
 }
 </style>
 

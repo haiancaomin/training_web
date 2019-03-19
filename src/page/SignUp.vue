@@ -4,7 +4,6 @@
       <el-step title="报名信息"></el-step>
       <el-step title="信息预览"></el-step>
       <el-step title="费用"></el-step>
-      <el-step title="开具发票"></el-step>
       <el-step title="完成"></el-step>
     </el-steps>
 
@@ -14,14 +13,15 @@
         <el-tab-pane label="公司报名">
           <div calss="batch-sign-up">
             <div class="batch-sign-up-notice">
-              <p id="signup-no-info-notice1">企业报名请确认已在个人中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击<router-link to="/PersonalCenter"><span class="signup-here">这里</span></router-link>进入个人中心填写。</p>
-              <p
-                class="info-notice" id="signup-no-info-notice2"
-              >注：如报名条件不同，可以通过点击添加报名按钮选择新的报名条件进行报名。</p>
+              <p id="signup-no-info-notice1">企业报名请确认已在个人中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
+                <router-link to="/PersonalCenter">
+                  <span class="signup-here">这里</span>
+                </router-link>进入个人中心填写。
+              </p>
+              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，可以通过点击添加报名按钮选择新的报名条件进行报名。</p>
             </div>
             <el-form class="demo-ruleForm">
               <ol>
-                
                 <span class="el-icon-plus" id="el-icon-plus1" @click="addNew0" v-if="but0"></span>
                 <div class="div-zone">
                   <el-col :span="12" v-if="form1" id="divZone1">
@@ -39,8 +39,18 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
-                          <span class="el-icon-plus" id="el-icon-plus1" @click="addNew1" v-if="but1"></span>
-                          <span class="el-icon-minus" id="el-icon-minus1" @click="deletes1()"></span>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus1"
+                            @click="addNew1"
+                            v-if="but1"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus1"
+                            @click="deletes1()"
+                            v-if="del1"
+                          ></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -50,7 +60,13 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
+                          <el-input-number
+                            v-model="num2"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
                         </el-form-item>
                       </div>
 
@@ -58,33 +74,34 @@
                         <el-form-item>
                           <el-dialog
                             title="请勾选选择该套餐的人员"
-                            :visible.sync="centerDialogVisible"
-                            width="30%"
+                            :visible.sync="centerDialogVisible1"
+                            width="600px"
                             center
                           >
-                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <ul>
-      <li v-for="city in cities" :label="city" :key="city">
-    <el-checkbox>{{city}}</el-checkbox>
-      </li>
-    </ul>
-  </el-checkbox-group>
-
-                            <el-button type="primary" class="sign-submit">提交</el-button>
-                          
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
                           </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
-                            
+                            <el-button type="primary" @click="centerDialogVisible1 = true">选择人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
                     </li>
                   </el-col>
                 </div>
-               
+
                 <div class="div-zone">
                   <el-col :span="12" v-if="form2">
                     <li class="form2">
@@ -100,9 +117,19 @@
                           <el-select v-model="ruleForm.region" placeholder="请选择课程">
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
-                          </el-select>     
-                          <span class="el-icon-plus" id="el-icon-plus2" @click="addNew2" v-if="but2"></span>
-                          <span class="el-icon-minus" id="el-icon-minus2" @click="deletes2()" ></span>
+                          </el-select>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus2"
+                            @click="addNew2"
+                            v-if="but2"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus2"
+                            @click="deletes2()"
+                            v-if="del2"
+                          ></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -112,7 +139,13 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num2" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
+                          <el-input-number
+                            v-model="num2"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
                         </el-form-item>
                       </div>
 
@@ -120,26 +153,27 @@
                         <el-form-item>
                           <el-dialog
                             title="请勾选选择该套餐的人员"
-                            :visible.sync="centerDialogVisible"
-                            width="30%"
+                            :visible.sync="centerDialogVisible2"
+                            width="600px"
                             center
                           >
-                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <ul>
-      <li v-for="city in cities" :label="city" :key="city">
-    <el-checkbox>{{city}}</el-checkbox>
-      </li>
-    </ul>
-  </el-checkbox-group>
-
-                            <el-button type="primary" class="sign-submit">提交</el-button>
-                          
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
                           </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
-                            
+                            <el-button type="primary" @click="centerDialogVisible2 = true">选择人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
@@ -163,8 +197,18 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
-                          <span class="el-icon-plus" id="el-icon-plus3" @click="addNew3" v-if="but3"></span>
-                          <span class="el-icon-minus" id="el-icon-minus3" @click="deletes3()"></span>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus3"
+                            @click="addNew3"
+                            v-if="but3"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus3"
+                            @click="deletes3()"
+                            v-if="del3"
+                          ></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -174,7 +218,13 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num3" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
+                          <el-input-number
+                            v-model="num3"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
                         </el-form-item>
                       </div>
 
@@ -182,26 +232,27 @@
                         <el-form-item>
                           <el-dialog
                             title="请勾选选择该套餐的人员"
-                            :visible.sync="centerDialogVisible"
-                            width="30%"
+                            :visible.sync="centerDialogVisible3"
+                            width="600px"
                             center
                           >
-                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <ul>
-      <li v-for="city in cities" :label="city" :key="city">
-    <el-checkbox>{{city}}</el-checkbox>
-      </li>
-    </ul>
-  </el-checkbox-group>
-
-                            <el-button type="primary" class="sign-submit">提交</el-button>
-                          
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
                           </el-dialog>
                           <div class="div-delete">
-                            
-                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
+                            <el-button type="primary" @click="centerDialogVisible3 = true">选择人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
@@ -225,8 +276,18 @@
                             <el-option label="课程1" value="shanghai"></el-option>
                             <el-option label="课程2" value="beijing"></el-option>
                           </el-select>
-                          <span class="el-icon-plus" id="el-icon-plus4" @click="addNew4" v-if="but4"></span>
-                          <span class="el-icon-minus" id="el-icon-minus4" @click="deletes4()"></span>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus4"
+                            @click="addNew4"
+                            v-if="but4"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus4"
+                            @click="deletes4()"
+                            v-if="del4"
+                          ></span>
                         </el-form-item>
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
@@ -236,7 +297,13 @@
                         </el-form-item>
                         <el-form-item>
                           <label class="sign-num">报名人数</label>
-                          <el-input-number v-model="num4" :min="1" :max="9999" label="描述文字" :disabled="true"></el-input-number>
+                          <el-input-number
+                            v-model="num4"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
                         </el-form-item>
                       </div>
 
@@ -244,25 +311,27 @@
                         <el-form-item>
                           <el-dialog
                             title="请勾选选择该套餐的人员"
-                            :visible.sync="centerDialogVisible"
-                            width="30%"
+                            :visible.sync="centerDialogVisible4"
+                            width="600px"
                             center
                           >
-                          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <ul>
-      <li v-for="city in cities" :label="city" :key="city">
-    <el-checkbox>{{city}}</el-checkbox>
-      </li>
-    </ul>
-  </el-checkbox-group>
-
-                            <el-button type="primary" class="sign-submit">提交</el-button>
-                          
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
                           </el-dialog>
                           <div class="div-delete">
-                            <el-button type="primary" @click="centerDialogVisible = true">添加人员</el-button>
+                            <el-button type="primary" @click="centerDialogVisible4 = true">选择人员</el-button>
                           </div>
                         </el-form-item>
                       </div>
@@ -282,13 +351,7 @@
         </el-tab-pane>
 
         <el-tab-pane label="个人报名">
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="350px"
-            class="demo-ruleForm"
-          >
+          <el-form :model="ruleForm" ref="ruleForm" label-width="350px" class="demo-ruleForm">
             <el-form-item label="培训地点" prop="region" id="education">
               <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
                 <el-option label="地点1" value="shanghai"></el-option>
@@ -719,7 +782,7 @@
     </div>
 
     <!-- 发票开具 page5 -->
-    <div class="Invoice" v-show="fifthPage == 1">
+    <!-- <div class="Invoice" v-show="fifthPage == 1">
       <div class="Invoice-notice">
         <p>
           如需开具发票请填写下列信息，如无此需求请点击
@@ -794,13 +857,20 @@
           </div>
         </el-form>
       </div>
-    </div>
-
+    </div>-->
     <!-- 报名成功 page6 -->
     <div class="success" v-show="sixth == 1">
       <div class="suc">
         <p class="sign-up-suc-notice">报名成功！</p>
         <p class="success-context">我们会在确认具体开课时间后联系您，请保持电话或邮箱畅通</p>
+        <p class="success-context">您可以前往
+          <router-link to="/personalCenter/PersonalCenterAllOrder">
+            <a href="javascript:;" class="to-center">客户中心</a>
+          </router-link>-
+          <router-link to="/personalCenter/PersonalCenterAllOrder">
+            <a href="javascript:;" class="to-center">我的订单</a>
+          </router-link>开具发票
+        </p>
       </div>
       <div class="success-other">
         <router-link to="/index">
@@ -812,28 +882,35 @@
 </template>
 
 <script>
-const cityOptions = ['张三', '李四', '王五', '赵六'];
+const cityOptions = ["张三", "李四", "王五", "赵六"];
 
 export default {
   name: "Signup",
   data() {
     return {
       checkAll: false,
-        checkedCities: ['上海', '北京'],
-        cities: cityOptions,
-        isIndeterminate: true,
+      checkedCities: ["上海", "北京"],
+      cities: cityOptions,
+      isIndeterminate: true,
 
-      centerDialogVisible: false,
+      centerDialogVisible1: false,
+      centerDialogVisible2: false,
+      centerDialogVisible3: false,
+      centerDialogVisible4: false,
       but0: false,
       form1: true,
       but1: true,
+      del1: false,
       form2: false,
       but2: false,
+      del2: false,
       form3: false,
       but3: false,
+      del3: false,
       form4: false,
       but4: false,
-      sites: [{}],
+      del4: false,
+
       radio2: 1,
       firstPage: 1,
       secondPage: 0,
@@ -873,56 +950,57 @@ export default {
         // company:"",
         // qualification:""
       },
-      rules: {
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
-        ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ],
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
-          }
-        ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change"
-          }
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change"
-          }
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" }
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }]
-      }
+      tableData: [
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-08",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-06",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        }
+      ]
     };
   },
 
   methods: {
     handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      },
+      this.checkedCities = val ? cityOptions : [];
+      this.isIndeterminate = false;
+    },
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.cities.length;
+    },
     addNew0() {
       this.but0 = false;
 
@@ -931,82 +1009,116 @@ export default {
     },
     addNew1() {
       this.but1 = false;
-
+      this.del1 = true;
       this.form2 = true;
       this.but2 = true;
-     
+      this.del2 = true;
     },
     deletes1() {
       this.form1 = false;
       this.but1 = false;
+      this.del1 = false;
 
       if (this.form4 == true) {
         this.but4 = true;
+        if (this.form3 == false && this.form2 == false) {
+          this.del4 = false;
+        }
       } else if (this.form3 == true) {
         this.but3 = true;
+        if (this.form4 == false && this.form2 == false) {
+          this.del3 = false;
+        }
       } else if (this.form2 == true) {
         this.but2 = true;
-      } else {
-        this.but0 = true;
+        if (this.form3 == false && this.form4 == false) {
+          this.del2 = false;
+        }
       }
     },
     addNew2() {
+      this.del2 = true;
       if (this.form1 == false) {
         this.form1 = true;
+        this.del1 = true;
       } else if (this.form3 == false) {
         this.but2 = false;
         this.form3 = true;
         this.but3 = true;
+        this.del3 = true;
       } else {
         this.form4 = true;
         this.but2 = false;
+        this.del4 = true;
       }
     },
     deletes2() {
       this.form2 = false;
       this.but2 = false;
-
+      this.del2 = false;
       if (this.form4 == true) {
         this.but4 = true;
+        if (this.form3 == false && this.form1 == false) {
+          this.del4 = false;
+        }
       } else if (this.form3 == true) {
         this.but3 = true;
+        if (this.form4 == false && this.form2 == false) {
+          this.del3 = false;
+        }
       } else if (this.form1 == true) {
         this.but1 = true;
-      } else {
-        this.but0 = true;
+        if (this.form3 == false && this.form4 == false) {
+          this.del1 = false;
+        }
       }
     },
     addNew3() {
+      this.del3 = true;
       if (this.form1 == false) {
         this.form1 = true;
+        this.del1 = true;
       } else if (this.form2 == false) {
         this.form2 = true;
+        this.del2 = true;
       } else {
         this.form4 = true;
+        this.del4 = true;
         this.but3 = false;
       }
     },
     deletes3() {
       this.form3 = false;
       this.but3 = false;
-
+      this.del3 = false;
       if (this.form4 == true) {
         this.but4 = true;
+        if (this.form1 == false && this.form2 == false) {
+          this.del4 = false;
+        }
       } else if (this.form2 == true) {
         this.but2 = true;
+        if (this.form1 == false && this.form4 == false) {
+          this.del2 = false;
+        }
       } else if (this.form1 == true) {
         this.but1 = true;
-      } else {
-        this.but0 = true;
+        if (this.form4 == false && this.form2 == false) {
+          this.del1 = false;
+        }
       }
     },
     addNew4() {
+      this.del4 = true;
       if (this.form1 == false) {
         this.form1 = true;
+        this.del1 = true;
       } else if (this.form2 == false) {
         this.form2 = true;
+        this.del2 = true;
       } else if (this.form3 == false) {
         this.form3 = true;
+        this.del3 = true;
       }
       if (this.form1 == true && this.form2 == true && this.form3 == true) {
         this.but4 = false;
@@ -1015,15 +1127,22 @@ export default {
     deletes4() {
       this.form4 = false;
       this.but4 = false;
-
+      this.del4 = false;
       if (this.form3 == true) {
         this.but3 = true;
+        if (this.form1 == false && this.form2 == false) {
+          this.del3 = false;
+        }
       } else if (this.form2 == true) {
         this.but2 = true;
+        if (this.form3 == false && this.form1 == false) {
+          this.del2 = false;
+        }
       } else if (this.form1 == true) {
         this.but1 = true;
-      } else {
-        this.but0 = true;
+        if (this.form3 == false && this.form2 == false) {
+          this.del1 = false;
+        }
       }
     },
     submitForm(formName) {
@@ -1062,13 +1181,13 @@ export default {
     submitForm4(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if (this.active++ > this.maxSetp) this.active = this.maxSetp;
+          this.active = this.active + 3;
           this.firstPage = 0;
           this.secondPage = 0;
           this.thirdPage = 0;
           this.fourthPage = 0;
-          this.fifthPage = 1;
-          this.sixth = 0;
+          this.fifthPage = 0;
+          this.sixth = 1;
         } else {
           console.log("error submit!!");
           return false;
@@ -1092,33 +1211,33 @@ export default {
         }
       });
     },
-    submitForm5(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("发票信息提交成功！");
-          this.active = this.active + 2;
-          this.firstPage = 0;
-          this.secondPage = 0;
-          this.thirdPage = 0;
-          this.fourthPage = 0;
-          this.fifthPage = 0;
-          this.sixth = 1;
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    skip5() {
-      alert("您没有选择开具发票，如要开具发票可以前往个人中心索取。");
-      this.active = this.active + 2;
-      this.firstPage = 0;
-      this.secondPage = 0;
-      this.thirdPage = 0;
-      this.fourthPage = 0;
-      this.fifthPage = 0;
-      this.sixth = 1;
-    },
+    // submitForm5(formName) {
+    //   this.$refs[formName].validate(valid => {
+    //     if (valid) {
+    //       alert("发票信息提交成功！");
+    //       this.active = this.active + 2;
+    //       this.firstPage = 0;
+    //       this.secondPage = 0;
+    //       this.thirdPage = 0;
+    //       this.fourthPage = 0;
+    //       this.fifthPage = 0;
+    //       this.sixth = 1;
+    //     } else {
+    //       console.log("error submit!!");
+    //       return false;
+    //     }
+    //   });
+    // },
+    // skip5() {
+    //   alert("您没有选择开具发票，如要开具发票可以前往个人中心索取。");
+    //   this.active = this.active + 2;
+    //   this.firstPage = 0;
+    //   this.secondPage = 0;
+    //   this.thirdPage = 0;
+    //   this.fourthPage = 0;
+    //   this.fifthPage = 0;
+    //   this.sixth = 1;
+    // },
     page2Primary() {
       if (this.active-- < 0) this.active = 0;
       this.firstPage = 1;
@@ -1554,14 +1673,14 @@ export default {
   text-align: center;
   font-family: "微软雅黑";
   font-size: 18px;
-  margin: 10px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 .success-other {
   text-align: center;
   font-family: "微软雅黑";
   font-size: 14px;
-  margin: 200px 0px 0px 0px;
+  margin: 140px 0px 0px 0px;
 }
 .upload-demo {
   text-align: center;
@@ -1622,23 +1741,29 @@ export default {
 .test-info-label {
   margin: 0px 5px 0px 0px;
 }
-#el-icon-plus1, #el-icon-plus2,#el-icon-plus3,#el-icon-plus4{
+#el-icon-plus1,
+#el-icon-plus2,
+#el-icon-plus3,
+#el-icon-plus4 {
   border: 1px solid #ddd;
-    border-radius: 6px;
-    padding:12px;
-    cursor: pointer;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
 }
-#el-icon-minus1,#el-icon-minus2,#el-icon-minus3,#el-icon-minus4 {
+#el-icon-minus1,
+#el-icon-minus2,
+#el-icon-minus3,
+#el-icon-minus4 {
   border: 1px solid #ddd;
-    border-radius: 6px;
-    padding:12px;
-    cursor: pointer;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
 }
 .div-zone .el-select {
   width: 250px;
 }
 .sign-submit {
-  margin: 0px 0px 0px 110px;
+  margin: 10px 0px 0px 220px;
 }
 .signup-here {
   color: #616bf7;
@@ -1646,10 +1771,13 @@ export default {
   font-size: 17px;
 }
 #signup-no-info-notice1 {
-  margin:10px 0px 0px 60px;
+  margin: 10px 0px 0px 60px;
 }
 #signup-no-info-notice2 {
-  margin:20px 0px 30px 60px;
+  margin: 20px 0px 30px 60px;
+}
+.to-center {
+  color: #42b983;
 }
 </style>
 
