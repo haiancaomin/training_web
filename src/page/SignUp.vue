@@ -13,12 +13,12 @@
         <el-tab-pane label="公司报名">
           <div calss="batch-sign-up">
             <div class="batch-sign-up-notice">
-              <p id="signup-no-info-notice1">企业报名请确认已在个人中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
+              <p id="signup-no-info-notice1">企业报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
                 <router-link to="/PersonalCenter">
                   <span class="signup-here">这里</span>
-                </router-link>进入个人中心填写。
+                </router-link>进入客户中心填写。
               </p>
-              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，可以通过点击添加报名按钮选择新的报名条件进行报名。</p>
+              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，可以通过点击添加按钮选择新的报名条件进行报名。</p>
             </div>
             <el-form class="demo-ruleForm">
               <ol>
@@ -81,6 +81,7 @@
                             <el-table
                               ref="multipleTable"
                               :data="tableData"
+                              height="400px"
                               tooltip-effect="dark"
                               style="width: 100%"
                             >
@@ -89,7 +90,7 @@
                                 <template slot-scope="scope">{{ scope.row.date }}</template>
                               </el-table-column>
                               <el-table-column prop="name" label="姓名" width="120"></el-table-column>
-                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                              <el-table-column prop="address" label="身份证号" show-overflow-tooltip></el-table-column>
                             </el-table>
                             <el-button type="primary" class="sign-submit">确定</el-button>
                           </el-dialog>
@@ -160,6 +161,7 @@
                             <el-table
                               ref="multipleTable"
                               :data="tableData"
+                              height="400px"
                               tooltip-effect="dark"
                               style="width: 100%"
                             >
@@ -239,6 +241,7 @@
                             <el-table
                               ref="multipleTable"
                               :data="tableData"
+                              height="400px"
                               tooltip-effect="dark"
                               style="width: 100%"
                             >
@@ -318,6 +321,7 @@
                             <el-table
                               ref="multipleTable"
                               :data="tableData"
+                              height="400px"
                               tooltip-effect="dark"
                               style="width: 100%"
                             >
@@ -560,65 +564,302 @@
     </div>-->
     <!-- 考试信息选择页面page3 -->
     <div class="test-info-choice" v-show="thirdPage == 1">
-      <div class="test-info-scan">
-        <div class="info-scan">
-          <el-col :span="12">
-            <div class="training-project">
-              <label class="test-info-label">报名项目</label>
-              <el-input placeholder="灌浆工" :disabled="true"></el-input>
+      <el-dialog
+                            title="报名人员信息"
+                            :visible.sync="showPersonInfo"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+    :data="tableData1"
+    border
+    height="400px"
+    style="width: 100%">
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="id"
+      label="身份证"
+      width="280">
+    </el-table-column>
+    <el-table-column
+      prop="course"
+      label="课程">
+    </el-table-column>
+  </el-table>
+                            <el-button type="primary" class="sign-submit">关闭</el-button>
+                          </el-dialog>
+      <div class="order-info-title">
+          <el-col :span="8">
+            <div class="order-meal-title1">
+              <span>套餐</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <label class="test-info-label">预计培训开始时间</label>
-            <el-input placeholder="2019-3-2" :disabled="true"></el-input>
-          </el-col>
-
-          <el-col :span="12">
-            <div class="scan-meal">
-              <label class="test-info-label">选择套餐</label>
-              <el-input placeholder="培训+考试" :disabled="true" id="test-input2"></el-input>
+          <el-col :span="3">
+            <div class="order-meal-title2">
+              <span>预计开课时间</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <div class="training-time">
-              <label class="test-info-label">培训时长</label>
-              <el-input placeholder="10天" :disabled="true" id="test-input2"></el-input>
+          <el-col :span="2">
+            <div class="order-meal-title3">
+              <span>培训时长</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <div class="test-scan-money">
-              <label class="test-info-label">费用</label>
-              <el-input placeholder="2000元" :disabled="true"></el-input>
+          <el-col :span="3">
+            <div class="order-meal-title4">
+              <span>预计考试时间</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <div class="scan-test-time">
-              <label class="test-info-label">预计考试时间</label>
-              <el-input placeholder="2019-3-15" :disabled="true"></el-input>
+          <el-col :span="4">
+            <div class="order-meal-title5">
+              <span>考试地点</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <div class="scan-mobile">
-              <label class="test-info-label">联系方式</label>
-              <el-input placeholder="123456789" :disabled="true"></el-input>
+          <el-col :span="3">
+            <div class="order-meal-title6">
+              <span>单价</span>
             </div>
           </el-col>
-
-          <el-col :span="12">
-            <div class="test-place">
-              <label class="test-info-label">考试地点</label>
-              <el-input placeholder="智聚" :disabled="true"></el-input>
+          <el-col :span="1">
+            <div class="order-meal-title7">
+              <span>删除</span>
             </div>
           </el-col>
         </div>
-        <el-col :span="24">
-          <div class="test-notice">这里是公告位，正式上线后根据用户选择动态生成信息</div>
+
+      <div class="order-group" v-if="orderShow1">
+        <div class="order-info-body">
+          <el-col :span="8">
+            <div class="order-meal-info">
+              <el-col :span="8">
+              <div class="order-img-meal">
+                  <img src="../assets/inspection1.jpg" class="order-img" alt>
+                </div>
+              </el-col>
+              <el-col :span="16">
+                <div class="order-meal-name">         
+                    <span>灌浆工+考试+南通</span>
+                </div>
+                  <div class="order-meal-person-num" @click="showPersonInfo = true">报名人数：<span>12</span></div>
+                
+              </el-col>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-05</span>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property">
+              <span>10天</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-25</span>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="order-meal-property-space">
+              <span>江苏省南通市创业外包服务中心-C座</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>1000.00</span>
+            </div>
+          </el-col>
+          <el-col :span="1">
+            <div class="order-meal-property">
+              <span class="el-icon-delete" @click="orderShow1=false"></span>
+            </div>
+          </el-col>
+        </div>
+        <div class="order-subtotal">
+          <span>小计：¥2000.00</span>
+        </div>
+      </div>
+
+      <div class="order-group" v-if="orderShow2">
+        <div class="order-info-body">
+          <el-col :span="8">
+            <div class="order-meal-info">
+              <el-col :span="8">
+              <div class="order-img-meal">
+                  <img src="../assets/inspection2.png" class="order-img" alt>
+                </div>
+              </el-col>
+              <el-col :span="16">
+                <div class="order-meal-name">         
+                    <span>灌浆工+考试+南通</span>
+                </div>
+                  <div class="order-meal-person-num" @click="showPersonInfo = true">报名人数：<span>12</span></div>
+                
+              </el-col>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-05</span>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property">
+              <span>10天</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-25</span>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="order-meal-property-space">
+              <span>江苏省南通市创业外包服务中心-C座</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>1000.00</span>
+            </div>
+          </el-col>
+          <el-col :span="1">
+            <div class="order-meal-property">
+              <span class="el-icon-delete" @click="orderShow2=false"></span>
+            </div>
+          </el-col>
+        </div>
+        <div class="order-subtotal">
+          <span>小计：¥2000.00</span>
+        </div>
+      </div>
+
+      <div class="order-group" v-if="orderShow3">
+        <div class="order-info-body">
+          <el-col :span="8">
+            <div class="order-meal-info">
+              <el-col :span="8">
+              <div class="order-img-meal">
+                  <img src="../assets/inspection1.jpg" class="order-img" alt>
+                </div>
+              </el-col>
+              <el-col :span="16">
+                <div class="order-meal-name">         
+                    <span>灌浆工+考试+南通</span>
+                </div>
+                  <div class="order-meal-person-num" @click="showPersonInfo = true">报名人数：<span>12</span></div>
+                
+              </el-col>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-05</span>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property">
+              <span>10天</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-25</span>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="order-meal-property-space">
+              <span>江苏省南通市创业外包服务中心-C座</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>1000.00</span>
+            </div>
+          </el-col>
+          <el-col :span="1">
+            <div class="order-meal-property">
+              <span class="el-icon-delete" @click="orderShow3=false"></span>
+            </div>
+          </el-col>
+        </div>
+        <div class="order-subtotal">
+          <span>小计：¥2000.00</span>
+        </div>
+      </div>
+
+      <div class="order-group" v-if="orderShow4">
+        <div class="order-info-body">
+          <el-col :span="8">
+            <div class="order-meal-info">
+              <el-col :span="8">
+              <div class="order-img-meal">
+                  <img src="../assets/inspection2.png" class="order-img" alt>
+                </div>
+              </el-col>
+              <el-col :span="16">
+                <div class="order-meal-name">         
+                    <span>灌浆工+考试+南通</span>
+                </div>
+                  <div class="order-meal-person-num" @click="showPersonInfo = true">报名人数：<span>12</span></div>
+                
+              </el-col>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-05</span>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property">
+              <span>10天</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>2019-05-25</span>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="order-meal-property-space">
+              <span>江苏省南通市创业外包服务中心-C座</span>
+            </div>
+          </el-col>
+          <el-col :span="3">
+            <div class="order-meal-property">
+              <span>1000.00</span>
+            </div>
+          </el-col>
+          <el-col :span="1">
+            <div class="order-meal-property">
+              <span class="el-icon-delete" @click="orderShow4=false"></span>
+            </div>
+          </el-col>
+        </div>
+        <div class="order-subtotal">
+          <span>小计：¥2000.00</span>
+        </div>
+      </div>
+      
+      <div class="order-total-price">
+        <el-col :span="20">
+        <div class="total">
+          合计：<span class="total-price">¥ 8000</span>
+        </div>
         </el-col>
+        <el-col :span="4">
+        <div class="chekout" @click="submitForm3('ruleForm')">去结算</div>
+        </el-col>
+      </div>
+
+      <div class="test-info-scan">
+        
+        
 
         <div class="nextPage3">
           <el-button style="margin-top: 12px;" @click="page3Primary">上一步</el-button>
@@ -637,126 +878,145 @@
       </div>
 
       <div calss="pay-online" v-show="payOnline == 1">
-        <div>
-          <el-radio-group v-model="radio2">
-            <div class="radio1zhifubao">
-              <el-radio :label="1" id="payZhifubao">
-                <div class="zhifubao-radio">
-                  <img src="../assets/zhifubao.jpg">
+        <el-dialog
+                            title="报名人员信息"
+                            :visible.sync="centerDialogVisible4"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+    :data="tableData1"
+    border
+    height="400px"
+    style="width: 100%">
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="id"
+      label="身份证"
+      width="280">
+    </el-table-column>
+    <el-table-column
+      prop="course"
+      label="课程">
+    </el-table-column>
+  </el-table>
+                            <el-button type="primary" class="sign-submit">关闭</el-button>
+                          </el-dialog>
+                          <el-dialog
+                            title="用户付费协议"
+                            :visible.sync="centerDialogVisible3"
+                            width="600px"
+                            center
+                          >
+                            用户付费协议文案
+                          </el-dialog>
+                        
+        <div class="pay-online-body">
+          <div class="pay-online-check">
+            <h1>确认订单信息</h1>
+            <h4>请在2小时内完成支付，否则订单会被自动取消</h4>
+          </div>
+
+          <div class="user-info">
+            <div class="user-name">购买帐号：<span>zeroandx</span></div>
+            <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认开课时间或考试时间后再提交订单</div>
+          </div>
+          <div class="pay-type">支付方式</div>
+          <el-collapse accordion>
+            <el-collapse-item>
+              <template slot="title">
+                <div v-if="radio2==3" class="choose-zhifubao">
+                  <img src="../assets/zhifubao_mini.png" class="icon-mini">支付宝
                 </div>
-              </el-radio>
+                <span v-if="radio2==6" class="choose-weixin">
+                  <img src="../assets/weixin_mini.png" class="icon-mini">微信支付
+                </span>
+              </template>
+              <div class="pay-choose">
+                <el-radio-group v-model="radio2">
+                  <div class="pay-zhifubao">
+                    <el-col :span="24">
+                      <el-radio :label="3">
+                        <img src="../assets/zhifubao.jpg" class="pay-img">
+                      </el-radio>
+                    </el-col>
+                  </div>
+                  <div class="pay-weixin">
+                    <el-radio :label="6">
+                      <img src="../assets/weixin.jpg" class="pay-img">
+                    </el-radio>
+                  </div>
+                </el-radio-group>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+
+          <div class="meal-body">
+            <div class="pay-meal">购买套餐</div>
+            <div class="pay-meal-body">
+              <div class="pay-meal-body">
+                <div class="meal_img f-fl">
+                  <img src="../assets/inspection1.jpg" alt>
+                </div>
+                <div class="meal_body f-fl">
+                  <a class="title">
+                    <span>质量员+考试培训+南通</span>
+                  </a>
+                  
+                  <div class="promotion" @click="centerDialogVisible4 = true">报名人数：<span>11</span></div>
+                </div>
+                <div class="meal_price">￥2000.00</div>
+              </div>
             </div>
-
-            <div class="radio2weixin">
-              <el-radio :label="2">
-                <div class="weixin-radio">
-                  <img src="../assets/weixin.jpg">
+            <div class="pay-meal-body">
+              <div class="pay-meal-body">
+                <div class="meal_img f-fl">
+                  <img src="../assets/inspection2.png" alt>
                 </div>
-              </el-radio>
+                <div class="meal_body f-fl">
+                  <a class="title">
+                    <span>灌浆工+考试+南通</span>
+                  </a>
+                  
+                  <div class="promotion" @click="centerDialogVisible4 = true">报名人数：<span>12</span></div>
+                </div>
+                <div class="meal_price">￥3000.00</div>
+              </div>
             </div>
-            <!-- <div>
-              <el-radio :label="3" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/jianshe.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="4" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/zhongguo.jpg">
-                </div>
-              </el-radio>
-
-              <el-radio :label="5" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/gongshang.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="6" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/nongye.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="7" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/jiaotong.gif">
-                </div>
-              </el-radio>
-            </div>
-            <div>
-              <el-radio :label="8" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/guangda.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="9" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/zhaoshang.gif">
-                </div>
-              </el-radio>
-              <el-radio :label="10" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/minsheng.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="11" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/guangfa.jpg">
-                </div>
-              </el-radio>
-
-              <el-radio :label="12" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/xingye.jpg">
-                </div>
-              </el-radio>
-            </div>
-            <div>
-              <el-radio :label="13" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/pufa.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="14" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/huaxia.jpg">
-                </div>
-              </el-radio>
-
-              <el-radio :label="15" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/fazhan.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="16" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/pingan.gif">
-                </div>
-              </el-radio>
-
-              <el-radio :label="17" class="radio3wangyin">
-                <div class="wangyin-radio">
-                  <img src="../assets/youzheng.gif">
-                </div>
-              </el-radio>
-            </div>-->
-          </el-radio-group>
+          </div>
         </div>
-        <div class="zhifubao">
-          <strong>1、支付宝</strong>
+
+
+
+        <div class="payment-body">
+      
+         <div class="payment-sub-body">
+    <el-col :span="18">    
+    <div class="agreement-con">
+        提交订单则表示您同意
+        <span class="agreement" @click="centerDialogVisible3 = true">《智聚用户付费协议》</span>
+    </div>
+    </el-col>
+    <el-col :span="6">
+    <div class="pay-price-btn f-fr">
+        <div class="pay-price-btn_price">
+            <span class="price_title">实付:</span>
+            <span class="price_account">
+                <span class="price_account_icon">￥</span>5000.00
+            </span>
         </div>
-        <div class="weixinzhifu">
-          <strong>2、微信支付</strong>
-        </div>
-        <!-- <div class="wangyinzhifu">
-          <strong>3、网银支付</strong>
-        </div>-->
+        <span class="pay-price-btn_btn">立即支付</span>
+    </div>
+    </el-col>
+</div>
+    </div>
+
+
+
         <div class="nextPage4">
           <el-button style="margin-top: 12px;" @click="page4Primary">上一步</el-button>
           <el-button type="primary" @click="submitForm4('ruleForm')">下一步</el-button>
@@ -888,11 +1148,15 @@ export default {
   name: "Signup",
   data() {
     return {
+      orderShow1: true,
+      orderShow2: true,
+      orderShow3: true,
+      orderShow4: true,
       checkAll: false,
       checkedCities: ["上海", "北京"],
       cities: cityOptions,
       isIndeterminate: true,
-
+      showPersonInfo: false,
       centerDialogVisible1: false,
       centerDialogVisible2: false,
       centerDialogVisible3: false,
@@ -911,7 +1175,7 @@ export default {
       but4: false,
       del4: false,
 
-      radio2: 1,
+      radio2: 3,
       firstPage: 1,
       secondPage: 0,
       thirdPage: 0,
@@ -954,38 +1218,181 @@ export default {
         {
           date: "2016-05-03",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-02",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-04",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-01",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-08",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-06",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
         },
         {
           date: "2016-05-07",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "512341341414141241233"
         }
+      ],
+      tableData1: [
+        {
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        },{
+          name: "张飞",
+          id: "342423434232323133",
+          course: "资料员"
+        }
+        
       ]
     };
   },
@@ -1353,7 +1760,7 @@ export default {
 
 .test-info-choice {
   width: 1000px;
-  height: 630px;
+  
   margin: 0px auto;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
@@ -1364,7 +1771,6 @@ export default {
 
 .pay {
   width: 1000px;
-  height: 400px;
   margin: 0px auto;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
@@ -1512,6 +1918,7 @@ export default {
 
 .nextPage3 {
   text-align: center;
+  margin: 20px 0px;
 }
 
 .test-result {
@@ -1585,11 +1992,11 @@ export default {
   margin: 30px 140px 0px 0px;
 }
 .nextPage4 {
-  margin: 13px 150px 0px 0px;
+  margin: 13px 0px 20px 0px;
   text-align: center;
 }
 .nextPage4-2 {
-  margin: 77px 150px 0px 0px;
+  margin: 77px 0px 20px 0px;
   text-align: center;
 }
 .offline-context {
@@ -1779,6 +2186,285 @@ export default {
 .to-center {
   color: #42b983;
 }
+.pay-online-body {
+  width: 900px;
+
+  margin: 10px 20px 0px 20px;
+  padding: 20px;
+}
+
+.pay-online-check {
+  padding: 0px 0px 20px 0px;
+  line-height: 24px;
+  border-bottom: solid 1px #eee;
+  box-sizing: border-box;
+  color: #333333;
+}
+.pay-online-check h1 {
+  display: inline-block;
+  font-size: 18px;
+}
+.pay-online-check h4 {
+  color: #666666;
+  display: inline-block;
+  line-height: 24px;
+  height: 24px;
+  font-size: 14px;
+  position: relative;
+  top: -1px;
+  margin-left: 20px;
+}
+.user-name {
+  font-size: 14px;
+  color: #333;
+}
+.pay-online-tips {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #999;
+  line-height: 16px;
+}
+.user-info {
+  width: 880px;
+  margin: 0 auto;
+  padding: 20px 0 30px 0;
+}
+.pay-zhifubao {
+  margin: 25px 0px 80px 0px;
+}
+.pay-img {
+  height: 40px;
+  width: 100px;
+  border: solid 1px #eee;
+}
+.pay-type {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.choose-zhifubao {
+  border-bottom: solid 1px #eee;
+  width: 860px;
+  margin: 0px -40px 0px 0px;
+  font-size: 14px;
+  color: #409eff;
+}
+.choose-weixin {
+  border-bottom: solid 1px #eee;
+  width: 860px;
+  margin: 0px -40px 0px 0px;
+  font-size: 14px;
+  color: #67c23a;
+}
+.icon-mini {
+  height: 25px;
+  width: 25px;
+  margin: 0px 3px 3px 0px;
+}
+
+.meal-body {
+  padding-top: 20px;
+}
+.pay-meal {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pay-meal-body {
+  height: 88px;
+  border-bottom: 1px solid #eee;
+  margin: 20px 0px 0px 0px;
+}
+.f-fl {
+  float: left;
+}
+.pay-meal-body img {
+  width: 120px;
+  height: 68px;
+}
+.meal_body {
+  margin-left: 12px;
+  font-size: 12px;
+}
+.meal_body .title {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  line-height: 19px;
+  text-decoration: none;
+}
+.meal_body .time {
+  margin-top: 8px;
+  color: #999;
+}
+.meal_body .promotion {
+  margin-top: 28px;
+  color: #ff6600;
+  cursor:pointer;
+}
+.meal_price {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  float: right;
+}
+.payment-sub-body {
+    width: 860px;
+    height: 120px;
+    box-sizing: border-box;
+    background: #FEFCEF;
+    border: 1px solid #DDD;
+    padding: 15px 40px;
+    margin: 0px 40px;
+    color: #666;
+    font-size: 14px;
+}
+.agreement-con {
+   
+    padding: 50px 0px 0px 0px;
+    text-align: right;
+}
+.agreement {
+    cursor: pointer;
+    color: #49af4f;
+}
+.f-fr {
+    float: right;
+}
+.pay-price-btn_price {
+    text-align: right;
+    margin-bottom: 5px;
+}
+.pay-price-btn_btn {
+    cursor: pointer;
+    display: inline-block;
+    height: 44px;
+    width: 160px;
+    line-height: 44px;
+    font-size: 18px;
+    color: #FFFFFF;
+    background: #FF6600;
+    border-radius: 2px;
+    text-align: center;
+}
+.pay-price-btn_price {
+    text-align: right;
+    margin-bottom: 5px;
+}
+.pay-price-btn_price .price_account {
+    font-size: 24px;
+    font-weight: 600;
+    color: #FF6600;
+}
+.pay-price-btn_price .price_account_icon {
+    font-weight: 300;
+    font-size: 14px;
+}
+.order-info-body {
+  width: 940px;
+  height: 110px;
+  background-color: #F8F8F8;
+  border: 1px solid #E4E4E4;
+  font-size: 12px;
+    color: #666;
+    text-align: center;
+    padding:20px;
+}
+.order-subtotal {
+  width: 940px;
+  height: 45px;
+      background-color: #eee;
+    border-bottom: 1px solid #E4E4E4;
+    border-left: 1px solid #E4E4E4;
+    border-right: 1px solid #E4E4E4;
+}
+.order-img {
+  width:120px;
+  height:70px;
+}
+.order-subtotal {
+  text-align: right;
+  padding:12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.order-info-title {
+  width: 940px;
+  height: 40px;
+  background-color: #F8F8F8;
+  border: 1px solid #E4E4E4;
+  margin: 0px 0px 20px 0px;
+  font-size: 12px;
+    color: #666;
+    text-align: center;
+    padding: 11px 20px 0px 20px;
+}
+.order-meal-name {
+  font-size: 14px;
+    color: #333;
+    text-align: left;
+    padding: 0px 0px 0px 30px;
+}
+.order-meal-person-num {
+  margin-top: 28px;
+  color: #ff6600;
+  cursor:pointer;
+  text-align: left;
+  padding: 0px 0px 0px 30px;
+}
+.order-meal-property {
+ line-height:70px ;
+ 
+  vertical-align:middle;
+  text-align: center;
+}
+.order-meal-property-space {
+  height: 70px;
+ display: table-cell;
+  vertical-align: middle;
+}
+.el-icon-delete {
+  font-size: 16px;
+}
+.el-icon-delete:hover {
+  color:#409EFF;
+}
+.order-group {
+  margin:20px 0px 0px 0px;
+}
+.order-total-price {
+  height:60px;
+  width: 940px;
+  margin:30px 0px 0px 0px;
+      background-color: #eee;
+    border: 1px solid #E4E4E4;
+    border-right: 0;
+}
+.chekout {
+    background-color: #FF8000;
+    border: 1px solid #FF8000;
+    font-size: 20px;
+    text-align: center;
+    line-height: 58px;
+    width: 120px;
+    margin:-1px 0px 0px 36px;
+    color: #fff;
+    cursor:pointer;
+}
+.total {
+  text-align: right;
+  font-size: 14px;
+    color: #444;
+    padding:15px  0px 0px 0px;
+}
+.total-price {
+  font-size: 20px;
+    color: #FF3900;
+}
+
 </style>
 
 

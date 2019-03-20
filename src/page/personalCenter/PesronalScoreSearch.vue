@@ -178,7 +178,7 @@ export default {
 <style scoped>
 #PesronalScoreSearch {
   width: 830px;
-
+  
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
