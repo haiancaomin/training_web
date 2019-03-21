@@ -18,10 +18,10 @@
           <a href="javascript:;">主页</a>
         </el-menu-item>
         <el-menu-item index="/course">
-          <a href="javascript:;">课程介绍</a>
+          <a href="javascript:;">培训课程</a>
         </el-menu-item>
         <el-menu-item index="/base">
-          <a href="javascript:;">基地展示</a>
+          <a href="javascript:;">基地介绍</a>
         </el-menu-item>
         <!-- <el-menu-item index="/teacher">
           <a href="javascript:;">师资力量</a>

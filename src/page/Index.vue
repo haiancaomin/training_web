@@ -205,7 +205,7 @@
      
         <el-col :span="24">
           <div class="grid-content">
-            <h1 class="index-floor-title">课程分类</h1>
+            <h1 class="index-floor-title">培训课程</h1>
           </div>
         </el-col>
         

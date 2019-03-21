@@ -2184,7 +2184,7 @@ export default {
   margin: 20px 0px 30px 60px;
 }
 .to-center {
-  color: #42b983;
+  color: #67C23A;
 }
 .pay-online-body {
   width: 900px;
