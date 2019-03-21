@@ -1,9 +1,13 @@
 <template>
   <div>
     <el-header>
-      <div class="logo">
-        <img src="../assets/favicon.png" alt>
-      </div>
+      <router-link to="/index">
+        <div class="logo">
+          <img src="../assets/favicon.png" alt>
+          <span class="logo-words">智聚实训</span>
+        </div>
+      </router-link>
+
       <el-menu
         :default-active="$route.path"
         class="el-menu-demo"
@@ -25,7 +29,7 @@
         </el-menu-item>
         <!-- <el-menu-item index="/teacher">
           <a href="javascript:;">师资力量</a>
-        </el-menu-item> -->
+        </el-menu-item>-->
         <el-menu-item index="/Inspection">
           <a href="javascript:;">高端考察</a>
         </el-menu-item>
@@ -56,13 +60,12 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
         </el-submenu>-->
-        
         <el-menu-item index="5">
           <a href="javascript:;">资讯</a>
         </el-menu-item>
         <!-- <el-menu-item index="/HRServiceTypeChoice">
           <a href="javascript:;">人力资源服务</a>
-        </el-menu-item> -->
+        </el-menu-item>-->
         <el-menu-item index="/download">
           <a href="javascript:;">资料下载</a>
         </el-menu-item>
@@ -104,6 +107,12 @@ export default {
 
 .logo {
   float: left;
+}
+
+.logo-words {
+  font-size: 18px;
+  margin-left: 10px;
+  color: #fff
 }
 .el-menu {
   float: right;
