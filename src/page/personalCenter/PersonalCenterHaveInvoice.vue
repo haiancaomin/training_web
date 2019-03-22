@@ -1,6 +1,11 @@
 <template>
   <div id="PersonalCenterHaveInvoice">
     <div class="order-dialog">
+
+      <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
+        <p>电话：845923412</p>
+        <p>邮箱：231231332@dd.com</p>
+      </el-dialog>
       <el-dialog title="物流编号" :visible.sync="num" width="400px">顺丰快递：84592341112412</el-dialog>
     </div>
     <div class="crumb">
@@ -33,6 +38,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="num = true">发票物流</el-button>
       </div>
     </div>
@@ -60,6 +66,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="num = true">发票物流</el-button>
       </div>
     </div>
@@ -87,6 +94,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="num = true">发票物流</el-button>
       </div>
     </div>
@@ -101,6 +109,7 @@ export default {
   name: "PersonalCenterHaveInvoice",
   data() {
     return {
+      contact: false,
       num: false
     };
   },

@@ -877,7 +877,7 @@
         <el-button type="success" @click="offliePayment">转账汇款</el-button>
       </div>
 
-      <div calss="pay-online" v-show="payOnline == 1">
+      <div clsss="pay-online" v-show="payOnline == 1">
         <el-dialog
                             title="报名人员信息"
                             :visible.sync="centerDialogVisible4"
@@ -1009,7 +1009,10 @@
                 <span class="price_account_icon">￥</span>5000.00
             </span>
         </div>
-        <span class="pay-price-btn_btn">立即支付</span>
+        <span class="pay-price-btn_btn" @click="submitForm4('ruleForm')">立即支付</span>
+        <div>
+          <span class="pay-price-btn_wait" @click="submitForm42('ruleForm')">稍后支付</span>
+        </div>
     </div>
     </el-col>
 </div>
@@ -1119,7 +1122,7 @@
       </div>
     </div>-->
     <!-- 报名成功 page6 -->
-    <div class="success" v-show="sixth == 1">
+    <div class="success" v-show="sixth1 == 1">
       <div class="suc">
         <p class="sign-up-suc-notice">报名成功！</p>
         <p class="success-context">我们会在确认具体开课时间后联系您，请保持电话或邮箱畅通</p>
@@ -1135,6 +1138,26 @@
       <div class="success-other">
         <router-link to="/index">
           <el-button type="primary" @click="onliePayment">返回首页</el-button>
+        </router-link>
+      </div>
+
+    </div>
+    <div class="success" v-show="sixth2 == 1">
+      <div class="suc">
+        <p class="sign-up-suc-notice2">下单成功！</p>
+        
+        <p class="success-context">请尽快前往
+          <router-link to="/personalCenter/PersonalCenterAllOrder">
+            <a href="javascript:;" class="to-center2">客户中心</a>
+          </router-link>-
+          <router-link to="/personalCenter/PersonalCenterAllOrder">
+            <a href="javascript:;" class="to-center2">我的订单</a>
+          </router-link>支付
+        </p>
+      </div>
+      <div class="success-other">
+        <router-link to="/personalCenter/PersonalCenterUncompletedOrder">
+          <el-button type="primary" @click="onliePayment">我的订单</el-button>
         </router-link>
       </div>
     </div>
@@ -1181,7 +1204,8 @@ export default {
       thirdPage: 0,
       fourthPage: 0,
       fifthPage: 0,
-      sixth: 0,
+      sixth1: 0,
+      sixth2: 0,
       payOnline: 1,
       payOffline: 0,
       active: 0,
@@ -1561,7 +1585,8 @@ export default {
           this.thirdPage = 1;
           this.fourthPage = 0;
           this.fifthPage = 0;
-          this.sixth = 0;
+          this.sixth1 = 0;
+          this.sixth2 = 0;
         } else {
           console.log("error submit!!");
           return false;
@@ -1577,7 +1602,8 @@ export default {
           this.thirdPage = 0;
           this.fourthPage = 1;
           this.fifthPage = 0;
-          this.sixth = 0;
+          this.sixth1 = 0;
+          this.sixth2 = 0;
         } else {
           console.log("error submit!!");
           return false;
@@ -1594,7 +1620,8 @@ export default {
           this.thirdPage = 0;
           this.fourthPage = 0;
           this.fifthPage = 0;
-          this.sixth = 1;
+          this.sixth1 = 1;
+          this.sixth2 = 0;;
         } else {
           console.log("error submit!!");
           return false;
@@ -1604,14 +1631,15 @@ export default {
     submitForm42(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("报名成功！请及时转账！汇款成功后可在个人中心索取发票。");
+          
           this.active = this.active + 3;
           this.firstPage = 0;
           this.secondPage = 0;
           this.thirdPage = 0;
           this.fourthPage = 0;
           this.fifthPage = 0;
-          this.sixth = 1;
+          this.sixth1 = 0;
+          this.sixth2 = 1;;
         } else {
           console.log("error submit!!");
           return false;
@@ -1652,7 +1680,8 @@ export default {
       this.thirdPage = 0;
       this.fourthPage = 0;
       this.fifthPage = 0;
-      this.sixth = 0;
+      this.sixth1 = 0;
+      this.sixth2 = 0;;
     },
     page3Primary() {
       if (this.active-- < 0) this.active = 0;
@@ -1661,7 +1690,8 @@ export default {
       this.thirdPage = 0;
       this.fourthPage = 0;
       this.fifthPage = 0;
-      this.sixth = 0;
+      this.sixth1 = 0;
+          this.sixth2 = 0;;
     },
     page4Primary() {
       if (this.active-- < 0) this.active = 0;
@@ -1670,7 +1700,8 @@ export default {
       this.thirdPage = 1;
       this.fourthPage = 0;
       this.fifthPage = 0;
-      this.sixth = 0;
+      this.sixth1 = 0;
+          this.sixth2 = 0;;
     },
     page42Primary() {
       if (this.active-- < 0) this.active = 0;
@@ -1679,7 +1710,8 @@ export default {
       this.thirdPage = 1;
       this.fourthPage = 0;
       this.fifthPage = 0;
-      this.sixth = 0;
+      this.sixth1 = 0;
+          this.sixth2 = 0;;
     },
     nextpage2() {
       if (this.active++ > this.maxSetp) this.active = this.maxSetp;
@@ -1688,7 +1720,8 @@ export default {
       this.thirdPage = 1;
       this.fourthPage = 0;
       this.fifthPage = 0;
-      this.sixth = 0;
+      this.sixth1 = 0;
+          this.sixth2 = 0;;
     },
     onliePayment() {
       this.payOnline = 1;
@@ -1771,7 +1804,7 @@ export default {
 
 .pay {
   width: 1000px;
-  margin: 0px auto;
+  
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
@@ -2075,6 +2108,14 @@ export default {
   color: #42b983;
   margin: 100px 0px 0px 0px;
 }
+.sign-up-suc-notice2 {
+  text-align: center;
+  font-family: "微软雅黑";
+  font-size: 40px;
+  font-weight: bold;
+  color: #409EFF;
+  margin: 100px 0px 0px 0px;
+}
 
 .success-context {
   text-align: center;
@@ -2185,6 +2226,9 @@ export default {
 }
 .to-center {
   color: #67C23A;
+}
+.to-center2 {
+  color: #409EFF;
 }
 .pay-online-body {
   width: 900px;
@@ -2312,7 +2356,7 @@ export default {
 }
 .payment-sub-body {
     width: 860px;
-    height: 120px;
+    height: 160px;
     box-sizing: border-box;
     background: #FEFCEF;
     border: 1px solid #DDD;
@@ -2323,8 +2367,8 @@ export default {
 }
 .agreement-con {
    
-    padding: 50px 0px 0px 0px;
-    text-align: right;
+    padding: 100px 0px 0px 0px;
+    text-align: left;
 }
 .agreement {
     cursor: pointer;
@@ -2348,6 +2392,19 @@ export default {
     background: #FF6600;
     border-radius: 2px;
     text-align: center;
+}
+.pay-price-btn_wait {
+    cursor: pointer;
+    display: inline-block;
+    height: 44px;
+    width: 160px;
+    line-height: 44px;
+    font-size: 18px;
+    color: #FFFFFF;
+    background: #909399;
+    border-radius: 2px;
+    text-align: center;
+    margin:5px 0px;
 }
 .pay-price-btn_price {
     text-align: right;

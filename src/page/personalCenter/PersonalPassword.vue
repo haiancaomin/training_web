@@ -23,7 +23,19 @@
           <el-input v-model="ruleForm.verification" class="identification-num"></el-input>
           <button type="button" class="test-but">获取验证码</button>
         </el-form-item>
-
+        <el-form-item>
+          <div class="com-upload">
+        <el-upload
+  class="upload-demo"
+  drag
+  action="https://jsonplaceholder.typicode.com/posts/"
+  multiple>
+  <i class="el-icon-upload"></i>
+  <div class="el-upload__text">请上传公司认证，<em>点击上传</em></div>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
+          </div>
+        </el-form-item>
         <div class="PersonalPassword-change-commit">
           <el-form-item>
             <el-button type="primary">确认更改</el-button>
@@ -76,17 +88,17 @@ export default {
   width: 300px;
 }
 .PersonalPassword-change {
-  margin: 50px 0px 0px 100px;
+  margin: 50px 0px 0px 150px;
 }
 .PersonalPassword-change-commit {
   text-align: center;
-  margin: 0px 200px 0px 0px;
+  margin: 0px 250px 0px 0px;
 }
 .test-but {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 230px;
+  right: 180px;
   width: 120px;
   height: 36px;
   margin: auto;
@@ -105,6 +117,12 @@ export default {
 }
 .el-breadcrumb {
   background: #e4e7ed;
+}
+.com-upload {
+ margin:0px 0px 0px -60px;;
+}
+.el-upload__tip {
+  margin:0px 0px 0px 70px;
 }
 </style>
 

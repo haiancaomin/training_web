@@ -1,6 +1,10 @@
 <template>
   <div id="PersonalCenterNotInvoice">
     <div class="order-dialog">
+      <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
+        <p>电话：845923412</p>
+        <p>邮箱：231231332@dd.com</p>
+      </el-dialog>
       <el-dialog title="发票预览" :visible.sync="dialogVisible" width="800px">
         <div class="table-body">
           <table border="1" cellspacing="0">
@@ -76,6 +80,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
       </div>
     </div>
@@ -103,6 +108,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
       </div>
     </div>
@@ -130,6 +136,7 @@
         </p>
       </div>
       <div class="order-operation">
+        <el-button type="primary" round @click="contact = true">联系我们</el-button>
         <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
       </div>
     </div>
@@ -144,6 +151,7 @@ export default {
   name: "PersonalCenterNotInvoice",
   data() {
     return {
+      contact: false,
       dialogVisible: false
     };
   },

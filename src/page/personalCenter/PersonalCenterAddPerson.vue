@@ -7,6 +7,15 @@
         <el-breadcrumb-item>人员信息</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+
+    <div class="add-head">
+        <span>您可以选择</span>
+        <el-button type="primary" @click="addOne">逐个添加</el-button>
+        <span>或者</span>
+        <el-button type="success" @click="addBatch">批量添加</el-button>
+    </div>
+
+    <div v-if="oneAdd">
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -35,6 +44,26 @@
         </div>
       </el-form-item>
     </el-form>
+    </div>
+    <div v-if="batchAdd" class="batch-add">
+      <div class="batch-model">
+        <p class="batch-model-text">点击下载批量添加模板</p>
+      </div>
+      <div class="batch-file-upload">
+        <el-upload
+  class="upload-demo"
+  drag
+  action="https://jsonplaceholder.typicode.com/posts/"
+  multiple>
+  <i class="el-icon-upload"></i>
+  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
+      </div>
+      <div class="batch-submit">
+        <el-button type="primary">添加</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,6 +72,8 @@ export default {
   name: "PersonalCenterAddPerson",
   data() {
     return {
+      oneAdd:true,
+        batchAdd: false,
       ruleForm: {
         name: "",
         region: "",
@@ -68,6 +99,7 @@ export default {
         // qualification:""
       },
       rules: {
+        
         name: [
           { required: true, message: "请输入活动名称", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
@@ -106,7 +138,16 @@ export default {
       }
     };
   },
-  methods: {}
+  methods: {
+    addOne() {
+      this.oneAdd=true;
+        this.batchAdd=false;
+    },
+    addBatch() {
+      this.oneAdd=false;
+        this.batchAdd=true;
+    }
+  }
 };
 </script>
 
@@ -171,6 +212,28 @@ export default {
 .worker-add {
   text-align: center;
   margin: 0px 250px 0px 0px;
+}
+.add-head {
+  margin: 0px 0px 0px 20px;
+}
+.batch-model-text {
+  color: #409EFF;
+  cursor:pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+.batch-model {
+  margin: 30px 0px 0px 0px;
+  text-align: center;
+}
+.batch-file-upload {
+  margin:20px 0px;
+  text-align: center;
+  padding: 0px 180px;
+}
+.batch-submit {
+  margin:0px 0px 20px 0px;
+  text-align: center;
 }
 </style>
 
