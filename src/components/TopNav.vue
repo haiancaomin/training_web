@@ -60,7 +60,7 @@
           <el-menu-item index="3-2-3">打胶</el-menu-item>
         </el-submenu>
         </el-submenu>-->
-        <el-menu-item index="5">
+        <el-menu-item index="/newsList">
           <a href="javascript:;">资讯</a>
         </el-menu-item>
         <!-- <el-menu-item index="/HRServiceTypeChoice">

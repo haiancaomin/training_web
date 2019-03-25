@@ -34,6 +34,7 @@ import Test from '@/page/Test'
 import baseMenu from '@/page/base/baseMenu'
 import baseOverView from '@/page/base/baseOverView'
 import baseShow1 from '@/page/base/baseShow1'
+import newsList from '@/page/news/newsList'
 
 
 
@@ -171,6 +172,10 @@ export default new Router({
     }, {
       path: '/PersonalCenterInvoiceShow',
       component: PersonalCenterInvoiceShow
+    },
+    {
+      path: '/newsList',
+      component: newsList
     }
     ]
   }]
