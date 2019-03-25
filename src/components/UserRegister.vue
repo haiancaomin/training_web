@@ -204,10 +204,10 @@ a {
 </style>
 <style>
   #regDialog .el-dialog__title {
-  font-size: 25px ;
-  font-weight: bold;
-  color: royalblue;
-  text-align:center;
+  /* font-size: 25px ; */
+  /* font-weight: bold; */
+  /* color: royalblue; */
+  /* text-align:center; */
 }
 </style>
 
