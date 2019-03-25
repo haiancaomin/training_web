@@ -202,13 +202,15 @@
           </div>
         </el-col>
       </el-row> -->
-     
+     <el-row class="no-margin-b">
         <el-col :span="24">
           <div class="grid-content">
-            <h1 class="index-floor-title">培训课程</h1>
+            <h1 class="index-floor-title">培训课程
+              <router-link to="/course" class="index-base-more">更多&gt;&gt;</router-link>
+            </h1>
           </div>
         </el-col>
-        
+     </el-row>
         <el-row class="no-margin-b">
     <el-col :span="8">
     <div class="index-course-list" id="index-course-list1">

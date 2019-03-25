@@ -573,6 +573,197 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        <el-tab-pane label="校园课程">
+          <el-row :gutter="20" class="bottom-line">
+            <el-col :span="7">
+              <div class="grid-content">
+                <img
+                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  class="full-width"
+                >
+              </div>
+            </el-col>
+            <el-col :span="17">
+              <div class="grid-content">
+                <el-row :gutter="20" class="no-pad">
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">课程介绍</div>
+                  </el-col>
+                  <el-col :span="17">
+                    <div
+                      class="grid-content"
+                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                  </el-col>
+                  <el-col :span="4">
+                    <div class="grid-content">
+                      <router-link to="/SignUp">
+                        <el-button type="primary">点我报名</el-button>
+                      </router-link>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">培训时长</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content">2天</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">其他标题</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content">其他内容</div>
+                  </el-col>
+                </el-row>
+                <el-collapse v-model="activeNames" @change="handleChange">
+                  <el-collapse-item name="3">
+                    <template slot="title">
+                      <el-col :span="3">
+                        <div class="grid-content bold text-right">授课老师</div>
+                      </el-col>
+                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
+                        <div class="grid-content">{{val}}</div>
+                      </el-col>
+                    </template>
+                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                      <div class="teacher-img">
+                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                      </div>
+                      <div class="teacher-info">
+                        <el-row :gutter="20">
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">姓名</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">{{val}}</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">授课老师</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">赵日天</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">其他标题</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">其他内容</div>
+                          </el-col>
+                        </el-row>
+                        <el-row :gutter="20" class="no-pad">
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">教师介绍</div>
+                          </el-col>
+                          <el-col :span="20">
+                            <div
+                              class="grid-content"
+                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="20" class="bottom-line">
+            <el-col :span="7">
+              <div class="grid-content">
+                <img
+                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  class="full-width"
+                >
+              </div>
+            </el-col>
+            <el-col :span="17">
+              <div class="grid-content">
+                <el-row :gutter="20" class="no-pad">
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">课程介绍</div>
+                  </el-col>
+                  <el-col :span="17">
+                    <div
+                      class="grid-content"
+                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                  </el-col>
+                  <el-col :span="4">
+                    <div class="grid-content">
+                      <router-link to="/SignUp">
+                        <el-button type="primary">点我报名</el-button>
+                      </router-link>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">培训时长</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content">2天</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content bold text-right">其他标题</div>
+                  </el-col>
+                  <el-col :span="3">
+                    <div class="grid-content">其他内容</div>
+                  </el-col>
+                </el-row>
+                <el-collapse v-model="activeNames" @change="handleChange">
+                  <el-collapse-item name="3">
+                    <template slot="title">
+                      <el-col :span="3">
+                        <div class="grid-content bold text-right">授课老师</div>
+                      </el-col>
+                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
+                        <div class="grid-content">{{val}}</div>
+                      </el-col>
+                    </template>
+                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                      <div class="teacher-img">
+                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                      </div>
+                      <div class="teacher-info">
+                        <el-row :gutter="20">
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">姓名</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">{{val}}</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">授课老师</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">赵日天</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">其他标题</div>
+                          </el-col>
+                          <el-col :span="4">
+                            <div class="grid-content">其他内容</div>
+                          </el-col>
+                        </el-row>
+                        <el-row :gutter="20" class="no-pad">
+                          <el-col :span="4">
+                            <div class="grid-content bold text-right">教师介绍</div>
+                          </el-col>
+                          <el-col :span="20">
+                            <div
+                              class="grid-content"
+                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+              </div>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </el-main>

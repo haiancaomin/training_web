@@ -16,9 +16,9 @@
           <el-input v-model="ruleForm.workingSpace"></el-input>
         </el-form-item>
 
-        <el-form-item label="手机号码:  " prop="mobile">
+        <!-- <el-form-item label="手机号码:  " prop="mobile">
           <el-input v-model="ruleForm.mobile"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="验证码:  " prop="verification" id="regVerification">
           <el-input v-model="ruleForm.verification" class="identification-num"></el-input>
           <button type="button" class="test-but">获取验证码</button>
