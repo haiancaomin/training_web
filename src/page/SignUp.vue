@@ -18,7 +18,351 @@
                   <span class="signup-here">这里</span>
                 </router-link>进入客户中心填写。
               </p>
-              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，可以通过点击添加按钮选择新的报名条件进行报名。</p>
+              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，请点击添加按钮选择新的报名条件进行报名。</p>
+            </div>
+            <el-form class="demo-ruleForm">
+              <ol>
+                <span class="el-icon-plus" id="el-icon-plus1" @click="addNew0" v-if="but0"></span>
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form1" id="divZone1">
+                    <li class="form1">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus1"
+                            @click="addNew1"
+                            v-if="but1"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus1"
+                            @click="deletes1()"
+                            v-if="del1"
+                          ></span>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number
+                            v-model="num2"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible1"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              height="400px"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="身份证号" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
+                          </el-dialog>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="centerDialogVisible1 = true">选择人员</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form2">
+                    <li class="form2">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus2"
+                            @click="addNew2"
+                            v-if="but2"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus2"
+                            @click="deletes2()"
+                            v-if="del2"
+                          ></span>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number
+                            v-model="num2"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible2"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              height="400px"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
+                          </el-dialog>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="centerDialogVisible2 = true">选择人员</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form3">
+                    <li class="form3">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus3"
+                            @click="addNew3"
+                            v-if="but3"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus3"
+                            @click="deletes3()"
+                            v-if="del3"
+                          ></span>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number
+                            v-model="num3"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible3"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              height="400px"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
+                          </el-dialog>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="centerDialogVisible3 = true">选择人员</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+
+                <div class="div-zone">
+                  <el-col :span="12" v-if="form4">
+                    <li class="form4">
+                      <div class="info-need">
+                        <el-form-item label="培训地点" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
+                            <el-option label="地点1" value="shanghai"></el-option>
+                            <el-option label="地点2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="课程选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择课程">
+                            <el-option label="课程1" value="shanghai"></el-option>
+                            <el-option label="课程2" value="beijing"></el-option>
+                          </el-select>
+                          <span
+                            class="el-icon-plus"
+                            id="el-icon-plus4"
+                            @click="addNew4"
+                            v-if="but4"
+                          ></span>
+                          <span
+                            class="el-icon-minus"
+                            id="el-icon-minus4"
+                            @click="deletes4()"
+                            v-if="del4"
+                          ></span>
+                        </el-form-item>
+                        <el-form-item label="套餐选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择套餐">
+                            <el-option label="套餐1" value="shanghai"></el-option>
+                            <el-option label="套餐2" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                          <label class="sign-num">报名人数</label>
+                          <el-input-number
+                            v-model="num4"
+                            :min="1"
+                            :max="9999"
+                            label="描述文字"
+                            :disabled="true"
+                          ></el-input-number>
+                        </el-form-item>
+                      </div>
+
+                      <div class="div-upload">
+                        <el-form-item>
+                          <el-dialog
+                            title="请勾选选择该套餐的人员"
+                            :visible.sync="centerDialogVisible4"
+                            width="600px"
+                            center
+                          >
+                            <el-table
+                              ref="multipleTable"
+                              :data="tableData"
+                              height="400px"
+                              tooltip-effect="dark"
+                              style="width: 100%"
+                            >
+                              <el-table-column type="selection" width="55"></el-table-column>
+                              <el-table-column label="日期" width="120">
+                                <template slot-scope="scope">{{ scope.row.date }}</template>
+                              </el-table-column>
+                              <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                              <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
+                            </el-table>
+                            <el-button type="primary" class="sign-submit">确定</el-button>
+                          </el-dialog>
+                          <div class="div-delete">
+                            <el-button type="primary" @click="centerDialogVisible4 = true">选择人员</el-button>
+                          </div>
+                        </el-form-item>
+                      </div>
+                    </li>
+                  </el-col>
+                </div>
+                <el-col :span="24">
+                  <div class="nextPage1-batch">
+                    <el-form-item>
+                      <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+                    </el-form-item>
+                  </div>
+                </el-col>
+              </ol>
+            </el-form>
+          </div>
+        </el-tab-pane>
+
+        <el-tab-pane label="校园报名">
+          <div calss="batch-sign-up">
+            <div class="batch-sign-up-notice">
+              <p id="signup-no-info-notice1">校园报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
+                <router-link to="/personalCenter/PersonalCenterAddPerson">
+                  <span class="signup-here">这里</span>
+                </router-link>进入客户中心填写。
+              </p>
+              <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，请点击添加按钮选择新的报名条件进行报名。</p>
             </div>
             <el-form class="demo-ruleForm">
               <ol>

@@ -186,13 +186,12 @@ export default {
   padding: 0px 0px 20px 0px;
 }
 .PesronalScoreSearch-info {
-  margin: 30px 0px 0px 170px;
+  margin: 50px 0px 0px 170px;
 }
 .PesronalScoreSearch-search {
   margin: 0px 0px 0px 60px;
 }
-.PesronalScoreSearch-result {
-}
+
 .el-table th > .cell {
   text-align: center;
 }
