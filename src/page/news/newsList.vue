@@ -125,7 +125,9 @@ export default {
   data() {
     return {
       swiperOption: {
-        autoplay: true,
+        autoplay: {
+          disableOnInteraction: false
+        },
         direction: "vertical",
         slidesPerView: 7, //页面分组显示，这里显示为3组
         height: 200,
