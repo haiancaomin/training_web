@@ -71,7 +71,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -165,7 +165,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -259,7 +259,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -355,7 +355,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -449,7 +449,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -546,7 +546,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -642,7 +642,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
@@ -737,7 +737,7 @@
                             <div class="grid-content bold text-right">授课老师</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">赵日天</div>
+                            <div class="grid-content">赵昊</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">其他标题</div>
