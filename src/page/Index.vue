@@ -841,7 +841,7 @@ body > .el-container {
 }
 .company-show {
   height: 810px;
-  width: 1520px;
+  /* width: 1520px; */
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
   padding: 0px 200px 0px 0px;
@@ -902,7 +902,7 @@ body > .el-container {
   margin: 0px 5px 0px 0px;
 }
 .course-type {
-  width: 1520px;
+  /* width: 1520px; */
   height: 650px;
   background: #fff;
   padding: 85px 0px 0px 0px;
@@ -932,7 +932,7 @@ body > .el-container {
   margin: 50px 0px 0px 120px;
 }
 .base-list {
-  width: 1520px;
+  /* width: 1520px; */
   height: 650px;
   background: #1d2939;
   padding: 85px 0px 0px 0px;
@@ -950,7 +950,7 @@ body > .el-container {
 .contact {
   background: #fff;
   padding:0px 200px;
-  width:1520px;
+  /* width:1520px; */
 }
 #contact {
   margin: 85px 0px 50px 0px;
