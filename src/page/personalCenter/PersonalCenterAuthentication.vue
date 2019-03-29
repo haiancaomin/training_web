@@ -166,6 +166,9 @@ export default {
 .operation {
     margin: 70px 0px 20px 148px;
 }
+#contact {
+  text-align: center;
+}
 </style>
 
 

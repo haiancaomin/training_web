@@ -21,7 +21,7 @@ export default {
     initMap() {
       var map = new BMap.Map("map");
       var point = new BMap.Point(120.9622853521,31.9312175342);
-      map.centerAndZoom(point, 18);
+      map.centerAndZoom(point, 17);
       var marker = new BMap.Marker(point); // 创建标注
       map.addOverlay(marker);
       marker.setAnimation(BMAP_ANIMATION_BOUNCE); 

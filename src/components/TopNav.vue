@@ -7,13 +7,12 @@
           <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
-
+     
       <el-menu
         :default-active="$route.path"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#242e68"
         text-color="#fff"
         active-text-color="#ffd04b"
         router
@@ -70,9 +69,9 @@
           <a href="javascript:;">资料下载</a>
         </el-menu-item>
 
-        <el-menu-item index="/contact">
+        <!-- <el-menu-item index="/contact">
           <a href="javascript:;">联系我们</a>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu>
     </el-header>
     <router-view></router-view>
@@ -95,14 +94,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header {
-  background: #242e68;
+  background: rgba(36,46,104,0.8);
   color: #fff;
-  line-height: 60px;
+  line-height: 80px !important;
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   z-index: 99;
+  height: 80px !important;
+  
 }
 
 .logo {
@@ -115,6 +116,21 @@ export default {
   color: #fff
 }
 .el-menu {
+  background: rgba(36,46,104,0) !important                     ;
   float: right;
+  height: 80px !important;
+  line-height: 80px !important;
+  border-bottom: 1px solid rgba(36,46,104,0) !important;
+  
+}
+.el-menu-item {
+  background: rgba(36,46,104,0) !important;
+  height: 80px !important;
+  line-height: 80px !important;
+  width: 100px !important;
+  text-align: center;
+  font-size: 15px;
+  
+  
 }
 </style>
