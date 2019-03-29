@@ -950,6 +950,7 @@ body > .el-container {
 .contact {
   background: #fff;
   padding:0px 200px;
+  width:1520px;
 }
 #contact {
   margin: 85px 0px 50px 0px;
