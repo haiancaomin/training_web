@@ -40,7 +40,7 @@
           </el-col>
         </el-row>
         <el-row class="no-margin-b">
-          <div class="course-body">
+          <div class="course-body clearfix">
             <el-col :span="8">
               <div class="index-course-list" id="index-course-list1">
                 <router-link to="/course">
