@@ -2,32 +2,54 @@
   <div class="news-container">
     <el-row class="pad20 mt20 bg-white">
       <el-col :span="9">
-        <div class="grid-content">
+        <div class="grid-content hot-box">
+          <div class="hot-news-tag">热点</div>
           <img
             src="http://www.axfc.cn/uploads/20190111/eb61c398f043ff50bdedd937647ec513.png"
             class="hot-news-img"
           >
           <swiper :options="swiperOption" ref="mySwiper">
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？一夜之间</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？一夜之间</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？一夜之间</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？一夜之间</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="newsDetail"><p>“双料明星”即将来通？一夜之间</p><span>2019-3-22</span></router-link>
+              <router-link to="newsDetail">
+                <p>“双料明星”即将来通？一夜之间</p>
+                <span>2019-3-22</span>
+              </router-link>
             </swiper-slide>
           </swiper>
         </div>
@@ -103,7 +125,9 @@ export default {
   data() {
     return {
       swiperOption: {
-        autoplay: true,
+        autoplay: {
+          disableOnInteraction: false
+        },
         direction: "vertical",
         slidesPerView: 7, //页面分组显示，这里显示为3组
         height: 200,
@@ -122,9 +146,21 @@ export default {
 
 <style scoped>
 .news-container {
-  width: 1100px;
+  width: 1000px;
   margin: 0 auto;
   padding-top: 60px;
+}
+.hot-box{
+  position: relative;
+}
+.hot-news-tag{
+  position: absolute;
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  background:rgba(1,173,100,.8);
+  text-align: center;
+  color: #fff;
 }
 .bg-white {
   background: #fff;
@@ -143,22 +179,22 @@ export default {
 }
 .swiper-container {
   height: 195px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.swiper-slide a{
+.swiper-slide a {
   color: #333;
   display: flex;
   justify-content: space-between;
 }
-.swiper-slide a p{
-  width: 300px;
+.swiper-slide a p {
+  width: 280px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
 }
-.swiper-slide a:hover{
+.swiper-slide a:hover {
   color: #409eff;
 }
 .news-overview h3,
@@ -168,7 +204,7 @@ export default {
   text-align: left;
   color: #333;
 }
-.list-row:hover .news-overview h3{
+.list-row:hover .news-overview h3 {
   color: #409eff;
 }
 .list-row:hover .news-img img {
@@ -201,8 +237,8 @@ export default {
   display: flex;
 }
 .news-list .list-row .news-img {
-  width: 280px;
-  height: 180px;
+  width: 250px;
+  height: 155px;
   margin-right: 20px;
   overflow: hidden;
 }
@@ -215,3 +251,11 @@ export default {
   margin-bottom: 0;
 } */
 </style>
+<style>
+.news-container .el-tabs__item {
+  font-size: 18px;
+  height: 55px;
+  line-height: 55px;
+}
+</style>
+

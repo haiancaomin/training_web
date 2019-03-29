@@ -38,7 +38,7 @@
       </el-collapse-item>
       <el-collapse-item title="质量员实训区" name="3" class="quality-worker">
         <div class="quality-worker-pic clearfix">
-          <swiper :options="swiperOption2" ref="mySwiper">
+          <swiper :options="swiperOption2" ref="mySwiper2">
             <!-- slides -->
             <swiper-slide>
               <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
@@ -66,7 +66,7 @@
       </el-collapse-item>
       <el-collapse-item title="吊装实训模拟区" name="4" class="quality-worker">
         <div class="quality-worker-pic clearfix">
-          <swiper :options="swiperOption3" ref="mySwiper">
+          <swiper :options="swiperOption3" ref="mySwiper3">
             <!-- slides -->
             <swiper-slide>
               <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
@@ -115,6 +115,8 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        observer: true,
+        observeParents: true,
         loop: true,
         effect: "coverflow",
         grabCursor: true,
@@ -132,6 +134,8 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        observer: true,
+        observeParents: true,
         loop: true,
         effect: "flip",
         grabCursor: true,
@@ -143,15 +147,17 @@ export default {
         autoplay: {
           disableOnInteraction: false
         },
+        observer: true,
+        observeParents: true,
         loop: true,
         effect: "cube",
         grabCursor: true,
-        cubeEffect: {
-          shadow: true,
-          slideShadows: true,
-          shadowOffset: 20,
-          shadowScale: 0.94
-        },
+        // cubeEffect: {
+        //   shadow: true,
+        //   slideShadows: true,
+        //   shadowOffset: 20,
+        //   shadowScale: 0.94
+        // },
         pagination: {
           el: ".swiper-pagination"
         }
