@@ -1,10 +1,23 @@
 <template>
   <div>
+
+    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
+    <user-register
+      :regDialogVisible="regDialogVisible"
+      v-on:regclosed="closeRegDialog"
+      v-on:goToLog="goToLogin"
+    ></user-register>
     <el-header>
       <router-link to="/index">
         <div class="logo">
           <img src="../assets/favicon.png" alt>
           <span class="logo-words">智聚实训</span>
+          
+          
+        </div>
+        <div class="login-self" @click="clickLogin">
+          <span class="el-icon-mobile-phone" ></span>
+          <span >登录/注册</span>
         </div>
       </router-link>
      
@@ -79,13 +92,42 @@
 </template>
 
 <script>
+import UserLogin from "@/components/UserLogin";
+import UserRegister from "@/components/UserRegister";
 export default {
   data() {
-    return {};
+    return {
+      dialogVisible: false,
+      regDialogVisible: false,
+    };
+  },
+   components: {
+    UserLogin,
+    UserRegister
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath, this.$route.path);
+    },
+    clickRegister: function() {
+      this.dialogVisible = false;
+      this.regDialogVisible = true;
+    },
+    clickLogin: function() {
+      this.regDialogVisible = false;
+      this.dialogVisible = true;
+    },
+    closeDialog: function(msg) {
+      this.dialogVisible = msg;
+    },
+    closeRegDialog: function(msg) {
+      this.regDialogVisible = msg;
+    },
+    goToRegist: function(msg) {
+      this.regDialogVisible = msg;
+    },
+    goToLogin: function(msg) {
+      this.dialogVisible = msg;
     }
   }
 };
@@ -132,5 +174,10 @@ export default {
   font-size: 15px;
   
   
+}
+.login-self {
+  float: left;
+  margin:0px 0px 0px 40px;
+  color: #fff;
 }
 </style>

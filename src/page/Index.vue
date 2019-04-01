@@ -1,14 +1,10 @@
 <template>
   <div>
-    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
-    <user-register
-      :regDialogVisible="regDialogVisible"
-      v-on:regclosed="closeRegDialog"
-      v-on:goToLog="goToLogin"
-    ></user-register>
+    
     <div class="index-body">
       <div class="company-show">
         <div class="login-sign">
+          
           <div class="logo">
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
@@ -25,10 +21,10 @@
             </router-link>
           </div>
         </div>
-        <div class="login-self" @click="clickLogin">
+        <!-- <div class="login-self" @click="clickLogin">
           <span class="el-icon-mobile-phone" ></span>
           <span >登录/注册</span>
-        </div>
+        </div> -->
       </div>
       
       <div class="course-outline-body">
@@ -324,8 +320,7 @@
 </template>
 
 <script>
-import UserLogin from "@/components/UserLogin";
-import UserRegister from "@/components/UserRegister";
+
 export default {
   data() {
     return {
@@ -351,10 +346,7 @@ export default {
       ]
     };
   },
-  components: {
-    UserLogin,
-    UserRegister
-  },
+ 
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
@@ -383,26 +375,6 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event);
-    },
-    clickRegister: function() {
-      this.dialogVisible = false;
-      this.regDialogVisible = true;
-    },
-    clickLogin: function() {
-      this.regDialogVisible = false;
-      this.dialogVisible = true;
-    },
-    closeDialog: function(msg) {
-      this.dialogVisible = msg;
-    },
-    closeRegDialog: function(msg) {
-      this.regDialogVisible = msg;
-    },
-    goToRegist: function(msg) {
-      this.regDialogVisible = msg;
-    },
-    goToLogin: function(msg) {
-      this.dialogVisible = msg;
     }
   }
 };
@@ -902,19 +874,7 @@ body > .el-container {
 .login {
   padding: 0px 20px;
 }
-.login-self {
-  float: right;
-  margin: 95px -510px 0px 0px;
-  font-size: 15px;
-  color: #666;
-}
-.login-self:hover {
-  float: right;
-  margin: 95px -510px 0px 0px;
-  font-size: 15px;
-  color: #409eff;
-  cursor: pointer;
-}
+
 .el-icon-mobile-phone {
   margin: 0px 5px 0px 0px;
 }
