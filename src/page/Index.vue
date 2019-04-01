@@ -856,7 +856,11 @@ body > .el-container {
 }
 .company-show {
   height: 810px;
+<<<<<<< HEAD
   width: 100%;
+=======
+  /* width: 1520px; */
+>>>>>>> 4e0da990eb1cb7fb04ec24da11a6c28c987baee7
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
   padding: 0px 200px 0px 0px;
@@ -917,6 +921,7 @@ body > .el-container {
   margin: 0px 5px 0px 0px;
 }
 .course-type {
+<<<<<<< HEAD
   width: 1220px;
   height: 500px;
   background: #fff;
@@ -924,6 +929,10 @@ body > .el-container {
   margin:0px auto;
 }
 .course-outline-body {
+=======
+  /* width: 1520px; */
+  height: 650px;
+>>>>>>> 4e0da990eb1cb7fb04ec24da11a6c28c987baee7
   background: #fff;
 }
 
@@ -952,6 +961,7 @@ body > .el-container {
   text-align: center
 }
 .base-list {
+<<<<<<< HEAD
   width: 1220px;
   height: 620px;
   background: #1d2939;
@@ -960,6 +970,10 @@ body > .el-container {
   text-align: center;
 }
 .base-list-outline-body {
+=======
+  /* width: 1520px; */
+  height: 650px;
+>>>>>>> 4e0da990eb1cb7fb04ec24da11a6c28c987baee7
   background: #1d2939;
 }
 .base-body-list {
@@ -982,6 +996,7 @@ body > .el-container {
 }
 .contact {
   background: #fff;
+<<<<<<< HEAD
   width:1220px;
   margin:0px auto;
   
@@ -989,6 +1004,10 @@ body > .el-container {
 .contact-outline-body {
   background: #fff;
  
+=======
+  padding:0px 200px;
+  /* width:1520px; */
+>>>>>>> 4e0da990eb1cb7fb04ec24da11a6c28c987baee7
 }
 #contact {
   margin: 50px 0px;
