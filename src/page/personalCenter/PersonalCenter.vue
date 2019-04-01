@@ -72,6 +72,10 @@
               
             </el-badge>
           </el-menu-item>
+          <el-menu-item index="/personalCenter/PersonalCenterCertificate">
+            <i class="el-icon-printer"></i>
+            <span slot="title">证书查询</span>
+          </el-menu-item>
         </el-menu>
       </el-col>
     </el-row>

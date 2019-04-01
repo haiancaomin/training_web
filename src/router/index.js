@@ -25,6 +25,7 @@ import PersonalCenterNotInvoice from '@/page/personalCenter/PersonalCenterNotInv
 import PersonalCenterHaveInvoice from '@/page/personalCenter/PersonalCenterHaveInvoice'
 import PersonalCenterAuthentication from '@/page/personalCenter/PersonalCenterAuthentication'
 import PersonalCenterReport from '@/page/personalCenter/PersonalCenterReport'
+import PersonalCenterCertificate from '@/page/personalCenter/PersonalCenterCertificate'
 import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
 import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
 import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
@@ -130,6 +131,9 @@ export default new Router({
       }, {
         path: 'PersonalCenterReport',
         component: PersonalCenterReport,
+      }, {
+        path: 'PersonalCenterCertificate',
+        component: PersonalCenterCertificate,
       }]
     }
       , {
