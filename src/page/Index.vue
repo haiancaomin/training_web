@@ -370,8 +370,10 @@ export default {
           mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
         })
       );
+      map.addControl(new BMap.NavigationControl());  
+      
       map.setCurrentCity("南通市"); // 设置地图显示的城市 此项是必须设置的
-      map.enableScrollWheelZoom(true);
+      // map.enableScrollWheelZoom(true);
     },
     handleClick(tab, event) {
       console.log(tab, event);
