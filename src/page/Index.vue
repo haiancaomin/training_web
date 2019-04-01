@@ -25,12 +25,13 @@
             </router-link>
           </div>
         </div>
-        <div class="login-self">
-          <span class="el-icon-mobile-phone" @click="clickLogin"></span>
-          <span @click="clickLogin">登录/注册</span>
+        <div class="login-self" @click="clickLogin">
+          <span class="el-icon-mobile-phone" ></span>
+          <span >登录/注册</span>
         </div>
       </div>
-
+      
+      <div class="course-outline-body">
       <div class="course-type">
         <el-row class="no-margin-b">
           <el-col :span="24">
@@ -164,7 +165,8 @@
           </div>
         </el-row>
       </div>
-
+    </div>
+    <div class="base-list-outline-body">
       <div class="base-list">
         <el-row class="no-margin-b">
           <el-col :span="24">
@@ -233,6 +235,8 @@
         
         </div>
       </div>
+      </div>
+      <div class="contact-outline-body">
       <div class="contact">
         <el-row class="no-margin-b">
           <el-col :span="24">
@@ -246,7 +250,8 @@
         </el-row>
       <div id="map"></div>
       </div>
-
+    </div>
+      <div class="friend-url-outline-body">
       <div class="friend-url">
         <el-row class="no-margin-b">
           <div class="index-friend">
@@ -306,11 +311,14 @@
           </div>
         </el-row>
       </div>
+      </div>
      
     </div>
+    <div class="index-footer-outline-body">
     <div class="index-footer">
       <p>©2018-2019 智聚 版权所有</p>
       <p class="index-mobile">联系电话： 18234211234</p>
+    </div>
     </div>
   </div>
 </template>
@@ -688,7 +696,7 @@ body > .el-container {
   padding: 12px;
   margin-right: 24px;
   width: 340px;
-  height: 180px;
+  height: 140px;
   font-size: 0;
   vertical-align: top;
   margin-bottom: 4px;
@@ -700,7 +708,7 @@ body > .el-container {
   height: 80px;
   width: 80px;
   font-size: 0;
-  margin: 35px 20px 0px 0px;
+  margin: 15px 20px 0px 0px;
 }
 .index-course-img1 {
   height: 100%;
@@ -709,19 +717,21 @@ body > .el-container {
 }
 .index-course-tit {
   position: relative;
-  margin: 15px 0px 18px 0px;
+  margin: 7px 0px 10px 0px;
   font-size: 14px;
   line-height: 19px;
   color: #333;
+  text-align: left;
 }
 .index-course-content {
   position: relative;
-  margin: 0px 0px 8px 100px;
+  margin: 0px 0px 10px 100px;
   font-size: 16px;
   line-height: 24px;
   word-break: break-all;
   color: #333;
   width: 220px;
+  text-align: left;
 }
 .index-course-other {
   position: relative;
@@ -731,7 +741,8 @@ body > .el-container {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin: 20px 0px 8px 100px;
+  margin: 0px 0px 0px 100px;
+  text-align: left;
 }
 .index-signup-but {
   color: #49af4f;
@@ -766,7 +777,7 @@ body > .el-container {
 .index-base-name {
   font-size: 16px;
   color: #333333;
-  margin: 10px 0px;
+  margin: 20px 0px 10px 0px;
   height: 31px;
   text-align: center;
 }
@@ -793,7 +804,7 @@ body > .el-container {
   font-weight: bold;
 }
 .index-friend1 {
-  margin: 40px 0px 0px 30px;
+  margin: 40px 0px 0px 0px;
   box-shadow: 0 0 2px #c7c5c5;
   width: 200px;
   height: 42px;
@@ -819,13 +830,17 @@ body > .el-container {
   padding: 0px 0px 0px 4px;
 }
 .index-footer {
-  width: 100%;
+  width: 1220px;
   height: 150px;
   background: #242e68;
   color: #fff;
   text-align: center;
   font-weight: bold;
   padding: 50px 0px 0px 0px;
+  margin:0px auto;
+}
+.index-footer-outline-body {
+  background: #242e68;
 }
 .index-mobile {
   margin: 10px 0px 0px 0px;
@@ -841,7 +856,7 @@ body > .el-container {
 }
 .company-show {
   height: 810px;
-  width: 1520px;
+  width: 100%;
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
   padding: 0px 200px 0px 0px;
@@ -893,7 +908,7 @@ body > .el-container {
 }
 .login-self:hover {
   float: right;
-  margin: 94px -510px 0px 0px;
+  margin: 95px -510px 0px 0px;
   font-size: 15px;
   color: #409eff;
   cursor: pointer;
@@ -902,10 +917,14 @@ body > .el-container {
   margin: 0px 5px 0px 0px;
 }
 .course-type {
-  width: 1520px;
-  height: 650px;
+  width: 1220px;
+  height: 500px;
   background: #fff;
-  padding: 85px 0px 0px 0px;
+  padding: 50px 0px 0px 0px;
+  margin:0px auto;
+}
+.course-outline-body {
+  background: #fff;
 }
 
 .grid-content {
@@ -929,31 +948,52 @@ body > .el-container {
   
 }
 .course-body {
-  margin: 50px 0px 0px 120px;
+  margin: 20px 0px 0px 0px;
+  text-align: center
 }
 .base-list {
-  width: 1520px;
-  height: 650px;
+  width: 1220px;
+  height: 620px;
   background: #1d2939;
-  padding: 85px 0px 0px 0px;
+  padding: 50px 0px 0px 0px;
+  margin: 0px auto;
+  text-align: center;
+}
+.base-list-outline-body {
+  background: #1d2939;
 }
 .base-body-list {
-  margin:50px 0px 50px 60px;
+  margin:50px 0px 50px 0px;
 }
 .friend-url {
   background: #fff;
-  padding:20px 0px 10px 100px;
+  padding:20px 0px 20px 62px;
+  width:1220px;
+  margin:0px auto;
+  text-align: center;
+}
+.friend-url-outline-body {
+  background: #fff;
 }
 #map {
   height: 450px;
+  
+ 
 }
 .contact {
   background: #fff;
-  padding:0px 200px;
-  width:1520px;
+  width:1220px;
+  margin:0px auto;
+  
+}
+.contact-outline-body {
+  background: #fff;
+ 
 }
 #contact {
-  margin: 85px 0px 50px 0px;
+  margin: 50px 0px;
 }
+
+
 </style>
 
