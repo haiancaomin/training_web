@@ -2,7 +2,11 @@
   <div>
     
     <div class="index-body">
+      
       <div class="company-show">
+        <div class="more" v-show="showDown" @click="goto">
+          <i class="el-icon-arrow-down"  ></i>
+        </div>
         <div class="login-sign">
           
           <div class="logo">
@@ -326,6 +330,7 @@ export default {
     return {
       dialogVisible: false,
       regDialogVisible: false,
+      showDown: true,
       bannerLists: [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
@@ -354,9 +359,25 @@ export default {
   },
   mounted() {
     // this.swiper.slideTo(3, 1000, false);
+    
+
     this.initMap();
+    var that = this;
+    window.addEventListener('scroll',function(){
+       if ((document.documentElement.clientHeight+document.documentElement.scrollTop)>880) {
+        that.showDown = false;
+        console.log(document.documentElement.clientHeight);
+        console.log(document.documentElement.scrollTop);
+       } else {
+         that.showDown = true;
+       }
+       
+      })
   },
   methods: {
+    goto() {
+      window.scrollTo(0,731);
+    },
     initMap() {
       var map = new BMap.Map("map");
       var point = new BMap.Point(120.9622853521,31.9312175342);
@@ -378,6 +399,7 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     }
+    
   }
 };
 </script>
@@ -835,7 +857,7 @@ body > .el-container {
 
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
-  padding: 0px 200px 0px 0px;
+  
 }
 
 .login-sign {
@@ -844,6 +866,7 @@ body > .el-container {
   height: 810px;
   width: 360px;
   padding: 0px 20px;
+  margin:0px 200px 0px 0px;
 }
 .logo {
   padding: 260px 0px 20px 0px;
@@ -962,6 +985,49 @@ body > .el-container {
   margin: 50px 0px;
 }
 
+.more
+{
+  cursor: pointer;
+  margin: 0px 50%;
+float:left;
+font-size: 50px;
+font-weight: 900;
+color:#fff;
+position:fixed;
+animation:myfirst 2s;
+-moz-animation:myfirst 2s; /* Firefox */
+-webkit-animation:myfirst 2s; /* Safari and Chrome */
+-o-animation:myfirst 2s; /* Opera */
+animation-iteration-count: infinite;
+-webkit-animation-iteration-count: infinite;
+}
 
+@keyframes myfirst
+{
+0%   { bottom:30px;}
+50%  { bottom:60px;}
+100% { bottom:30px;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0%   { bottom:30px;}
+50%  { bottom:60px;}
+100% { bottom:30px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   { bottom:30px;}
+50%  { bottom:60px;}
+100% { bottom:30px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0%   { bottom:30px;}
+50%  { bottom:60px;}
+100% { bottom:30px;}
+}
 </style>
 
