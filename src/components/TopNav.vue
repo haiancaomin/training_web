@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
     <user-register
       :regDialogVisible="regDialogVisible"
@@ -12,15 +11,13 @@
         <div class="logo">
           <img src="../assets/favicon.png" alt>
           <span class="logo-words">智聚实训</span>
-          
-          
-        </div>
-        <div class="login-self" @click="clickLogin">
-          <span class="el-icon-mobile-phone" ></span>
-          <span >登录/注册</span>
         </div>
       </router-link>
-     
+      <div class="login-self" @click="clickLogin">
+        <span class="el-icon-mobile-phone"></span>
+        <span>登录/注册</span>
+      </div>
+
       <el-menu
         :default-active="$route.path"
         class="el-menu-demo"
@@ -84,7 +81,7 @@
 
         <!-- <el-menu-item index="/contact">
           <a href="javascript:;">联系我们</a>
-        </el-menu-item> -->
+        </el-menu-item>-->
       </el-menu>
     </el-header>
     <router-view></router-view>
@@ -98,10 +95,10 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      regDialogVisible: false,
+      regDialogVisible: false
     };
   },
-   components: {
+  components: {
     UserLogin,
     UserRegister
   },
@@ -136,7 +133,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header {
-  background: rgba(36,46,104,0.8);
+  background: rgba(36, 46, 104, 0.8);
   color: #fff;
   line-height: 80px !important;
   position: fixed;
@@ -145,7 +142,6 @@ export default {
   width: 100%;
   z-index: 99;
   height: 80px !important;
-  
 }
 
 .logo {
@@ -155,29 +151,27 @@ export default {
 .logo-words {
   font-size: 18px;
   margin-left: 10px;
-  color: #fff
+  color: #fff;
 }
 .el-menu {
-  background: rgba(36,46,104,0) !important                     ;
+  background: rgba(36, 46, 104, 0) !important                     ;
   float: right;
   height: 80px !important;
   line-height: 80px !important;
-  border-bottom: 1px solid rgba(36,46,104,0) !important;
-  
+  border-bottom: 1px solid rgba(36, 46, 104, 0) !important;
 }
 .el-menu-item {
-  background: rgba(36,46,104,0) !important;
+  background: rgba(36, 46, 104, 0) !important;
   height: 80px !important;
   line-height: 80px !important;
   width: 100px !important;
   text-align: center;
   font-size: 15px;
-  
-  
 }
 .login-self {
   float: left;
-  margin:0px 0px 0px 40px;
+  margin: 0px 0px 0px 40px;
   color: #fff;
+  cursor: pointer;
 }
 </style>
