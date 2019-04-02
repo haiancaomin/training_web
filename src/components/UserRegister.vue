@@ -1,36 +1,68 @@
 <template>
   <div class="User-Register">
-    <el-dialog title="账号注册" :visible.sync="regshow" width="480px" id="regDialog" @closed="closeDialog">
+    <el-dialog title="账号注册" :visible.sync="regshow" width="500px" id="regDialog" @closed="closeDialog">
       <el-form
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
-        label-width="100px"
+       
         class="demo-ruleForm"
       >
-        <el-form-item label="用户名: " prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item  prop="name">
+          <div class="input-body">
+            <div class="input-icon1">
+              <i class="iconfont">&#xe75f;</i>
+            </div>
+              <input :type="inputType" placeholder="请输入用户名" class="input-input" maxlength="12">
+              
+            </div>
         </el-form-item>
        
-        <el-form-item label="密码:  " prop="IDCardNuM">
-          <el-input v-model="ruleForm.IDCardNuM"></el-input>
+        <el-form-item  prop="IDCardNuM">
+          <div class="input-body">
+            <div class="input-icon2">
+              <i class="iconfont" id="pwd-lock">&#xe62b;</i>
+            </div>
+              <input :type="inputType" placeholder="请输入密码" class="input-input" maxlength="12">
+              <div class="input-icon" @click="changeType">
+              <i class="el-icon-view" v-if="showNewPassword"></i>
+              <i class="iconfont" v-if="!showNewPassword">&#xe723;</i>
+            </div>
+            </div>
         </el-form-item>
         
-        <el-form-item label="确认密码:  " prop="workingSpace">
-          <el-input v-model="ruleForm.workingSpace"></el-input>
+        <el-form-item  prop="workingSpace">
+          <div class="input-body">
+            <div class="input-icon2">
+              <i class="iconfont" id="pwd-lock">&#xe62b;</i>
+            </div>
+              <input :type="inputType" placeholder="请再次输入密码" class="input-input" maxlength="12">
+              <div class="input-icon" @click="changeType">
+              <i class="el-icon-view" v-if="showNewPassword"></i>
+              <i class="iconfont" v-if="!showNewPassword">&#xe723;</i>
+            </div>
+            </div>
         </el-form-item>
        
-        <el-form-item label="手机号码:  " prop="mobile">
-          <el-input v-model="ruleForm.mobile"></el-input>
+        <el-form-item  prop="mobile">
+          <div class="input-body">
+            <div class="input-icon1">
+              <i class="iconfont">&#xe704;</i>
+            </div>
+              <input :type="inputType" placeholder="请输入手机号" class="input-input" maxlength="12">
+              
+            </div>
         </el-form-item>
-        <el-form-item label="验证码:  " prop="verification" id="regVerification"> 
-
-          <el-input v-model="ruleForm.verification" class="identification-num"></el-input> 
-          <button type="button" class="test-but">获取验证码</button>
+        <el-form-item prop="verification" id="regVerification"> 
+        <div class="verification-code">
+         <input :type="inputType" placeholder="请输入短信新密码" class="input-input" maxlength="12" id="identifying">
+          <el-button type="primary" plain class="get-button-con" v-if="show" @click="getCode">获取验证码</el-button>
+          <el-button type="primary" plain disabled class="wait-button-con" v-if="!show">{{count}} 秒后重发</el-button>
+        </div>
         </el-form-item>
         
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">注&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" class="regist-self">注&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
         </el-form-item>
       </el-form>
       <a class="register" href="#" @click="go">
@@ -45,6 +77,11 @@
 export default {
   data() {
     return {
+       showNewPassword: false,
+      inputType: 'password',
+      iconColor: '',
+      show: true,
+      count: '',
       regshow:false,
       ruleForm: {
         name: "",
@@ -97,6 +134,33 @@ export default {
     }
   },
   methods: {
+    changeType() {
+      if(this.inputType == 'text') {
+        this.inputType = 'password';
+        this.showNewPassword =false;
+        console.log(this.inputType)
+      } else {
+        this.inputType = 'text';
+        this.showNewPassword =true;
+        console.log(this.inputType)
+      }
+    },
+    getCode(){
+     const TIME_COUNT = 60;
+     if (!this.timer) {
+       this.count = TIME_COUNT;
+       this.show = false;
+       this.timer = setInterval(() => {
+       if (this.count > 0 && this.count <= TIME_COUNT) {
+         this.count--;
+        } else {
+         this.show = true;
+         clearInterval(this.timer);
+         this.timer = null;
+        }
+       }, 1000)
+      }
+   },
     closeDialog:function(){
       this.$emit('regclosed', false)
     },
@@ -125,51 +189,16 @@ a {
   color: #42b983;
   text-decoration: none;
 }
-.el-input {
-  width: 300px;
-  margin: 0px 55px 0px 0px;
-  display: block;
+.el-form {
+  padding:0px 50px;
 }
 
-.el-select {
-  width: 300px;
-  margin: 0px 55px 0px 0px;
-  display: block;
-}
 
-.el-date-picker {
-  width: 80%;
-  margin: 0px 55px 0px 0px;
-}
 
-.el-button {
-  width: 300px;
-  font-size: 18px;
-  font-family: fantasy;
-  font-weight: bold;
-  margin: 0px 55px 0px 0px;
-  display: block;
-}
 
-.el-row {
-  margin-bottom: 20px;
-}
-.el-col {
-  border-radius: 4px;
-}
 
-.bg-purple-light {
-  background: #e5e9f2;
-  padding: 20px 0px 20px 0px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
+
+
 .forgetpwd {
   color: darkgrey;
   font-size: 12px;
@@ -178,7 +207,7 @@ a {
 }
 .register {
   font-size: 12px;
-  padding: 0 0 0 300px;
+  margin: 0 0 0 300px;
 }
 .User-Register {
   white-space: nowrap;
@@ -201,13 +230,86 @@ a {
     line-height: 36px;
     text-align: center;
 }
-</style>
-<style>
-  #regDialog .el-dialog__title {
-  /* font-size: 25px ; */
-  /* font-weight: bold; */
-  /* color: royalblue; */
-  /* text-align:center; */
+.input-input {
+  border:1px solid #c5cddb;
+  width: 358px;
+border-radius: 2px;
+height: 44px;
+line-height: 44px;
+background: #fff;
+    font-size:14px;
+    padding:0px 10px 0px 40px;
 }
+
+.input-icon {
+  position: absolute;
+  font-size: 18px;
+  margin: -42px 0px 0px 320px;
+}
+.input-icon1 {
+  position: absolute;
+  font-size: 18px;
+  margin: 1px 0px 0px 14px;
+}
+.input-icon2 {
+  position: absolute;
+ 
+  margin: 2px 0px 0px 9px;
+}
+.el-icon-view {
+  font-size:18px;
+}
+.input-icon:hover {
+  color: #409EFF;
+  cursor: pointer;
+}
+
+.input-input:hover {
+  border:1px solid #409EFF;
+}
+.input-input:focus {
+  border:1px solid #409EFF;
+}
+#pwd-lock {
+  font-size: 28px;
+  
+
+}
+#identifying {
+  width:242px;
+  padding:0px 10px;
+}
+.get-button-con {
+  height:44px;
+  width:112px;
+}
+.wait-button-con {
+  height:44px;
+  width:112px;
+}
+.regist-self {
+ width: 358px;
+font-size: 18px;
+height: 44px;
+}
+#regDialog {
+  text-align: center;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1121282 */
+  src: url('//at.alicdn.com/t/font_1121282_moohvn72vvf.eot');
+  src: url('//at.alicdn.com/t/font_1121282_moohvn72vvf.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1121282_moohvn72vvf.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1121282_moohvn72vvf.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1121282_moohvn72vvf.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1121282_moohvn72vvf.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:18px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
 </style>
+
 
