@@ -1,14 +1,11 @@
 <template>
   <div>
-    
     <div class="index-body">
-      
       <div class="company-show">
-        <div class="more" v-show="showDown" @click="goto">
-          <i class="el-icon-arrow-down"  ></i>
+        <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
+          <i class="el-icon-arrow-down"></i>
         </div>
         <div class="login-sign">
-          
           <div class="logo">
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
@@ -28,303 +25,292 @@
         <!-- <div class="login-self" @click="clickLogin">
           <span class="el-icon-mobile-phone" ></span>
           <span >登录/注册</span>
-        </div> -->
+        </div>-->
       </div>
-      
+
       <div class="course-outline-body">
-      <div class="course-type">
-        <el-row class="no-margin-b">
-          <el-col :span="24">
-            <div class="grid-content">
-              <h1 class="title-type">培训课程</h1>
+        <div class="course-type">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content">
+                <h1 class="title-type">培训课程</h1>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="no-margin-b">
+            <div class="course-body">
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list1">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>工艺员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list2">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>质量员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list3">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>资料员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list4">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>深化员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list5">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>灌浆工</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list6">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>吊装工</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
             </div>
-          </el-col>
-        </el-row>
-        <el-row class="no-margin-b">
-          <div class="course-body">
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list1">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection1.jpg" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>工艺员</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list2">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection2.png" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>质量员</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list3">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection1.jpg" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>资料员</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list4">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection2.png" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>深化员</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list5">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection1.jpg" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>灌浆工</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="index-course-list" id="index-course-list6">
-                <router-link to="/course">
-                  <a href="javascript:;">
-                    <div class="index-course-img">
-                      <img src="../assets/inspection2.png" class="index-course-img1">
-                    </div>
-                    <div class="index-course-tit">
-                      <span>吊装工</span>
-                      <span>|</span>
-                      <router-link to="/SignUp">
-                        <span class="index-signup-but">点击报名</span>
-                      </router-link>
-                    </div>
-                    <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
-                    <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                  </a>
-                </router-link>
-              </div>
-            </el-col>
-          </div>
-        </el-row>
-      </div>
-    </div>
-    <div class="base-list-outline-body">
-      <div class="base-list">
-        <el-row class="no-margin-b">
-          <el-col :span="24">
-            <div class="grid-content">
-              <h1 class="title-type1">
-                基地展示
-               
-              </h1>
-            </div>
-          </el-col>
-        </el-row>
-
-        <div class="base-body-list">
-          <el-row class="pad20 bg-white" id="index-base-background">
-          <el-col :span="6">
-            <router-link to="/base">
-              <a href="javascript:;">
-                <div class="index-base-list" id="index-base-list1">
-                  <img src="../assets/inspection1.jpg" class="index-base-img">
-
-                  <div class="index-base-name">南通实训基地</div>
-                  <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
-                </div>
-              </a>
-            </router-link>
-          </el-col>
-          <el-col :span="6">
-            <router-link to="/base">
-              <a href="javascript:;">
-                <div class="index-base-list" id="index-base-list2">
-                  <img src="../assets/inspection2.png" class="index-base-img">
-
-                  <div class="index-base-name">南通实地基地</div>
-                  <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                </div>
-              </a>
-            </router-link>
-          </el-col>
-          <el-col :span="6">
-            <router-link to="/base">
-              <a href="javascript:;">
-                <div class="index-base-list" id="index-base-list3">
-                  <img src="../assets/inspection1.jpg" class="index-base-img">
-
-                  <div class="index-base-name">徐州实训基地</div>
-                  <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
-                </div>
-              </a>
-            </router-link>
-          </el-col>
-          <el-col :span="6">
-            <router-link to="/base">
-              <a href="javascript:;">
-                <div class="index-base-list" id="index-base-list4">
-                  <img src="../assets/inspection2.png" class="index-base-img">
-
-                  <div class="index-base-name">徐州实地基地</div>
-                  <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                </div>
-              </a>
-            </router-link>
-          </el-col>
-        </el-row>
-        
-
-        
+          </el-row>
         </div>
       </div>
+      <div class="base-list-outline-body">
+        <div class="base-list">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content">
+                <h1 class="title-type1">基地展示</h1>
+              </div>
+            </el-col>
+          </el-row>
+
+          <div class="base-body-list">
+            <el-row class="pad20 bg-white" id="index-base-background">
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list1">
+                      <img src="../assets/inspection1.jpg" class="index-base-img">
+
+                      <div class="index-base-name">南通实训基地</div>
+                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list2">
+                      <img src="../assets/inspection2.png" class="index-base-img">
+
+                      <div class="index-base-name">南通实地基地</div>
+                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list3">
+                      <img src="../assets/inspection1.jpg" class="index-base-img">
+
+                      <div class="index-base-name">徐州实训基地</div>
+                      <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list4">
+                      <img src="../assets/inspection2.png" class="index-base-img">
+
+                      <div class="index-base-name">徐州实地基地</div>
+                      <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
       </div>
       <div class="contact-outline-body">
-      <div class="contact">
-        <el-row class="no-margin-b">
-          <el-col :span="24">
-            <div class="grid-content" id="contact">
-              <h1 class="title-type2">
-                联系我们
-               
-              </h1>
-            </div>
-          </el-col>
-        </el-row>
-      <div id="map"></div>
+        <div class="contact">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content" id="contact">
+                <h1 class="title-type2">联系我们</h1>
+              </div>
+            </el-col>
+          </el-row>
+          <div id="map"></div>
+        </div>
       </div>
-    </div>
       <div class="friend-url-outline-body">
-      <div class="friend-url">
-        <el-row class="no-margin-b">
-          <div class="index-friend">
-            <el-col :span="5">
-              <div class="index-friend1">
-                <a href="http://www.zhongnangroup.cn" target="_blank">
-                  <img
-                    src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
-                    alt
-                    width="190"
-                    height="38"
-                    border="0"
-                  >
-                </a>
-              </div>
-            </el-col>
-            <el-col :span="7">
-              <div class="index-friend2">
-                <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
-                  <img
-                    src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
-                    alt
-                    width="260"
-                    height="46"
-                    border="0"
-                  >
-                </a>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="index-friend3">
-                <a href="http://www.tjprefab.com.cn" target="_blank">
-                  <img
-                    src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
-                    alt
-                    width="170"
-                    height="72"
-                    border="0"
-                  >
-                </a>
-              </div>
-            </el-col>
+        <div class="friend-url">
+          <el-row class="no-margin-b">
+            <div class="index-friend">
+              <el-col :span="5">
+                <div class="index-friend1">
+                  <a href="http://www.zhongnangroup.cn" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
+                      alt
+                      width="190"
+                      height="38"
+                      border="0"
+                    >
+                  </a>
+                </div>
+              </el-col>
+              <el-col :span="7">
+                <div class="index-friend2">
+                  <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
+                      alt
+                      width="260"
+                      height="46"
+                      border="0"
+                    >
+                  </a>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="index-friend3">
+                  <a href="http://www.tjprefab.com.cn" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
+                      alt
+                      width="170"
+                      height="72"
+                      border="0"
+                    >
+                  </a>
+                </div>
+              </el-col>
 
-            <el-col :span="6">
-              <div class="index-friend4">
-                <a href="http://www.ntadi.cc/index.html" target="_blank">
-                  <img
-                    src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
-                    alt
-                    width="190"
-                    height="83"
-                    border="0"
-                  >
-                </a>
-              </div>
-            </el-col>
-          </div>
-        </el-row>
+              <el-col :span="6">
+                <div class="index-friend4">
+                  <a href="http://www.ntadi.cc/index.html" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
+                      alt
+                      width="190"
+                      height="83"
+                      border="0"
+                    >
+                  </a>
+                </div>
+              </el-col>
+            </div>
+          </el-row>
+        </div>
       </div>
-      </div>
-     
     </div>
     <div class="index-footer-outline-body">
-    <div class="index-footer">
-      <p>©2018-2019 智聚 版权所有</p>
-      <p class="index-mobile">联系电话： 18234211234</p>
-    </div>
+      <div class="index-footer">
+        <p>©2018-2019 智聚 版权所有</p>
+        <p class="index-mobile">联系电话： 18234211234</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -351,7 +337,7 @@ export default {
       ]
     };
   },
- 
+
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
@@ -359,47 +345,65 @@ export default {
   },
   mounted() {
     // this.swiper.slideTo(3, 1000, false);
-    
 
     this.initMap();
     var that = this;
-    window.addEventListener('scroll',function(){
-       if ((document.documentElement.clientHeight+document.documentElement.scrollTop)>880) {
+    window.addEventListener("scroll", function() {
+      if (
+        document.documentElement.clientHeight +
+          document.documentElement.scrollTop >
+        880
+      ) {
         that.showDown = false;
         console.log(document.documentElement.clientHeight);
         console.log(document.documentElement.scrollTop);
-       } else {
-         that.showDown = true;
-       }
-       
-      })
+      } else {
+        that.showDown = true;
+      }
+    });
   },
   methods: {
-    goto() {
-      window.scrollTo(0,731);
+    scrollAnimation(currentY, targetY) {
+      // 获取当前位置方法
+      // const currentY = document.documentElement.scrollTop || document.body.scrollTop
+
+      // 计算需要移动的距离
+      let needScrollTop = targetY - currentY;
+      let _currentY = currentY;
+      setTimeout(() => {
+        // 一次调用滑动帧数，每次调用会不一样
+        const dist = Math.ceil(needScrollTop / 10);
+        _currentY += dist;
+        window.scrollTo(_currentY, currentY);
+        // 如果移动幅度小于十个像素，直接移动，否则递归调用，实现动画效果
+        if (needScrollTop > 10 || needScrollTop < -10) {
+          this.scrollAnimation(_currentY, targetY);
+        } else {
+          window.scrollTo(_currentY, targetY);
+        }
+      }, 1);
     },
     initMap() {
       var map = new BMap.Map("map");
-      var point = new BMap.Point(120.9622853521,31.9312175342);
+      var point = new BMap.Point(120.9622853521, 31.9312175342);
       map.centerAndZoom(point, 17);
       var marker = new BMap.Marker(point); // 创建标注
       map.addOverlay(marker);
-      marker.setAnimation(BMAP_ANIMATION_BOUNCE); 
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
       //添加地图类型控件
       map.addControl(
         new BMap.MapTypeControl({
           mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
         })
       );
-      map.addControl(new BMap.NavigationControl());  
-      
+      map.addControl(new BMap.NavigationControl());
+
       map.setCurrentCity("南通市"); // 设置地图显示的城市 此项是必须设置的
       // map.enableScrollWheelZoom(true);
     },
     handleClick(tab, event) {
       console.log(tab, event);
     }
-    
   }
 };
 </script>
@@ -423,7 +427,7 @@ body > .el-container {
 
 .grid-content {
   border-radius: 4px;
-  
+
   margin: 10px 0px;
 }
 .el-carousel__item h3 {
@@ -833,7 +837,7 @@ body > .el-container {
   text-align: center;
   font-weight: bold;
   padding: 50px 0px 0px 0px;
-  margin:0px auto;
+  margin: 0px auto;
 }
 .index-footer-outline-body {
   background: #242e68;
@@ -857,7 +861,6 @@ body > .el-container {
 
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
-  
 }
 
 .login-sign {
@@ -866,7 +869,7 @@ body > .el-container {
   height: 810px;
   width: 360px;
   padding: 0px 20px;
-  margin:0px 200px 0px 0px;
+  margin: 0px 200px 0px 0px;
 }
 .logo {
   padding: 260px 0px 20px 0px;
@@ -908,10 +911,9 @@ body > .el-container {
   height: 500px;
   background: #fff;
   padding: 50px 0px 0px 0px;
-  margin:0px auto;
+  margin: 0px auto;
 }
 .course-outline-body {
-
   background: #fff;
 }
 
@@ -929,18 +931,16 @@ body > .el-container {
   font-weight: 500;
   color: #fff;
 }
-.title-type2 h1{
+.title-type2 h1 {
   font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 28px;
   font-weight: 500;
-  
 }
 .course-body {
   margin: 20px 0px 0px 0px;
-  text-align: center
+  text-align: center;
 }
 .base-list {
-
   width: 1220px;
   height: 620px;
   background: #1d2939;
@@ -949,17 +949,16 @@ body > .el-container {
   text-align: center;
 }
 .base-list-outline-body {
-
   background: #1d2939;
 }
 .base-body-list {
-  margin:50px 0px 50px 0px;
+  margin: 50px 0px 50px 0px;
 }
 .friend-url {
   background: #fff;
-  padding:20px 0px 20px 62px;
-  width:1220px;
-  margin:0px auto;
+  padding: 20px 0px 20px 62px;
+  width: 1220px;
+  margin: 0px auto;
   text-align: center;
 }
 .friend-url-outline-body {
@@ -967,67 +966,82 @@ body > .el-container {
 }
 #map {
   height: 450px;
-  
- 
 }
 .contact {
   background: #fff;
 
-  width:1220px;
-  margin:0px auto;
-  
+  width: 1220px;
+  margin: 0px auto;
 }
 .contact-outline-body {
   background: #fff;
-
 }
 #contact {
   margin: 50px 0px;
 }
 
-.more
-{
+.more {
   cursor: pointer;
   margin: 0px 50%;
-float:left;
-font-size: 50px;
-font-weight: 900;
-color:#fff;
-position:fixed;
-animation:myfirst 2s;
--moz-animation:myfirst 2s; /* Firefox */
--webkit-animation:myfirst 2s; /* Safari and Chrome */
--o-animation:myfirst 2s; /* Opera */
-animation-iteration-count: infinite;
--webkit-animation-iteration-count: infinite;
+  float: left;
+  font-size: 50px;
+  font-weight: 900;
+  color: #fff;
+  position: fixed;
+  animation: myfirst 2s;
+  -moz-animation: myfirst 2s; /* Firefox */
+  -webkit-animation: myfirst 2s; /* Safari and Chrome */
+  -o-animation: myfirst 2s; /* Opera */
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
 }
 
-@keyframes myfirst
-{
-0%   { bottom:30px;}
-50%  { bottom:60px;}
-100% { bottom:30px;}
+@keyframes myfirst {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
 }
 
-@-moz-keyframes myfirst /* Firefox */
-{
-0%   { bottom:30px;}
-50%  { bottom:60px;}
-100% { bottom:30px;}
+@-moz-keyframes myfirst /* Firefox */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
 }
 
-@-webkit-keyframes myfirst /* Safari and Chrome */
-{
-0%   { bottom:30px;}
-50%  { bottom:60px;}
-100% { bottom:30px;}
+@-webkit-keyframes myfirst /* Safari and Chrome */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
 }
 
-@-o-keyframes myfirst /* Opera */
-{
-0%   { bottom:30px;}
-50%  { bottom:60px;}
-100% { bottom:30px;}
+@-o-keyframes myfirst /* Opera */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
 }
 </style>
 
