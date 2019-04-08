@@ -20,6 +20,9 @@
             <router-link to="/SignUp">
               <p class="index-sign-up2">报名入口&gt;&gt;</p>
             </router-link>
+            <router-link to="/SignUp">
+              <p class="index-sign-up1">证书公示&gt;&gt;</p>
+            </router-link>
           </div>
         </div>
         <!-- <div class="login-self" @click="clickLogin">
@@ -615,34 +618,30 @@ body > .el-container {
 }
 
 .index-sign-up1 {
-  width: 177px;
+  width: 160px;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: #fff;
+  color: #0a6998;
   font-size: 20px;
-  border: 1px solid #fff;
-  border-radius: 6px;
+  border: 1px solid #0a6998;
+  border-radius: 25px;
   display: block;
-  position: relative;
-  left: 260px;
-  top: 230px;
+
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
+  background: #fff;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
+  margin:20px 0px 0px 0px;
 }
-.index-sign-up1 a {
-  text-decoration: none;
-  color: #393939;
-  cursor: pointer;
-}
+
 .index-sign-up1:hover {
-  background: #fff;
-  color: #393939;
+  background: #0a6998;
+  color: #fff;
 }
+
 .index-sign-up2 {
   width: 160px;
   height: 50px;
