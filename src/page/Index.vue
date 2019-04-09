@@ -20,7 +20,7 @@
             <router-link to="/SignUp">
               <p class="index-sign-up2">报名入口&gt;&gt;</p>
             </router-link>
-            <router-link to="/SignUp">
+            <router-link to="/PesronalScoreSearch">
               <p class="index-sign-up1">证书公示&gt;&gt;</p>
             </router-link>
           </div>
@@ -97,7 +97,7 @@
                         </router-link>
                       </div>
                       <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
                     </a>
                   </router-link>
                 </div>
@@ -117,7 +117,7 @@
                         </router-link>
                       </div>
                       <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
                     </a>
                   </router-link>
                 </div>
@@ -137,7 +137,7 @@
                         </router-link>
                       </div>
                       <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
                     </a>
                   </router-link>
                 </div>
@@ -157,7 +157,7 @@
                         </router-link>
                       </div>
                       <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
                     </a>
                   </router-link>
                 </div>
@@ -184,7 +184,7 @@
                     <div class="index-base-list" id="index-base-list1">
                       <img src="../assets/inspection1.jpg" class="index-base-img">
 
-                      <div class="index-base-name">南通实训基地</div>
+                      <div class="index-base-name">灌浆区</div>
                       <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
                     </div>
                   </a>
@@ -196,7 +196,7 @@
                     <div class="index-base-list" id="index-base-list2">
                       <img src="../assets/inspection2.png" class="index-base-img">
 
-                      <div class="index-base-name">南通实地基地</div>
+                      <div class="index-base-name">质量员实训区</div>
                       <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
                     </div>
                   </a>
@@ -208,7 +208,7 @@
                     <div class="index-base-list" id="index-base-list3">
                       <img src="../assets/inspection1.jpg" class="index-base-img">
 
-                      <div class="index-base-name">徐州实训基地</div>
+                      <div class="index-base-name">吊装实训区</div>
                       <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
                     </div>
                   </a>
@@ -220,7 +220,7 @@
                     <div class="index-base-list" id="index-base-list4">
                       <img src="../assets/inspection2.png" class="index-base-img">
 
-                      <div class="index-base-name">徐州实地基地</div>
+                      <div class="index-base-name">休息区</div>
                       <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
                     </div>
                   </a>
@@ -239,66 +239,56 @@
               </div>
             </el-col>
           </el-row>
+          <div class="index-contact">
+            <span class="contact-mobile">电话：0513-81055866</span>
+            <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
+            <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
+          </div>
           <div id="map"></div>
         </div>
       </div>
       <div class="friend-url-outline-body">
         <div class="friend-url">
+            <div class="friend-title">
+              <div class="friend-title-con">
+                <span>友情链接</span>
+              </div>
+            </div>
           <el-row class="no-margin-b">
             <div class="index-friend">
-              <el-col :span="5">
-                <div class="index-friend1">
+              
                   <a href="http://www.zhongnangroup.cn" target="_blank">
                     <img
                       src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
                       alt
-                      width="190"
-                      height="38"
-                      border="0"
+                      class="friend-img"
                     >
                   </a>
-                </div>
-              </el-col>
-              <el-col :span="7">
-                <div class="index-friend2">
+                
                   <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
                     <img
                       src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
                       alt
-                      width="260"
-                      height="46"
-                      border="0"
+                      class="friend-img"
                     >
                   </a>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="index-friend3">
+               
                   <a href="http://www.tjprefab.com.cn" target="_blank">
                     <img
                       src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
                       alt
-                      width="170"
-                      height="72"
-                      border="0"
+                     class="friend-img"
                     >
                   </a>
-                </div>
-              </el-col>
-
-              <el-col :span="6">
-                <div class="index-friend4">
+                
                   <a href="http://www.ntadi.cc/index.html" target="_blank">
                     <img
                       src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
                       alt
-                      width="190"
-                      height="83"
-                      border="0"
+                      class="friend-img-last"
                     >
                   </a>
-                </div>
-              </el-col>
+                
             </div>
           </el-row>
         </div>
@@ -634,7 +624,7 @@ body > .el-container {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
-  margin:20px 0px 0px 0px;
+  margin:40px 0px 0px 0px;
 }
 
 .index-sign-up1:hover {
@@ -802,32 +792,25 @@ body > .el-container {
   color: #0a6995;
   font-weight: bold;
 }
-.index-friend1 {
-  margin: 40px 0px 0px 0px;
-  box-shadow: 0 0 2px #c7c5c5;
-  width: 200px;
-  height: 42px;
+.index-friend {
+  margin: 20px 0px 0px 0px;
 }
-.index-friend2 {
-  margin: 37px 0px 0px 50px;
-  box-shadow: 0 0 2px #c7c5c5;
-  width: 260px;
-  height: 47px;
+
+.friend-img {
+  
+ height: 80px;
+  width: 286px;
+  border: solid 1px #eee;
+  margin: 0px 20px 0px 0px;
 }
-.index-friend3 {
-  margin: 20px 0px 0px 42px;
-  box-shadow: 0 0 2px #c7c5c5;
-  width: 200px;
-  height: 77px;
-  padding: 0px 0px 0px 18px;
+.friend-img-last {
+  
+ height: 80px;
+  width: 286px;
+  border: solid 1px #eee;
+  
 }
-.index-friend4 {
-  margin: 20px 0px 20px 24px;
-  box-shadow: 0 0 2px #c7c5c5;
-  width: 200px;
-  height: 77px;
-  padding: 0px 0px 0px 4px;
-}
+
 .index-footer {
   width: 1220px;
   height: 150px;
@@ -955,7 +938,7 @@ body > .el-container {
 }
 .friend-url {
   background: #fff;
-  padding: 20px 0px 20px 62px;
+  padding: 80px 0px 20px 0px;
   width: 1220px;
   margin: 0px auto;
   text-align: center;
@@ -978,7 +961,34 @@ body > .el-container {
 #contact {
   margin: 50px 0px;
 }
-
+.contact-mobile {
+  margin: 0px 30px 0px 0px;
+}
+.contact-mail {
+  margin: 0px 30px 0px 0px;
+}
+.index-contact {
+  margin: 0px 0px 20px 0px;
+  
+}
+.friend-title {
+  width:100%;
+  background: #f4f4f4;
+  border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+}
+.friend-title-con {
+  width:100px;
+  background: #409eff;
+  padding:10px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+  font-size: 16px;
+  color:#fff;
+}
+.friend-title-con>span {
+  font-weight: bold;
+}
 .more {
   cursor: pointer;
   margin: 0px 50%;

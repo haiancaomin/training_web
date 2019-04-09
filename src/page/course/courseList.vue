@@ -33,23 +33,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="1">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -68,21 +63,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -127,23 +117,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="1">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -162,21 +147,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -221,23 +201,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="2">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -256,21 +231,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -317,23 +287,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="1">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -352,21 +317,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -411,23 +371,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="3">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -446,21 +401,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -508,23 +458,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="3">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -543,21 +488,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -604,23 +544,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="3">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -639,21 +574,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div
@@ -699,23 +629,18 @@
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="3">
-                    <div class="grid-content bold text-right">培训时长</div>
+                    <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
                     <div class="grid-content">2天</div>
                   </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">其他标题</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">其他内容</div>
-                  </el-col>
+                  
                 </el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                   <el-collapse-item name="3">
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">授课老师</div>
+                        <div class="grid-content bold text-right">方向</div>
                       </el-col>
                       <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
                         <div class="grid-content">{{val}}</div>
@@ -734,21 +659,16 @@
                             <div class="grid-content">{{val}}</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">授课老师</div>
+                            <div class="grid-content bold text-right">方向</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">赵昊</div>
+                          <el-col :span="8">
+                            <div class="grid-content">装配式预制构件生产</div>
                           </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">其他标题</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">其他内容</div>
-                          </el-col>
+                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
-                            <div class="grid-content bold text-right">教师介绍</div>
+                            <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
                             <div

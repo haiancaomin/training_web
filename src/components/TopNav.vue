@@ -42,6 +42,9 @@
         <el-menu-item index="/Inspection">
           <a href="javascript:;">高端考察</a>
         </el-menu-item>
+        <el-menu-item index="/PesronalScoreSearch">
+          <a href="javascript:;">证书公示</a>
+        </el-menu-item>
         <el-menu-item index="/PersonalCenter">
           <a href="javascript:;">客户中心</a>
         </el-menu-item>

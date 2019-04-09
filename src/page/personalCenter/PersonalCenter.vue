@@ -22,19 +22,19 @@
               <span class="in-submenu">全部</span>
             </el-menu-item>
             <el-menu-item index="/personalCenter/PersonalCenterUncompletedOrder">
-              <span class="in-submenu">待完成</span>
+              <span class="in-submenu">待付款</span>
             </el-menu-item>
             <el-menu-item index="/personalCenter/PersonalCenterNotInvoice">
-              <span class="in-submenu">未开发票</span>
+              <span class="in-submenu">待开发票</span>
             </el-menu-item>
             <el-menu-item index="/personalCenter/PersonalCenterHaveInvoice">
               <span class="in-submenu">已开发票</span>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item index="/personalCenter/PesronalScoreSearch">
+          <!-- <el-menu-item index="/personalCenter/PesronalScoreSearch">
             <i class="el-icon-search"></i>   
             <span slot="title">成绩查询</span>
-          </el-menu-item>
+          </el-menu-item> -->
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-menu"></i>
@@ -53,11 +53,7 @@
             <span slot="title">发票信息</span>
           </el-menu-item>
 
-          <el-menu-item index="/personalCenter/PersonalPassword">
-            <i class="el-icon-setting"></i>
-            <span slot="title">修改密码</span>
-          </el-menu-item>
-
+         
           <el-menu-item index="/personalCenter/PersonalCenterAuthentication">
             <i class="el-icon-success"></i>
             <span slot="title">企业认证</span>
@@ -76,6 +72,19 @@
             <i class="el-icon-printer"></i>
             <span slot="title">证书查询</span>
           </el-menu-item>
+
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>账户信息</span>
+            </template>
+            <el-menu-item index="/personalCenter/PersonalPassword">
+              <span class="in-submenu">修改密码</span>
+            </el-menu-item>
+            <el-menu-item index="/personalCenter/PersonalCenterChangeMobile">
+              <span class="in-submenu">联系方式</span>
+            </el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-col>
     </el-row>

@@ -5,6 +5,7 @@
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalPassword' }">账户信息</el-breadcrumb-item>
         <el-breadcrumb-item>修改密码</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -44,22 +45,10 @@
           <el-button type="primary" plain disabled class="wait-button-con" v-if="!show">{{count}} 秒后重发</el-button>
           
         </el-form-item>
-        <el-form-item>
-          <div class="com-upload">
-        <el-upload
-  class="upload-demo"
-  drag
-  action="https://jsonplaceholder.typicode.com/posts/"
-  multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">请上传公司认证，<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
-          </div>
-        </el-form-item>
+        
         <div class="PersonalPassword-change-commit">
           <el-form-item>
-            <el-button type="primary">确认更改</el-button>
+            <el-button type="primary" class="login-self">确认更改</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -205,7 +194,7 @@ background: #fff;
 .input-icon {
   position: absolute;
   font-size: 18px;
-  margin: -42px 0px 0px 520px;
+  margin: -42px 0px 0px 515px;
 }
 .input-icon:hover {
   color: #409EFF;
@@ -235,7 +224,11 @@ background: #fff;
 .com-upload {
   padding:0px 200px;
 }
-
+.login-self {
+  width: 358px;
+font-size: 16px;
+height: 44px;
+}
 @font-face {
   font-family: 'iconfont';  /* project id 1121282 */
   src: url('//at.alicdn.com/t/font_1121282_yrupv69b5jk.eot');

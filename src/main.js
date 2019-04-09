@@ -15,6 +15,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

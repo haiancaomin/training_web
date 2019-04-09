@@ -92,6 +92,7 @@ export default {
   padding: 0 15px;
   border-radius: 3px;
   margin: 0px 0px 10px 0px;
+  border-left: 2px solid #409eff;
 }
 </style>
 

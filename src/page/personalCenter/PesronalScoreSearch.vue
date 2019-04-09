@@ -1,54 +1,41 @@
 <template>
   <div id="PesronalScoreSearch">
     <div class="order-dialog">
-      <el-dialog title="查询结果" :visible.sync="dialogVisible" width="800px">
-        <div class="PesronalScoreSearch-result">
-          <el-table :data="tableData" height="400" border style="width: 100%">
-            <el-table-column prop="name" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="id" label="身份证号" width="180"></el-table-column>
-            <el-table-column prop="subject" label="科目" width="80"></el-table-column>
-            <el-table-column prop="testDate" label="考试日期"></el-table-column>
-            <el-table-column prop="score" label="分数" width="60"></el-table-column>
-            <el-table-column prop="passFlag" label="是否及格" width="100"></el-table-column>
-          </el-table>
-          <el-button type="primary" class="pull-out">导出结果</el-button>
+      <el-dialog  :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
+        <div class="certificate">
         </div>
+        
       </el-dialog>
     </div>
 
     <div class="crumb">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
-        <el-breadcrumb-item>成绩查询</el-breadcrumb-item>
-      </el-breadcrumb>
+      <h1 class="score-label">证书查询</h1>
     </div>
     <div class="PesronalScoreSearch-info">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="条件1">
-          <el-select v-model="form.region" placeholder="请选择条件1">
-            <el-option label="条件1-1" value="shanghai"></el-option>
-            <el-option label="条件1-2" value="beijing"></el-option>
-          </el-select>
+      <el-form ref="form" :model="form">
+        <el-form-item  prop="name">
+          <div class="input-body">
+            <div class="input-icon1">
+              <i class="iconfont">&#xe614;</i>
+            </div>
+              <input :type="inputType" placeholder="请输入姓名" class="input-input" maxlength="12">
+              
+            </div>
         </el-form-item>
 
-        <el-form-item label="条件2">
-          <el-select v-model="form.region" placeholder="请选择条件2">
-            <el-option label="条件2-1" value="shanghai"></el-option>
-            <el-option label="条件2-2" value="beijing"></el-option>
-          </el-select>
+        <el-form-item  prop="name">
+          <div class="input-body">
+            <div class="input-icon1">
+              <i class="iconfont">&#xe706;</i>
+            </div>
+              <input :type="inputType" placeholder="请输入身份证号码" class="input-input" maxlength="12">
+              
+            </div>
         </el-form-item>
 
-        <el-form-item label="条件3">
-          <el-select v-model="form.region" placeholder="请选择条件3">
-            <el-option label="条件3-1" value="shanghai"></el-option>
-            <el-option label="条件3-2" value="beijing"></el-option>
-          </el-select>
+        <el-form-item>
+          <el-button type="primary"  class="login-self" @click="showCertificate">查&nbsp;&nbsp;&nbsp;&nbsp;询</el-button>
         </el-form-item>
-        <div class="PesronalScoreSearch-search">
-          <el-form-item>
-            <el-button type="primary" @click="dialogVisible = true">查询</el-button>
-          </el-form-item>
-        </div>
       </el-form>
     </div>
   </div>
@@ -59,7 +46,7 @@ export default {
   name: "PesronalScoreSearch",
   data() {
     return {
-      dialogVisible: false,
+      showCertificateDialog:false,
       tableData: [
         {
           name: "老王",
@@ -171,22 +158,26 @@ export default {
       }
     };
   },
-  methods: {}
+  methods: {
+    showCertificate() {
+          this.showCertificateDialog = true;
+      }
+  }
 };
 </script>
 
 <style scoped>
 #PesronalScoreSearch {
-  width: 830px;
+  width: 1000px;
   
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
-  margin: 0px 0px 0px 20px;
-  padding: 0px 0px 20px 0px;
+  margin: 80px auto;
+  padding: 20px;
 }
 .PesronalScoreSearch-info {
-  margin: 50px 0px 0px 170px;
+  padding: 40px 0px 50px 300px
 }
 .PesronalScoreSearch-search {
   margin: 0px 0px 0px 60px;
@@ -195,25 +186,71 @@ export default {
 .el-table th > .cell {
   text-align: center;
 }
-.crumb {
-  padding: 10px 0px 10px 0px;
-  font-size: 20px;
-  text-align: left;
-  margin: 20px;
-  border-left: 2px solid #409eff;
-  line-height: 40px;
-  padding-left: 15px;
-  background: #e4e7ed;
-}
-.el-breadcrumb {
-  background: #e4e7ed;
-}
+
+
 .order-dialog {
   text-align: center;
 }
 .pull-out {
   margin: 20px 0px 0px 0px;
 }
+.score-label {
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #e4e7ed;
+  background: #e4e7ed;
+  padding: 0 15px;
+  border-radius: 3px;
+  margin: 0px 0px 10px 0px;
+  border-left: 2px solid #409eff;
+}
+.input-input {
+  border:1px solid #c5cddb;
+  width: 358px;
+border-radius: 2px;
+height: 44px;
+line-height: 44px;
+background: #fff;
+    font-size:14px;
+    padding:0px 10px 0px 40px;
+}
+.input-input:hover {
+  border:1px solid #409EFF;
+}
+.input-input:focus {
+  border:1px solid #409EFF;
+}
+.input-icon1 {
+  position: absolute;
+  font-size: 16px;
+  margin: 2px 0px 0px 14px;
+}
+.login-self {
+  width: 358px;
+font-size: 18px;
+height: 44px;
+}
+.certificate {
+    margin:0px auto;
+    height:1000px;
+    width:800px;
+    border: 1px solid #e4e7ed;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot');
+  src: url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:18px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
 </style>
 
 

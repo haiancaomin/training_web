@@ -1,9 +1,19 @@
 <template>
   <div id="PersonalCenterNotInvoice">
+    
     <div class="order-dialog">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
+      </el-dialog>
+      <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule">
+        <div class="schedule-body">
+        <el-steps :space="250" :active="1" finish-status="success">
+  <el-step title="提交材料"></el-step>
+  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+  <el-step title="完成"></el-step>
+</el-steps>
+        </div>
       </el-dialog>
       <el-dialog title="发票预览" :visible.sync="dialogVisible" width="800px">
         <div class="table-body">
@@ -81,7 +91,8 @@
       </div>
       <div class="order-operation">
         <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
+        <el-button type="primary" round @click="dialogVisible = true" v-if="havaNotClick">开具发票</el-button>
+        <el-button type="primary" round @click="schedule = true" v-if="havaClick">开票进度</el-button>
       </div>
     </div>
 
@@ -109,7 +120,8 @@
       </div>
       <div class="order-operation">
         <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
+        <el-button type="primary" round @click="dialogVisible = true" v-if="havaNotClick">开具发票</el-button>
+        <el-button type="primary" round @click="schedule = true" v-if="havaClick">开票进度</el-button>
       </div>
     </div>
 
@@ -137,7 +149,8 @@
       </div>
       <div class="order-operation">
         <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
+        <el-button type="primary" round @click="dialogVisible = true" v-if="havaNotClick">开具发票</el-button>
+        <el-button type="primary" round @click="schedule = true" v-if="havaClick">开票进度</el-button>
       </div>
     </div>
     <div class="order-page">
@@ -152,14 +165,21 @@ export default {
   data() {
     return {
       contact: false,
-      dialogVisible: false
+      schedule: false,
+      dialogVisible: false,
+      havaNotClick: true,
+      havaClick: false,
+
     };
   },
   methods: {
     checkOK() {
       alert("开票成功");
       this.dialogVisible = false;
-    }
+      this.havaNotClick = false;
+      this.havaClick = true;
+    },
+    
   }
 };
 </script>
@@ -300,6 +320,14 @@ input {
 }
 .el-breadcrumb {
   background: #e4e7ed;
+}
+.schedule-body {
+  text-align: left;
+ 
+  padding:0px 0px 0px 115px;
+}
+#schedule {
+  text-align: center;
 }
 </style>
 

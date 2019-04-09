@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import TopNav from '@/components/TopNav'
 import Index from '@/page/Index'
 import SignUp from '@/page/SignUp'
+// import Diagram from '@/page/Diagram'
+// import Echarts from '@/page/Echarts'
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
@@ -26,13 +28,12 @@ import PersonalCenterHaveInvoice from '@/page/personalCenter/PersonalCenterHaveI
 import PersonalCenterAuthentication from '@/page/personalCenter/PersonalCenterAuthentication'
 import PersonalCenterReport from '@/page/personalCenter/PersonalCenterReport'
 import PersonalCenterCertificate from '@/page/personalCenter/PersonalCenterCertificate'
+import PersonalCenterChangeMobile from '@/page/personalCenter/PersonalCenterChangeMobile'
 import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
 import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
 import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
 import HRServiceJobSeekerResume from '@/page/HRService/HRServiceJobSeekerResume'
 import HRServiceJobSeekerResumeInfo from '@/page/HRService/HRServiceJobSeekerResumeInfo'
-
-import Test from '@/page/Test'
 
 import baseMenu from '@/page/base/baseMenu'
 import baseOverView from '@/page/base/baseOverView'
@@ -59,10 +60,19 @@ export default new Router({
       name: 'SignUp',
       component: SignUp
     },
+    // {
+    //   path: '/Diagram',
+    //   name: 'Diagram',
+    //   component: Diagram
+    // },
+    // {
+    //   path: '/Echarts',
+    //   name: 'Echarts',
+    //   component: Echarts
+    // },
     {
-      path: '/Test',
-      name: 'Test',
-      component: Test
+      path: 'PesronalScoreSearch',
+      component: PesronalScoreSearch,
     },
     {
       path: '/course',
@@ -95,9 +105,6 @@ export default new Router({
       children: [{
         path: '',
         redirect: '/personalCenter/PersonalCenterAllOrder',
-      }, {
-        path: 'PesronalScoreSearch',
-        component: PesronalScoreSearch,
       }, {
         path: 'PersonalCenterAddPerson',
         component: PersonalCenterAddPerson,
@@ -134,6 +141,9 @@ export default new Router({
       }, {
         path: 'PersonalCenterCertificate',
         component: PersonalCenterCertificate,
+      }, {
+        path: 'PersonalCenterChangeMobile',
+        component: PersonalCenterChangeMobile,
       }]
     }
       , {
