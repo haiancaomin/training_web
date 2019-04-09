@@ -10,31 +10,11 @@
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
           </div>
-<<<<<<< HEAD
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content login-box">
-            <template v-if="1">
-              <el-row>
-                <el-button type="primary" class="login-btn">登录</el-button>
-              </el-row>
-              <el-row class="regist">
-                还没账号？
-                <a href class="regist-now">立即注册</a>
-              </el-row>
-            </template>
-            <template v-if="0">
-              <el-row>
-                <p class="welcome">欢迎回来，test！</p>
-              </el-row>
-            </template>
-=======
           <div class="feature">
             <span class="feature-detail">快速</span>
             <span class="feature-detail">全面</span>
             <span class="feature-detail">方便</span>
             <span class="feature-detail-last">质量</span>
->>>>>>> dev
           </div>
           <div class="sign-up-main">
             <router-link to="/SignUp">
