@@ -18,7 +18,7 @@
             <div class="input-icon1">
               <i class="iconfont">&#xe614;</i>
             </div>
-              <input :type="inputType" placeholder="请输入姓名" class="input-input" maxlength="12">
+              <input type="text" placeholder="请输入姓名" class="input-input" maxlength="12">
               
             </div>
         </el-form-item>
@@ -28,7 +28,7 @@
             <div class="input-icon1">
               <i class="iconfont">&#xe706;</i>
             </div>
-              <input :type="inputType" placeholder="请输入身份证号码" class="input-input" maxlength="12">
+              <input type="text" placeholder="请输入身份证号码" class="input-input" maxlength="12">
               
             </div>
         </el-form-item>
