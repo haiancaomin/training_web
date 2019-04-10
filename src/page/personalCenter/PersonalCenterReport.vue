@@ -27,7 +27,11 @@
         <el-breadcrumb-item>统计汇报</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-
+    <div class="show-body">
+      <div id="echarts">
+      </div>
+      
+    </div>
     <div class="list-body">
         <div class="report-body"> 
             <div class="report-title" @click="report = true">
@@ -79,15 +83,6 @@
             </div>
         </div>
 
-        <div class="report-body"> 
-            <div class="report-title" @click="report = true">
-                <span>2019年第2季度汇报</span>  
-            </div>
-            <div class="report-date">
-                <span>2019-07-07</span>
-            </div>
-        </div>
-
         
     </div>
 
@@ -98,8 +93,7 @@
   :total="1000">
 </el-pagination>
     </div>
-    <div id="echarts">
-      </div>
+    
   </div>
 </template>
 
@@ -114,7 +108,8 @@ export default {
    mounted() {
     var echarts = require('echarts/lib/echarts');
 // 引入柱状图
-require('echarts/lib/chart/bar');
+require('echarts/lib/chart/pie');
+require('echarts/lib/chart/line');
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
@@ -123,21 +118,24 @@ require('echarts/lib/component/title');
     // 绘制图表
     myChart.setOption({
       title: {
-        text: "ECharts 入门示例"
+        // text: "ECharts 入门示例"
       },
       tooltip: {},
-      xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-      },
-      yAxis: {},
+      // xAxis: {
+      //   data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      // },
+      // yAxis: {},
       series: [
         {
-          name: "销量",
-          type: "bar",
-          data: [5, 20, 36, 10, 10, 20]
+          // name: "销量",
+          type: "pie",
+          data: [{name: '历史考试通过人数', value: 1000},
+                    {name: '历史未通过人数', value: 50}]
+                  
         }
       ]
     });
+
   },
   methods: {}
 };
@@ -203,9 +201,9 @@ require('echarts/lib/component/title');
     text-align: center;
 } 
 #echarts {
-  height: 300px;
-  width: 1000px;
+  height: 280px;
 }
+
 </style>
 
 

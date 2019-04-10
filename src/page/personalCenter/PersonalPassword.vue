@@ -106,7 +106,7 @@ export default {
        this.count = TIME_COUNT;
        this.show = false;
        this.timer = setInterval(() => {
-       if (this.count > 0 && this.count <= TIME_COUNT) {
+       if (this.count > 0 && this.count <= TIME_COUNT) {l
          this.count--;
         } else {
          this.show = true;

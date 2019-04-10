@@ -854,7 +854,7 @@ body > .el-container {
   margin: 0px 200px 0px 0px;
 }
 .logo {
-  padding: 260px 0px 20px 0px;
+  padding: 240px 0px 20px 0px;
   text-align: center;
 }
 .logo-words {
