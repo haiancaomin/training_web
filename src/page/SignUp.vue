@@ -52,6 +52,14 @@
                             v-if="del1"
                           ></span>
                         </el-form-item>
+
+                        <el-form-item label="时间选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训时间">
+                            <el-option label="2019-05-01" value="shanghai"></el-option>
+                            <el-option label="2019-06-01" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
                             <el-option label="套餐1" value="shanghai"></el-option>
@@ -132,6 +140,14 @@
                             v-if="del2"
                           ></span>
                         </el-form-item>
+
+<el-form-item label="时间选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训时间">
+                            <el-option label="2019-05-01" value="shanghai"></el-option>
+                            <el-option label="2019-06-01" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
                             <el-option label="套餐1" value="shanghai"></el-option>
@@ -212,6 +228,14 @@
                             v-if="del3"
                           ></span>
                         </el-form-item>
+
+<el-form-item label="时间选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训时间">
+                            <el-option label="2019-05-01" value="shanghai"></el-option>
+                            <el-option label="2019-06-01" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
                             <el-option label="套餐1" value="shanghai"></el-option>
@@ -292,6 +316,15 @@
                             v-if="del4"
                           ></span>
                         </el-form-item>
+
+
+                        <el-form-item label="时间选择" prop="region" id="education">
+                          <el-select v-model="ruleForm.region" placeholder="请选择培训时间">
+                            <el-option label="2019-05-01" value="shanghai"></el-option>
+                            <el-option label="2019-06-01" value="beijing"></el-option>
+                          </el-select>
+                        </el-form-item>
+
                         <el-form-item label="套餐选择" prop="region" id="education">
                           <el-select v-model="ruleForm.region" placeholder="请选择套餐">
                             <el-option label="套餐1" value="shanghai"></el-option>
@@ -927,11 +960,20 @@
     <el-table-column
       prop="id"
       label="身份证"
-      width="280">
+      width="220">
     </el-table-column>
     <el-table-column
       prop="course"
       label="课程">
+    </el-table-column>
+    <el-table-column
+      fixed="right"
+      label="操作"
+      width="100">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </template>
     </el-table-column>
   </el-table>
                             <el-button type="primary" class="sign-submit">关闭</el-button>
@@ -1205,10 +1247,10 @@
         
         
 
-        <div class="nextPage3">
+        <!-- <div class="nextPage3">
           <el-button style="margin-top: 12px;" @click="page3Primary">上一步</el-button>
           <el-button type="primary" @click="submitForm3('ruleForm')">下一步</el-button>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -1364,10 +1406,10 @@
 
 
 
-        <div class="nextPage4">
+        <!-- <div class="nextPage4">
           <el-button style="margin-top: 12px;" @click="page4Primary">上一步</el-button>
           <el-button type="primary" @click="submitForm4('ruleForm')">下一步</el-button>
-        </div>
+        </div> -->
       </div>
 
       <div calss="pay-offline" v-show="payOffline == 1">
@@ -1382,7 +1424,7 @@
         </div>
 
         <div class="nextPage4-2">
-          <el-button style="margin-top: 12px;" @click="page42Primary">上一步</el-button>
+          <!-- <el-button style="margin-top: 12px;" @click="page42Primary">上一步</el-button> -->
           <el-button type="primary" @click="submitForm42('ruleForm')">下一步</el-button>
         </div>
       </div>
@@ -2555,7 +2597,7 @@ export default {
   width: 250px;
 }
 .sign-submit {
-  margin: 10px 0px 0px 220px;
+  margin: 20px 0px 0px 240px;
 }
 .signup-here {
   color: #616bf7;

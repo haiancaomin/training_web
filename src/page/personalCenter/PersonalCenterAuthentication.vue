@@ -8,23 +8,23 @@
     </div>
 
     <div class="PersonalPassword-change" v-if="!haveSubmit">
-      <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="信息1:  " prop="IDCardNuM">
-          <el-input v-model="ruleForm.IDCardNuM"></el-input>
+      <el-form :model="ruleForm" ref="ruleForm"  class="demo-ruleForm">
+        <el-form-item prop="IDCardNuM">
+         
+            
+            <div class="input-body">
+                <div class="input-icon1">
+              <i class="el-icon-edit-outline"></i>
+            </div>
+              <input type="text" placeholder="请输入公司名称" class="input-input" maxlength="12">
+            </div>
+          
+            
+            
+        
         </el-form-item>
 
-        <el-form-item label="信息2:  " prop="workingSpace">
-          <el-input v-model="ruleForm.workingSpace"></el-input>
-        </el-form-item>
-
-        <el-form-item label="信息3:  " prop="workingSpace">
-          <el-input v-model="ruleForm.workingSpace"></el-input>
-        </el-form-item>
-
-        <el-form-item label="信息4:  " prop="workingSpace">
-          <el-input v-model="ruleForm.workingSpace"></el-input>
-        </el-form-item>
-
+        
         <!-- <el-form-item label="手机号码:  " prop="mobile">
           <el-input v-model="ruleForm.mobile"></el-input>
         </el-form-item> -->
@@ -38,13 +38,25 @@
   multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">请上传公司认证文件，<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+  
+</el-upload>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <div class="com-upload">
+        <el-upload
+  class="upload-demo"
+  drag
+  action="https://jsonplaceholder.typicode.com/posts/"
+  multiple>
+  <i class="el-icon-upload"></i>
+  <div class="el-upload__text">请上传公司认证文件，<em>点击上传</em></div>
 </el-upload>
           </div>
         </el-form-item>
         <div class="PersonalPassword-change-commit">
           <el-form-item>
-            <el-button type="primary" @click="checkCompany">立即认证</el-button>
+            <el-button type="primary" @click="checkCompany" class="login-self">立即认证</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -120,8 +132,7 @@ export default {
   width: 300px;
 }
 .PersonalPassword-change {
-  margin: 30px 0px 0px 150px;
- 
+  margin: 30px 200px 0px 200px;
 }
 
 .haveSubmit {
@@ -157,9 +168,7 @@ export default {
 .el-breadcrumb {
   background: #e4e7ed;
 }
-.com-upload {
- margin:0px 0px 0px -60px;;
-}
+
 .el-upload__tip {
   margin:0px 0px 0px 70px;
 }
@@ -168,6 +177,32 @@ export default {
 }
 #contact {
   text-align: center;
+}
+.input-icon1 {
+  position: absolute;
+  font-size: 18px;
+  margin: 1px 0px 0px 12px;
+}
+.input-input {
+  border:1px solid #c5cddb;
+  width: 358px;
+border-radius: 2px;
+height: 44px;
+line-height: 44px;
+background: #fff;
+    font-size:14px;
+    padding:0px 10px 0px 40px;
+}
+.input-input:hover {
+  border:1px solid #409EFF;
+}
+.input-input:focus {
+  border:1px solid #409EFF;
+}
+.login-self {
+  width: 358px;
+font-size: 16px;
+height: 44px;
 }
 </style>
 

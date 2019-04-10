@@ -27,15 +27,33 @@
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
 
-      <el-form-item label="身份证号" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
-      </el-form-item>
+     
 
       <el-form-item label="性别" prop="resource">
         <el-radio-group v-model="ruleForm.resource">
           <el-radio label="男"></el-radio>
           <el-radio label="女"></el-radio>
         </el-radio-group>
+      </el-form-item>
+
+       <el-form-item label="年龄" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+
+       <el-form-item label="工种" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+
+       <el-form-item label="身份证号" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+
+       <el-form-item label="手机号码" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+
+       <el-form-item label="工作地" prop="name" id="add-id">
+        <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
 
       <el-form-item>
