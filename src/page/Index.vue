@@ -1,226 +1,315 @@
 <template>
-  <el-container>
-    <top-nav></top-nav>
-    <el-main>
-      <el-row :gutter="20">
-        <el-col :span="16">
-          <div class="grid-content">
-            <el-carousel :interval="5000">
-              <el-carousel-item v-for="(item,key) in bannerLists" :key="key">
-                <img :src="item" class="banner-img">
-              </el-carousel-item>
-            </el-carousel>
+  <div>
+    <div class="index-body">
+      <div class="company-show">
+        <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
+          <i class="el-icon-arrow-down"></i>
+        </div>
+        <div class="login-sign">
+          <div class="logo">
+            <img src="../assets/favicon.png" alt>
+            <span class="logo-words">智聚实训</span>
           </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content login-box">
-            <template v-if="1">
-              <el-row>
-                <el-button type="primary" class="login-btn">登录</el-button>
-              </el-row>
-              <el-row class="regist">
-                还没账号？
-                <a href class="regist-now">立即注册</a>
-              </el-row>
-            </template>
-            <template v-if="0">
-              <el-row>
-                <p class="welcome">欢迎回来，test！</p>
-              </el-row>
-            </template>
+          <div class="feature">
+            <span class="feature-detail">快速</span>
+            <span class="feature-detail">全面</span>
+            <span class="feature-detail">方便</span>
+            <span class="feature-detail-last">质量</span>
           </div>
-        </el-col>
-      </el-row>
-      <el-row class="no-margin-b">
-        <el-col :span="24">
-          <div class="grid-content">
-            <h1 class="index-floor-title">资讯</h1>
+          <div class="sign-up-main">
+            <router-link to="/SignUp">
+              <p class="index-sign-up2">报名入口&gt;&gt;</p>
+            </router-link>
+            <router-link to="/PesronalScoreSearch">
+              <p class="index-sign-up1">证书公示&gt;&gt;</p>
+            </router-link>
           </div>
-        </el-col>
-      </el-row>
-      <el-row class="pad20 bg-white">
-        <el-col :span="9">
-          <div class="grid-content">
-            <img
-              src="http://www.axfc.cn/uploads/20190111/eb61c398f043ff50bdedd937647ec513.png"
-              class="hot-news-img"
-            >
-            <swiper :options="swiperOption" ref="mySwiper">
-              <!-- slides -->
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-              <swiper-slide>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</swiper-slide>
-            </swiper>
+        </div>
+        <!-- <div class="login-self" @click="clickLogin">
+          <span class="el-icon-mobile-phone" ></span>
+          <span >登录/注册</span>
+        </div>-->
+      </div>
+
+      <div class="course-outline-body">
+        <div class="course-type">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content">
+                <h1 class="title-type">培训课程</h1>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="no-margin-b">
+            <div class="course-body">
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list1">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>工艺员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list2">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>质量员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
+                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list3">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>资料员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list4">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>深化员</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list5">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>灌浆工</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="index-course-list" id="index-course-list6">
+                  <router-link to="/course">
+                    <a href="javascript:;">
+                      <div class="index-course-img">
+                        <img src="../assets/inspection2.png" class="index-course-img1">
+                      </div>
+                      <div class="index-course-tit">
+                        <span>吊装工</span>
+                        <span>|</span>
+                        <router-link to="/SignUp">
+                          <span class="index-signup-but">点击报名</span>
+                        </router-link>
+                      </div>
+                      <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
+                      <div class="index-course-other">最近开课时间： 暂未开放</div>
+                    </a>
+                  </router-link>
+                </div>
+              </el-col>
+            </div>
+          </el-row>
+        </div>
+      </div>
+      <div class="base-list-outline-body">
+        <div class="base-list">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content">
+                <h1 class="title-type1">基地展示</h1>
+              </div>
+            </el-col>
+          </el-row>
+
+          <div class="base-body-list">
+            <el-row class="pad20 bg-white" id="index-base-background">
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list1">
+                      <img src="../assets/inspection1.jpg" class="index-base-img">
+
+                      <div class="index-base-name">灌浆区</div>
+                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list2">
+                      <img src="../assets/inspection2.png" class="index-base-img">
+
+                      <div class="index-base-name">质量员实训区</div>
+                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list3">
+                      <img src="../assets/inspection1.jpg" class="index-base-img">
+
+                      <div class="index-base-name">吊装实训区</div>
+                      <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <router-link to="/base">
+                  <a href="javascript:;">
+                    <div class="index-base-list" id="index-base-list4">
+                      <img src="../assets/inspection2.png" class="index-base-img">
+
+                      <div class="index-base-name">休息区</div>
+                      <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
+                    </div>
+                  </a>
+                </router-link>
+              </el-col>
+            </el-row>
           </div>
-        </el-col>
-        <el-col :span="15" class="index-news-list">
-          <div class="grid-content">
-            <el-tabs v-model="activeName" @tab-click="handleClick" stretch>
-              <el-tab-pane label="行业政策" name="first">
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-22</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-22</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-22</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-tab-pane>
-              <el-tab-pane label="地方动态" name="second">
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-26</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-tab-pane>
-              <el-tab-pane label="企业新闻" name="third">
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-24</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-tab-pane>
-              <el-tab-pane label="国际信息" name="fourth">
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div class="grid-content news-overview">
-                      <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                      <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                      <p>2019-2-23</p>
-                    </div>
-                  </el-col>
-                  <el-col :span="8">
-                    <div class="grid-content">
-                      <img
-                        src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                        class="full-width"
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-tab-pane>
-            </el-tabs>
+        </div>
+      </div>
+      <div class="contact-outline-body">
+        <div class="contact">
+          <el-row class="no-margin-b">
+            <el-col :span="24">
+              <div class="grid-content" id="contact">
+                <h1 class="title-type2">联系我们</h1>
+              </div>
+            </el-col>
+          </el-row>
+          <div class="index-contact">
+            <span class="contact-mobile">电话：0513-81055866</span>
+            <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
+            <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
           </div>
-        </el-col>
-      </el-row>
-      <el-row class="no-margin-b">
-        <el-col :span="24">
-          <div class="grid-content">
-            <h1 class="index-floor-title">基地展示</h1>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="pad20 bg-white">
-        <el-col :span="6" v-for="o in 4" :key="o" class="teacher-wall">
-          <el-card :body-style="{ padding: '0px' }">
-            <img src="http://element-cn.eleme.io/static/hamburger.50e4091.png" class="image">
-            <div style="padding: 14px;">
-              <span>好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡好吃的汉堡</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ currentDate }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
+          <div id="map"></div>
+        </div>
+      </div>
+      <div class="friend-url-outline-body">
+        <div class="friend-url">
+            <div class="friend-title">
+              <div class="friend-title-con">
+                <span>友情链接</span>
               </div>
             </div>
-          </el-card>
-        </el-col>
-      </el-row>
-      <el-row class="no-margin-b">
-        <el-col :span="24">
-          <div class="grid-content">
-            <h1 class="index-floor-title">师资力量</h1>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="pad20 bg-white">
-        <el-carousel :interval="4000" type="card" height="370px" width="650px" class="teacher-box">
-          <el-carousel-item v-for="(item,key) in teachers" :key="key">
-            <img :src="item" class="index-teacher-img">
-            <div class="title">TFBOYS成员、男歌手、舞者、演员</div>
-            <div class="name">易烊千玺</div>
-            <p class="detail">2005年首登电视荧屏，开始参演各类综艺节目</p>
-          </el-carousel-item>
-        </el-carousel>
-      </el-row>
-    </el-main>
-  </el-container>
+          <el-row class="no-margin-b">
+            <div class="index-friend">
+              
+                  <a href="http://www.zhongnangroup.cn" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
+                      alt
+                      class="friend-img"
+                    >
+                  </a>
+                
+                  <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
+                      alt
+                      class="friend-img"
+                    >
+                  </a>
+               
+                  <a href="http://www.tjprefab.com.cn" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
+                      alt
+                     class="friend-img"
+                    >
+                  </a>
+                
+                  <a href="http://www.ntadi.cc/index.html" target="_blank">
+                    <img
+                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
+                      alt
+                      class="friend-img-last"
+                    >
+                  </a>
+                
+            </div>
+          </el-row>
+        </div>
+      </div>
+    </div>
+    <div class="index-footer-outline-body">
+      <div class="index-footer">
+        <p>©2018-2019 智聚 版权所有</p>
+        <p class="index-mobile">联系电话： 18234211234</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import TopNav from "../components/TopNav";
 export default {
   data() {
     return {
+      dialogVisible: false,
+      regDialogVisible: false,
+      showDown: true,
       bannerLists: [
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
@@ -241,9 +330,7 @@ export default {
       ]
     };
   },
-  components: {
-    TopNav
-  },
+
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
@@ -251,8 +338,62 @@ export default {
   },
   mounted() {
     // this.swiper.slideTo(3, 1000, false);
+
+    this.initMap();
+    var that = this;
+    window.addEventListener("scroll", function() {
+      if (
+        document.documentElement.clientHeight +
+          document.documentElement.scrollTop >
+        880
+      ) {
+        that.showDown = false;
+        console.log(document.documentElement.clientHeight);
+        console.log(document.documentElement.scrollTop);
+      } else {
+        that.showDown = true;
+      }
+    });
   },
   methods: {
+    scrollAnimation(currentY, targetY) {
+      // 获取当前位置方法
+      // const currentY = document.documentElement.scrollTop || document.body.scrollTop
+
+      // 计算需要移动的距离
+      let needScrollTop = targetY - currentY;
+      let _currentY = currentY;
+      setTimeout(() => {
+        // 一次调用滑动帧数，每次调用会不一样
+        const dist = Math.ceil(needScrollTop / 10);
+        _currentY += dist;
+        window.scrollTo(_currentY, currentY);
+        // 如果移动幅度小于十个像素，直接移动，否则递归调用，实现动画效果
+        if (needScrollTop > 10 || needScrollTop < -10) {
+          this.scrollAnimation(_currentY, targetY);
+        } else {
+          window.scrollTo(_currentY, targetY);
+        }
+      }, 1);
+    },
+    initMap() {
+      var map = new BMap.Map("map");
+      var point = new BMap.Point(120.9622853521, 31.9312175342);
+      map.centerAndZoom(point, 17);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker);
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+      //添加地图类型控件
+      map.addControl(
+        new BMap.MapTypeControl({
+          mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+        })
+      );
+      map.addControl(new BMap.NavigationControl());
+
+      map.setCurrentCity("南通市"); // 设置地图显示的城市 此项是必须设置的
+      // map.enableScrollWheelZoom(true);
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     }
@@ -264,8 +405,6 @@ export default {
 <style scoped>
 .el-main {
   color: #333;
-  text-align: center;
-  padding-top: 60px;
 }
 
 body > .el-container {
@@ -281,7 +420,8 @@ body > .el-container {
 
 .grid-content {
   border-radius: 4px;
-  background: #fff;
+
+  margin: 10px 0px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -300,7 +440,7 @@ body > .el-container {
 }
 .login-btn {
   width: 80%;
-  margin-top: 100px;
+  margin: 25px 25px 0px 25px;
 }
 
 .welcome {
@@ -408,9 +548,9 @@ body > .el-container {
   margin: 0;
 }
 
-.el-carousel__item {
+.teacher-box .el-carousel__item {
   background-color: #fff;
-  box-shadow:10px 10px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 10px 10px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
@@ -458,6 +598,459 @@ body > .el-container {
   color: #bbb;
   font-size: 14px;
   text-align: left;
+}
+.el-main {
+  width: 1240px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 80px auto 0px auto;
+}
+
+.index-sign-up1 {
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #0a6998;
+  font-size: 20px;
+  border: 1px solid #0a6998;
+  border-radius: 25px;
+  display: block;
+
+  cursor: pointer;
+  background: #fff;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1;
+  margin:40px 0px 0px 0px;
+}
+
+.index-sign-up1:hover {
+  background: #0a6998;
+  color: #fff;
+}
+
+.index-sign-up2 {
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #0a6998;
+  font-size: 20px;
+  border: 1px solid #0a6998;
+  border-radius: 25px;
+  display: block;
+
+  cursor: pointer;
+  background: #fff;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.index-sign-up2:hover {
+  background: #0a6998;
+  color: #fff;
+}
+
+.el-carousel {
+  z-index: 0;
+}
+#index-carousel {
+  margin: -50px 0px 0px 0px;
+}
+.sign-up-main {
+  height: 115px;
+  margin: 70px 0px 0px 0px;
+  padding: 0px 73px;
+}
+.login-welcome {
+  height: 115px;
+}
+.index-login-signup {
+  margin: -50px 0px 0px 0px;
+}
+
+.signip-con {
+  color: #aaa;
+  font-size: 13px;
+  position: relative;
+  top: 50px;
+}
+.index-course-list {
+  display: inline-block;
+  padding: 12px;
+  margin-right: 24px;
+  width: 340px;
+  height: 140px;
+  font-size: 0;
+  vertical-align: top;
+  margin-bottom: 4px;
+}
+
+.index-course-img {
+  float: left;
+
+  height: 80px;
+  width: 80px;
+  font-size: 0;
+  margin: 15px 20px 0px 0px;
+}
+.index-course-img1 {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.index-course-tit {
+  position: relative;
+  margin: 7px 0px 10px 0px;
+  font-size: 14px;
+  line-height: 19px;
+  color: #333;
+  text-align: left;
+}
+.index-course-content {
+  position: relative;
+  margin: 0px 0px 10px 100px;
+  font-size: 16px;
+  line-height: 24px;
+  word-break: break-all;
+  color: #333;
+  width: 220px;
+  text-align: left;
+}
+.index-course-other {
+  position: relative;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0px 0px 0px 100px;
+  text-align: left;
+}
+.index-signup-but {
+  color: #49af4f;
+  cursor: pointer;
+}
+.index-register {
+  text-align: center;
+}
+#index-course-list1,
+#index-course-list2,
+#index-course-list3,
+#index-course-list4,
+#index-course-list5,
+#index-course-list6 {
+  border: 1px solid #fff;
+}
+.index-base-img {
+  display: block;
+  width: 280px;
+  height: 200px;
+  transition: all ease-in-out 0.5s;
+}
+.index-base-con {
+  width: 180px;
+  font-size: 14px;
+  color: #888;
+  line-height: 22px;
+  margin: 10px auto;
+  height: 62px;
+  text-align: center;
+}
+.index-base-name {
+  font-size: 16px;
+  color: #333333;
+  margin: 20px 0px 10px 0px;
+  height: 31px;
+  text-align: center;
+}
+.index-base-list {
+  width: 280px;
+  height: 350px;
+  background: #fff;
+  box-shadow: 0 0 2px #c7c5c5;
+  overflow: hidden;
+}
+#index-base-background {
+  padding: 0px 0px 0px 20px;
+  background: #1d2939;
+}
+.index-base-more {
+  margin: 0px 50px 0px 0px;
+  float: right;
+  color: #666;
+  font-size: 14px;
+  line-height: 31px;
+}
+.index-base-more:hover {
+  color: #0a6995;
+  font-weight: bold;
+}
+.index-friend {
+  margin: 20px 0px 0px 0px;
+}
+
+.friend-img {
+  
+ height: 80px;
+  width: 286px;
+  border: solid 1px #eee;
+  margin: 0px 20px 0px 0px;
+}
+.friend-img-last {
+  
+ height: 80px;
+  width: 286px;
+  border: solid 1px #eee;
+  
+}
+
+.index-footer {
+  width: 1220px;
+  height: 150px;
+  background: #242e68;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 50px 0px 0px 0px;
+  margin: 0px auto;
+}
+.index-footer-outline-body {
+  background: #242e68;
+}
+.index-mobile {
+  margin: 10px 0px 0px 0px;
+}
+.index-course-list:hover {
+  box-shadow: 0 0 2px #c7c5c5;
+}
+.index-base-list:hover {
+  box-shadow: 0 0 8px #c7c5c5;
+}
+.index-base-list:hover .index-base-img {
+  transform: scale(1.04);
+}
+.company-show {
+  height: 810px;
+
+  width: 100%;
+
+  background: url(../assets/company.jpg) no-repeat;
+  background-size: 100% 810px;
+}
+
+.login-sign {
+  float: right;
+  background: rgba(255, 255, 255, 0.6);
+  height: 810px;
+  width: 360px;
+  padding: 0px 20px;
+  margin: 0px 200px 0px 0px;
+}
+.logo {
+  padding: 240px 0px 20px 0px;
+  text-align: center;
+}
+.logo-words {
+  font-size: 32px;
+  font-weight: 700;
+  color: #343a40;
+  text-shadow: 5px 5px 10px #c7c5c5;
+}
+.logo img {
+  width: 40px;
+  padding: 0px 0px 10px 0px;
+  margin: 0px 5px 0px 0px;
+}
+.feature-detail {
+  padding: 0px 25px 0px 0px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.feature-detail-last {
+  font-size: 16px;
+  font-weight: 600;
+}
+.feature {
+  text-align: center;
+  margin: 20px 0px;
+}
+.login {
+  padding: 0px 20px;
+}
+
+.el-icon-mobile-phone {
+  margin: 0px 5px 0px 0px;
+}
+.course-type {
+  width: 1220px;
+  height: 500px;
+  background: #fff;
+  padding: 50px 0px 0px 0px;
+  margin: 0px auto;
+}
+.course-outline-body {
+  background: #fff;
+}
+
+.grid-content {
+  text-align: center;
+}
+.title-type h1 {
+  font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+}
+.title-type1 {
+  font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+}
+.title-type2 h1 {
+  font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+}
+.course-body {
+  margin: 20px 0px 0px 0px;
+  text-align: center;
+}
+.base-list {
+  width: 1220px;
+  height: 620px;
+  background: #1d2939;
+  padding: 50px 0px 0px 0px;
+  margin: 0px auto;
+  text-align: center;
+}
+.base-list-outline-body {
+  background: #1d2939;
+}
+.base-body-list {
+  margin: 50px 0px 50px 0px;
+}
+.friend-url {
+  background: #fff;
+  padding: 80px 0px 20px 0px;
+  width: 1220px;
+  margin: 0px auto;
+  text-align: center;
+}
+.friend-url-outline-body {
+  background: #fff;
+}
+#map {
+  height: 450px;
+}
+.contact {
+  background: #fff;
+
+  width: 1220px;
+  margin: 0px auto;
+}
+.contact-outline-body {
+  background: #fff;
+}
+#contact {
+  margin: 50px 0px;
+}
+.contact-mobile {
+  margin: 0px 30px 0px 0px;
+}
+.contact-mail {
+  margin: 0px 30px 0px 0px;
+}
+.index-contact {
+  margin: 0px 0px 20px 0px;
+  
+}
+.friend-title {
+  width:100%;
+  background: #f4f4f4;
+  border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+}
+.friend-title-con {
+  width:100px;
+  background: #409eff;
+  padding:10px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+  font-size: 16px;
+  color:#fff;
+}
+.friend-title-con>span {
+  font-weight: bold;
+}
+.more {
+  cursor: pointer;
+  margin: 0px 50%;
+  float: left;
+  font-size: 50px;
+  font-weight: 900;
+  color: #fff;
+  position: fixed;
+  animation: myfirst 2s;
+  -moz-animation: myfirst 2s; /* Firefox */
+  -webkit-animation: myfirst 2s; /* Safari and Chrome */
+  -o-animation: myfirst 2s; /* Opera */
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes myfirst {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+@-moz-keyframes myfirst /* Firefox */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+@-o-keyframes myfirst /* Opera */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
 }
 </style>
 
