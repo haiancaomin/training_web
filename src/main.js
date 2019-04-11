@@ -12,6 +12,7 @@ import router from './router'
 import axios from 'axios' //引入axios
 
 Vue.prototype.$ajax=axios
+Vue.prototype.baseURL = process.env.API_ROOT
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);

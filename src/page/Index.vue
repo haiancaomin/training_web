@@ -360,7 +360,7 @@ export default {
     this.$ajax({
       method: 'get',
       
-      url: 'http://192.168.1.153:8080/zjsxpt/login_Login.do?name=hcc&password=123',
+      url: this.baseURL+'/zjsxpt/login_Login.do?name=hcc&password=123',
     }).then(response=>{
       let _data=response.data;
       console.log(_data.data.name);
