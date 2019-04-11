@@ -357,17 +357,7 @@ export default {
 
 
 
-    this.$ajax({
-      method: 'get',
-      
-      url: this.baseURL+'/zjsxpt/login_Login.do?name=hcc&password=123',
-    }).then(response=>{
-      let _data=response.data;
-      console.log(_data.data.name);
-      alert("hello," + _data);
-    }).catch(function(err){
-        console.log(err)
-    })
+    
 
   },
   methods: {
