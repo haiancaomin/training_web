@@ -1,6 +1,12 @@
 <template>
   <div>
-    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
+    <user-login
+      :dialogVisible="dialogVisible"
+      v-on:closed="closeDialog"
+      v-on:goToReg="goToRegist"
+      v-on:logSuccess="logOK"
+      
+    ></user-login>
     <user-register
       :regDialogVisible="regDialogVisible"
       v-on:regclosed="closeRegDialog"
@@ -13,9 +19,13 @@
           <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
-      <div class="login-self" @click="clickLogin">
+      <div class="login-self" @click="clickLogin" v-if="!showUser">
         <span class="el-icon-mobile-phone"></span>
         <span>登录/注册</span>
+      </div>
+      <div class="login-self" v-if="showUser">
+        欢迎回来，
+        <span>{{userName}}</span>
       </div>
 
       <el-menu
@@ -98,7 +108,9 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      regDialogVisible: false
+      regDialogVisible: false,
+      userName: "",
+      showUser: false
     };
   },
   components: {
@@ -128,6 +140,11 @@ export default {
     },
     goToLogin: function(msg) {
       this.dialogVisible = msg;
+    },
+    logOK: function(msg) {
+      this.showUser = msg.showUser;
+      this.userName = msg.user;
+      console.log(msg)
     }
   }
 };

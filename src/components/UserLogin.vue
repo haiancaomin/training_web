@@ -31,6 +31,7 @@
         <span class="el-icon-arrow-right"></span>
       </a>
     </el-dialog>
+    
   </div>
 </template>
 
@@ -89,10 +90,15 @@ export default {
         if (valid) {
           this.$ajax({
             method: "get",
-            url: `${this.baseURL}/zjsxpt/login_Login.do?name=${this.ruleForm.name}&password=${this.ruleForm.password}`
+            url: `${this.baseURL}/zjsxpt/login_Login.do?name=${
+              this.ruleForm.name
+            }&password=${this.ruleForm.password}`
           })
             .then(res => {
-              console.log(res)             
+              this.$message('登陆成功')
+              this.logshow=false
+              this.$emit("logSuccess", {showUser:true,user:res.data.data.name});
+              console.log(res);
             })
             .catch(function(err) {
               console.log(err);
