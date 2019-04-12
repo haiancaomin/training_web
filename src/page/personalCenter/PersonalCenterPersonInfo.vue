@@ -7,28 +7,35 @@
         <el-breadcrumb-item>人员信息</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-input placeholder="输入关键字搜索" id="searchInput"/>
 
-    <el-table :data="tableData" border height="450" style="width: 700px">
-      <el-table-column prop="id" label="序号" width="50"></el-table-column>
-      <el-table-column prop="date" label="录入时间" sortable width="110"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="80"></el-table-column>
+    <el-form :model="ruleForm" ref="ruleForm">
+      <el-form-item prop="keyWord">
+        <el-input placeholder="输入关键字搜索" id="searchInput" v-model="searchKey"/>
+        <el-button type="primary" class="search-btn" @click="submitForm('ruleForm')">搜索</el-button>
+      </el-form-item>
+      
+        
+      
+    </el-form>
+
+
+    <el-table :data="tableData" border max-height="450" style="width: 700px">
+      <el-table-column  label="序号" type="index" width="50"></el-table-column>
+      <el-table-column prop="create_date" label="录入时间" sortable width="110"></el-table-column>
+      <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
       <el-table-column prop="sex" label="性别" width="50"></el-table-column>
       <el-table-column prop="age" label="年龄" width="50"></el-table-column>
       <el-table-column prop="worktype" label="工种" width="80"></el-table-column>
-      <el-table-column prop="idcard" label="身份证号" width="180"></el-table-column>
-      <el-table-column prop="mobile" label="手机" width="120"></el-table-column>
-      <el-table-column prop="workspace" label="工作地" width="120"></el-table-column>
-      <el-table-column prop="testID" label="考试编号" width="120"></el-table-column>
-      <el-table-column
-      fixed="right"
-      label="操作"
-      width="100">
-      <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-      </template>
-    </el-table-column>
+      <el-table-column prop="cardno" label="身份证号" width="180"></el-table-column>
+      <el-table-column prop="phone" label="手机" width="120"></el-table-column>
+      <el-table-column prop="address" label="工作地" width="120"></el-table-column>
+      <el-table-column prop="examno" label="考试编号" width="120"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="100">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+          <el-button type="text" size="small">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -38,133 +45,40 @@ export default {
   name: "PersonalCenterPersonInfo",
   data() {
     return {
-      tableData: [
-        {
-          id: "1",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "2",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "3",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "4",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "5",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "6",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "7",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "8",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "9",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-        {
-          id: "10",
-          date: "2019-04-01",
-          name: "诸葛孔明",
-          sex: "男",
-          age: "24",
-          worktype: "资料员",
-          idcard: "320876789876567876",
-          mobile: "87678765678",
-          workspace: "江苏省南通市",
-          testID: "1313131312"
-        },
-      ]
+      tableDataLength:0,
+      searchKey: "",
+      ruleForm: {
+        keyWord: ""
+      },
+      tableData: [{}]
     };
   },
   methods: {
     handleClick(row) {
       console.log(row);
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$ajax({
+            method: "post",
+            url: `${this.baseURL}/zjsxpt/employee_findEmployeeList.do?keyword=${this.searchKey}&userid=6DF675A0-3C50-4257-8E44-8A5E9FBB31EB`
+            // ${this.ruleForm.keyWord}
+          })
+            .then(res => {
+              
+              this.tableData = res.data.data;
+              // this.tableDataLength = this.tableData.length
+              console.log(this.tableData.length);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     }
   }
 };
@@ -199,9 +113,11 @@ export default {
 }
 .el-input {
   width: 250px;
-  margin: 0px 0px 0px 470px;
+  margin: 0px 0px 0px 395px;
 }
-
+.search-btn {
+  margin: 0px 0px 0px 0px;
+}
 </style>
 
 
