@@ -24,13 +24,13 @@
           </div>
         </el-form-item>
 
-        <el-form-item prop="password">
-          <el-input :type="inputType" placeholder="请再次输入密码" v-model="ruleForm.password">
+        <el-form-item prop="password2">
+          <el-input :type="inputType2" placeholder="请再次输入密码" v-model="ruleForm.password2">
             <i slot="prefix" class="iconfont pwd-lock">&#xe62b;</i>
           </el-input>
-          <div class="input-icon" @click="changeType">
-            <i class="el-icon-view" v-if="showNewPassword"></i>
-            <i class="iconfont" v-if="!showNewPassword">&#xe723;</i>
+          <div class="input-icon" @click="changeType2">
+            <i class="el-icon-view" v-if="showNewPassword2"></i>
+            <i class="iconfont" v-if="!showNewPassword2">&#xe723;</i>
           </div>
         </el-form-item>
 
@@ -40,7 +40,7 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="code" id="regVerification">
-          <el-input placeholder="请输入短信新密码" id="identifying"></el-input>
+          <el-input placeholder="请输入短信新密码" id="identifying" v-model="ruleForm.code"></el-input>
           <el-button type="primary" plain class="get-button-con" v-if="show" @click="getCode">获取验证码</el-button>
           <el-button
             type="primary"
@@ -70,30 +70,61 @@
 <script>
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value !== this.ruleForm.password) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
     return {
       showNewPassword: false,
+      showNewPassword2: false,
       inputType: "password",
+      inputType2: "password",
       iconColor: "",
       show: true,
       count: "",
       regshow: false,
       ruleForm: {
         name: "",
-        password:'',
-        password2:'',
-        phone:'',
-        code:''
+        password: "",
+        password2: "",
+        phone: "",
+        code: ""
       },
       rules: {
         name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入身份证号码", trigger: "blur" },
-          { min: 18, max: 18, message: "请输入18位身份证号码", trigger: "blur" }
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            pattern: /^(\w){6,12}$/,
+            message: "只能输入6-12个字母、数字、下划线",
+            trigger: "blur"
+          }
         ],
-        
+        password2: [
+          { required: true, message: "请再次输入密码", trigger: "blur" },
+          {
+            validator: validatePass,
+            trigger: "blur"
+          }
+        ],
+        phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          {
+            message: "请输入正确的手机号",
+            pattern: /^1[34578]\d{9}$/,
+            trigger: "blur"
+          }
+        ],
+        code: [
+          { required: true, message: "请输入短信验证码", trigger: "blur" },
+          { min: 6, max: 6, message: "验证码错误", trigger: "blur" }
+        ]
       }
     };
   },
@@ -113,6 +144,15 @@ export default {
         this.inputType = "text";
         this.showNewPassword = true;
         console.log(this.inputType);
+      }
+    },
+    changeType2() {
+      if (this.inputType2 == "text") {
+        this.inputType2 = "password";
+        this.showNewPassword2 = false;
+      } else {
+        this.inputType2 = "text";
+        this.showNewPassword2 = true;
       }
     },
     getCode() {
