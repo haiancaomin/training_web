@@ -13,14 +13,10 @@
         <el-input placeholder="输入关键字搜索" id="searchInput" v-model="searchKey"/>
         <el-button type="primary" class="search-btn" @click="submitForm('ruleForm')">搜索</el-button>
       </el-form-item>
-      
-        
-      
     </el-form>
 
-
     <el-table :data="tableData" border max-height="450" style="width: 700px">
-      <el-table-column  label="序号" type="index" width="50"></el-table-column>
+      <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="110"></el-table-column>
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
       <el-table-column prop="sex" label="性别" width="50"></el-table-column>
@@ -45,7 +41,7 @@ export default {
   name: "PersonalCenterPersonInfo",
   data() {
     return {
-      tableDataLength:0,
+      tableDataLength: 0,
       searchKey: "",
       ruleForm: {
         keyWord: ""
@@ -58,18 +54,21 @@ export default {
       console.log(row);
     },
     submitForm(formName) {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.name;
+      }
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$ajax({
             method: "post",
-            url: `${this.baseURL}/zjsxpt/employee_findEmployeeList.do?keyword=${this.searchKey}&userid=6DF675A0-3C50-4257-8E44-8A5E9FBB31EB`
-            // ${this.ruleForm.keyWord}
+            url: `${this.baseURL}/zjsxpt/employee_findEmployeeList.do?keyword=${
+              this.searchKey
+            }&userid=${userid}`
           })
             .then(res => {
-              
               this.tableData = res.data.data;
-              // this.tableDataLength = this.tableData.length
-              console.log(this.tableData.length);
+              console.log("success");
             })
             .catch(function(err) {
               console.log(err);
@@ -80,6 +79,25 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    var userInfo = JSON.parse(sessionStorage.getItem("user"));
+    if (userInfo) {
+      var userid = userInfo.name;
+    }
+    this.$ajax({
+      method: "post",
+      url: `${
+        this.baseURL
+      }/zjsxpt/employee_findEmployeeList.do?keyword=&userid=${userid}`
+    })
+      .then(res => {
+        this.tableData = res.data.data;
+        console.log("success");
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 };
 </script>

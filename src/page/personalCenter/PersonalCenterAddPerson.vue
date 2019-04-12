@@ -151,6 +151,10 @@ export default {
         this.batchAdd=true;
     },
     submitForm(formName) {
+       var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.name;
+      }
       var sex= 0;
       if (this.ruleForm.sex == '男') {
         sex= 0
@@ -162,9 +166,14 @@ export default {
         if (valid) {
           this.$ajax({
             method: "post",
-            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=6DF675A0-3C50-4257-8E44-8A5E9FBB31EB`
+            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=${userid}`
           })
             .then(res => {
+              this.$message({
+                message: "添加成功！",
+                center:true
+              });
+              this.ruleForm = {};
               console.log(res)             
             })
             .catch(function(err) {
