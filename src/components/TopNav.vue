@@ -1,6 +1,11 @@
 <template>
   <div>
-    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist" v-on:logSuccess='logOK'></user-login>
+    <user-login
+      :dialogVisible="dialogVisible"
+      v-on:closed="closeDialog"
+      v-on:goToReg="goToRegist"
+      v-on:logSuccess="logOK"
+    ></user-login>
     <user-register
       :regDialogVisible="regDialogVisible"
       v-on:regclosed="closeRegDialog"
