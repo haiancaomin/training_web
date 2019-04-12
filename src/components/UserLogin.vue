@@ -95,10 +95,13 @@ export default {
             }&password=${this.ruleForm.password}`
           })
             .then(res => {
-              this.$message('登陆成功')
+              this.$message({
+                message: "登录成功！",
+                center:true
+              });
+              sessionStorage.setItem('user',JSON.stringify(res.data.data))
               this.logshow=false
               this.$emit("logSuccess", {showUser:true,user:res.data.data.name});
-              console.log(res);
             })
             .catch(function(err) {
               console.log(err);
