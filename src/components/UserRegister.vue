@@ -41,7 +41,13 @@
         </el-form-item>
         <el-form-item prop="code" id="regVerification">
           <el-input placeholder="请输入短信新密码" id="identifying" v-model="ruleForm.code"></el-input>
-          <el-button type="primary" plain class="get-button-con" v-if="show" @click="getCode">获取验证码</el-button>
+          <el-button
+            type="primary"
+            plain
+            class="get-button-con"
+            v-if="show"
+            @click="getCode('ruleForm')"
+          >获取验证码</el-button>
           <el-button
             type="primary"
             plain
@@ -155,21 +161,39 @@ export default {
         this.showNewPassword2 = true;
       }
     },
-    getCode() {
-      const TIME_COUNT = 60;
-      if (!this.timer) {
-        this.count = TIME_COUNT;
-        this.show = false;
-        this.timer = setInterval(() => {
-          if (this.count > 0 && this.count <= TIME_COUNT) {
-            this.count--;
-          } else {
-            this.show = true;
-            clearInterval(this.timer);
-            this.timer = null;
-          }
-        }, 1000);
-      }
+    getCode(formName) {
+      this.$refs[formName].validateField("phone", error => {
+        if (!error) {
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/login_sendMessage.do?phone=${
+              this.ruleForm.phone
+            }`
+          })
+            .then(res => {
+              console.log(res);
+              const TIME_COUNT = 60;
+              if (!this.timer) {
+                this.count = TIME_COUNT;
+                this.show = false;
+                this.timer = setInterval(() => {
+                  if (this.count > 0 && this.count <= TIME_COUNT) {
+                    this.count--;
+                  } else {
+                    this.show = true;
+                    clearInterval(this.timer);
+                    this.timer = null;
+                  }
+                }, 1000);
+              }
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          return false;
+        }
+      });
     },
     closeDialog: function() {
       this.$emit("regclosed", false);
@@ -181,7 +205,29 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/login_register.do?name=${
+              this.ruleForm.name
+            }&password=${this.ruleForm.password}&phone=${
+              this.ruleForm.phone
+            }&code=${this.ruleForm.code}`
+          })
+            .then(res => {
+              var that=this
+              this.$message({
+                message: "注册成功！",
+                center:true,
+                onClose: function() {
+                  that.regshow = false;
+                  that.go();
+                }
+              });
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         } else {
           console.log("error submit!!");
           return false;
