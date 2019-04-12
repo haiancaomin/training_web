@@ -20,45 +20,56 @@
       :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
-      label-width="100px"
+      
       class="demo-ruleForm"
     >
-      <el-form-item label="姓名" prop="empname">
-        <el-input v-model="ruleForm.empname"></el-input>
+      <el-form-item prop="empname">
+        <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconName">&#xe75f;</i>
+        </el-input>
       </el-form-item>
 
-     
+      <el-form-item prop="sex">
+     <el-select v-model="ruleForm.sex" placeholder="请选择性别" class="person-add-select">
+      <el-option label="男" value="0"></el-option>
+      <el-option label="女" value="1"></el-option>
+      <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
+    </el-select>
+ </el-form-item>
 
-      <el-form-item label="性别" prop="sex">
-        <el-radio-group v-model="ruleForm.sex">
-          <el-radio label="男"></el-radio>
-          <el-radio label="女"></el-radio>
-        </el-radio-group>
+       <el-form-item  prop="age">
+        <el-input v-model.number="ruleForm.age" placeholder="请输入年龄" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="年龄" prop="age">
-        <el-input v-model.number="ruleForm.age"></el-input>
+       <el-form-item  prop="worktype" >
+        <el-input v-model="ruleForm.worktype" placeholder="请输入工种" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconWorktype">&#xe626;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="工种" prop="worktype" >
-        <el-input v-model="ruleForm.worktype"></el-input>
+       <el-form-item  prop="cardno" >
+        <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="身份证号" prop="cardno" >
-        <el-input v-model="ruleForm.cardno"></el-input>
+       <el-form-item  prop="phone">
+        <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconPhone">&#xe61d;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="手机号码" prop="phone">
-        <el-input v-model="ruleForm.phone"></el-input>
-      </el-form-item>
-
-       <el-form-item label="工作地" prop="address" >
-        <el-input v-model="ruleForm.address"></el-input>
+       <el-form-item  prop="address" >
+        <el-input v-model="ruleForm.address" placeholder="请输入工作地" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
+        </el-input>
       </el-form-item>
 
       <el-form-item>
         <div class="worker-add">
-          <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" class="login-self">添&nbsp;&nbsp;&nbsp;&nbsp;加</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -151,22 +162,17 @@ export default {
         this.batchAdd=true;
     },
     submitForm(formName) {
+      alert(this.ruleForm.sex);
        var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.name;
-      }
-      var sex= 0;
-      if (this.ruleForm.sex == '男') {
-        sex= 0
-      } else if (this.ruleForm.sex == '女') {
-        sex= 1
       }
        console.log("1");
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$ajax({
             method: "post",
-            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=${userid}`
+            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${this.ruleForm.sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=${userid}`
           })
             .then(res => {
               this.$message({
@@ -230,11 +236,13 @@ export default {
   float: right;
   margin: -100px 0px 0px 0px;
 }
-.el-input {
-  width: 220px;
+.el-input, .el-select {
+  width: 358px;
 }
+
 .el-form {
-  margin: 50px 0px 0px 180px;
+  margin: 30px 0px 0px 0px;
+  text-align: center;
 }
 .crumb {
   padding: 10px 0px 10px 0px;
@@ -251,7 +259,7 @@ export default {
 }
 .worker-add {
   text-align: center;
-  margin: 0px 250px 0px 0px;
+  
 }
 .add-head {
   margin: 0px 0px 0px 20px;
@@ -275,6 +283,41 @@ export default {
   margin:0px 0px 20px 0px;
   text-align: center;
 }
+#iconAge,#iconWorktype,#iconName,#iconCardno,#iconPhone,#iconAddress,#iconSex {
+  margin: 0px 0px 0px 2px;
+  line-height: 44px;
+}
+.login-self {
+  width: 358px;
+  font-size: 18px;
+  height: 44px;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_uv81vozq3es.eot');
+  src: url('//at.alicdn.com/t/font_1131189_uv81vozq3es.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 18px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+<style>
+  .person-add-input .el-input__inner {
+  height: 44px;
+}
+.person-add-select .el-input__inner {
+  height: 44px;
+}
+</style>
 </style>
 
 
