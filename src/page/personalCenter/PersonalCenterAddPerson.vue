@@ -23,37 +23,37 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+      <el-form-item label="姓名" prop="empname">
+        <el-input v-model="ruleForm.empname"></el-input>
       </el-form-item>
 
      
 
-      <el-form-item label="性别" prop="resource">
-        <el-radio-group v-model="ruleForm.resource">
+      <el-form-item label="性别" prop="sex">
+        <el-radio-group v-model="ruleForm.sex">
           <el-radio label="男"></el-radio>
           <el-radio label="女"></el-radio>
         </el-radio-group>
       </el-form-item>
 
-       <el-form-item label="年龄" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item label="年龄" prop="age">
+        <el-input v-model.number="ruleForm.age"></el-input>
       </el-form-item>
 
-       <el-form-item label="工种" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item label="工种" prop="worktype" >
+        <el-input v-model="ruleForm.worktype"></el-input>
       </el-form-item>
 
-       <el-form-item label="身份证号" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item label="身份证号" prop="cardno" >
+        <el-input v-model="ruleForm.cardno"></el-input>
       </el-form-item>
 
-       <el-form-item label="手机号码" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item label="手机号码" prop="phone">
+        <el-input v-model="ruleForm.phone"></el-input>
       </el-form-item>
 
-       <el-form-item label="工作地" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item label="工作地" prop="address" >
+        <el-input v-model="ruleForm.address"></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -93,66 +93,51 @@ export default {
       oneAdd:true,
         batchAdd: false,
       ruleForm: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-        // name: "",
-        // identification:"",
-        // sex: "",
-        // birthday: "",
-        native: ""
-        // workspace:"",
-        // education:"",
-        // school:"",
-        // position:"",
-        // workType:"",
-        // mobile:"",
-        // mail:"",
-        // company:"",
-        // qualification:""
+        empname: "",
+        sex: "",
+        age: "",
+        worktype: "",
+        cardno: "",
+        phone: "",
+        address: "",
       },
       rules: {
         
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        empname: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 5, message: "长度在 2 到 5个字符", trigger: "blur" }
         ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ],
-        date1: [
+       sex: [
+          { required: true, message: "请选择性别", trigger: "blur" },
+       ],
+       age: [
+          { required: true, message: '年龄不能为空' , trigger: "blur"},
+          { type: 'number', message: '年龄必须为数字值'}  
+       ],
+       worktype: [
+          { required: true, message: "请输入工种", trigger: "blur" },
+          { min: 1, max: 5, message: "长度在 1 到 5个字符", trigger: "blur" }
+       ],
+       cardno: [
+         { required: true, message: "请输入身份证号", trigger: "blur" },
           {
-            type: "date",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
+            message: "请输入正确的身份证号",
+            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+            trigger: "blur"
           }
-        ],
-        date2: [
+       ],
+       phone: [
+         { required: true, message: "请输入手机号", trigger: "blur" },
           {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change"
+            message: "请输入正确的手机号",
+            pattern: /^1[34578]\d{9}$/,
+            trigger: "blur"
           }
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change"
-          }
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" }
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }]
+       ],
+       address: [
+         { required: true, message: "请输入工作地", trigger: "blur" },
+          { min: 1, max: 20, message: "长度在 1 到 20个字符", trigger: "blur" }
+       ]
       }
     };
   },
@@ -166,21 +151,18 @@ export default {
         this.batchAdd=true;
     },
     submitForm(formName) {
+      var sex= 0;
+      if (this.ruleForm.sex == '男') {
+        sex= 0
+      } else if (this.ruleForm.sex == '女') {
+        sex= 1
+      }
        console.log("1");
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$ajax({
             method: "post",
-            data: {
-              employee:{empname:"xi",
-              sex:"0",
-              age:"20",
-              worktype:"资料员",
-              cardno:"320683199209201234",
-              phone:"18752901234",
-              address:"江苏南通"}
-            },
-            url: this.baseURL + "/zjsxpt/employee_saveEmployee.do"
+            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=6DF675A0-3C50-4257-8E44-8A5E9FBB31EB`
           })
             .then(res => {
               console.log(res)             
