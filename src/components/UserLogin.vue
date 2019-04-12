@@ -1,7 +1,7 @@
 <template>
   <div class="User-Login">
     <el-dialog title="账号登录" :visible.sync="logshow" width="500px" @closed="closeDialog">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" id="loginForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
           <el-input placeholder="请输入用户名" v-model="ruleForm.name">
             <i slot="prefix" class="iconfont">&#xe75f;</i>
