@@ -15,7 +15,7 @@
         <el-button type="success" @click="addBatch">批量添加</el-button>
     </div>
 
-    <div v-if="oneAdd">
+    <div v-if="oneAdd" class="form-body">
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -259,7 +259,6 @@ export default {
 }
 .worker-add {
   text-align: center;
-  
 }
 .add-head {
   margin: 0px 0px 0px 20px;
@@ -291,6 +290,10 @@ export default {
   width: 358px;
   font-size: 18px;
   height: 44px;
+}
+.form-body {
+  width: 358px;
+  margin:0px auto;
 }
 @font-face {
   font-family: 'iconfont';  /* project id 1131189 */
