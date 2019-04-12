@@ -58,7 +58,7 @@
 
       <el-form-item>
         <div class="worker-add">
-          <el-button type="primary">添加</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -79,7 +79,7 @@
 </el-upload>
       </div>
       <div class="batch-submit">
-        <el-button type="primary">添加</el-button>
+        <el-button type="primary" >添加</el-button>
       </div>
     </div>
   </div>
@@ -164,6 +164,37 @@ export default {
     addBatch() {
       this.oneAdd=false;
         this.batchAdd=true;
+    },
+    submitForm(formName) {
+       console.log("1");
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$ajax({
+            method: "post",
+            data: {
+              employee:{empname:"xi",
+              sex:"0",
+              age:"20",
+              worktype:"资料员",
+              cardno:"320683199209201234",
+              phone:"18752901234",
+              address:"江苏南通"}
+            },
+            url: this.baseURL + "/zjsxpt/employee_saveEmployee.do"
+          })
+            .then(res => {
+              console.log(res)             
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+      console.log("2");
     }
   }
 };
