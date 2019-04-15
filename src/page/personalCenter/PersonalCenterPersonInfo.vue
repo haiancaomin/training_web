@@ -1,5 +1,6 @@
 <template>
   <div id="PersonalCenterPersonInfo">
+
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
@@ -15,11 +16,18 @@
       </el-form-item>
     </el-form>
 
+    
+
     <el-table :data="tableData" border max-height="450" style="width: 700px">
       <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="110"></el-table-column>
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="50"></el-table-column>
+      <el-table-column prop="sex" label="性别" width="50">
+        <template slot-scope="scope">
+                <i v-if="scope.row.sex==0">男</i>
+                <i v-else>女</i>
+            </template>
+      </el-table-column>
       <el-table-column prop="age" label="年龄" width="50"></el-table-column>
       <el-table-column prop="worktype" label="工种" width="80"></el-table-column>
       <el-table-column prop="cardno" label="身份证号" width="180"></el-table-column>
@@ -29,7 +37,7 @@
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" prop="empid" @click="deletePerson(scope.row.empid)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -50,8 +58,45 @@ export default {
     };
   },
   methods: {
+    deletePerson(empid) {
+     
+      this.$ajax({
+            method: "post",      
+            url: `${this.baseURL}/zjsxpt/employee_deleteEmployeeById.do?employeeId=${empid}`
+          })
+            .then(res => {
+              this.$message({
+                message: "删除成功！",
+                center:true
+              });
+              console.log("delete success!");
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+      this.getPersonInfo();
+    },
     handleClick(row) {
       console.log(row);
+    },
+    getPersonInfo() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+    if (userInfo) {
+      var userid = userInfo.name;
+    }
+    this.$ajax({
+      method: "post",
+      url: `${
+        this.baseURL
+      }/zjsxpt/employee_findEmployeeList.do?keyword=&userid=${userid}`
+    })
+      .then(res => {
+        this.tableData = res.data.data;
+        console.log("success");
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     },
     submitForm(formName) {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -81,23 +126,7 @@ export default {
     }
   },
   mounted() {
-    var userInfo = JSON.parse(sessionStorage.getItem("user"));
-    if (userInfo) {
-      var userid = userInfo.name;
-    }
-    this.$ajax({
-      method: "post",
-      url: `${
-        this.baseURL
-      }/zjsxpt/employee_findEmployeeList.do?keyword=&userid=${userid}`
-    })
-      .then(res => {
-        this.tableData = res.data.data;
-        console.log("success");
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
+    this.getPersonInfo();
   }
 };
 </script>

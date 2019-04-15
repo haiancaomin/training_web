@@ -90,7 +90,7 @@
 </el-upload>
       </div>
       <div class="batch-submit">
-        <el-button type="primary" >添加</el-button>
+        <el-button type="primary">添加</el-button>
       </div>
     </div>
   </div>
@@ -162,7 +162,7 @@ export default {
         this.batchAdd=true;
     },
     submitForm(formName) {
-      alert(this.ruleForm.sex);
+    
        var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.name;
