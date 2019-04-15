@@ -1,9 +1,9 @@
 <template>
   <el-main>
     <div class="course-container">
-      <el-tabs type="border-card" stretch>
-        <el-tab-pane label="生产类">
-          <el-row :gutter="20" class="bottom-line">
+      <el-tabs type="border-card" stretch @tab-click="handleClick" v-model="activeNames[0]">
+        <el-tab-pane label="生产类" name="0">
+          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in prodCourseLists" :key="key">
             <el-col :span="7">
               <div class="grid-content">
                 <img
@@ -19,9 +19,7 @@
                     <div class="grid-content bold text-right">课程介绍</div>
                   </el-col>
                   <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                    <div class="grid-content">{{val.introdtction}}</div>
                   </el-col>
                   <el-col :span="4">
                     <div class="grid-content">
@@ -36,23 +34,22 @@
                     <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
-                    <div class="grid-content">2天</div>
+                    <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
-                  
                 </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="1">
+                <el-collapse @change="handleChange">
+                  <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
+                        <div class="grid-content bold text-right">授课老师</div>
                       </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
+                      <el-col :span="3" v-for="(v,k) in val.tlist" :key="k">
+                        <div class="grid-content">{{v.teachername}}</div>
                       </el-col>
                     </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                    <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                        <img :src="v.url" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -60,192 +57,21 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
+                            <div class="grid-content">{{v.teachername}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">方向</div>
                           </el-col>
                           <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
+                            <div class="grid-content">{{v.direction}}</div>
                           </el-col>
-                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
                             <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                  </el-collapse-item>
-                </el-collapse>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="bottom-line">
-            <el-col :span="7">
-              <div class="grid-content">
-                <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                  class="full-width"
-                >
-              </div>
-            </el-col>
-            <el-col :span="17">
-              <div class="grid-content">
-                <el-row :gutter="20" class="no-pad">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课程介绍</div>
-                  </el-col>
-                  <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div class="grid-content">
-                      <router-link to="/SignUp">
-                        <el-button type="primary">点我报名</el-button>
-                      </router-link>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课时</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">2天</div>
-                  </el-col>
-                  
-                </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="1">
-                    <template slot="title">
-                      <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
-                      </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
-                      </el-col>
-                    </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">方向</div>
-                          </el-col>
-                          <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
-                          </el-col>
-                          
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">简介</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                  </el-collapse-item>
-                </el-collapse>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="bottom-line">
-            <el-col :span="7">
-              <div class="grid-content">
-                <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                  class="full-width"
-                >
-              </div>
-            </el-col>
-            <el-col :span="17">
-              <div class="grid-content">
-                <el-row :gutter="20" class="no-pad">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课程介绍</div>
-                  </el-col>
-                  <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div class="grid-content">
-                      <router-link to="/SignUp">
-                        <el-button type="primary">点我报名</el-button>
-                      </router-link>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课时</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">2天</div>
-                  </el-col>
-                  
-                </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="2">
-                    <template slot="title">
-                      <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
-                      </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
-                      </el-col>
-                    </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">方向</div>
-                          </el-col>
-                          <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
-                          </el-col>
-                          
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">简介</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                            <div class="grid-content">{{v.summary}}</div>
                           </el-col>
                         </el-row>
                       </div>
@@ -256,8 +82,8 @@
             </el-col>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane label="施工类">
-          <el-row :gutter="20" class="bottom-line">
+        <el-tab-pane label="施工类" name="1">
+          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in workCourseLists" :key="key">
             <el-col :span="7">
               <div class="grid-content">
                 <img
@@ -273,9 +99,7 @@
                     <div class="grid-content bold text-right">课程介绍</div>
                   </el-col>
                   <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                    <div class="grid-content">{{val.introdtction}}</div>
                   </el-col>
                   <el-col :span="4">
                     <div class="grid-content">
@@ -290,23 +114,22 @@
                     <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
-                    <div class="grid-content">2天</div>
+                    <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
-                  
                 </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="1">
+                <el-collapse @change="handleChange">
+                  <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
+                        <div class="grid-content bold text-right">授课老师</div>
                       </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
+                      <el-col :span="3" v-for="(v,k) in val.tlist" :key="k">
+                        <div class="grid-content">{{v.teachername}}</div>
                       </el-col>
                     </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                    <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                        <img :src="v.url" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -314,108 +137,21 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
+                            <div class="grid-content">{{v.teachername}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">方向</div>
                           </el-col>
                           <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
+                            <div class="grid-content">{{v.direction}}</div>
                           </el-col>
-                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
                             <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                  </el-collapse-item>
-                </el-collapse>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="bottom-line">
-            <el-col :span="7">
-              <div class="grid-content">
-                <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                  class="full-width"
-                >
-              </div>
-            </el-col>
-            <el-col :span="17">
-              <div class="grid-content">
-                <el-row :gutter="20" class="no-pad">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课程介绍</div>
-                  </el-col>
-                  <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div class="grid-content">
-                      <router-link to="/SignUp">
-                        <el-button type="primary">点我报名</el-button>
-                      </router-link>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课时</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">2天</div>
-                  </el-col>
-                  
-                </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="3">
-                    <template slot="title">
-                      <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
-                      </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
-                      </el-col>
-                    </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">方向</div>
-                          </el-col>
-                          <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
-                          </el-col>
-                          
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">简介</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                            <div class="grid-content">{{v.summary}}</div>
                           </el-col>
                         </el-row>
                       </div>
@@ -427,8 +163,8 @@
           </el-row>
         </el-tab-pane>
 
-        <el-tab-pane label="设计类">
-          <el-row :gutter="20" class="bottom-line">
+        <el-tab-pane label="设计类" name="2">
+          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in designCourseLists" :key="key">
             <el-col :span="7">
               <div class="grid-content">
                 <img
@@ -444,9 +180,7 @@
                     <div class="grid-content bold text-right">课程介绍</div>
                   </el-col>
                   <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                    <div class="grid-content">{{val.introdtction}}</div>
                   </el-col>
                   <el-col :span="4">
                     <div class="grid-content">
@@ -461,23 +195,22 @@
                     <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
-                    <div class="grid-content">2天</div>
+                    <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
-                  
                 </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="3">
+                <el-collapse @change="handleChange">
+                  <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
+                        <div class="grid-content bold text-right">授课老师</div>
                       </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
+                      <el-col :span="3" v-for="(v,k) in val.tlist" :key="k">
+                        <div class="grid-content">{{v.teachername}}</div>
                       </el-col>
                     </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                    <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                        <img :src="v.url" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -485,24 +218,21 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
+                            <div class="grid-content">{{v.teachername}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">方向</div>
                           </el-col>
                           <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
+                            <div class="grid-content">{{v.direction}}</div>
                           </el-col>
-                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
                             <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                            <div class="grid-content">{{v.summary}}</div>
                           </el-col>
                         </el-row>
                       </div>
@@ -513,8 +243,8 @@
             </el-col>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane label="校园课程">
-          <el-row :gutter="20" class="bottom-line">
+        <el-tab-pane label="校园课程" name="3">
+          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in schoolCourseLists" :key="key">
             <el-col :span="7">
               <div class="grid-content">
                 <img
@@ -530,9 +260,7 @@
                     <div class="grid-content bold text-right">课程介绍</div>
                   </el-col>
                   <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                    <div class="grid-content">{{val.introdtction}}</div>
                   </el-col>
                   <el-col :span="4">
                     <div class="grid-content">
@@ -547,23 +275,22 @@
                     <div class="grid-content bold text-right">课时</div>
                   </el-col>
                   <el-col :span="3">
-                    <div class="grid-content">2天</div>
+                    <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
-                  
                 </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="3">
+                <el-collapse @change="handleChange">
+                  <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
+                        <div class="grid-content bold text-right">授课老师</div>
                       </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
+                      <el-col :span="3" v-for="(v,k) in val.tlist" :key="k">
+                        <div class="grid-content">{{v.teachername}}</div>
                       </el-col>
                     </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
+                    <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
+                        <img :src="v.url" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -571,109 +298,21 @@
                             <div class="grid-content bold text-right">姓名</div>
                           </el-col>
                           <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
+                            <div class="grid-content">{{v.teachername}}</div>
                           </el-col>
                           <el-col :span="4">
                             <div class="grid-content bold text-right">方向</div>
                           </el-col>
                           <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
+                            <div class="grid-content">{{v.direction}}</div>
                           </el-col>
-                          
                         </el-row>
                         <el-row :gutter="20" class="no-pad">
                           <el-col :span="4">
                             <div class="grid-content bold text-right">简介</div>
                           </el-col>
                           <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                          </el-col>
-                        </el-row>
-                      </div>
-                    </div>
-                  </el-collapse-item>
-                </el-collapse>
-              </div>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="20" class="bottom-line">
-            <el-col :span="7">
-              <div class="grid-content">
-                <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                  class="full-width"
-                >
-              </div>
-            </el-col>
-            <el-col :span="17">
-              <div class="grid-content">
-                <el-row :gutter="20" class="no-pad">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课程介绍</div>
-                  </el-col>
-                  <el-col :span="17">
-                    <div
-                      class="grid-content"
-                    >课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div class="grid-content">
-                      <router-link to="/SignUp">
-                        <el-button type="primary">点我报名</el-button>
-                      </router-link>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="3">
-                    <div class="grid-content bold text-right">课时</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div class="grid-content">2天</div>
-                  </el-col>
-                  
-                </el-row>
-                <el-collapse v-model="activeNames" @change="handleChange">
-                  <el-collapse-item name="3">
-                    <template slot="title">
-                      <el-col :span="3">
-                        <div class="grid-content bold text-right">方向</div>
-                      </el-col>
-                      <el-col :span="3" v-for='(val,key) in teachers' :key='key'>
-                        <div class="grid-content">{{val}}</div>
-                      </el-col>
-                    </template>
-                    <div class="clearfix teacher-box" v-for='(val,key) in teachers' :key='key'>
-                      <div class="teacher-img">
-                        <img src="https://www.swiper.com.cn/demo/tfboys/images/p1.jpg" alt>
-                      </div>
-                      <div class="teacher-info">
-                        <el-row :gutter="20">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">姓名</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content">{{val}}</div>
-                          </el-col>
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">方向</div>
-                          </el-col>
-                          <el-col :span="8">
-                            <div class="grid-content">装配式预制构件生产</div>
-                          </el-col>
-                          
-                        </el-row>
-                        <el-row :gutter="20" class="no-pad">
-                          <el-col :span="4">
-                            <div class="grid-content bold text-right">简介</div>
-                          </el-col>
-                          <el-col :span="20">
-                            <div
-                              class="grid-content"
-                            >程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</div>
+                            <div class="grid-content">{{v.summary}}</div>
                           </el-col>
                         </el-row>
                       </div>
@@ -692,13 +331,46 @@
 export default {
   data() {
     return {
-      activeNames: [],
-      teachers: ["张三", "李四"]
+      activeNames: ["0", "1", "2", "3"],
+      prodCourseLists: [],
+      workCourseLists: [],
+      designCourseLists: [],
+      schoolCourseLists: []
+      // teachers: ["张三", "李四"]
     };
   },
+  mounted() {
+    this.getCourses("0");
+  },
   methods: {
+    getCourses(type) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_findCourseList.do?coursetype=${type}`
+      })
+        .then(res => {
+          if (type == "0") {
+            this.prodCourseLists = res.data.data;
+          } else if (type == "1") {
+            this.workCourseLists = res.data.data;
+          } else if (type == "2") {
+            this.designCourseLists = res.data.data;
+          } else {
+            this.schoolCourseLists = res.data.data;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     handleChange(val) {
       console.log(val);
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
+      this.getCourses(tab.name);
     }
   }
 };
