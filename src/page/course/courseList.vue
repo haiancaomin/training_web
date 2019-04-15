@@ -336,7 +336,6 @@ export default {
       workCourseLists: [],
       designCourseLists: [],
       schoolCourseLists: []
-      // teachers: ["张三", "李四"]
     };
   },
   mounted() {
@@ -364,9 +363,6 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-    },
-    handleChange(val) {
-      console.log(val);
     },
     handleClick(tab, event) {
       console.log(tab, event);
