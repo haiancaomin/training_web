@@ -37,7 +37,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -117,7 +117,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -198,7 +198,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -278,7 +278,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
