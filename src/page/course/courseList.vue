@@ -37,7 +37,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -117,7 +117,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -198,7 +198,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -278,7 +278,7 @@
                     <div class="grid-content">{{val.coursehour}}</div>
                   </el-col>
                 </el-row>
-                <el-collapse @change="handleChange">
+                <el-collapse>
                   <el-collapse-item>
                     <template slot="title">
                       <el-col :span="3">
@@ -336,7 +336,6 @@ export default {
       workCourseLists: [],
       designCourseLists: [],
       schoolCourseLists: []
-      // teachers: ["张三", "李四"]
     };
   },
   mounted() {
@@ -365,11 +364,7 @@ export default {
           console.log(err);
         });
     },
-    handleChange(val) {
-      console.log(val);
-    },
     handleClick(tab, event) {
-      console.log(tab, event);
       this.getCourses(tab.name);
     }
   }
