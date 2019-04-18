@@ -165,7 +165,7 @@ export default {
     
        var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
-        var userid = userInfo.name;
+        var userid = userInfo.userid;
       }
        console.log("1");
       this.$refs[formName].validate(valid => {

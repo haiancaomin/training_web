@@ -15,7 +15,7 @@
             <i class="el-icon-view" v-if="showNewPassword"></i>
             <i class="iconfont" v-if="!showNewPassword">&#xe723;</i>
           </div>
-          <!-- </div> -->
+         
         </el-form-item>
         <el-form-item>
           <el-button

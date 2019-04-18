@@ -16,8 +16,6 @@
       </el-form-item>
     </el-form>
 
-    
-
     <el-table :data="tableData" border max-height="450" style="width: 700px">
       <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="110"></el-table-column>
@@ -25,7 +23,7 @@
       <el-table-column prop="sex" label="性别" width="50">
         <template slot-scope="scope">
                 <i v-if="scope.row.sex==0">男</i>
-                <i v-else>女</i>
+                <i v-if="scope.row.sex==1">女</i>
             </template>
       </el-table-column>
       <el-table-column prop="age" label="年龄" width="50"></el-table-column>
@@ -82,7 +80,7 @@ export default {
     getPersonInfo() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
     if (userInfo) {
-      var userid = userInfo.name;
+      var userid = userInfo.userid;
     }
     this.$ajax({
       method: "post",
@@ -101,7 +99,7 @@ export default {
     submitForm(formName) {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
-        var userid = userInfo.name;
+        var userid = userInfo.userid;
       }
       this.$refs[formName].validate(valid => {
         if (valid) {

@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import TopNav from '@/components/TopNav'
 import Index from '@/page/Index'
-import SignUp from '@/page/SignUp'
+import SignUp from '@/page/signUp/SignUp'
+import CompanySignUp from '@/page/signUp/CompanySignUp'
+import SchoolSignUp from '@/page/signUp/SchoolSignUp'
+import Accounts from '@/page/signUp/Accounts'
 
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
@@ -58,6 +61,21 @@ export default new Router({
       path: '/SignUp',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/CompanySignUp',
+      name: 'CompanySignUp',
+      component: CompanySignUp
+    },
+    {
+      path: '/SchoolSignUp',
+      name: 'SchoolSignUp',
+      component: SchoolSignUp
+    },
+    {
+      path: '/Accounts',
+      name: 'Accounts',
+      component: Accounts
     },
     // {
     //   path: '/Diagram',
