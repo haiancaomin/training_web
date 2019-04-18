@@ -595,7 +595,9 @@ export default {
 
       tableDataRe: [{}],
       totalPrice: 0,
-      accountsPage: 1
+      accountsPage: 1,
+      SignUpPayPage:0,
+      active : 1
     };
   },
   mounted() {
@@ -1284,6 +1286,15 @@ export default {
         url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}",
         "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}`
       }).then(res => {
+          
+        this.accountsPage = 0;
+        this.SignUpPayPage = 1;
+        this.active = 2;
+        this.$emit("ToSignUpPayPage", {
+          accountsPage: this.accountsPage,
+          SignUpPayPage: this.SignUpPayPage,
+          active: this.active
+        });
           console.log("success");
         })
         .catch(function(err) {

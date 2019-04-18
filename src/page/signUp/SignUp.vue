@@ -18,271 +18,25 @@
         </el-tab-pane>
 
         <!-- 校园报名 -->
+        <el-tab-pane label="校园报名">
+          <school-signUp v-on:ToAccountsPage="gotoAccountsPage"></school-signUp>
+        </el-tab-pane>
 
+        <!-- 个人报名 -->
         <el-tab-pane label="个人报名">
-          <el-form :model="ruleForm" ref="ruleForm" label-width="350px" class="demo-ruleForm">
-            <el-form-item label="培训地点" prop="region" id="education">
-              <el-select v-model="ruleForm.region" placeholder="请选择培训地点">
-                <el-option label="地点1" value="shanghai"></el-option>
-                <el-option label="地点2" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="课程选择" prop="region" id="education">
-              <el-select v-model="ruleForm.region" placeholder="请选择课程">
-                <el-option label="课程1" value="shanghai"></el-option>
-                <el-option label="课程2" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="套餐选择" prop="region" id="education">
-              <el-select v-model="ruleForm.region" placeholder="请选择套餐">
-                <el-option label="套餐1" value="shanghai"></el-option>
-                <el-option label="套餐2" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="姓名" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="身份证号" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="性别" prop="resource">
-              <el-radio-group v-model="ruleForm.resource">
-                <el-radio label="男"></el-radio>
-                <el-radio label="女"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-
-            <el-form-item label="出生日期" required>
-              <el-form-item prop="date1">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="ruleForm.date1"
-                  style="width: 300px;"
-                ></el-date-picker>
-              </el-form-item>
-            </el-form-item>
-
-            <el-form-item label="籍贯" prop="native" id="native">
-              <el-col :span="5">
-                <el-select v-model="ruleForm.native" placeholder="省份">
-                  <el-option label="省份1" value="shanghai"></el-option>
-                  <el-option label="省份2" value="beijing"></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="2">&nbsp;</el-col>
-              <el-col :span="5">
-                <el-select v-model="ruleForm.native" placeholder="城市" id="city">
-                  <el-option label="城市1" value="shanghai"></el-option>
-                  <el-option label="城市2" value="beijing"></el-option>
-                </el-select>
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label="现工作地" prop="native">
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="学历" prop="region" id="education">
-              <el-select v-model="ruleForm.region" placeholder="请选择学历">
-                <el-option label="省份1" value="shanghai"></el-option>
-                <el-option label="省份2" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="毕业学校" prop="native">
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="职位" prop="native">
-              <el-input v-model="ruleForm.native"></el-input>
-            </el-form-item>
-
-            <el-form-item label="工种" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="移动电话" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="邮箱" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="所在公司" prop="native">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item label="从业资格证书" prop="native">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-
-            <el-form-item>
-              <div class="nextPage1">
-                <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
-              </div>
-            </el-form-item>
-          </el-form>
+          <personal-signUp></personal-signUp>
         </el-tab-pane>
       </el-tabs>
     </div>
 
     <!-- 考试信息选择页面page3 -->
     <div class="test-info-choice" v-show="accountsPage">
-      <accounts></accounts>
+      <accounts v-on:ToSignUpPayPage="gotoSignUpPayPage"></accounts>
     </div>
 
     <!-- 支付页面page4 -->
-    <div class="pay" v-if="fourthPage == 1">
-      <div class="pay-head">
-        <span>您可以选择</span>
-        <el-button type="primary" @click="onliePayment">在线支付</el-button>
-        <span>或者</span>
-        <el-button type="success" @click="offliePayment">转账汇款</el-button>
-      </div>
-
-      <div clsss="pay-online" v-if="payOnline == 1">
-        <el-dialog title="报名人员信息" :visible.sync="centerDialogVisible4" width="600px" center>
-          <el-table :data="tableData1" border height="400px" style="width: 100%">
-            <el-table-column prop="name" label="姓名" width="80"></el-table-column>
-            <el-table-column prop="id" label="身份证" width="280"></el-table-column>
-            <el-table-column prop="course" label="课程"></el-table-column>
-          </el-table>
-          <el-button type="primary" class="sign-submit">关闭</el-button>
-        </el-dialog>
-        <el-dialog title="用户付费协议" :visible.sync="centerDialogVisible3" width="600px" center>用户付费协议文案</el-dialog>
-
-        <div class="pay-online-body">
-          <div class="pay-online-check">
-            <h1>确认订单信息</h1>
-            <h4>请在2小时内完成支付，否则订单会被自动取消</h4>
-          </div>
-
-          <div class="user-info">
-            <div class="user-name">
-              购买帐号：
-              <span>zeroandx</span>
-            </div>
-            <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认开课时间或考试时间后再提交订单</div>
-          </div>
-          <div class="pay-type">支付方式</div>
-          <el-collapse accordion>
-            <el-collapse-item>
-              <template slot="title">
-                <div v-if="radio2==3" class="choose-zhifubao">
-                  <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
-                </div>
-                <span v-if="radio2==6" class="choose-weixin">
-                  <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                </span>
-              </template>
-              <div class="pay-choose">
-                <el-radio-group v-model="radio2">
-                  <div class="pay-zhifubao">
-                    <el-col :span="24">
-                      <el-radio :label="3">
-                        <img src="../../assets/zhifubao.jpg" class="pay-img">
-                      </el-radio>
-                    </el-col>
-                  </div>
-                  <div class="pay-weixin">
-                    <el-radio :label="6">
-                      <img src="../../assets/weixin.jpg" class="pay-img">
-                    </el-radio>
-                  </div>
-                </el-radio-group>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-
-          <div class="meal-body">
-            <div class="pay-meal">购买套餐</div>
-            <div class="pay-meal-body">
-              <div class="pay-meal-body">
-                <div class="meal_img f-fl">
-                  <img src="../../assets/inspection1.jpg" alt>
-                </div>
-                <div class="meal_body f-fl">
-                  <a class="title">
-                    <span>质量员+考试培训+南通</span>
-                  </a>
-
-                  <div class="promotion" @click="centerDialogVisible4 = true">
-                    报名人数：
-                    <span>11</span>
-                  </div>
-                </div>
-                <div class="meal_price">￥2000.00</div>
-              </div>
-            </div>
-            <div class="pay-meal-body">
-              <div class="pay-meal-body">
-                <div class="meal_img f-fl">
-                  <img src="../../assets/inspection2.png" alt>
-                </div>
-                <div class="meal_body f-fl">
-                  <a class="title">
-                    <span>灌浆工+考试+南通</span>
-                  </a>
-
-                  <div class="promotion" @click="centerDialogVisible4 = true">
-                    报名人数：
-                    <span>12</span>
-                  </div>
-                </div>
-                <div class="meal_price">￥3000.00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="payment-body">
-          <div class="payment-sub-body">
-            <el-col :span="18">
-              <div class="agreement-con">
-                提交订单则表示您同意
-                <span class="agreement" @click="centerDialogVisible3 = true">《智聚用户付费协议》</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="pay-price-btn f-fr">
-                <div class="pay-price-btn_price">
-                  <span class="price_title">实付:</span>
-                  <span class="price_account">
-                    <span class="price_account_icon">￥</span>5000.00
-                  </span>
-                </div>
-                <span class="pay-price-btn_btn" @click="submitForm4()">立即支付</span>
-                <div>
-                  <span class="pay-price-btn_wait" @click="submitForm42()">稍后支付</span>
-                </div>
-              </div>
-            </el-col>
-          </div>
-        </div>
-      </div>
-
-      <div calss="pay-offline" v-if="payOffline == 1">
-        <div class="offline-context">
-          <p class="offline-notice">转账汇款成功后，请在正常工作时间9:30-5:30致电进行款项确认，汇款成功后可在个人中心索取发票。电话：1234567890</p>
-          <p>&nbsp;</p>
-          <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
-          <br>
-          <p>开 户 行：中国**银行股份有限公司**支行</p>
-          <p>收款户名：***</p>
-          <p>帐 号：1234567890</p>
-        </div>
-
-        <div class="nextPage4-2">
-          <el-button type="primary" @click="submitForm42('ruleForm')">下一步</el-button>
-        </div>
-      </div>
+    <div class="pay" v-if="SignUpPayPage">
+      <SignUpPay></SignUpPay>
     </div>
 
     <div class="success" v-if="sixth1 == 1">
@@ -330,13 +84,19 @@
 
 <script>
 import CompanySignUp from "@/page/signUp/CompanySignUp";
-import Accounts from '@/page/signUp/Accounts'
+import SchoolSignUp from '@/page/signUp/SchoolSignUp';
+import PersonalSignUp from '@/page/signUp/PersonalSignUp';
+import Accounts from '@/page/signUp/Accounts';
+import SignUpPay from '@/page/signUp/SignUpPay';
 
 export default {
   name: "Signup",
   components: {
     CompanySignUp,
-    Accounts
+    SchoolSignUp,
+    PersonalSignUp,
+    Accounts,
+    SignUpPay
   },
   data() {
     return {
@@ -352,7 +112,8 @@ export default {
       radio2: 3,
       signUpPage: 1,
       accountsPage: 0,
-
+      SignUpPayPage: 0,
+  
       thirdPage: 0,
       fourthPage: 0,
       fifthPage: 0,
@@ -422,229 +183,16 @@ export default {
       this.payOnline = 0;
       this.payOffline = 1;
     },
-    getCourseList() {
-      this.$ajax({
-        method: "get",
-        url: `${this.baseURL}/zjsxpt/course_getCourseList.do`
-      })
-        .then(res => {
-          this.selectCourseData = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getAddressList1(course) {
-      this.ruleForm.time1 = null;
-      this.ruleForm.Address1 = null;
-      this.ruleForm.meal1 = null;
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectAddressData1 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getTimeList1(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectTimeData1 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getMealList1(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getSetMenuList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectMealData1 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    handleSelectionChange1(val) {
-      this.multipleSelection1 = val;
-      this.personSize1 = this.multipleSelection1.length;
-      console.log(this.multipleSelection1);
-    },
-    
-    getAddressList2(course) {
-      this.ruleForm.time2 = null;
-      this.ruleForm.Address2 = null;
-      this.ruleForm.meal2 = null;
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectAddressData2 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getTimeList2(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectTimeData2 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getMealList2(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getSetMenuList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectMealData2 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    handleSelectionChange2(val) {
-      this.multipleSelection2 = val;
-      this.personSize2 = this.multipleSelection2.length;
-      console.log(this.multipleSelection2);
-    },
-    getAddressList3(course) {
-      this.ruleForm.time3 = null;
-      this.ruleForm.Address3 = null;
-      this.ruleForm.meal3 = null;
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectAddressData3 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getTimeList3(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectTimeData3 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getMealList3(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getSetMenuList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectMealData3 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    handleSelectionChange3(val) {
-      this.multipleSelection3 = val;
-      this.personSize3 = this.multipleSelection3.length;
-      console.log(this.multipleSelection3);
-    },
-    getAddressList4(course) {
-      this.ruleForm.time4 = null;
-      this.ruleForm.Address4 = null;
-      this.ruleForm.meal4 = null;
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectAddressData4 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getTimeList4(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectTimeData4 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    getMealList4(course) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getSetMenuList.do?courseid=${course}`
-      })
-        .then(res => {
-          this.selectMealData4 = res.data.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    handleSelectionChange4(val) {
-      this.multipleSelection4 = val;
-      this.personSize4 = this.multipleSelection4.length;
-      console.log(this.multipleSelection4);
-    },
     gotoAccountsPage: function(msg) {
       (this.active = msg.active),
         (this.signUpPage = msg.signUpPage),
         (this.accountsPage = msg.accountsPage);
+    },
+    gotoSignUpPayPage: function(msg) {
+      (this.active = msg.active),
+        (this.accountsPage = msg.accountsPage),
+        (this.SignUpPayPage = msg.SignUpPayPage);
     }
-  },
-
-  mounted() {
-    this.getCourseList();
-  
   }
 };
 </script>
@@ -721,7 +269,7 @@ export default {
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
-  padding: 30px 0px 0px 30px;
+  padding: 30px;
   margin: 10px 0px 0px 0px;
 }
 

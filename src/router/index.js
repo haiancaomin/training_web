@@ -5,7 +5,9 @@ import Index from '@/page/Index'
 import SignUp from '@/page/signUp/SignUp'
 import CompanySignUp from '@/page/signUp/CompanySignUp'
 import SchoolSignUp from '@/page/signUp/SchoolSignUp'
+import PersonalSignUp from '@/page/signUp/PersonalSignUp'
 import Accounts from '@/page/signUp/Accounts'
+import SignUpPay from '@/page/signUp/SignUpPay'
 
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
@@ -73,9 +75,18 @@ export default new Router({
       component: SchoolSignUp
     },
     {
+      path: '/PersonalSignUp',
+      name: 'PersonalSignUp',
+      component: PersonalSignUp
+    },
+    {
       path: '/Accounts',
       name: 'Accounts',
       component: Accounts
+    },{
+      path: '/SignUpPay',
+      name: 'SignUpPay',
+      component: SignUpPay
     },
     // {
     //   path: '/Diagram',
