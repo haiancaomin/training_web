@@ -2,7 +2,11 @@
   <div class="PersonalSignUp">
     
     <el-form :model="ruleForm" ref="ruleForm"  class="demo-ruleForm">
-     
+      <el-col :span="12">
+      <div class="form-left">
+        <div class="left-title">
+          <h1>报名项目</h1>
+        </div>
         <el-form-item prop="course1">
         <el-select
           v-model="ruleForm.course1"
@@ -54,7 +58,13 @@
           ></el-option>
         </el-select>
       </el-form-item>
+      </div>
+      </el-col>
+      <el-col :span="12">
       <div class="form-right">
+        <div class="right-title">
+          <h1>基本信息</h1>
+        </div>
       <el-form-item prop="empname">
         <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
           <i slot="prefix" class="iconfont" id="iconName">&#xe75f;</i>
@@ -87,6 +97,7 @@
         </el-input>
       </el-form-item>
       </div>
+      </el-col>
     
 
       <el-form-item>
@@ -198,9 +209,22 @@ export default {
 .nextPage1 {
   margin: 0px 0px 0px 100px;
 }
-.form-right {
+.form-left {
+  /* margin: 20px 0px 0px 150px; */
+  margin:0 auto;
+  width:300px;
+}
+/* .form-right {
   position: absolute;
-  margin: -200px 0px 0px 500px;
+  margin: -283.5px 0px 0px 520px;
+}
+.right-title, .left-title{
+  border-left: 2px solid #409eff;
+  margin: 0px 0px 15px 0px;
+  padding: 0px 0px 0px 5px;
+} */
+h1 {
+  font-size: 16px;
 }
 @font-face {
   font-family: "iconfont"; /* project id 1131189 */
