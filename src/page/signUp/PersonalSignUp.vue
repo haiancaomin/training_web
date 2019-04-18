@@ -198,6 +198,10 @@ export default {
 .nextPage1 {
   margin: 0px 0px 0px 100px;
 }
+.form-right {
+  position: absolute;
+  margin: -200px 0px 0px 500px;
+}
 @font-face {
   font-family: "iconfont"; /* project id 1131189 */
   src: url("//at.alicdn.com/t/font_1131189_uv81vozq3es.eot");
