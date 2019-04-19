@@ -7,36 +7,36 @@
       id="regDialog"
       @closed="closeDialog"
     >
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
           <el-input placeholder="请输入用户名" v-model="ruleForm.name">
-            <i slot="prefix" class="iconfont">&#xe75f;</i>
+            <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
 
         <el-form-item prop="password">
           <el-input :type="inputType" placeholder="请输入密码" v-model="ruleForm.password">
-            <i slot="prefix" class="iconfont pwd-lock">&#xe62b;</i>
+            <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
           <div class="input-icon" @click="changeType">
-            <i class="el-icon-view" v-if="showNewPassword"></i>
-            <i class="iconfont" v-if="!showNewPassword">&#xe723;</i>
+            <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
+            <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
           </div>
         </el-form-item>
 
         <el-form-item prop="password2">
           <el-input :type="inputType2" placeholder="请再次输入密码" v-model="ruleForm.password2">
-            <i slot="prefix" class="iconfont pwd-lock">&#xe62b;</i>
+            <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
           <div class="input-icon" @click="changeType2">
-            <i class="el-icon-view" v-if="showNewPassword2"></i>
-            <i class="iconfont" v-if="!showNewPassword2">&#xe723;</i>
+            <i class="iconfont" v-if="showNewPassword2">&#xe76c;</i>
+            <i class="iconfont" v-if="!showNewPassword2">&#xe604;</i>
           </div>
         </el-form-item>
 
         <el-form-item prop="phone">
           <el-input placeholder="请输入手机号" v-model="ruleForm.phone">
-            <i slot="prefix" class="iconfont">&#xe704;</i>
+            <i slot="prefix" class="iconfont">&#xe745;</i>
           </el-input>
         </el-form-item>
         <el-form-item prop="code" id="regVerification">
@@ -294,10 +294,6 @@ a {
   cursor: pointer;
 }
 
-.iconfont.pwd-lock {
-  font-size: 28px;
-}
-
 .get-button-con {
   height: 44px;
   width: 112px;
@@ -315,14 +311,13 @@ a {
   text-align: center;
 }
 @font-face {
-  font-family: "iconfont"; /* project id 1121282 */
-  src: url("//at.alicdn.com/t/font_1121282_moohvn72vvf.eot");
-  src: url("//at.alicdn.com/t/font_1121282_moohvn72vvf.eot?#iefix")
-      format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_1121282_moohvn72vvf.woff2") format("woff2"),
-    url("//at.alicdn.com/t/font_1121282_moohvn72vvf.woff") format("woff"),
-    url("//at.alicdn.com/t/font_1121282_moohvn72vvf.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_1121282_moohvn72vvf.svg#iconfont") format("svg");
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -331,6 +326,8 @@ a {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 44px;
+  margin:0px 0px 0px 2px;
 }
 </style>
 <style>
@@ -342,6 +339,10 @@ a {
   width: auto;
 }
 </style>
-
+<style>
+#loginForm>.el-input__inner {
+  height: 44px;
+}
+</style>
 
 

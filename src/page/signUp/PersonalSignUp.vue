@@ -2,7 +2,6 @@
   <div class="PersonalSignUp">
     
     <el-form :model="ruleForm" ref="ruleForm"  class="demo-ruleForm">
-      <el-col :span="12">
       <div class="form-left">
         <div class="left-title">
           <h1>报名项目</h1>
@@ -19,12 +18,14 @@
             :label="item.coursename"
             :value="item.courseid"
           ></el-option>
-          <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
+          <i slot="prefix" class="iconfont">&#xe60a;</i>
         </el-select>
       </el-form-item>
    
       <el-form-item  prop="Address1">
-        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value></el-select>
+        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value>
+          <i slot="prefix" class="iconfont">&#xe601;</i>
+        </el-select>
         <el-select v-model="ruleForm.Address1" placeholder="请选择培训地点" v-if="!ruleForm.course1==''">
           <el-option
             v-for="item in selectAddressData1"
@@ -32,11 +33,14 @@
             :label="item.address"
             :value="item.address"
           ></el-option>
+          <i slot="prefix" class="iconfont">&#xe601;</i>
         </el-select>
       </el-form-item>
   
       <el-form-item prop="time1">
-        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value></el-select>
+        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value>
+          <i slot="prefix" class="iconfont">&#xe6e0;</i>
+        </el-select>
         <el-select v-model="ruleForm.time1" placeholder="请选择培训时间" v-if="!ruleForm.course1==''">
           <el-option
             v-for="item in selectTimeData1"
@@ -44,11 +48,14 @@
             :label="item.traintime"
             :value="item.timeid"
           ></el-option>
+          <i slot="prefix" class="iconfont">&#xe6e0;</i>
         </el-select>
       </el-form-item>
 
       <el-form-item prop="meal1">
-        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value></el-select>
+        <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value>
+          <i slot="prefix" class="iconfont">&#xe671;</i>
+        </el-select>
         <el-select v-model="ruleForm.meal1" placeholder="请选择套餐" v-if="!ruleForm.course1==''">
           <el-option
             v-for="item in selectMealData1"
@@ -56,24 +63,24 @@
             :label="item.menuname"
             :value="item.menuid"
           ></el-option>
+          <i slot="prefix" class="iconfont">&#xe671;</i>
         </el-select>
       </el-form-item>
       </div>
-      </el-col>
-      <el-col :span="12">
+
       <div class="form-right">
         <div class="right-title">
           <h1>基本信息</h1>
         </div>
       <el-form-item prop="empname">
         <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
-          <i slot="prefix" class="iconfont" id="iconName">&#xe75f;</i>
+          <i slot="prefix" class="iconfont">&#xe614;</i>
         </el-input>
       </el-form-item>
 
       <el-form-item  prop="cardno" >
         <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
-          <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
+          <i slot="prefix" class="iconfont">&#xe7de;</i>
         </el-input>
       </el-form-item>
 
@@ -85,7 +92,7 @@
             :label="item.menuname"
             :value="item.menuid"
           ></el-option>
-      <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
+      <i slot="prefix" class="iconfont">&#xe8c8;</i>
     </el-select>
  </el-form-item>
 
@@ -93,16 +100,15 @@
 
        <el-form-item  prop="phone">
         <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
-          <i slot="prefix" class="iconfont" id="iconPhone">&#xe61d;</i>
+          <i slot="prefix" class="iconfont">&#xe745;</i>
         </el-input>
       </el-form-item>
       </div>
-      </el-col>
     
 
       <el-form-item>
         <div class="nextPage1">
-          <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">立即提交</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -207,34 +213,32 @@ export default {
   width: 120px;
 }
 .nextPage1 {
-  margin: 0px 0px 0px 100px;
+  margin: 20px auto 0px auto;
+  width:98px;
 }
 .form-left {
-  /* margin: 20px 0px 0px 150px; */
-  margin:0 auto;
-  width:300px;
+  margin: 30px 0px 0px 150px;
 }
-/* .form-right {
+.form-right {
   position: absolute;
-  margin: -283.5px 0px 0px 520px;
+  margin: -283.3px 0px 0px 520px;
 }
 .right-title, .left-title{
   border-left: 2px solid #409eff;
   margin: 0px 0px 15px 0px;
   padding: 0px 0px 0px 5px;
-} */
+}
 h1 {
   font-size: 16px;
 }
 @font-face {
-  font-family: "iconfont"; /* project id 1131189 */
-  src: url("//at.alicdn.com/t/font_1131189_uv81vozq3es.eot");
-  src: url("//at.alicdn.com/t/font_1131189_uv81vozq3es.eot?#iefix")
-      format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_1131189_uv81vozq3es.woff2") format("woff2"),
-    url("//at.alicdn.com/t/font_1131189_uv81vozq3es.woff") format("woff"),
-    url("//at.alicdn.com/t/font_1131189_uv81vozq3es.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_1131189_uv81vozq3es.svg#iconfont") format("svg");
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -243,6 +247,8 @@ h1 {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 40px;
+  margin: 0px 0px 0px 2px;
 }
 </style>
 

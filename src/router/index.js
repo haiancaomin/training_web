@@ -8,6 +8,8 @@ import SchoolSignUp from '@/page/signUp/SchoolSignUp'
 import PersonalSignUp from '@/page/signUp/PersonalSignUp'
 import Accounts from '@/page/signUp/Accounts'
 import SignUpPay from '@/page/signUp/SignUpPay'
+import SignUpSuccess from '@/page/signUp/SignUpSuccess'
+import SignUpPageWait from '@/page/signUp/SignUpPageWait'
 
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
@@ -87,6 +89,16 @@ export default new Router({
       path: '/SignUpPay',
       name: 'SignUpPay',
       component: SignUpPay
+    },
+    {
+      path: '/SignUpSuccess',
+      name: 'SignUpSuccess',
+      component: SignUpSuccess
+    },
+    {
+      path: '/SignUpPageWait',
+      name: 'SignUpPageWait',
+      component: SignUpPageWait
     },
     // {
     //   path: '/Diagram',

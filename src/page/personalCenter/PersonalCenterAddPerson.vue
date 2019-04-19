@@ -25,7 +25,7 @@
     >
       <el-form-item prop="empname">
         <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
-          <i slot="prefix" class="iconfont" id="iconName">&#xe75f;</i>
+          <i slot="prefix" class="iconfont" id="iconName">&#xe614;</i>
         </el-input>
       </el-form-item>
 
@@ -57,7 +57,7 @@
 
        <el-form-item  prop="phone">
         <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
-          <i slot="prefix" class="iconfont" id="iconPhone">&#xe61d;</i>
+          <i slot="prefix" class="iconfont" id="iconPhone">&#xe745;</i>
         </el-input>
       </el-form-item>
 
@@ -297,12 +297,12 @@ export default {
 }
 @font-face {
   font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_uv81vozq3es.eot');
-  src: url('//at.alicdn.com/t/font_1131189_uv81vozq3es.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_uv81vozq3es.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;

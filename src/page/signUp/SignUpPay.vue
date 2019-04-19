@@ -119,9 +119,9 @@
                     <span class="price_account_icon">￥</span>5000.00
                   </span>
                 </div>
-                <span class="pay-price-btn_btn">立即支付</span>
+                <span class="pay-price-btn_btn" @click="payNow">立即支付</span>
                 <div>
-                  <span class="pay-price-btn_wait">稍后支付</span>
+                  <span class="pay-price-btn_wait" @click="payWait">稍后支付</span>
                 </div>
               </div>
             </el-col>
@@ -141,7 +141,7 @@
         </div>
 
         <div class="nextPage4-2">
-          <el-button type="primary">下一步</el-button>
+          <el-button type="primary" @click="payWait">下一步</el-button>
         </div>
       </div>
     </div>
@@ -156,7 +156,9 @@ export default {
       showPersonInfo: false,
 
       radio2: 3,
-      SignUpPayPage: 0,
+      SignUpPayPage: 1,
+      SignUpSuccessPage: 0,
+      SignUpPageWaitPage:0,
 
       payOnline: 1,
       payOffline: 0,
@@ -179,6 +181,26 @@ export default {
     offliePayment() {
       this.payOnline = 0;
       this.payOffline = 1;
+    },
+    payNow() {
+        this.SignUpPayPage = 0;
+        this.SignUpSuccessPage =1
+        this.active = 4;
+        this.$emit("ToSignUpSuccessPage", {
+          SignUpPayPage: this.SignUpPayPage,
+          SignUpSuccessPage: this.SignUpSuccessPage,
+          active: this.active
+        });
+    },
+    payWait() {
+        this.SignUpPayPage = 0;
+        this.SignUpPageWaitPage =1
+        this.active = 4;
+        this.$emit("ToSignUpPageWaitPage", {
+          SignUpPayPage: this.SignUpPayPage,
+          SignUpPageWaitPage: this.SignUpPageWaitPage,
+          active: this.active
+        });
     }
   }
 };
