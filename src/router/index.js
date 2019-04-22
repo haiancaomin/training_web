@@ -131,13 +131,15 @@ export default new Router({
       component: baseMenu,
       children: [{
         path: '',
-        redirect: 'overview',
+        redirect: 'overview/sxjd',
       }, {
-        path: 'overview',
+        path: 'overview/:id',
         component: baseOverView,
+        props: true
       }, {
-        path: 'show1',
+        path: 'show1/:id',
         component: baseShow1,
+        props: true
       }]
     }, {
       path: '/PersonalCenter',

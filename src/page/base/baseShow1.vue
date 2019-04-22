@@ -1,104 +1,45 @@
 <template>
   <div class="base-box">
-    <el-collapse v-model="activeNames" @change="handleChange">
-      <el-collapse-item title="基地简介" name="1" class="base-intro">
-        <swiper :options="swiperOption" ref="mySwiper">
+    <el-collapse v-model="activeNames" @change="handleChange" v-if="swipershow">
+      <el-collapse-item :title="baseInfo.basename" name="1" class="base-intro">
+        <swiper :options="swiperOption1" ref="mySwiper1">
           <!-- slides -->
-          <swiper-slide>
-            <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt class="base-intro-pic">
-          </swiper-slide>
-          <swiper-slide>
-            <img src="https://www.swiper.com.cn/demo/img/nature2.jpg" alt class="base-intro-pic">
-          </swiper-slide>
-          <swiper-slide>
-            <img src="https://www.swiper.com.cn/demo/img/nature3.jpg" alt class="base-intro-pic">
-          </swiper-slide>
-          <swiper-slide>
-            <img src="https://www.swiper.com.cn/demo/img/nature4.jpg" alt class="base-intro-pic">
-          </swiper-slide>
-          <swiper-slide>
-            <img src="https://www.swiper.com.cn/demo/img/nature5.jpg" alt class="base-intro-pic">
+          <swiper-slide v-for="(item,key) in baseInfo.pictureUrl" :key="key">
+            <img :src="item" class="base-intro-pic">
           </swiper-slide>
         </swiper>
-        <div
-          class="base-content"
-        >基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍基地总体介绍</div>
+        <div class="base-content">{{baseInfo.summary}}</div>
       </el-collapse-item>
-      <el-collapse-item title="灌浆区" name="2" class="guanjiang">
+      <el-collapse-item :title="areaList0.areaname" name="2" class="guanjiang">
         <el-carousel :interval="5000">
-          <el-carousel-item v-for="(item,key) in guanjiangPic" :key="key">
+          <el-carousel-item v-for="(item,key) in areaList0.areapictureUrl" :key="key">
             <img :src="item" class="guanjiang-pic">
             <div class="guanjiang-content">
-              <h1>Title</h1>
-              <h2>Subtitle</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, alias ipsa expedita eum perspiciatis molestias nihil libero voluptatibus ipsum distinctio similique veritatis sapiente veniam praesentium explicabo enim inventore unde placeat!</p>
+              <!-- <h1>Title</h1>
+              <h2>Subtitle</h2>-->
+              <p>{{areaList0.area_summary}}</p>
             </div>
           </el-carousel-item>
         </el-carousel>
       </el-collapse-item>
-      <el-collapse-item title="质量员实训区" name="3" class="quality-worker">
+      <el-collapse-item
+        :title="item.areaname"
+        :name="key+3"
+        class="quality-worker"
+        v-for="(item,key) in arealistrest"
+        :key="key"
+      >
         <div class="quality-worker-pic clearfix">
-          <swiper :options="swiperOption2" ref="mySwiper2">
+          <swiper :options="swiperOption[key]" :ref="'mySwiper'+(key+2)">
             <!-- slides -->
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature2.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature3.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature4.jpg" alt>
+            <swiper-slide v-for="(v,k) in item.areapictureUrl" :key="k">
+              <img :src="v">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="quality-worker-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-        </div>
+        <div class="quality-worker-content">{{item.area_summary}}</div>
       </el-collapse-item>
-      <el-collapse-item title="吊装实训模拟区" name="4" class="quality-worker">
-        <div class="quality-worker-pic clearfix">
-          <swiper :options="swiperOption3" ref="mySwiper3">
-            <!-- slides -->
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature1.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature2.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature3.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature4.jpg" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="https://www.swiper.com.cn/demo/img/nature5.jpg" alt>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-        </div>
-        <div class="quality-worker-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum cumque facere et debitis. Voluptatum totam eligendi, accusantium suscipit at magni possimus maxime facere doloribus praesentium aspernatur ea qui commodi?
-        </div>
-      </el-collapse-item>
-      <!-- <el-collapse-item title="吊装实训模拟区" name="5">
-          <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-          <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-      </el-collapse-item>-->
     </el-collapse>
   </div>
 </template>
@@ -107,11 +48,11 @@ export default {
   data() {
     return {
       activeNames: ["1"],
-      guanjiangPic: [
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
-      ],
-      swiperOption: {
+      baseInfo: [],
+      areaList0: {},
+      arealistrest: [],
+      swipershow: false,
+      swiperOption1: {
         autoplay: {
           disableOnInteraction: false
         },
@@ -152,19 +93,43 @@ export default {
         loop: true,
         effect: "cube",
         grabCursor: true,
-        // cubeEffect: {
-        //   shadow: true,
-        //   slideShadows: true,
-        //   shadowOffset: 20,
-        //   shadowScale: 0.94
-        // },
         pagination: {
           el: ".swiper-pagination"
         }
       }
     };
   },
+  computed: {
+    swiperOption: function() {
+      return [this.swiperOption2, this.swiperOption3];
+    }
+  },
+  props: ["id"],
+  mounted() {
+    this.getBaseInfoById();
+  },
+  watch: {
+    id: function() {
+      this.swipershow = false;
+      this.getBaseInfoById();
+    }
+  },
   methods: {
+    getBaseInfoById() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_getBaseAreaById.do?baseid=${this.id}`
+      })
+        .then(res => {
+          this.baseInfo = res.data.data;
+          this.areaList0 = res.data.data.arealist[0];
+          this.arealistrest = res.data.data.arealist.slice(1);
+          this.swipershow = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     handleChange(val) {
       console.log(val);
     }
@@ -202,18 +167,18 @@ export default {
   padding-top: 30px;
 }
 .guanjiang-content {
-  color: #fff;
+  color: #000;
   position: absolute;
   top: 40px;
   left: 60px;
 }
 
-.guanjiang-content h1 {
+/* .guanjiang-content h1 {
   font-size: 41px;
 }
 .guanjiang-content h2 {
   font-size: 14px;
-}
+} */
 .guanjiang-content p {
   width: 400px;
 }
