@@ -123,7 +123,6 @@ export default {
        ],
        age: [
           { required: true, message: '年龄不能为空' , trigger: "blur"},
-          { type: 'number', message: '年龄必须为数字值'}  
        ],
        worktype: [
           { required: true, message: "请输入工种", trigger: "blur" },
