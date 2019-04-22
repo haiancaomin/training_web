@@ -118,7 +118,7 @@
                         <el-table
                           ref="multipleTable"
                           :data="tableData1"
-                          max-height="400px"
+                          max-height="350"
                           tooltip-effect="dark"
                           style="width: 100%"
                           @selection-change="handleSelectionChange1"

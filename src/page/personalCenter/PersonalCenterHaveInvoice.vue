@@ -21,10 +21,10 @@
         <span class="order-head-title">智聚培训</span>
       </div>
       <div class="order-picture">
-        <el-col :span="8">
+        <el-col :span="7">
           <img src="../../assets/inspection1.jpg" alt class="order-img">
         </el-col>
-        <el-col :span="16">
+        <el-col :span="17">
           <div class="order-detail">
             <p>质量员+考试培训+南通，资料员+考试培训+南通，灌浆工+考试+南通</p>
           </div>
@@ -127,14 +127,13 @@ export default {
   padding: 20px;
 }
 .order-card {
-  height: 350px;
+  height: 320px;
   width: 640px;
   margin: 10px auto;
   box-shadow: 0 0 6px #c7c5c5;
   margin: 20px auto 0px auto;
 }
 .order-card:hover {
-  height: 350px;
   width: 640px;
   margin: 10px auto;
   box-shadow: 0 0 10px #c7c5c5;
@@ -154,12 +153,12 @@ export default {
   font-size: 18px;
 }
 .order-img {
-  width: 171px;
-  height: 171px;
+  width: 141px;
+  height: 141px;
   margin: 0px 0px 0px 10px;
 }
 .order-picture {
-  height: 192px;
+  height: 162px;
   padding: 10px 10px 10px 0px;
   background-color: #f4f4f4;
 }
@@ -167,7 +166,7 @@ export default {
   font-size: 17px;
   margin: 10px 0px 0px 0px;
   color: #333;
-  height: 110px;
+  height: 85px;
 }
 .order-time {
   text-align: left;

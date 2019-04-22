@@ -66,7 +66,15 @@ export default {
   name: "PersonalCenterChangeMobile",
   data() {
     return {
-     
+     ruleForm: {
+        empname: "",
+        sex: "",
+        age: "",
+        worktype: "",
+        cardno: "",
+        phone: "",
+        address: "",
+      },
     };
   },
   methods: {

@@ -205,27 +205,29 @@
         <el-breadcrumb-item>全部订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="order-card">
+
+    <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
       <div class="order-head">
         <img src="../../assets/favicon.png" alt class="order-head-img">
         <span class="order-head-title">智聚培训</span>
+        <span class="el-icon-delete"></span>
       </div>
       <div class="order-picture">
-        <el-col :span="8">
+        <el-col :span="7">
           <img src="../../assets/inspection2.png" alt class="order-img">
         </el-col>
-        <el-col :span="16">
+        <el-col :span="17">
           <div class="order-detail">
-            <p>质量员+考试培训+南通，资料员+考试培训+南通，灌浆工+考试+南通</p>
+            <span v-for="(menuname,index) in orderItem.dlist" :key="menuname.menuname"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
           </div>
-          <p class="order-time">下单时间：2019-03-08 09:52:06</p>
-          <p class="order-num">订单号：84562792862</p>
+          <p class="order-time">下单时间：{{orderItem.createdate}}</p>
+          <p class="order-num">订单号：{{orderItem.orderno}}</p>
         </el-col>
       </div>
       <div class="order-pay">
         <p class="order-pay-info">
-          报名11人，实付款：
-          <span class="order-payment">¥5000</span>
+          报名{{orderItem.personcount}}人，实付款：
+          <span class="order-payment">¥{{orderItem.summoney}}</span>
         </p>
       </div>
       <div class="order-operation">
@@ -234,63 +236,8 @@
       </div>
     </div>
 
-    <div class="order-card">
-      <div class="order-head">
-        <img src="../../assets/favicon.png" alt class="order-head-img">
-        <span class="order-head-title">智聚培训</span>
-      </div>
-      <div class="order-picture">
-        <el-col :span="8">
-          <img src="../../assets/inspection1.jpg" alt class="order-img">
-        </el-col>
-        <el-col :span="16">
-          <div class="order-detail">
-            <p>质量员+考试培训+南通，资料员+考试培训+南通</p>
-          </div>
-          <p class="order-time">下单时间：2019-03-08 09:52:06</p>
-          <p class="order-num">订单号：84562792862</p>
-        </el-col>
-      </div>
-      <div class="order-pay">
-        <p class="order-pay-info">
-          报名11人，实付款：
-          <span class="order-payment">¥5000</span>
-        </p>
-      </div>
-      <div class="order-operation">
-        <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="num = true">发票物流</el-button>
-      </div>
-    </div>
-
-    <div class="order-card">
-      <div class="order-head">
-        <img src="../../assets/favicon.png" alt class="order-head-img">
-        <span class="order-head-title">智聚培训</span>
-      </div>
-      <div class="order-picture">
-        <el-col :span="8">
-          <img src="../../assets/inspection2.png" alt class="order-img">
-        </el-col>
-        <el-col :span="16">
-          <div class="order-detail">
-            <p>质量员+考试培训+南通，资料员+考试培训+南通，灌浆工+考试+南通</p>
-          </div>
-          <p class="order-time">下单时间：2019-03-08 09:52:06</p>
-          <p class="order-num">订单号：84562792862</p>
-        </el-col>
-      </div>
-      <div class="order-pay">
-        <p class="order-pay-info">待付款</p>
-      </div>
-      <div class="order-operation">
-        <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="dialogVisibleInfo = true">查看人员</el-button>
-        <el-button type="primary" round @click="payShow = true">立即支付</el-button>
-      </div>
-    </div>
     <div class="order-page">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="1000" @current-change="handleCurrentChange"></el-pagination>
     </div>
   </div>
 </template>
@@ -309,6 +256,7 @@ export default {
       payOffline: 0,
       dialogVisibleAgreement: false,
       dialogVisibleInfo: false,
+      orderlist: [{}],
       tableData1: [
         {
           name: "张飞",
@@ -419,6 +367,9 @@ export default {
     };
   },
   methods: {
+    handleCurrentChange(val) {
+       
+      },
     checkOK() {
       alert("开票成功");
       this.dialogVisible = false;
@@ -430,7 +381,30 @@ export default {
     offliePayment() {
       this.payOnline = 0;
       this.payOffline = 1;
-    }
+    },
+    getNotPayOrderList(selectIndex) {
+      
+      var pageIndex = (selectIndex - 1)*3
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+          method: "get",
+          url: `${
+            this.baseURL
+          }/zjsxpt/course_findOrderList.do?userid=${userid}&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+        })
+          .then(res => {
+            this.orderlist = res.data.data;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+    },
+  },
+  mounted() {
+    this.getNotPayOrderList(1);
   }
 };
 </script>
@@ -445,18 +419,15 @@ export default {
   padding: 20px;
 }
 .order-card {
-  height: 350px;
-  width: 640px;
-  margin: 10px auto;
-  box-shadow: 0 0 6px #c7c5c5;
+  height: 320px;
+  width: 600px;
   margin: 20px auto 0px auto;
+  box-shadow: 0 0 6px #c7c5c5;
+  border: 1px solid #fff;
 }
 .order-card:hover {
-  height: 350px;
-  width: 640px;
-  margin: 10px auto;
-  box-shadow: 0 0 10px #c7c5c5;
-  margin: 20px auto 0px auto;
+  box-shadow: 0 0 20px #c7c5c5;
+  border: 1px solid #409eff;
 }
 .order-head {
   height: 50px;
@@ -472,12 +443,12 @@ export default {
   font-size: 18px;
 }
 .order-img {
-  width: 171px;
-  height: 171px;
+  width: 141px;
+  height: 141px;
   margin: 0px 0px 0px 10px;
 }
 .order-picture {
-  height: 192px;
+  height: 162px;
   padding: 10px 10px 10px 0px;
   background-color: #f4f4f4;
 }
@@ -485,7 +456,7 @@ export default {
   font-size: 17px;
   margin: 10px 0px 0px 0px;
   color: #333;
-  height: 110px;
+  height: 85px;
 }
 .order-time {
   text-align: left;
@@ -768,6 +739,15 @@ input {
 }
 #contact {
   text-align: center;
+}
+.el-icon-delete {
+  float: right;
+  font-size: 18px;
+  margin: 6px 15px 0px 0px;
+}
+.el-icon-delete:hover {
+  color: #409eff;
+  cursor: pointer;
 }
 </style>
 

@@ -1281,7 +1281,13 @@ export default {
         traintimeids += this.time4+ ",";
         employeeids += this.empids4 + ";";
       }
-      this.$ajax({
+      if (this.empSize1<1&&this.empSize2<1&&this.empSize3<1&&this.empSize4<1) {
+         this.$message({
+                message: "网络延迟或选择人员为0!",
+                center:true
+              });  
+      } else {
+        this.$ajax({
         method: "post",
         url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}",
         "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}`
@@ -1300,6 +1306,7 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
+      }
     }
   }
 };

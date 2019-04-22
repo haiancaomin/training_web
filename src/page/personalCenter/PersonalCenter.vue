@@ -25,16 +25,9 @@
               <span class="in-submenu">待付款</span>
             </el-menu-item>
             <el-menu-item index="/personalCenter/PersonalCenterNotInvoice">
-              <span class="in-submenu">待开发票</span>
-            </el-menu-item>
-            <el-menu-item index="/personalCenter/PersonalCenterHaveInvoice">
-              <span class="in-submenu">已开发票</span>
+              <span class="in-submenu">订单发票</span>
             </el-menu-item>
           </el-submenu>
-          <!-- <el-menu-item index="/personalCenter/PesronalScoreSearch">
-            <i class="el-icon-search"></i>   
-            <span slot="title">成绩查询</span>
-          </el-menu-item> -->
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-menu"></i>
@@ -82,7 +75,7 @@
               <span class="in-submenu">修改密码</span>
             </el-menu-item>
             <el-menu-item index="/personalCenter/PersonalCenterChangeMobile">
-              <span class="in-submenu">联系方式</span>
+              <span class="in-submenu">修改电话</span>
             </el-menu-item>
           </el-submenu>
         </el-menu>
