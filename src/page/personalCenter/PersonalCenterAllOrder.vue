@@ -52,17 +52,41 @@
     </div>
 
     <div class="order-dialog" id="orderDialog">
-      <el-dialog title="报名人员信息" :visible.sync="dialogVisibleInfo" width="600px" center>
-        <el-table :data="tableData1" border height="400px" style="width: 100%">
-          <el-table-column prop="name" label="姓名" width="80"></el-table-column>
-          <el-table-column prop="id" label="身份证" width="280"></el-table-column>
-          <el-table-column prop="course" label="课程"></el-table-column>
+      <el-dialog title="报名人员信息" :visible.sync="showEmpDia" width="600px" center>
+        <el-table :data="tableData" border max-height="400" style="width: 100%">
+          <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
+          <el-table-column prop="cardno" label="身份证" width="280"></el-table-column>
+          <el-table-column prop="coursename" label="课程"></el-table-column>
         </el-table>
         <div class="sign-submit">
-          <el-button type="primary">关闭</el-button>
+          <el-button type="primary" @click="showEmpDia=false">关闭</el-button>
         </div>
       </el-dialog>
 
+      <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
+        <p>电话：845923412</p>
+        <p>邮箱：231231332@dd.com</p>
+      </el-dialog>
+      <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule1">
+        <div class="schedule-body">
+        <el-steps :space="250" :active="1" finish-status="success">
+  <el-step title="提交材料"></el-step>
+  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+  <el-step title="完成"></el-step>
+</el-steps>
+        </div>
+      </el-dialog>
+
+      <el-dialog title="开票进度" :visible.sync="scheduleSuccess" width="600px" id="schedule2">
+        <div class="schedule-body">
+        <el-steps :space="250" :active="3" finish-status="success">
+  <el-step title="提交材料"></el-step>
+  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+  <el-step title="完成"></el-step>
+</el-steps>
+        </div>
+      </el-dialog>
+      
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
@@ -218,26 +242,35 @@
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
-            <span v-for="(menuname,index) in orderItem.dlist" :key="menuname.menuname"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
+            <span v-for="(menuname,index) in orderItem.dlist" :key="index"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
           </div>
           <p class="order-time">下单时间：{{orderItem.createdate}}</p>
           <p class="order-num">订单号：{{orderItem.orderno}}</p>
         </el-col>
       </div>
       <div class="order-pay">
-        <p class="order-pay-info">
+        <p class="order-pay-info" v-if="orderItem.status==0">
+          报名{{orderItem.personcount}}人，待付款：
+          <span class="order-payment">¥{{orderItem.summoney}}</span>
+        </p>
+        <p class="order-pay-info" v-else>
           报名{{orderItem.personcount}}人，实付款：
           <span class="order-payment">¥{{orderItem.summoney}}</span>
         </p>
       </div>
       <div class="order-operation">
-        <el-button type="primary" round @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round @click="dialogVisible = true">开具发票</el-button>
+        <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
+        <el-button type="primary" round plain @click="checkEmp(orderItem.orderid)">报名员工</el-button>
+        <el-button type="primary" round @click="payShow = true" v-if="orderItem.status==0">立即支付</el-button>
+        <el-button type="primary" round @click="dialogVisible = true" v-if="orderItem.status==1">开具发票</el-button>
+        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
+        <el-button type="primary" round plain @click="scheduleSuccess = true" v-if="orderItem.status==3">开票进度</el-button>
+        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==3">发票物流</el-button>
       </div>
     </div>
 
     <div class="order-page">
-      <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="1000" @current-change="handleCurrentChange"></el-pagination>
+      <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="count" @current-change="handleCurrentChange"></el-pagination>
     </div>
   </div>
 </template>
@@ -248,142 +281,27 @@ export default {
   data() {
     return {
       contact: false,
+      count: 0,
       dialogVisible: false,
       radio2: 3,
       num: false,
       payShow: false,
       payOnline: 1,
       payOffline: 0,
+      showEmpDia: false,
+      scheduleSuccess: false,
+      schedule: false,
       dialogVisibleAgreement: false,
       dialogVisibleInfo: false,
       orderlist: [{}],
-      tableData1: [
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        },
-        {
-          name: "张飞",
-          id: "342423434232323133",
-          course: "资料员"
-        }
-      ]
+      tableData: [{}]
     };
   },
   methods: {
     handleCurrentChange(val) {
-       
-      },
-    checkOK() {
-      alert("开票成功");
-      this.dialogVisible = false;
-    },
-    onliePayment() {
-      this.payOnline = 1;
-      this.payOffline = 0;
-    },
-    offliePayment() {
-      this.payOnline = 0;
-      this.payOffline = 1;
+        this.getNotPayOrderList(val);
     },
     getNotPayOrderList(selectIndex) {
-      
       var pageIndex = (selectIndex - 1)*3
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -397,10 +315,38 @@ export default {
         })
           .then(res => {
             this.orderlist = res.data.data;
+            this.count = res.data.count;    
           })
           .catch(function(err) {
             console.log(err);
           });
+    },
+    checkOK() {
+      alert("开票成功");
+      this.dialogVisible = false;
+    },
+    onliePayment() {
+      this.payOnline = 1;
+      this.payOffline = 0;
+    },
+    offliePayment() {
+      this.payOnline = 0;
+      this.payOffline = 1;
+    },
+    checkEmp(orderid) {
+      this.$ajax({
+          method: "get",
+          url: `${
+            this.baseURL
+          }/zjsxpt/course_findPersonListByOrderid.do?orderid=${orderid}`
+        })
+          .then(res => {
+            this.tableData = res.data.data;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      this.showEmpDia = true;
     },
   },
   mounted() {
@@ -748,6 +694,13 @@ input {
 .el-icon-delete:hover {
   color: #409eff;
   cursor: pointer;
+}
+#schedule1,#schedule2 {
+  text-align: center;
+}
+.schedule-body {
+  text-align: left;
+  padding:0px 0px 0px 115px;
 }
 </style>
 

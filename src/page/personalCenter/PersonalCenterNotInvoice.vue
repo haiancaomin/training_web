@@ -16,7 +16,7 @@
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
       </el-dialog>
-      <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule">
+      <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule1">
         <div class="schedule-body">
         <el-steps :space="250" :active="1" finish-status="success">
   <el-step title="提交材料"></el-step>
@@ -25,6 +25,17 @@
 </el-steps>
         </div>
       </el-dialog>
+
+      <el-dialog title="开票进度" :visible.sync="scheduleSuccess" width="600px" id="schedule2">
+        <div class="schedule-body">
+        <el-steps :space="250" :active="3" finish-status="success">
+  <el-step title="提交材料"></el-step>
+  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+  <el-step title="完成"></el-step>
+</el-steps>
+        </div>
+      </el-dialog>
+
       <el-dialog title="发票预览" :visible.sync="dialogVisible" width="800px">
         <div class="table-body">
           <table border="1" cellspacing="0">
@@ -89,7 +100,7 @@
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
-            <span v-for="(menuname,index) in orderItem.dlist" :key="menuname.menuname"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
+            <span v-for="(menuname,index) in orderItem.dlist" :key="index"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
           </div>
           <p class="order-time">下单时间：{{orderItem.createdate}}</p>
           <p class="order-num">订单号：{{orderItem.orderno}}</p>
@@ -105,7 +116,8 @@
         <el-button type="primary" round plain @click="checkEmp(orderItem.orderid)">报名员工</el-button>
         <el-button type="primary" round @click="dialogVisible = true" v-if="orderItem.status==1">开具发票</el-button>
         <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
-        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">发票物流</el-button>
+        <el-button type="primary" round plain @click="scheduleSuccess = true" v-if="orderItem.status==3">开票进度</el-button>
+        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==3">发票物流</el-button>
       </div>
     </div>
 
@@ -122,6 +134,7 @@ export default {
     return {
       contact: false,
       schedule: false,
+      scheduleSuccess: false,
       dialogVisible: false,
       havaNotClick: true,
       havaClick: false,
@@ -142,7 +155,6 @@ export default {
         this.getNotPayOrderList(val);
     },
     checkEmp(orderid) {
-      this.tableData = [{}];
       this.$ajax({
           method: "get",
           url: `${
@@ -151,7 +163,6 @@ export default {
         })
           .then(res => {
             this.tableData = res.data.data;
-            console.log(this.tableData);
           })
           .catch(function(err) {
             console.log(err);
@@ -321,10 +332,9 @@ input {
 }
 .schedule-body {
   text-align: left;
- 
   padding:0px 0px 0px 115px;
 }
-#schedule {
+#schedule1,#schedule2 {
   text-align: center;
 }
 .sign-submit {

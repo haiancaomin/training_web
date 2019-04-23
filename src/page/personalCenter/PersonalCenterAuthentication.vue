@@ -8,74 +8,54 @@
     </div>
 
     <div class="PersonalPassword-change" v-if="!haveSubmit">
-      <el-form :model="ruleForm" ref="ruleForm"  class="demo-ruleForm">
-        <el-form-item prop="IDCardNuM">
-         
-            
-            <div class="input-body">
-                <div class="input-icon1">
-              <i class="el-icon-edit-outline"></i>
-            </div>
-              <input type="text" placeholder="请输入公司名称" class="input-input" maxlength="12">
-            </div>
-          
-            
-            
-        
+      <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm">
+        <el-form-item prop="companyName">
+          <div class="input-body" id="loginForm">
+            <el-input :type="inputType" placeholder="请输入公司名称" v-model="ruleForm.companyName">
+              <i slot="prefix" class="el-icon-edit-outline"></i>
+            </el-input>
+          </div>
         </el-form-item>
 
-        
-        <!-- <el-form-item label="手机号码:  " prop="mobile">
-          <el-input v-model="ruleForm.mobile"></el-input>
-        </el-form-item> -->
-        
         <el-form-item>
           <div class="com-upload">
-        <el-upload
-  class="upload-demo"
-  drag
-  action="https://jsonplaceholder.typicode.com/posts/"
-  multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">请上传公司认证文件，<em>点击上传</em></div>
-  
-</el-upload>
+            <el-upload
+              class="upload-demo"
+              drag
+              action="https://jsonplaceholder.typicode.com/posts/"
+              multiple
+            >
+              <i class="el-icon-upload"></i>
+              <div class="el-upload__text">
+                请上传公司认证文件，
+                <em>点击上传</em>
+              </div>
+              <el-button type="primary" @click="submitUpload" class="login-self">立即认证</el-button>
+            </el-upload>
           </div>
         </el-form-item>
-        <el-form-item>
-          <div class="com-upload">
-        <el-upload
-  class="upload-demo"
-  drag
-  action="https://jsonplaceholder.typicode.com/posts/"
-  multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">请上传公司认证文件，<em>点击上传</em></div>
-</el-upload>
-          </div>
-        </el-form-item>
+
         <div class="PersonalPassword-change-commit">
           <el-form-item>
-            <el-button type="primary" @click="checkCompany" class="login-self">立即认证</el-button>
+            
           </el-form-item>
         </div>
       </el-form>
     </div>
 
     <div class="haveSubmit" v-if="haveSubmit">
-
-<el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
+      <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
       </el-dialog>
 
-        <el-steps :space="200" :active="1" finish-status="success">
-  <el-step title="提交材料"></el-step>
-  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
-  <el-step title="完成"></el-step>
-</el-steps>
+      <el-steps :space="200" :active="1" finish-status="success">
+        <el-step title="提交材料"></el-step>
+        <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+        <el-step title="完成"></el-step>
+      </el-steps>
 
-<div class="operation">
+      <div class="operation">
         <el-button type="primary" round @click="contact = true">联系我们</el-button>
       </div>
     </div>
@@ -87,7 +67,7 @@ export default {
   name: "PersonalCenterAuthentication",
   data() {
     return {
-        contact: false,
+      contact: false,
       haveSubmit: false,
       ruleForm: {
         name: "",
@@ -104,24 +84,28 @@ export default {
         verification: "",
         mail: "",
         company: "",
-        qualification: ""
+        qualification: "",
+        ruleForm: {
+          companyName: ""
+        }
       }
     };
   },
   methods: {
     checkCompany() {
-        alert("信息提交成功，我们会在一个工作日内完成验证，您也可以联系我们，加速认证进度");
-        this.haveSubmit = true;
+      alert(
+        "信息提交成功，我们会在一个工作日内完成验证，您也可以联系我们，加速认证进度"
+      );
+      this.haveSubmit = true;
     }
   }
 };
 </script>
 
 <style scoped>
-
 #PersonalCenterAuthentication {
   width: 830px;
-  
+
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -136,8 +120,7 @@ export default {
 }
 
 .haveSubmit {
-    margin: 100px 0px 0px 150px;
-   
+  margin: 100px 0px 0px 150px;
 }
 
 .PersonalPassword-change-commit {
@@ -170,10 +153,10 @@ export default {
 }
 
 .el-upload__tip {
-  margin:0px 0px 0px 70px;
+  margin: 0px 0px 0px 70px;
 }
 .operation {
-    margin: 70px 0px 20px 148px;
+  margin: 70px 0px 20px 148px;
 }
 #contact {
   text-align: center;
@@ -183,26 +166,23 @@ export default {
   font-size: 18px;
   margin: 1px 0px 0px 12px;
 }
-.input-input {
-  border:1px solid #c5cddb;
+.el-input {
   width: 358px;
-border-radius: 2px;
-height: 44px;
-line-height: 44px;
-background: #fff;
-    font-size:14px;
-    padding:0px 10px 0px 40px;
-}
-.input-input:hover {
-  border:1px solid #409EFF;
-}
-.input-input:focus {
-  border:1px solid #409EFF;
 }
 .login-self {
   width: 358px;
-font-size: 16px;
-height: 44px;
+  font-size: 16px;
+  height: 44px;
+}
+.el-icon-edit-outline {
+  line-height: 44px;
+  margin: 0px 0px 0px 2px;
+  font-size: 18px;
+}
+</style>
+<style>
+#loginForm .el-input__inner {
+  height: 44px;
 }
 </style>
 

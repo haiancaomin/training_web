@@ -166,7 +166,7 @@
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
-            <span v-for="(menuname,index) in orderItem.dlist" :key="menuname.menuname"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
+            <span v-for="(menuname,index) in orderItem.dlist" :key="index"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
           </div>
           <p class="order-time">下单时间：{{orderItem.createdate}}</p>
           <p class="order-num">订单号：{{orderItem.orderno}}</p>
