@@ -230,6 +230,7 @@
       </el-breadcrumb>
     </div>
 
+    <div v-show="orderlist">
     <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
       <div class="order-head">
         <img src="../../assets/favicon.png" alt class="order-head-img">
@@ -268,9 +269,11 @@
         <el-button type="success" round @click="schedule = true" v-if="orderItem.status==3">发票物流</el-button>
       </div>
     </div>
-
+    </div>
+    <div v-show="orderlist">
     <div class="order-page">
       <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="count" @current-change="handleCurrentChange"></el-pagination>
+    </div>
     </div>
   </div>
 </template>
@@ -357,7 +360,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAllOrder {
-  width: 830px;
+  width: 730px;
 
   box-shadow: 0 0 2px #c7c5c5;
   border: 1px solid #e7e7e7;

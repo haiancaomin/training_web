@@ -19,18 +19,15 @@ import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
 import contactUs from '@/page/contactUs'
 import PersonalCenter from '@/page/personalCenter/PersonalCenter'
-import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
-import PersonalExpressSearch from '@/page/personalCenter/PersonalExpressSearch'
-import PersonalInvoice from '@/page/personalCenter/PersonalInvoice'
+
 import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
-import PersonalMail from '@/page/personalCenter/PersonalMail'
+
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
 import PersonalCenterPersonInfo from '@/page/personalCenter/PersonalCenterPersonInfo'
 import PersonalCenterAllOrder from '@/page/personalCenter/PersonalCenterAllOrder'
 import PersonalCenterUncompletedOrder from '@/page/personalCenter/PersonalCenterUncompletedOrder'
 import PersonalCenterNotInvoice from '@/page/personalCenter/PersonalCenterNotInvoice'
-import PersonalCenterHaveInvoice from '@/page/personalCenter/PersonalCenterHaveInvoice'
 import PersonalCenterAuthentication from '@/page/personalCenter/PersonalCenterAuthentication'
 import PersonalCenterReport from '@/page/personalCenter/PersonalCenterReport'
 import PersonalCenterCertificate from '@/page/personalCenter/PersonalCenterCertificate'
@@ -110,10 +107,7 @@ export default new Router({
     //   name: 'Echarts',
     //   component: Echarts
     // },
-    {
-      path: 'PesronalScoreSearch',
-      component: PesronalScoreSearch,
-    },
+   
     {
       path: '/course',
       component: courseList
@@ -154,9 +148,6 @@ export default new Router({
         path: 'PersonalCenterPersonInfo',
         component: PersonalCenterPersonInfo,
       }, {
-        path: 'PersonalExpressSearch',
-        component: PersonalExpressSearch,
-      }, {
         path: 'PersonalCenterInvoiceShow',
         component: PersonalCenterInvoiceShow,
       }, {
@@ -171,10 +162,8 @@ export default new Router({
       }, {
         path: 'PersonalCenterNotInvoice',
         component: PersonalCenterNotInvoice,
-      }, {
-        path: 'PersonalCenterHaveInvoice',
-        component: PersonalCenterHaveInvoice,
-      }, {
+      }, 
+       {
         path: 'PersonalCenterAuthentication',
         component: PersonalCenterAuthentication,
       }, {
@@ -200,22 +189,11 @@ export default new Router({
     }, {
       path: '/PersonalCenter',
       component: PersonalCenter
-    }, {
-      path: '/PesronalScoreSearch',
-      component: PesronalScoreSearch
-    }, {
-      path: '/PersonalExpressSearch',
-      component: PersonalExpressSearch
-    }, {
-      path: '/PersonalInvoice',
-      component: PersonalInvoice
-    }, {
+    }, 
+    {
       path: '/PersonalPassword',
       component: PersonalPassword
-    }, {
-      path: '/PersonalMail',
-      component: PersonalMail
-    }, {
+    },{
       path: '/HRServiceTypeChoice',
       component: HRServiceTypeChoice
     }, {

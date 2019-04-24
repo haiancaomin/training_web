@@ -250,7 +250,7 @@ export default {
 
 <style scoped>
 #PersonalCenterInvoiceShow {
-  width: 830px;
+  width: 730px;
 
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;

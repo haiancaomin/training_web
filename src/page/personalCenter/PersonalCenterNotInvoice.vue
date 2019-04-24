@@ -198,8 +198,7 @@ export default {
 
 <style scoped>
 #PersonalCenterNotInvoice {
-  width: 830px;
-
+  width: 730px;
   box-shadow: 0 0 2px #c7c5c5;
   border: 1px solid #e7e7e7;
   margin: 0px 0px 0px 20px;

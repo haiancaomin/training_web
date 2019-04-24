@@ -166,7 +166,7 @@ export default {
       if (userInfo) {
         var userid = userInfo.userid;
       }
-       console.log("1");
+       
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$ajax({
@@ -198,7 +198,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAddPerson {
-  width: 830px;
+  width: 730px;
 
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;

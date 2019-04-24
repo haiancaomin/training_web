@@ -11,7 +11,7 @@
       <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="companyName">
           <div class="input-body" id="loginForm">
-            <el-input :type="inputType" placeholder="请输入公司名称" v-model="ruleForm.companyName">
+            <el-input type="text" placeholder="请输入公司名称" v-model="ruleForm.companyName">
               <i slot="prefix" class="el-icon-edit-outline"></i>
             </el-input>
           </div>
@@ -19,25 +19,21 @@
 
         <el-form-item>
           <div class="com-upload">
-            <el-upload
-              class="upload-demo"
-              drag
-              action="https://jsonplaceholder.typicode.com/posts/"
-              multiple
-            >
+            <el-upload class="upload-demo" ref="upload" drag :action="uploadUrl" :on-success="uploadSuccess" :auto-upload="false" multiple>
               <i class="el-icon-upload"></i>
               <div class="el-upload__text">
                 请上传公司认证文件，
                 <em>点击上传</em>
               </div>
-              <el-button type="primary" @click="submitUpload" class="login-self">立即认证</el-button>
             </el-upload>
+
+            
           </div>
         </el-form-item>
 
         <div class="PersonalPassword-change-commit">
           <el-form-item>
-            
+            <el-button type="primary" @click="submitUpload" class="login-self">立即认证</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -70,26 +66,15 @@ export default {
       contact: false,
       haveSubmit: false,
       ruleForm: {
-        name: "",
-        IDCardNuM: "",
-        sex: "",
-        birthday: "",
-        native: "",
-        workingSpace: "",
-        education: "",
-        graduteSchool: "",
-        position: "",
-        workType: "",
-        mobile: "",
-        verification: "",
-        mail: "",
-        company: "",
-        qualification: "",
-        ruleForm: {
-          companyName: ""
-        }
-      }
+        companyName: ""
+      },
+      fileUid: ""
     };
+  },
+  computed: {
+    uploadUrl: function() {
+      return this.baseURL + "/zjsxpt/attachment_upload.do";
+    }
   },
   methods: {
     checkCompany() {
@@ -97,6 +82,41 @@ export default {
         "信息提交成功，我们会在一个工作日内完成验证，您也可以联系我们，加速认证进度"
       );
       this.haveSubmit = true;
+    },
+    submitUpload() {
+      this.$refs.upload.submit();
+      if (this.fileUid == ''||this.ruleForm.companyName == '') {
+        this.$message({
+            message: "请上传完整信息！",
+            center: true
+          });
+      } else {
+        
+        var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${
+          this.ruleForm.companyName
+        }&attachmentids=${this.fileUid}&userid=${userid}`
+      })
+        .then(res => {
+          this.haveSubmit = true;
+          this.$message({
+            message: "上传成功！",
+            center: true
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      }
+    },
+    uploadSuccess(response, file, fileList) {
+      this.fileUid += response.data + ",";
+      alert(this.fileUid)
     }
   }
 };
@@ -104,8 +124,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAuthentication {
-  width: 830px;
-
+  width: 730px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -116,7 +135,7 @@ export default {
   width: 300px;
 }
 .PersonalPassword-change {
-  margin: 30px 200px 0px 200px;
+  margin: 30px 170px 0px 200px;
 }
 
 .haveSubmit {
@@ -125,7 +144,7 @@ export default {
 
 .PersonalPassword-change-commit {
   text-align: center;
-  margin: 0px 250px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 .test-but {
   position: absolute;
