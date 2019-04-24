@@ -19,11 +19,15 @@
 
         <el-form-item>
           <div class="com-upload">
-            <el-upload class="upload-demo" ref="upload" drag :action="uploadUrl" :on-success="uploadSuccess" :auto-upload="false" multiple>
+            <el-upload class="upload-demo" ref="upload" drag :action="uploadUrl" 
+            :on-success="uploadSuccess"
+            :on-remove="removeUpload"
+            :on-exceed="noticeOut"
+            :limit="2"
+            multiple>
               <i class="el-icon-upload"></i>
               <div class="el-upload__text">
-                请上传公司认证文件，
-                <em>点击上传</em>
+                请上传<em>法人身份照扫描件</em>和<em>营业执照扫描件</em>
               </div>
             </el-upload>
 
@@ -114,9 +118,31 @@ export default {
         });
       }
     },
+    splitFileUid(uid) {
+      if(this.fileUid.split(uid+",")[0] != '') {
+        this.fileUid = this.fileUid.split(uid+",")[0];
+      } else {
+        this.fileUid = this.fileUid.split(uid+",")[1];
+      }
+      
+     
+    },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
-      alert(this.fileUid)
+      console.log(file);
+      console.log(fileList);
+    },
+    removeUpload(file, fileList) {
+      console.log(file.response.data);
+      console.log(fileList);
+      this.splitFileUid(file.response.data)
+      alert(this.fileUid);
+    },
+    noticeOut(files, fileList) {
+      this.$message({
+            message: "最多上传两个文件！",
+            center: true
+          });
     }
   }
 };
