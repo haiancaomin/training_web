@@ -22,6 +22,7 @@ import PersonalCenter from '@/page/personalCenter/PersonalCenter'
 
 import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
 import PersonalPassword from '@/page/personalCenter/PersonalPassword'
+import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
 
 import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
 import PersonalCenterPersonInfo from '@/page/personalCenter/PersonalCenterPersonInfo'
@@ -62,6 +63,11 @@ export default new Router({
       path: '/SignUp',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/PesronalScoreSearch',
+      name: 'PesronalScoreSearch',
+      component: PesronalScoreSearch
     },
     {
       path: '/CompanySignUp',
