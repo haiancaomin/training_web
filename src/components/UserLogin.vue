@@ -27,9 +27,7 @@
 
         <el-form-item>
           <el-button
-            type="primary"
-            @click="submitForm('ruleForm')"
-            class="login-self"
+            type="primary" @click="submitForm('ruleForm')" class="login-self"
           >登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
         </el-form-item>
       </el-form>

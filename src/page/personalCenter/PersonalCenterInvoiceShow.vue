@@ -282,7 +282,6 @@ export default {
             .then(res => {
               if(res.data.data == "false") {
                this.haveInvoice = false;
-               alert(this.haveInvoice);
             } else {
               this.haveInvoice = true;
               this.companyName= res.data.data.company;
