@@ -54,7 +54,8 @@
                 </div>
                 <div class="order-meal-person-num" @click="scanEmp1">
                   报名人数：
-                  <span>{{empSize1}}</span>
+                  <span >{{empSize1}}</span>
+                  <span  class="emp-edit">编辑</span>
                 </div>
               </el-col>
             </div>
@@ -168,6 +169,7 @@
                 <div class="order-meal-person-num" @click="scanEmp2">
                   报名人数：
                   <span>{{empSize2}}</span>
+                  <span  class="emp-edit">编辑</span>
                 </div>
               </el-col>
             </div>
@@ -281,6 +283,7 @@
                 <div class="order-meal-person-num" @click="scanEmp3">
                   报名人数：
                   <span>{{empSize3}}</span>
+                  <span  class="emp-edit">编辑</span>
                 </div>
               </el-col>
             </div>
@@ -394,6 +397,7 @@
                 <div class="order-meal-person-num" @click="scanEmp4">
                   报名人数：
                   <span>{{empSize4}}</span>
+                  <span  class="emp-edit">编辑</span>
                 </div>
               </el-col>
             </div>
@@ -1350,7 +1354,7 @@ export default {
   font-size: 12px;
   color: #666;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 .order-subtotal {
   width: 940px;
@@ -1362,7 +1366,7 @@ export default {
 }
 .order-img {
   width: 120px;
-  height: 70px;
+  height: 87px;
 }
 .order-subtotal {
   text-align: right;
@@ -1385,18 +1389,20 @@ export default {
   font-size: 14px;
   color: #333;
   text-align: left;
-  padding: 0px 0px 0px 30px;
+  padding: 5px 0px 10px 30px;
 }
 .order-meal-person-num {
   margin-top: 28px;
   color: #ff6600;
   cursor: pointer;
   text-align: left;
-  padding: 0px 0px 0px 30px;
+  margin: 30px 0px 0px 30px;
 }
-
+.emp-edit {
+  margin: 0px 0px 0px 10px;
+}
 .order-meal-property {
-  height: 70px;
+  height: 90px;
   display: table-cell;
   vertical-align: middle;
 }
