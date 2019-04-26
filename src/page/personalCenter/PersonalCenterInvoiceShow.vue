@@ -71,7 +71,8 @@
         </tr>
       </table>
       <div class="info-edit">
-        <el-button type="success" @click="saveInvoice">点击保存</el-button>
+        <el-button type="success" @click="saveHaveInvoice" v-if="haveInvoice">点击保存</el-button>
+        <el-button type="success" @click="saveNoInvoice" v-if="!haveInvoice">点击保存</el-button>
       </div>
     </div>
     <div v-if="!ifEdit" class="table-body">
@@ -121,7 +122,7 @@ export default {
   data() {
     return {
       ifEdit: false,
-      companyName: 'ss',
+      companyName: '',
       companyAddress:'',
       taxerID:'',
       contactPerson:'',
@@ -130,7 +131,8 @@ export default {
       account:'',
       otherContent:'',
       invoiceid:'',
-      haveEdit: false
+      haveEdit: false,
+      haveInvoice: false
     };
   },
   methods: {
@@ -142,8 +144,71 @@ export default {
          this.haveEdit = true;
        }
     },
-    saveInvoice() {
-      
+    saveHaveInvoice() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      if(this.companyName=='') {
+        this.$message({
+                message: "公司名称不能为空！",
+                center:true
+              });  
+      } else if(this.companyAddress=='') {
+        this.$message({
+                message: "公司地址不能为空！",
+                center:true
+              });  
+      }else if(this.taxerID=='') {
+        this.$message({
+                message: "纳税人识别号不能为空！",
+                center:true
+              });  
+      }else if(this.taxerID.length!=15&&this.taxerID.length!=17&&this.taxerID.length!=18&&this.taxerID.length!=20) {
+        this.$message({
+                message: "纳税人识别号位数不正确！",
+                center:true
+              });  
+      }else if(this.contactPerson=='') {
+        this.$message({
+                message: "联系人不能为空！",
+                center:true
+              });  
+      }else if(this.bank=='') {
+        this.$message({
+                message: "公司开户行不能为空！",
+                center:true
+              });  
+      }else if(this.phone=='') {
+        this.$message({
+                message: "联系电话不能为空！",
+                center:true
+              });  
+      }else if(this.account=='') {
+        this.$message({
+                message: "公司账号不能为空！",
+                center:true
+              });  
+      }else {
+        this.$ajax({
+            method: "post",
+            url: `${this.baseURL}/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${this.invoiceid}",company:
+            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",content:"${this.otherContent}"}&userid=${userid}`
+          })
+            .then(res => {
+              this.$message({
+                message: "修改成功！",
+                center:true
+              });    
+              this.ifEdit = false;       
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+      }
+    },
+    saveNoInvoice() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
@@ -183,7 +248,7 @@ export default {
                 message: "公司账号不能为空！",
                 center:true
               });  
-      }else if (!this.haveEdit){
+      }else {
         this.$ajax({
             method: "post",
             url: `${this.baseURL}/zjsxpt/invoice_saveInvoice.do?invoice={"company":
@@ -200,24 +265,8 @@ export default {
             .catch(function(err) {
               console.log(err);
             });
-      } else {
-        this.$ajax({
-            method: "post",
-            url: `${this.baseURL}/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${this.invoiceid}",company:
-            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",content:"${this.otherContent}"}&userid=${userid}`
-          })
-            .then(res => {
-              this.$message({
-                message: "修改成功！",
-                center:true
-              });    
-              this.ifEdit = false;       
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
-      }
+      } 
+     
       
     }
   },
@@ -231,6 +280,11 @@ export default {
             url: `${this.baseURL}//zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
           })
             .then(res => {
+              if(res.data.data == "false") {
+               this.haveInvoice = false;
+               alert(this.haveInvoice);
+            } else {
+              this.haveInvoice = true;
               this.companyName= res.data.data.company;
               this.companyAddress=res.data.data.address;
               this.taxerID=res.data.data.taxpayerno;
@@ -239,7 +293,9 @@ export default {
               this.phone=res.data.data.mobilephone;
               this.account=res.data.data.account;
               this.otherContent=res.data.data.content;
-              this.invoiceid = res.data.data.invoiceid      
+              this.invoiceid = res.data.data.invoiceid
+            }
+                    
             })
             .catch(function(err) {
               console.log(err);

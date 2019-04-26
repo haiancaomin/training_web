@@ -17,6 +17,14 @@
         <p>邮箱：231231332@dd.com</p>
       </el-dialog>
 
+      <el-dialog :visible.sync="deleteOrderShow" width="400px" class="deleteOrderNotice">
+        <p>是否确认删除，删除执行后将无法撤销</p>
+        <div class="delete-order-operation">
+          <el-button type="primary" @click="deleteOrderShow=false">取消</el-button>
+          <el-button type="primary" plain @click="deleteOrder">确认</el-button>
+        </div>
+      </el-dialog>
+
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
         <div class="pay">
           <div class="pay-head">
@@ -154,15 +162,16 @@
         <el-breadcrumb-item>待完成订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+    <div v-if="count">
     <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
       <div class="order-head">
         <img src="../../assets/favicon.png" alt class="order-head-img">
         <span class="order-head-title">智聚实训</span>
-        <span class="el-icon-delete"></span>
+        <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
       </div>
       <div class="order-picture">
         <el-col :span="7">
-          <img src="../../assets/inspection1.jpg" alt class="order-img">
+          <img :src="orderItem.picurl" alt class="order-img">
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
@@ -181,9 +190,15 @@
         <el-button type="primary" round @click="payShow = true">立即支付</el-button>
       </div>
     </div>
-
+    </div>
+    <div v-if="count">
     <div class="order-page">
       <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="count" @current-change="handleCurrentChange"></el-pagination>
+    </div>
+    </div>
+    <div v-if="!count" class="noOrder">
+      <img src="../../assets/favicon.png" alt class="order-head-img">
+      <p class="no-order-content">您还没有相关的订单</p>
     </div>
   </div>
 </template>
@@ -201,7 +216,10 @@ export default {
       radio2: 3,
       orderlist: [{}],
       count:0,
-      tableData: [{}]
+      tableData: [{}],
+      deleteOrderShow: false,
+      deleteOrderID: "",
+      currentPage: 1
     };
   },
   methods: {
@@ -215,6 +233,7 @@ export default {
     },
      handleCurrentChange(val) {
         this.getNotPayOrderList(val);
+        this.currentPage = val;
     },
     checkEmp(orderid) {
       this.tableData = [{}];
@@ -251,7 +270,30 @@ export default {
           .catch(function(err) {
             console.log(err);
           });
-    }
+    },
+    showNotice(id) {
+      this.deleteOrderID = id;
+      this.deleteOrderShow = true;
+    },
+    deleteOrder() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${
+          this.deleteOrderID
+        }`
+      })
+        .then(res => {
+          this.deleteOrderShow = false;
+          this.$message({
+            message: "删除成功！",
+            center: true
+          });
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getNotPayOrderList(1);
@@ -559,6 +601,21 @@ export default {
 .el-icon-delete:hover {
   color: #409eff;
   cursor: pointer;
+}
+.deleteOrderNotice {
+  text-align: center;
+}
+.delete-order-operation {
+  margin:30px 0px 0px 0px;
+}
+.noOrder {
+  margin: 120px 0px 0px 0px; 
+  text-align: center;
+}
+.no-order-content {
+  margin: 20px 0px 0px 0px;
+  color: #999;
+  font-size: 18px;
 }
 </style>
 

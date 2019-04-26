@@ -45,7 +45,7 @@
             <div class="order-meal-info">
               <el-col :span="8">
                 <div class="order-img-meal">
-                  <img src="../../assets/inspection1.jpg" class="order-img" alt>
+                  <img :src="picurl1" class="order-img" alt>
                 </div>
               </el-col>
               <el-col :span="16">
@@ -97,7 +97,7 @@
           <el-col :span="1">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span class="el-icon-delete" @click="orderShow1=false"></span>
+                <span class="el-icon-delete" @click="deleteOrder1"></span>
               </div>
             </div>
           </el-col>
@@ -158,7 +158,7 @@
             <div class="order-meal-info">
               <el-col :span="8">
                 <div class="order-img-meal">
-                  <img src="../../assets/inspection2.png" class="order-img" alt>
+                  <img :src="picurl2" class="order-img" alt>
                 </div>
               </el-col>
               <el-col :span="16">
@@ -210,7 +210,7 @@
           <el-col :span="1">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span class="el-icon-delete" @click="orderShow2=false"></span>
+                <span class="el-icon-delete" @click="deleteOrder2"></span>
               </div>
             </div>
           </el-col>
@@ -271,7 +271,7 @@
             <div class="order-meal-info">
               <el-col :span="8">
                 <div class="order-img-meal">
-                  <img src="../../assets/inspection1.jpg" class="order-img" alt>
+                  <img :src="picurl3" class="order-img" alt>
                 </div>
               </el-col>
               <el-col :span="16">
@@ -323,7 +323,7 @@
           <el-col :span="1">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span class="el-icon-delete" @click="orderShow3=false"></span>
+                <span class="el-icon-delete" @click="deleteOrder3"></span>
               </div>
             </div>
           </el-col>
@@ -384,7 +384,7 @@
             <div class="order-meal-info">
               <el-col :span="8">
                 <div class="order-img-meal">
-                  <img src="../../assets/inspection2.png" class="order-img" alt>
+                  <img :src="picurl4" class="order-img" alt>
                 </div>
               </el-col>
               <el-col :span="16">
@@ -436,7 +436,7 @@
           <el-col :span="1">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span class="el-icon-delete" @click="orderShow4=false"></span>
+                <span class="el-icon-delete" @click="deleteOrder4"></span>
               </div>
             </div>
           </el-col>
@@ -532,6 +532,10 @@ export default {
       coursename2: "",
       coursename3: "",
       coursename4: "",
+      picurl1:"",
+      picurl2:"",
+      picurl3:"",
+      picurl4:"",
       Address1: "",
       Address2: "",
       Address3: "",
@@ -592,7 +596,7 @@ export default {
       tableData2: [{}],
       tableData3: [{}],
       tableData4: [{}],
-
+     
       tableDataRe: [{}],
       totalPrice: 0,
       accountsPage: 1,
@@ -651,6 +655,7 @@ export default {
           .then(res => {
             accountsThis.coursehour1 = res.data.data.coursehour;
             accountsThis.coursename1 = res.data.data.coursename;
+            accountsThis.picurl1 = res.data.data.picurl;
           })
           .catch(function(err) {
             console.log(err);
@@ -731,6 +736,7 @@ export default {
           .then(res => {
             accountsThis.coursehour2 = res.data.data.coursehour;
             accountsThis.coursename2 = res.data.data.coursename;
+            accountsThis.picurl2 = res.data.data.picurl;
           })
           .catch(function(err) {
             console.log(err);
@@ -811,6 +817,7 @@ export default {
           .then(res => {
             accountsThis.coursehour3 = res.data.data.coursehour;
             accountsThis.coursename3 = res.data.data.coursename;
+            accountsThis.picurl3 = res.data.data.picurl;
           })
           .catch(function(err) {
             console.log(err);
@@ -891,6 +898,7 @@ export default {
           .then(res => {
             accountsThis.coursehour4 = res.data.data.coursehour;
             accountsThis.coursename4 = res.data.data.coursename;
+            accountsThis.picurl4 = res.data.data.picurl;
           })
           .catch(function(err) {
             console.log(err);
@@ -930,6 +938,22 @@ export default {
     
   },
   methods: {
+    deleteOrder1() {
+      this.orderShow1=false;
+      this.totalPrice = Number(this.totalPrice) - Number(this.subtotal1);
+    },
+    deleteOrder2() {
+      this.orderShow2=false;
+      this.totalPrice = Number(this.totalPrice) - Number(this.subtotal2);
+    },
+    deleteOrder3() {
+      this.orderShow3=false;
+      this.totalPrice = Number(this.totalPrice) - Number(this.subtotal3);
+    },
+    deleteOrder4() {
+      this.orderShow4=false;
+      this.totalPrice = Number(this.totalPrice) - Number(this.subtotal4);
+    },
     getEmpData() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -1286,7 +1310,12 @@ export default {
                 message: "网络延迟或选择人员为0!",
                 center:true
               });  
-      } else {
+      } else if(!this.orderShow1&&!this.orderShow2&&!this.orderShow3&&!this.orderShow4){
+          this.$message({
+                message: "没有任何订单!",
+                center:true
+              }); 
+        } else{
         this.$ajax({
         method: "post",
         url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}",

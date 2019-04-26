@@ -7,8 +7,8 @@
       </el-breadcrumb>
     </div>
 
-    <div class="PersonalPassword-change" v-if="!haveSubmit">
-      <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm">
+    <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+      <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
         <el-form-item prop="companyName">
           <div class="input-body" id="loginForm">
             <el-input type="text" placeholder="请输入公司名称" v-model="ruleForm.companyName">
@@ -19,31 +19,36 @@
 
         <el-form-item>
           <div class="com-upload">
-            <el-upload class="upload-demo" ref="upload" drag :action="uploadUrl" 
-            :on-success="uploadSuccess"
-            :on-remove="removeUpload"
-            :on-exceed="noticeOut"
-            :limit="2"
-            multiple>
+            <el-upload
+              class="upload-demo"
+              ref="upload"
+              drag
+              :action="uploadUrl"
+              :on-success="uploadSuccess"
+              :on-remove="removeUpload"
+              :on-exceed="noticeOut"
+              :limit="2"
+              multiple
+            >
               <i class="el-icon-upload"></i>
               <div class="el-upload__text">
-                请上传<em>法人身份照扫描件</em>和<em>营业执照扫描件</em>
+                请上传
+                <em>法人身份照扫描件</em>和
+                <em>营业执照扫描件</em>
               </div>
             </el-upload>
-
-            
           </div>
         </el-form-item>
 
         <div class="PersonalPassword-change-commit">
           <el-form-item>
-            <el-button type="primary" @click="submitUpload" class="login-self">立即认证</el-button>
+            <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
           </el-form-item>
         </div>
       </el-form>
     </div>
 
-    <div class="haveSubmit" v-if="haveSubmit">
+    <div class="haveSubmit" v-if="authenticationStatus == '1'">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
@@ -59,6 +64,16 @@
         <el-button type="primary" round @click="contact = true">联系我们</el-button>
       </div>
     </div>
+
+    <div class="authenticationFailed" v-if="authenticationStatus == '2'">
+      
+      <p><i class="iconfont">&#xe7bd;</i>抱歉，您提交的材料认证失败了</p>
+      <el-button type="primary" @click="authenticationAgain">重新认证</el-button>
+    </div>
+
+    <div class="authenticationSuccess" v-if="authenticationStatus == '3'">
+      <p><i class="iconfont" id="happy">&#xe60b;</i>您的公司认证已完成！</p>
+    </div>
   </div>
 </template>
 
@@ -68,11 +83,17 @@ export default {
   data() {
     return {
       contact: false,
-      haveSubmit: false,
       ruleForm: {
         companyName: ""
       },
-      fileUid: ""
+      rules: {
+        companyName: [
+          { required: true, message: "请输入公司名称", trigger: "blur" },
+          { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
+        ],
+      },
+      fileUid: "",
+      authenticationStatus: ""
     };
   },
   computed: {
@@ -81,51 +102,73 @@ export default {
     }
   },
   methods: {
-    checkCompany() {
-      alert(
-        "信息提交成功，我们会在一个工作日内完成验证，您也可以联系我们，加速认证进度"
-      );
-      this.haveSubmit = true;
-    },
-    submitUpload() {
-      this.$refs.upload.submit();
-      if (this.fileUid == ''||this.ruleForm.companyName == '') {
-        this.$message({
-            message: "请上传完整信息！",
-            center: true
-          });
-      } else {
-        
-        var userInfo = JSON.parse(sessionStorage.getItem("user"));
+    authenticationAgain() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
       this.$ajax({
-        method: "post",
-        url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${
-          this.ruleForm.companyName
-        }&attachmentids=${this.fileUid}&userid=${userid}`
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/invoice_resetStatus.do?userid=${userid}`
       })
         .then(res => {
-          this.haveSubmit = true;
-          this.$message({
-            message: "上传成功！",
-            center: true
-          });
+          
+          if(res.data.data) {
+            this.authenticationStatus = "0";
+          } else {
+            this.$message({
+        message: "获取客户信息失败或网络异常！",
+        center: true
+      });
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
+    },
+    submitUpload(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+      this.$refs.upload.submit();
+      if (this.fileUid == "") {
+        this.$message({
+          message: "请上传文件！",
+          center: true
+        });
+      } else {
+        var userInfo = JSON.parse(sessionStorage.getItem("user"));
+        if (userInfo) {
+          var userid = userInfo.userid;
+        }
+        this.$ajax({
+          method: "post",
+          url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${
+            this.ruleForm.companyName
+          }&attachmentids=${this.fileUid}&userid=${userid}`
+        })
+          .then(res => {
+            this.$message({
+              message: "上传成功！",
+              center: true
+            });
+            this.authenticationStatus = 1;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       }
+       } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
     splitFileUid(uid) {
-      if(this.fileUid.split(uid+",")[0] != '') {
-        this.fileUid = this.fileUid.split(uid+",")[0];
+      if (this.fileUid.split(uid + ",")[0] != "") {
+        this.fileUid = this.fileUid.split(uid + ",")[0];
       } else {
-        this.fileUid = this.fileUid.split(uid+",")[1];
+        this.fileUid = this.fileUid.split(uid + ",")[1];
       }
-      
-     
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
@@ -135,15 +178,32 @@ export default {
     removeUpload(file, fileList) {
       console.log(file.response.data);
       console.log(fileList);
-      this.splitFileUid(file.response.data)
-      alert(this.fileUid);
+      this.splitFileUid(file.response.data);
     },
     noticeOut(files, fileList) {
       this.$message({
-            message: "最多上传两个文件！",
-            center: true
-          });
+        message: "最多上传两个文件！",
+        center: true
+      });
     }
+  },
+  mounted() {
+    var userInfo = JSON.parse(sessionStorage.getItem("user"));
+    if (userInfo) {
+      var userid = userInfo.userid;
+    }
+    this.$ajax({
+      method: "get",
+      url: `${
+        this.baseURL
+      }/zjsxpt/invoice_findCompanyStatusById.do?userid=${userid}`
+    })
+      .then(res => {
+        this.authenticationStatus = res.data.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 };
 </script>
@@ -161,7 +221,7 @@ export default {
   width: 300px;
 }
 .PersonalPassword-change {
-  margin: 30px 170px 0px 200px;
+  margin: 30px 190px 0px 190px;
 }
 
 .haveSubmit {
@@ -212,10 +272,10 @@ export default {
   margin: 1px 0px 0px 12px;
 }
 .el-input {
-  width: 358px;
+  width: 360px;
 }
 .login-self {
-  width: 358px;
+  width: 360px;
   font-size: 16px;
   height: 44px;
 }
@@ -224,17 +284,48 @@ export default {
   margin: 0px 0px 0px 2px;
   font-size: 18px;
 }
+.authenticationFailed {
+  text-align: center;
+  margin: 120px 0px 0px 0px;
+}
+.authenticationFailed>p {
+  font-size: 20px;
+  color:#F56C6C;
+  margin:0px 0px 40px 0px;
+}
+.authenticationSuccess {
+  text-align: center;
+  margin: 150px 0px 0px 0px;
+}
+.authenticationSuccess>p {
+  font-size: 24px;
+  color:#67C23A; 
+}
+#happy {
+  font-size: 28px;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot');
+  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 22px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  margin:0px 5px 0px 0px;
+  
+}
 </style>
 <style>
 #loginForm .el-input__inner {
   height: 44px;
 }
 </style>
-
-
-
-
-
-
-
-

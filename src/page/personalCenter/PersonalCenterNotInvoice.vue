@@ -26,6 +26,27 @@
         </div>
       </el-dialog>
 
+      <el-dialog :visible.sync="deleteOrderShow" width="400px" class="deleteOrderNotice">
+        <p>是否确认删除，删除执行后将无法撤销</p>
+        <div class="delete-order-operation">
+          <el-button type="primary" @click="deleteOrderShow=false">取消</el-button>
+          <el-button type="primary" plain @click="deleteOrder">确认</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
+        <p>开具发票上传后将无法修改，是否再次确认发票信息</p>
+        <div class="delete-order-operation">
+          <el-button type="primary" @click="checkAgainMore">再次确认</el-button>
+          <el-button type="primary" plain @click="checkSubmit">我要提交</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog :visible.sync="noInvoice" width="400px" class="noInvoice">
+        <p>您尚未填写发票信息，点击<router-link to="/personalCenter/PersonalCenterInvoiceShow"><el-button type="primary" 
+        class="click-here">这里</el-button></router-link>填写发票信息</p>
+      </el-dialog>
+
       <el-dialog title="开票进度" :visible.sync="scheduleSuccess" width="600px" id="schedule2">
         <div class="schedule-body">
         <el-steps :space="250" :active="3" finish-status="success">
@@ -44,35 +65,35 @@
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">公司名称</td>
-              <td colspan="3" class="invoice-show-table-td-input1">某某公司</td>
+              <td colspan="3" class="invoice-show-table-td-input1">{{companyName}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">公司地址</td>
-              <td colspan="3" class="invoice-show-table-td-input1">江苏省南通市崇川区街道门牌号</td>
+              <td colspan="3" class="invoice-show-table-td-input1">{{companyAddress}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">纳税人识别号</td>
-              <td class="invoice-show-table-td-input2">123123123</td>
+              <td class="invoice-show-table-td-input2">{{taxerID}}</td>
               <td class="invoice-show-table-td-info2">联系人</td>
-              <td class="invoice-show-table-td-input3">老王</td>
+              <td class="invoice-show-table-td-input3">{{contactPerson}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">公司开户行</td>
-              <td class="invoice-show-table-td-input2">建设银行</td>
+              <td class="invoice-show-table-td-input2">{{bank}}</td>
               <td class="invoice-show-table-td-info2">联系电话</td>
-              <td class="invoice-show-table-td-input3">2312312312313</td>
+              <td class="invoice-show-table-td-input3">{{phone}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">公司账号</td>
-              <td colspan="3" class="invoice-show-table-td-input1">123123123123123</td>
+              <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">开票总金额</td>
-              <td colspan="3" class="invoice-show-table-td-input1">5000</td>
+              <td colspan="3" class="invoice-show-table-td-input1">{{orderMoney}}</td>
             </tr>
             <tr>
               <td class="invoice-show-table-td-info3">可开具的发票内容</td>
-              <td colspan="3" class="invoice-show-table-td-input1"></td>
+              <td colspan="3" class="invoice-show-table-td-input1">{{otherContent}}</td>
             </tr>
           </table>
           <div class="info-save">
@@ -80,23 +101,31 @@
           </div>
         </div>
       </el-dialog>
+
+       <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center >
+         <div class="expressShow">
+           <p>物流单号：{{expressID}}</p>          
+        </div>
+     </el-dialog>
+
     </div>
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">我的订单</el-breadcrumb-item>
-        <el-breadcrumb-item>未开票订单</el-breadcrumb-item>
+        <el-breadcrumb-item>订单发票</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+    <div v-if="count">
     <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
       <div class="order-head">
         <img src="../../assets/favicon.png" alt class="order-head-img">
         <span class="order-head-title">智聚实训</span>
-        <span class="el-icon-delete"></span>
+        <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
       </div>
       <div class="order-picture">
         <el-col :span="7">
-          <img src="../../assets/inspection2.png" alt class="order-img">
+          <img :src="orderItem.picurl" alt class="order-img">
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
@@ -114,15 +143,21 @@
       <div class="order-operation">
         <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
         <el-button type="primary" round plain @click="checkEmp(orderItem.orderid)">报名员工</el-button>
-        <el-button type="primary" round @click="dialogVisible = true" v-if="orderItem.status==1">开具发票</el-button>
+        <el-button type="primary" round @click="getInvoice(orderItem.orderid,orderItem.summoney)" v-if="orderItem.status==1">开具发票</el-button>
         <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
         <el-button type="primary" round plain @click="scheduleSuccess = true" v-if="orderItem.status==3">开票进度</el-button>
-        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==3">发票物流</el-button>
+        <el-button type="success" round @click="checkExpress(orderItem.orderid)" v-if="orderItem.status==3">发票物流</el-button>
       </div>
     </div>
-
+    </div>
+    <div v-if="count">
     <div class="order-page">
       <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="count" @current-change="handleCurrentChange"></el-pagination>
+    </div>
+    </div>
+     <div v-if="!count" class="noOrder">
+      <img src="../../assets/favicon.png" alt class="order-head-img">
+      <p class="no-order-content">您还没有相关的订单</p>
     </div>
   </div>
 </template>
@@ -136,23 +171,108 @@ export default {
       schedule: false,
       scheduleSuccess: false,
       dialogVisible: false,
-      havaNotClick: true,
-      havaClick: false,
       orderlist: [{}],
       count:0,
       tableData: [{}],
       showEmpDia: false,
+      deleteOrderShow: false,
+      deleteOrderID: "",
+      currentPage: 1,
+      noInvoice: false,
+      companyName: '',
+      companyAddress:'',
+      taxerID:'',
+      contactPerson:'',
+      bank:'',
+      phone:'',
+      account:'',
+      otherContent:'',
+      invoiceid:'',
+      orderMoney:'',
+      checkAgain: false,
+      orderID:'',
+      expressID:'',
+      expressShow: false
     };
   },
   methods: {
+    checkExpress(id) {
+      this.$ajax({
+          method: "get",
+          url: `${
+            this.baseURL
+          }/zjsxpt/course_findLognoByOrderid.do?orderid=${id}`
+        })
+          .then(res => {
+            this.expressID = res.data.data;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      this.expressShow = true;
+    },
+    checkSubmit() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${this.orderID}&invoiceid=${this.invoiceid}`
+      })
+        .then(res => {
+          this.checkAgain = false;
+          this.$message({
+            message: "提交成功！",
+            center: true
+          });
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    checkAgainMore() {
+       this.dialogVisible = true;
+      this.checkAgain = false;
+    },
+    getInvoice(id,money) {
+      this.orderID = id;
+      this.orderMoney = money;
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+          method: "get",
+          url: `${
+            this.baseURL
+          }/zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
+        })
+          .then(res => {
+            if(res.data.data == "false") {
+              this.noInvoice = true;
+            } else {
+              this.companyName= res.data.data.company;
+              this.companyAddress=res.data.data.address;
+              this.taxerID=res.data.data.taxpayerno;
+              this.contactPerson=res.data.data.person;
+              this.bank=res.data.data.bank;
+              this.phone=res.data.data.mobilephone;
+              this.account=res.data.data.account;
+              this.otherContent=res.data.data.content;
+              this.invoiceid = res.data.data.invoiceid;
+              this.dialogVisible = true;
+            }
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      
+    },
     checkOK() {
-      alert("开票成功");
       this.dialogVisible = false;
-      this.havaNotClick = false;
-      this.havaClick = true;
+      this.checkAgain = true;
     },
     handleCurrentChange(val) {
         this.getNotPayOrderList(val);
+        this.currentPage = val;
     },
     checkEmp(orderid) {
       this.$ajax({
@@ -188,7 +308,30 @@ export default {
           .catch(function(err) {
             console.log(err);
           });
-    }
+    },
+    showNotice(id) {
+      this.deleteOrderID = id;
+      this.deleteOrderShow = true;
+    },
+    deleteOrder() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${
+          this.deleteOrderID
+        }`
+      })
+        .then(res => {
+          this.deleteOrderShow = false;
+          this.$message({
+            message: "删除成功！",
+            center: true
+          });
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getNotPayOrderList(1);
@@ -348,6 +491,24 @@ input {
 .el-icon-delete:hover {
   color: #409eff;
   cursor: pointer;
+}
+.deleteOrderNotice,.checkAgain,.expressShow {
+  text-align: center;
+}
+.delete-order-operation {
+  margin:30px 0px 0px 0px;
+}
+.click-here {
+  margin:0px 5px;
+}
+.noOrder {
+  margin: 120px 0px 0px 0px; 
+  text-align: center;
+}
+.no-order-content {
+  margin: 20px 0px 0px 0px;
+  color: #999;
+  font-size: 18px;
 }
 </style>
 
