@@ -876,25 +876,10 @@ body > .el-container {
 .index-mobile {
   margin: 10px 0px 0px 0px;
 }
-
-#index-course-list1:hover {
-  box-shadow: -2px -2px 5px #c7c5c5;
-}
-#index-course-list2:hover {
-  box-shadow: 0px -2px 5px #c7c5c5;
-}
-#index-course-list3:hover {
-  box-shadow: 2px -2px 5px #c7c5c5;
-}
-#index-course-list4:hover {
+.index-course-list:hover {
   box-shadow: -2px 2px 5px #c7c5c5;
 }
-#index-course-list5:hover {
-  box-shadow: 0px 2px 5px #c7c5c5;
-}
-#index-course-list6:hover {
-  box-shadow: 2px 2px 5px #c7c5c5;
-}
+
 .index-base-list:hover {
   box-shadow: 0 0 8px #c7c5c5;
 }
