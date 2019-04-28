@@ -7,7 +7,7 @@
             <el-col :span="7">
               <div class="grid-content">
                 <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  :src="val.picurl"
                   class="full-width"
                 >
               </div>
@@ -87,7 +87,7 @@
             <el-col :span="7">
               <div class="grid-content">
                 <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  :src="val.picurl"
                   class="full-width"
                 >
               </div>
@@ -168,7 +168,7 @@
             <el-col :span="7">
               <div class="grid-content">
                 <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  :src="val.picurl"
                   class="full-width"
                 >
               </div>
@@ -248,7 +248,7 @@
             <el-col :span="7">
               <div class="grid-content">
                 <img
-                  src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
+                  :src="val.picurl"
                   class="full-width"
                 >
               </div>
