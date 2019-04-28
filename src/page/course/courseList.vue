@@ -49,7 +49,7 @@
                     </template>
                     <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img :src="v.url" alt>
+                        <img :src="v.picurl" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -129,7 +129,7 @@
                     </template>
                     <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img :src="v.url" alt>
+                        <img :src="v.picurl" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -210,7 +210,7 @@
                     </template>
                     <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img :src="v.url" alt>
+                        <img :src="v.picurl" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">
@@ -290,7 +290,7 @@
                     </template>
                     <div class="clearfix teacher-box" v-for="(v,k) in val.tlist" :key="k">
                       <div class="teacher-img">
-                        <img :src="v.url" alt>
+                        <img :src="v.picurl" alt>
                       </div>
                       <div class="teacher-info">
                         <el-row :gutter="20">

@@ -42,6 +42,7 @@
           </el-row>
           <el-row class="no-margin-b">
             <div class="course-body">
+              <div  v-for="courseItem in courseList" :key="courseItem.courseid">
               <el-col :span="8">
                 <div class="index-course-list" id="index-course-list1">
                   <router-link to="/course">
@@ -50,118 +51,19 @@
                         <img src="../assets/inspection1.jpg" class="index-course-img1">
                       </div>
                       <div class="index-course-tit">
-                        <span>工艺员</span>
+                        <span>{{courseItem.coursename}}</span>
                         <span>|</span>
                         <router-link to="/SignUp">
                           <span class="index-signup-but">点击报名</span>
                         </router-link>
                       </div>
-                      <div class="index-course-content">工艺就是把产品设计者的意图转化成产品的行业规范</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
+                      <div class="index-course-content">{{courseItem.description}}</div>
+                      <div class="index-course-other">最近开课时间： {{courseItem.traintime}}</div>
                     </a>
                   </router-link>
                 </div>
               </el-col>
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list2">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection2.png" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>质量员</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">质量员是企业生产第一线的质量哨兵和忠诚战士</div>
-                      <div class="index-course-other">最近开课时间： 2019-04-01</div>
-                    </a>
-                  </router-link>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list3">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection1.jpg" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>资料员</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">资料员是负责工程项目管理工作的技术人员</div>
-                      <div class="index-course-other">最近开课时间： 暂未开放</div>
-                    </a>
-                  </router-link>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list4">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection2.png" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>深化员</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">深化员是技术人员技术人员技术人员</div>
-                      <div class="index-course-other">最近开课时间： 暂未开放</div>
-                    </a>
-                  </router-link>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list5">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection1.jpg" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>灌浆工</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">灌浆工灌浆工灌浆工灌浆工灌浆工灌浆工</div>
-                      <div class="index-course-other">最近开课时间： 暂未开放</div>
-                    </a>
-                  </router-link>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list6">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection2.png" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>吊装工</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">吊装工吊装工吊装工吊装工吊装工</div>
-                      <div class="index-course-other">最近开课时间： 暂未开放</div>
-                    </a>
-                  </router-link>
-                </div>
-              </el-col>
+              </div>
             </div>
           </el-row>
         </div>
@@ -310,24 +212,7 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      bannerLists: [
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702991&di=a99af2609be2beb8e2db46b5b30e8297&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01481559841b3da801215603a36220.jpg%402o.jpg",
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550816702989&di=77e855c8efc558aea5a71b254fc9d7c9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01edb3555ea8100000009af0ba36f5.jpg%401280w_1l_2o_100sh.jpg"
-      ],
-      currentDate: new Date(),
-      swiperOption: {
-        autoplay: true,
-        direction: "vertical",
-        slidesPerView: 7, //页面分组显示，这里显示为3组
-        height: 200,
-        loop: true
-      },
-      activeName: "first",
-      teachers: [
-        "https://www.swiper.com.cn/demo/tfboys/images/p1.jpg",
-        "https://www.swiper.com.cn/demo/tfboys/images/p2.jpg",
-        "https://www.swiper.com.cn/demo/tfboys/images/p3.jpg"
-      ]
+      courseList: [{}],
     };
   },
 
@@ -337,8 +222,6 @@ export default {
     }
   },
   mounted() {
-    // this.swiper.slideTo(3, 1000, false);
-
     this.initMap();
     var that = this;
     window.addEventListener("scroll", function() {
@@ -348,19 +231,31 @@ export default {
         880
       ) {
         that.showDown = false;
-        console.log(document.documentElement.clientHeight);
-        console.log(document.documentElement.scrollTop);
       } else {
         that.showDown = true;
       }
     });
-
+   this.getCourseList();
 
 
     
 
   },
   methods: {
+    getCourseList() {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_findIndexCourseList.do`
+      })
+        .then(res => {
+          this.courseList = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     scrollAnimation(currentY, targetY) {
       // 获取当前位置方法
       // const currentY = document.documentElement.scrollTop || document.body.scrollTop
@@ -755,7 +650,7 @@ body > .el-container {
 }
 .index-course-tit {
   position: relative;
-  margin: 7px 0px 10px 0px;
+  margin: 15px 0px 10px 0px;
   font-size: 14px;
   line-height: 19px;
   color: #333;
@@ -789,12 +684,7 @@ body > .el-container {
 .index-register {
   text-align: center;
 }
-#index-course-list1,
-#index-course-list2,
-#index-course-list3,
-#index-course-list4,
-#index-course-list5,
-#index-course-list6 {
+#index-course-list1 {
   border: 1px solid #fff;
 }
 .index-base-img {
@@ -903,6 +793,7 @@ body > .el-container {
   padding: 0px 20px;
   margin: 0px 200px 0px 0px;
 }
+
 .logo {
   padding: 240px 0px 20px 0px;
   text-align: center;
