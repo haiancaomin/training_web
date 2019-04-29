@@ -10,16 +10,21 @@
         </swiper>
         <div class="base-content">{{baseInfo.summary}}</div>
       </el-collapse-item>
-      <el-collapse-item :title="areaList0.areaname" name="2" class="guanjiang" v-if='JSON.stringify(areaList0)!="{}"'>
+      <el-collapse-item
+        :title="areaList0.areaname"
+        name="2"
+        class="guanjiang"
+        v-if="JSON.stringify(areaList0)!='{}'"
+      >
         <el-carousel :interval="5000">
           <el-carousel-item v-for="(item,key) in areaList0.areapictureUrl" :key="key">
             <img :src="item" class="guanjiang-pic">
-            <div class="guanjiang-content">
-              <!-- <h1>Title</h1>
-              <h2>Subtitle</h2>-->
-              <p>{{areaList0.area_summary}}</p>
-            </div>
           </el-carousel-item>
+          <div class="guanjiang-content">
+            <!-- <h1>Title</h1>
+            <h2>Subtitle</h2>-->
+            <p>{{areaList0.area_summary}}</p>
+          </div>
         </el-carousel>
       </el-collapse-item>
       <el-collapse-item
@@ -122,8 +127,12 @@ export default {
       })
         .then(res => {
           this.baseInfo = res.data.data;
-          this.areaList0 = res.data.data.arealist.length?res.data.data.arealist[0]:{};
-          this.arealistrest = res.data.data.arealist.length?res.data.data.arealist.slice(1):[];
+          this.areaList0 = res.data.data.arealist.length
+            ? res.data.data.arealist[0]
+            : {};
+          this.arealistrest = res.data.data.arealist.length
+            ? res.data.data.arealist.slice(1)
+            : [];
           this.swipershow = true;
         })
         .catch(function(err) {
@@ -171,6 +180,13 @@ export default {
   position: absolute;
   top: 40px;
   left: 60px;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 100;
+  border-radius: 5px;
+  transition: all linear 0.3s;
+}
+.guanjiang-content:hover {
+  background: rgba(255, 255, 255, 1);
 }
 
 /* .guanjiang-content h1 {
@@ -180,7 +196,8 @@ export default {
   font-size: 14px;
 } */
 .guanjiang-content p {
-  width: 400px;
+  max-width: 400px;
+  padding: 5px 10px;
 }
 .quality-worker img {
   width: 100%;
