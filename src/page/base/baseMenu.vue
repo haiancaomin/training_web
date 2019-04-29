@@ -43,7 +43,7 @@
 export default {
   data() {
     return {
-      menuopen: ["1","2"],
+      menuopen: ["1"],
       baseList1: [],
       baseList2: [],
       type: 0
@@ -51,6 +51,11 @@ export default {
   },
   mounted() {
     this.getBaseList(this.type, this.showDefault);
+  },
+  computed: {
+    defaultActive() {
+      return "/" + this.$route.path.split("/")[1];
+    }
   },
   methods: {
     getBaseList(type, fun) {
