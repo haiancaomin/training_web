@@ -10,7 +10,7 @@
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
-          :unique-opened=true
+          :unique-opened='true'
           router
         >
           <el-submenu index="1">
@@ -18,13 +18,13 @@
               <i class="el-icon-tickets"></i>
               <span>我的订单</span>
             </template>
-            <el-menu-item index="/personalCenter/PersonalCenterAllOrder">
+            <el-menu-item index="/PersonalCenter/PersonalCenterAllOrder">
               <span class="in-submenu">全部</span>
             </el-menu-item>
-            <el-menu-item index="/personalCenter/PersonalCenterUncompletedOrder">
+            <el-menu-item index="/PersonalCenter/PersonalCenterUncompletedOrder">
               <span class="in-submenu">待付款</span>
             </el-menu-item>
-            <el-menu-item index="/personalCenter/PersonalCenterNotInvoice">
+            <el-menu-item index="/PersonalCenter/PersonalCenterNotInvoice">
               <span class="in-submenu">订单发票</span>
             </el-menu-item>
           </el-submenu>
@@ -33,26 +33,26 @@
               <i class="el-icon-menu"></i>
               <span>公司人员</span>
             </template>
-            <el-menu-item index="/personalCenter/PersonalCenterPersonInfo">
+            <el-menu-item index="/PersonalCenter/PersonalCenterPersonInfo">
               <span class="in-submenu">人员信息</span>
             </el-menu-item>
-            <el-menu-item index="/personalCenter/PersonalCenterAddPerson">
+            <el-menu-item index="/PersonalCenter/PersonalCenterAddPerson">
               <span class="in-submenu">人员添加</span>
             </el-menu-item>
           </el-submenu>
 
-          <el-menu-item index="/personalCenter/PersonalCenterInvoiceShow">
+          <el-menu-item index="/PersonalCenter/PersonalCenterInvoiceShow">
             <i class="el-icon-document"></i>
             <span slot="title">发票信息</span>
           </el-menu-item>
 
          
-          <el-menu-item index="/personalCenter/PersonalCenterAuthentication">
+          <el-menu-item index="/PersonalCenter/PersonalCenterAuthentication">
             <i class="el-icon-success"></i>
             <span slot="title">企业认证</span>
           </el-menu-item>
 
-          <el-menu-item index="/personalCenter/PersonalCenterReport">
+          <el-menu-item index="/PersonalCenter/PersonalCenterReport">
             <i class="el-icon-message"></i>
             <div class="report-con">
             <span slot="title">统计汇报</span>
@@ -61,7 +61,7 @@
               
             </el-badge>
           </el-menu-item>
-          <el-menu-item index="/personalCenter/PersonalCenterCertificate">
+          <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
             <i class="el-icon-printer"></i>
             <span slot="title">证书查询</span>
           </el-menu-item>
@@ -71,10 +71,10 @@
               <i class="el-icon-setting"></i>
               <span>账户信息</span>
             </template>
-            <el-menu-item index="/personalCenter/PersonalPassword">
+            <el-menu-item index="/PersonalCenter/PersonalPassword">
               <span class="in-submenu">修改密码</span>
             </el-menu-item>
-            <el-menu-item index="/personalCenter/PersonalCenterChangeMobile">
+            <el-menu-item index="/PersonalCenter/PersonalCenterChangeMobile">
               <span class="in-submenu">修改电话</span>
             </el-menu-item>
           </el-submenu>

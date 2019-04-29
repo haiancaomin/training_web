@@ -43,14 +43,14 @@
 export default {
   data() {
     return {
-      menuopen: ["1"],
+      menuopen: ["1","2"],
       baseList1: [],
       baseList2: [],
       type: 0
     };
   },
   mounted() {
-    this.getBaseList(this.type,this.showDefault);
+    this.getBaseList(this.type, this.showDefault);
   },
   methods: {
     getBaseList(type, fun) {
@@ -74,8 +74,11 @@ export default {
           console.log(err);
         });
     },
-    showDefault(){
-      this.$router.push({path:`/base/overview/${this.baseList1[0].bid}`})
+    showDefault() {
+      var id = this.$route.params.id;
+      if (id == undefined) {
+        this.$router.push({ path: `/base/overview/${this.baseList1[0].bid}` });
+      }
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

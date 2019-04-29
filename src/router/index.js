@@ -143,7 +143,7 @@ export default new Router({
       component: PersonalCenter,
       children: [{
         path: '',
-        redirect: '/personalCenter/PersonalCenterAllOrder',
+        redirect: '/PersonalCenter/PersonalCenterAllOrder',
       }, {
         path: 'PersonalCenterAddPerson',
         component: PersonalCenterAddPerson,

@@ -28,7 +28,7 @@
       </div>
 
       <el-menu
-        :default-active="$route.path"
+        :default-active="defaultActive"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -84,6 +84,12 @@ export default {
   },
   mounted() {
     this.addUserInfo();
+    console.log(this.defaultActive)
+  },
+  computed: {
+    defaultActive() {
+      return "/" + this.$route.path.split("/")[1];
+    }
   },
   methods: {
     addUserInfo() {
