@@ -39,7 +39,6 @@ export default {
         url: `${this.baseURL}/zjsxpt/base_getBaseAreaById.do?baseid=${this.id}`
       })
         .then(res => {
-          console.log(res.data.data);
           this.baseOverView = res.data.data;
         })
         .catch(function(err) {

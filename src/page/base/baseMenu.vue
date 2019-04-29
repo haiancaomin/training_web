@@ -59,7 +59,7 @@ export default {
         url: `${this.baseURL}/zjsxpt/base_showBaseInfo.do?basetype=${type}`
       })
         .then(res => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (type == 0) {
             this.baseList1 = res.data.data;
           }

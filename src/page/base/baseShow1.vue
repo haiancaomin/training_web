@@ -10,7 +10,7 @@
         </swiper>
         <div class="base-content">{{baseInfo.summary}}</div>
       </el-collapse-item>
-      <el-collapse-item :title="areaList0.areaname" name="2" class="guanjiang">
+      <el-collapse-item :title="areaList0.areaname" name="2" class="guanjiang" v-if='JSON.stringify(areaList0)!="{}"'>
         <el-carousel :interval="5000">
           <el-carousel-item v-for="(item,key) in areaList0.areapictureUrl" :key="key">
             <img :src="item" class="guanjiang-pic">
@@ -122,8 +122,8 @@ export default {
       })
         .then(res => {
           this.baseInfo = res.data.data;
-          this.areaList0 = res.data.data.arealist[0];
-          this.arealistrest = res.data.data.arealist.slice(1);
+          this.areaList0 = res.data.data.arealist.length?res.data.data.arealist[0]:{};
+          this.arealistrest = res.data.data.arealist.length?res.data.data.arealist.slice(1):[];
           this.swipershow = true;
         })
         .catch(function(err) {
