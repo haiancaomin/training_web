@@ -176,7 +176,7 @@ export default {
   padding-top: 30px;
 }
 .guanjiang-content {
-  color: #000;
+  color: #555;
   position: absolute;
   top: 40px;
   left: 60px;
@@ -196,7 +196,7 @@ export default {
   font-size: 14px;
 } */
 .guanjiang-content p {
-  max-width: 400px;
+  max-width: 350px;
   padding: 5px 10px;
 }
 .quality-worker img {
