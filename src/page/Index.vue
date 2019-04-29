@@ -43,8 +43,8 @@
           <el-row class="no-margin-b">
             <div class="course-body">
               <div  v-for="courseItem in courseList" :key="courseItem.courseid">
-              <el-col :span="8">
-                <div class="index-course-list" id="index-course-list1">
+              <el-col :span="6">
+                <!-- <div class="index-course-list" id="index-course-list1">
                   <router-link to="/course">
                     <a href="javascript:;">
                       <div class="index-course-img">
@@ -61,9 +61,34 @@
                       <div class="index-course-other">最近开课时间： {{courseItem.traintime}}</div>
                     </a>
                   </router-link>
+                </div> -->
+                <router-link to="/course">
+                <div class="course-outbody">
+                  <div class="course-img-body">
+                    <img src="https://edu-image.nosdn.127.net/0b9d55e1-0e5a-4d89-a2ba-8522609d599e.jpg?imageView&amp;quality=100&amp;thumbnail=286y170&amp;type=webp" class="course-show-img">
+                  </div>
+                  <div class="course-info">
+                   
+            
+            
+         
+                    <img src="../assets/contentBack.png">
+                    <div class="course-name">
+                      <h3>{{courseItem.coursename}}</h3>
+                    </div>
+                    <div class="course-description">
+                      <h3>{{courseItem.description}}</h3>
+                    </div>
+                  </div>
                 </div>
+                </router-link>
               </el-col>
               </div>
+              <el-col :span="6">
+              <div v-if="courseList.length < 8" class="course-no-over">
+                <p>更多课程，尽情期待！</p>
+              </div>
+              </el-col>
             </div>
           </el-row>
         </div>
@@ -84,8 +109,9 @@
                 <router-link to="/base">
                   <a href="javascript:;">
                     <div class="index-base-list" id="index-base-list1">
+                      <div class="index-base-img-div">
                       <img src="../assets/inspection1.jpg" class="index-base-img">
-
+                      </div>
                       <div class="index-base-name">灌浆区</div>
                       <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
                     </div>
@@ -693,6 +719,11 @@ body > .el-container {
   height: 200px;
   transition: all ease-in-out 0.5s;
 }
+.index-base-img-div {
+   width: 280px;
+  height: 200px;
+  overflow: hidden;
+}
 .index-base-con {
   width: 180px;
   font-size: 14px;
@@ -829,13 +860,7 @@ body > .el-container {
 .el-icon-mobile-phone {
   margin: 0px 5px 0px 0px;
 }
-.course-type {
-  width: 1220px;
-  height: 500px;
-  background: #fff;
-  padding: 50px 0px 0px 0px;
-  margin: 0px auto;
-}
+
 .course-outline-body {
   background: #fff;
 }
@@ -945,7 +970,105 @@ body > .el-container {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
 }
+.course-type {
+  width: 1220px;
+  height: 600px;
+  background: #fff;
+  padding: 50px 0px 0px 0px;
+  margin: 0px auto;
+}
+.course-info{
+      position: absolute;
+      margin:-95px 0px 0px 22.5PX;  
+}
+.course-info img{
+  width: 240px;
+  height:76px;
+}
+.course-show-img {
+  width: 280px;
+  height:170px;
+  transition: all ease-in-out 0.5s;
+}
+.course-img-body {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.course-outbody {
+  width: 280px;
+  height:170px;
+  margin:20px 10px 5px 10px; 
+  border-radius: 4px;
+}
+.course-outbody:hover .course-show-img {
+  transform: scale(1.2);
+}
+.course-name {
+  position: absolute;
+  width:200px;
+  height:30px;
+  margin:-75px 0px 0px 19px;
+  text-align: center;
+}
+.course-name h3 {
+    font-size: 18px;
+    height: 24px;
+    line-height: 24px;
+    margin: 14px 0 3px;
+    color: #333;
+    overflow: hidden;
+    font-weight: normal;
+}
+.course-description {
+  position: absolute;
+  width:220px;
+  height:30px;
+  margin:-30px 0px 0px 10px;
+  text-align: center;
+  
+}
+.course-description h3 {
+    font-size: 14px;
+    height: 19px;
+    line-height: 19px;
+    margin: 0;
+    color: #666;
+    overflow:hidden;text-overflow:ellipsis; 
+}
+.course-no-over {
+  width:280px;
+  height:170px;
+    border: 1px solid #409eff;
+    margin:20px 10px 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+.course-no-over p{
+  line-height: 170px;
+  font-size:20px;
+  font-weight: 400;
+  color: #666;
+}
+.course-no-over:hover {
+  background: url("../assets/hop.jpg") no-repeat;
+  background-size: 100% 100%
+}
 
+/* .index-base-img {
+  display: block;
+  width: 280px;
+  height: 200px;
+  transition: all ease-in-out 0.5s;
+}
+.index-base-img-div {
+   width: 280px;
+  height: 200px;
+  overflow: hidden;
+}
+.index-base-list:hover .index-base-img {
+  transform: scale(1.04);
+} */
 @keyframes myfirst {
   0% {
     bottom: 30px;
