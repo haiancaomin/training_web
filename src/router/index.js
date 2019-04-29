@@ -130,9 +130,6 @@ export default new Router({
       path: '/base',
       component: baseMenu,
       children: [{
-        path: '',
-        redirect: 'overview/sxjd',
-      }, {
         path: 'overview/:id',
         component: baseOverView,
         props: true

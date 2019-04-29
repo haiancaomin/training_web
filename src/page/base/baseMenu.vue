@@ -50,10 +50,10 @@ export default {
     };
   },
   mounted() {
-    this.getBaseList(this.type);
+    this.getBaseList(this.type,this.showDefault);
   },
   methods: {
-    getBaseList(type) {
+    getBaseList(type, fun) {
       this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/base_showBaseInfo.do?basetype=${type}`
@@ -62,6 +62,9 @@ export default {
           // console.log(res.data.data);
           if (type == 0) {
             this.baseList1 = res.data.data;
+            if (fun != "undefined") {
+              fun();
+            }
           }
           if (type == 1) {
             this.baseList2 = res.data.data;
@@ -70,6 +73,9 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
+    },
+    showDefault(){
+      this.$router.push({path:`/base/overview/${this.baseList1[0].bid}`})
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
