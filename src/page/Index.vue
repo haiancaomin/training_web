@@ -238,7 +238,7 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      courseList: [{}],
+      courseList: [],
     };
   },
 
