@@ -14,17 +14,23 @@
             <template slot="title">
               <span>实训基地</span>
             </template>
-            <el-menu-item index="/base/overview">实训基地概览</el-menu-item>
-            <el-menu-item index="/base/show1">实训基地1</el-menu-item>
-            <el-menu-item index="1-2">实训基地2</el-menu-item>
+            <el-menu-item
+              v-for="(item,key) in baseList1"
+              :key="key"
+              :index="'/base/'+(key==0?'overview/':'show1/')+item.bid"
+            >{{item.basename}}</el-menu-item>
+            <!-- <el-menu-item index="/base/show1">实训基地1</el-menu-item>
+            <el-menu-item index="1-2">实训基地2</el-menu-item>-->
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <span>实地基地</span>
             </template>
-            <el-menu-item index="2-1">实地基地概览</el-menu-item>
-            <el-menu-item index="2-1">实地基地1</el-menu-item>
-            <el-menu-item index="2-2">实地基地2</el-menu-item>
+            <el-menu-item
+              v-for="(item,key) in baseList2"
+              :key="key"
+              :index="'/base/'+(key==0?'overview/':'show1/')+item.bid"
+            >{{item.basename}}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
@@ -37,12 +43,52 @@
 export default {
   data() {
     return {
-      menuopen: ["1"]
+      menuopen: ["1"],
+      baseList1: [],
+      baseList2: [],
+      type: 0
     };
   },
+  mounted() {
+    this.getBaseList(this.type, this.showDefault);
+  },
+  computed: {
+    defaultActive() {
+      return "/" + this.$route.path.split("/")[1];
+    }
+  },
   methods: {
+    getBaseList(type, fun) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_showBaseInfo.do?basetype=${type}`
+      })
+        .then(res => {
+          // console.log(res.data.data);
+          if (type == 0) {
+            this.baseList1 = res.data.data;
+            if (fun != "undefined") {
+              fun();
+            }
+          }
+          if (type == 1) {
+            this.baseList2 = res.data.data;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    showDefault() {
+      var id = this.$route.params.id;
+      if (id == undefined) {
+        this.$router.push({ path: `/base/overview/${this.baseList1[0].bid}` });
+      }
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
+      this.type = key == 1 ? 0 : 1;
+      this.getBaseList(this.type);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
@@ -55,7 +101,7 @@ export default {
 .base-container {
   width: 1200px;
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: 100px;
   display: flex;
 }
 .tac .el-col {

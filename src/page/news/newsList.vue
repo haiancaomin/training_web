@@ -1,54 +1,19 @@
 <template>
   <div class="news-container">
-    <el-row class="pad20 mt20 bg-white">
-      <el-col :span="9">
+    <el-row class="pad20 mt20 bg-white" v-if="hotNews.length">
+      <el-col :span="9" class="hot-img">
         <div class="grid-content hot-box">
           <div class="hot-news-tag">热点</div>
-          <img
-            src="http://www.axfc.cn/uploads/20190111/eb61c398f043ff50bdedd937647ec513.png"
-            class="hot-news-img"
-          >
+          <img :src="hotNews[0].picurl" class="hot-news-img">
+        </div>
+      </el-col>
+      <el-col :span="15">
+        <div class="grid-content hot-box">
           <swiper :options="swiperOption" ref="mySwiper">
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？一夜之间</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？一夜之间</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？一夜之间，全通城都在猜测这张图！</p>
-                <span>2019-3-22</span>
-              </router-link>
-            </swiper-slide>
-            <swiper-slide>
-              <router-link to="newsDetail">
-                <p>“双料明星”即将来通？一夜之间</p>
-                <span>2019-3-22</span>
+            <swiper-slide v-for="(item,key) in hotNews" :key="key">
+              <router-link :to="'/newsDetail/'+item.newsid">
+                <p>{{item.title}}</p>
+                <span>{{item.createdate}}</span>
               </router-link>
             </swiper-slide>
           </swiper>
@@ -59,61 +24,35 @@
       <el-col class="news-list">
         <div class="grid-content">
           <el-tabs v-model="activeName" @tab-click="handleClick" stretch>
-            <el-tab-pane label="行业政策" name="first">
-              <router-link to="/newsDetail">
+            <el-tab-pane :label="v.label" :name="v.name" v-for="(v,k) in tabs" :key="k">
+              <router-link
+                :to="'/newsDetail/'+item.newsid"
+                v-for="(item,key) in newsList.data"
+                :key="key"
+              >
                 <div class="list-row">
                   <div class="news-img">
-                    <img
-                      src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                    >
+                    <img :src="item.picurl">
                   </div>
                   <div class="news-overview">
-                    <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                    <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                    <p>2019-2-22</p>
+                    <h3>{{item.title}}</h3>
+                    <div>{{item.preview}}</div>
+                    <p>{{item.createdate}}</p>
                   </div>
                 </div>
               </router-link>
-              <router-link to="/newsDetail">
-                <div class="list-row">
-                  <div class="news-img">
-                    <img
-                      src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                    >
-                  </div>
-                  <div class="news-overview">
-                    <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                    <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                    <p>2019-2-22</p>
-                  </div>
-                </div>
-              </router-link>
-              <router-link to="/newsDetail">
-                <div class="list-row">
-                  <div class="news-img">
-                    <img
-                      src="http://www.axfc.cn/uploads/20190222/8470b0cd14194545b6a04a4768184ef6.jpg"
-                    >
-                  </div>
-                  <div class="news-overview">
-                    <h3>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h3>
-                    <div>内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览内容预览</div>
-                    <p>2019-2-22</p>
-                  </div>
-                </div>
-              </router-link>
-              <el-row>
-                <el-pagination
-                  background
-                  layout="prev, pager, next"
-                  :total="1000"
-                  class="text-right"
-                ></el-pagination>
-              </el-row>
             </el-tab-pane>
-            <el-tab-pane label="地方动态" name="second"></el-tab-pane>
-            <el-tab-pane label="企业新闻" name="third"></el-tab-pane>
-            <el-tab-pane label="国际信息" name="fourth"></el-tab-pane>
+            <el-row>
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="newsList.count"
+                :page-size="8"
+                @current-change="handleCurrentChange"
+                class="text-right"
+                v-if="newsList.count"
+              ></el-pagination>
+            </el-row>
           </el-tabs>
         </div>
       </el-col>
@@ -124,21 +63,70 @@
 export default {
   data() {
     return {
+      tabs: [
+        { label: "行业政策", name: "first" },
+        { label: "地方动态", name: "second" },
+        { label: "企业新闻", name: "third" },
+        { label: "国际信息", name: "fourth" }
+      ],
+      hotNews: [],
+      newsList: [],
+      type: "0",
+      currentPage: 1,
       swiperOption: {
         autoplay: {
           disableOnInteraction: false
         },
         direction: "vertical",
-        slidesPerView: 7, //页面分组显示，这里显示为3组
+        slidesPerView: 7,
         height: 200,
         loop: true
       },
       activeName: "first"
     };
   },
+  mounted() {
+    this.getHotNews();
+    this.getNewsList(this.type);
+  },
   methods: {
+    getHotNews() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/news_findNewsList.do`
+      })
+        .then(res => {
+          this.hotNews = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getNewsList(type) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/news_findNewsList.do?type=${type}&pageIndex=${(this
+          .currentPage -
+          1) *
+          8}&selectIndex=${this.currentPage}`
+      })
+        .then(res => {
+          this.newsList = res.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     handleClick(tab, event) {
-      console.log(tab, event);
+      this.type = tab.index;
+      this.currentPage = 1;
+      this.getNewsList(this.type);
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.getNewsList(this.type);
     }
   }
 };
@@ -150,15 +138,18 @@ export default {
   margin: 0 auto;
   padding-top: 60px;
 }
-.hot-box{
+.hot-box {
   position: relative;
 }
-.hot-news-tag{
+.hot-img {
+  padding-right: 20px;
+}
+.hot-news-tag {
   position: absolute;
   width: 50px;
   height: 30px;
   line-height: 30px;
-  background:rgba(1,173,100,.8);
+  background: rgba(1, 173, 100, 0.8);
   text-align: center;
   color: #fff;
 }
@@ -188,7 +179,7 @@ export default {
   justify-content: space-between;
 }
 .swiper-slide a p {
-  width: 280px;
+  width: 400px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -9,7 +9,7 @@
     </div>
 
     <div class="crumb">
-      <h1 class="score-label">证书查询</h1>
+      <h1 class="score-label">证书查询1</h1>
     </div>
     <div class="PesronalScoreSearch-info">
       <el-form ref="form" :model="form">

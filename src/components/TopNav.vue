@@ -1,6 +1,11 @@
 <template>
   <div>
-    <user-login :dialogVisible="dialogVisible" v-on:closed="closeDialog" v-on:goToReg="goToRegist"></user-login>
+    <user-login
+      :dialogVisible="dialogVisible"
+      v-on:closed="closeDialog"
+      v-on:goToReg="goToRegist"
+      v-on:logSuccess="logOK"
+    ></user-login>
     <user-register
       :regDialogVisible="regDialogVisible"
       v-on:regclosed="closeRegDialog"
@@ -13,13 +18,17 @@
           <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
-      <div class="login-self" @click="clickLogin">
+      <div class="login-self" @click="clickLogin" v-if="!showUser">
         <span class="el-icon-mobile-phone"></span>
         <span>登录/注册</span>
       </div>
+      <div class="login-self" v-if="showUser">
+        欢迎回来，
+        <span>{{userName}}</span>
+      </div>
 
       <el-menu
-        :default-active="$route.path"
+        :default-active="defaultActive"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -36,9 +45,6 @@
         <el-menu-item index="/base">
           <a href="javascript:;">基地介绍</a>
         </el-menu-item>
-        <!-- <el-menu-item index="/teacher">
-          <a href="javascript:;">师资力量</a>
-        </el-menu-item>-->
         <el-menu-item index="/Inspection">
           <a href="javascript:;">高端考察</a>
         </el-menu-item>
@@ -48,43 +54,12 @@
         <el-menu-item index="/PersonalCenter">
           <a href="javascript:;">客户中心</a>
         </el-menu-item>
-        <!-- <el-submenu index="2">
-        <template slot="title">关于我们</template>
-        <el-menu-item index="2-1">机构介绍</el-menu-item>
-        <el-menu-item index="2-2">培训理念</el-menu-item>
-        <el-menu-item index="2-3">培训定位</el-menu-item>
-        <el-menu-item index="2-4">资质荣誉</el-menu-item>
-        <el-menu-item index="2-5">管理体系</el-menu-item>
-        <el-menu-item index="2-6">招贤纳士</el-menu-item>
-        </el-submenu>-->
-        <!-- <el-submenu index="3">
-        <template slot="title">课程分类</template>
-        <el-submenu index="3-1">
-          <template slot="title">生产</template>
-          <el-menu-item index="3-1-1">质量员</el-menu-item>
-          <el-menu-item index="3-1-2">工艺员</el-menu-item>
-          <el-menu-item index="3-3-3">资料员</el-menu-item>
-        </el-submenu>
-        <el-submenu index="3-2">
-          <template slot="title">施工</template>
-          <el-menu-item index="3-2-1">灌浆</el-menu-item>
-          <el-menu-item index="3-2-2">吊装</el-menu-item>
-          <el-menu-item index="3-2-3">打胶</el-menu-item>
-        </el-submenu>
-        </el-submenu>-->
         <el-menu-item index="/newsList">
           <a href="javascript:;">资讯</a>
         </el-menu-item>
-        <!-- <el-menu-item index="/HRServiceTypeChoice">
-          <a href="javascript:;">人力资源服务</a>
-        </el-menu-item>-->
         <el-menu-item index="/download">
           <a href="javascript:;">资料下载</a>
         </el-menu-item>
-
-        <!-- <el-menu-item index="/contact">
-          <a href="javascript:;">联系我们</a>
-        </el-menu-item>-->
       </el-menu>
     </el-header>
     <router-view></router-view>
@@ -98,14 +73,31 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      regDialogVisible: false
+      regDialogVisible: false,
+      userName: "",
+      showUser: false
     };
   },
   components: {
     UserLogin,
     UserRegister
   },
+  mounted() {
+    this.addUserInfo();
+  },
+  computed: {
+    defaultActive() {
+      return "/" + this.$route.path.split("/")[1];
+    }
+  },
   methods: {
+    addUserInfo() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        this.showUser = true;
+        this.userName = userInfo.name;
+      }
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath, this.$route.path);
     },
@@ -128,6 +120,10 @@ export default {
     },
     goToLogin: function(msg) {
       this.dialogVisible = msg;
+    },
+    logOK: function(msg) {
+      this.showUser = msg.showUser;
+      this.userName = msg.user;
     }
   }
 };

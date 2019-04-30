@@ -15,50 +15,61 @@
         <el-button type="success" @click="addBatch">批量添加</el-button>
     </div>
 
-    <div v-if="oneAdd">
+    <div v-if="oneAdd" class="form-body">
     <el-form
       :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
-      label-width="100px"
+      
       class="demo-ruleForm"
     >
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+      <el-form-item prop="empname">
+        <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconName">&#xe614;</i>
+        </el-input>
       </el-form-item>
 
-     
+      <el-form-item prop="sex">
+     <el-select v-model="ruleForm.sex" placeholder="请选择性别" class="person-add-select">
+      <el-option label="男" value="0"></el-option>
+      <el-option label="女" value="1"></el-option>
+      <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
+    </el-select>
+ </el-form-item>
 
-      <el-form-item label="性别" prop="resource">
-        <el-radio-group v-model="ruleForm.resource">
-          <el-radio label="男"></el-radio>
-          <el-radio label="女"></el-radio>
-        </el-radio-group>
+       <el-form-item  prop="age">
+        <el-input v-model.number="ruleForm.age" placeholder="请输入年龄" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="年龄" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item  prop="worktype" >
+        <el-input v-model="ruleForm.worktype" placeholder="请输入工种" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconWorktype">&#xe626;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="工种" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item  prop="cardno" >
+        <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="身份证号" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item  prop="phone">
+        <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconPhone">&#xe745;</i>
+        </el-input>
       </el-form-item>
 
-       <el-form-item label="手机号码" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
-      </el-form-item>
-
-       <el-form-item label="工作地" prop="name" id="add-id">
-        <el-input v-model="ruleForm.name"></el-input>
+       <el-form-item  prop="address" >
+        <el-input v-model="ruleForm.address" placeholder="请输入工作地" class="person-add-input">
+          <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
+        </el-input>
       </el-form-item>
 
       <el-form-item>
         <div class="worker-add">
-          <el-button type="primary">添加</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" class="login-self">添&nbsp;&nbsp;&nbsp;&nbsp;加</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -93,66 +104,50 @@ export default {
       oneAdd:true,
         batchAdd: false,
       ruleForm: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-        // name: "",
-        // identification:"",
-        // sex: "",
-        // birthday: "",
-        native: ""
-        // workspace:"",
-        // education:"",
-        // school:"",
-        // position:"",
-        // workType:"",
-        // mobile:"",
-        // mail:"",
-        // company:"",
-        // qualification:""
+        empname: "",
+        sex: "",
+        age: "",
+        worktype: "",
+        cardno: "",
+        phone: "",
+        address: "",
       },
       rules: {
         
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        empname: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 5, message: "长度在 2 到 5个字符", trigger: "blur" }
         ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ],
-        date1: [
+       sex: [
+          { required: true, message: "请选择性别", trigger: "blur" },
+       ],
+       age: [
+          { required: true, message: '年龄不能为空' , trigger: "blur"},
+       ],
+       worktype: [
+          { required: true, message: "请输入工种", trigger: "blur" },
+          { min: 1, max: 5, message: "长度在 1 到 5个字符", trigger: "blur" }
+       ],
+       cardno: [
+         { required: true, message: "请输入身份证号", trigger: "blur" },
           {
-            type: "date",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
+            message: "请输入正确的身份证号",
+            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+            trigger: "blur"
           }
-        ],
-        date2: [
+       ],
+       phone: [
+         { required: true, message: "请输入手机号", trigger: "blur" },
           {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change"
+            message: "请输入正确的手机号",
+            pattern: /^1[34578]\d{9}$/,
+            trigger: "blur"
           }
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change"
-          }
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" }
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }]
+       ],
+       address: [
+         { required: true, message: "请输入工作地", trigger: "blur" },
+          { min: 1, max: 20, message: "长度在 1 到 20个字符", trigger: "blur" }
+       ]
       }
     };
   },
@@ -164,6 +159,38 @@ export default {
     addBatch() {
       this.oneAdd=false;
         this.batchAdd=true;
+    },
+    submitForm(formName) {
+    
+       var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+       
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$ajax({
+            method: "post",
+            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${this.ruleForm.sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}'}&userid=${userid}`
+          })
+            .then(res => {
+              this.$message({
+                message: "添加成功！",
+                center:true
+              });
+              this.ruleForm = {};
+              console.log(res)             
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+      console.log("2");
     }
   }
 };
@@ -171,7 +198,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAddPerson {
-  width: 830px;
+  width: 730px;
 
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
@@ -208,11 +235,13 @@ export default {
   float: right;
   margin: -100px 0px 0px 0px;
 }
-.el-input {
-  width: 220px;
+.el-input, .el-select {
+  width: 358px;
 }
+
 .el-form {
-  margin: 50px 0px 0px 180px;
+  margin: 30px 0px 0px 0px;
+  text-align: center;
 }
 .crumb {
   padding: 10px 0px 10px 0px;
@@ -229,7 +258,6 @@ export default {
 }
 .worker-add {
   text-align: center;
-  margin: 0px 250px 0px 0px;
 }
 .add-head {
   margin: 0px 0px 0px 20px;
@@ -253,6 +281,45 @@ export default {
   margin:0px 0px 20px 0px;
   text-align: center;
 }
+#iconAge,#iconWorktype,#iconName,#iconCardno,#iconPhone,#iconAddress,#iconSex {
+  margin: 0px 0px 0px 2px;
+  line-height: 44px;
+}
+.login-self {
+  width: 358px;
+  font-size: 18px;
+  height: 44px;
+}
+.form-body {
+  width: 358px;
+  margin:0px auto;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
+  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 18px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+<style>
+  .person-add-input .el-input__inner {
+  height: 44px;
+}
+.person-add-select .el-input__inner {
+  height: 44px;
+}
+</style>
 </style>
 
 
