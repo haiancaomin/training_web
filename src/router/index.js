@@ -14,10 +14,8 @@ import SignUpPageWait from '@/page/signUp/SignUpPageWait'
 import courseList from '@/page/course/courseList'
 import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
-import fileDetail from '@/page/downloads/fileDetail'
 import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
-import contactUs from '@/page/contactUs'
 import PersonalCenter from '@/page/personalCenter/PersonalCenter'
 
 import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
@@ -125,9 +123,6 @@ export default new Router({
       path: '/download',
       component: fileList
     }, {
-      path: '/download-action',
-      component: fileDetail
-    }, {
       path: '/base',
       component: baseMenu,
       children: [{
@@ -187,9 +182,6 @@ export default new Router({
     }, {
       path: '/InspectionDetail',
       component: InspectionDetail
-    }, {
-      path: '/contact',
-      component: contactUs
     }, {
       path: '/PersonalCenter',
       component: PersonalCenter
