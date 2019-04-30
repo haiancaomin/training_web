@@ -115,7 +115,7 @@ export default new Router({
     {
       path: '/course',
       component: courseList
-    },{
+    }, {
       path: '/download',
       component: fileList
     }, {
