@@ -27,7 +27,7 @@
             <el-tab-pane :label="v.label" :name="v.name" v-for="(v,k) in tabs" :key="k">
               <router-link
                 :to="'/newsDetail/'+item.newsid"
-                v-for="(item,key) in newsList"
+                v-for="(item,key) in newsList.data"
                 :key="key"
               >
                 <div class="list-row">
@@ -46,9 +46,11 @@
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="newsList.length"
+                :total="newsList.count"
+                :page-size="8"
+                @current-change="handleCurrentChange"
                 class="text-right"
-                 v-if="newsList.length"
+                v-if="newsList.data.length"
               ></el-pagination>
             </el-row>
           </el-tabs>
@@ -70,6 +72,7 @@ export default {
       hotNews: [],
       newsList: [],
       type: "0",
+      currentPage: 1,
       swiperOption: {
         autoplay: {
           disableOnInteraction: false
@@ -102,10 +105,15 @@ export default {
     getNewsList(type) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/news_findNewsList.do?type=${type}`
+        url: `${
+          this.baseURL
+        }/zjsxpt/news_findNewsList.do?type=${type}&pageIndex=${(this
+          .currentPage -
+          1) *
+          8}&selectIndex=${this.currentPage}`
       })
         .then(res => {
-          this.newsList = res.data.data;
+          this.newsList = res.data;
         })
         .catch(function(err) {
           console.log(err);
@@ -113,6 +121,11 @@ export default {
     },
     handleClick(tab, event) {
       this.type = tab.index;
+      this.currentPage = 1;
+      this.getNewsList(this.type);
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
       this.getNewsList(this.type);
     }
   }
