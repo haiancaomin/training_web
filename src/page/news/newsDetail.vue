@@ -66,18 +66,19 @@ export default {
 .preview {
   /* width: 1000px;
   margin: 0 auto; */
-  padding: 30px 0;
+  margin: 40px 30px;
   overflow: hidden;
 }
 .text-center{
   text-align: center
 }
 .news-title{
-  padding: 15px 0;
+  margin: 20px 30px;
   font-weight: bold
 }
 .news-tags{
   color:#999;
+  margin: 0 30px;
 }
 .mr15{
   margin-right: 15px;
