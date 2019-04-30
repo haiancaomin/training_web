@@ -50,7 +50,7 @@
                 :page-size="8"
                 @current-change="handleCurrentChange"
                 class="text-right"
-                v-if="newsList.data.length"
+                v-if="newsList.count"
               ></el-pagination>
             </el-row>
           </el-tabs>
