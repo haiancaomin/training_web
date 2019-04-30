@@ -43,6 +43,7 @@ import baseMenu from '@/page/base/baseMenu'
 import baseOverView from '@/page/base/baseOverView'
 import baseShow1 from '@/page/base/baseShow1'
 import newsList from '@/page/news/newsList'
+import newsDetail from '@/page/news/newsDetail'
 
 
 
@@ -221,6 +222,10 @@ export default new Router({
     {
       path: '/newsList',
       component: newsList
+    },
+    {
+      path: '/newsDetail/:id',
+      component: newsDetail
     }
     ]
   }]
