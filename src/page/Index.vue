@@ -68,10 +68,6 @@
                     <img src="https://edu-image.nosdn.127.net/0b9d55e1-0e5a-4d89-a2ba-8522609d599e.jpg?imageView&amp;quality=100&amp;thumbnail=286y170&amp;type=webp" class="course-show-img">
                   </div>
                   <div class="course-info">
-                   
-            
-            
-         
                     <img src="../assets/contentBack.png">
                     <div class="course-name">
                       <h3>{{courseItem.coursename}}</h3>
