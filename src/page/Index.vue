@@ -1047,7 +1047,7 @@ body > .el-container {
   color: #666;
 }
 .course-no-over:hover {
-  background: url("../assets/hop.jpg") no-repeat;
+  /* background: url("../assets/hop.jpg") no-repeat; */
   background-size: 100% 100%
 }
 
