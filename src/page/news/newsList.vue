@@ -36,7 +36,7 @@
                   </div>
                   <div class="news-overview">
                     <h3>{{item.title}}</h3>
-                    <div v-html="item.content"></div>
+                    <div>{{item.preview}}</div>
                     <p>{{item.createdate}}</p>
                   </div>
                 </div>
@@ -48,6 +48,7 @@
                 layout="prev, pager, next"
                 :total="newsList.length"
                 class="text-right"
+                 v-if="newsList.length"
               ></el-pagination>
             </el-row>
           </el-tabs>
@@ -105,14 +106,12 @@ export default {
       })
         .then(res => {
           this.newsList = res.data.data;
-          console.log(this.newsList);
         })
         .catch(function(err) {
           console.log(err);
         });
     },
     handleClick(tab, event) {
-      console.log(tab, event);
       this.type = tab.index;
       this.getNewsList(this.type);
     }

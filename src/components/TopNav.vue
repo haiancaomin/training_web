@@ -84,7 +84,6 @@ export default {
   },
   mounted() {
     this.addUserInfo();
-    console.log(this.defaultActive)
   },
   computed: {
     defaultActive() {

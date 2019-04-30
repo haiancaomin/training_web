@@ -225,7 +225,8 @@ export default new Router({
     },
     {
       path: '/newsDetail/:id',
-      component: newsDetail
+      component: newsDetail,
+      props: true
     }
     ]
   }]
