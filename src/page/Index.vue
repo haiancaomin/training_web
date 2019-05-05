@@ -112,7 +112,7 @@
             <el-row class="pad20 bg-white" id="index-base-background">
               <el-col :span="6">
                 <router-link to="/base">
-                  <a href="javascript:;">
+                  
                     <div class="index-base-list" id="index-base-list1">
                       <div class="index-base-img-div">
                         <img src="../assets/inspection1.jpg" class="index-base-img">
@@ -120,7 +120,7 @@
                       <div class="index-base-name">灌浆区</div>
                       <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
                     </div>
-                  </a>
+                  
                 </router-link>
               </el-col>
               <el-col :span="6">
@@ -1043,15 +1043,9 @@ body > .el-container {
   font-weight: 400;
   color: #666;
 }
-.course-no-over h1 {
-  font-size: 20px;
-  font-weight: 400;
-  color: #666;
-}
 .course-hover-show {
   display: none;
   margin: 140px 0px 0px -60px;
-  transition: all ease-in-out 0.5s;
 }
 .course-hover-show>img {
   margin:-5px 0px 0px 0px;
@@ -1064,7 +1058,6 @@ body > .el-container {
   color: #666;
 }
 .course-no-over:hover .course-hover-show {
-  /* background: url("../assets/hop.jpg") no-repeat; */
   animation: courseHover 1s;
   -moz-animation: courseHover 1s; 
   -webkit-animation: courseHover 1s;
@@ -1110,25 +1103,9 @@ body > .el-container {
     margin: 70px 0px 0px -60px;
   }
 }
-
 .course-no-over:hover .more-course {
   display: none;
 }
-
-/* .index-base-img {
-  display: block;
-  width: 280px;
-  height: 200px;
-  transition: all ease-in-out 0.5s;
-}
-.index-base-img-div {
-   width: 280px;
-  height: 200px;
-  overflow: hidden;
-}
-.index-base-list:hover .index-base-img {
-  transform: scale(1.04);
-} */
 @keyframes myfirst {
   0% {
     bottom: 30px;
@@ -1152,7 +1129,6 @@ body > .el-container {
     bottom: 30px;
   }
 }
-
 @-webkit-keyframes myfirst /* Safari and Chrome */ {
   0% {
     bottom: 30px;
@@ -1164,7 +1140,6 @@ body > .el-container {
     bottom: 30px;
   }
 }
-
 @-o-keyframes myfirst /* Opera */ {
   0% {
     bottom: 30px;
