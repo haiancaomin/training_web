@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else if (to.path == '/SignUp' || to.path == '/PersonalCenter') {
       // next({path: '/login'})
+      sessionStorage.setItem('redirect',to.fullPath)
       document.getElementById('loginBtn').click()
       Vue.prototype.$message({
         message: '检测到您还未登录,请登录后操作！',

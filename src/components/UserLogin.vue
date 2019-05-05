@@ -9,25 +9,35 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input :type="inputType" placeholder="请输入密码" v-model="ruleForm.password">
-            <i slot="prefix" class="iconfont" >&#xe7c9;</i>
+            <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
           <div class="input-icon" @click="changeType">
             <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
             <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
           </div>
-         
         </el-form-item>
 
         <el-form-item prop="inputVerificationCode" v-if="errorCount>2">
-        <el-input placeholder="请输入验证码"  v-model="ruleForm.inputVerificationCode" class="identifying"></el-input>
-        <div @click="createCode" class="verificationCode">
-          <p><span :style="{'color': color1 }">{{code1}}</span><span :style="{'color': color2 }">{{code2}}</span><span :style="{'color': color3 }">{{code3}}</span><span :style="{'color': color4 }">{{code4}}</span></p>
-        </div>
+          <el-input
+            placeholder="请输入验证码"
+            v-model="ruleForm.inputVerificationCode"
+            class="identifying"
+          ></el-input>
+          <div @click="createCode" class="verificationCode">
+            <p>
+              <span :style="{'color': color1 }">{{code1}}</span>
+              <span :style="{'color': color2 }">{{code2}}</span>
+              <span :style="{'color': color3 }">{{code3}}</span>
+              <span :style="{'color': color4 }">{{code4}}</span>
+            </p>
+          </div>
         </el-form-item>
 
         <el-form-item>
           <el-button
-            type="primary" @click="submitForm('ruleForm')" class="login-self"
+            type="primary"
+            @click="submitForm('ruleForm')"
+            class="login-self"
           >登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
         </el-form-item>
       </el-form>
@@ -37,7 +47,6 @@
         <span class="el-icon-arrow-right"></span>
       </a>
     </el-dialog>
-    
   </div>
 </template>
 
@@ -56,20 +65,20 @@ export default {
       showNewPassword: false,
       inputType: "password",
       logshow: false,
-      checkCode:"",
-      code1:"",
-      code2:"",
-      code3:"",
-      code4:"",
-      color1:"",
-      color2:"",
-      color3:"",
-      color4:"",
-      errorCount:0,
+      checkCode: "",
+      code1: "",
+      code2: "",
+      code3: "",
+      code4: "",
+      color1: "",
+      color2: "",
+      color3: "",
+      color4: "",
+      errorCount: 0,
       ruleForm: {
         name: "",
         password: "",
-        inputVerificationCode:"",
+        inputVerificationCode: ""
       },
       rules: {
         name: [
@@ -126,11 +135,17 @@ export default {
             .then(res => {
               this.$message({
                 message: "登录成功！",
-                center:true
+                center: true
               });
-              sessionStorage.setItem('user',JSON.stringify(res.data.data))
-              this.logshow=false
-              this.$emit("logSuccess", {showUser:true,user:res.data.data.name});
+              sessionStorage.setItem("user", JSON.stringify(res.data.data));
+              this.logshow = false;
+              this.$emit("logSuccess", {
+                showUser: true,
+                user: res.data.data.name
+              });
+              this.$router.push({
+                path: sessionStorage.getItem('redirect')
+              });
             })
             .catch(function(err) {
               console.log(err);
@@ -142,32 +157,75 @@ export default {
         }
       });
     },
-    createCode(){
-     var code = "";    
-     var codeLength = 4; 
-     var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',   
-                 'S','T','U','V','W','X','Y','Z'); 
-     for(var i = 0; i < codeLength; i++) { 
-           var index = Math.floor(Math.random()*36);
-           code += random[index]; 
-     }   
-     this.checkCode = code; 
-     this.code1 = this.checkCode.substring(0,1);
-     this.code2 = this.checkCode.substring(1,2);
-     this.code3 = this.checkCode.substring(2,3);
-     this.code4 = this.checkCode.substring(3,4);
+    createCode() {
+      var code = "";
+      var codeLength = 4;
+      var random = new Array(
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z"
+      );
+      for (var i = 0; i < codeLength; i++) {
+        var index = Math.floor(Math.random() * 36);
+        code += random[index];
+      }
+      this.checkCode = code;
+      this.code1 = this.checkCode.substring(0, 1);
+      this.code2 = this.checkCode.substring(1, 2);
+      this.code3 = this.checkCode.substring(2, 3);
+      this.code4 = this.checkCode.substring(3, 4);
 
-     var random = new Array('#409EFF','#67C23A','#E6A23C','#F56C6C','#909399','#303133','#DCDFE6');
-     var indexColor = Math.floor(Math.random()*7);
-     this.color1 = random[indexColor];
-     var indexColor = Math.floor(Math.random()*7);
-     this.color2 = random[indexColor];
-     var indexColor = Math.floor(Math.random()*7);
-     this.color3 = random[indexColor];
-     var indexColor = Math.floor(Math.random()*7);
-     this.color4 = random[indexColor]; 
-     
-}
+      var random = new Array(
+        "#409EFF",
+        "#67C23A",
+        "#E6A23C",
+        "#F56C6C",
+        "#909399",
+        "#303133",
+        "#DCDFE6"
+      );
+      var indexColor = Math.floor(Math.random() * 7);
+      this.color1 = random[indexColor];
+      var indexColor = Math.floor(Math.random() * 7);
+      this.color2 = random[indexColor];
+      var indexColor = Math.floor(Math.random() * 7);
+      this.color3 = random[indexColor];
+      var indexColor = Math.floor(Math.random() * 7);
+      this.color4 = random[indexColor];
+    }
   },
   mounted() {
     this.createCode();
@@ -242,13 +300,14 @@ a {
   padding: 0px 50px;
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
-  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_b13898ksm7.eot");
+  src: url("//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont") format("svg");
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -258,29 +317,29 @@ a {
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
   line-height: 44px;
-  margin:0px 0px 0px 2px;
+  margin: 0px 0px 0px 2px;
 }
 .verificationCode {
-  width:110px;
-  height:44px;
-  background:url(../assets/yzm.png) no-repeat;
-   cursor: pointer;
-   background-size:cover;
-   position: absolute;
-   margin: -44px 0px 0px 248px;
-   border-radius: 4px;
+  width: 110px;
+  height: 44px;
+  background: url(../assets/yzm.png) no-repeat;
+  cursor: pointer;
+  background-size: cover;
+  position: absolute;
+  margin: -44px 0px 0px 248px;
+  border-radius: 4px;
 }
-.verificationCode>p {
+.verificationCode > p {
   line-height: 44px;
   font-size: 28px;
-  -webkit-user-select:none;
-   -moz-user-select:none;
-   -ms-user-select:none;
-   user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .identifying {
-  width:230px;
-   margin: 0px 0px 0px -129px;
+  width: 230px;
+  margin: 0px 0px 0px -129px;
 }
 </style>
 <style>
