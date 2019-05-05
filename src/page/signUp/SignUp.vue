@@ -56,7 +56,7 @@ import SignUpSuccess from '@/page/signUp/SignUpSuccess';
 import SignUpPageWait from '@/page/signUp/SignUpPageWait';
 
 export default {
-  name: "Signup",
+  name: "SignUp",
   components: {
     CompanySignUp,
     SchoolSignUp,
