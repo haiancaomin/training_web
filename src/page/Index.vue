@@ -11,10 +11,10 @@
             <span class="logo-words">智聚实训</span>
           </div>
           <div class="feature">
-            <span class="feature-detail">快速</span>
-            <span class="feature-detail">全面</span>
-            <span class="feature-detail">方便</span>
-            <span class="feature-detail-last">质量</span>
+            <span class="feature-detail">求是</span>
+            <span class="feature-detail">创新</span>
+            <span class="feature-detail">共享</span>
+            <span class="feature-detail-last">共赢</span>
           </div>
           <div class="sign-up-main">
             <router-link to="/SignUp">
@@ -42,9 +42,9 @@
           </el-row>
           <el-row class="no-margin-b">
             <div class="course-body">
-              <div  v-for="courseItem in courseList" :key="courseItem.courseid">
-              <el-col :span="6">
-                <!-- <div class="index-course-list" id="index-course-list1">
+              <div v-for="courseItem in courseList" :key="courseItem.courseid">
+                <el-col :span="6">
+                  <!-- <div class="index-course-list" id="index-course-list1">
                   <router-link to="/course">
                     <a href="javascript:;">
                       <div class="index-course-img">
@@ -61,29 +61,38 @@
                       <div class="index-course-other">最近开课时间： {{courseItem.traintime}}</div>
                     </a>
                   </router-link>
-                </div> -->
+                  </div>-->
+                  <router-link to="/course">
+                    <div class="course-outbody">
+                      <div class="course-img-body">
+                        <img
+                          :src="courseItem.picurl"
+                          class="course-show-img"
+                        >
+                      </div>
+                      <div class="course-info">
+                        <img src="../assets/contentBack.png">
+                        <div class="course-name">
+                          <h3>{{courseItem.coursename}}</h3>
+                        </div>
+                        <div class="course-description">
+                          <h3>{{courseItem.description}}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </el-col>
+              </div>
+              <el-col :span="6">
                 <router-link to="/course">
-                <div class="course-outbody">
-                  <div class="course-img-body">
-                    <img src="https://edu-image.nosdn.127.net/0b9d55e1-0e5a-4d89-a2ba-8522609d599e.jpg?imageView&amp;quality=100&amp;thumbnail=286y170&amp;type=webp" class="course-show-img">
-                  </div>
-                  <div class="course-info">
-                    <img src="../assets/contentBack.png">
-                    <div class="course-name">
-                      <h3>{{courseItem.coursename}}</h3>
-                    </div>
-                    <div class="course-description">
-                      <h3>{{courseItem.description}}</h3>
-                    </div>
+                <div v-if="courseList.length < 8" class="course-no-over">
+                  <p class="more-course">更多课程，尽情期待！</p>
+                  <div class="course-hover-show">
+                    <img src="../assets/favicon.png" alt>
+                    <span class="logo-words">智聚实训</span>
                   </div>
                 </div>
                 </router-link>
-              </el-col>
-              </div>
-              <el-col :span="6">
-              <div v-if="courseList.length < 8" class="course-no-over">
-                <p>更多课程，尽情期待！</p>
-              </div>
               </el-col>
             </div>
           </el-row>
@@ -106,7 +115,7 @@
                   <a href="javascript:;">
                     <div class="index-base-list" id="index-base-list1">
                       <div class="index-base-img-div">
-                      <img src="../assets/inspection1.jpg" class="index-base-img">
+                        <img src="../assets/inspection1.jpg" class="index-base-img">
                       </div>
                       <div class="index-base-name">灌浆区</div>
                       <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
@@ -173,46 +182,44 @@
       </div>
       <div class="friend-url-outline-body">
         <div class="friend-url">
-            <div class="friend-title">
-              <div class="friend-title-con">
-                <span>友情链接</span>
-              </div>
+          <div class="friend-title">
+            <div class="friend-title-con">
+              <span>友情链接</span>
             </div>
+          </div>
           <el-row class="no-margin-b">
             <div class="index-friend">
-              
-                  <a href="http://www.zhongnangroup.cn" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
-                      alt
-                      class="friend-img"
-                    >
-                  </a>
-                
-                  <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
-                      alt
-                      class="friend-img"
-                    >
-                  </a>
-               
-                  <a href="http://www.tjprefab.com.cn" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
-                      alt
-                     class="friend-img"
-                    >
-                  </a>
-                
-                  <a href="http://www.ntadi.cc/index.html" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
-                      alt
-                      class="friend-img-last"
-                    >
-                  </a>
-                
+              <a href="http://www.zhongnangroup.cn" target="_blank">
+                <img
+                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
+                  alt
+                  class="friend-img"
+                >
+              </a>
+
+              <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
+                <img
+                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
+                  alt
+                  class="friend-img"
+                >
+              </a>
+
+              <a href="http://www.tjprefab.com.cn" target="_blank">
+                <img
+                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
+                  alt
+                  class="friend-img"
+                >
+              </a>
+
+              <a href="http://www.ntadi.cc/index.html" target="_blank">
+                <img
+                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
+                  alt
+                  class="friend-img-last"
+                >
+              </a>
             </div>
           </el-row>
         </div>
@@ -234,7 +241,7 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      courseList: [],
+      courseList: []
     };
   },
 
@@ -257,19 +264,13 @@ export default {
         that.showDown = true;
       }
     });
-   this.getCourseList();
-
-
-    
-
+    this.getCourseList();
   },
   methods: {
     getCourseList() {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_findIndexCourseList.do`
+        url: `${this.baseURL}/zjsxpt/course_findIndexCourseList.do`
       })
         .then(res => {
           this.courseList = res.data.data;
@@ -546,7 +547,7 @@ body > .el-container {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
-  margin:40px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
 }
 
 .index-sign-up1:hover {
@@ -626,7 +627,7 @@ body > .el-container {
   width: 100%;
   border-radius: 50%;
 }
-.index-course-list:hover .index-course-img1{
+.index-course-list:hover .index-course-img1 {
   animation: borderRadius 1s;
   -moz-animation: borderRadius 1s; /* Firefox */
   -webkit-animation: borderRadius 1s; /* Safari and Chrome */
@@ -716,7 +717,7 @@ body > .el-container {
   transition: all ease-in-out 0.5s;
 }
 .index-base-img-div {
-   width: 280px;
+  width: 280px;
   height: 200px;
   overflow: hidden;
 }
@@ -763,18 +764,15 @@ body > .el-container {
 }
 
 .friend-img {
-  
- height: 80px;
+  height: 80px;
   width: 286px;
   border: solid 1px #eee;
   margin: 0px 20px 0px 0px;
 }
 .friend-img-last {
-  
- height: 80px;
+  height: 80px;
   width: 286px;
   border: solid 1px #eee;
-  
 }
 
 .index-footer {
@@ -801,7 +799,7 @@ body > .el-container {
   box-shadow: 0 0 8px #c7c5c5;
 }
 .index-base-list:hover .index-base-img {
-  transform: scale(1.04);
+  transform: scale(1.1);
 }
 .company-show {
   height: 810px;
@@ -931,24 +929,23 @@ body > .el-container {
 }
 .index-contact {
   margin: 0px 0px 20px 0px;
-  
 }
 .friend-title {
-  width:100%;
+  width: 100%;
   background: #f4f4f4;
   border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .friend-title-con {
-  width:100px;
+  width: 100px;
   background: #409eff;
-  padding:10px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   font-size: 16px;
-  color:#fff;
+  color: #fff;
 }
-.friend-title-con>span {
+.friend-title-con > span {
   font-weight: bold;
 }
 .more {
@@ -973,17 +970,17 @@ body > .el-container {
   padding: 50px 0px 0px 0px;
   margin: 0px auto;
 }
-.course-info{
-      position: absolute;
-      margin:-95px 0px 0px 22.5PX;  
+.course-info {
+  position: absolute;
+  margin: -95px 0px 0px 22.5px;
 }
-.course-info img{
+.course-info img {
   width: 240px;
-  height:76px;
+  height: 76px;
 }
 .course-show-img {
   width: 280px;
-  height:170px;
+  height: 170px;
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {
@@ -992,8 +989,8 @@ body > .el-container {
 }
 .course-outbody {
   width: 280px;
-  height:170px;
-  margin:20px 10px 5px 10px; 
+  height: 170px;
+  margin: 20px 10px 5px 10px;
   border-radius: 4px;
 }
 .course-outbody:hover .course-show-img {
@@ -1001,54 +998,121 @@ body > .el-container {
 }
 .course-name {
   position: absolute;
-  width:200px;
-  height:30px;
-  margin:-75px 0px 0px 19px;
+  width: 200px;
+  height: 30px;
+  margin: -75px 0px 0px 19px;
   text-align: center;
 }
 .course-name h3 {
-    font-size: 18px;
-    height: 24px;
-    line-height: 24px;
-    margin: 14px 0 3px;
-    color: #333;
-    overflow: hidden;
-    font-weight: normal;
+  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  margin: 14px 0 3px;
+  color: #333;
+  overflow: hidden;
+  font-weight: normal;
 }
 .course-description {
   position: absolute;
-  width:220px;
-  height:30px;
-  margin:-30px 0px 0px 10px;
+  width: 220px;
+  height: 30px;
+  margin: -30px 0px 0px 10px;
   text-align: center;
-  
 }
 .course-description h3 {
-    font-size: 14px;
-    height: 19px;
-    line-height: 19px;
-    margin: 0;
-    color: #666;
-    overflow:hidden;text-overflow:ellipsis; 
+  font-size: 14px;
+  height: 19px;
+  line-height: 19px;
+  margin: 0;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .course-no-over {
-  width:280px;
-  height:170px;
-    border: 1px solid #409eff;
-    margin:20px 10px 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
+  width: 280px;
+  height: 170px;
+  border: 1px solid #409eff;
+  margin: 20px 10px 5px 10px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
 }
-.course-no-over p{
+.course-no-over p {
   line-height: 170px;
-  font-size:20px;
+  font-size: 20px;
   font-weight: 400;
   color: #666;
 }
-.course-no-over:hover {
+.course-no-over h1 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #666;
+}
+.course-hover-show {
+  display: none;
+  margin: 140px 0px 0px -60px;
+  transition: all ease-in-out 0.5s;
+}
+.course-hover-show>img {
+  margin:-5px 0px 0px 0px;
+  width:25px;
+  height:25px;
+}
+.course-hover-show>span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+}
+.course-no-over:hover .course-hover-show {
   /* background: url("../assets/hop.jpg") no-repeat; */
-  background-size: 100% 100%
+  animation: courseHover 1s;
+  -moz-animation: courseHover 1s; 
+  -webkit-animation: courseHover 1s;
+  -o-animation: courseHover 1s;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  
+  display: inline;
+  position: absolute;
+  margin: 70px 0px 0px -60px;
+}
+@keyframes courseHover {
+  0% {
+    margin: 140px 0px 0px -60px;
+  }
+  100% {
+    margin: 70px 0px 0px -60px;
+  }
+}
+@-moz-keyframes courseHover /* Firefox */ {
+  0% {
+    margin: 140px 0px 0px -60px;
+  }
+  100% {
+    margin: 70px 0px 0px -60px;
+  }
+}
+
+@-webkit-keyframes courseHover /* Safari and Chrome */ {
+  0% {
+    margin: 140px 0px 0px -60px;
+  }
+  100% {
+    margin: 70px 0px 0px -60px;
+  }
+}
+
+@-o-keyframes courseHover /* Opera */ {
+  0% {
+    margin: 140px 0px 0px -60px;
+  }
+  100% {
+    margin: 70px 0px 0px -60px;
+  }
+}
+
+.course-no-over:hover .more-course {
+  display: none;
 }
 
 /* .index-base-img {
