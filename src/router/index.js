@@ -58,7 +58,8 @@ export default new Router({
     {
       path: '/SignUp',
       name: 'SignUp',
-      component: SignUp
+      component: SignUp,
+      meta: {auth: true}
     },
     {
       path: '/PesronalScoreSearch',

@@ -12,18 +12,38 @@ import router from './router'
 import axios from 'axios' //引入axios
 
 Vue.prototype.bus = new Vue()
-Vue.prototype.$ajax=axios
+Vue.prototype.$ajax = axios
 Vue.prototype.baseURL = process.env.API_ROOT
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
+Vue.use(VueAwesomeSwiper, /* { default global options } */ )
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.auth)) {
+    if (window.sessionStorage.user != undefined) {
+      next()
+    } else if (to.path == '/SignUp') {
+      // next({path: '/login'})
+      document.getElementById('loginBtn').click()
+      Vue.prototype.$message({
+        message: '检测到您还未登录,请登录后操作！',
+        type: 'warning',
+        center: true,
+        customClass: 'zZindex'
+      })
+    }
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

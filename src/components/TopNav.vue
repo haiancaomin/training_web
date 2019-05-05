@@ -18,7 +18,7 @@
           <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
-      <div class="login-self" @click="clickLogin" v-if="!showUser">
+      <div id="loginBtn" class="login-self" @click="clickLogin" v-if="!showUser">
         <span class="el-icon-mobile-phone"></span>
         <span>登录/注册</span>
       </div>
