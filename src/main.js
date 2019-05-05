@@ -32,7 +32,6 @@ router.beforeEach((to, from, next) => {
         center: true,
         customClass: 'zZindex'
       })
-      next()
     }
   } else {
     next()
