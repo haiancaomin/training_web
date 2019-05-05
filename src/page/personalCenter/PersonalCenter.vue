@@ -10,7 +10,7 @@
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
-          :unique-opened='true'
+          :unique-opened="true"
           router
         >
           <el-submenu index="1">
@@ -46,7 +46,6 @@
             <span slot="title">发票信息</span>
           </el-menu-item>
 
-         
           <el-menu-item index="/PersonalCenter/PersonalCenterAuthentication">
             <i class="el-icon-success"></i>
             <span slot="title">企业认证</span>
@@ -55,11 +54,9 @@
           <el-menu-item index="/PersonalCenter/PersonalCenterReport">
             <i class="el-icon-message"></i>
             <div class="report-con">
-            <span slot="title">统计汇报</span>
+              <span slot="title">统计汇报</span>
             </div>
-            <el-badge :value="1" :hidden=false class="item">
-              
-            </el-badge>
+            <el-badge :value="1" :hidden="false" class="item"></el-badge>
           </el-menu-item>
           <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
             <i class="el-icon-printer"></i>
@@ -94,7 +91,13 @@ export default {
     };
   },
   components: {},
+  mounted() {
+    this.showDefault();
+  },
   methods: {
+    showDefault() {
+      this.$router.push({ path: "/PersonalCenter/PersonalCenterAllOrder" });
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -132,13 +135,11 @@ i {
 }
 .el-badge {
   margin: 0px 0px 2px 50px;
-  
 }
 .report-con {
   display: inline-block;
-  margin:0px 0px 2px 0px;
+  margin: 0px 0px 2px 0px;
 }
-
 </style>
 
 

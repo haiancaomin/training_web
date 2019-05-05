@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth)) {
     if (window.sessionStorage.user != undefined) {
       next()
-    } else if (to.path == '/SignUp') {
+    } else if (to.path == '/SignUp' || to.path == '/PersonalCenter') {
       // next({path: '/login'})
       document.getElementById('loginBtn').click()
       Vue.prototype.$message({
