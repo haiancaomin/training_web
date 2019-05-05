@@ -12,7 +12,6 @@ import SignUpSuccess from '@/page/signUp/SignUpSuccess'
 import SignUpPageWait from '@/page/signUp/SignUpPageWait'
 
 import courseList from '@/page/course/courseList'
-import teacherList from '@/page/teacher/teacherList'
 import fileList from '@/page/downloads/fileList'
 import Inspection from '@/page/inspection/Inspection'
 import InspectionDetail from '@/page/inspection/InspectionDetail'
@@ -42,8 +41,6 @@ import baseOverView from '@/page/base/baseOverView'
 import baseShow1 from '@/page/base/baseShow1'
 import newsList from '@/page/news/newsList'
 import newsDetail from '@/page/news/newsDetail'
-
-
 
 Vue.use(Router)
 
@@ -102,23 +99,9 @@ export default new Router({
       name: 'SignUpPageWait',
       component: SignUpPageWait
     },
-    // {
-    //   path: '/Diagram',
-    //   name: 'Diagram',
-    //   component: Diagram
-    // },
-    // {
-    //   path: '/Echarts',
-    //   name: 'Echarts',
-    //   component: Echarts
-    // },
-   
     {
       path: '/course',
       component: courseList
-    }, {
-      path: '/teacher',
-      component: teacherList
     }, {
       path: '/download',
       component: fileList
