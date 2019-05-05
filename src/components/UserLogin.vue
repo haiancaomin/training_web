@@ -200,7 +200,8 @@ export default {
             }&password=${this.ruleForm.password}`
           })
             .then(res => {
-              this.$message({
+              if(res.data.data != false) {
+                this.$message({
                 message: "登录成功！",
                 center: true
               });
@@ -213,19 +214,14 @@ export default {
               this.$router.push({
                 path: sessionStorage.getItem('redirect')
               });
-            })
-              .then(res => {
+              } else {
                 this.$message({
-                  message: "登录成功！",
-                  center: true
-                });
-                sessionStorage.setItem("user", JSON.stringify(res.data.data));
-                this.logshow = false;
-                this.$emit("logSuccess", {
-                  showUser: true,
-                  user: res.data.data.name
-                });
-              })
+                message: "用户名不存在或密码错误！",
+                center: true
+              });
+              }
+              
+            })
               .catch(function(err) {
                 console.log(err);
               });
