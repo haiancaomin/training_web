@@ -192,11 +192,27 @@ export default {
             this.errorCount < 3 ||
             (this.errorCount > 2 && this.confirmSuccess)
           ) {
-            this.$ajax({
-              method: "get",
-              url: `${this.baseURL}/zjsxpt/login_Login.do?name=${
-                this.ruleForm.name
-              }&password=${this.ruleForm.password}`
+            
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/login_Login.do?name=${
+              this.ruleForm.name
+            }&password=${this.ruleForm.password}`
+          })
+            .then(res => {
+              this.$message({
+                message: "登录成功！",
+                center: true
+              });
+              sessionStorage.setItem("user", JSON.stringify(res.data.data));
+              this.logshow = false;
+              this.$emit("logSuccess", {
+                showUser: true,
+                user: res.data.data.name
+              });
+              this.$router.push({
+                path: sessionStorage.getItem('redirect')
+              });
             })
               .then(res => {
                 this.$message({
