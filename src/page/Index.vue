@@ -1044,8 +1044,8 @@ body > .el-container {
   color: #666;
 }
 .course-hover-show {
-  display: none;
-  margin: 140px 0px 0px -60px;
+  opacity: 0;
+  transition: all ease-in-out .3s
 }
 .course-hover-show>img {
   margin:-5px 0px 0px 0px;
@@ -1057,55 +1057,20 @@ body > .el-container {
   font-weight: 600;
   color: #666;
 }
-.course-no-over:hover .course-hover-show {
-  animation: courseHover 1s;
-  -moz-animation: courseHover 1s; 
-  -webkit-animation: courseHover 1s;
-  -o-animation: courseHover 1s;
-  animation-iteration-count: 1;
-  -webkit-animation-iteration-count: 1;
-  
-  display: inline;
-  position: absolute;
-  margin: 70px 0px 0px -60px;
-}
-@keyframes courseHover {
-  0% {
-    margin: 140px 0px 0px -60px;
-  }
-  100% {
-    margin: 70px 0px 0px -60px;
-  }
-}
-@-moz-keyframes courseHover /* Firefox */ {
-  0% {
-    margin: 140px 0px 0px -60px;
-  }
-  100% {
-    margin: 70px 0px 0px -60px;
-  }
+.course-no-over:hover .course-hover-show{
+  opacity: 1;
+  margin-top: -100px;
 }
 
-@-webkit-keyframes courseHover /* Safari and Chrome */ {
-  0% {
-    margin: 140px 0px 0px -60px;
-  }
-  100% {
-    margin: 70px 0px 0px -60px;
-  }
-}
-
-@-o-keyframes courseHover /* Opera */ {
-  0% {
-    margin: 140px 0px 0px -60px;
-  }
-  100% {
-    margin: 70px 0px 0px -60px;
-  }
+.more-course{
+  opacity: 1;
+  transition: all ease-in-out .3s;
 }
 .course-no-over:hover .more-course {
-  display: none;
+  opacity: 0;
 }
+
+
 @keyframes myfirst {
   0% {
     bottom: 30px;
