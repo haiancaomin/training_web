@@ -18,10 +18,7 @@
         </el-form-item>
 
         <el-form-item prop="inputVerificationCode" v-if="errorCount>2">
-          <!-- <el-input placeholder="请输入验证码"  v-model="ruleForm.inputVerificationCode" class="identifying"></el-input>
-        <div @click="createCode" class="verificationCode">
-          <p><span :style="{'color': color1 }">{{code1}}</span><span :style="{'color': color2 }">{{code2}}</span><span :style="{'color': color3 }">{{code3}}</span><span :style="{'color': color4 }">{{code4}}</span></p>
-          </div>-->
+
           <div class="drag" ref="dragDiv">
             <div class="drag_bg"></div>
             <div class="drag_text">{{confirmWords}}</div>
@@ -59,7 +56,7 @@ export default {
     return {
       beginClientX: 0 /*距离屏幕左端距离*/,
       mouseMoveStata: false /*触发拖动状态  判断*/,
-      maxwidth: "320" /*拖动最大宽度，依据滑块宽度算出来的*/,
+      maxwidth: 220 /*拖动最大宽度，依据滑块宽度算出来的*/,
       confirmWords: "拖动滑块验证" /*滑块文字*/,
       confirmSuccess: false,
 
@@ -113,6 +110,7 @@ export default {
   },
   methods: {
     mousedownFn: function(e) {
+      
       if (!this.confirmSuccess) {
         e.preventDefault && e.preventDefault(); //阻止文字选中等 浏览器默认事件
         this.mouseMoveStata = true;
@@ -120,7 +118,8 @@ export default {
       }
     }, //mousedoen 事件
     successFunction() {
-      this.confirmSuccess = true;
+      if(this.errorCount >2) {
+this.confirmSuccess = true;
       this.confirmWords = "验证通过";
       if (window.addEventListener) {
         document
@@ -140,31 +139,51 @@ export default {
         this.maxwidth + "px";
       document.getElementsByClassName("drag_bg")[0].style.width =
         this.maxwidth + "px";
+      }
+      
     }, //验证成功函数
     mouseMoveFn(e) {
-      if (this.mouseMoveStata) {
+      if(this.errorCount >2) {
+if (this.mouseMoveStata) {
         let width = e.clientX - this.beginClientX;
-        if (width > 0 && width <= this.maxwidth) {
+        console.log(width);
+        // if (width > 0 && width <= this.maxwidth) {
+        //   document.getElementsByClassName("handler")[0].style.left =
+        //     width + "px";
+        //   document.getElementsByClassName("drag_bg")[0].style.width =
+        //     width + "px";
+        // } else if (width > this.maxwidth) {
+        //   this.successFunction();
+        // }
+        if (width > 0 && width <= this.maxwidth+100) {
           document.getElementsByClassName("handler")[0].style.left =
             width + "px";
           document.getElementsByClassName("drag_bg")[0].style.width =
             width + "px";
-        } else if (width > this.maxwidth) {
-          this.successFunction();
         }
       }
+      }
+      
     }, //mousemove事件
     moseUpFn(e) {
-      this.mouseMoveStata = false;
+      if(this.errorCount >2) {
+this.mouseMoveStata = false;
+      
       var width = e.clientX - this.beginClientX;
+     
       if (
-        width < this.maxwidth &&
+        (width < this.maxwidth-10 || width > this.maxwidth+10) &&
         document.getElementsByClassName("handler")[0] &&
         document.getElementsByClassName("drag_bg")[0]
       ) {
         document.getElementsByClassName("handler")[0].style.left = 0 + "px";
         document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
+      } else if (width > this.maxwidth-10 && width < this.maxwidth+10){
+        this.successFunction();
       }
+      }
+      
+      
     },
 
     changeType() {
@@ -219,8 +238,7 @@ export default {
                 message: "用户名不存在或密码错误！",
                 center: true
               });
-              }
-              
+              }             
             })
               .catch(function(err) {
                 console.log(err);
