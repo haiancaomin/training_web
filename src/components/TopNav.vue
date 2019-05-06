@@ -99,7 +99,7 @@ export default {
       }
     },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath, this.$route.path);
+      console.log(key, keyPath, this.defaultActive);
     },
     clickRegister: function() {
       this.dialogVisible = false;
