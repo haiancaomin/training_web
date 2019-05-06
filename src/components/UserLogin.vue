@@ -28,8 +28,7 @@
               class="handler handler_bg"
               style="position: absolute;top: 0px;left: 0px;"
             ></div>
-            <div class="checkPoint">
-            </div>
+            <div class="checkPoint"></div>
           </div>
         </el-form-item>
 
@@ -58,7 +57,7 @@ export default {
       beginClientX: 0 /*距离屏幕左端距离*/,
       mouseMoveStata: false /*触发拖动状态  判断*/,
       maxwidth: 320 /*拖动最大宽度，依据滑块宽度算出来的*/,
-      checkWidth:0,
+      checkWidth: 0,
       confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
       confirmSuccess: false,
 
@@ -107,30 +106,31 @@ export default {
         document
           .getElementsByTagName("html")[0]
           .addEventListener("mouseup", this.moseUpFn);
-          this.setCheckPoint();
-          document.getElementsByClassName("checkPoint")[0].style.visibility="visible";
+        this.setCheckPoint();
+        document.getElementsByClassName("checkPoint")[0].style.visibility =
+          "visible";
       }
-  
     },
     address: function(val) {
-      console.log(val.logshow);
-       console.log(val.errorCount);
-       if(val.logshow&&val.errorCount>2&&document.getElementsByClassName("checkPoint")[0]) {
-         document.getElementsByClassName("checkPoint")[0].style.left = this.checkWidth  + "px";
-       }
-       
-    }
       
-    
+      if (
+        val.logshow &&
+        val.errorCount > 2 &&
+        document.getElementsByClassName("checkPoint")[0]
+      ) {
+        document.getElementsByClassName("checkPoint")[0].style.left =
+          this.checkWidth + "px";
+      }
+    }
   },
   computed: {
     address() {
-    const { logshow, errorCount } = this
-    return {
-      logshow,
-      errorCount
+      const { logshow, errorCount } = this;
+      return {
+        logshow,
+        errorCount
+      };
     }
-  }
   },
   methods: {
     mousedownFn: function(e) {
@@ -150,7 +150,8 @@ export default {
       if (this.errorCount > 2) {
         this.confirmSuccess = true;
         this.confirmWords = "验证通过";
-        document.getElementsByClassName("checkPoint")[0].style.visibility="hidden";
+        document.getElementsByClassName("checkPoint")[0].style.visibility =
+          "hidden";
         if (window.addEventListener) {
           document
             .getElementsByTagName("html")[0]
@@ -172,20 +173,11 @@ export default {
       }
     }, //验证成功函数
     mouseMoveFn(e) {
-      
       if (this.errorCount > 2) {
         if (this.mouseMoveStata) {
           let width = e.clientX - this.beginClientX;
-         console.log(width);
-          // if (width > 0 && width <= this.maxwidth) {
-          //   document.getElementsByClassName("handler")[0].style.left =
-          //     width + "px";
-          //   document.getElementsByClassName("drag_bg")[0].style.width =
-          //     width + "px";
-          // } else if (width > this.maxwidth) {
-          //   this.successFunction();
-          // }
           if (width > 0 && width <= this.maxwidth) {
+            
             document.getElementsByClassName("handler")[0].style.left =
               width + "px";
             document.getElementsByClassName("drag_bg")[0].style.width =
@@ -207,7 +199,10 @@ export default {
         ) {
           document.getElementsByClassName("handler")[0].style.left = 0 + "px";
           document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
-        } else if (width >= this.checkWidth - 10 && width <= this.checkWidth + 10) {
+        } else if (
+          width >= this.checkWidth - 10 &&
+          width <= this.checkWidth + 10
+        ) {
           this.successFunction();
         }
         document
@@ -223,11 +218,11 @@ export default {
       if (this.inputType == "text") {
         this.inputType = "password";
         this.showNewPassword = false;
-        console.log(this.inputType);
+       
       } else {
         this.inputType = "text";
         this.showNewPassword = true;
-        console.log(this.inputType);
+      
       }
     },
     closeDialog: function() {
@@ -289,9 +284,8 @@ export default {
       });
     },
     setCheckPoint() {
-      this.checkWidth = Math.floor(Math.random()*200+50);
-    console.log(this.checkWidth);
-    
+      this.checkWidth = Math.floor(Math.random() * 200 + 50);
+  
     }
   },
   mounted() {
@@ -449,13 +443,13 @@ a {
   -ms-user-select: none;
 }
 .checkPoint {
-  width:44px;
-  height:44px;
+  width: 44px;
+  height: 44px;
   background-color: #fff;
-  opacity:0.5;
+  opacity: 0.5;
   position: absolute;
   margin: -44px 0px 0px 0px;
-  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.8)  inset;
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.8) inset;
   border-radius: 5px;
   border: 1px solid #dddddd;
 }
