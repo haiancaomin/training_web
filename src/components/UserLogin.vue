@@ -3,7 +3,7 @@
     <el-dialog title="账号登录" :visible.sync="logshow" width="500px" @closed="closeDialog">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
-          <el-input placeholder="请输入用户名" v-model="ruleForm.name">
+          <el-input placeholder="请输入用户名" v-model="ruleForm.name" name='name' auto-complete='on'>
             <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
