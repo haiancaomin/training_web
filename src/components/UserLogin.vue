@@ -108,6 +108,7 @@ export default {
           .getElementsByTagName("html")[0]
           .addEventListener("mouseup", this.moseUpFn);
           this.setCheckPoint();
+          document.getElementsByClassName("checkPoint")[0].style.visibility="visible";
       }
   
     },
