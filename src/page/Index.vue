@@ -110,55 +110,21 @@
 
           <div class="base-body-list">
             <el-row class="pad20 bg-white" id="index-base-background">
+              <div v-for="baseItem in baseList" :key="baseItem.pid">
               <el-col :span="6">
                 <router-link to="/base">
                   
                     <div class="index-base-list" id="index-base-list1">
                       <div class="index-base-img-div">
-                        <img src="../assets/inspection1.jpg" class="index-base-img">
+                        <img :src="baseItem.picurl" class="index-base-img">
                       </div>
-                      <div class="index-base-name">灌浆区</div>
-                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                      <div class="index-base-name">{{baseItem.name}}</div>
+                      <div class="index-base-con">{{baseItem.description}}</div>
                     </div>
                   
                 </router-link>
               </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list2">
-                      <img src="../assets/inspection2.png" class="index-base-img">
-
-                      <div class="index-base-name">质量员实训区</div>
-                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list3">
-                      <img src="../assets/inspection1.jpg" class="index-base-img">
-
-                      <div class="index-base-name">吊装实训区</div>
-                      <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list4">
-                      <img src="../assets/inspection2.png" class="index-base-img">
-
-                      <div class="index-base-name">休息区</div>
-                      <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
+              </div>
             </el-row>
           </div>
         </div>
@@ -241,7 +207,8 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      courseList: []
+      courseList: [],
+      baseList:[]
     };
   },
 
@@ -265,8 +232,22 @@ export default {
       }
     });
     this.getCourseList();
+    this.getBaseList();
   },
   methods: {
+    getBaseList() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_showBaseIndex.do`
+      })
+        .then(res => {
+          this.baseList = res.data.data;
+          console.log(this.baseList);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getCourseList() {
       this.$ajax({
         method: "get",
