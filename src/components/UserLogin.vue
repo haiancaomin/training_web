@@ -3,7 +3,7 @@
     <el-dialog title="账号登录" :visible.sync="logshow" width="500px" @closed="closeDialog">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
-          <el-input placeholder="请输入用户名" v-model="ruleForm.name" name='name' auto-complete='on'>
+          <el-input placeholder="请输入用户名" v-model="ruleForm.name" name="name" auto-complete="on">
             <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
@@ -17,8 +17,7 @@
           </div>
         </el-form-item>
 
-        <el-form-item prop="inputVerificationCode" v-if="errorCount>2">
-
+        <el-form-item prop="inputVerificationCode" v-show="errorCount>2">
           <div class="drag" ref="dragDiv">
             <div class="drag_bg"></div>
             <div class="drag_text">{{confirmWords}}</div>
@@ -29,6 +28,8 @@
               class="handler handler_bg"
               style="position: absolute;top: 0px;left: 0px;"
             ></div>
+            <div class="checkPoint">
+            </div>
           </div>
         </el-form-item>
 
@@ -56,8 +57,9 @@ export default {
     return {
       beginClientX: 0 /*距离屏幕左端距离*/,
       mouseMoveStata: false /*触发拖动状态  判断*/,
-      maxwidth: 220 /*拖动最大宽度，依据滑块宽度算出来的*/,
-      confirmWords: "拖动滑块验证" /*滑块文字*/,
+      maxwidth: 320 /*拖动最大宽度，依据滑块宽度算出来的*/,
+      checkWidth:0,
+      confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
       confirmSuccess: false,
 
       showNewPassword: false,
@@ -93,7 +95,7 @@ export default {
           document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
         }
 
-        this.confirmWords = "拖动滑块验证";
+        this.confirmWords = "拖动滑块完成拼图";
         this.mouseMoveStata = false;
         if (document.getElementsByClassName("drag_text")[0]) {
           document.getElementsByClassName("drag_text")[0].style.color = "";
@@ -105,85 +107,115 @@ export default {
         document
           .getElementsByTagName("html")[0]
           .addEventListener("mouseup", this.moseUpFn);
+          this.setCheckPoint();
       }
+  
+    },
+    address: function(val) {
+      console.log(val.logshow);
+       console.log(val.errorCount);
+       if(val.logshow&&val.errorCount>2&&document.getElementsByClassName("checkPoint")[0]) {
+         document.getElementsByClassName("checkPoint")[0].style.left = this.checkWidth  + "px";
+       }
+       
     }
+      
+    
+  },
+  computed: {
+    address() {
+    const { logshow, errorCount } = this
+    return {
+      logshow,
+      errorCount
+    }
+  }
   },
   methods: {
     mousedownFn: function(e) {
-      
       if (!this.confirmSuccess) {
         e.preventDefault && e.preventDefault(); //阻止文字选中等 浏览器默认事件
         this.mouseMoveStata = true;
         this.beginClientX = e.clientX;
+        document
+          .getElementsByTagName("html")[0]
+          .addEventListener("mousemove", this.mouseMoveFn);
       }
+      document
+        .getElementsByTagName("html")[0]
+        .addEventListener("mouseup", this.moseUpFn);
     }, //mousedoen 事件
     successFunction() {
-      if(this.errorCount >2) {
-this.confirmSuccess = true;
-      this.confirmWords = "验证通过";
-      if (window.addEventListener) {
+      if (this.errorCount > 2) {
+        this.confirmSuccess = true;
+        this.confirmWords = "验证通过";
+        document.getElementsByClassName("checkPoint")[0].style.visibility="hidden";
+        if (window.addEventListener) {
+          document
+            .getElementsByTagName("html")[0]
+            .removeEventListener("mousemove", this.mouseMoveFn);
+          document
+            .getElementsByTagName("html")[0]
+            .removeEventListener("mouseup", this.moseUpFn);
+        } else {
+          document
+            .getElementsByTagName("html")[0]
+            .removeEventListener("mouseup", () => {});
+        }
+
+        document.getElementsByClassName("drag_text")[0].style.color = "#fff";
+        document.getElementsByClassName("handler")[0].style.left =
+          this.maxwidth + "px";
+        document.getElementsByClassName("drag_bg")[0].style.width =
+          this.maxwidth + "px";
+      }
+    }, //验证成功函数
+    mouseMoveFn(e) {
+      
+      if (this.errorCount > 2) {
+        if (this.mouseMoveStata) {
+          let width = e.clientX - this.beginClientX;
+         console.log(width);
+          // if (width > 0 && width <= this.maxwidth) {
+          //   document.getElementsByClassName("handler")[0].style.left =
+          //     width + "px";
+          //   document.getElementsByClassName("drag_bg")[0].style.width =
+          //     width + "px";
+          // } else if (width > this.maxwidth) {
+          //   this.successFunction();
+          // }
+          if (width > 0 && width <= this.maxwidth) {
+            document.getElementsByClassName("handler")[0].style.left =
+              width + "px";
+            document.getElementsByClassName("drag_bg")[0].style.width =
+              width + "px";
+          }
+        }
+      }
+    }, //mousemove事件
+    moseUpFn(e) {
+      if (this.errorCount > 2) {
+        this.mouseMoveStata = false;
+
+        var width = e.clientX - this.beginClientX;
+
+        if (
+          (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
+          document.getElementsByClassName("handler")[0] &&
+          document.getElementsByClassName("drag_bg")[0]
+        ) {
+          document.getElementsByClassName("handler")[0].style.left = 0 + "px";
+          document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
+        } else if (width >= this.checkWidth - 10 && width <= this.checkWidth + 10) {
+          this.successFunction();
+        }
         document
           .getElementsByTagName("html")[0]
           .removeEventListener("mousemove", this.mouseMoveFn);
         document
           .getElementsByTagName("html")[0]
           .removeEventListener("mouseup", this.moseUpFn);
-      } else {
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mouseup", () => {});
       }
-
-      document.getElementsByClassName("drag_text")[0].style.color = "#fff";
-      document.getElementsByClassName("handler")[0].style.left =
-        this.maxwidth + "px";
-      document.getElementsByClassName("drag_bg")[0].style.width =
-        this.maxwidth + "px";
-      }
-      
-    }, //验证成功函数
-    mouseMoveFn(e) {
-      if(this.errorCount >2) {
-if (this.mouseMoveStata) {
-        let width = e.clientX - this.beginClientX;
-        console.log(width);
-        // if (width > 0 && width <= this.maxwidth) {
-        //   document.getElementsByClassName("handler")[0].style.left =
-        //     width + "px";
-        //   document.getElementsByClassName("drag_bg")[0].style.width =
-        //     width + "px";
-        // } else if (width > this.maxwidth) {
-        //   this.successFunction();
-        // }
-        if (width > 0 && width <= this.maxwidth+100) {
-          document.getElementsByClassName("handler")[0].style.left =
-            width + "px";
-          document.getElementsByClassName("drag_bg")[0].style.width =
-            width + "px";
-        }
-      }
-      }
-      
-    }, //mousemove事件
-    moseUpFn(e) {
-      if(this.errorCount >2) {
-this.mouseMoveStata = false;
-      
-      var width = e.clientX - this.beginClientX;
-     
-      if (
-        (width < this.maxwidth-10 || width > this.maxwidth+10) &&
-        document.getElementsByClassName("handler")[0] &&
-        document.getElementsByClassName("drag_bg")[0]
-      ) {
-        document.getElementsByClassName("handler")[0].style.left = 0 + "px";
-        document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
-      } else if (width > this.maxwidth-10 && width < this.maxwidth+10){
-        this.successFunction();
-      }
-      }
-      
-      
     },
 
     changeType() {
@@ -211,41 +243,40 @@ this.mouseMoveStata = false;
             this.errorCount < 3 ||
             (this.errorCount > 2 && this.confirmSuccess)
           ) {
-            
-          this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/login_Login.do?name=${
-              this.ruleForm.name
-            }&password=${this.ruleForm.password}`
-          })
-            .then(res => {
-              if(res.data.data != false) {
-                this.$message({
-                message: "登录成功！",
-                center: true
-              });
-              sessionStorage.setItem("user", JSON.stringify(res.data.data));
-              this.logshow = false;
-              this.$emit("logSuccess", {
-                showUser: true,
-                user: res.data.data.name
-              });
-              this.$router.push({
-                path: sessionStorage.getItem('redirect')
-              });
-              } else {
-                this.$message({
-                message: "用户名不存在或密码错误！",
-                center: true
-              });
-              }             
+            this.$ajax({
+              method: "get",
+              url: `${this.baseURL}/zjsxpt/login_Login.do?name=${
+                this.ruleForm.name
+              }&password=${this.ruleForm.password}`
             })
+              .then(res => {
+                if (res.data.data != false) {
+                  this.$message({
+                    message: "登录成功！",
+                    center: true
+                  });
+                  sessionStorage.setItem("user", JSON.stringify(res.data.data));
+                  this.logshow = false;
+                  this.$emit("logSuccess", {
+                    showUser: true,
+                    user: res.data.data.name
+                  });
+                  this.$router.push({
+                    path: sessionStorage.getItem("redirect")
+                  });
+                } else {
+                  this.$message({
+                    message: "用户名不存在或密码错误！",
+                    center: true
+                  });
+                }
+              })
               .catch(function(err) {
                 console.log(err);
               });
           } else {
             this.$message({
-              message: "请将滑动条拖至最右侧！",
+              message: "请拖动滑块完成拼图！",
               center: true
             });
           }
@@ -255,15 +286,15 @@ this.mouseMoveStata = false;
           return false;
         }
       });
+    },
+    setCheckPoint() {
+      this.checkWidth = Math.floor(Math.random()*200+50);
+    console.log(this.checkWidth);
+    
     }
   },
   mounted() {
-    document
-      .getElementsByTagName("html")[0]
-      .addEventListener("mousemove", this.mouseMoveFn);
-    document
-      .getElementsByTagName("html")[0]
-      .addEventListener("mouseup", this.moseUpFn);
+    this.setCheckPoint();
   },
   components: {
     UserRegister
@@ -415,6 +446,17 @@ a {
   user-select: none;
   -o-user-select: none;
   -ms-user-select: none;
+}
+.checkPoint {
+  width:44px;
+  height:44px;
+  background-color: #fff;
+  opacity:0.5;
+  position: absolute;
+  margin: -44px 0px 0px 0px;
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.8)  inset;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
 }
 </style>
 <style>
