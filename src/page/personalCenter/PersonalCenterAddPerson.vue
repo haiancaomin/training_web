@@ -190,7 +190,6 @@ export default {
           return false;
         }
       });
-      console.log("2");
     }
   }
 };

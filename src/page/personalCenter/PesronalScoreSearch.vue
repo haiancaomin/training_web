@@ -3,38 +3,40 @@
     <div class="order-dialog">
       <el-dialog  :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
         <div class="certificate">
+          <div>{{acceptdate}}</div>
+          <div>{{cardnoResult}}</div>
+          <div>{{courseid}}</div>
+          <div>{{coursename}}</div>
+          <div>{{empname}}</div>
+          <div>{{zsid}}</div>
+          <div>{{ispass}}</div>
+        
         </div>
         
       </el-dialog>
     </div>
 
     <div class="crumb">
-      <h1 class="score-label">证书查询1</h1>
+      <h1 class="score-label">证书查询</h1>
     </div>
     <div class="PesronalScoreSearch-info">
-      <el-form ref="form" :model="form">
-        <el-form-item  prop="name">
-          <div class="input-body">
-            <div class="input-icon1">
-              <i class="iconfont">&#xe614;</i>
-            </div>
-              <input type="text" placeholder="请输入姓名" class="input-input" maxlength="12">
-              
-            </div>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
+        <el-form-item prop="name">
+          <el-input placeholder="请输入姓名" v-model="ruleForm.name" name="name">
+            <i slot="prefix" class="iconfont">&#xe614;</i>
+          </el-input>
         </el-form-item>
 
-        <el-form-item  prop="name">
-          <div class="input-body">
-            <div class="input-icon1">
-              <i class="iconfont">&#xe706;</i>
-            </div>
-              <input type="text" placeholder="请输入身份证号码" class="input-input" maxlength="12">
-              
-            </div>
+        <el-form-item prop="cardno">
+          <el-input placeholder="请输入身份证号码" v-model="ruleForm.cardno" name="cardno">
+            <i slot="prefix" class="iconfont">&#xe706;</i>
+          </el-input>
         </el-form-item>
+
+        
 
         <el-form-item>
-          <el-button type="primary"  class="login-self" @click="showCertificate">查&nbsp;&nbsp;&nbsp;&nbsp;询</el-button>
+          <el-button type="primary"  class="login-self" @click="submitForm('ruleForm')">查&nbsp;&nbsp;&nbsp;&nbsp;询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -47,120 +49,70 @@ export default {
   data() {
     return {
       showCertificateDialog:false,
-      tableData: [
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        }
-      ],
-
-      form: {
+      acceptdate:"",
+        cardnoResult:"",
+        courseid:"",
+        coursename:"",
+        empname:"",
+        zsid:"",
+        ispass:"",
+      ruleForm: {
         name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        cardno: "",
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
+        ],
+        cardno: [
+         { required: true, message: "请输入身份证号", trigger: "blur" },
+          {
+            message: "请输入正确的身份证号",
+            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+            trigger: "blur"
+          }
+       ]
       }
     };
   },
   methods: {
-    showCertificate() {
-          this.showCertificateDialog = true;
+    submitForm(formName) {
+     
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/invoice_getCertificateByParams.do?name=${this.ruleForm.name}&cardno=${this.ruleForm.cardno}`
+          })
+            .then(res => {
+              if(res.data.data != false) {
+                console.log(res.data.data);
+                this.acceptdate = res.data.data.acceptdate;
+                this.cardnoResult = res.data.data.cardno;
+                this.courseid = res.data.data.courseid;
+                this.coursename = res.data.data.coursename;
+                this.empname = res.data.data.empname;
+                this.zsid = res.data.data.zsid;
+                this.ispass = res.data.data.ispass;
+                this.showCertificateDialog = true;
+              }else {
+                this.$message({
+                message: "未查询到此人证书！",
+                center:true
+              });
+              }            
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+          
       }
   }
 };
@@ -227,8 +179,11 @@ background: #fff;
 }
 .login-self {
   width: 358px;
-font-size: 18px;
-height: 44px;
+  font-size: 18px;
+  height: 44px;
+}
+.el-input {
+  width: 358px;
 }
 .certificate {
     margin:0px auto;
@@ -250,7 +205,11 @@ height: 44px;
   font-size:18px;font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;}
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 44px;
+  margin: 0px 0px 0px 2px;
+ 
+  }
 </style>
 
 
