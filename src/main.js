@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else if (to.path == '/SignUp' || to.path == '/PersonalCenter') {
       // next({path: '/login'})
+      next(false)
       sessionStorage.setItem('redirect',to.fullPath)
       document.getElementById('loginBtn').click()
       Vue.prototype.$message({
