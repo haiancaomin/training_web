@@ -1,34 +1,58 @@
 <template>
-    <el-main>
-      <div class="file-container">
-        <h1 class="file-title">文件列表</h1>
-        <ul class="file-box">
-          <li>
-            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件</router-link>
-            <span class="date">2019-2-28</span>
-          </li>
-          <li>
-            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</router-link>
-            <span class="date">2019-2-28</span>
-          </li>
-          <li>
-            <router-link to="/download-action">江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件江苏省住房和城乡建设厅装配式文件</router-link>
-            <span class="date">2019-2-28</span>
-          </li>
-        </ul>
-        <el-row>
-          <el-pagination background layout="prev, pager, next" :total="1000" class="text-right"></el-pagination>
-        </el-row>
-      </div>
-    </el-main>
+  <el-main>
+    <div class="file-container">
+      <h1 class="file-title">文件列表</h1>
+      <ul class="file-box">
+        <li v-for="(item,key) in fileLists.data" :key="key" class="clearfix">
+          <a :href="item.fileurl">{{item.name}}</a>
+          <span class="date">{{item.createdate}}</span>
+        </li>
+      </ul>
+      <el-row>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="fileLists.count"
+          :page-size="8"
+          @current-change="handleCurrentChange"
+          class="text-right"
+          v-if="fileLists.count"
+        ></el-pagination>
+      </el-row>
+    </div>
+  </el-main>
 </template>
 <script>
-
 export default {
   data() {
-    return {};
+    return {
+      currentPage: 1,
+      fileLists: {}
+    };
   },
-  
+  mounted() {
+    this.getFileList();
+  },
+  methods: {
+    getFileList() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/news_findFilesList.do?pageIndex=${(this
+          .currentPage -
+          1) *
+          8}&selectIndex=${this.currentPage}`
+      })
+        .then(res => {
+          this.fileLists = res.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+    }
+  }
 };
 </script>
 
@@ -36,7 +60,7 @@ export default {
 .el-main {
   padding-top: 60px;
   width: 1000px;
-  margin: 0 auto
+  margin: 0 auto;
 }
 .el-row {
   padding: 20px 0;
@@ -55,26 +79,30 @@ export default {
   padding: 0 15px;
   border-radius: 3px;
 }
-.file-box{
+.file-box {
   padding-top: 30px;
 }
 
-.file-box li a{
+.file-box li a {
+  float: left;
   line-height: 30px;
   color: #333;
 }
-.file-box li a:hover{
-  color:#409eff;
+.file-box li a:hover {
+  color: #409eff;
 }
-.date{
-  color:#999;
-  margin-left: 30px;
+.date {
+  float: right;
+  color: #999;
 }
-.text-right{
-  text-align: right
+.text-right {
+  text-align: right;
 }
-
-
+.clearfix:after{
+  content: '';
+  display: block;
+  clear: both;
+}
 </style>
 
 
