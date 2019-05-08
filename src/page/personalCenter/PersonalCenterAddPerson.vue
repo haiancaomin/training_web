@@ -74,7 +74,7 @@
     </div>
     <div v-if="batchAdd" class="batch-add">
       <div class="batch-model">
-        <p class="batch-model-text">点击下载批量添加模板</p>
+        <a href="../../../static/employee.xlsx" class="batch-model-text">点击下载批量添加模板</a>
       </div>
       <div class="batch-file-upload">
         <el-upload

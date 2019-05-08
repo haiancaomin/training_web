@@ -57,7 +57,7 @@ export default {
       ruleForm1: {
         keyWord: ""
       },
-      tableData: [{}],
+      tableData: [],
       multipleSelection: []
     };
   },
