@@ -58,10 +58,13 @@ export default {
   max-width: 870px;
 }
 .base-intro {
-  font-size: 15px;
+  font-size: 17px;
+  height:70px;
+  line-height: 70px;
 }
 .base-show-intro{
   text-indent: 30px;
+  line-height: 25px;
 }
 .overview-box {
   position: relative;
@@ -75,3 +78,5 @@ export default {
   padding-top: 30px;
 }
 </style>
+
+

@@ -167,6 +167,7 @@ export default {
 }
 .base-show-intro{
   text-indent: 30px;
+  line-height: 25px;
 }
 .guanjiang-pic {
   width: 100%;
