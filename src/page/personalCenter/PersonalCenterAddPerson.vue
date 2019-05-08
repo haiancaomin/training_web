@@ -80,7 +80,13 @@
         <el-upload
           class="upload-demo"
           drag
-          action="https://jsonplaceholder.typicode.com/posts/"
+          ref="fileUpload"
+          :action="uploadUrl"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
+          :before-upload="checkSize"
+              :limit="1"
+              accept=".xlsx"
           multiple
         >
           <i class="el-icon-upload"></i>
@@ -88,12 +94,10 @@
             将文件拖到此处，或
             <em>点击上传</em>
           </div>
-          <div class="el-upload__tip" slot="tip">只能上传Excel文件，且不超过500kb</div>
+          <div class="el-upload__tip" slot="tip">只能上传Excel文件，且不超过100kb</div>
         </el-upload>
       </div>
-      <div class="batch-submit">
-        <el-button type="primary">添加</el-button>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -103,6 +107,7 @@ export default {
   name: "PersonalCenterAddPerson",
   data() {
     return {
+      fileUid: "",
       oneAdd: true,
       batchAdd: false,
       ruleForm: {
@@ -149,6 +154,30 @@ export default {
     };
   },
   methods: {
+    checkSize(file) {
+      if(file.size/1024 > 100) {
+        return false;
+        this.$message({
+              message: "文件不能大于100kb！",
+              center: true
+            });
+      } 
+    },
+    uploadError(err, file, fileList) {
+      this.$message({
+              message: "只能上传.xlsx文件！",
+              center: true
+            });
+    },
+    uploadSuccess(response, file, fileList) {
+
+        
+this.$message({
+              message: "上传成功！人员信息已更新",
+              center: true
+            });
+      
+    },
     addOne() {
       this.oneAdd = true;
       this.batchAdd = false;
@@ -193,6 +222,15 @@ export default {
           return false;
         }
       });
+    }
+  },
+  computed: {
+    uploadUrl: function() {
+       var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      return this.baseURL + "/zjsxpt/employee_batchAddEmployee.do?userid=" + userid;
     }
   }
 };
