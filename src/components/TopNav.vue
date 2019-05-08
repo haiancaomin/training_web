@@ -22,7 +22,7 @@
         <span class="el-icon-mobile-phone"></span>
         <span>登录/注册</span>
       </div>
-      <div class="login-self" v-if="showUser">
+      <div class="login-self-success" v-if="showUser">
         欢迎回来，
         <span>{{userName}}</span>
       </div>
@@ -172,5 +172,13 @@ export default {
   margin: 0px 0px 0px 40px;
   color: #fff;
   cursor: pointer;
+}
+.login-self:hover {
+  color: #ffd04b;
+}
+.login-self-success {
+  float: left;
+  margin: 0px 0px 0px 40px;
+  color: #fff;
 }
 </style>
