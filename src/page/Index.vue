@@ -40,11 +40,17 @@
               </div>
             </el-col>
           </el-row>
+
+      
+  
+
           <el-row class="no-margin-b">
             <div class="course-body">
+               
               <div v-for="courseItem in courseList" :key="courseItem.courseid">
                 <el-col :span="6">
                   <router-link to="/course">
+                  
                     <div class="course-outbody">
                       <div class="course-img-body">
                         <img
@@ -52,19 +58,39 @@
                           class="course-show-img"
                         >
                       </div>
+                      
+                
                       <div class="course-info">
                         <img src="../assets/contentBack.png">
-                        <div class="course-name">
-                          <h3>{{courseItem.coursename}}</h3>
+                        <div class="course-name" v-if="courseItem.coursename.length>11">
+                          <marquee behavior="alternate" direction="left" loop="infinite" scrollamount="2">
+                         <h3 class="big_h3">{{courseItem.coursename}}</h3>
+                          </marquee>
                         </div>
-                        <div class="course-description">
+                        <div class="course-name" v-if="courseItem.coursename.length<=11">
+                         
+                         <h3 class="little_h3">{{courseItem.coursename}}</h3>
+                          
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length>15">
+                          <el-tooltip content="Top center" placement="bottom">
+                             <div slot="content">{{courseItem.description}}</div>
                           <h3>{{courseItem.description}}</h3>
+                          </el-tooltip>
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length<=15">
+                          
+                          <h3>{{courseItem.description}}</h3>
+                        
                         </div>
                       </div>
+                      
                     </div>
+                    
                   </router-link>
                 </el-col>
               </div>
+              
               <el-col :span="6">
                 <router-link to="/course">
                 <div v-if="courseList.length < 8" class="course-no-over">
@@ -941,11 +967,13 @@ body > .el-container {
   height: 76px;
 }
 .course-show-img {
-  width: 280px;
-  height: 170px;
+  width: 100%;
+  height: 100%;
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -958,21 +986,37 @@ body > .el-container {
 .course-outbody:hover .course-show-img {
   transform: scale(1.2);
 }
+
 .course-name {
   position: absolute;
   width: 200px;
   height: 30px;
   margin: -75px 0px 0px 19px;
   text-align: center;
+
+ 
 }
-.course-name h3 {
+.big_h3 {
   font-size: 18px;
   height: 24px;
   line-height: 24px;
   margin: 14px 0 3px;
   color: #333;
-  overflow: hidden;
+  padding:0px 15px;
   font-weight: normal;
+  
+}
+.little_h3 {
+  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  margin: 14px 0 3px;
+  color: #333;
+
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .course-description {
   position: absolute;
@@ -989,6 +1033,7 @@ body > .el-container {
   color: #666;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 .course-no-over {
   width: 280px;
@@ -1007,6 +1052,7 @@ body > .el-container {
 }
 .course-hover-show {
   opacity: 0;
+  margin-top: -27px;
   transition: all ease-in-out .3s
 }
 .course-hover-show>img {
@@ -1078,5 +1124,6 @@ body > .el-container {
     bottom: 30px;
   }
 }
+
 </style>
 
