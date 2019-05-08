@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     showDefault() {
-      this.$router.push({ path: "/PersonalCenter/PersonalCenterAllOrder" });
+      this.$router.push({ path: this.$route.path=="/PersonalCenter"?"/PersonalCenter/PersonalCenterAllOrder":this.$route.path });
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
