@@ -58,7 +58,7 @@
                             behavior="alternate"
                             direction="left"
                             loop="infinite"
-                            scrollamount="2"
+                            scrollamount="1"
                           >
                             <h3 class="big_h3">{{courseItem.coursename}}</h3>
                           </marquee>
