@@ -946,9 +946,8 @@ body > .el-container {
 }
 .course-type {
   width: 1220px;
-  height: 600px;
   background: #fff;
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 100px 0px;
   margin: 0px auto;
 }
 .course-info {
