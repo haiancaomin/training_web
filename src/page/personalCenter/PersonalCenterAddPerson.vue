@@ -164,7 +164,7 @@ export default {
     },
     uploadError(err, file, fileList) {
       this.$message({
-        message: "只能上传.xlsx文件！",
+        message: "请使用模板文件上传！",
         center: true
       });
     },
