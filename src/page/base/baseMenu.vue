@@ -112,7 +112,7 @@ export default {
   display: flex;
 }
 .tac .el-col {
-  width: 250px;
+  width: 300px;
 }
 </style>
 

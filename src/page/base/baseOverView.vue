@@ -12,7 +12,7 @@
       </el-carousel>
     </el-row>
     <div
-      class="base-content"
+      class="base-content base-show-intro"
     >{{baseOverView.summary}}</div>
   </div>
 </template>
@@ -55,10 +55,13 @@ export default {
   flex: 1;
   padding: 15px;
   background: #fff;
-  max-width: 920px;
+  max-width: 870px;
 }
 .base-intro {
   font-size: 15px;
+}
+.base-show-intro{
+  text-indent: 30px;
 }
 .overview-box {
   position: relative;

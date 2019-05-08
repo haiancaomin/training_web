@@ -8,7 +8,7 @@
             <img :src="item" class="base-intro-pic">
           </swiper-slide>
         </swiper>
-        <div class="base-content">{{baseInfo.summary}}</div>
+        <div class="base-content base-show-intro">{{baseInfo.summary}}</div>
       </el-collapse-item>
       <el-collapse-item
         :title="areaList0.areaname"
@@ -152,7 +152,7 @@ export default {
   flex: 1;
   padding: 15px;
   background: #fff;
-  max-width: 920px;
+  max-width: 870px;
 }
 .el-collapse-item {
   font-size: 14px;
@@ -164,6 +164,9 @@ export default {
 .base-intro-pic {
   width: 100%;
   height: 100%;
+}
+.base-show-intro{
+  text-indent: 30px;
 }
 .guanjiang-pic {
   width: 100%;
@@ -224,7 +227,9 @@ export default {
 </style>
 <style>
 .base-box .el-collapse-item__header {
-  font-size: 15px;
+  font-size: 17px;
+  height:70px;
+  line-height: 70px;
 }
 .base-box .el-collapse-item__content {
   font-size: 14px;
