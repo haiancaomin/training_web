@@ -44,24 +44,6 @@
             <div class="course-body">
               <div v-for="courseItem in courseList" :key="courseItem.courseid">
                 <el-col :span="6">
-                  <!-- <div class="index-course-list" id="index-course-list1">
-                  <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection1.jpg" class="index-course-img1">
-                      </div>
-                      <div class="index-course-tit">
-                        <span>{{courseItem.coursename}}</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
-                      </div>
-                      <div class="index-course-content">{{courseItem.description}}</div>
-                      <div class="index-course-other">最近开课时间： {{courseItem.traintime}}</div>
-                    </a>
-                  </router-link>
-                  </div>-->
                   <router-link to="/course">
                     <div class="course-outbody">
                       <div class="course-img-body">
@@ -946,9 +928,8 @@ body > .el-container {
 }
 .course-type {
   width: 1220px;
-  height: 600px;
   background: #fff;
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 100px 0px;
   margin: 0px auto;
 }
 .course-info {
