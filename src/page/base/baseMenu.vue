@@ -57,6 +57,13 @@ export default {
       return "/" + this.$route.path.split("/")[1];
     }
   },
+  watch: {
+    $route(to, from) {
+      if(to.path=='/base'){
+        this.showDefault()
+      }
+    }
+  },
   methods: {
     getBaseList(type, fun) {
       this.$ajax({

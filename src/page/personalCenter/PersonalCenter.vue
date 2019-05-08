@@ -93,6 +93,13 @@ export default {
   mounted() {
     this.showDefault();
   },
+  watch: {
+    $route(to, from) {
+      if(to.path=='/PersonalCenter'){
+        this.showDefault()
+      }
+    }
+  },
   methods: {
     showDefault() {
       this.$router.push({ path: "/PersonalCenter/PersonalCenterAllOrder" });
