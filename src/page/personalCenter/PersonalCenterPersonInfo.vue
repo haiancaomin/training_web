@@ -78,7 +78,7 @@
       </el-form-item>
     </el-form>
 
-    <el-table :data="tableData" border max-height="450" style="width: 700px">
+    <el-table :data="tableData" border max-height="450" v-loading="loading" style="width: 700px">
       <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="160"></el-table-column>
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
@@ -109,6 +109,7 @@ export default {
   name: "PersonalCenterPersonInfo",
   data() {
     return {
+      loading:true,
       tableDataLength: 0,
       showEditDia: false,
       searchKey: "",
@@ -247,6 +248,7 @@ export default {
     })
       .then(res => {
         this.tableData = res.data.data;
+        this.loading =false;
         console.log("success");
       })
       .catch(function(err) {
