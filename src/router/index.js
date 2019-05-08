@@ -128,38 +128,38 @@ export default new Router({
         },
         children: [{
             path: 'PersonalCenterAddPerson',
-            component: PersonalCenterAddPerson,
+            component: PersonalCenterAddPerson
           }, {
             path: 'PersonalCenterPersonInfo',
-            component: PersonalCenterPersonInfo,
+            component: PersonalCenterPersonInfo
           }, {
             path: 'PersonalCenterInvoiceShow',
-            component: PersonalCenterInvoiceShow,
+            component: PersonalCenterInvoiceShow
           }, {
             path: 'PersonalPassword',
-            component: PersonalPassword,
+            component: PersonalPassword
           }, {
             path: 'PersonalCenterAllOrder',
-            component: PersonalCenterAllOrder,
+            component: PersonalCenterAllOrder
           }, {
             path: 'PersonalCenterUncompletedOrder',
-            component: PersonalCenterUncompletedOrder,
+            component: PersonalCenterUncompletedOrder
           }, {
             path: 'PersonalCenterNotInvoice',
-            component: PersonalCenterNotInvoice,
+            component: PersonalCenterNotInvoice
           },
           {
             path: 'PersonalCenterAuthentication',
-            component: PersonalCenterAuthentication,
+            component: PersonalCenterAuthentication
           }, {
             path: 'PersonalCenterReport',
-            component: PersonalCenterReport,
+            component: PersonalCenterReport
           }, {
             path: 'PersonalCenterCertificate',
-            component: PersonalCenterCertificate,
+            component: PersonalCenterCertificate
           }, {
             path: 'PersonalCenterChangeMobile',
-            component: PersonalCenterChangeMobile,
+            component: PersonalCenterChangeMobile
           }
         ]
       }, {

@@ -90,7 +90,6 @@ export default {
       menuopen: ["1"]
     };
   },
-  components: {},
   mounted() {
     this.showDefault();
   },
