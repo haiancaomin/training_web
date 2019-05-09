@@ -18,7 +18,12 @@
     <div v-if="oneAdd" class="form-body">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="empname">
-          <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
+          <el-input
+            v-model="ruleForm.empname"
+            placeholder="请输入姓名"
+            class="person-add-input"
+            id="empNameFocus"
+          >
             <i slot="prefix" class="iconfont" id="iconName">&#xe614;</i>
           </el-input>
         </el-form-item>
@@ -107,8 +112,9 @@ export default {
   data() {
     return {
       fileUid: "",
-      oneAdd: true,
+      oneAdd: false,
       batchAdd: false,
+      countFocus: 0,
       ruleForm: {
         empname: "",
         sex: "",
@@ -230,6 +236,15 @@ export default {
         this.baseURL + "/zjsxpt/employee_batchAddEmployee.do?userid=" + userid
       );
     }
+  },
+  updated: function() {
+    this.countFocus++;
+    if (this.oneAdd && this.countFocus < 2) {
+      document.getElementById("empNameFocus").focus();
+    }
+  },
+  mounted: function() {
+    this.oneAdd = true;
   }
 };
 </script>

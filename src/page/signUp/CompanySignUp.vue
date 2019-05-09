@@ -22,6 +22,7 @@
                         v-model="ruleForm.course1"
                         placeholder="请选择课程"
                         @change="getAddressList1(ruleForm.course1),getTimeList1(ruleForm.course1),getMealList1(ruleForm.course1)"
+                       
                       >
                         <el-option
                           v-for="item in selectCourseData"

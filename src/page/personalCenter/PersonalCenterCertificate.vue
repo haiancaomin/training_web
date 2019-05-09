@@ -9,7 +9,6 @@
         <div>{{cardno}}</div>
         <div>{{name}}</div>
       </div>
-      
     </el-dialog>
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -37,7 +36,12 @@
         <el-table-column prop="acceptdate" label="获取时间" width="180"></el-table-column>
         <el-table-column fixed="right" label="证书查询" width="90">
           <template slot-scope="scope">
-          <el-button type="primary" prop="zsid" @click="showCertificate(scope.row.zsid)" class="search-btn2">查询证书</el-button>
+            <el-button
+              type="primary"
+              prop="zsid"
+              @click="showCertificate(scope.row.zsid)"
+              class="search-btn2"
+            >查询证书</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,8 +55,8 @@ export default {
   data() {
     return {
       showCertificateDialog: false,
-      cardno:"",
-      name:"",
+      cardno: "",
+      name: "",
       searchKey: "",
       ruleForm1: {
         keyWord: ""
@@ -65,14 +69,11 @@ export default {
     showCertificate(zsid) {
       this.$ajax({
         method: "post",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_getCertificateById.do?zsid=${zsid}`
+        url: `${this.baseURL}/zjsxpt/invoice_getCertificateById.do?zsid=${zsid}`
       })
         .then(res => {
           this.cardno = res.data.data[0];
           this.name = res.data.data[1];
-          
         })
         .catch(function(err) {
           console.log(err);
@@ -95,7 +96,6 @@ export default {
       })
         .then(res => {
           this.tableData = res.data.data;
-        
         })
         .catch(function(err) {
           console.log(err);
@@ -104,6 +104,7 @@ export default {
   },
   mounted() {
     this.getCertificateList("");
+    document.getElementById("searchInput").focus();
   }
 };
 </script>
@@ -162,10 +163,10 @@ export default {
   margin: 0px 0px 0px 382px;
 }
 .search-btn2 {
-  width:70px;
+  width: 70px;
   text-align: center;
-  height:35px;
-  padding:0px;
+  height: 35px;
+  padding: 0px;
 }
 </style>
 

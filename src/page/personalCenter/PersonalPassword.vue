@@ -1,7 +1,5 @@
 <template>
   <div id="PersonalPassword">
-
-    
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
@@ -11,9 +9,14 @@
     </div>
     <div class="PersonalPassword-change">
       <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm" id="loginForm">
-        <el-form-item prop="newPassword">       
-            <el-input :type="inputType" placeholder="请输入密码" v-model="ruleForm.newPassword">
-            <i slot="prefix" class="iconfont" >&#xe7c9;</i>
+        <el-form-item prop="newPassword">
+          <el-input
+            :type="inputType"
+            placeholder="请输入密码"
+            v-model="ruleForm.newPassword"
+            id="newPassword1"
+          >
+            <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
           <div class="input-icon" @click="changeType">
             <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
@@ -21,9 +24,9 @@
           </div>
         </el-form-item>
 
-        <el-form-item  prop="reNewPassword">
-           <el-input :type="inputType" placeholder="请再次输入密码" v-model="ruleForm.reNewPassword">
-            <i slot="prefix" class="iconfont" >&#xe7c9;</i>
+        <el-form-item prop="reNewPassword">
+          <el-input :type="inputType" placeholder="请再次输入密码" v-model="ruleForm.reNewPassword">
+            <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
           <div class="input-icon" @click="changeType">
             <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
@@ -31,15 +34,24 @@
           </div>
         </el-form-item>
 
-        <el-form-item  prop="verificationCode">
-          <el-input :type="inputType" placeholder="请输入短信验证码" v-model="ruleForm.verificationCode" 
-           maxlength="12" class="verification">
-          </el-input>
+        <el-form-item prop="verificationCode">
+          <el-input
+            :type="inputType"
+            placeholder="请输入短信验证码"
+            v-model="ruleForm.verificationCode"
+            maxlength="12"
+            class="verification"
+          ></el-input>
           <el-button type="primary" plain class="get-button-con" v-if="show" @click="getCode">获取验证码</el-button>
-          <el-button type="primary" plain disabled class="wait-button-con" v-if="!show">{{count}} 秒后重发</el-button>
-          
+          <el-button
+            type="primary"
+            plain
+            disabled
+            class="wait-button-con"
+            v-if="!show"
+          >{{count}} 秒后重发</el-button>
         </el-form-item>
-        
+
         <div class="PersonalPassword-change-commit">
           <el-form-item>
             <el-button type="primary" class="login-self" @click="reNewPassword">确认更改</el-button>
@@ -56,12 +68,12 @@ export default {
   data() {
     return {
       showNewPassword: false,
-      inputType: 'password',
-      iconColor: '',
+      inputType: "password",
+      iconColor: "",
       show: true,
-      input21: '',
-   count: '',
-   timer: null,
+      input21: "",
+      count: "",
+      timer: null,
       ruleForm: {
         newPassword: "",
         reNewPassword: "",
@@ -71,96 +83,101 @@ export default {
   },
   methods: {
     reNewPassword() {
-      if(this.ruleForm.newPassword == "")  {
+      if (this.ruleForm.newPassword == "") {
         this.$message({
-                message: "请输入新密码",
-                center:true
-              });
-      } else if (this.ruleForm.reNewPassword == "")  {
+          message: "请输入新密码",
+          center: true
+        });
+      } else if (this.ruleForm.reNewPassword == "") {
         this.$message({
-                message: "请确认新密码",
-                center:true
-              });
-      }else if (this.ruleForm.verificationCode == "")  {
+          message: "请确认新密码",
+          center: true
+        });
+      } else if (this.ruleForm.verificationCode == "") {
         this.$message({
-                message: "请输入手机验证码",
-                center:true
-              });
+          message: "请输入手机验证码",
+          center: true
+        });
       } else if (this.ruleForm.newPassword != this.ruleForm.reNewPassword) {
         this.$message({
-                message: "两次输入的密码不一致",
-                center:true
-              });
+          message: "两次输入的密码不一致",
+          center: true
+        });
       } else {
         var userInfo = JSON.parse(sessionStorage.getItem("user"));
+        if (userInfo) {
+          var userid = userInfo.userid;
+        }
+        this.$ajax({
+          method: "post",
+          url: `${
+            this.baseURL
+          }/zjsxpt/login_updatePassword.do?userid=${userid}&newpassword=${
+            this.ruleForm.newPassword
+          }&code=${this.ruleForm.verificationCode}`
+        })
+          .then(res => {
+            this.checkAgain = false;
+            this.$message({
+              message: "修改成功！",
+              center: true
+            });
+            this.ruleForm = {};
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      }
+    },
+    changeType() {
+      if (this.inputType == "text") {
+        this.inputType = "password";
+        this.showNewPassword = false;
+        console.log(this.inputType);
+      } else {
+        this.inputType = "text";
+        this.showNewPassword = true;
+        console.log(this.inputType);
+      }
+    },
+    getCode() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
-        this.$ajax({
-        method: "post",
-        url: `${this.baseURL}/zjsxpt/login_updatePassword.do?userid=${userid}&newpassword=${this.ruleForm.newPassword}&code=${this.ruleForm.verificationCode}`
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/login_getCode.do?userid=${userid}`
       })
         .then(res => {
-          this.checkAgain = false;
-          this.$message({
-            message: "修改成功！",
-            center: true
-          });
-          this.ruleForm = {};
+          console.log(res);
+          const TIME_COUNT = 60;
+          if (!this.timer) {
+            this.count = TIME_COUNT;
+            this.show = false;
+            this.timer = setInterval(() => {
+              if (this.count > 0 && this.count <= TIME_COUNT) {
+                this.count--;
+              } else {
+                this.show = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000);
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
-      }
-  
-    },
-    changeType() {
-      if(this.inputType == 'text') {
-        this.inputType = 'password';
-        this.showNewPassword =false;
-        console.log(this.inputType)
-      } else {
-        this.inputType = 'text';
-        this.showNewPassword =true;
-        console.log(this.inputType)
-      }
-    },
-    getCode(){
-       var userInfo = JSON.parse(sessionStorage.getItem("user"));
-      if (userInfo) {
-        var userid = userInfo.userid;
-      }
-     this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/login_getCode.do?userid=${userid}`
-          })
-            .then(res => {
-              console.log(res);
-              const TIME_COUNT = 60;
-              if (!this.timer) {
-                this.count = TIME_COUNT;
-                this.show = false;
-                this.timer = setInterval(() => {
-                  if (this.count > 0 && this.count <= TIME_COUNT) {
-                    this.count--;
-                  } else {
-                    this.show = true;
-                    clearInterval(this.timer);
-                    this.timer = null;
-                  }
-                }, 1000);
-              }
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
-   }
+    }
+  },
+  mounted: function() {
+    document.getElementById("newPassword1").focus();
   }
 };
 </script>
 
 <style scoped>
-
 #PersonalPassword {
   width: 730px;
 
@@ -172,15 +189,14 @@ export default {
 }
 
 .PersonalPassword-change {
-  margin:40px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
   text-align: center;
 }
 
-.get-button{
+.get-button {
   display: inline-block;
 }
 .wait-button-con {
-  
   display: inline-block;
 }
 .test-but1 {
@@ -220,66 +236,66 @@ export default {
   background: #e4e7ed;
 }
 
-
 .input-input {
-  border:1px solid #c5cddb;
+  border: 1px solid #c5cddb;
   width: 358px;
-border-radius: 2px;
-height: 44px;
-line-height: 44px;
-background: #fff;
-    font-size:14px;
-    padding:0px 10px;
+  border-radius: 2px;
+  height: 44px;
+  line-height: 44px;
+  background: #fff;
+  font-size: 14px;
+  padding: 0px 10px;
 }
 .input-icon {
   position: absolute;
   font-size: 18px;
-  margin: -42px 0px 0px 515px;
+  margin: -42px 0px 0px 508px;
 }
 .input-icon:hover {
-  color: #409EFF;
+  color: #409eff;
   cursor: pointer;
 }
 
 .input-input:hover {
-  border:1px solid #409EFF;
+  border: 1px solid #409eff;
 }
 .input-input:focus {
-  border:1px solid #409EFF;
+  border: 1px solid #409eff;
 }
 .el-icon-view {
-  font-size:18px;
+  font-size: 18px;
 }
-.verification{
-  width:242px !important;
+.verification {
+  width: 242px !important;
 }
 .get-button-con {
-  height:44px;
-  width:112px;
+  height: 44px;
+  width: 112px;
 }
 .wait-button-con {
-  height:44px;
-  width:112px;
+  height: 44px;
+  width: 112px;
 }
 .com-upload {
-  padding:0px 200px;
+  padding: 0px 200px;
 }
 .login-self {
   width: 358px;
-font-size: 16px;
-height: 44px;
+  font-size: 16px;
+  height: 44px;
 }
 .el-input {
   width: 358px;
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot');
-  src: url('//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont') format('svg');
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_b13898ksm7.eot");
+  src: url("//at.alicdn.com/t/font_1131189_b13898ksm7.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_b13898ksm7.svg#iconfont") format("svg");
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -289,7 +305,7 @@ height: 44px;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
   line-height: 44px;
-  margin:0px 0px 0px 2px;
+  margin: 0px 0px 0px 2px;
 }
 </style>
 <style>

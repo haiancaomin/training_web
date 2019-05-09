@@ -16,7 +16,13 @@
             <span>*</span>公司名称
           </td>
           <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input v-model="companyName" placeholder="请输入公司名称" maxlength="30" class="person-add-input"></el-input>
+            <el-input
+              v-model="companyName"
+              placeholder="请输入公司名称"
+              maxlength="30"
+              class="person-add-input"
+              id="companyNameInputFocus"
+            ></el-input>
           </td>
         </tr>
         <tr>
@@ -24,7 +30,12 @@
             <span>*</span>公司地址
           </td>
           <td colspan="3" class="invoice-show-table-td-input1">
-             <el-input v-model="companyAddress" placeholder="请输入公司地址" maxlength="50" class="person-add-input"></el-input>
+            <el-input
+              v-model="companyAddress"
+              placeholder="请输入公司地址"
+              maxlength="50"
+              class="person-add-input"
+            ></el-input>
           </td>
         </tr>
         <tr>
@@ -32,13 +43,23 @@
             <span>*</span>纳税人识别号
           </td>
           <td class="invoice-show-table-td-input2">
-            <el-input v-model="taxerID" placeholder="请输入纳税人识别号" maxlength="30" class="person-add-input"></el-input>
+            <el-input
+              v-model="taxerID"
+              placeholder="请输入纳税人识别号"
+              maxlength="30"
+              class="person-add-input"
+            ></el-input>
           </td>
           <td class="invoice-show-table-td-info2">
             <span>*</span>联系人
           </td>
           <td class="invoice-show-table-td-input3">
-            <el-input v-model="contactPerson" placeholder="请输入联系人" maxlength="5" class="person-add-input"></el-input>
+            <el-input
+              v-model="contactPerson"
+              placeholder="请输入联系人"
+              maxlength="5"
+              class="person-add-input"
+            ></el-input>
           </td>
         </tr>
         <tr>
@@ -60,13 +81,23 @@
             <span>*</span>公司账号
           </td>
           <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input v-model="account" placeholder="请输入公司账号" maxlength="20" class="person-add-input"></el-input>
+            <el-input
+              v-model="account"
+              placeholder="请输入公司账号"
+              maxlength="20"
+              class="person-add-input"
+            ></el-input>
           </td>
         </tr>
         <tr>
           <td class="invoice-show-table-td-info3">可开具的发票内容</td>
           <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input v-model="otherContent"  maxlength="50" class="person-add-input" id="otherContent"></el-input>
+            <el-input
+              v-model="otherContent"
+              maxlength="50"
+              class="person-add-input"
+              id="otherContent"
+            ></el-input>
           </td>
         </tr>
       </table>
@@ -122,15 +153,16 @@ export default {
   data() {
     return {
       ifEdit: false,
-      companyName: '',
-      companyAddress:'',
-      taxerID:'',
-      contactPerson:'',
-      bank:'',
-      phone:'',
-      account:'',
-      otherContent:'',
-      invoiceid:'',
+      countFocus: 0,
+      companyName: "",
+      companyAddress: "",
+      taxerID: "",
+      contactPerson: "",
+      bank: "",
+      phone: "",
+      account: "",
+      otherContent: "",
+      invoiceid: "",
       haveEdit: false,
       haveInvoice: false
     };
@@ -138,74 +170,96 @@ export default {
   methods: {
     editInvoice() {
       this.ifEdit = true;
-       if (this.companyName==''&&this.companyAddress==''&&this.taxerID==''&&this.contactPerson==''&&this.bank==''&&this.phone==''&&this.account==''&&this.otherContent==''){
-         this.haveEdit = false;
-       } else {
-         this.haveEdit = true;
-       }
+      if (
+        this.companyName == "" &&
+        this.companyAddress == "" &&
+        this.taxerID == "" &&
+        this.contactPerson == "" &&
+        this.bank == "" &&
+        this.phone == "" &&
+        this.account == "" &&
+        this.otherContent == ""
+      ) {
+        this.haveEdit = false;
+      } else {
+        this.haveEdit = true;
+      }
     },
     saveHaveInvoice() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
-      if(this.companyName=='') {
+      if (this.companyName == "") {
         this.$message({
-                message: "公司名称不能为空！",
-                center:true
-              });  
-      } else if(this.companyAddress=='') {
+          message: "公司名称不能为空！",
+          center: true
+        });
+      } else if (this.companyAddress == "") {
         this.$message({
-                message: "公司地址不能为空！",
-                center:true
-              });  
-      }else if(this.taxerID=='') {
+          message: "公司地址不能为空！",
+          center: true
+        });
+      } else if (this.taxerID == "") {
         this.$message({
-                message: "纳税人识别号不能为空！",
-                center:true
-              });  
-      }else if(this.taxerID.length!=15&&this.taxerID.length!=17&&this.taxerID.length!=18&&this.taxerID.length!=20) {
+          message: "纳税人识别号不能为空！",
+          center: true
+        });
+      } else if (
+        this.taxerID.length != 15 &&
+        this.taxerID.length != 17 &&
+        this.taxerID.length != 18 &&
+        this.taxerID.length != 20
+      ) {
         this.$message({
-                message: "纳税人识别号位数不正确！",
-                center:true
-              });  
-      }else if(this.contactPerson=='') {
+          message: "纳税人识别号位数不正确！",
+          center: true
+        });
+      } else if (this.contactPerson == "") {
         this.$message({
-                message: "联系人不能为空！",
-                center:true
-              });  
-      }else if(this.bank=='') {
+          message: "联系人不能为空！",
+          center: true
+        });
+      } else if (this.bank == "") {
         this.$message({
-                message: "公司开户行不能为空！",
-                center:true
-              });  
-      }else if(this.phone=='') {
+          message: "公司开户行不能为空！",
+          center: true
+        });
+      } else if (this.phone == "") {
         this.$message({
-                message: "联系电话不能为空！",
-                center:true
-              });  
-      }else if(this.account=='') {
+          message: "联系电话不能为空！",
+          center: true
+        });
+      } else if (this.account == "") {
         this.$message({
-                message: "公司账号不能为空！",
-                center:true
-              });  
-      }else {
+          message: "公司账号不能为空！",
+          center: true
+        });
+      } else {
         this.$ajax({
-            method: "post",
-            url: `${this.baseURL}/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${this.invoiceid}",company:
-            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",content:"${this.otherContent}"}&userid=${userid}`
-          })
-            .then(res => {
-              this.$message({
-                message: "修改成功！",
-                center:true
-              });    
-              this.ifEdit = false;       
-            })
-            .catch(function(err) {
-              console.log(err);
+          method: "post",
+          url: `${
+            this.baseURL
+          }/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${
+            this.invoiceid
+          }",company:
+            "${this.companyName}",address:"${
+            this.companyAddress
+          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
+            this.account
+          }",content:"${this.otherContent}"}&userid=${userid}`
+        })
+          .then(res => {
+            this.$message({
+              message: "修改成功！",
+              center: true
             });
+            this.ifEdit = false;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       }
     },
     saveNoInvoice() {
@@ -213,92 +267,101 @@ export default {
       if (userInfo) {
         var userid = userInfo.userid;
       }
-      if(this.companyName=='') {
+      if (this.companyName == "") {
         this.$message({
-                message: "公司名称不能为空！",
-                center:true
-              });  
-      } else if(this.companyAddress=='') {
+          message: "公司名称不能为空！",
+          center: true
+        });
+      } else if (this.companyAddress == "") {
         this.$message({
-                message: "公司地址不能为空！",
-                center:true
-              });  
-      }else if(this.taxerID=='') {
+          message: "公司地址不能为空！",
+          center: true
+        });
+      } else if (this.taxerID == "") {
         this.$message({
-                message: "纳税人识别号不能为空！",
-                center:true
-              });  
-      }else if(this.contactPerson=='') {
+          message: "纳税人识别号不能为空！",
+          center: true
+        });
+      } else if (this.contactPerson == "") {
         this.$message({
-                message: "联系人不能为空！",
-                center:true
-              });  
-      }else if(this.bank=='') {
+          message: "联系人不能为空！",
+          center: true
+        });
+      } else if (this.bank == "") {
         this.$message({
-                message: "公司开户行不能为空！",
-                center:true
-              });  
-      }else if(this.phone=='') {
+          message: "公司开户行不能为空！",
+          center: true
+        });
+      } else if (this.phone == "") {
         this.$message({
-                message: "联系电话不能为空！",
-                center:true
-              });  
-      }else if(this.account=='') {
+          message: "联系电话不能为空！",
+          center: true
+        });
+      } else if (this.account == "") {
         this.$message({
-                message: "公司账号不能为空！",
-                center:true
-              });  
-      }else {
+          message: "公司账号不能为空！",
+          center: true
+        });
+      } else {
         this.$ajax({
-            method: "post",
-            url: `${this.baseURL}/zjsxpt/invoice_saveInvoice.do?invoice={"company":
-            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",content:"${this.otherContent}"}&userid=${userid}`
-          })
-            .then(res => {
-              this.$message({
-                message: "添加成功！",
-                center:true
-              }); 
-              this.ifEdit = false;          
-            })
-            .catch(function(err) {
-              console.log(err);
+          method: "post",
+          url: `${
+            this.baseURL
+          }/zjsxpt/invoice_saveInvoice.do?invoice={"company":
+            "${this.companyName}",address:"${
+            this.companyAddress
+          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
+            this.account
+          }",content:"${this.otherContent}"}&userid=${userid}`
+        })
+          .then(res => {
+            this.$message({
+              message: "添加成功！",
+              center: true
             });
-      } 
-     
-      
+            this.ifEdit = false;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      }
     }
   },
   mounted() {
     var userInfo = JSON.parse(sessionStorage.getItem("user"));
-      if (userInfo) {
-        var userid = userInfo.userid;
-      }
+    if (userInfo) {
+      var userid = userInfo.userid;
+    }
     this.$ajax({
-            method: "post",
-            url: `${this.baseURL}//zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
-          })
-            .then(res => {
-              if(res.data.data == "false") {
-               this.haveInvoice = false;
-            } else {
-              this.haveInvoice = true;
-              this.companyName= res.data.data.company;
-              this.companyAddress=res.data.data.address;
-              this.taxerID=res.data.data.taxpayerno;
-              this.contactPerson=res.data.data.person;
-              this.bank=res.data.data.bank;
-              this.phone=res.data.data.mobilephone;
-              this.account=res.data.data.account;
-              this.otherContent=res.data.data.content;
-              this.invoiceid = res.data.data.invoiceid
-            }
-                    
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
+      method: "post",
+      url: `${this.baseURL}//zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
+    })
+      .then(res => {
+        if (res.data.data == "false") {
+          this.haveInvoice = false;
+        } else {
+          this.haveInvoice = true;
+          this.companyName = res.data.data.company;
+          this.companyAddress = res.data.data.address;
+          this.taxerID = res.data.data.taxpayerno;
+          this.contactPerson = res.data.data.person;
+          this.bank = res.data.data.bank;
+          this.phone = res.data.data.mobilephone;
+          this.account = res.data.data.account;
+          this.otherContent = res.data.data.content;
+          this.invoiceid = res.data.data.invoiceid;
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  },
+  updated: function() {
+    this.countFocus++;
+    if (this.ifEdit && this.countFocus < 2) {
+      document.getElementById("companyNameInputFocus").focus();
+    }
   }
 };
 </script>

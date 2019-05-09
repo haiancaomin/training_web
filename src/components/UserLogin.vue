@@ -3,7 +3,13 @@
     <el-dialog title="账号登录" :visible.sync="logshow" width="500px" @closed="closeDialog">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
-          <el-input placeholder="请输入用户名" v-model="ruleForm.name" name="name" auto-complete="on">
+          <el-input
+            placeholder="请输入用户名"
+            v-model="ruleForm.name"
+            name="name"
+            id="usernameFocus"
+            auto-complete="on"
+          >
             <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
@@ -60,6 +66,7 @@ export default {
       checkWidth: 0,
       confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
       confirmSuccess: false,
+      countFocus: 0,
 
       showNewPassword: false,
       inputType: "password",
@@ -112,7 +119,6 @@ export default {
       }
     },
     address: function(val) {
-      
       if (
         val.logshow &&
         val.errorCount > 2 &&
@@ -177,7 +183,6 @@ export default {
         if (this.mouseMoveStata) {
           let width = e.clientX - this.beginClientX;
           if (width > 0 && width <= this.maxwidth) {
-            
             document.getElementsByClassName("handler")[0].style.left =
               width + "px";
             document.getElementsByClassName("drag_bg")[0].style.width =
@@ -218,11 +223,9 @@ export default {
       if (this.inputType == "text") {
         this.inputType = "password";
         this.showNewPassword = false;
-       
       } else {
         this.inputType = "text";
         this.showNewPassword = true;
-      
       }
     },
     closeDialog: function() {
@@ -285,11 +288,16 @@ export default {
     },
     setCheckPoint() {
       this.checkWidth = Math.floor(Math.random() * 200 + 50);
-  
     }
   },
   mounted() {
     this.setCheckPoint();
+  },
+  updated: function() {
+    this.countFocus++;
+    if (this.logshow && this.countFocus < 2) {
+      document.getElementById("usernameFocus").focus();
+    }
   },
   components: {
     UserRegister

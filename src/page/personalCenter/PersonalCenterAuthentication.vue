@@ -11,7 +11,12 @@
       <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
         <el-form-item prop="companyName">
           <div class="input-body" id="loginForm">
-            <el-input type="text" placeholder="请输入公司名称" v-model="ruleForm.companyName">
+            <el-input
+              type="text"
+              placeholder="请输入公司名称"
+              v-model="ruleForm.companyName"
+              id="companyNameFocus"
+            >
               <i slot="prefix" class="el-icon-edit-outline"></i>
             </el-input>
           </div>
@@ -66,13 +71,16 @@
     </div>
 
     <div class="authenticationFailed" v-if="authenticationStatus == '2'">
-      
-      <p><i class="iconfont">&#xe7bd;</i>抱歉，您提交的材料认证失败了</p>
+      <p>
+        <i class="iconfont">&#xe7bd;</i>抱歉，您提交的材料认证失败了
+      </p>
       <el-button type="primary" @click="authenticationAgain">重新认证</el-button>
     </div>
 
     <div class="authenticationSuccess" v-if="authenticationStatus == '3'">
-      <p><i class="iconfont" id="happy">&#xe60b;</i>您的公司认证已完成！</p>
+      <p>
+        <i class="iconfont" id="happy">&#xe60b;</i>您的公司认证已完成！
+      </p>
     </div>
   </div>
 </template>
@@ -83,6 +91,7 @@ export default {
   data() {
     return {
       contact: false,
+      countFocus: 0,
       ruleForm: {
         companyName: ""
       },
@@ -90,7 +99,7 @@ export default {
         companyName: [
           { required: true, message: "请输入公司名称", trigger: "blur" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
-        ],
+        ]
       },
       fileUid: "",
       authenticationStatus: ""
@@ -112,14 +121,13 @@ export default {
         url: `${this.baseURL}/zjsxpt/invoice_resetStatus.do?userid=${userid}`
       })
         .then(res => {
-          
-          if(res.data.data) {
+          if (res.data.data) {
             this.authenticationStatus = "0";
           } else {
             this.$message({
-        message: "获取客户信息失败或网络异常！",
-        center: true
-      });
+              message: "获取客户信息失败或网络异常！",
+              center: true
+            });
           }
         })
         .catch(function(err) {
@@ -129,35 +137,37 @@ export default {
     submitUpload(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-      this.$refs.upload.submit();
-      if (this.fileUid == "") {
-        this.$message({
-          message: "请上传文件！",
-          center: true
-        });
-      } else {
-        var userInfo = JSON.parse(sessionStorage.getItem("user"));
-        if (userInfo) {
-          var userid = userInfo.userid;
-        }
-        this.$ajax({
-          method: "post",
-          url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${
-            this.ruleForm.companyName
-          }&attachmentids=${this.fileUid}&userid=${userid}`
-        })
-          .then(res => {
+          this.$refs.upload.submit();
+          if (this.fileUid == "") {
             this.$message({
-              message: "上传成功！",
+              message: "请上传文件！",
               center: true
             });
-            this.authenticationStatus = 1;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
-       } else {
+          } else {
+            var userInfo = JSON.parse(sessionStorage.getItem("user"));
+            if (userInfo) {
+              var userid = userInfo.userid;
+            }
+            this.$ajax({
+              method: "post",
+              url: `${
+                this.baseURL
+              }/zjsxpt/invoice_identifyCompany.do?companyname=${
+                this.ruleForm.companyName
+              }&attachmentids=${this.fileUid}&userid=${userid}`
+            })
+              .then(res => {
+                this.$message({
+                  message: "上传成功！",
+                  center: true
+                });
+                this.authenticationStatus = 1;
+              })
+              .catch(function(err) {
+                console.log(err);
+              });
+          }
+        } else {
           console.log("error submit!!");
           return false;
         }
@@ -204,6 +214,12 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+  },
+  updated: function() {
+    this.countFocus++;
+    if (this.authenticationStatus == 0 && this.countFocus < 2) {
+      document.getElementById("companyNameFocus").focus();
+    }
   }
 };
 </script>
@@ -288,30 +304,31 @@ export default {
   text-align: center;
   margin: 120px 0px 0px 0px;
 }
-.authenticationFailed>p {
+.authenticationFailed > p {
   font-size: 20px;
-  color:#F56C6C;
-  margin:0px 0px 40px 0px;
+  color: #f56c6c;
+  margin: 0px 0px 40px 0px;
 }
 .authenticationSuccess {
   text-align: center;
   margin: 150px 0px 0px 0px;
 }
-.authenticationSuccess>p {
+.authenticationSuccess > p {
   font-size: 24px;
-  color:#67C23A; 
+  color: #67c23a;
 }
 #happy {
   font-size: 28px;
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot');
-  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.svg#iconfont') format('svg');
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_kt4thveua8j.eot");
+  src: url("//at.alicdn.com/t/font_1131189_kt4thveua8j.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.svg#iconfont") format("svg");
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -320,8 +337,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
-  margin:0px 5px 0px 0px;
-  
+  margin: 0px 5px 0px 0px;
 }
 </style>
 <style>

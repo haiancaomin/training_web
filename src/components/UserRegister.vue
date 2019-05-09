@@ -9,7 +9,7 @@
     >
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
-          <el-input placeholder="请输入用户名" v-model="ruleForm.name">
+          <el-input placeholder="请输入用户名" v-model="ruleForm.name" id="nameRegFocus">
             <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
@@ -51,7 +51,7 @@
               class="handler1 handler_bg1"
               style="position: absolute;top: 0px;left: 0px;"
             ></div>
-            
+
             <div class="checkPoint1"></div>
           </div>
         </el-form-item>
@@ -107,6 +107,7 @@ export default {
       checkWidth: 0,
       confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
       confirmSuccess: false,
+      countFocus: 0,
 
       showNewPassword: false,
       showNewPassword2: false,
@@ -187,9 +188,8 @@ export default {
         this.setCheckPoint();
         document.getElementsByClassName("checkPoint1")[0].style.visibility =
           "visible";
-      } 
-    },
-   
+      }
+    }
   },
 
   methods: {
@@ -235,9 +235,10 @@ export default {
         let width = e.clientX - this.beginClientX;
 
         if (width > 0 && width <= this.maxwidth) {
-          
-          document.getElementsByClassName("handler1")[0].style.left = width+"px";
-          document.getElementsByClassName("drag_bg1")[0].style.width = width+"px";
+          document.getElementsByClassName("handler1")[0].style.left =
+            width + "px";
+          document.getElementsByClassName("drag_bg1")[0].style.width =
+            width + "px";
         }
       }
     }, //mousemove事件
@@ -286,39 +287,38 @@ export default {
     getCode(formName) {
       this.$refs[formName].validateField("phone", error => {
         if (!error) {
-          if(this.confirmSuccess) {
+          if (this.confirmSuccess) {
             this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/login_sendMessage.do?phone=${
-              this.ruleForm.phone
-            }`
-          })
-            .then(res => {
-              const TIME_COUNT = 60;
-              if (!this.timer) {
-                this.count = TIME_COUNT;
-                this.show = false;
-                this.timer = setInterval(() => {
-                  if (this.count > 0 && this.count <= TIME_COUNT) {
-                    this.count--;
-                  } else {
-                    this.show = true;
-                    clearInterval(this.timer);
-                    this.timer = null;
-                  }
-                }, 1000);
-              }
+              method: "get",
+              url: `${this.baseURL}/zjsxpt/login_sendMessage.do?phone=${
+                this.ruleForm.phone
+              }`
             })
-            .catch(function(err) {
-              console.log(err);
-            });
+              .then(res => {
+                const TIME_COUNT = 60;
+                if (!this.timer) {
+                  this.count = TIME_COUNT;
+                  this.show = false;
+                  this.timer = setInterval(() => {
+                    if (this.count > 0 && this.count <= TIME_COUNT) {
+                      this.count--;
+                    } else {
+                      this.show = true;
+                      clearInterval(this.timer);
+                      this.timer = null;
+                    }
+                  }, 1000);
+                }
+              })
+              .catch(function(err) {
+                console.log(err);
+              });
           } else {
             this.$message({
               message: "请拖动滑块完成拼图！",
               center: true
             });
           }
-          
         } else {
           return false;
         }
@@ -368,11 +368,14 @@ export default {
   },
   mounted() {
     this.setCheckPoint();
-   
   },
   updated() {
-document.getElementsByClassName("checkPoint1")[0].style.left =
-          this.checkWidth + "px";
+    document.getElementsByClassName("checkPoint1")[0].style.left =
+      this.checkWidth + "px";
+    this.countFocus++;
+    if (this.regshow && this.countFocus < 2) {
+      document.getElementById("nameRegFocus").focus();
+    }
   }
 };
 </script>
