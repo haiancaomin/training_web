@@ -321,7 +321,7 @@ body > .el-container {
 .grid-content {
   border-radius: 4px;
 
-  margin: 10px 0px;
+  margin: 5px 0px 13px 0px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -745,6 +745,7 @@ body > .el-container {
   width: 286px;
   border: solid 1px #eee;
   margin: 0px 20px 0px 0px;
+    object-fit:scale-down
 }
 .friend-img-last {
   height: 80px;
@@ -958,7 +959,7 @@ body > .el-container {
 .course-show-img {
   width: 100%;
   height: 100%;
-  object-fit:cover;
+ 
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {

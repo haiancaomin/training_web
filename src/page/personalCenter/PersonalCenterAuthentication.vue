@@ -237,7 +237,7 @@ export default {
   width: 300px;
 }
 .PersonalPassword-change {
-  margin: 30px 190px 0px 190px;
+  margin: 30px 179px 0px 190px;
 }
 
 .haveSubmit {

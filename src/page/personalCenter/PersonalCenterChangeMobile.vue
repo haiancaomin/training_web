@@ -271,7 +271,7 @@ export default {
   margin: 1px 0px 0px 12px;
 }
 .change-mobile-form {
-  padding: 0px 190px 0px 190px;
+  padding: 0px 179px 0px 190px;
 }
 .login-self {
   width: 360px;
