@@ -48,6 +48,20 @@
           </el-input>
         </el-form-item>
 
+        <el-form-item prop="education">
+          <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
+            <el-option label="小学及以下" value="小学及以下"></el-option>
+            <el-option label="初中" value="初中"></el-option>
+            <el-option label="中专" value="中专"></el-option>
+            <el-option label="高中" value="高中"></el-option>
+            <el-option label="大专" value="大专"></el-option>
+            <el-option label="本科" value="本科"></el-option>
+            <el-option label="硕士" value="硕士"></el-option>
+            <el-option label="博士及以上" value="博士及以上"></el-option>
+            <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
+          </el-select>
+        </el-form-item>
+
         <el-form-item prop="cardno">
           <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
             <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
@@ -120,6 +134,7 @@ export default {
         sex: "",
         age: "",
         worktype: "",
+        education: "",
         cardno: "",
         phone: "",
         address: ""
@@ -206,7 +221,7 @@ export default {
               this.ruleForm.worktype
             }',cardno:'${this.ruleForm.cardno}',phone:'${
               this.ruleForm.phone
-            }',address:'${this.ruleForm.address}'}&userid=${userid}`
+            }',address:'${this.ruleForm.address}',education:'${this.ruleForm.education}'}&userid=${userid}`
           })
             .then(res => {
               this.$message({

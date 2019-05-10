@@ -35,6 +35,20 @@
             </el-input>
           </el-form-item>
 
+           <el-form-item prop="education">
+          <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
+            <el-option label="小学及以下" value="小学及以下"></el-option>
+            <el-option label="初中" value="初中"></el-option>
+            <el-option label="中专" value="中专"></el-option>
+            <el-option label="高中" value="高中"></el-option>
+            <el-option label="大专" value="大专"></el-option>
+            <el-option label="本科" value="本科"></el-option>
+            <el-option label="硕士" value="硕士"></el-option>
+            <el-option label="博士及以上" value="博士及以上"></el-option>
+            <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
+          </el-select>
+        </el-form-item>
+
           <el-form-item prop="cardno">
             <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
               <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
@@ -52,6 +66,8 @@
               <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
             </el-input>
           </el-form-item>
+
+         
 
           <el-form-item>
             <div class="sign-submit">
@@ -92,6 +108,7 @@
       <el-table-column prop="cardno" label="身份证号" width="180"></el-table-column>
       <el-table-column prop="phone" label="手机" width="120"></el-table-column>
       <el-table-column prop="address" label="工作地" width="120"></el-table-column>
+      <el-table-column prop="education" label="学历" width="120"></el-table-column>
       <el-table-column prop="examno" label="考试编号" width="120"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
@@ -121,6 +138,7 @@ export default {
         sex: "",
         age: 0,
         worktype: "",
+        education: "",
         cardno: "",
         phone: "",
         address: ""
@@ -175,6 +193,7 @@ export default {
           this.ruleForm.sex = res.data.data.sex;
           this.ruleForm.age = Number(res.data.data.age);
           this.ruleForm.worktype = res.data.data.worktype;
+          this.ruleForm.education = res.data.data.education;
           this.ruleForm.cardno = res.data.data.cardno;
           this.ruleForm.phone = res.data.data.phone;
           this.ruleForm.address = res.data.data.address;
@@ -200,6 +219,8 @@ export default {
               this.ruleForm.sex
             },age:'${this.ruleForm.age}',worktype:'${
               this.ruleForm.worktype
+            }',education:'${
+              this.ruleForm.education
             }',cardno:'${this.ruleForm.cardno}',phone:'${
               this.ruleForm.phone
             }',address:'${this.ruleForm.address}'}&userid=${userid}`
