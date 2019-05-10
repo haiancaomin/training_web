@@ -2,7 +2,7 @@
   <div id="signup">
     <el-steps :active="active" finish-status="success" simple style="margin-top: 80px">
       <el-step title="报名信息"></el-step>
-      <el-step title="信息预览"></el-step>
+      <el-step title="订单确认"></el-step>
       <el-step title="费用"></el-step>
       <el-step title="完成"></el-step>
     </el-steps>

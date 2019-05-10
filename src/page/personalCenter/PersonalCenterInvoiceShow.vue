@@ -153,7 +153,7 @@ export default {
   data() {
     return {
       ifEdit: false,
-      countFocus: 0,
+      focusBoolean: true,
       companyName: "",
       companyAddress: "",
       taxerID: "",
@@ -358,9 +358,12 @@ export default {
       });
   },
   updated: function() {
-    this.countFocus++;
-    if (this.ifEdit && this.countFocus < 2) {
+    if (this.ifEdit && this.focusBoolean) {
+      this.focusBoolean = false;
       document.getElementById("companyNameInputFocus").focus();
+    }
+    if (!this.ifEdit) {
+      this.focusBoolean = true;
     }
   }
 };
@@ -369,7 +372,6 @@ export default {
 <style scoped>
 #PersonalCenterInvoiceShow {
   width: 730px;
-
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;

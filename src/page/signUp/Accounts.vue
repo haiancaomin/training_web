@@ -4,6 +4,11 @@
       <div class="order-info-title">
         <el-col :span="8">
           <div class="order-meal-title1">
+            <span>课程</span>
+          </div>
+        </el-col>
+         <el-col :span="2">
+          <div class="order-meal-title5">
             <span>套餐</span>
           </div>
         </el-col>
@@ -22,12 +27,13 @@
             <span>预计考试时间</span>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <div class="order-meal-title5">
             <span>考试地点</span>
           </div>
         </el-col>
-        <el-col :span="3">
+       
+        <el-col :span="2">
           <div class="order-meal-title6">
             <span>单价</span>
           </div>
@@ -50,14 +56,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname1}}</span>
+                  <span>{{coursename1}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp1">
+                <div class="order-meal-person-num">
                   报名人数：
                   <span >{{empSize1}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <el-button  class="emp-edit" type="danger" @click="scanEmp1">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname1}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -81,14 +94,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress1}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+          
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price1}}</span>
@@ -164,14 +178,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname2}}</span>
+                  <span>{{coursename2}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp2">
+                <div class="order-meal-person-num">
                   报名人数：
-                  <span>{{empSize2}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <span >{{empSize2}}</span>
+                  <el-button  class="emp-edit" type="danger" @click="scanEmp2">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname2}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -195,14 +216,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress2}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+          
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price2}}</span>
@@ -278,14 +300,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname3}}</span>
+                  <span>{{coursename3}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp3">
+                <div class="order-meal-person-num">
                   报名人数：
-                  <span>{{empSize3}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <span >{{empSize3}}</span>
+                  <el-button  class="emp-edit" type="danger" @click="scanEmp3">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname3}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -309,14 +338,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress3}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+          
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price3}}</span>
@@ -392,14 +422,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname4}}</span>
+                  <span>{{coursename4}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp4">
+                <div class="order-meal-person-num">
                   报名人数：
-                  <span>{{empSize4}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <span >{{empSize4}}</span>
+                  <el-button  class="emp-edit" type="danger" @click="scanEmp4">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname4}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -423,14 +460,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress4}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+          
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price4}}</span>
@@ -532,10 +570,7 @@ export default {
       coursehour2: "",
       coursehour3: "",
       coursehour4: "",
-      coursename1: "",
-      coursename2: "",
-      coursename3: "",
-      coursename4: "",
+   
       picurl1:"",
       picurl2:"",
       picurl3:"",
@@ -560,6 +595,10 @@ export default {
       menuname2: "",
       menuname3: "",
       menuname4: "",
+      coursename1:"",
+      coursename2:"",
+      coursename3:"",
+      coursename4:"",
       examtime1: "",
       examtime2: "",
       examtime3: "",
@@ -638,7 +677,9 @@ export default {
           }`
         })
           .then(res => {
+            console.log(res.data.data);
             accountsThis.menuname1 = res.data.data.menuname;
+            accountsThis.coursename1 = res.data.data.coursename;
             accountsThis.examtime1 = res.data.data.examtime;
             accountsThis.examaddress1 = res.data.data.examaddress;
             accountsThis.price1 = res.data.data.price;
@@ -720,6 +761,7 @@ export default {
         })
           .then(res => {
             accountsThis.menuname2 = res.data.data.menuname;
+            accountsThis.coursename2 = res.data.data.coursename;
             accountsThis.examtime2 = res.data.data.examtime;
             accountsThis.examaddress2 = res.data.data.examaddress;
             accountsThis.price2 = res.data.data.price;
@@ -801,6 +843,7 @@ export default {
         })
           .then(res => {
             accountsThis.menuname3 = res.data.data.menuname;
+            accountsThis.coursename3 = res.data.data.coursename;
             accountsThis.examtime3 = res.data.data.examtime;
             accountsThis.examaddress3 = res.data.data.examaddress;
             accountsThis.price3 = res.data.data.price;
@@ -882,6 +925,7 @@ export default {
         })
           .then(res => {
             accountsThis.menuname4 = res.data.data.menuname;
+            accountsThis.coursename4 = res.data.data.coursename;
             accountsThis.examtime4 = res.data.data.examtime;
             accountsThis.examaddress4 = res.data.data.examaddress;
             accountsThis.price4 = res.data.data.price;
@@ -1354,7 +1398,7 @@ export default {
   font-size: 12px;
   color: #666;
   text-align: center;
-  padding: 10px;
+  padding: 10px ;
 }
 .order-subtotal {
   width: 940px;
@@ -1383,23 +1427,33 @@ export default {
   font-size: 12px;
   color: #666;
   text-align: center;
-  padding: 11px 20px 0px 20px;
+  padding: 11px 10px 0px 10px;
 }
 .order-meal-name {
   font-size: 14px;
   color: #333;
   text-align: left;
-  padding: 5px 0px 10px 30px;
+  margin: 5px 0px 0px 30px;
+  height:40px;
+  
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
 }
 .order-meal-person-num {
   margin-top: 28px;
   color: #ff6600;
-  cursor: pointer;
   text-align: left;
-  margin: 30px 0px 0px 30px;
+  margin: 10px 0px 0px 30px;
 }
 .emp-edit {
-  margin: 0px 0px 0px 10px;
+  margin: 5px 0px 0px 10px;
+  height:25px;
+  width:50px;
+  line-height: 25px;
+  padding:0px;
+  font-size: 12px;
 }
 .order-meal-property {
   height: 90px;
@@ -1412,6 +1466,8 @@ export default {
 }
 .el-icon-delete {
   font-size: 16px;
+  cursor: pointer;
+
 }
 .el-icon-delete:hover {
   color: #409eff;
