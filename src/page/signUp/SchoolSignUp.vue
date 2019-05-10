@@ -621,37 +621,38 @@ export default {
       var from3Empty = 0;
       var from4Empty = 0;
       if (
-        this.ruleForm.course1 == "" ||
-        this.ruleForm.Address1 == "" ||
-        this.ruleForm.time1 == "" ||
-        this.ruleForm.meal1 == "" ||
+        this.ruleForm.course1 == ""||this.ruleForm.course1 == null||
+        this.ruleForm.Address1 == "" || this.ruleForm.Address1 == null||
+        this.ruleForm.time1 == "" || this.ruleForm.time1 == null||
+        this.ruleForm.meal1 == "" || this.ruleForm.meal1 == null||
         this.personSize1 < 1
       ) {
+        
         from1Empty = 1;
       }
       if (
-        this.ruleForm.course2 == "" ||
-        this.ruleForm.Address2 == "" ||
-        this.ruleForm.time2 == "" ||
-        this.ruleForm.meal2 == "" ||
+        this.ruleForm.course2 == ""||this.ruleForm.course2 == null||
+        this.ruleForm.Address2 == "" || this.ruleForm.Address2 == null||
+        this.ruleForm.time2 == "" || this.ruleForm.time2 == null||
+        this.ruleForm.meal2 == "" || this.ruleForm.meal2 == null||
         this.personSize2 < 1
       ) {
         from2Empty = 1;
       }
       if (
-        this.ruleForm.course3 == "" ||
-        this.ruleForm.Address3 == "" ||
-        this.ruleForm.time3 == "" ||
-        this.ruleForm.meal3 == "" ||
+        this.ruleForm.course3 == ""||this.ruleForm.course3 == null||
+        this.ruleForm.Address3 == "" || this.ruleForm.Address3 == null||
+        this.ruleForm.time3 == "" || this.ruleForm.time3 == null||
+        this.ruleForm.meal3 == "" || this.ruleForm.meal3 == null||
         this.personSize3 < 1
       ) {
         from3Empty = 1;
       }
       if (
-        this.ruleForm.course4 == "" ||
-        this.ruleForm.Address4 == "" ||
-        this.ruleForm.time4 == "" ||
-        this.ruleForm.meal4 == "" ||
+        this.ruleForm.course4 == ""||this.ruleForm.course4 == null||
+        this.ruleForm.Address4 == "" || this.ruleForm.Address4 == null||
+        this.ruleForm.time4 == "" || this.ruleForm.time4 == null||
+        this.ruleForm.meal4 == "" || this.ruleForm.meal4 == null||
         this.personSize4 < 1
       ) {
         from4Empty = 1;

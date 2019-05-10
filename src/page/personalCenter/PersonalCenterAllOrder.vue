@@ -453,6 +453,7 @@ export default {
       })
         .then(res => {
           this.orderlist = res.data.data;
+          console.log(this.orderlist);
           this.count = res.data.count;
         })
         .catch(function(err) {
@@ -553,6 +554,7 @@ export default {
   width: 141px;
   height: 141px;
   margin: 0px 0px 0px 10px;
+  object-fit:cover
 }
 .order-picture {
   height: 162px;

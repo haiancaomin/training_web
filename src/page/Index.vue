@@ -785,6 +785,7 @@ body > .el-container {
 
   background: url(../assets/company.jpg) no-repeat;
   background-size: 100% 810px;
+
 }
 
 .login-sign {
@@ -957,6 +958,7 @@ body > .el-container {
 .course-show-img {
   width: 100%;
   height: 100%;
+  object-fit:cover;
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {

@@ -93,7 +93,7 @@
       </el-form-item>
     </el-form>
 
-    <el-table :data="tableData" border max-height="450" v-loading="loading" style="width: 700px">
+    <el-table :data="tableData" border max-height="450" stripe v-loading="loading" style="width: 700px">
       <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="160"></el-table-column>
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
@@ -395,6 +395,9 @@ export default {
 }
 .person-add-select .el-input__inner {
   height: 44px;
+}
+.cell {
+  text-align: center;
 }
 </style>
 

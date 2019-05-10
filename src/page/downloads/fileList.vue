@@ -4,6 +4,8 @@
       <h1 class="file-title">文件列表</h1>
       <ul class="file-box">
         <li v-for="(item,key) in fileLists.data" :key="key" class="clearfix">
+          <span v-if="item.name.split('.')[1] == 'doc'||item.name.split('.')[1] == 'docx'"><i class="iconfont">&#xe64e;</i></span>
+          <span v-if="item.name.split('.')[1] == 'pdf'"><i class="iconfont">&#xe740;</i></span>
           <a :href="item.fileurl">{{item.name}}</a>
           <span class="date">{{item.createdate}}</span>
         </li>
@@ -85,7 +87,6 @@ export default {
 }
 
 .file-box li a {
-  float: left;
   line-height: 30px;
   color: #333;
 }
@@ -103,6 +104,23 @@ export default {
   content: '';
   display: block;
   clear: both;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_cto7yxkxej.eot');
+  src: url('//at.alicdn.com/t/font_1131189_cto7yxkxej.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_cto7yxkxej.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_cto7yxkxej.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_cto7yxkxej.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_cto7yxkxej.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 18px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>
 
