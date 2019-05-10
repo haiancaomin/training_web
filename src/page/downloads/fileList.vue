@@ -1,7 +1,7 @@
 <template>
   <el-main>
     <div class="file-container">
-      <h1 class="file-title">文件列表</h1>
+      <h1 class="file-title">资料下载</h1>
       <ul class="file-box">
         <li v-for="(item,key) in fileLists.data" :key="key" class="clearfix">
           <div>
@@ -15,7 +15,7 @@
 
           <div class="download">
             <a :href="item.fileurl">
-            <el-button type="primary" class="download_btn"><i class="iconfont">&#xe682;</i>下载</el-button>
+            <el-button type="primary" class="download_btn"><i class="iconfont download_icon">&#xe682;</i>下载</el-button>
             </a>
           </div>
           
@@ -151,6 +151,11 @@ export default {
 .doc_icon {
   color:#409EFF;
 }
+.download_icon {
+  line-height: 14px;
+  font-size: 14px;
+  margin:0px 2px 0px 0px;
+}
 .download {
   position: absolute;
   margin:-52px 0px 0px 765px;
@@ -159,6 +164,8 @@ export default {
   height:35px;
   width:70px;
   padding: 0px;
+  line-height: 14px;
+  font-size: 14px;
 }
 </style>
 
