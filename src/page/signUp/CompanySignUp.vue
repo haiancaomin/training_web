@@ -137,7 +137,7 @@
                       <div class="div-delete">
                         <el-button
                           type="primary"
-                          @click="centerDialogVisible1 = true"
+                          @click="chooseEmp1"
                           class="choose-person"
                         >选择人员</el-button>
                       </div>
@@ -268,7 +268,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible2 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp2">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -399,7 +399,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible3 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp3">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -528,7 +528,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible4 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp4">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -612,10 +612,54 @@ export default {
         time4: "",
         meal4: ""
       },
-      tableData1: [{}]
+      tableData1: []
     };
   },
   methods: {
+    chooseEmp1() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible1 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp2() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible2 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp3() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible3 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp4() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible4 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
     submitForm(formName) {
 
       var from1Empty = 0;
@@ -701,6 +745,7 @@ export default {
           meal4: this.ruleForm.meal4,
           multipleSelection4: this.multipleSelection4
         });
+        
       }
     },
     addNew1() {

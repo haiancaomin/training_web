@@ -137,9 +137,9 @@
             @selection-change="handleSelectionChange1"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename1}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证" ></el-table-column>
+           
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun1">确定</el-button>
@@ -259,9 +259,8 @@
             @selection-change="handleSelectionChange2"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename2}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun2">确定</el-button>
@@ -381,9 +380,9 @@
             @selection-change="handleSelectionChange3"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename3}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
+            
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun3">确定</el-button>
@@ -503,9 +502,9 @@
             @selection-change="handleSelectionChange4"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename4}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
+           
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun4">确定</el-button>
@@ -652,6 +651,7 @@ export default {
     
     let accountsThis = this;
     this.bus.$on("todata", function(res) {
+      console.log(res)
       if (
         res.course1 != "" &&
         res.Address1 != "" &&
@@ -677,7 +677,6 @@ export default {
           }`
         })
           .then(res => {
-            console.log(res.data.data);
             accountsThis.menuname1 = res.data.data.menuname;
             accountsThis.coursename1 = res.data.data.coursename;
             accountsThis.examtime1 = res.data.data.examtime;
@@ -1042,7 +1041,7 @@ export default {
     chooseAll1() {
       let that = this;
       if (!this.clickOnce1) {
-        console.log(this);
+    
         this.$nextTick(function() {
           this.tableData1.forEach(item => {
             this.$refs.table1.toggleRowSelection(item, true);
@@ -1369,7 +1368,6 @@ export default {
         url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}",
         "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}`
       }).then(res => {
-          
         this.accountsPage = 0;
         this.SignUpPayPage = 1;
         this.active = 2;
@@ -1378,7 +1376,10 @@ export default {
           SignUpPayPage: this.SignUpPayPage,
           active: this.active
         });
-          console.log("success");
+        this.bus.$emit("toNextPage", {
+          orderID: res.data.orderid
+        });
+   
         })
         .catch(function(err) {
           console.log(err);
@@ -1411,6 +1412,7 @@ export default {
 .order-img {
   width: 120px;
   height: 87px;
+   object-fit:cover
 }
 .order-subtotal {
   text-align: right;
@@ -1511,5 +1513,11 @@ overflow: hidden;
 .operation-zone > .el-button {
   width: 100px;
   margin: 0px 20px;
+}
+</style>
+<style>
+
+.cell {
+  text-align: center;
 }
 </style>

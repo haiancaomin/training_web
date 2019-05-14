@@ -33,8 +33,8 @@
     </div>
 
     <!-- 支付页面 -->
-    <div class="pay" v-if="SignUpPayPage">
-      <SignUpPay v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage" v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"></SignUpPay>
+    <div class="pay" v-show="SignUpPayPage">
+      <SignUpPay  v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage" v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"></SignUpPay>
     </div>
 
     <div class="success" v-if="SignUpSuccessPage == 1">
@@ -195,7 +195,7 @@ export default {
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
-  padding: 30px;
+  padding: 10px 30px 30px 30px;
   margin: 10px 0px 0px 0px;
 }
 .success {

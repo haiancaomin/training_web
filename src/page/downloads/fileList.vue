@@ -7,7 +7,7 @@
           <div>
           <span v-if="item.name.split('.')[1] == 'doc'||item.name.split('.')[1] == 'docx'"><i class="iconfont doc_icon">&#xe64e;</i></span>
           <span v-if="item.name.split('.')[1] == 'pdf'"><i class="iconfont pdf_icon">&#xe740;</i></span>
-          <a :href="item.fileurl">{{item.name.split('.')[0]}}</a>
+          <a :href="item.fileurl" download>{{item.name.split('.')[0]}}</a>
           </div>
           <div class="update_date">
             <span class="date">更新时间：{{item.createdate}}</span>
