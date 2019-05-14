@@ -30,6 +30,7 @@ import PersonalCenterAuthentication from '@/page/personalCenter/PersonalCenterAu
 import PersonalCenterReport from '@/page/personalCenter/PersonalCenterReport'
 import PersonalCenterCertificate from '@/page/personalCenter/PersonalCenterCertificate'
 import PersonalCenterChangeMobile from '@/page/personalCenter/PersonalCenterChangeMobile'
+import PersonalCenterOrderDetail from '@/page/personalCenter/PersonalCenterOrderDetail'
 import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
 import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
 import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
@@ -54,6 +55,11 @@ export default new Router({
       }, {
         path: '/index',
         component: Index
+      },
+      {
+        path: 'PersonalCenterOrderDetail/:orderid',
+        component: PersonalCenterOrderDetail,
+        props: true
       },
       {
         path: '/SignUp',
@@ -119,7 +125,8 @@ export default new Router({
           path: 'show1/:id',
           component: baseShow1,
           props: true
-        }]
+        }
+      ]
       }, {
         path: '/PersonalCenter',
         component: PersonalCenter,

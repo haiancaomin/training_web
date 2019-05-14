@@ -390,10 +390,10 @@ export default {
 }
 </style>
 <style>
-.person-add-input .el-input__inner {
+#editForm .person-add-input .el-input__inner {
   height: 44px;
 }
-.person-add-select .el-input__inner {
+#editForm .person-add-select .el-input__inner {
   height: 44px;
 }
 .cell {

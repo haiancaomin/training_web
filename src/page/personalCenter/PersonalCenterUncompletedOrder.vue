@@ -1,16 +1,7 @@
 <template>
   <div id="PersonalCenterUncompletedOrder">
     <div class="order-dialog" id="orderDialog">
-      <el-dialog title="报名人员信息" :visible.sync="showEmpDia" width="600px" center>
-        <el-table :data="tableData" border max-height="400" style="width: 100%">
-          <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
-          <el-table-column prop="cardno" label="身份证" width="280"></el-table-column>
-          <el-table-column prop="coursename" label="课程"></el-table-column>
-        </el-table>
-        <div class="sign-submit">
-          <el-button type="primary" @click="showEmpDia=false">关闭</el-button>
-        </div>
-      </el-dialog>
+    
 
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
@@ -27,14 +18,9 @@
 
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
         <div class="pay">
-          <div class="pay-head">
-            <span>您可以选择</span>
-            <el-button type="primary" @click="onliePayment">在线支付</el-button>
-            <span>或者</span>
-            <el-button type="success" @click="offliePayment">转账汇款</el-button>
-          </div>
+          
 
-          <div class="pay-online" v-show="payOnline == 1">
+          <div class="pay-online">
             <div class="pay-online-body">
               <div class="pay-online-check">
                 <h1>确认订单信息</h1>
@@ -43,9 +29,9 @@
               <div class="user-info">
                 <div class="user-name">
                   购买帐号：
-                  <span>zeroandx</span>
+                  <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认开课时间或考试时间后再提交订单</div>
+                <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
               </div>
               <div class="pay-type">支付方式</div>
               <el-collapse accordion>
@@ -57,6 +43,9 @@
                     <span v-if="radio2==6" class="choose-weixin">
                       <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
                     </span>
+                    <span v-if="radio2==9" class="choose-bank">
+                  <img src="../../assets/weixin_mini.png" class="icon-mini">转账汇款
+                </span>
                   </template>
                   <div class="pay-choose">
                     <el-radio-group v-model="radio2">
@@ -72,6 +61,11 @@
                           <img src="../../assets/weixin.jpg" class="pay-img">
                         </el-radio>
                       </div>
+                      <div class="pay-bank">
+                    <el-radio :label="9">
+                      <img src="../../assets/weixin.jpg" class="pay-img">
+                    </el-radio>
+                  </div>
                     </el-radio-group>
                   </div>
                 </el-collapse-item>
@@ -79,56 +73,38 @@
 
               <div class="meal-body">
                 <div class="pay-meal">购买套餐</div>
-                <div class="pay-meal-body">
-                  <div class="pay-meal-body">
+                
+                  <div class="pay-meal-body" v-for="orderItem in orderDetail.dlist" :key="orderItem.detailid">
                     <div class="meal_img f-fl">
-                      <img src="../../assets/inspection1.jpg" alt>
+                      <img :src="orderItem.picurl" alt>
                     </div>
                     <div class="meal_body f-fl">
                       <a class="title">
-                        <span>质量员+考试培训+南通</span>
+                        <span>{{orderItem.coursename}}（{{orderItem.menuname}}）</span>
                       </a>
 
                       <div class="promotion">
                         报名人数：
-                        <span>11</span>
+                        <span>{{orderItem.personcount}}</span>
                       </div>
                     </div>
-                    <div class="meal_price">￥2000.00</div>
+                    <div class="meal_price">￥{{orderItem.money}}</div>
                   </div>
-                </div>
-                <div class="pay-meal-body">
-                  <div class="pay-meal-body">
-                    <div class="meal_img f-fl">
-                      <img src="../../assets/inspection2.png" alt>
-                    </div>
-                    <div class="meal_body f-fl">
-                      <a class="title">
-                        <span>灌浆工+考试+南通</span>
-                      </a>
-
-                      <div class="promotion">
-                        报名人数：
-                        <span>12</span>
-                      </div>
-                    </div>
-                    <div class="meal_price">￥3000.00</div>
-                  </div>
-                </div>
+               
               </div>
             </div>
 
-            <div class="payment-body">
+            <div class="payment-body" v-if="radio2==3||radio2==6">
               <div class="payment-sub-body">
                 <el-col :span="18">
-                  <div class="agreement-con"></div>
+                  <div class="agreement-con">&nbsp;</div>
                 </el-col>
                 <el-col :span="6">
                   <div class="pay-price-btn f-fr">
                     <div class="pay-price-btn_price">
-                      <span class="price_title">实付:</span>
+                      <span class="price_title">待付款:</span>
                       <span class="price_account">
-                        <span class="price_account_icon">￥</span>5000.00
+                        <span class="price_account_icon">￥</span> {{orderDetail.summoney}}
                       </span>
                     </div>
                     <span class="pay-price-btn_btn">立即支付</span>
@@ -136,21 +112,39 @@
                 </el-col>
               </div>
             </div>
-          </div>
-
-          <div calss="pay-offline" v-show="payOffline == 1">
-            <div class="offline-context">
+            <div class="payment-body" v-if="radio2==9">
+              <div class="payment-sub-body">
+                <el-col :span="18">
+                  <div class="agreement-con">
+                    <div class="offline-context">
               <p
                 class="offline-notice"
-              >转账汇款成功后，请在正常工作时间9:30-5:30致电进行款项确认，汇款成功后可在个人中心索取发票。电话：1234567890</p>
-              <p>&nbsp;</p>
+              >转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
+              <p class="margin_height">&nbsp;</p>
               <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
               <br>
               <p>开 户 行：中国**银行股份有限公司**支行</p>
               <p>收款户名：***</p>
               <p>帐 号：1234567890</p>
             </div>
+                  </div>
+                </el-col>
+                <el-col :span="6">
+                  <div class="pay-price-btn f-fr">
+                    <div class="pay-price-btn_price bank_pay">
+                      <span class="price_title">待付款:</span>
+                      <span class="price_account">
+                        <span class="price_account_icon">￥</span> {{orderDetail.summoney}}
+                      </span>
+                    </div>
+                  
+                  </div>
+                </el-col>
+              </div>
+            </div>
           </div>
+
+          
         </div>
       </el-dialog>
     </div>
@@ -175,7 +169,7 @@
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
-            <span v-for="(menuname,index) in orderItem.dlist" :key="index"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
+            <p v-for="(menuname,index) in orderItem.dlist" :key="index">{{menuname.coursename}}（{{menuname.menuname}}）</p>
           </div>
           <p class="order-time">下单时间：{{orderItem.createdate}}</p>
           <p class="order-num">订单号：{{orderItem.orderno}}</p>
@@ -186,8 +180,8 @@
       </div>
       <div class="order-operation">
         <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round plain @click="checkEmp(orderItem.orderid)">报名员工</el-button>
-        <el-button type="primary" round @click="payShow = true">立即支付</el-button>
+        <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid"><el-button type="primary" round plain>订单详情</el-button></router-link>
+        <el-button type="primary" round @click="payNowShow(orderItem.orderid)">立即支付</el-button>
       </div>
     </div>
     </div>
@@ -211,46 +205,39 @@ export default {
       contact: false,
       payShow: false,
       showEmpDia: false,
-      payOnline: 1,
-      payOffline: 0,
-      radio2: 3,
-      orderlist: [{}],
+userName:"",
+      radio2: 9,
+      orderlist: [],
       count:0,
-      tableData: [{}],
+    
+      orderDetail: [],
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1
     };
   },
   methods: {
-    onliePayment() {
-      this.payOnline = 1;
-      this.payOffline = 0;
-    },
-    offliePayment() {
-      this.payOnline = 0;
-      this.payOffline = 1;
+    payNowShow(orderid) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${
+          orderid
+        }`
+      })
+        .then(res => {
+          this.orderDetail = res.data.data;
+          console.log(this.orderDetail);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      this.payShow = true;
     },
      handleCurrentChange(val) {
         this.getNotPayOrderList(val);
         this.currentPage = val;
     },
-    checkEmp(orderid) {
-      this.tableData = [{}];
-      this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_findPersonListByOrderid.do?orderid=${orderid}`
-        })
-          .then(res => {
-            this.tableData = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      this.showEmpDia = true;
-    },
+   
     getNotPayOrderList(selectIndex) {
       var pageIndex = (selectIndex - 1)*3
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -296,6 +283,11 @@ export default {
     },
   },
   mounted() {
+     var userInfo = JSON.parse(sessionStorage.getItem("user")),
+      that = this;
+    if (userInfo) {
+      this.userName = userInfo.name;
+    }
     this.getNotPayOrderList(1);
   }
 };
@@ -338,6 +330,7 @@ export default {
   width: 141px;
   height: 141px;
   margin: 0px 0px 0px 10px;
+  object-fit:cover;
 }
 .order-picture {
   height: 162px;
@@ -345,22 +338,22 @@ export default {
   background-color: #f4f4f4;
 }
 .order-detail {
-  font-size: 17px;
-  margin: 10px 0px 0px 0px;
+  font-size: 16px;
+  margin: 0px 0px 0px 0px;
   color: #333;
-  height: 85px;
+  height: 100px;
 }
 .order-time {
   text-align: left;
   margin: 0px 10px 0px 0px;
   font-size: 13px;
-  color: #333;
+  color: #888;
 }
 .order-num {
   text-align: left;
   margin: 5px 10px 0px 0px;
   font-size: 13px;
-  color: #333;
+  color: #888;
 }
 .order-pay {
   height: 50px;
@@ -451,6 +444,13 @@ export default {
   font-size: 14px;
   color: #67c23a;
 }
+.choose-bank {
+  border-bottom: solid 1px #eee;
+  width: 860px;
+  margin: 0px -40px 0px 0px;
+  font-size: 14px;
+  color: #E6A23C;
+}
 .pay-zhifubao {
   margin: 25px 0px 80px 0px;
 }
@@ -515,8 +515,8 @@ export default {
   font-size: 14px;
 }
 .agreement-con {
-  padding: 50px 0px 0px 0px;
-  text-align: right;
+  padding: 0px 0px 0px 0px;
+  text-align: left;
 }
 .agreement {
   cursor: pointer;
@@ -526,10 +526,11 @@ export default {
   width: 120px;
   height: 68px;
 }
-.pay-price-btn_price {
+.pay-price-btn_price2 {
   text-align: right;
-  margin-bottom: 5px;
+  margin: 28px 0px 0px 0px;
 }
+
 .pay-price-btn_btn {
   cursor: pointer;
   display: inline-block;
@@ -556,15 +557,11 @@ export default {
   font-weight: 300;
   font-size: 14px;
 }
-.offline-context {
-  margin: 20px 0px 0px 0px;
-}
 
 .offline-context p {
   font-family: "微软雅黑";
-
+  font-size:12px;
   padding: 0px;
-  margin: 5px 0px;
 }
 .offline-notice {
   font-family: "微软雅黑";
@@ -616,6 +613,27 @@ export default {
   margin: 20px 0px 0px 0px;
   color: #999;
   font-size: 18px;
+}
+.pay-weixin {
+  margin: 0px 0px 15px 0px;
+}
+.margin_height {
+  font-size:8px;
+  line-height: 8px;
+  height:8px;
+}
+.bank_pay {
+  margin:28px 0px 0px 0px;
+}
+</style>
+<style>
+#payNow .el-dialog__header {
+    padding: 0px 20px 10px;
+}
+#payNow .el-dialog__body {
+    padding: 0px 20px 30px 20px;
+    color: #606266;
+    font-size: 14px;
 }
 </style>
 

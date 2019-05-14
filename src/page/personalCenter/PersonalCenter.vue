@@ -51,13 +51,13 @@
             <span slot="title">企业认证</span>
           </el-menu-item>
 
-          <el-menu-item index="/PersonalCenter/PersonalCenterReport">
+          <!-- <el-menu-item index="/PersonalCenter/PersonalCenterReport">
             <i class="el-icon-message"></i>
             <div class="report-con">
               <span slot="title">统计汇报</span>
             </div>
             <el-badge :value="1" :hidden="false" class="item"></el-badge>
-          </el-menu-item>
+          </el-menu-item> -->
           <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
             <i class="el-icon-printer"></i>
             <span slot="title">证书查询</span>

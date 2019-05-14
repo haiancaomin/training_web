@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="oneAdd" class="form-body">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" id="form_box">
         <el-form-item prop="empname">
           <el-input
             v-model="ruleForm.empname"
@@ -389,10 +389,10 @@ export default {
 }
 </style>
 <style>
-.person-add-input .el-input__inner {
+#form_box .person-add-input .el-input__inner {
   height: 44px;
 }
-.person-add-select .el-input__inner {
+#form_box .person-add-select .el-input__inner {
   height: 44px;
 }
 </style>
