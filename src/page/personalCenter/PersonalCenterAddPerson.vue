@@ -146,6 +146,7 @@ export default {
         ],
         sex: [{ required: true, message: "请选择性别", trigger: "blur" }],
         age: [{ required: true, message: "年龄不能为空", trigger: "blur" }],
+        education: [{ required: true, message: "请选择学历", trigger: "blur" }],
         worktype: [
           { required: true, message: "请输入工种", trigger: "blur" },
           { min: 1, max: 5, message: "长度在 1 到 5个字符", trigger: "blur" }

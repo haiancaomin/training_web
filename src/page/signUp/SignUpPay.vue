@@ -7,7 +7,7 @@
             <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
             <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
-          <el-button type="primary" class="sign-submit" @click="showTable=false">确认</el-button>
+          <el-button type="primary" class="sign-submit1" @click="showTable=false">确认</el-button>
         </el-dialog>
         <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" center>用户付费协议文案</el-dialog>
 
@@ -109,10 +109,10 @@
                 </template>
                 <div class="more_info">
                   <div class="more_info_up">
-                <el-col :span="5">
+                <el-col :span="4">
                 <div>预计考试时间</div>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="4">
                 <div>预计开课时间</div>
                 </el-col>
                 <el-col :span="4">
@@ -121,16 +121,19 @@
                 <el-col :span="6">
                 <div>考试地点</div>
                 </el-col>
+                <el-col :span="2">
+                <div>单价</div>
+                </el-col>
                 <el-col :span="4">
                 <div>查看人员</div>
                 </el-col>
                   </div>
 
                  <div class="more_info_down">
-                <el-col :span="5">
+                <el-col :span="4">
                 <div class="down_cell">{{orderItem.examtime}}</div>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="4">
                 <div class="down_cell">{{orderItem.traintime}}</div>
                 </el-col>
                 <el-col :span="4">
@@ -143,6 +146,9 @@
                             <h3>{{orderItem.examaddress}}</h3>
                           </el-tooltip>
                 </div>
+                </el-col>
+                <el-col :span="2">
+                <div class="down_cell">{{orderItem.price}}</div>
                 </el-col>
                 <el-col :span="4">
                 <div class="down_cell">
@@ -168,7 +174,7 @@
             <el-col :span="6">
               <div class="pay-price-btn f-fr">
                 <div class="pay-price-btn_price">
-                  <span class="price_title">实付:</span>
+                  <span class="price_title">待付款:</span>
                   <span class="price_account">
                     <span class="price_account_icon">￥</span>
                     {{orderDetail.summoney}}
@@ -193,7 +199,7 @@
             <el-col :span="6">
               <div class="pay-price-btn f-fr">
                 <div class="pay-price-btn_price">
-                  <span class="price_title">实付:</span>
+                  <span class="price_title">待付款:</span>
                   <span class="price_account">
                     <span class="price_account_icon">￥</span>
                     {{orderDetail.summoney}}
@@ -527,6 +533,9 @@ export default {
 }
 .sign-submit {
   margin: 30px 50px 0px 50px;
+}
+.sign-submit1 {
+  margin: 30px 0px 0px 190px;
 }
 .more_info {
   text-align: center; 

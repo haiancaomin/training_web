@@ -6,6 +6,7 @@ import SignUp from '@/page/signUp/SignUp'
 import CompanySignUp from '@/page/signUp/CompanySignUp'
 import SchoolSignUp from '@/page/signUp/SchoolSignUp'
 import PersonalSignUp from '@/page/signUp/PersonalSignUp'
+import TeamSignUp from '@/page/signUp/TeamSignUp'
 import Accounts from '@/page/signUp/Accounts'
 import SignUpPay from '@/page/signUp/SignUpPay'
 import SignUpSuccess from '@/page/signUp/SignUpSuccess'
@@ -88,6 +89,11 @@ export default new Router({
         path: '/PersonalSignUp',
         name: 'PersonalSignUp',
         component: PersonalSignUp
+      },
+      {
+        path: '/TeamSignUp',
+        name: 'TeamSignUp',
+        component: TeamSignUp
       },
       {
         path: '/Accounts',

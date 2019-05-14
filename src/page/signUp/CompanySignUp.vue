@@ -539,7 +539,7 @@
           <el-col :span="24">
             <div class="nextPage1-batch">
               <el-form-item>
-                <el-button type="primary" @click.prevent="submitForm('ruleForm')">下一步</el-button>
+                <el-button type="primary" @click.prevent="submitForm1('ruleForm')">下一步</el-button>
               </el-form-item>
             </div>
           </el-col>
@@ -660,7 +660,7 @@ this.centerDialogVisible4 = true;
         });
       } 
     },
-    submitForm(formName) {
+    submitForm1(formName) {
 
       var from1Empty = 0;
       var from2Empty = 0;
@@ -724,6 +724,7 @@ this.centerDialogVisible4 = true;
           active: this.active
         });
         this.bus.$emit("todata", {
+          type: "1",
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,

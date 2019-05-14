@@ -22,9 +22,16 @@
 
         <!-- 个人报名 -->
         <el-tab-pane label="个人报名">
-          <personal-signUp></personal-signUp>
+          <personal-signUp v-on:ToAccountsPage="gotoAccountsPage"></personal-signUp>
+        </el-tab-pane>
+
+        <!-- 团队报名 -->
+        <el-tab-pane label="团队报名">
+          <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
         </el-tab-pane>
       </el-tabs>
+
+      
     </div>
 
     <!-- 考试信息选择页面 -->
@@ -50,6 +57,7 @@
 import CompanySignUp from "@/page/signUp/CompanySignUp";
 import SchoolSignUp from '@/page/signUp/SchoolSignUp';
 import PersonalSignUp from '@/page/signUp/PersonalSignUp';
+import TeamSignUp from '@/page/signUp/TeamSignUp'
 import Accounts from '@/page/signUp/Accounts';
 import SignUpPay from '@/page/signUp/SignUpPay';
 import SignUpSuccess from '@/page/signUp/SignUpSuccess';
@@ -61,6 +69,7 @@ export default {
     CompanySignUp,
     SchoolSignUp,
     PersonalSignUp,
+    TeamSignUp,
     Accounts,
     SignUpPay,
     SignUpSuccess,
