@@ -182,7 +182,7 @@ export default {
           center: true
         });
         return false; 
-      } else if(file.name.split(".")[1] != "xlsx") {
+      } else if(file.name.split(".")[file.name.split(".").length-1] != "xlsx") {
         this.$message({
           message: "请使用模板文件上传！",
           center: true

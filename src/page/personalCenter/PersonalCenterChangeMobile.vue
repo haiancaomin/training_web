@@ -121,7 +121,7 @@ export default {
           center: true
         });
         return false;
-      } else if(file.name.split(".")[1] != "jpg"&&file.name.split(".")[1] != "png") {
+      } else if(file.name.split(".")[file.name.split(".").length-1] != "jpg"&&file.name.split(".")[file.name.split(".").length-1] != "png") {
         this.$message({
           message: "只能上传jpg/png文件",
           center: true
