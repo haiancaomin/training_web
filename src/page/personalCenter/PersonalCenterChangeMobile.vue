@@ -27,6 +27,8 @@
               :on-success="uploadSuccess"
               :on-remove="removeUpload"
               :on-exceed="noticeOut"
+              :before-upload="checkSize"
+               accept=".jpg,.png"
               :limit="2"
               multiple
             >
@@ -36,6 +38,7 @@
                 <em>法人身份照扫描件</em>和
                 <em>营业执照扫描件</em>
               </div>
+              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
             </el-upload>
           </div>
         </el-form-item>
@@ -111,6 +114,21 @@ export default {
     }
   },
   methods: {
+    checkSize(file) {
+      if (file.size / 1024 > 1024) {
+        this.$message({
+          message: "文件不能大于1MB！",
+          center: true
+        });
+        return false;
+      } else if(file.name.split(".")[1] != "jpg"&&file.name.split(".")[1] != "png") {
+        this.$message({
+          message: "只能上传jpg/png文件",
+          center: true
+        });
+        return false;
+      }
+    },
     changeMobileAgain() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -138,13 +156,12 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
-      console.log(file);
-      console.log(fileList);
+     
     },
     removeUpload(file, fileList) {
-      console.log(file.response.data);
-      console.log(fileList);
-      this.splitFileUid(file.response.data);
+      if (file.response) {
+        this.splitFileUid(file.response.data);
+      }
     },
     noticeOut(files, fileList) {
       this.$message({
@@ -248,6 +265,9 @@ export default {
 }
 .el-breadcrumb {
   background: #e4e7ed;
+}
+.el-upload__tip {
+  margin: 0px 0px 0px 80px;
 }
 .input-input {
   border: 1px solid #c5cddb;

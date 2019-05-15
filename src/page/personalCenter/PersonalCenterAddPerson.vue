@@ -177,13 +177,20 @@ export default {
   methods: {
     checkSize(file) {
       if (file.size / 1024 > 100) {
-        return false;
         this.$message({
           message: "文件不能大于100kb！",
           center: true
         });
+        return false; 
+      } else if(file.name.split(".")[1] != "xlsx") {
+        this.$message({
+          message: "请使用模板文件上传！",
+          center: true
+        });
+        return false;
       }
     },
+
     uploadError(err, file, fileList) {
       this.$message({
         message: "请使用模板文件上传！",
