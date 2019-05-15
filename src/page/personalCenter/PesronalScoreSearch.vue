@@ -3,13 +3,7 @@
     <div class="order-dialog">
       <el-dialog :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
         <div class="certificate">
-          <div>{{acceptdate}}</div>
-          <div>{{cardnoResult}}</div>
-          <div>{{courseid}}</div>
-          <div>{{coursename}}</div>
-          <div>{{empname}}</div>
-          <div>{{zsid}}</div>
-          <div>{{ispass}}</div>
+          <img :src="pictueUrl" alt>
         </div>
       </el-dialog>
     </div>
@@ -50,13 +44,7 @@ export default {
     return {
       showCertificateDialog: false,
       countFocus: 0,
-      acceptdate: "",
-      cardnoResult: "",
-      courseid: "",
-      coursename: "",
-      empname: "",
-      zsid: "",
-      ispass: "",
+      pictueUrl:"",
       ruleForm: {
         name: "",
         cardno: ""
@@ -92,13 +80,7 @@ export default {
             .then(res => {
               if (res.data.data != false) {
                 console.log(res.data.data);
-                this.acceptdate = res.data.data.acceptdate;
-                this.cardnoResult = res.data.data.cardno;
-                this.courseid = res.data.data.courseid;
-                this.coursename = res.data.data.coursename;
-                this.empname = res.data.data.empname;
-                this.zsid = res.data.data.zsid;
-                this.ispass = res.data.data.ispass;
+                this.pictueUrl = res.data.data
                 this.showCertificateDialog = true;
               } else {
                 this.$message({

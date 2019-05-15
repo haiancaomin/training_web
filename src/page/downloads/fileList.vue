@@ -155,6 +155,7 @@ export default {
 }
 .xls_icon {
   color:#67C23A;
+  font-size:16px;
 }
 .download_icon {
   line-height: 14px;

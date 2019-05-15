@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       showNewPassword: false,
-       showNewPassword2: false,
+      showNewPassword2: false,
       inputType: "password",
       inputType2: "password",
       iconColor: "",
@@ -119,12 +119,19 @@ export default {
           }&code=${this.ruleForm.verificationCode}`
         })
           .then(res => {
-            this.checkAgain = false;
-            this.$message({
-              message: "修改成功！",
-              center: true
-            });
-            this.ruleForm = {};
+            if (res.data.data == 0) {
+              this.checkAgain = false;
+              this.$message({
+                message: "修改成功！",
+                center: true
+              });
+              this.ruleForm = {};
+            } else {
+              this.$message({
+                message: "验证码错误！",
+                center: true
+              });
+            }
           })
           .catch(function(err) {
             console.log(err);
@@ -135,22 +142,18 @@ export default {
       if (this.inputType == "text") {
         this.inputType = "password";
         this.showNewPassword = false;
-       
       } else {
         this.inputType = "text";
         this.showNewPassword = true;
-       
       }
     },
     changeType2() {
       if (this.inputType2 == "text") {
         this.inputType2 = "password";
         this.showNewPassword2 = false;
-       
       } else {
         this.inputType2 = "text";
         this.showNewPassword2 = true;
-       
       }
     },
     getCode() {
@@ -263,10 +266,10 @@ export default {
   position: absolute;
   font-size: 18px;
   margin: -42px 0px 0px 508px;
-  -webkit-user-select:none;
-   -moz-user-select:none;
-   -ms-user-select:none;
-   user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .input-icon:hover {
   color: #409eff;

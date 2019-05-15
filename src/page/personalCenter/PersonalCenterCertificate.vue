@@ -1,13 +1,9 @@
 <template>
   <div id="PersonalCenterCertificate">
     <el-dialog :visible.sync="showCertificateDialog" width="1000px">
-      <div class="print">
-        <span class="el-icon-printer"></span>
-        <span>打印</span>
-      </div>
+    
       <div class="certificate">
-        <div>{{cardno}}</div>
-        <div>{{name}}</div>
+        <img :src="pictueUrl" alt>
       </div>
     </el-dialog>
     <div class="crumb">
@@ -31,7 +27,7 @@
         <el-table-column label="序号" type="index" width="50"></el-table-column>
         <el-table-column prop="cardno" label="身份证号" width="170"></el-table-column>
         <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-        <el-table-column prop="coursename" label="通过课程" width="100"></el-table-column>
+        <el-table-column prop="coursename" label="通过课程" width="300"></el-table-column>
         <el-table-column prop="ispass" label="是否通过" width="100"></el-table-column>
         <el-table-column prop="acceptdate" label="获取时间" width="180"></el-table-column>
         <el-table-column fixed="right" label="证书查询" width="90">
@@ -55,8 +51,7 @@ export default {
   data() {
     return {
       showCertificateDialog: false,
-      cardno: "",
-      name: "",
+      pictueUrl:"",
       searchKey: "",
       ruleForm1: {
         keyWord: ""
@@ -72,13 +67,21 @@ export default {
         url: `${this.baseURL}/zjsxpt/invoice_getCertificateById.do?zsid=${zsid}`
       })
         .then(res => {
-          this.cardno = res.data.data[0];
-          this.name = res.data.data[1];
+          if (res.data.data != false) {
+
+                this.pictueUrl = res.data.data
+                this.showCertificateDialog = true;
+              } else {
+                this.$message({
+                  message: "接口异常！",
+                  center: true
+                });
+              }
         })
         .catch(function(err) {
           console.log(err);
         });
-      this.showCertificateDialog = true;
+      
     },
     submitForm(formName, searchKey) {
       this.getCertificateList(searchKey);
@@ -139,15 +142,7 @@ export default {
   text-align: center;
   margin: 20px 0px 0px 0px;
 }
-.print {
-  font-size: 18px;
-  margin: 0px 0px 20px 90px;
-}
-.print:hover {
-  font-size: 18px;
-  color: #409eff;
-  cursor: pointer;
-}
+
 .certificate {
   margin: 0px auto;
   height: 1000px;
