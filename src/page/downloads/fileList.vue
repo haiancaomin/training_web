@@ -5,9 +5,10 @@
       <ul class="file-box">
         <li v-for="(item,key) in fileLists.data" :key="key" class="clearfix">
           <div>
-          <span v-if="item.name.split('.')[1] == 'doc'||item.name.split('.')[1] == 'docx'"><i class="iconfont doc_icon">&#xe64e;</i></span>
-          <span v-if="item.name.split('.')[1] == 'pdf'"><i class="iconfont pdf_icon">&#xe740;</i></span>
-          <a :href="item.fileurl" download>{{item.name.split('.')[0]}}</a>
+          <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'doc'||item.name.split('.')[item.name.split('.').length-1] == 'docx'"><i class="iconfont doc_icon">&#xe64e;</i></span>
+          <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'pdf'"><i class="iconfont pdf_icon">&#xe740;</i></span>
+          <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'xls'||item.name.split('.')[item.name.split('.').length-1] == 'xlsx'"><i class="iconfont xls_icon">&#xe615;</i></span>
+          <a :href="item.fileurl" download>{{item.name}}</a>
           </div>
           <div class="update_date">
             <span class="date">更新时间：{{item.createdate}}</span>
@@ -130,12 +131,12 @@ export default {
 }
 @font-face {
   font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.eot');
-  src: url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_aqgbpfdqk5t.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.eot');
+  src: url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_fbkfz3vz02m.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -151,6 +152,9 @@ export default {
 }
 .doc_icon {
   color:#409EFF;
+}
+.xls_icon {
+  color:#67C23A;
 }
 .download_icon {
   line-height: 14px;

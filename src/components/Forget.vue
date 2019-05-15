@@ -1,12 +1,6 @@
 <template>
-  <div id="PersonalPassword">
-    <div class="crumb">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalPassword' }">账户信息</el-breadcrumb-item>
-        <el-breadcrumb-item>修改密码</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+  <div id="Forget">
+     <h1 class="file-title">忘记密码</h1>
     <div class="PersonalPassword-change">
       <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm" id="loginForm">
         <el-form-item prop="newPassword">
@@ -32,6 +26,12 @@
             <i class="iconfont" v-if="showNewPassword2">&#xe76c;</i>
             <i class="iconfont" v-if="!showNewPassword2">&#xe604;</i>
           </div>
+        </el-form-item>
+
+        <el-form-item prop="phone">
+          <el-input placeholder="请输入注册手机号" v-model="ruleForm.phone">
+            <i slot="prefix" class="iconfont">&#xe745;</i>
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="verificationCode">
@@ -61,16 +61,14 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "PersonalPassword",
   data() {
     return {
       showNewPassword: false,
-       showNewPassword2: false,
+      showNewPassword2: false,
       inputType: "password",
-      inputType2: "password",
+      inputType2:"password",
       iconColor: "",
       show: true,
       input21: "",
@@ -79,9 +77,13 @@ export default {
       ruleForm: {
         newPassword: "",
         reNewPassword: "",
+        phone: "",
         verificationCode: ""
       }
     };
+  },
+  mounted() {
+    document.getElementById("newPassword1").focus();
   },
   methods: {
     reNewPassword() {
@@ -135,22 +137,18 @@ export default {
       if (this.inputType == "text") {
         this.inputType = "password";
         this.showNewPassword = false;
-       
       } else {
         this.inputType = "text";
         this.showNewPassword = true;
-       
       }
     },
     changeType2() {
       if (this.inputType2 == "text") {
         this.inputType2 = "password";
         this.showNewPassword2 = false;
-       
       } else {
         this.inputType2 = "text";
         this.showNewPassword2 = true;
-       
       }
     },
     getCode() {
@@ -183,26 +181,32 @@ export default {
           console.log(err);
         });
     }
-  },
-  mounted: function() {
-    document.getElementById("newPassword1").focus();
   }
 };
 </script>
 
 <style scoped>
-#PersonalPassword {
-  width: 730px;
-
+#Forget {
+  width: 1000px;
+  margin: 0px auto;
   box-shadow: 0 0 2px #c7c5c5;
-  background: #fffffd;
+  background: #fff;
   border: 1px solid #e7e7e7;
-  margin: 0px 0px 0px 20px;
-  padding: 0px 0px 20px 0px;
+  padding: 0px 30px 30px 30px;
+  margin-top:80px;
 }
-
+.file-title {
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #e4e7ed;
+  background: #e4e7ed;
+  padding: 0 15px;
+  border-radius: 3px;
+  border-left: 2px solid #409eff;
+  margin:20px 0px 0px 0px;
+}
 .PersonalPassword-change {
-  margin: 40px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
   text-align: center;
 }
 
@@ -235,20 +239,6 @@ export default {
   text-align: center;
 }
 
-.crumb {
-  padding: 10px 0px 10px 0px;
-  font-size: 20px;
-  text-align: left;
-  margin: 20px;
-  border-left: 2px solid #409eff;
-  line-height: 40px;
-  padding-left: 15px;
-  background: #e4e7ed;
-}
-.el-breadcrumb {
-  background: #e4e7ed;
-}
-
 .input-input {
   border: 1px solid #c5cddb;
   width: 358px;
@@ -262,7 +252,7 @@ export default {
 .input-icon {
   position: absolute;
   font-size: 18px;
-  margin: -42px 0px 0px 508px;
+  margin: -42px 0px 0px 608px;
   -webkit-user-select:none;
    -moz-user-select:none;
    -ms-user-select:none;
@@ -330,7 +320,6 @@ export default {
   height: 44px;
 }
 </style>
-
 
 
 

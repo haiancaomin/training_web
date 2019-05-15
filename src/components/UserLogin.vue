@@ -46,7 +46,7 @@
           >登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
         </el-form-item>
       </el-form>
-      <a class="forgetpwd" href="#">忘记密码？</a>
+      <span class="forgetpwd" @click="gotoForget">忘记密码？</span>
       <a class="register" href="javascript:;" @click="clickRegister">
         去注册
         <span class="el-icon-arrow-right"></span>
@@ -79,7 +79,7 @@ export default {
       rules: {
         name: [
           { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
+          { min: 2, max: 5, message: "长度在 2 到 30 个字符", trigger: "blur" }
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
@@ -139,6 +139,10 @@ export default {
     }
   },
   methods: {
+    gotoForget() {
+      this.logshow = false;
+      this.$router.push({ path: `/Forget` });
+    },
     mousedownFn: function(e) {
       if (!this.confirmSuccess) {
         e.preventDefault && e.preventDefault(); //阻止文字选中等 浏览器默认事件
@@ -335,7 +339,7 @@ a {
 .forgetpwd {
   color: darkgrey;
   font-size: 12px;
-
+  cursor: pointer;
   margin: 0px 90px 0px 0px;
 }
 .register {
@@ -355,6 +359,10 @@ a {
   position: absolute;
   font-size: 18px;
   margin: -42px 0px 0px 320px;
+  -webkit-user-select:none;
+   -moz-user-select:none;
+   -ms-user-select:none;
+   user-select:none;
 }
 
 .el-icon-view {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import TopNav from '@/components/TopNav'
+import Forget from '@/components/Forget'
 import Index from '@/page/Index'
 import SignUp from '@/page/signUp/SignUp'
 import CompanySignUp from '@/page/signUp/CompanySignUp'
@@ -56,6 +57,11 @@ export default new Router({
       }, {
         path: '/index',
         component: Index
+      },
+      {
+        path: '/Forget',
+        name: 'Forget',
+        component: Forget
       },
       {
         path: 'PersonalCenterOrderDetail/:orderid',
