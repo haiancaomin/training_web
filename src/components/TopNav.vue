@@ -23,9 +23,17 @@
         <span>登录/注册</span>
       </div>
       <div class="login-self-success" v-if="showUser">
-        欢迎回来，
-        <span>{{userName}}</span>
-        <a href="javascript:;" class="logout" @click="logOut">退出</a>
+        <el-dropdown :show-timeout=0 :hide-timeout=500 @command="handleCommand">
+          <div class="underline_text">
+      <span class="el-dropdown-link">
+        欢迎回来，{{userName}}
+      </span>
+          </div>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="personalCenter">个人中心</el-dropdown-item>
+        <el-dropdown-item command="logOut">注销</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
       </div>
 
       <el-menu
@@ -92,6 +100,13 @@ export default {
     }
   },
   methods: {
+    handleCommand(command) {
+        if(command=="logOut") {
+          this.logOut();
+        } else if (command=="personalCenter") {
+          this.$router.push({ path: `/PersonalCenter/PersonalCenterAllOrder` });
+        }
+      },
     addUserInfo() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -182,10 +197,18 @@ export default {
 .login-self:hover {
   color: #ffd04b;
 }
-.login-self-success {
+.login-self-success{
   float: left;
   margin: 0px 0px 0px 40px;
   color: #fff;
+}
+.el-dropdown-link:hover{
+  color: #ffd04b;
+}
+.el-dropdown-link {
+   color: #fff;
+   cursor: pointer;
+   text-decoration : underline ;
 }
 .logout{
   color:rgb(255, 208, 75);
