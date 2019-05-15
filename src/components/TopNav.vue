@@ -25,6 +25,7 @@
       <div class="login-self-success" v-if="showUser">
         欢迎回来，
         <span>{{userName}}</span>
+        <a href="javascript:;" class="logout" @click="logOut">退出</a>
       </div>
 
       <el-menu
@@ -124,6 +125,11 @@ export default {
     logOK: function(msg) {
       this.showUser = msg.showUser;
       this.userName = msg.user;
+    },
+    logOut:function(){
+      sessionStorage.removeItem('user');
+      this.$router.push({ path: '/index' });
+      location.reload()
     }
   }
 };
@@ -180,5 +186,9 @@ export default {
   float: left;
   margin: 0px 0px 0px 40px;
   color: #fff;
+}
+.logout{
+  color:rgb(255, 208, 75);
+  margin-left: 10px;
 }
 </style>
