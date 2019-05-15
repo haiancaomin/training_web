@@ -18,6 +18,7 @@ export default {
 }
 body,
 div,
+pre,
 span,
 header,
 footer,

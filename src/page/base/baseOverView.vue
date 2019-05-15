@@ -5,15 +5,12 @@
       <el-carousel :interval="4000" type="card" class="overview-box">
         <el-carousel-item v-for="(item,key) in baseOverView.pictureUrl" :key="key">
           <img :src="item" class="overview-img">
-          <!-- <div class="title">TFBOYS成员、男歌手、舞者、演员</div>
-            <div class="name">易烊千玺</div>
-          <p class="detail">2005年首登电视荧屏，开始参演各类综艺节目</p>-->
         </el-carousel-item>
       </el-carousel>
     </el-row>
-    <div
-      class="base-content base-show-intro"
-    >{{baseOverView.summary}}</div>
+    <div class="base-content">
+      <pre>{{baseOverView.summary}}</pre>
+    </div>
   </div>
 </template>
 <script>
@@ -23,12 +20,12 @@ export default {
       baseOverView: {}
     };
   },
-  props:['id'],
+  props: ["id"],
   mounted() {
     this.getBaseInfoById();
   },
-  watch:{
-    id:function(){
+  watch: {
+    id: function() {
       this.getBaseInfoById();
     }
   },
@@ -50,6 +47,10 @@ export default {
 </script>
 
 <style scoped>
+pre {
+  white-space: pre-wrap;
+  text-align: justify;
+}
 .base-box {
   margin-left: 30px;
   flex: 1;
@@ -59,12 +60,8 @@ export default {
 }
 .base-intro {
   font-size: 17px;
-  height:70px;
+  height: 70px;
   line-height: 70px;
-}
-.base-show-intro{
-  text-indent: 30px;
-  line-height: 25px;
 }
 .overview-box {
   position: relative;

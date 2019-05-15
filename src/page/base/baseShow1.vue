@@ -8,7 +8,9 @@
             <img :src="item" class="base-intro-pic">
           </swiper-slide>
         </swiper>
-        <div class="base-content base-show-intro">{{baseInfo.summary}}</div>
+        <div class="base-content">
+          <pre>{{baseInfo.summary}}</pre>
+        </div>
       </el-collapse-item>
       <el-collapse-item
         :title="item.areaname"
@@ -25,7 +27,7 @@
         <div class="guanjiang-content">
           <!-- <h1>Title</h1>
           <h2>Subtitle</h2>-->
-          {{item.area_summary}}
+          <pre>{{item.area_summary}}</pre>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -104,6 +106,10 @@ export default {
 </script>
 
 <style scoped>
+pre {
+  white-space: pre-wrap;
+  text-align: justify;
+}
 .base-box {
   margin-left: 30px;
   flex: 1;
@@ -122,10 +128,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.base-show-intro {
-  text-indent: 30px;
-  line-height: 25px;
-}
+
 .guanjiang-pic {
   width: 100%;
   height: 300px;
@@ -144,7 +147,7 @@ export default {
 .guanjiang-content h2 {
   font-size: 14px;
 } */
-.guanjiang-content{
+.guanjiang-content {
   padding: 5px 10px;
 }
 .clearfix:after {
