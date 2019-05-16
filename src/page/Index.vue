@@ -6,7 +6,7 @@
           <i class="el-icon-arrow-down"></i>
         </div>
         <div class="login-sign">
-          <div class="logo">
+          <div class="logo"> 
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
           </div>
@@ -151,9 +151,9 @@
           </div>
           <el-row class="no-margin-b">
             <div class="index-friend">
-              <a href="http://www.zhongnangroup.cn" target="_blank">
+              <a href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx" target="_blank">
                 <img
-                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
+                  src="../assets/zhiliangxiehui.png"
                   alt
                   class="friend-img"
                 >
@@ -161,23 +161,23 @@
 
               <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
                 <img
-                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
+                  src="../assets/guojiazhongxin.png"
                   alt
                   class="friend-img"
                 >
               </a>
 
-              <a href="http://www.tjprefab.com.cn" target="_blank">
+              <a href="http://tjprefab.com.cn/" target="_blank">
                 <img
-                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
+                  src="../assets/tongjilvjian.png"
                   alt
                   class="friend-img"
                 >
               </a>
 
-              <a href="http://www.ntadi.cc/index.html" target="_blank">
+              <a href="http://www.ntadi.cc/" target="_blank">
                 <img
-                  src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
+                  src="../assets/nantongshiyuan.png"
                   alt
                   class="friend-img-last"
                 >

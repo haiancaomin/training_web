@@ -69,6 +69,11 @@ export default new Router({
         props: true
       },
       {
+        path: 'InspectionDetail/:eid',
+        component: InspectionDetail,
+        props: true
+      },
+      {
         path: '/SignUp',
         name: 'SignUp',
         component: SignUp,
@@ -184,9 +189,6 @@ export default new Router({
       }, {
         path: '/Inspection',
         component: Inspection
-      }, {
-        path: '/InspectionDetail',
-        component: InspectionDetail
       }, {
         path: '/PersonalCenter',
         component: PersonalCenter

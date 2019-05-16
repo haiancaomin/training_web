@@ -84,6 +84,9 @@
         </el-tab-pane>
         <el-tab-pane label="施工类" name="1">
           <el-row :gutter="20" class="bottom-line" v-for="(val,key) in workCourseLists" :key="key">
+            <div v-if="workCourseLists">
+              ss
+            </div>
             <el-col :span="7">
               <div class="grid-content">
                 <img
