@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="index-body">
-      <div class="company-show">
+      <div class="company-show" :style="{backgroundImage:'url(' + picurl + ')'}">
         <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
           <i class="el-icon-arrow-down"></i>
         </div>
         <div class="login-sign">
-          <div class="logo"> 
+          <div class="logo">
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
           </div>
@@ -151,36 +151,23 @@
           </div>
           <el-row class="no-margin-b">
             <div class="index-friend">
-              <a href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx" target="_blank">
-                <img
-                  src="../assets/zhiliangxiehui.png"
-                  alt
-                  class="friend-img"
-                >
+              <a
+                href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx"
+                target="_blank"
+              >
+                <img src="../assets/zhiliangxiehui.png" alt class="friend-img">
               </a>
 
               <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
-                <img
-                  src="../assets/guojiazhongxin.png"
-                  alt
-                  class="friend-img"
-                >
+                <img src="../assets/guojiazhongxin.png" alt class="friend-img">
               </a>
 
               <a href="http://tjprefab.com.cn/" target="_blank">
-                <img
-                  src="../assets/tongjilvjian.png"
-                  alt
-                  class="friend-img"
-                >
+                <img src="../assets/tongjilvjian.png" alt class="friend-img">
               </a>
 
               <a href="http://www.ntadi.cc/" target="_blank">
-                <img
-                  src="../assets/nantongshiyuan.png"
-                  alt
-                  class="friend-img-last"
-                >
+                <img src="../assets/nantongshiyuan.png" alt class="friend-img-last">
               </a>
             </div>
           </el-row>
@@ -203,6 +190,7 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
+      picurl:"",
       courseList: [],
       baseList: []
     };
@@ -213,7 +201,14 @@ export default {
       return this.$refs.mySwiper.swiper;
     }
   },
+  // watch: {
+  //   picurl: function(val) {
+  //     alert(val);
+  //     this.picurl = val;
+  //   }
+  // },
   mounted() {
+    this.getIndexPicture();
     this.initMap();
     var that = this;
     window.addEventListener("scroll", function() {
@@ -231,6 +226,19 @@ export default {
     this.getBaseList();
   },
   methods: {
+    getIndexPicture() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_findIndexPic.do`
+      })
+        .then(res => {
+          this.picurl = res.data.picurl;
+          console.log(res.data);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getBaseList() {
       this.$ajax({
         method: "get",
@@ -745,7 +753,7 @@ body > .el-container {
   width: 286px;
   border: solid 1px #eee;
   margin: 0px 20px 0px 0px;
-    object-fit:scale-down
+  object-fit: scale-down;
 }
 .friend-img-last {
   height: 80px;
@@ -784,9 +792,8 @@ body > .el-container {
 
   width: 100%;
 
-  background: url(../assets/company.jpg) no-repeat;
+  /* background: url(../assets/company.jpg) no-repeat; */
   background-size: 100% 810px;
-
 }
 
 .login-sign {
@@ -959,7 +966,7 @@ body > .el-container {
 .course-show-img {
   width: 100%;
   height: 100%;
- 
+
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {
@@ -1111,8 +1118,8 @@ body > .el-container {
     bottom: 30px;
   }
 }
-.beian{
-  color:#fff;
+.beian {
+  color: #fff;
 }
 </style>
 

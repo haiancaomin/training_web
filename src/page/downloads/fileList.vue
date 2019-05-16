@@ -8,7 +8,7 @@
           <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'doc'||item.name.split('.')[item.name.split('.').length-1] == 'docx'"><i class="iconfont doc_icon">&#xe64e;</i></span>
           <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'pdf'"><i class="iconfont pdf_icon">&#xe740;</i></span>
           <span v-if="item.name.split('.')[item.name.split('.').length-1] == 'xls'||item.name.split('.')[item.name.split('.').length-1] == 'xlsx'"><i class="iconfont xls_icon">&#xe615;</i></span>
-          <a :href="item.fileurl" download>{{item.name}}</a>
+          <a :href="item.fileurl" target="_blank">{{item.name}}</a>
           </div>
           <div class="update_date">
             <span class="date">更新时间：{{item.createdate}}</span>
