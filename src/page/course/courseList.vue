@@ -3,13 +3,11 @@
     <div class="course-container">
       <el-tabs type="border-card" stretch @tab-click="handleClick" v-model="activeNames[0]">
         <el-tab-pane label="生产类" name="0">
+          <el-row v-if="prodCourseLists.length==0" class="no-data">暂无数据</el-row>
           <el-row :gutter="20" class="bottom-line" v-for="(val,key) in prodCourseLists" :key="key">
             <el-col :span="7">
               <div class="grid-content">
-                <img
-                  :src="val.picurl"
-                  class="full-width"
-                >
+                <img :src="val.picurl" class="full-width">
               </div>
             </el-col>
             <el-col :span="17">
@@ -83,16 +81,12 @@
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="施工类" name="1">
+          <el-row v-if="workCourseLists.length==0" class="no-data">暂无数据</el-row>
+
           <el-row :gutter="20" class="bottom-line" v-for="(val,key) in workCourseLists" :key="key">
-            <div v-if="workCourseLists">
-              ss
-            </div>
             <el-col :span="7">
               <div class="grid-content">
-                <img
-                  :src="val.picurl"
-                  class="full-width"
-                >
+                <img :src="val.picurl" class="full-width">
               </div>
             </el-col>
             <el-col :span="17">
@@ -167,13 +161,17 @@
         </el-tab-pane>
 
         <el-tab-pane label="设计类" name="2">
-          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in designCourseLists" :key="key">
+          <el-row v-if="designCourseLists.length==0" class="no-data">暂无数据</el-row>
+
+          <el-row
+            :gutter="20"
+            class="bottom-line"
+            v-for="(val,key) in designCourseLists"
+            :key="key"
+          >
             <el-col :span="7">
               <div class="grid-content">
-                <img
-                  :src="val.picurl"
-                  class="full-width"
-                >
+                <img :src="val.picurl" class="full-width">
               </div>
             </el-col>
             <el-col :span="17">
@@ -247,13 +245,17 @@
           </el-row>
         </el-tab-pane>
         <el-tab-pane label="校园课程" name="3">
-          <el-row :gutter="20" class="bottom-line" v-for="(val,key) in schoolCourseLists" :key="key">
+          <el-row v-if="schoolCourseLists.length==0" class="no-data">暂无数据</el-row>
+
+          <el-row
+            :gutter="20"
+            class="bottom-line"
+            v-for="(val,key) in schoolCourseLists"
+            :key="key"
+          >
             <el-col :span="7">
               <div class="grid-content">
-                <img
-                  :src="val.picurl"
-                  class="full-width"
-                >
+                <img :src="val.picurl" class="full-width">
               </div>
             </el-col>
             <el-col :span="17">
@@ -431,6 +433,11 @@ export default {
 }
 .no-pad {
   padding: 0;
+}
+.no-data {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
 }
 </style>
 <style>
