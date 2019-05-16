@@ -189,8 +189,8 @@
     </div>
     <div class="index-footer-outline-body">
       <div class="index-footer">
-        <p>©2018-2019 智聚 版权所有</p>
-        <p class="index-mobile">联系电话： 18234211234</p>
+        <a href="#" class="beian">版权所有@智聚装配式绿色建筑创新中心南通有限公司</a>
+        <p class="index-mobile">联系电话： 0513-81055866</p>
       </div>
     </div>
   </div>
@@ -1110,6 +1110,9 @@ body > .el-container {
   100% {
     bottom: 30px;
   }
+}
+.beian{
+  color:#fff;
 }
 </style>
 
