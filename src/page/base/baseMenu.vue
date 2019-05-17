@@ -4,10 +4,10 @@
       <el-col :span="12">
         <el-menu
           :default-active="$route.path"
-          :default-openeds="menuopen"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
+          :unique-opened="true"
           router
         >
           <el-submenu index="1">
@@ -43,14 +43,16 @@
 export default {
   data() {
     return {
-      menuopen: ["1"],
       baseList1: [],
       baseList2: [],
       type: 0
     };
   },
   mounted() {
-    this.getBaseList(this.type, this.showDefault);
+    
+    this.getBaseList("0", this.showDefault);
+    this.getBaseList("1", this.showDefault);
+
   },
   computed: {
     defaultActive() {

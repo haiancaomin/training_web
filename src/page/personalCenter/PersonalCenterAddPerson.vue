@@ -344,6 +344,10 @@ export default {
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
+  text-decoration: underline;
+}
+.batch-model-text:hover {
+  color: #67C23A;
 }
 .batch-model {
   margin: 30px 0px 0px 0px;
