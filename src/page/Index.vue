@@ -190,7 +190,7 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      picurl:"sss",
+      picurl:"",
       courseList: [],
       baseList: []
     };
