@@ -48,10 +48,8 @@ export default {
     };
   },
   mounted() {
-    
     this.getBaseList("0", this.showDefault);
     this.getBaseList("1");
-
   },
 
   watch: {
