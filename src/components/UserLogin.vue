@@ -4,7 +4,7 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
           <el-input
-            placeholder="请输入用户名"
+            placeholder="请输入用户名/手机号"
             v-model="ruleForm.name"
             name="name"
             id="usernameFocus"
