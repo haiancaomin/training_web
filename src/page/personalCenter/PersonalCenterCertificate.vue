@@ -1,13 +1,9 @@
 <template>
   <div id="PersonalCenterCertificate">
     <el-dialog :visible.sync="showCertificateDialog" width="1000px">
-      <div class="print">
-        <span class="el-icon-printer"></span>
-        <span>打印</span>
-      </div>
-      <div class="certificate"></div>
-      <div class="page">
-        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+    
+      <div class="certificate">
+        <img :src="pictueUrl" alt>
       </div>
     </el-dialog>
     <div class="crumb">
@@ -16,23 +12,33 @@
         <el-breadcrumb-item>证书查询</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-
+    <el-form :model="ruleForm1" ref="ruleForm1">
+      <el-form-item prop="keyWord">
+        <el-input placeholder="输入身份证号搜索" id="searchInput" v-model="searchKey"/>
+        <el-button
+          type="primary"
+          class="search-btn"
+          @click.prevent="submitForm('ruleForm1',searchKey)"
+        >搜索</el-button>
+      </el-form-item>
+    </el-form>
     <div class="get-certificate-list">
-      <el-table
-        :data="tableData3"
-        height="450"
-       
-        style="width: 700px"
-      >
-       
-        <el-table-column prop="id" label="序号" width="50"></el-table-column>
-        <el-table-column prop="idCard" label="身份证号" width="170"></el-table-column>
-        <el-table-column prop="name" label="姓名" width="100"></el-table-column>
-        <el-table-column prop="course" label="通过课程" width="100"></el-table-column>
-        <el-table-column prop="ifPass" label="是否通过" width="100"></el-table-column>
-        <el-table-column prop="date" label="获取时间" width="120"></el-table-column>
-        <el-table-column fixed="right" label="证书查询" width="120">
-          <el-button type="primary" @click="showCertificate">查询证书</el-button>
+      <el-table :data="tableData" max-height="450" style="width: 700px">
+        <el-table-column label="序号" type="index" width="50"></el-table-column>
+        <el-table-column prop="cardno" label="身份证号" width="170"></el-table-column>
+        <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
+        <el-table-column prop="coursename" label="通过课程" width="300"></el-table-column>
+        <el-table-column prop="ispass" label="是否通过" width="100"></el-table-column>
+        <el-table-column prop="acceptdate" label="获取时间" width="180"></el-table-column>
+        <el-table-column fixed="right" label="证书查询" width="90">
+          <template slot-scope="scope">
+            <el-button
+              type="primary"
+              prop="zsid"
+              @click="showCertificate(scope.row.zsid)"
+              class="search-btn2"
+            >查询证书</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -45,95 +51,63 @@ export default {
   data() {
     return {
       showCertificateDialog: false,
-      tableData3: [
-        {
-          id: "1",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "2",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "3",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "4",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "5",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "6",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "7",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "8",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "9",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-        {
-          id: "10",
-          idCard: "878765456798763457",
-          name: "诸葛孔明",
-          course: "资料员",
-          ifPass: "是",
-          date: "2019-05-08"
-        },
-      ],
+      pictueUrl:"",
+      searchKey: "",
+      ruleForm1: {
+        keyWord: ""
+      },
+      tableData: [],
       multipleSelection: []
     };
   },
   methods: {
-    showCertificate() {
-      this.showCertificateDialog = true;
+    showCertificate(zsid) {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/invoice_getCertificateById.do?zsid=${zsid}`
+      })
+        .then(res => {
+          if (res.data.data != false) {
+
+                this.pictueUrl = res.data.data
+                this.showCertificateDialog = true;
+              } else {
+                this.$message({
+                  message: "接口异常！",
+                  center: true
+                });
+              }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      
+    },
+    submitForm(formName, searchKey) {
+      this.getCertificateList(searchKey);
+    },
+    getCertificateList(searchKey) {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "post",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_findCertificateList.do?userid=${userid}&cardno=${searchKey}`
+      })
+        .then(res => {
+          this.tableData = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
+  },
+  mounted() {
+    this.getCertificateList("");
+    document.getElementById("searchInput").focus();
   }
 };
 </script>
@@ -168,15 +142,7 @@ export default {
   text-align: center;
   margin: 20px 0px 0px 0px;
 }
-.print {
-  font-size: 18px;
-  margin: 0px 0px 20px 90px;
-}
-.print:hover {
-  font-size: 18px;
-  color: #409eff;
-  cursor: pointer;
-}
+
 .certificate {
   margin: 0px auto;
   height: 1000px;
@@ -186,6 +152,16 @@ export default {
 .page {
   text-align: center;
   margin: 20px 0px 0px 0px;
+}
+.el-input {
+  width: 250px;
+  margin: 0px 0px 0px 382px;
+}
+.search-btn2 {
+  width: 70px;
+  text-align: center;
+  height: 35px;
+  padding: 0px;
 }
 </style>
 

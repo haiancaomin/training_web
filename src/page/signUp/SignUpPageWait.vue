@@ -5,16 +5,16 @@
 
         <p class="success-context">
           请尽快前往
-          <router-link to="/personalCenter/PersonalCenterAllOrder">
+          <router-link to="/PersonalCenter/PersonalCenterAllOrder">
             <a href="javascript:;" class="to-center2">客户中心</a>
           </router-link>-
-          <router-link to="/personalCenter/PersonalCenterAllOrder">
+          <router-link to="/PersonalCenter/PersonalCenterAllOrder">
             <a href="javascript:;" class="to-center2">我的订单</a>
           </router-link>支付
         </p>
       </div>
       <div class="success-other">
-        <router-link to="/personalCenter/PersonalCenterUncompletedOrder">
+        <router-link to="/PersonalCenter/PersonalCenterUncompletedOrder">
           <el-button type="primary" @click="onliePayment">我的订单</el-button>
         </router-link>
       </div>

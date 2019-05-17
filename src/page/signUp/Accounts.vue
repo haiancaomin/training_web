@@ -4,6 +4,11 @@
       <div class="order-info-title">
         <el-col :span="8">
           <div class="order-meal-title1">
+            <span>课程</span>
+          </div>
+        </el-col>
+        <el-col :span="2">
+          <div class="order-meal-title5">
             <span>套餐</span>
           </div>
         </el-col>
@@ -22,12 +27,13 @@
             <span>预计考试时间</span>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <div class="order-meal-title5">
             <span>考试地点</span>
           </div>
         </el-col>
-        <el-col :span="3">
+
+        <el-col :span="2">
           <div class="order-meal-title6">
             <span>单价</span>
           </div>
@@ -50,14 +56,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname1}}</span>
+                  <span>{{coursename1}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp1">
+                <div class="order-meal-person-num" v-if="!personalFlag">
                   报名人数：
-                  <span >{{empSize1}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <span>{{empSize1}}</span>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp1">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname1}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -81,14 +94,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress1}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price1}}</span>
@@ -104,7 +118,8 @@
           </el-col>
         </div>
         <div class="order-subtotal">
-          <span>小计：¥{{subtotal1}}</span>
+          <span v-if="!personalFlag">小计：¥{{subtotal1}}</span>
+          <span v-else>小计：¥{{price1}}</span>
         </div>
 
         <el-dialog
@@ -123,9 +138,8 @@
             @selection-change="handleSelectionChange1"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename1}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun1">确定</el-button>
@@ -164,14 +178,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname2}}</span>
+                  <span>{{coursename2}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp2">
+                <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize2}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp2">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname2}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -195,14 +216,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress2}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price2}}</span>
@@ -237,9 +259,8 @@
             @selection-change="handleSelectionChange2"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename2}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun2">确定</el-button>
@@ -278,14 +299,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname3}}</span>
+                  <span>{{coursename3}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp3">
+                <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize3}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp3">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname3}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -309,14 +337,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress3}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price3}}</span>
@@ -351,9 +380,8 @@
             @selection-change="handleSelectionChange3"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename3}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun3">确定</el-button>
@@ -392,14 +420,21 @@
               </el-col>
               <el-col :span="16">
                 <div class="order-meal-name">
-                  <span>{{menuname4}}</span>
+                  <span>{{coursename4}}</span>
                 </div>
-                <div class="order-meal-person-num" @click="scanEmp4">
+                <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize4}}</span>
-                  <span  class="emp-edit">编辑</span>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp4">编辑</el-button>
                 </div>
               </el-col>
+            </div>
+          </el-col>
+          <el-col :span="2">
+            <div class="order-meal-property-outbody">
+              <div class="order-meal-property">
+                <span>{{menuname4}}</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="3">
@@ -423,14 +458,15 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{examaddress4}}</span>
               </div>
             </div>
           </el-col>
-          <el-col :span="3">
+
+          <el-col :span="2">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
                 <span>{{price4}}</span>
@@ -465,9 +501,8 @@
             @selection-change="handleSelectionChange4"
           >
             <el-table-column type="selection" width="35"></el-table-column>
-            <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-            <el-table-column prop="cardno" label="身份证" width="220"></el-table-column>
-            <el-table-column label="课程">{{coursename4}}</el-table-column>
+            <el-table-column prop="empname" label="姓名" width="200"></el-table-column>
+            <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
           <div class="operation-zone">
             <el-button type="primary" class="sign-submit" @click="showPersonInfofun4">确定</el-button>
@@ -499,7 +534,8 @@
         <el-col :span="20">
           <div class="total">
             合计：
-            <span class="total-price">¥ {{totalPrice}}</span>
+            <span class="total-price" v-if="!personalFlag">¥ {{totalPrice}}</span>
+            <span class="total-price" v-else>¥{{price1}}</span>
           </div>
         </el-col>
         <el-col :span="4">
@@ -532,14 +568,11 @@ export default {
       coursehour2: "",
       coursehour3: "",
       coursehour4: "",
-      coursename1: "",
-      coursename2: "",
-      coursename3: "",
-      coursename4: "",
-      picurl1:"",
-      picurl2:"",
-      picurl3:"",
-      picurl4:"",
+
+      picurl1: "",
+      picurl2: "",
+      picurl3: "",
+      picurl4: "",
       Address1: "",
       Address2: "",
       Address3: "",
@@ -548,10 +581,10 @@ export default {
       time2: "",
       time3: "",
       time4: "",
-      trainDate1:"",
-      trainDate2:"",
-      trainDate3:"",
-      trainDate4:"",
+      trainDate1: "",
+      trainDate2: "",
+      trainDate3: "",
+      trainDate4: "",
       meal1: "",
       meal2: "",
       meal3: "",
@@ -560,6 +593,10 @@ export default {
       menuname2: "",
       menuname3: "",
       menuname4: "",
+      coursename1: "",
+      coursename2: "",
+      coursename3: "",
+      coursename4: "",
       examtime1: "",
       examtime2: "",
       examtime3: "",
@@ -596,366 +633,453 @@ export default {
       reChoose2: false,
       reChoose3: false,
       reChoose4: false,
-      tableData1: [{}],
-      tableData2: [{}],
-      tableData3: [{}],
-      tableData4: [{}],
-     
-      tableDataRe: [{}],
+      tableData1: [],
+      tableData2: [],
+      tableData3: [],
+      tableData4: [],
+
+      tableDataRe: [],
       totalPrice: 0,
       accountsPage: 1,
-      SignUpPayPage:0,
-      active : 1
+      SignUpPayPage: 0,
+      active: 1,
+      personalFlag: false,
+      name:"",
+      cardno:"",
+      education:"",
+      phone:"",
+      signUpType:""
     };
   },
   mounted() {
     this.getEmpData();
-    
+
     let accountsThis = this;
     this.bus.$on("todata", function(res) {
-      if (
-        res.course1 != "" &&
-        res.Address1 != "" &&
-        res.time1 != "" &&
-        res.meal1 != "" &&
-        res.multipleSelection1 != ""
-      ) {
-        accountsThis.orderShow1 = true;
-        accountsThis.course1 = res.course1;
-        accountsThis.Address1 = res.Address1;
-        accountsThis.time1 = res.time1;
-        accountsThis.meal1 = res.meal1;
-        accountsThis.empSize1 = res.multipleSelection1.length;
-        for (var i = 0; i < res.multipleSelection1.length - 1; i++) {
-          accountsThis.empids1 += res.multipleSelection1[i].empid + ",";
-        }
-        var last1 = res.multipleSelection1.length - 1;
-        accountsThis.empids1 += res.multipleSelection1[last1].empid;
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
-            accountsThis.meal1
-          }`
-        })
-          .then(res => {
-            accountsThis.menuname1 = res.data.data.menuname;
-            accountsThis.examtime1 = res.data.data.examtime;
-            accountsThis.examaddress1 = res.data.data.examaddress;
-            accountsThis.price1 = res.data.data.price;
-            accountsThis.subtotal1 = Number(accountsThis.empSize1) * Number(res.data.data.price);
-             accountsThis.totalPrice = Number(accountsThis.totalPrice) + Number(accountsThis.subtotal1)
-            
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
-            accountsThis.course1
-          }`
-        })
-          .then(res => {
-            accountsThis.coursehour1 = res.data.data.coursehour;
-            accountsThis.coursename1 = res.data.data.coursename;
-            accountsThis.picurl1 = res.data.data.picurl;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
-            accountsThis.time1
-          }`
-        })
-          .then(res => {
-            accountsThis.trainDate1 = res.data.data.traintime;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
-            accountsThis.empids1
-          }`
-        })
-          .then(res => {
-            accountsThis.tableData1 = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
-
-      if (
-        res.course2 != "" &&
-        res.Address2 != "" &&
-        res.time2 != "" &&
-        res.meal2 != "" &&
-        res.multipleSelection2 != ""
-      ) {
-        accountsThis.orderShow2 = true;
-        accountsThis.course2 = res.course2;
-        accountsThis.Address2 = res.Address2;
-        accountsThis.time2 = res.time2;
-        accountsThis.meal2 = res.meal2;
-        accountsThis.empSize2 = res.multipleSelection2.length;
-        for (var i = 0; i < res.multipleSelection2.length - 1; i++) {
-          accountsThis.empids2 += res.multipleSelection2[i].empid + ",";
-        }
-        var last2 = res.multipleSelection2.length - 1;
-        accountsThis.empids2 += res.multipleSelection2[last2].empid;
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
-            accountsThis.meal2
-          }`
-        })
-          .then(res => {
-            accountsThis.menuname2 = res.data.data.menuname;
-            accountsThis.examtime2 = res.data.data.examtime;
-            accountsThis.examaddress2 = res.data.data.examaddress;
-            accountsThis.price2 = res.data.data.price;
-            accountsThis.subtotal2 =
-              Number(accountsThis.empSize2) * Number(res.data.data.price);
-              accountsThis.totalPrice = Number(accountsThis.totalPrice) + Number(accountsThis.subtotal2)
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
-            accountsThis.course2
-          }`
-        })
-          .then(res => {
-            accountsThis.coursehour2 = res.data.data.coursehour;
-            accountsThis.coursename2 = res.data.data.coursename;
-            accountsThis.picurl2 = res.data.data.picurl;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
-            accountsThis.time2
-          }`
-        })
-          .then(res => {
-            accountsThis.trainDate2 = res.data.data.traintime;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
-            accountsThis.empids2
-          }`
-        })
-          .then(res => {
-            accountsThis.tableData2 = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
-
-      if (
-        res.course3 != "" &&
-        res.Address3 != "" &&
-        res.time3 != "" &&
-        res.meal3 != "" &&
-        res.multipleSelection3 != ""
-      ) {
-        accountsThis.orderShow3 = true;
-        accountsThis.course3 = res.course3;
-        accountsThis.Address3 = res.Address3;
-        accountsThis.time3 = res.time3;
-        accountsThis.meal3 = res.meal3;
-        accountsThis.empSize3 = res.multipleSelection3.length;
-        for (var i = 0; i < res.multipleSelection3.length - 1; i++) {
-          accountsThis.empids3 += res.multipleSelection3[i].empid + ",";
-        }
-        var last3 = res.multipleSelection3.length - 1;
-        accountsThis.empids3 += res.multipleSelection3[last3].empid;
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
-            accountsThis.meal3
-          }`
-        })
-          .then(res => {
-            accountsThis.menuname3 = res.data.data.menuname;
-            accountsThis.examtime3 = res.data.data.examtime;
-            accountsThis.examaddress3 = res.data.data.examaddress;
-            accountsThis.price3 = res.data.data.price;
-            accountsThis.subtotal3 =
-              Number(accountsThis.empSize3) * Number(res.data.data.price);
-              accountsThis.totalPrice = Number(accountsThis.totalPrice) + Number(accountsThis.subtotal3)
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
-            accountsThis.course3
-          }`
-        })
-          .then(res => {
-            accountsThis.coursehour3 = res.data.data.coursehour;
-            accountsThis.coursename3 = res.data.data.coursename;
-            accountsThis.picurl3 = res.data.data.picurl;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+      
         
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
-            accountsThis.time3
-          }`
-        })
-          .then(res => {
-            accountsThis.trainDate3 = res.data.data.traintime;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-
-        this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
-            accountsThis.empids3
-          }`
-        })
-          .then(res => {
-            accountsThis.tableData3 = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
-
+      console.log(res);
       if (
-        res.course4 != "" &&
-        res.Address4 != "" &&
-        res.time4 != "" &&
-        res.meal4 != "" &&
-        res.multipleSelection4 != ""
+        res.multipleSelection1 ||
+        res.multipleSelection2 ||
+        res.multipleSelection3 ||
+        res.multipleSelection4
       ) {
-        accountsThis.orderShow4 = true;
-        accountsThis.course4 = res.course4;
-        accountsThis.Address4 = res.Address4;
-        accountsThis.time4 = res.time4;
-        accountsThis.meal4 = res.meal4;
-        accountsThis.empSize4 = res.multipleSelection4.length;
-        for (var i = 0; i < res.multipleSelection4.length - 1; i++) {
-          accountsThis.empids4 += res.multipleSelection4[i].empid + ",";
+        accountsThis.signUpType = res.type;
+        if (
+          res.course1 != "" &&
+          res.Address1 != "" &&
+          res.time1 != "" &&
+          res.meal1 != "" &&
+          res.multipleSelection1 != ""
+        ) {
+          accountsThis.orderShow1 = true;
+          accountsThis.course1 = res.course1;
+          accountsThis.Address1 = res.Address1;
+          accountsThis.time1 = res.time1;
+          accountsThis.meal1 = res.meal1;
+          accountsThis.empSize1 = res.multipleSelection1.length;
+          for (var i = 0; i < res.multipleSelection1.length - 1; i++) {
+            accountsThis.empids1 += res.multipleSelection1[i].empid + ",";
+          }
+          var last1 = res.multipleSelection1.length - 1;
+          accountsThis.empids1 += res.multipleSelection1[last1].empid;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+              accountsThis.meal1
+            }`
+          })
+            .then(res => {
+              accountsThis.menuname1 = res.data.data.menuname;
+              accountsThis.coursename1 = res.data.data.coursename;
+              accountsThis.examtime1 = res.data.data.examtime;
+              accountsThis.examaddress1 = res.data.data.examaddress;
+              accountsThis.price1 = res.data.data.price;
+              accountsThis.subtotal1 =
+                Number(accountsThis.empSize1) * Number(res.data.data.price);
+              accountsThis.totalPrice =
+                Number(accountsThis.totalPrice) +
+                Number(accountsThis.subtotal1);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+              accountsThis.course1
+            }`
+          })
+            .then(res => {
+              accountsThis.coursehour1 = res.data.data.coursehour;
+              accountsThis.coursename1 = res.data.data.coursename;
+              accountsThis.picurl1 = res.data.data.picurl;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+              accountsThis.time1
+            }`
+          })
+            .then(res => {
+              accountsThis.trainDate1 = res.data.data.traintime;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
+              accountsThis.empids1
+            }`
+          })
+            .then(res => {
+              accountsThis.tableData1 = res.data.data;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         }
-        var last4 = res.multipleSelection4.length - 1;
-        accountsThis.empids4 += res.multipleSelection4[last4].empid;
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
-            accountsThis.meal4
-          }`
-        })
-          .then(res => {
-            accountsThis.menuname4 = res.data.data.menuname;
-            accountsThis.examtime4 = res.data.data.examtime;
-            accountsThis.examaddress4 = res.data.data.examaddress;
-            accountsThis.price4 = res.data.data.price;
-            accountsThis.subtotal4 =
-              Number(accountsThis.empSize4) * Number(res.data.data.price);
-              accountsThis.totalPrice = Number(accountsThis.totalPrice) + Number(accountsThis.subtotal4)
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
 
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
-            accountsThis.course4
-          }`
-        })
-          .then(res => {
-            accountsThis.coursehour4 = res.data.data.coursehour;
-            accountsThis.coursename4 = res.data.data.coursename;
-            accountsThis.picurl4 = res.data.data.picurl;
+        if (
+          res.course2 != "" &&
+          res.Address2 != "" &&
+          res.time2 != "" &&
+          res.meal2 != "" &&
+          res.multipleSelection2 != ""
+        ) {
+          accountsThis.orderShow2 = true;
+          accountsThis.course2 = res.course2;
+          accountsThis.Address2 = res.Address2;
+          accountsThis.time2 = res.time2;
+          accountsThis.meal2 = res.meal2;
+          accountsThis.empSize2 = res.multipleSelection2.length;
+          for (var i = 0; i < res.multipleSelection2.length - 1; i++) {
+            accountsThis.empids2 += res.multipleSelection2[i].empid + ",";
+          }
+          var last2 = res.multipleSelection2.length - 1;
+          accountsThis.empids2 += res.multipleSelection2[last2].empid;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+              accountsThis.meal2
+            }`
           })
-          .catch(function(err) {
-            console.log(err);
-          });
+            .then(res => {
+              accountsThis.menuname2 = res.data.data.menuname;
+              accountsThis.coursename2 = res.data.data.coursename;
+              accountsThis.examtime2 = res.data.data.examtime;
+              accountsThis.examaddress2 = res.data.data.examaddress;
+              accountsThis.price2 = res.data.data.price;
+              accountsThis.subtotal2 =
+                Number(accountsThis.empSize2) * Number(res.data.data.price);
+              accountsThis.totalPrice =
+                Number(accountsThis.totalPrice) +
+                Number(accountsThis.subtotal2);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
 
-        this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
-            accountsThis.time4
-          }`
-        })
-          .then(res => {
-            accountsThis.trainDate4 = res.data.data.traintime;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+              accountsThis.course2
+            }`
           })
-          .catch(function(err) {
-            console.log(err);
-          });
+            .then(res => {
+              accountsThis.coursehour2 = res.data.data.coursehour;
+              accountsThis.coursename2 = res.data.data.coursename;
+              accountsThis.picurl2 = res.data.data.picurl;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
 
-        this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
-            accountsThis.empids4
-          }`
-        })
-          .then(res => {
-            accountsThis.tableData4 = res.data.data;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+              accountsThis.time2
+            }`
           })
-          .catch(function(err) {
-            console.log(err);
-          });
+            .then(res => {
+              accountsThis.trainDate2 = res.data.data.traintime;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
+              accountsThis.empids2
+            }`
+          })
+            .then(res => {
+              accountsThis.tableData2 = res.data.data;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+
+        if (
+          res.course3 != "" &&
+          res.Address3 != "" &&
+          res.time3 != "" &&
+          res.meal3 != "" &&
+          res.multipleSelection3 != ""
+        ) {
+          accountsThis.orderShow3 = true;
+          accountsThis.course3 = res.course3;
+          accountsThis.Address3 = res.Address3;
+          accountsThis.time3 = res.time3;
+          accountsThis.meal3 = res.meal3;
+          accountsThis.empSize3 = res.multipleSelection3.length;
+          for (var i = 0; i < res.multipleSelection3.length - 1; i++) {
+            accountsThis.empids3 += res.multipleSelection3[i].empid + ",";
+          }
+          var last3 = res.multipleSelection3.length - 1;
+          accountsThis.empids3 += res.multipleSelection3[last3].empid;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+              accountsThis.meal3
+            }`
+          })
+            .then(res => {
+              accountsThis.menuname3 = res.data.data.menuname;
+              accountsThis.coursename3 = res.data.data.coursename;
+              accountsThis.examtime3 = res.data.data.examtime;
+              accountsThis.examaddress3 = res.data.data.examaddress;
+              accountsThis.price3 = res.data.data.price;
+              accountsThis.subtotal3 =
+                Number(accountsThis.empSize3) * Number(res.data.data.price);
+              accountsThis.totalPrice =
+                Number(accountsThis.totalPrice) +
+                Number(accountsThis.subtotal3);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+              accountsThis.course3
+            }`
+          })
+            .then(res => {
+              accountsThis.coursehour3 = res.data.data.coursehour;
+              accountsThis.coursename3 = res.data.data.coursename;
+              accountsThis.picurl3 = res.data.data.picurl;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+              accountsThis.time3
+            }`
+          })
+            .then(res => {
+              accountsThis.trainDate3 = res.data.data.traintime;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
+              accountsThis.empids3
+            }`
+          })
+            .then(res => {
+              accountsThis.tableData3 = res.data.data;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+
+        if (
+          res.course4 != "" &&
+          res.Address4 != "" &&
+          res.time4 != "" &&
+          res.meal4 != "" &&
+          res.multipleSelection4 != ""
+        ) {
+          accountsThis.orderShow4 = true;
+          accountsThis.course4 = res.course4;
+          accountsThis.Address4 = res.Address4;
+          accountsThis.time4 = res.time4;
+          accountsThis.meal4 = res.meal4;
+          accountsThis.empSize4 = res.multipleSelection4.length;
+          for (var i = 0; i < res.multipleSelection4.length - 1; i++) {
+            accountsThis.empids4 += res.multipleSelection4[i].empid + ",";
+          }
+          var last4 = res.multipleSelection4.length - 1;
+          accountsThis.empids4 += res.multipleSelection4[last4].empid;
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+              accountsThis.meal4
+            }`
+          })
+            .then(res => {
+              accountsThis.menuname4 = res.data.data.menuname;
+              accountsThis.coursename4 = res.data.data.coursename;
+              accountsThis.examtime4 = res.data.data.examtime;
+              accountsThis.examaddress4 = res.data.data.examaddress;
+              accountsThis.price4 = res.data.data.price;
+              accountsThis.subtotal4 =
+                Number(accountsThis.empSize4) * Number(res.data.data.price);
+              accountsThis.totalPrice =
+                Number(accountsThis.totalPrice) +
+                Number(accountsThis.subtotal4);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+              accountsThis.course4
+            }`
+          })
+            .then(res => {
+              accountsThis.coursehour4 = res.data.data.coursehour;
+              accountsThis.coursename4 = res.data.data.coursename;
+              accountsThis.picurl4 = res.data.data.picurl;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+              accountsThis.time4
+            }`
+          })
+            .then(res => {
+              accountsThis.trainDate4 = res.data.data.traintime;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${
+              accountsThis.empids4
+            }`
+          })
+            .then(res => {
+              accountsThis.tableData4 = res.data.data;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+      } else {
+        accountsThis.personalFlag = true;
+        
+        accountsThis.course1 = res.course1,
+          accountsThis.Address1 = res.Address1,
+          accountsThis.time1 = res.time1,
+          accountsThis.meal1 = res.meal1,
+          accountsThis.name = res.name,
+        accountsThis.cardno = res.cardno,
+        accountsThis.education =res.education,
+        accountsThis.phone = res.phone
+        this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+              res.meal1
+            }`
+          })
+            .then(res => {
+              accountsThis.menuname1 = res.data.data.menuname;
+              accountsThis.coursename1 = res.data.data.coursename;
+              accountsThis.examtime1 = res.data.data.examtime;
+              accountsThis.examaddress1 = res.data.data.examaddress;
+              accountsThis.price1 = res.data.data.price;
+              accountsThis.subtotal1 =
+                Number(accountsThis.empSize1) * Number(res.data.data.price);
+              accountsThis.totalPrice =
+                Number(accountsThis.totalPrice) +
+                Number(accountsThis.subtotal1);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+              res.course1
+            }`
+          })
+            .then(res => {
+              accountsThis.coursehour1 = res.data.data.coursehour;
+              accountsThis.coursename1 = res.data.data.coursename;
+              accountsThis.picurl1 = res.data.data.picurl;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+              res.time1
+            }`
+          })
+            .then(res => {
+              accountsThis.trainDate1 = res.data.data.traintime;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+            accountsThis.orderShow1 = true;
       }
     });
-   
-    
-    
   },
   methods: {
     deleteOrder1() {
-      this.orderShow1=false;
+      this.orderShow1 = false;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal1);
     },
     deleteOrder2() {
-      this.orderShow2=false;
+      this.orderShow2 = false;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal2);
     },
     deleteOrder3() {
-      this.orderShow3=false;
+      this.orderShow3 = false;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal3);
     },
     deleteOrder4() {
-      this.orderShow4=false;
+      this.orderShow4 = false;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal4);
     },
     getEmpData() {
@@ -993,12 +1117,11 @@ export default {
       this.empSize1 = this.multipleSelection1.length;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal1);
       this.subtotal1 = Number(this.empSize1) * Number(this.price1);
-      this.totalPrice = Number(this.totalPrice) + Number(this.subtotal1)
+      this.totalPrice = Number(this.totalPrice) + Number(this.subtotal1);
     },
     chooseAll1() {
       let that = this;
       if (!this.clickOnce1) {
-        console.log(this);
         this.$nextTick(function() {
           this.tableData1.forEach(item => {
             this.$refs.table1.toggleRowSelection(item, true);
@@ -1247,7 +1370,6 @@ export default {
       this.multipleSelection4 = val;
     },
     reChoosefunction4() {
-     
       this.empSize4 = this.multipleSelection4.length;
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal4);
       this.subtotal4 = Number(this.empSize4) * Number(this.price4);
@@ -1281,65 +1403,117 @@ export default {
       if (userInfo) {
         var userid = userInfo.userid;
       }
-      var courseids = '';
-      var menuids = '';
-      var traintimeids = '';
-      var employeeids = '';
-      if(this.orderShow1 && this.empSize1>0) {
+      if(!this.personalFlag){
+ var courseids = "";
+      var menuids = "";
+      var traintimeids = "";
+      var employeeids = "";
+      if (this.orderShow1 && this.empSize1 > 0) {
         courseids += this.course1 + ",";
-        menuids += this.meal1+ ",";
-        traintimeids += this.time1+ ",";
+        menuids += this.meal1 + ",";
+        traintimeids += this.time1 + ",";
         employeeids += this.empids1 + ";";
       }
-      if(this.orderShow2 && this.empSize2>0) {
-        courseids += this.course2+ ",";
-        menuids += this.meal2+ ",";
-        traintimeids += this.time2+ ",";
+      if (this.orderShow2 && this.empSize2 > 0) {
+        courseids += this.course2 + ",";
+        menuids += this.meal2 + ",";
+        traintimeids += this.time2 + ",";
         employeeids += this.empids2 + ";";
       }
-      if(this.orderShow3 && this.empSize3>0) {
-        courseids += this.course3+ ",";
-        menuids += this.meal3+ ",";
-        traintimeids += this.time3+ ",";
+      if (this.orderShow3 && this.empSize3 > 0) {
+        courseids += this.course3 + ",";
+        menuids += this.meal3 + ",";
+        traintimeids += this.time3 + ",";
         employeeids += this.empids3 + ";";
       }
-      if(this.orderShow4 && this.empSize4>0) {
-        courseids += this.course4+ ",";
-        menuids += this.meal4+ ",";
-        traintimeids += this.time4+ ",";
+      if (this.orderShow4 && this.empSize4 > 0) {
+        courseids += this.course4 + ",";
+        menuids += this.meal4 + ",";
+        traintimeids += this.time4 + ",";
         employeeids += this.empids4 + ";";
       }
-      if (this.empSize1<1&&this.empSize2<1&&this.empSize3<1&&this.empSize4<1) {
-         this.$message({
-                message: "网络延迟或选择人员为0!",
-                center:true
-              });  
-      } else if(!this.orderShow1&&!this.orderShow2&&!this.orderShow3&&!this.orderShow4){
-          this.$message({
-                message: "没有任何订单!",
-                center:true
-              }); 
-        } else{
+      if (
+        this.empSize1 < 1 &&
+        this.empSize2 < 1 &&
+        this.empSize3 < 1 &&
+        this.empSize4 < 1
+      ) {
+        this.$message({
+          message: "网络延迟或选择人员为0!",
+          center: true
+        });
+      } else if (
+        !this.orderShow1 &&
+        !this.orderShow2 &&
+        !this.orderShow3 &&
+        !this.orderShow4
+      ) {
+        this.$message({
+          message: "没有任何订单!",
+          center: true
+        });
+      } else {
         this.$ajax({
-        method: "post",
-        url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}",
-        "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}`
-      }).then(res => {
-          
-        this.accountsPage = 0;
-        this.SignUpPayPage = 1;
-        this.active = 2;
-        this.$emit("ToSignUpPayPage", {
-          accountsPage: this.accountsPage,
-          SignUpPayPage: this.SignUpPayPage,
-          active: this.active
-        });
-          console.log("success");
+          method: "post",
+          url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${
+            this.totalPrice
+          }","courseids":"${courseids}",
+        "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${this.signUpType}`
         })
-        .catch(function(err) {
-          console.log(err);
-        });
+          .then(res => {
+            this.accountsPage = 0;
+            this.SignUpPayPage = 1;
+            this.active = 2;
+            this.$emit("ToSignUpPayPage", {
+              accountsPage: this.accountsPage,
+              SignUpPayPage: this.SignUpPayPage,
+              active: this.active
+            });
+            this.bus.$emit("toNextPage", {
+              orderID: res.data.orderid
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       }
+      } else {
+
+        if(this.orderShow1) {
+          this.$ajax({
+          method: "post",
+          url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}",
+          "courseids":"${this.course1}",
+          "menuids":"${this.meal1}",
+          "traintimeids":"${this.time1}",
+          "employeeids":""}&userid=${userid}&type=3&emp=
+          {"name":"${this.name}","cardno":"${this.cardno}","education":"${this.education}","phone":"${this.phone}"}`
+
+        })
+          .then(res => {
+            this.accountsPage = 0;
+            this.SignUpPayPage = 1;
+            this.active = 2;
+            this.$emit("ToSignUpPayPage", {
+              accountsPage: this.accountsPage,
+              SignUpPayPage: this.SignUpPayPage,
+              active: this.active
+            });
+            this.bus.$emit("toNextPage", {
+              orderID: res.data.orderid
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        } else {
+          this.$message({
+          message: "没有任何订单!",
+          center: true
+        });
+        }
+      }
+     
     }
   }
 };
@@ -1367,6 +1541,7 @@ export default {
 .order-img {
   width: 120px;
   height: 87px;
+  object-fit: cover;
 }
 .order-subtotal {
   text-align: right;
@@ -1383,23 +1558,33 @@ export default {
   font-size: 12px;
   color: #666;
   text-align: center;
-  padding: 11px 20px 0px 20px;
+  padding: 11px 10px 0px 10px;
 }
 .order-meal-name {
   font-size: 14px;
   color: #333;
   text-align: left;
-  padding: 5px 0px 10px 30px;
+  margin: 5px 0px 0px 30px;
+  height: 40px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 .order-meal-person-num {
   margin-top: 28px;
   color: #ff6600;
-  cursor: pointer;
   text-align: left;
-  margin: 30px 0px 0px 30px;
+  margin: 10px 0px 0px 30px;
 }
 .emp-edit {
-  margin: 0px 0px 0px 10px;
+  margin: 5px 0px 0px 10px;
+  height: 25px;
+  width: 50px;
+  line-height: 25px;
+  padding: 0px;
+  font-size: 12px;
 }
 .order-meal-property {
   height: 90px;
@@ -1412,6 +1597,7 @@ export default {
 }
 .el-icon-delete {
   font-size: 16px;
+  cursor: pointer;
 }
 .el-icon-delete:hover {
   color: #409eff;
@@ -1455,5 +1641,10 @@ export default {
 .operation-zone > .el-button {
   width: 100px;
   margin: 0px 20px;
+}
+</style>
+<style>
+.cell {
+  text-align: center;
 }
 </style>

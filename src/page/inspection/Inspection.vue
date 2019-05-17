@@ -1,28 +1,35 @@
 <template>
   <div id="inspection">
-    <el-col :span="24">
+    
       <h1 class="inspection-label">高端考察</h1>
-    </el-col>
-    <el-col :span="24">
-      <el-card shadow="hover">
-        <img src="../../assets/inspection1.jpg" class="inspection-picture">
-        <p class="inspection-title">2017年赴日装配式建筑技术高端专业考察</p>
-        <p class="inspection-time">考察时间：2017 年 11 月 13‐19 日</p>
-        <p class="inspection-end-time">报名截止时间：2017年10月13日</p>
-        <el-button type="primary" @click="gotoDetail()" class="see-detail">查看详情</el-button>
+   
+      <el-card shadow="hover" v-for="inspectionItem in inspectionList" :key="inspectionItem.eid">
+        <img :src="inspectionItem.picurl" class="inspection-picture">
+        <div class="inspection_info">
+        <p class="inspection-title">{{inspectionItem.title}}</p>
+        <p class="inspection-time">考察时间：{{inspectionItem.inspectdate}}</p>
+        <p class="inspection-end-time">报名截止时间：{{inspectionItem.deadline}}</p>
+       </div>
+        <div class="operation_btn">
+        <router-link :to="'/InspectionDetail/'+inspectionItem.eid">
+          <el-button type="primary" class="see-detail">查看详情</el-button>
+        </router-link>
+        </div>
+       
+        
+        
       </el-card>
-
-      <el-card shadow="hover">
-        <img src="../../assets/inspection2.png" class="inspection-picture">
-        <p class="inspection-title">2017冬赴新加坡装配式建筑技术 商务高端考察·交流</p>
-        <p class="inspection-time">考察时间：2017 年 11 月 21‐24 日</p>
-        <p class="inspection-end-time">报名截止时间：2017年10月10日</p>
-        <el-button type="primary" @click="gotoDetail()" class="see-detail">查看详情</el-button>
-      </el-card>
-    </el-col>
-    <el-col :span="24">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-    </el-col>
+    
+      <div class="order-page">
+        <el-pagination
+          background
+          layout="prev, pager, next, jumper"
+          :page-size="3"
+          :total="count"
+          @current-change="handleCurrentChange"
+        ></el-pagination>
+      </div>
+    
   </div>
 </template>
 
@@ -30,13 +37,35 @@
 export default {
   name: "Inspection",
   data() {
-    return {};
+    return {
+      count: 0,
+      inspectionList: []
+    };
   },
 
   methods: {
-    gotoDetail() {
-      this.$router.push("/InspectionDetail");
+    handleCurrentChange(val) {
+      this.getInspection(val);
+    },
+    getInspection(selectIndex) {
+      var pageIndex = (selectIndex - 1) * 3;
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/news_findInpectList.do?pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+      })
+        .then(res => {
+          this.inspectionList = res.data.data;
+          this.count = res.data.count;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
+  },
+  mounted() {
+    this.getInspection(1);
   }
 };
 </script>
@@ -44,12 +73,12 @@ export default {
 <style scoped>
 #inspection {
   width: 1000px;
-  height: 790px;
-  margin: 80px auto;
+  margin: 0px auto;
+  margin-top:80px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
-  padding: 20px 20px 0px 20px;
+  padding: 20px;
 }
 .el-card {
   height: 300px;
@@ -57,28 +86,37 @@ export default {
 }
 .inspection-picture {
   height: 257px;
-  width: 330px;
+  width: 380px;
+}
+.inspection_info {
+  float:right;
 }
 .inspection-title {
-  float: left;
-  margin: -240px 0px 0px 450px;
+  width:480px;
   font-size: 18px;
   font-weight: bold;
+  margin:5px 0px 22px 0px;
 }
 .inspection-time {
-  float: left;
-  margin: -205px 0px 0px 450px;
   font-weight: 530;
+  margin:5px 0px 22px 0px;
 }
 .inspection-end-time {
-  float: left;
-  margin: -170px 0px 0px 450px;
-  color: red;
+  color: #F56C6C;
   font-weight: bold;
+  margin:5px 0px 22px 0px;
 }
-.see-detail {
-  float: left;
-  margin: -60px 0px 0px 580px;
+.el-button {
+  width:122px;
+  height:40px;
+  padding:0px;
+  
+}
+.operation_btn {
+position: absolute;
+ margin:-45px 0px 0px 750px;
+ 
+ 
 }
 .el-pagination {
   text-align: center;

@@ -1,40 +1,36 @@
 <template>
   <div id="PesronalScoreSearch">
     <div class="order-dialog">
-      <el-dialog  :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
+      <el-dialog :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
         <div class="certificate">
+          <img :src="pictueUrl" alt>
         </div>
-        
       </el-dialog>
     </div>
 
     <div class="crumb">
-      <h1 class="score-label">证书查询1</h1>
+      <h1 class="score-label">证书查询</h1>
     </div>
     <div class="PesronalScoreSearch-info">
-      <el-form ref="form" :model="form">
-        <el-form-item  prop="name">
-          <div class="input-body">
-            <div class="input-icon1">
-              <i class="iconfont">&#xe614;</i>
-            </div>
-              <input type="text" placeholder="请输入姓名" class="input-input" maxlength="12">
-              
-            </div>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
+        <el-form-item prop="name">
+          <el-input placeholder="请输入姓名" v-model="ruleForm.name" name="name" id="nameFocus">
+            <i slot="prefix" class="iconfont">&#xe614;</i>
+          </el-input>
         </el-form-item>
 
-        <el-form-item  prop="name">
-          <div class="input-body">
-            <div class="input-icon1">
-              <i class="iconfont">&#xe706;</i>
-            </div>
-              <input type="text" placeholder="请输入身份证号码" class="input-input" maxlength="12">
-              
-            </div>
+        <el-form-item prop="cardno">
+          <el-input placeholder="请输入身份证号码" v-model="ruleForm.cardno" name="cardno">
+            <i slot="prefix" class="iconfont">&#xe706;</i>
+          </el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary"  class="login-self" @click="showCertificate">查&nbsp;&nbsp;&nbsp;&nbsp;询</el-button>
+          <el-button
+            type="primary"
+            class="login-self"
+            @click="submitForm('ruleForm')"
+          >查&nbsp;&nbsp;&nbsp;&nbsp;询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -46,122 +42,65 @@ export default {
   name: "PesronalScoreSearch",
   data() {
     return {
-      showCertificateDialog:false,
-      tableData: [
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        },
-        {
-          name: "老王",
-          id: "320999888877656765",
-          subject: "灌浆工",
-          testDate: "2019-03-05",
-          score: "99",
-          passFlag: "是"
-        }
-      ],
-
-      form: {
+      showCertificateDialog: false,
+      countFocus: 0,
+      pictueUrl:"",
+      ruleForm: {
         name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        cardno: ""
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
+        ],
+        cardno: [
+          { required: true, message: "请输入身份证号", trigger: "blur" },
+          {
+            message: "请输入正确的身份证号",
+            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
   methods: {
-    showCertificate() {
-          this.showCertificateDialog = true;
-      }
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/invoice_getCertificateByParams.do?name=${
+              this.ruleForm.name
+            }&cardno=${this.ruleForm.cardno}`
+          })
+            .then(res => {
+              if (res.data.data != false) {
+                console.log(res.data.data);
+                this.pictueUrl = res.data.data
+                this.showCertificateDialog = true;
+              } else {
+                this.$message({
+                  message: "未查询到此人证书！",
+                  center: true
+                });
+              }
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    }
+  },
+  mounted() {
+    document.getElementById("nameFocus").focus();
   }
 };
 </script>
@@ -169,7 +108,7 @@ export default {
 <style scoped>
 #PesronalScoreSearch {
   width: 1000px;
-  
+
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -177,7 +116,7 @@ export default {
   padding: 20px;
 }
 .PesronalScoreSearch-info {
-  padding: 40px 0px 50px 300px
+  padding: 40px 0px 50px 300px;
 }
 .PesronalScoreSearch-search {
   margin: 0px 0px 0px 60px;
@@ -186,7 +125,6 @@ export default {
 .el-table th > .cell {
   text-align: center;
 }
-
 
 .order-dialog {
   text-align: center;
@@ -205,20 +143,20 @@ export default {
   border-left: 2px solid #409eff;
 }
 .input-input {
-  border:1px solid #c5cddb;
+  border: 1px solid #c5cddb;
   width: 358px;
-border-radius: 2px;
-height: 44px;
-line-height: 44px;
-background: #fff;
-    font-size:14px;
-    padding:0px 10px 0px 40px;
+  border-radius: 2px;
+  height: 44px;
+  line-height: 44px;
+  background: #fff;
+  font-size: 14px;
+  padding: 0px 10px 0px 40px;
 }
 .input-input:hover {
-  border:1px solid #409EFF;
+  border: 1px solid #409eff;
 }
 .input-input:focus {
-  border:1px solid #409EFF;
+  border: 1px solid #409eff;
 }
 .input-icon1 {
   position: absolute;
@@ -227,30 +165,38 @@ background: #fff;
 }
 .login-self {
   width: 358px;
-font-size: 18px;
-height: 44px;
+  font-size: 18px;
+  height: 44px;
+}
+.el-input {
+  width: 358px;
 }
 .certificate {
-    margin:0px auto;
-    height:1000px;
-    width:800px;
-    border: 1px solid #e4e7ed;
+  margin: 0px auto;
+  height: 1000px;
+  width: 800px;
+  border: 1px solid #e4e7ed;
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot');
-  src: url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.svg#iconfont') format('svg');
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot");
+  src: url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_8wpzxd8vwx7.svg#iconfont") format("svg");
 }
-.iconfont{
-  font-family:"iconfont" !important;
-  font-size:18px;font-style:normal;
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 18px;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;}
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 44px;
+  margin: 0px 0px 0px 2px;
+}
 </style>
 
 

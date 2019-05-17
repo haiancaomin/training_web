@@ -1,7 +1,7 @@
 <template>
   <div class="PersonalSignUp">
     
-    <el-form :model="ruleForm" ref="ruleForm"  class="demo-ruleForm">
+    <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
       <div class="form-left">
         <div class="left-title">
           <h1>报名项目</h1>
@@ -72,8 +72,8 @@
         <div class="right-title">
           <h1>基本信息</h1>
         </div>
-      <el-form-item prop="empname">
-        <el-input v-model="ruleForm.empname" placeholder="请输入姓名" class="person-add-input">
+      <el-form-item prop="name">
+        <el-input v-model="ruleForm.name" placeholder="请输入姓名" class="person-add-input">
           <i slot="prefix" class="iconfont">&#xe614;</i>
         </el-input>
       </el-form-item>
@@ -85,13 +85,15 @@
       </el-form-item>
 
        <el-form-item prop="education">
-     <el-select v-model="ruleForm.meal1" placeholder="请选择学历" class="person-add-select">
-      <el-option
-            v-for="item in selectMealData1"
-            :key="item.menuid"
-            :label="item.menuname"
-            :value="item.menuid"
-          ></el-option>
+     <el-select v-model="ruleForm.education" placeholder="请选择学历" class="person-add-select">
+      <el-option label="小学及以下" value="小学及以下"></el-option>
+            <el-option label="初中" value="初中"></el-option>
+            <el-option label="中专" value="中专"></el-option>
+            <el-option label="高中" value="高中"></el-option>
+            <el-option label="大专" value="大专"></el-option>
+            <el-option label="本科" value="本科"></el-option>
+            <el-option label="硕士" value="硕士"></el-option>
+            <el-option label="博士及以上" value="博士及以上"></el-option>
       <i slot="prefix" class="iconfont">&#xe8c8;</i>
     </el-select>
  </el-form-item>
@@ -108,7 +110,7 @@
 
       <el-form-item>
         <div class="nextPage1">
-          <el-button type="primary" @click="submitForm('ruleForm')">立即提交</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">下一步</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -131,11 +133,84 @@ export default {
         course1: "",
         Address1: "",
         time1: "",
-        meal1: ""
+        meal1: "",
+        name: "",
+        cardno: "",
+        education: "",
+        phone: ""
+      },
+      rules: {
+        course1: [
+          { required: true, message: "请选择课程", trigger: "blur" }
+        ],
+        Address1: [
+          { required: true, message: "请选择培训地点", trigger: "blur" },
+        ],
+        time1: [
+          { required: true, message: "请选择培训时间", trigger: "blur" },
+        ],
+        meal1: [
+          { required: true, message: "请选择套餐", trigger: "blur" },
+        ],
+        name: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 5, message: "长度在 2 到 5个字符", trigger: "blur" }
+        ],
+        education: [{ required: true, message: "请选择学历", trigger: "blur" }],
+        cardno: [
+          { required: true, message: "请输入身份证号", trigger: "blur" },
+          {
+            message: "请输入正确的身份证号",
+            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+            trigger: "blur"
+          }
+        ],
+        phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          {
+            message: "请输入正确的手机号",
+            pattern: /^1[34578]\d{9}$/,
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
   methods: {
+    submitForm(formName) {
+        this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.signUpPage = 0;
+        this.accountsPage = 1;
+        this.active = 1;
+        this.$emit("ToAccountsPage", {
+          signUpPage: this.firstPage,
+          accountsPage: this.accountsPage,
+          active: this.active
+        });
+        this.bus.$emit("todata", {
+          course1: this.ruleForm.course1,
+          Address1: this.ruleForm.Address1,
+          time1: this.ruleForm.time1,
+          meal1: this.ruleForm.meal1,
+          name: this.ruleForm.name,
+        cardno: this.ruleForm.cardno,
+        education: this.ruleForm.education,
+        phone: this.ruleForm.phone
+        });
+        } else {
+          console.log("error submit!!");
+         
+        }
+      });
+      
+
+      
+     
+        
+        
+     
+    },
     getCourseList() {
       this.$ajax({
         method: "get",

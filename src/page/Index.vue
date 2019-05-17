@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="index-body">
-      <div class="company-show">
+      <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
         <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
           <i class="el-icon-arrow-down"></i>
         </div>
@@ -11,10 +11,10 @@
             <span class="logo-words">智聚实训</span>
           </div>
           <div class="feature">
-            <span class="feature-detail">快速</span>
-            <span class="feature-detail">全面</span>
-            <span class="feature-detail">方便</span>
-            <span class="feature-detail-last">质量</span>
+            <span class="feature-detail">求是</span>
+            <span class="feature-detail">创新</span>
+            <span class="feature-detail">共享</span>
+            <span class="feature-detail-last">共赢</span>
           </div>
           <div class="sign-up-main">
             <router-link to="/SignUp">
@@ -40,50 +40,57 @@
               </div>
             </el-col>
           </el-row>
+
           <el-row class="no-margin-b">
             <div class="course-body">
-              <div  v-for="courseItem in courseList" :key="courseItem.courseid">
-              <el-col :span="6">
-                <!-- <div class="index-course-list" id="index-course-list1">
+              <div v-for="courseItem in courseList" :key="courseItem.courseid">
+                <el-col :span="6">
                   <router-link to="/course">
-                    <a href="javascript:;">
-                      <div class="index-course-img">
-                        <img src="../assets/inspection1.jpg" class="index-course-img1">
+                    <div class="course-outbody">
+                      <div class="course-img-body">
+                        <img :src="courseItem.picurl" class="course-show-img">
                       </div>
-                      <div class="index-course-tit">
-                        <span>{{courseItem.coursename}}</span>
-                        <span>|</span>
-                        <router-link to="/SignUp">
-                          <span class="index-signup-but">点击报名</span>
-                        </router-link>
+
+                      <div class="course-info">
+                        <img src="../assets/contentBack.png">
+                        <div class="course-name" v-if="courseItem.coursename.length>11">
+                          <marquee
+                            behavior="alternate"
+                            direction="left"
+                            loop="infinite"
+                            scrollamount="1"
+                          >
+                            <h3 class="big_h3">{{courseItem.coursename}}</h3>
+                          </marquee>
+                        </div>
+                        <div class="course-name" v-if="courseItem.coursename.length<=11">
+                          <h3 class="little_h3">{{courseItem.coursename}}</h3>
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length>15">
+                          <el-tooltip content="Top center" placement="bottom">
+                            <div slot="content">{{courseItem.description}}</div>
+                            <h3>{{courseItem.description}}</h3>
+                          </el-tooltip>
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length<=15">
+                          <h3>{{courseItem.description}}</h3>
+                        </div>
                       </div>
-                      <div class="index-course-content">{{courseItem.description}}</div>
-                      <div class="index-course-other">最近开课时间： {{courseItem.traintime}}</div>
-                    </a>
+                    </div>
                   </router-link>
-                </div> -->
-                <router-link to="/course">
-                <div class="course-outbody">
-                  <div class="course-img-body">
-                    <img src="https://edu-image.nosdn.127.net/0b9d55e1-0e5a-4d89-a2ba-8522609d599e.jpg?imageView&amp;quality=100&amp;thumbnail=286y170&amp;type=webp" class="course-show-img">
-                  </div>
-                  <div class="course-info">
-                    <img src="../assets/contentBack.png">
-                    <div class="course-name">
-                      <h3>{{courseItem.coursename}}</h3>
-                    </div>
-                    <div class="course-description">
-                      <h3>{{courseItem.description}}</h3>
-                    </div>
-                  </div>
-                </div>
-                </router-link>
-              </el-col>
+                </el-col>
               </div>
+
               <el-col :span="6">
-              <div v-if="courseList.length < 8" class="course-no-over">
-                <p>更多课程，尽情期待！</p>
-              </div>
+                <router-link to="/course">
+                  <div v-if="courseList.length < 8" class="course-no-over">
+                    <p class="more-course">更多课程，尽情期待！</p>
+                    <div class="course-hover-show">
+                      <img src="../assets/favicon.png" alt>
+                      <span class="logo-words">智聚实训</span>
+                    </div>
+                  </div>
+                </router-link>
               </el-col>
             </div>
           </el-row>
@@ -101,55 +108,19 @@
 
           <div class="base-body-list">
             <el-row class="pad20 bg-white" id="index-base-background">
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
+              <div v-for="baseItem in baseList" :key="baseItem.pid">
+                <el-col :span="6">
+                  <router-link to="/base">
                     <div class="index-base-list" id="index-base-list1">
                       <div class="index-base-img-div">
-                      <img src="../assets/inspection1.jpg" class="index-base-img">
+                        <img :src="baseItem.picurl" class="index-base-img">
                       </div>
-                      <div class="index-base-name">灌浆区</div>
-                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
+                      <div class="index-base-name">{{baseItem.name}}</div>
+                      <div class="index-base-con">{{baseItem.description}}</div>
                     </div>
-                  </a>
-                </router-link>
-              </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list2">
-                      <img src="../assets/inspection2.png" class="index-base-img">
-
-                      <div class="index-base-name">质量员实训区</div>
-                      <div class="index-base-con">南通实训基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list3">
-                      <img src="../assets/inspection1.jpg" class="index-base-img">
-
-                      <div class="index-base-name">吊装实训区</div>
-                      <div class="index-base-con">徐州实训基地位于南通，主要培训项目有工艺员、质量员等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
-              <el-col :span="6">
-                <router-link to="/base">
-                  <a href="javascript:;">
-                    <div class="index-base-list" id="index-base-list4">
-                      <img src="../assets/inspection2.png" class="index-base-img">
-
-                      <div class="index-base-name">休息区</div>
-                      <div class="index-base-con">徐州实地基地位于南通，主要培训项目有灌浆工、吊装工等。</div>
-                    </div>
-                  </a>
-                </router-link>
-              </el-col>
+                  </router-link>
+                </el-col>
+              </div>
             </el-row>
           </div>
         </div>
@@ -173,46 +144,31 @@
       </div>
       <div class="friend-url-outline-body">
         <div class="friend-url">
-            <div class="friend-title">
-              <div class="friend-title-con">
-                <span>友情链接</span>
-              </div>
+          <div class="friend-title">
+            <div class="friend-title-con">
+              <span>友情链接</span>
             </div>
+          </div>
           <el-row class="no-margin-b">
             <div class="index-friend">
-              
-                  <a href="http://www.zhongnangroup.cn" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140846_75890.png"
-                      alt
-                      class="friend-img"
-                    >
-                  </a>
-                
-                  <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140855_45488.png"
-                      alt
-                      class="friend-img"
-                    >
-                  </a>
-               
-                  <a href="http://www.tjprefab.com.cn" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140910_98094.png"
-                      alt
-                     class="friend-img"
-                    >
-                  </a>
-                
-                  <a href="http://www.ntadi.cc/index.html" target="_blank">
-                    <img
-                      src="http://www.zhjcx.cn/uploads/image/20180424/20180424140932_39452.png"
-                      alt
-                      class="friend-img-last"
-                    >
-                  </a>
-                
+              <a
+                href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx"
+                target="_blank"
+              >
+                <img src="../assets/zhiliangxiehui.png" alt class="friend-img">
+              </a>
+
+              <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
+                <img src="../assets/guojiazhongxin.png" alt class="friend-img">
+              </a>
+
+              <a href="http://tjprefab.com.cn/" target="_blank">
+                <img src="../assets/tongjilvjian.png" alt class="friend-img">
+              </a>
+
+              <a href="http://www.ntadi.cc/" target="_blank">
+                <img src="../assets/nantongshiyuan.png" alt class="friend-img-last">
+              </a>
             </div>
           </el-row>
         </div>
@@ -220,8 +176,8 @@
     </div>
     <div class="index-footer-outline-body">
       <div class="index-footer">
-        <p>©2018-2019 智聚 版权所有</p>
-        <p class="index-mobile">联系电话： 18234211234</p>
+        <a href="#" class="beian">版权所有@智聚装配式绿色建筑创新中心南通有限公司</a>
+        <p class="index-mobile">联系电话： 0513-81055866</p>
       </div>
     </div>
   </div>
@@ -234,16 +190,14 @@ export default {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
+      picurl:"",
       courseList: [],
+      baseList: []
     };
   },
-
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
+  
   mounted() {
+    this.getIndexPicture();
     this.initMap();
     var that = this;
     window.addEventListener("scroll", function() {
@@ -257,19 +211,40 @@ export default {
         that.showDown = true;
       }
     });
-   this.getCourseList();
-
-
-    
-
+    this.getCourseList();
+    this.getBaseList();
   },
   methods: {
+    getIndexPicture() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_findIndexPic.do`
+      })
+        .then(res => {
+          this.picurl = res.data.picurl;
+          console.log(this.picurl)
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getBaseList() {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/base_showBaseIndex.do`
+      })
+        .then(res => {
+          this.baseList = res.data.data;
+          console.log(this.baseList);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getCourseList() {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_findIndexCourseList.do`
+        url: `${this.baseURL}/zjsxpt/course_findIndexCourseList.do`
       })
         .then(res => {
           this.courseList = res.data.data;
@@ -343,7 +318,7 @@ body > .el-container {
 .grid-content {
   border-radius: 4px;
 
-  margin: 10px 0px;
+  margin: 5px 0px 13px 0px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -546,7 +521,7 @@ body > .el-container {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
-  margin:40px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
 }
 
 .index-sign-up1:hover {
@@ -626,7 +601,7 @@ body > .el-container {
   width: 100%;
   border-radius: 50%;
 }
-.index-course-list:hover .index-course-img1{
+.index-course-list:hover .index-course-img1 {
   animation: borderRadius 1s;
   -moz-animation: borderRadius 1s; /* Firefox */
   -webkit-animation: borderRadius 1s; /* Safari and Chrome */
@@ -716,7 +691,7 @@ body > .el-container {
   transition: all ease-in-out 0.5s;
 }
 .index-base-img-div {
-   width: 280px;
+  width: 280px;
   height: 200px;
   overflow: hidden;
 }
@@ -763,18 +738,16 @@ body > .el-container {
 }
 
 .friend-img {
-  
- height: 80px;
+  height: 80px;
   width: 286px;
   border: solid 1px #eee;
   margin: 0px 20px 0px 0px;
+  object-fit: scale-down;
 }
 .friend-img-last {
-  
- height: 80px;
+  height: 80px;
   width: 286px;
   border: solid 1px #eee;
-  
 }
 
 .index-footer {
@@ -801,14 +774,13 @@ body > .el-container {
   box-shadow: 0 0 8px #c7c5c5;
 }
 .index-base-list:hover .index-base-img {
-  transform: scale(1.04);
+  transform: scale(1.1);
 }
 .company-show {
   height: 810px;
-
   width: 100%;
 
-  background: url(../assets/company.jpg) no-repeat;
+  /* background: url(../assets/company.jpg) no-repeat; */
   background-size: 100% 810px;
 }
 
@@ -931,24 +903,23 @@ body > .el-container {
 }
 .index-contact {
   margin: 0px 0px 20px 0px;
-  
 }
 .friend-title {
-  width:100%;
+  width: 100%;
   background: #f4f4f4;
   border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .friend-title-con {
-  width:100px;
+  width: 100px;
   background: #409eff;
-  padding:10px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   font-size: 16px;
-  color:#fff;
+  color: #fff;
 }
-.friend-title-con>span {
+.friend-title-con > span {
   font-weight: bold;
 }
 .more {
@@ -968,103 +939,128 @@ body > .el-container {
 }
 .course-type {
   width: 1220px;
-  height: 600px;
   background: #fff;
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 100px 0px;
   margin: 0px auto;
 }
-.course-info{
-      position: absolute;
-      margin:-95px 0px 0px 22.5PX;  
+.course-info {
+  position: absolute;
+  margin: -95px 0px 0px 22.5px;
 }
-.course-info img{
+.course-info img {
   width: 240px;
-  height:76px;
+  height: 76px;
 }
 .course-show-img {
-  width: 280px;
-  height:170px;
+  width: 100%;
+  height: 100%;
+
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
   overflow: hidden;
 }
 .course-outbody {
   width: 280px;
-  height:170px;
-  margin:20px 10px 5px 10px; 
+  height: 170px;
+  margin: 20px 10px 5px 10px;
   border-radius: 4px;
 }
 .course-outbody:hover .course-show-img {
   transform: scale(1.2);
 }
+
 .course-name {
   position: absolute;
-  width:200px;
-  height:30px;
-  margin:-75px 0px 0px 19px;
+  width: 200px;
+  height: 30px;
+  margin: -75px 0px 0px 19px;
   text-align: center;
 }
-.course-name h3 {
-    font-size: 18px;
-    height: 24px;
-    line-height: 24px;
-    margin: 14px 0 3px;
-    color: #333;
-    overflow: hidden;
-    font-weight: normal;
+.big_h3 {
+  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  margin: 14px 0 3px;
+  color: #333;
+  padding: 0px 15px;
+  font-weight: normal;
+}
+.little_h3 {
+  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  margin: 14px 0 3px;
+  color: #333;
+
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .course-description {
   position: absolute;
-  width:220px;
-  height:30px;
-  margin:-30px 0px 0px 10px;
+  width: 220px;
+  height: 30px;
+  margin: -30px 0px 0px 10px;
   text-align: center;
-  
 }
 .course-description h3 {
-    font-size: 14px;
-    height: 19px;
-    line-height: 19px;
-    margin: 0;
-    color: #666;
-    overflow:hidden;text-overflow:ellipsis; 
+  font-size: 14px;
+  height: 19px;
+  line-height: 19px;
+  margin: 0;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .course-no-over {
-  width:280px;
-  height:170px;
-    border: 1px solid #409eff;
-    margin:20px 10px 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
+  width: 280px;
+  height: 170px;
+  border: 1px solid #409eff;
+  margin: 20px 10px 5px 10px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
 }
-.course-no-over p{
+.course-no-over p {
   line-height: 170px;
-  font-size:20px;
+  font-size: 20px;
   font-weight: 400;
   color: #666;
 }
-.course-no-over:hover {
-  /* background: url("../assets/hop.jpg") no-repeat; */
-  background-size: 100% 100%
+.course-hover-show {
+  opacity: 0;
+  margin-top: -27px;
+  transition: all ease-in-out 0.3s;
+}
+.course-hover-show > img {
+  margin: -5px 0px 0px 0px;
+  width: 25px;
+  height: 25px;
+}
+.course-hover-show > span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+}
+.course-no-over:hover .course-hover-show {
+  opacity: 1;
+  margin-top: -100px;
 }
 
-/* .index-base-img {
-  display: block;
-  width: 280px;
-  height: 200px;
-  transition: all ease-in-out 0.5s;
+.more-course {
+  opacity: 1;
+  transition: all ease-in-out 0.3s;
 }
-.index-base-img-div {
-   width: 280px;
-  height: 200px;
-  overflow: hidden;
+.course-no-over:hover .more-course {
+  opacity: 0;
 }
-.index-base-list:hover .index-base-img {
-  transform: scale(1.04);
-} */
+
 @keyframes myfirst {
   0% {
     bottom: 30px;
@@ -1088,7 +1084,6 @@ body > .el-container {
     bottom: 30px;
   }
 }
-
 @-webkit-keyframes myfirst /* Safari and Chrome */ {
   0% {
     bottom: 30px;
@@ -1100,7 +1095,6 @@ body > .el-container {
     bottom: 30px;
   }
 }
-
 @-o-keyframes myfirst /* Opera */ {
   0% {
     bottom: 30px;
@@ -1111,6 +1105,9 @@ body > .el-container {
   100% {
     bottom: 30px;
   }
+}
+.beian {
+  color: #fff;
 }
 </style>
 

@@ -22,6 +22,7 @@
                         v-model="ruleForm.course1"
                         placeholder="请选择课程"
                         @change="getAddressList1(ruleForm.course1),getTimeList1(ruleForm.course1),getMealList1(ruleForm.course1)"
+                       
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -136,7 +137,7 @@
                       <div class="div-delete">
                         <el-button
                           type="primary"
-                          @click="centerDialogVisible1 = true"
+                          @click="chooseEmp1"
                           class="choose-person"
                         >选择人员</el-button>
                       </div>
@@ -267,7 +268,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible2 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp2">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -398,7 +399,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible3 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp3">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -527,7 +528,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary" @click="centerDialogVisible4 = true">选择人员</el-button>
+                        <el-button type="primary"  @click="chooseEmp4">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -538,7 +539,7 @@
           <el-col :span="24">
             <div class="nextPage1-batch">
               <el-form-item>
-                <el-button type="primary" @click.prevent="submitForm('ruleForm')">下一步</el-button>
+                <el-button type="primary" @click.prevent="submitForm1('ruleForm')">下一步</el-button>
               </el-form-item>
             </div>
           </el-col>
@@ -611,47 +612,93 @@ export default {
         time4: "",
         meal4: ""
       },
-      tableData1: [{}]
+      tableData1: []
     };
   },
   methods: {
-    submitForm(formName) {
+    chooseEmp1() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible1 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp2() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible2 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp3() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible3 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    chooseEmp4() {
+      if(this.tableData1.length>0) {
+this.centerDialogVisible4 = true;
+      } else {
+        this.$message({
+          message: "请先前往客户中心-公司人员添加公司人员",
+          center: true,
+          type: 'warning'
+        });
+      } 
+    },
+    submitForm1(formName) {
+
       var from1Empty = 0;
       var from2Empty = 0;
       var from3Empty = 0;
       var from4Empty = 0;
       if (
-        this.ruleForm.course1 == "" ||
-        this.ruleForm.Address1 == "" ||
-        this.ruleForm.time1 == "" ||
-        this.ruleForm.meal1 == "" ||
+        this.ruleForm.course1 == ""||this.ruleForm.course1 == null||
+        this.ruleForm.Address1 == "" || this.ruleForm.Address1 == null||
+        this.ruleForm.time1 == "" || this.ruleForm.time1 == null||
+        this.ruleForm.meal1 == "" || this.ruleForm.meal1 == null||
         this.personSize1 < 1
       ) {
+        
         from1Empty = 1;
       }
       if (
-        this.ruleForm.course2 == "" ||
-        this.ruleForm.Address2 == "" ||
-        this.ruleForm.time2 == "" ||
-        this.ruleForm.meal2 == "" ||
+        this.ruleForm.course2 == ""||this.ruleForm.course2 == null||
+        this.ruleForm.Address2 == "" || this.ruleForm.Address2 == null||
+        this.ruleForm.time2 == "" || this.ruleForm.time2 == null||
+        this.ruleForm.meal2 == "" || this.ruleForm.meal2 == null||
         this.personSize2 < 1
       ) {
         from2Empty = 1;
       }
       if (
-        this.ruleForm.course3 == "" ||
-        this.ruleForm.Address3 == "" ||
-        this.ruleForm.time3 == "" ||
-        this.ruleForm.meal3 == "" ||
+        this.ruleForm.course3 == ""||this.ruleForm.course3 == null||
+        this.ruleForm.Address3 == "" || this.ruleForm.Address3 == null||
+        this.ruleForm.time3 == "" || this.ruleForm.time3 == null||
+        this.ruleForm.meal3 == "" || this.ruleForm.meal3 == null||
         this.personSize3 < 1
       ) {
         from3Empty = 1;
       }
       if (
-        this.ruleForm.course4 == "" ||
-        this.ruleForm.Address4 == "" ||
-        this.ruleForm.time4 == "" ||
-        this.ruleForm.meal4 == "" ||
+        this.ruleForm.course4 == ""||this.ruleForm.course4 == null||
+        this.ruleForm.Address4 == "" || this.ruleForm.Address4 == null||
+        this.ruleForm.time4 == "" || this.ruleForm.time4 == null||
+        this.ruleForm.meal4 == "" || this.ruleForm.meal4 == null||
         this.personSize4 < 1
       ) {
         from4Empty = 1;
@@ -677,6 +724,7 @@ export default {
           active: this.active
         });
         this.bus.$emit("todata", {
+          type: "1",
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,
@@ -698,6 +746,7 @@ export default {
           meal4: this.ruleForm.meal4,
           multipleSelection4: this.multipleSelection4
         });
+        
       }
     },
     addNew1() {

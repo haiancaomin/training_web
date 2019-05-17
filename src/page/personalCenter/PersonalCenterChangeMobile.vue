@@ -11,7 +11,7 @@
       <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
         <el-form-item prop="mobile">
           <div class="input-body" id="loginForm">
-            <el-input type="text" placeholder="请输入新手机号" v-model="ruleForm.mobile">
+            <el-input type="text" placeholder="请输入新手机号" v-model="ruleForm.mobile" id="newMobile1">
               <i slot="prefix" class="el-icon-edit-outline"></i>
             </el-input>
           </div>
@@ -27,6 +27,8 @@
               :on-success="uploadSuccess"
               :on-remove="removeUpload"
               :on-exceed="noticeOut"
+              :before-upload="checkSize"
+               accept=".jpg,.png"
               :limit="2"
               multiple
             >
@@ -36,6 +38,7 @@
                 <em>法人身份照扫描件</em>和
                 <em>营业执照扫描件</em>
               </div>
+              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
             </el-upload>
           </div>
         </el-form-item>
@@ -66,13 +69,16 @@
     </div>
 
     <div class="changeMobileFailed" v-if="changeMobileStatus == '2'">
-      
-      <p><i class="iconfont">&#xe7bd;</i>抱歉，您提交的材料认证失败了</p>
+      <p>
+        <i class="iconfont">&#xe7bd;</i>抱歉，您提交的材料认证失败了
+      </p>
       <el-button type="primary" @click="changeMobileAgain">重新认证</el-button>
     </div>
 
     <div class="changeMobileSuccess" v-if="changeMobileStatus == '3'">
-      <p><i class="iconfont" id="happy">&#xe60b;</i>您的公司联系电话已修改完成！</p>
+      <p>
+        <i class="iconfont" id="happy">&#xe60b;</i>您的公司联系电话已修改完成！
+      </p>
       <el-button type="primary" @click="changeMobileAgain">知道了</el-button>
     </div>
   </div>
@@ -84,7 +90,7 @@ export default {
   data() {
     return {
       ruleForm: {
-        mobile: "",
+        mobile: ""
       },
       rules: {
         mobile: [
@@ -94,11 +100,12 @@ export default {
             pattern: /^1[34578]\d{9}$/,
             trigger: "blur"
           }
-        ],
+        ]
       },
       changeMobileStatus: "",
-        contact: false,
-        fileUid: "",
+      countFocus: 0,
+      contact: false,
+      fileUid: ""
     };
   },
   computed: {
@@ -107,25 +114,40 @@ export default {
     }
   },
   methods: {
+    checkSize(file) {
+      if (file.size / 1024 > 1024) {
+        this.$message({
+          message: "文件不能大于1MB！",
+          center: true
+        });
+        return false;
+      } else if(file.name.split(".")[file.name.split(".").length-1] != "jpg"&&file.name.split(".")[file.name.split(".").length-1] != "png") {
+        this.$message({
+          message: "只能上传jpg/png文件",
+          center: true
+        });
+        return false;
+      }
+    },
     changeMobileAgain() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
-    this.$ajax({
+      this.$ajax({
         method: "get",
         url: `${
           this.baseURL
         }/zjsxpt/invoice_resetPhoneStatus.do?userid=${userid}`
       })
         .then(res => {
-          if(res.data.data) {
+          if (res.data.data) {
             this.changeMobileStatus = "0";
           } else {
             this.$message({
-        message: "获取客户信息失败或网络异常！",
-        center: true
-      });
+              message: "获取客户信息失败或网络异常！",
+              center: true
+            });
           }
         })
         .catch(function(err) {
@@ -134,14 +156,12 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
-      console.log(file);
-      console.log(fileList);
+     
     },
     removeUpload(file, fileList) {
-      console.log(file.response.data);
-      console.log(fileList);
-      this.splitFileUid(file.response.data);
-      alert(this.fileUid);
+      if (file.response) {
+        this.splitFileUid(file.response.data);
+      }
     },
     noticeOut(files, fileList) {
       this.$message({
@@ -159,38 +179,42 @@ export default {
     submitUpload(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-      this.$refs.upload.submit();
-      if (this.fileUid == "") {
-        this.$message({
-          message: "请上传文件！",
-          center: true
-        });
-      } else {
-        var userInfo = JSON.parse(sessionStorage.getItem("user"));
-        if (userInfo) {
-          var userid = userInfo.userid;
-        }
-        this.$ajax({
-          method: "post",
-          url: `${this.baseURL}/zjsxpt/invoice_updatePhone.do?userid=${userid}&newphone=${this.ruleForm.mobile}&attachmentids=${this.fileUid}`
-        })
-          .then(res => {
+          this.$refs.upload.submit();
+          if (this.fileUid == "") {
             this.$message({
-              message: "上传成功！",
+              message: "请上传文件！",
               center: true
             });
-            this.changeMobileStatus = 1;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
-      } else {
+          } else {
+            var userInfo = JSON.parse(sessionStorage.getItem("user"));
+            if (userInfo) {
+              var userid = userInfo.userid;
+            }
+            this.$ajax({
+              method: "post",
+              url: `${
+                this.baseURL
+              }/zjsxpt/invoice_updatePhone.do?userid=${userid}&newphone=${
+                this.ruleForm.mobile
+              }&attachmentids=${this.fileUid}`
+            })
+              .then(res => {
+                this.$message({
+                  message: "上传成功！",
+                  center: true
+                });
+                this.changeMobileStatus = 1;
+              })
+              .catch(function(err) {
+                console.log(err);
+              });
+          }
+        } else {
           console.log("error submit!!");
           return false;
         }
       });
-    },
+    }
   },
   mounted() {
     var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -209,6 +233,12 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+  },
+  updated: function() {
+    this.countFocus++;
+    if (this.changeMobileStatus == 0 && this.countFocus < 2) {
+      document.getElementById("newMobile1").focus();
+    }
   }
 };
 </script>
@@ -236,6 +266,9 @@ export default {
 .el-breadcrumb {
   background: #e4e7ed;
 }
+.el-upload__tip {
+  margin: 0px 0px 0px 80px;
+}
 .input-input {
   border: 1px solid #c5cddb;
   width: 358px;
@@ -258,7 +291,7 @@ export default {
   margin: 1px 0px 0px 12px;
 }
 .change-mobile-form {
-  padding: 0px 190px 0px 190px;
+  padding: 0px 179px 0px 190px;
 }
 .login-self {
   width: 360px;
@@ -286,31 +319,32 @@ export default {
   text-align: center;
   margin: 120px 0px 0px 0px;
 }
-.changeMobileFailed>p {
+.changeMobileFailed > p {
   font-size: 20px;
-  color:#F56C6C;
-  margin:0px 0px 40px 0px;
+  color: #f56c6c;
+  margin: 0px 0px 40px 0px;
 }
 .changeMobileSuccess {
   text-align: center;
   margin: 120px 0px 0px 0px;
 }
-.changeMobileSuccess>p {
+.changeMobileSuccess > p {
   font-size: 24px;
-  color:#67C23A; 
-  margin:0px 0px 40px 0px;
+  color: #67c23a;
+  margin: 0px 0px 40px 0px;
 }
 #happy {
   font-size: 28px;
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 1131189 */
-  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot');
-  src: url('//at.alicdn.com/t/font_1131189_kt4thveua8j.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1131189_kt4thveua8j.svg#iconfont') format('svg');
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_kt4thveua8j.eot");
+  src: url("//at.alicdn.com/t/font_1131189_kt4thveua8j.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_kt4thveua8j.svg#iconfont") format("svg");
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -319,8 +353,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
-  margin:0px 5px 0px 0px;
-  
+  margin: 0px 5px 0px 0px;
 }
 </style>
 

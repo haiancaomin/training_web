@@ -1,7 +1,7 @@
 <template>
   <div id="HRServiceJobSeekerResumeInfo" @mouseenter="enter()" @mouseleave="leave()">
     <div id="resumePicture">
-        <img src="../../assets/inspection1.jpg" id="pictureShow" alt>
+        <!-- <img src="../../assets/inspection1.jpg" id="pictureShow" alt> -->
     </div>
      <span class="el-icon-edit-outline" v-if="showedit"></span>
     <div id="resumeName">

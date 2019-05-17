@@ -2,16 +2,7 @@
   <div id="PersonalCenterNotInvoice">
     
     <div class="order-dialog">
-      <el-dialog title="报名人员信息" :visible.sync="showEmpDia" width="600px" center>
-        <el-table :data="tableData" border max-height="400" style="width: 100%">
-          <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
-          <el-table-column prop="cardno" label="身份证" width="280"></el-table-column>
-          <el-table-column prop="coursename" label="课程"></el-table-column>
-        </el-table>
-        <div class="sign-submit">
-          <el-button type="primary" @click="showEmpDia=false">关闭</el-button>
-        </div>
-      </el-dialog>
+      
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
@@ -129,7 +120,7 @@
         </el-col>
         <el-col :span="17">
           <div class="order-detail">
-            <span v-for="(menuname,index) in orderItem.dlist" :key="index"><i v-if="index > 0">+</i>{{menuname.menuname}}</span>
+            <p v-for="(menuname,index) in orderItem.dlist" :key="index">{{menuname.coursename}}（{{menuname.menuname}}）</p>
           </div>
           <p class="order-time">下单时间：{{orderItem.createdate}}</p>
           <p class="order-num">订单号：{{orderItem.orderno}}</p>
@@ -142,7 +133,7 @@
       </div>
       <div class="order-operation">
         <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
-        <el-button type="primary" round plain @click="checkEmp(orderItem.orderid)">报名员工</el-button>
+        <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid"><el-button type="primary" round plain>订单详情</el-button></router-link>
         <el-button type="primary" round @click="getInvoice(orderItem.orderid,orderItem.summoney)" v-if="orderItem.status==1">开具发票</el-button>
         <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
         <el-button type="primary" round plain @click="scheduleSuccess = true" v-if="orderItem.status==3">开票进度</el-button>
@@ -171,9 +162,9 @@ export default {
       schedule: false,
       scheduleSuccess: false,
       dialogVisible: false,
-      orderlist: [{}],
+      orderlist: [],
       count:0,
-      tableData: [{}],
+     
       showEmpDia: false,
       deleteOrderShow: false,
       deleteOrderID: "",
@@ -274,21 +265,6 @@ export default {
         this.getNotPayOrderList(val);
         this.currentPage = val;
     },
-    checkEmp(orderid) {
-      this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_findPersonListByOrderid.do?orderid=${orderid}`
-        })
-          .then(res => {
-            this.tableData = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      this.showEmpDia = true;
-    },
     getNotPayOrderList(selectIndex) {
       var pageIndex = (selectIndex - 1)*3
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -375,6 +351,7 @@ export default {
   width: 141px;
   height: 141px;
   margin: 0px 0px 0px 10px;
+   object-fit:cover;
 }
 .order-picture {
   height: 162px;
@@ -382,22 +359,22 @@ export default {
   background-color: #f4f4f4;
 }
 .order-detail {
-  font-size: 17px;
-  margin: 10px 0px 0px 0px;
+  font-size: 16px;
+  margin: 0px 0px 0px 0px;
   color: #333;
-  height: 85px;
+  height: 100px;
 }
 .order-time {
   text-align: left;
   margin: 0px 10px 0px 0px;
   font-size: 13px;
-  color: #333;
+  color: #888;
 }
 .order-num {
   text-align: left;
   margin: 5px 10px 0px 0px;
   font-size: 13px;
-  color: #333;
+  color: #888;
 }
 .order-pay {
   height: 50px;

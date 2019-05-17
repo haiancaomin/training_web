@@ -1,85 +1,14 @@
 <template>
-  <div id="SignUpPay">
-    <div>
-      <div clsss="pay-online">
-        <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
+  <div id="PersonalCenterOrderDetail">
+      <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
           <el-table :data="tableData" border max-height="400" style="width: 100%">
             <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
             <el-table-column prop="cardno" label="身份证"></el-table-column>
           </el-table>
-          <el-button type="primary" class="sign-submit1" @click="showTable=false">确认</el-button>
+          <el-button type="primary" class="sign-submit" @click="showTable=false">确认</el-button>
         </el-dialog>
-        <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" center>用户付费协议文案</el-dialog>
-
-        <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
-          <div class="offline-context">
-          <p class="offline-notice">转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
-          <p>&nbsp;</p>
-          <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
-          <br>
-          <p>开 户 行：中国**银行股份有限公司**支行</p>
-          <p>收款户名：***</p>
-          <p>帐 号：1234567890</p>
-        </div>
-        <div class="check_operation">
-          <el-button type="primary" class="sign-submit" @click="payWait">我已确认</el-button>
-          <el-button type="primary" class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
-        </div>
-        </el-dialog>
-
-        <div class="pay-online-body">
-          <div class="pay-online-check">
-            <h1>确认订单信息</h1>
-            
-          </div>
-
-          <div class="user-info">
-            <div class="user-name">
-              购买帐号：
-              <span>{{userName}}</span>
-            </div>
-            <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
-          </div>
-          <div class="pay-type">支付方式</div>
-          <el-collapse accordion id="pay_choose">
-            <el-collapse-item>
-              <template slot="title">
-                <div v-if="radio2==3" class="choose-zhifubao">
-                  <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
-                </div>
-                <span v-if="radio2==6" class="choose-weixin">
-                  <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                </span>
-                <span v-if="radio2==9" class="choose-bank">
-                  <img src="../../assets/weixin_mini.png" class="icon-mini">转账汇款
-                </span>
-              </template>
-              <div class="pay-choose">
-                <el-radio-group v-model="radio2">
-                  <div class="pay-zhifubao">
-                    <el-col :span="24">
-                      <el-radio :label="3">
-                        <img src="../../assets/zhifubao.jpg" class="pay-img">
-                      </el-radio>
-                    </el-col>
-                  </div>
-                  <div class="pay-weixin">
-                    <el-radio :label="6">
-                      <img src="../../assets/weixin.jpg" class="pay-img">
-                    </el-radio>
-                  </div>
-                  <div class="pay-bank">
-                    <el-radio :label="9">
-                      <img src="../../assets/weixin.jpg" class="pay-img">
-                    </el-radio>
-                  </div>
-                </el-radio-group>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-
-          <div class="meal-body">
-            <div class="pay-meal">购买套餐</div>
+    <div class="meal-body">
+          <h1 class="file-title">订单详情</h1>
 
             <el-collapse accordion  v-for="orderItem in orderDetail.dlist"
                     :key="orderItem.detailid">
@@ -161,107 +90,20 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-        </div>
-
-        <div class="payment-body" v-if="radio2==3||radio2==6">
-          <div class="payment-sub-body">
-            <el-col :span="18">
-              <div class="agreement-con">
-                完成支付则表示您同意
-                <span class="agreement" @click="showProtocol = true">《智聚用户付费协议》</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="pay-price-btn f-fr">
-                <div class="pay-price-btn_price">
-                  <span class="price_title">待付款:</span>
-                  <span class="price_account">
-                    <span class="price_account_icon">￥</span>
-                    {{orderDetail.summoney}}
-                  </span>
-                </div>
-                <span class="pay-price-btn_btn" @click="payNow">立即支付</span>
-                <div>
-                  <span class="pay-price-btn_wait" @click="payWait">稍后支付</span>
-                </div>
-              </div>
-            </el-col>
-          </div>
-        </div>
-        <div class="payment-body" v-if="radio2==9">
-          <div class="payment-sub-body2">
-            <el-col :span="18">
-              <div class="agreement-con2">
-                完成支付则表示您同意
-                <span class="agreement" @click="showProtocol = true">《智聚用户付费协议》</span>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="pay-price-btn f-fr">
-                <div class="pay-price-btn_price">
-                  <span class="price_title">待付款:</span>
-                  <span class="price_account">
-                    <span class="price_account_icon">￥</span>
-                    {{orderDetail.summoney}}
-                  </span>
-                </div>
-                
-                <div>
-                  <span class="pay-price-btn_btn2" @click="showAccountDialog=true">汇款账户</span>
-                </div>
-              </div>
-            </el-col>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: "PersonalCenterOrderDetail",
   data() {
     return {
-      isIndeterminate: true,
-      showPersonInfo: false,
-      enterCount: 0,
-      radio2: 9,
-      SignUpPayPage: 0,
-      SignUpSuccessPage: 0,
-      SignUpPageWaitPage: 0,
-      userName: "",
-      active: 0,
-      showAccountDialog: false,
-      showTable: false,
-      showProtocol: false,
-
-      tableData: [],
+        showTable:false,
+        tableData: [],
       orderDetail: []
     };
   },
-
-  mounted() {
-    var userInfo = JSON.parse(sessionStorage.getItem("user")),
-      that = this;
-    if (userInfo) {
-      this.userName = userInfo.name;
-    }
-    this.bus.$on("toNextPage", function(val) {
-      this.$ajax({
-        method: "get",
-        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${
-          val.orderID
-        }`
-      })
-        .then(res => {
-          that.orderDetail = res.data.data;
-          console.log(that.orderDetail);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    });
-  },
+  props:['orderid'],
   methods: {
     checkEmp(empList) {
       this.$ajax({
@@ -278,33 +120,44 @@ export default {
         });
       this.showTable = true;
     },
+  },
+  mounted() {
+     
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${this.orderid}`
+      })
+        .then(res => {
+          this.orderDetail = res.data.data;
+          console.log(this.orderDetail);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
   
-    payNow() {
-      this.SignUpPayPage = 0;
-      this.SignUpSuccessPage = 1;
-      this.active = 4;
-      this.$emit("ToSignUpSuccessPage", {
-        SignUpPayPage: this.SignUpPayPage,
-        SignUpSuccessPage: this.SignUpSuccessPage,
-        active: this.active
-      });
-    },
-    payWait() {
-      this.showAccountDialog = false;
-      this.SignUpPayPage = 0;
-      this.SignUpPageWaitPage = 1;
-      this.active = 4;
-      this.$emit("ToSignUpPageWaitPage", {
-        SignUpPayPage: this.SignUpPayPage,
-        SignUpPageWaitPage: this.SignUpPageWaitPage,
-        active: this.active
-      });
-    }
   }
 };
 </script>
 
 <style scoped>
+#PersonalCenterOrderDetail {
+   width: 1000px;
+  margin: 0px auto;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  padding: 0px 30px 30px 30px;
+  margin-top:80px;
+}
+.file-title {
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #e4e7ed;
+  background: #e4e7ed;
+  padding: 0 15px;
+  border-radius: 3px;
+  border-left: 2px solid #409eff;
+}
 .pay-online-body {
   width: 900px;
   margin: 0px 20px 0px 20px;
@@ -532,9 +385,6 @@ export default {
   font-size: 14px;
 }
 .sign-submit {
-  margin: 30px 50px 0px 50px;
-}
-.sign-submit1 {
   margin: 30px 0px 0px 190px;
 }
 .more_info {
@@ -581,5 +431,8 @@ export default {
 #meal-body-collapse .el-collapse-item__content {
   padding:0px;
 }
-
+.cell {
+    text-align: center;
+}
 </style>
+

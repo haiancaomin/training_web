@@ -1,9 +1,9 @@
 <template>
-  <div class="SchoolSignUp">
+  <div class="TeamSignUp">
     <div calss="batch-sign-up">
       <div class="batch-sign-up-notice">
         <p id="signup-no-info-notice1">
-          校园报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
+          团队报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
           <router-link to="/personalCenter/PersonalCenterAddPerson">
             <span class="signup-here">这里</span>
           </router-link>进入客户中心填写。
@@ -539,7 +539,7 @@
           <el-col :span="24">
             <div class="nextPage1-batch">
               <el-form-item>
-                <el-button type="primary" @click.prevent="submitForm2('ruleForm')">下一步</el-button>
+                <el-button type="primary" @click.prevent="submitForm4('ruleForm')">下一步</el-button>
               </el-form-item>
             </div>
           </el-col>
@@ -660,7 +660,7 @@ this.centerDialogVisible4 = true;
         });
       } 
     },
-    submitForm2(formName) {
+    submitForm4(formName) {
 
       var from1Empty = 0;
       var from2Empty = 0;
@@ -724,7 +724,7 @@ this.centerDialogVisible4 = true;
           active: this.active
         });
         this.bus.$emit("todata", {
-          type: "2",
+            type: "4",
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,

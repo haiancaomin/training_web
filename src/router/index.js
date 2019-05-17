@@ -1,221 +1,153 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import TopNav from '@/components/TopNav'
-import Index from '@/page/Index'
-import SignUp from '@/page/signUp/SignUp'
-import CompanySignUp from '@/page/signUp/CompanySignUp'
-import SchoolSignUp from '@/page/signUp/SchoolSignUp'
-import PersonalSignUp from '@/page/signUp/PersonalSignUp'
-import Accounts from '@/page/signUp/Accounts'
-import SignUpPay from '@/page/signUp/SignUpPay'
-import SignUpSuccess from '@/page/signUp/SignUpSuccess'
-import SignUpPageWait from '@/page/signUp/SignUpPageWait'
-
-import courseList from '@/page/course/courseList'
-import fileList from '@/page/downloads/fileList'
-import Inspection from '@/page/inspection/Inspection'
-import InspectionDetail from '@/page/inspection/InspectionDetail'
-import PersonalCenter from '@/page/personalCenter/PersonalCenter'
-
-import PersonalCenterInvoiceShow from '@/page/personalCenter/PersonalCenterInvoiceShow'
-import PersonalPassword from '@/page/personalCenter/PersonalPassword'
-import PesronalScoreSearch from '@/page/personalCenter/PesronalScoreSearch'
-
-import PersonalCenterAddPerson from '@/page/personalCenter/PersonalCenterAddPerson'
-import PersonalCenterPersonInfo from '@/page/personalCenter/PersonalCenterPersonInfo'
-import PersonalCenterAllOrder from '@/page/personalCenter/PersonalCenterAllOrder'
-import PersonalCenterUncompletedOrder from '@/page/personalCenter/PersonalCenterUncompletedOrder'
-import PersonalCenterNotInvoice from '@/page/personalCenter/PersonalCenterNotInvoice'
-import PersonalCenterAuthentication from '@/page/personalCenter/PersonalCenterAuthentication'
-import PersonalCenterReport from '@/page/personalCenter/PersonalCenterReport'
-import PersonalCenterCertificate from '@/page/personalCenter/PersonalCenterCertificate'
-import PersonalCenterChangeMobile from '@/page/personalCenter/PersonalCenterChangeMobile'
-import HRServiceTypeChoice from '@/page/HRService/HRServiceTypeChoice'
-import HRServiceJobSeekerIndex from '@/page/HRService/HRServiceJobSeekerIndex'
-import HRServiceHRIndex from '@/page/HRService/HRServiceHRIndex'
-import HRServiceJobSeekerResume from '@/page/HRService/HRServiceJobSeekerResume'
-import HRServiceJobSeekerResumeInfo from '@/page/HRService/HRServiceJobSeekerResumeInfo'
-
-import baseMenu from '@/page/base/baseMenu'
-import baseOverView from '@/page/base/baseOverView'
-import baseShow1 from '@/page/base/baseShow1'
-import newsList from '@/page/news/newsList'
-import newsDetail from '@/page/news/newsDetail'
-
-
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
     path: '/',
-    component: TopNav,
+    component: resolve => require(['@/components/TopNav'], resolve),
     children: [{
-      path: '',
-      redirect: '/index'
-    }, {
-      path: '/index',
-      component: Index
-    },
-    {
-      path: '/SignUp',
-      name: 'SignUp',
-      component: SignUp
-    },
-    {
-      path: '/PesronalScoreSearch',
-      name: 'PesronalScoreSearch',
-      component: PesronalScoreSearch
-    },
-    {
-      path: '/CompanySignUp',
-      name: 'CompanySignUp',
-      component: CompanySignUp
-    },
-    {
-      path: '/SchoolSignUp',
-      name: 'SchoolSignUp',
-      component: SchoolSignUp
-    },
-    {
-      path: '/PersonalSignUp',
-      name: 'PersonalSignUp',
-      component: PersonalSignUp
-    },
-    {
-      path: '/Accounts',
-      name: 'Accounts',
-      component: Accounts
-    },{
-      path: '/SignUpPay',
-      name: 'SignUpPay',
-      component: SignUpPay
-    },
-    {
-      path: '/SignUpSuccess',
-      name: 'SignUpSuccess',
-      component: SignUpSuccess
-    },
-    {
-      path: '/SignUpPageWait',
-      name: 'SignUpPageWait',
-      component: SignUpPageWait
-    },
-    // {
-    //   path: '/Diagram',
-    //   name: 'Diagram',
-    //   component: Diagram
-    // },
-    // {
-    //   path: '/Echarts',
-    //   name: 'Echarts',
-    //   component: Echarts
-    // },
-   
-    {
-      path: '/course',
-      component: courseList
-    }, {
-      path: '/download',
-      component: fileList
-    }, {
-      path: '/base',
-      component: baseMenu,
-      children: [{
-        path: 'overview/:id',
-        component: baseOverView,
-        props: true
-      }, {
-        path: 'show1/:id',
-        component: baseShow1,
-        props: true
-      }]
-    }, {
-      path: '/PersonalCenter',
-      component: PersonalCenter,
-      children: [{
         path: '',
-        redirect: '/PersonalCenter/PersonalCenterAllOrder',
+        redirect: '/index'
       }, {
-        path: 'PersonalCenterAddPerson',
-        component: PersonalCenterAddPerson,
+        path: '/index',
+        component: resolve => require(['@/page/Index'], resolve)
+      },
+      {
+        path: '/Forget',
+        component: resolve => require(['@/components/Forget'], resolve)
+      },
+      {
+        path: 'PersonalCenterOrderDetail/:orderid',
+        component: resolve => require(['@/page/personalCenter/PersonalCenterOrderDetail'], resolve),
+        props: true
+      },
+      {
+        path: 'InspectionDetail/:eid',
+        component: resolve => require(['@/page/inspection/InspectionDetail'], resolve),
+        props: true
+      },
+      {
+        path: '/SignUp',
+        component: resolve => require(['@/page/signUp/SignUp'], resolve),
+        meta: {
+          auth: true
+        }
+      },
+      {
+        path: '/PesronalScoreSearch',
+        component: resolve => require(['@/page/personalCenter/PesronalScoreSearch'], resolve)
+      },
+      {
+        path: '/CompanySignUp',
+        name: 'CompanySignUp',
+        component: resolve => require(['@/page/signUp/CompanySignUp'], resolve)
+      },
+      {
+        path: '/SchoolSignUp',
+        name: 'SchoolSignUp',
+        component: resolve => require(['@/page/signUp/SchoolSignUp'], resolve)
+      },
+      {
+        path: '/PersonalSignUp',
+        name: 'PersonalSignUp',
+        component: resolve => require(['@/page/signUp/PersonalSignUp'], resolve)
+      },
+      {
+        path: '/TeamSignUp',
+        name: 'TeamSignUp',
+        component: resolve => require(['@/page/signUp/TeamSignUp'], resolve)
+      },
+      {
+        path: '/Accounts',
+        name: 'Accounts',
+        component: resolve => require(['@/page/signUp/Accounts'], resolve)
       }, {
-        path: 'PersonalCenterPersonInfo',
-        component: PersonalCenterPersonInfo,
+        path: '/SignUpPay',
+        name: 'SignUpPay',
+        component: resolve => require(['@/page/signUp/SignUpPay'], resolve)
+      },
+      {
+        path: '/SignUpSuccess',
+        name: 'SignUpSuccess',
+        component: resolve => require(['@/page/signUp/SignUpSuccess'], resolve)
+      },
+      {
+        path: '/SignUpPageWait',
+        name: 'SignUpPageWait',
+        component: resolve => require(['@/page/signUp/SignUpPageWait'], resolve)
+      },
+      {
+        path: '/course',
+        component: resolve => require(['@/page/course/courseList'], resolve)
       }, {
-        path: 'PersonalCenterInvoiceShow',
-        component: PersonalCenterInvoiceShow,
+        path: '/download',
+        component: resolve => require(['@/page/downloads/fileList'], resolve)
       }, {
-        path: 'PersonalPassword',
-        component: PersonalPassword,
+        path: '/base',
+        component: resolve => require(['@/page/base/baseMenu'], resolve),
+        children: [{
+          path: 'overview/:id',
+          component: resolve => require(['@/page/base/baseOverView'], resolve),
+          props: true
+        }, {
+          path: 'show1/:id',
+          component: resolve => require(['@/page/base/baseShow1'], resolve),
+          props: true
+        }]
       }, {
-        path: 'PersonalCenterAllOrder',
-        component: PersonalCenterAllOrder,
+        path: '/PersonalCenter',
+        component: resolve => require(['@/page/personalCenter/PersonalCenter'], resolve),
+        meta: {
+          auth: true
+        },
+        children: [{
+            path: 'PersonalCenterAddPerson',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterAddPerson'], resolve)
+          }, {
+            path: 'PersonalCenterPersonInfo',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterPersonInfo'], resolve)
+          }, {
+            path: 'PersonalCenterInvoiceShow',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterInvoiceShow'], resolve)
+          }, {
+            path: 'PersonalPassword',
+            component: resolve => require(['@/page/personalCenter/PersonalPassword'], resolve)
+          }, {
+            path: 'PersonalCenterAllOrder',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterAllOrder'], resolve)
+          }, {
+            path: 'PersonalCenterUncompletedOrder',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterUncompletedOrder'], resolve)
+          }, {
+            path: 'PersonalCenterNotInvoice',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterNotInvoice'], resolve)
+          },
+          {
+            path: 'PersonalCenterAuthentication',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterAuthentication'], resolve)
+          }, {
+            path: 'PersonalCenterCertificate',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterCertificate'], resolve)
+          }, {
+            path: 'PersonalCenterChangeMobile',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterChangeMobile'], resolve)
+          }
+        ]
       }, {
-        path: 'PersonalCenterUncompletedOrder',
-        component: PersonalCenterUncompletedOrder,
-      }, {
-        path: 'PersonalCenterNotInvoice',
-        component: PersonalCenterNotInvoice,
-      }, 
-       {
-        path: 'PersonalCenterAuthentication',
-        component: PersonalCenterAuthentication,
-      }, {
-        path: 'PersonalCenterReport',
-        component: PersonalCenterReport,
-      }, {
-        path: 'PersonalCenterCertificate',
-        component: PersonalCenterCertificate,
-      }, {
-        path: 'PersonalCenterChangeMobile',
-        component: PersonalCenterChangeMobile,
-      }]
-    }
-      , {
-      path: '/Inspection',
-      component: Inspection
-    }, {
-      path: '/InspectionDetail',
-      component: InspectionDetail
-    }, {
-      path: '/PersonalCenter',
-      component: PersonalCenter
-    }, 
-    {
-      path: '/PersonalPassword',
-      component: PersonalPassword
-    },{
-      path: '/HRServiceTypeChoice',
-      component: HRServiceTypeChoice
-    }, {
-      path: '/HRServiceJobSeekerIndex',
-      component: HRServiceJobSeekerIndex
-    }, {
-      path: '/HRServiceHRIndex',
-      component: HRServiceHRIndex
-    }, {
-      path: '/HRServiceJobSeekerResume',
-      component: HRServiceJobSeekerResume
-    }, {
-      path: '/HRServiceJobSeekerResumeInfo',
-      component: HRServiceJobSeekerResumeInfo
-    }, {
-      path: '/PersonalCenterAddPerson',
-      component: PersonalCenterAddPerson
-    }, {
-      path: '/PersonalCenterInvoiceShow',
-      component: PersonalCenterInvoiceShow
-    },
-    {
-      path: '/newsList',
-      component: newsList
-    },
-    {
-      path: '/newsDetail/:id',
-      component: newsDetail,
-      props: true
-    }
+        path: '/Inspection',
+        component: resolve => require(['@/page/inspection/Inspection'], resolve)
+      },
+      {
+        path: '/newsList',
+        component: resolve => require(['@/page/news/newsList'], resolve)
+      },
+      {
+        path: '/newsDetail/:id',
+        component: resolve => require(['@/page/news/newsDetail'], resolve),
+        props: true
+      }
     ]
   }]
 })

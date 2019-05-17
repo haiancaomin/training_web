@@ -57,6 +57,13 @@ export default {
       return "/" + this.$route.path.split("/")[1];
     }
   },
+  watch: {
+    $route(to, from) {
+      if(to.path=='/base'){
+        this.showDefault()
+      }
+    }
+  },
   methods: {
     getBaseList(type, fun) {
       this.$ajax({
@@ -105,7 +112,7 @@ export default {
   display: flex;
 }
 .tac .el-col {
-  width: 250px;
+  width: 300px;
 }
 </style>
 

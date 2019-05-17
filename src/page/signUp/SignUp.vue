@@ -2,7 +2,7 @@
   <div id="signup">
     <el-steps :active="active" finish-status="success" simple style="margin-top: 80px">
       <el-step title="报名信息"></el-step>
-      <el-step title="信息预览"></el-step>
+      <el-step title="订单确认"></el-step>
       <el-step title="费用"></el-step>
       <el-step title="完成"></el-step>
     </el-steps>
@@ -22,9 +22,16 @@
 
         <!-- 个人报名 -->
         <el-tab-pane label="个人报名">
-          <personal-signUp></personal-signUp>
+          <personal-signUp v-on:ToAccountsPage="gotoAccountsPage"></personal-signUp>
+        </el-tab-pane>
+
+        <!-- 团队报名 -->
+        <el-tab-pane label="团队报名">
+          <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
         </el-tab-pane>
       </el-tabs>
+
+      
     </div>
 
     <!-- 考试信息选择页面 -->
@@ -33,8 +40,8 @@
     </div>
 
     <!-- 支付页面 -->
-    <div class="pay" v-if="SignUpPayPage">
-      <SignUpPay v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage" v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"></SignUpPay>
+    <div class="pay" v-show="SignUpPayPage">
+      <SignUpPay  v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage" v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"></SignUpPay>
     </div>
 
     <div class="success" v-if="SignUpSuccessPage == 1">
@@ -50,17 +57,19 @@
 import CompanySignUp from "@/page/signUp/CompanySignUp";
 import SchoolSignUp from '@/page/signUp/SchoolSignUp';
 import PersonalSignUp from '@/page/signUp/PersonalSignUp';
+import TeamSignUp from '@/page/signUp/TeamSignUp'
 import Accounts from '@/page/signUp/Accounts';
 import SignUpPay from '@/page/signUp/SignUpPay';
 import SignUpSuccess from '@/page/signUp/SignUpSuccess';
 import SignUpPageWait from '@/page/signUp/SignUpPageWait';
 
 export default {
-  name: "Signup",
+  name: "SignUp",
   components: {
     CompanySignUp,
     SchoolSignUp,
     PersonalSignUp,
+    TeamSignUp,
     Accounts,
     SignUpPay,
     SignUpSuccess,
@@ -195,7 +204,7 @@ export default {
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
-  padding: 30px;
+  padding: 10px 30px 30px 30px;
   margin: 10px 0px 0px 0px;
 }
 .success {

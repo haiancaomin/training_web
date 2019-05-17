@@ -64,6 +64,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       template: 'index.html',
       inject: true,
+      favicon: path.resolve('src/assets/favicon.png'), //新增
       minify: {
         removeComments: true,
         collapseWhitespace: true,

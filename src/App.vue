@@ -18,6 +18,7 @@ export default {
 }
 body,
 div,
+pre,
 span,
 header,
 footer,
@@ -67,5 +68,8 @@ body {
   color: #333;
   background: #eee;
   font-size: 14px;
+}
+.zZindex{
+  z-index: 10000 !important
 }
 </style>
