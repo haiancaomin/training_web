@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="index-body">
-      <div class="company-show" :style="{backgroundImage:'url(' + picurl + ')'}">
+      <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
         <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
           <i class="el-icon-arrow-down"></i>
         </div>
@@ -195,18 +195,7 @@ export default {
       baseList: []
     };
   },
-
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
-  // watch: {
-  //   picurl: function(val) {
-  //     alert(val);
-  //     this.picurl = val;
-  //   }
-  // },
+  
   mounted() {
     this.getIndexPicture();
     this.initMap();
@@ -233,7 +222,7 @@ export default {
       })
         .then(res => {
           this.picurl = res.data.picurl;
-          console.log(res.data);
+          console.log(this.picurl)
         })
         .catch(function(err) {
           console.log(err);
@@ -789,7 +778,6 @@ body > .el-container {
 }
 .company-show {
   height: 810px;
-
   width: 100%;
 
   /* background: url(../assets/company.jpg) no-repeat; */
