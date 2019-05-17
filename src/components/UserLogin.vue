@@ -396,28 +396,7 @@ a {
   line-height: 44px;
   margin: 0px 0px 0px 2px;
 }
-.verificationCode {
-  width: 110px;
-  height: 44px;
-  background: url(../assets/yzm.png) no-repeat;
-  cursor: pointer;
-  background-size: cover;
-  position: absolute;
-  margin: -44px 0px 0px 248px;
-  border-radius: 4px;
-}
-.verificationCode > p {
-  line-height: 44px;
-  font-size: 28px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.identifying {
-  width: 230px;
-  margin: 0px 0px 0px -129px;
-}
+
 .drag {
   position: relative;
   background-color: #e8e8e8;
