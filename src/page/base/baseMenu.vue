@@ -45,19 +45,13 @@ export default {
     return {
       baseList1: [],
       baseList2: [],
-      type: 0
     };
   },
   mounted() {
     
     this.getBaseList("0", this.showDefault);
-    this.getBaseList("1", this.showDefault);
+    this.getBaseList("1");
 
-  },
-  computed: {
-    defaultActive() {
-      return "/" + this.$route.path.split("/")[1];
-    }
   },
   watch: {
     $route(to, from) {
@@ -97,7 +91,7 @@ export default {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
       this.type = key == 1 ? 0 : 1;
-      this.getBaseList(this.type);
+      
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
