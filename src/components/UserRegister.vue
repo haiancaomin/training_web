@@ -353,9 +353,24 @@ export default {
                   that.go();
                 }
               });
-              } else {
+              } else if(res.data.data == 0){
+                this.$message({
+                message: "注册失败！",
+                center: true,
+              });
+              } else if(res.data.data == 2){
                 this.$message({
                 message: "验证码错误！",
+                center: true,
+              });
+              } else if(res.data.data == 3){
+                this.$message({
+                message: "该手机号已被注册！",
+                center: true,
+              });
+              } else if(res.data.data == 4){
+                this.$message({
+                message: "用户名已存在！",
                 center: true,
               });
               }
