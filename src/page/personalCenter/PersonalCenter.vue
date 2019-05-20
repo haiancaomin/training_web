@@ -87,7 +87,7 @@ export default {
   name: "PersonalCenter",
   data() {
     return {
-      menuopen: ["1"]
+     
     };
   },
   mounted() {
