@@ -154,19 +154,20 @@
               <a
                 href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx"
                 target="_blank"
+                class="friend-a"
               >
                 <img src="../assets/zhiliangxiehui.png" alt class="friend-img">
               </a>
 
-              <a href="http://prefabcenter.tongji.edu.cn/" target="_blank">
+              <a href="http://prefabcenter.tongji.edu.cn/" target="_blank" class="friend-a">
                 <img src="../assets/guojiazhongxin.png" alt class="friend-img">
               </a>
 
-              <a href="http://tjprefab.com.cn/" target="_blank">
+              <a href="http://tjprefab.com.cn/" target="_blank" class="friend-a">
                 <img src="../assets/tongjilvjian.png" alt class="friend-img">
               </a>
 
-              <a href="http://www.ntadi.cc/" target="_blank">
+              <a href="http://www.ntadi.cc/" target="_blank" class="friend-a-last">
                 <img src="../assets/nantongshiyuan.png" alt class="friend-img-last">
               </a>
             </div>
@@ -741,7 +742,7 @@ body > .el-container {
   height: 80px;
   width: 286px;
   border: solid 1px #eee;
-  margin: 0px 20px 0px 0px;
+ 
   object-fit: scale-down;
 }
 .friend-img-last {
@@ -749,7 +750,9 @@ body > .el-container {
   width: 286px;
   border: solid 1px #eee;
 }
-
+.friend-a{
+ margin: 0px 20px 0px 0px;
+}
 .index-footer {
   width: 1220px;
   height: 150px;
