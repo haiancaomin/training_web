@@ -193,7 +193,7 @@ export default {
 
     uploadError(err, file, fileList) {
       this.$message({
-        message: "请使用模板文件上传！",
+        message: "请按照模板要求上传文件！",
         center: true
       });
     },
