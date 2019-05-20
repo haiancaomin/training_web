@@ -196,30 +196,33 @@ export default {
       }
     }, //mousemove事件
     moseUpFn(e) {
-      if (this.errorCount > 2) {
-        this.mouseMoveStata = false;
+      if (!this.confirmSuccess) {
+        if (this.errorCount > 2) {
+          this.mouseMoveStata = false;
 
-        var width = e.clientX - this.beginClientX;
+          var width = e.clientX - this.beginClientX;
 
-        if (
-          (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
-          document.getElementsByClassName("handler")[0] &&
-          document.getElementsByClassName("drag_bg")[0]
-        ) {
-          document.getElementsByClassName("handler")[0].style.left = 0 + "px";
-          document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
-        } else if (
-          width >= this.checkWidth - 10 &&
-          width <= this.checkWidth + 10
-        ) {
-          this.successFunction();
+          if (
+            (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
+            document.getElementsByClassName("handler")[0] &&
+            document.getElementsByClassName("drag_bg")[0]
+          ) {
+            document.getElementsByClassName("handler")[0].style.left = 0 + "px";
+            document.getElementsByClassName("drag_bg")[0].style.width =
+              0 + "px";
+          } else if (
+            width >= this.checkWidth - 10 &&
+            width <= this.checkWidth + 10
+          ) {
+            this.successFunction();
+          }
+          document
+            .getElementsByTagName("html")[0]
+            .removeEventListener("mousemove", this.mouseMoveFn);
+          document
+            .getElementsByTagName("html")[0]
+            .removeEventListener("mouseup", this.moseUpFn);
         }
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mousemove", this.mouseMoveFn);
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mouseup", this.moseUpFn);
       }
     },
 
@@ -359,10 +362,10 @@ a {
   position: absolute;
   font-size: 18px;
   margin: -42px 0px 0px 320px;
-  -webkit-user-select:none;
-   -moz-user-select:none;
-   -ms-user-select:none;
-   user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .el-icon-view {
