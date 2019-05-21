@@ -2,8 +2,21 @@
   <div id="PesronalScoreSearch">
     <div class="order-dialog">
       <el-dialog :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
-        <div class="certificate">
-          <img :src="pictueUrl" alt>
+        <p class="count_certificate">{{ruleForm.name}}共有{{pictueUrl.length}}张证书</p>
+        <div class="certificate-page">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :page-size="1"
+          :total="pictueUrl.length"
+          @current-change="handleCurrentChange"
+        ></el-pagination>
+      </div>
+        <div class="certificate" >
+          
+          <iframe align="middle" frameborder="0" height="800" scrolling="no" 
+     width="800" :src="pictueUrl[currentPage-1]" >
+    </iframe>
         </div>
       </el-dialog>
     </div>
@@ -44,6 +57,7 @@ export default {
     return {
       showCertificateDialog: false,
       countFocus: 0,
+      currentPage: 1,
       pictueUrl:[],
       ruleForm: {
         name: "",
@@ -66,6 +80,9 @@ export default {
     };
   },
   methods: {
+    handleCurrentChange(val) {
+      this.currentPage = val;
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -80,8 +97,7 @@ export default {
             .then(res => {
               if (res.data.data != false) {
     
-                this.pictueUrl = res.data.data[1];
-                console.log(this.pictueUrl);
+                this.pictueUrl = res.data.data;
                 this.showCertificateDialog = true;
               } else {
                 this.$message({
@@ -175,7 +191,7 @@ export default {
 }
 .certificate {
   margin: 0px auto;
-  height: 1000px;
+ 
   width: 800px;
   border: 1px solid #e4e7ed;
 }
@@ -198,6 +214,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   line-height: 44px;
   margin: 0px 0px 0px 2px;
+}
+.count_certificate {
+  text-align: left;
+  margin:0px 0px 0px 85px;
+  font-size:16px;
+  font-weight:bold;
+}
+.certificate-page {
+  text-align: left;
+  margin:20px 0px 20px 75px;
 }
 </style>
 
