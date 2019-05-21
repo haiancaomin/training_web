@@ -230,6 +230,7 @@ export default {
               this.getPersonInfo();
               this.$message({
                 message: "修改成功！",
+                type: 'success',
                 center: true
               });
             })
@@ -252,6 +253,7 @@ export default {
         .then(res => {
           this.$message({
             message: "删除成功！",
+            type: 'success',
             center: true
           });
           console.log("delete success!");

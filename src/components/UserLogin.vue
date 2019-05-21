@@ -259,6 +259,7 @@ export default {
                 if (res.data.data != false) {
                   this.$message({
                     message: "登录成功！",
+                    type: 'success',
                     center: true
                   });
                   sessionStorage.setItem("user", JSON.stringify(res.data.data));
@@ -273,6 +274,7 @@ export default {
                 } else {
                   this.$message({
                     message: "用户名不存在或密码错误！",
+                    type: 'error',
                     center: true
                   });
                 }
@@ -283,6 +285,7 @@ export default {
           } else {
             this.$message({
               message: "请拖动滑块完成拼图！",
+              type: 'error',
               center: true
             });
           }

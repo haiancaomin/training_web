@@ -1440,6 +1440,7 @@ export default {
       ) {
         this.$message({
           message: "网络延迟或选择人员为0!",
+          type: 'error',
           center: true
         });
       } else if (
@@ -1450,6 +1451,7 @@ export default {
       ) {
         this.$message({
           message: "没有任何订单!",
+          type: 'error',
           center: true
         });
       } else {
@@ -1509,6 +1511,7 @@ export default {
         } else {
           this.$message({
           message: "没有任何订单!",
+          type: 'error',
           center: true
         });
         }

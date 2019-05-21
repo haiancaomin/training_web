@@ -135,12 +135,14 @@ export default {
             if(res.data.data == 0) {
                 this.$message({
                 message: "修改成功！",
+                type: 'success',
                 center: true,
               });
               this.$router.push({ path: `/index` });
             } else {
                 this.$message({
                 message: "验证码错误！",
+                type: 'error',
                 center: true,
               });
             }

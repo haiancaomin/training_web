@@ -728,6 +728,7 @@ this.centerDialogVisible4 = true;
       ) {
         this.$message({
           message: "您的报名信息不完整！",
+          type: 'error',
           center: true
         });
       } else {

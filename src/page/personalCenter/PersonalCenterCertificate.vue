@@ -74,6 +74,7 @@ export default {
               } else {
                 this.$message({
                   message: "接口异常！",
+                  type: 'error',
                   center: true
                 });
               }

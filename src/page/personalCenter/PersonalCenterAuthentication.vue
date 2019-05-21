@@ -118,6 +118,7 @@ export default {
       if (file.size / 1024 > 1024) {
         this.$message({
           message: "文件不能大于1MB！",
+          type: 'error',
           center: true
         });
         return false;
@@ -127,6 +128,7 @@ export default {
       ) {
         this.$message({
           message: "只能上传jpg/png文件",
+          type: 'error',
           center: true
         });
         return false;
@@ -147,6 +149,7 @@ export default {
           } else {
             this.$message({
               message: "获取客户信息失败或网络异常！",
+              type: 'error',
               center: true
             });
           }
@@ -162,6 +165,7 @@ export default {
           if (this.fileUid == "") {
             this.$message({
               message: "请上传文件！",
+              type: 'error',
               center: true
             });
           } else {
@@ -180,6 +184,7 @@ export default {
               .then(res => {
                 this.$message({
                   message: "上传成功！",
+                  type: 'success',
                   center: true
                 });
                 this.authenticationStatus = 1;
@@ -214,6 +219,7 @@ export default {
     noticeOut(files, fileList) {
       this.$message({
         message: "最多上传两个文件！",
+        type: 'error',
         center: true
       });
     }

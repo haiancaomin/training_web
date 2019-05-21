@@ -179,12 +179,14 @@ export default {
       if (file.size / 1024 > 100) {
         this.$message({
           message: "文件不能大于100kb！",
+          type: 'error',
           center: true
         });
         return false; 
       } else if(file.name.split(".")[file.name.split(".").length-1] != "xlsx") {
         this.$message({
           message: "请使用模板文件上传！",
+          type: 'error',
           center: true
         });
         return false;
@@ -194,12 +196,14 @@ export default {
     uploadError(err, file, fileList) {
       this.$message({
         message: "请按照模板要求上传文件！",
+        type: 'error',
         center: true
       });
     },
     uploadSuccess(response, file, fileList) {
       this.$message({
         message: "上传成功！人员信息已更新",
+        type: 'success',
         center: true
       });
     },
@@ -234,6 +238,7 @@ export default {
             .then(res => {
               this.$message({
                 message: "添加成功！",
+                type: 'success',
                 center: true
               });
               this.ruleForm = {};

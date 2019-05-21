@@ -89,21 +89,25 @@ export default {
       if (this.ruleForm.newPassword == "") {
         this.$message({
           message: "请输入新密码",
+          type: 'error',
           center: true
         });
       } else if (this.ruleForm.reNewPassword == "") {
         this.$message({
           message: "请确认新密码",
+          type: 'error',
           center: true
         });
       } else if (this.ruleForm.verificationCode == "") {
         this.$message({
           message: "请输入手机验证码",
+          type: 'error',
           center: true
         });
       } else if (this.ruleForm.newPassword != this.ruleForm.reNewPassword) {
         this.$message({
           message: "两次输入的密码不一致",
+          type: 'error',
           center: true
         });
       } else {
@@ -124,12 +128,14 @@ export default {
               this.checkAgain = false;
               this.$message({
                 message: "修改成功！",
+                type: 'success',
                 center: true
               });
               this.ruleForm = {};
             } else {
               this.$message({
                 message: "验证码错误！",
+                type: 'error',
                 center: true
               });
             }
