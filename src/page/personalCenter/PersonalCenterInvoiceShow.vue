@@ -3,10 +3,42 @@
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
-        <el-breadcrumb-item>发票信息</el-breadcrumb-item>
+        <el-breadcrumb-item>发票管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div v-if="ifEdit" class="table-body">
+    <el-col :span="12">
+    <div class="invoice_body pupiao">
+      <div class="invoice_picture"><img src="../../assets/pupiao.png"></div>
+      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
+      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司心南通有限公司心南通有限公司心南通有限公司心南通有限公司心南通有限公司</div>
+      <div class="invoice_type">普票</div>
+      <div class="invoice_account">484571289748</div>
+    </div>
+    </el-col>
+    <el-col :span="12">
+    <div class="invoice_body gongpiao">
+      <div class="invoice_picture"><img src="../../assets/zhuanpiao.png"></div>
+      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
+      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司</div>
+      <div class="invoice_type">专票</div>
+      <div class="invoice_account">484571289748</div>
+    </div>
+    </el-col>
+    <el-col :span="12">
+    <div class="invoice_body dianzi">
+      <div class="invoice_picture"><img src="../../assets/dianzi.png"></div>
+      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
+      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司心南通有限公司</div>
+      <div class="invoice_type">电子发票</div>
+      <div class="invoice_account">484571289748</div>
+    </div>
+    </el-col>
+    <el-col :span="12">
+    <div class="invoice_body_add">
+      <div class="add_new_invoice"><span class="el-icon-plus"></span></div>
+    </div>
+    </el-col>
+    <!-- <div v-if="ifEdit" class="table-body">
       <table border="1" cellspacing="0">
         <tr>
           <th colspan="4" class="invoice-show-table-th">开票信息表</th>
@@ -143,7 +175,7 @@
       <div class="info-save">
         <el-button type="primary" @click="editInvoice">点击编辑</el-button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -454,6 +486,106 @@ span {
 }
 .invoice-show-table-td-input1 {
   text-overflow: ellipsis;
+}
+.invoice_body {
+  width:310px;
+  height:146px;
+  margin:20px auto 0px auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 12px #c7c5c5;
+}
+.invoice_body:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.invoice_body_add {
+  width:310px;
+  height:146px;
+  margin:20px auto 0px auto;
+  border-radius: 8px;
+  border: 1px dashed #c7c5c5;
+  cursor: pointer;
+}
+.invoice_body_add:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.pupiao {
+  background:linear-gradient(left, #67C23A, rgb(67, 197, 2));
+}
+.gongpiao {
+  background:linear-gradient(left, #409EFF, rgb(0, 128, 255));
+}
+.dianzi {
+  background:linear-gradient(left, #E6A23C, rgb(228, 137, 0))
+}
+.invoice_title {
+  position:absolute;
+  width:235px;
+  height:40px;
+  margin:20px 0px 0px 60px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color:#fff;
+}
+.invoice_type {
+  position:absolute;
+  margin:65px 0px 0px 60px;
+  color:#fff;
+  font-size:12px;
+}
+.invoice_account {
+  position:absolute;
+  margin:110px 0px 0px 60px;
+  color:#fff;
+  font-weight: bold;
+  font-size:13px;
+}
+.el-icon-delete {
+  color:#fff;
+  font-size: 16px;
+}
+.el-icon-delete:hover {
+  color:#fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.el-icon-edit {
+  color:#fff;
+  font-size: 16px;
+  margin:0px 15px 0px 0px;
+}
+.el-icon-edit:hover{
+  color:#fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.invoice_delete {
+  position:absolute;
+  margin: 110px 0px 0px 240px;
+}
+.invoice_picture{
+  position:absolute;
+  width:40px;
+  height:40px;
+  margin:20px 0px 0px 10px;
+}
+.invoice_picture img{
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+}
+.add_new_invoice {
+  text-align: center;
+  height:146px;
+  line-height: 146px;
+}
+.el-icon-plus {
+  color:#c7c5c5;
+  font-size:26px;
+}
+.invoice_body_add:hover .el-icon-plus{
+  color:#807e7e;
 }
 </style>
 <style>

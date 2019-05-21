@@ -43,7 +43,7 @@
 
           <el-menu-item index="/PersonalCenter/PersonalCenterInvoiceShow">
             <i class="el-icon-document"></i>
-            <span slot="title">发票信息</span>
+            <span slot="title">发票管理</span>
           </el-menu-item>
 
           <el-menu-item index="/PersonalCenter/PersonalCenterAuthentication">
