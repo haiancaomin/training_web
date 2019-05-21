@@ -27,7 +27,7 @@
             <el-tab-pane :label="v.label" :name="v.name" v-for="(v,k) in tabs" :key="k">
               <router-link
                 :to="'/newsDetail/'+item.newsid"
-                v-for="(item,key) in newsList.data"
+                v-for="(item,key) in newsLists"
                 :key="key"
               >
                 <div class="list-row">
@@ -70,7 +70,8 @@ export default {
         { label: "国际信息", name: "fourth" }
       ],
       hotNews: [],
-      newsList: [],
+      newsList: {},
+      newsLists:[],
       type: "0",
       currentPage: 1,
       swiperOption: {
@@ -114,6 +115,7 @@ export default {
       })
         .then(res => {
           this.newsList = res.data;
+          this.newsLists = res.data.data;
         })
         .catch(function(err) {
           console.log(err);
