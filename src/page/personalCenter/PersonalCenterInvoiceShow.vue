@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <td class="invoice-show-table-td-info1">
-            <span>*</span>纳税人识别号
+            <span>*</span>社会统一信用编码
           </td>
           <td class="invoice-show-table-td-input2">
             <el-input
@@ -120,7 +120,7 @@
           <td colspan="3" class="invoice-show-table-td-input1">{{companyAddress}}</td>
         </tr>
         <tr>
-          <td class="invoice-show-table-td-info1">纳税人识别号</td>
+          <td class="invoice-show-table-td-info1">社会统一信用编码</td>
           <td class="invoice-show-table-td-input2">{{taxerID}}</td>
           <td class="invoice-show-table-td-info2">联系人</td>
           <td class="invoice-show-table-td-input3">{{contactPerson}}</td>
