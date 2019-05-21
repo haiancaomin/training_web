@@ -509,13 +509,23 @@ span {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .pupiao {
-  background:linear-gradient(left, #67C23A, rgb(67, 197, 2));
+  background: -webkit-linear-gradient(to right, #67C23A , rgb(67, 197, 2));
+  background: -o-linear-gradient(to right, #67C23A, rgb(67, 197, 2));
+  background: -moz-linear-gradient(to right, #67C23A, rgb(67, 197, 2));
+  background: linear-gradient(to right, #67C23A , rgb(67, 197, 2));
 }
 .gongpiao {
-  background:linear-gradient(left, #409EFF, rgb(0, 128, 255));
+  background: -webkit-linear-gradient(to right, #409EFF , rgb(0, 128, 255));
+  background: -o-linear-gradient(to right, #409EFF, rgb(0, 128, 255));
+  background: -moz-linear-gradient(to right, #409EFF, rgb(0, 128, 255));
+  
+  background:linear-gradient(to right, #409EFF, rgb(0, 128, 255));
 }
 .dianzi {
-  background:linear-gradient(left, #E6A23C, rgb(228, 137, 0))
+  background: -webkit-linear-gradient(to right, #E6A23C , rgb(228, 137, 0));
+  background: -o-linear-gradient(to right, #E6A23C, rgb(228, 137, 0));
+  background: -moz-linear-gradient(to right, #E6A23C, rgb(228, 137, 0));
+  background:linear-gradient(to right, #E6A23C, rgb(228, 137, 0))
 }
 .invoice_title {
   position:absolute;
