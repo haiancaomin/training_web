@@ -60,6 +60,8 @@
   </div>
 </template>
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper"
+import "swiper/dist/css/swiper.css"
 export default {
   data() {
     return {
@@ -85,6 +87,10 @@ export default {
       },
       activeName: "first"
     };
+  },
+  components: {
+    swiper,
+    swiperSlide
   },
   mounted() {
     this.getHotNews();

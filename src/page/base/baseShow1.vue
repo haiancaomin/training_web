@@ -34,6 +34,8 @@
   </div>
 </template>
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper"
+import "swiper/dist/css/swiper.css"
 export default {
   data() {
     return {
@@ -63,11 +65,10 @@ export default {
       }
     };
   },
-  // computed: {
-  //   swiperOption: function() {
-  //     return [this.swiperOption2, this.swiperOption3];
-  //   }
-  // },
+  components: {
+    swiper,
+    swiperSlide
+  },
   props: ["id"],
   mounted() {
     this.getBaseInfoById();
