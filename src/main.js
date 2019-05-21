@@ -1,15 +1,16 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+
+// import Vue from 'vue'
+// import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // require styles
 import 'swiper/dist/css/swiper.css'
 import App from './App'
 import router from './router'
-import axios from 'axios' //引入axios
+// import axios from 'axios' //引入axios
 import 'babel-polyfill'
 
 Vue.prototype.bus = new Vue()
@@ -17,7 +18,7 @@ Vue.prototype.$ajax = axios
 Vue.prototype.baseURL = process.env.API_ROOT
 Vue.config.productionTip = false
 
-Vue.use(ElementUI);
+// Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper, /* { default global options } */ )
 
 router.beforeEach((to, from, next) => {

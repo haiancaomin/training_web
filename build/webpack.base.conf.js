@@ -78,7 +78,12 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   },
-  // externals: {
-  //   'BMap': 'BMap'
-  // }
+  externals: {
+    // 'BMap': 'BMap'
+    'vue': 'Vue',
+    'element-ui': 'ELEMENT',
+    'vue-router': 'VueRouter',
+    'axios': 'axios',
+    // 'vue-awesome-swiper':VueAwesomeSwiper
+  }
 }
