@@ -397,6 +397,7 @@ export default {
           this.checkAgain = false;
           this.$message({
             message: "提交成功！",
+            type: 'success',
             center: true
           });
           this.getNotPayOrderList(this.currentPage);
@@ -481,6 +482,7 @@ export default {
           this.deleteOrderShow = false;
           this.$message({
             message: "删除成功！",
+            type: 'success',
             center: true
           });
           this.getNotPayOrderList(this.currentPage);

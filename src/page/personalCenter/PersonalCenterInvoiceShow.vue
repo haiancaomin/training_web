@@ -193,16 +193,19 @@ export default {
       if (this.companyName == "") {
         this.$message({
           message: "公司名称不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.companyAddress == "") {
         this.$message({
           message: "公司地址不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.taxerID == "") {
         this.$message({
           message: "纳税人识别号不能为空！",
+          type: 'error',
           center: true
         });
       } else if (
@@ -213,26 +216,31 @@ export default {
       ) {
         this.$message({
           message: "纳税人识别号位数不正确！",
+          type: 'error',
           center: true
         });
       } else if (this.contactPerson == "") {
         this.$message({
           message: "联系人不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.bank == "") {
         this.$message({
           message: "公司开户行不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.phone == "") {
         this.$message({
           message: "联系电话不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.account == "") {
         this.$message({
           message: "公司账号不能为空！",
+          type: 'error',
           center: true
         });
       } else {
@@ -253,6 +261,7 @@ export default {
           .then(res => {
             this.$message({
               message: "修改成功！",
+              type: 'success',
               center: true
             });
             this.ifEdit = false;
@@ -270,36 +279,43 @@ export default {
       if (this.companyName == "") {
         this.$message({
           message: "公司名称不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.companyAddress == "") {
         this.$message({
           message: "公司地址不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.taxerID == "") {
         this.$message({
           message: "纳税人识别号不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.contactPerson == "") {
         this.$message({
           message: "联系人不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.bank == "") {
         this.$message({
           message: "公司开户行不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.phone == "") {
         this.$message({
           message: "联系电话不能为空！",
+          type: 'error',
           center: true
         });
       } else if (this.account == "") {
         this.$message({
           message: "公司账号不能为空！",
+          type: 'error',
           center: true
         });
       } else {
@@ -318,6 +334,7 @@ export default {
           .then(res => {
             this.$message({
               message: "添加成功！",
+              type: 'success',
               center: true
             });
             this.ifEdit = false;

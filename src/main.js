@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
       document.getElementById('loginBtn').click()
       Vue.prototype.$message({
         message: '检测到您还未登录,请登录后操作！',
-        type: 'warning',
+        type: 'error',
         center: true,
         customClass: 'zZindex'
       })

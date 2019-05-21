@@ -319,6 +319,7 @@ export default {
           } else {
             this.$message({
               message: "请拖动滑块完成拼图！",
+              type: 'error',
               center: true
             });
           }
@@ -350,6 +351,7 @@ export default {
                 var that = this;
                 this.$message({
                   message: "注册成功！",
+                  type: 'success',
                   center: true,
                   onClose: function() {
                     that.regshow = false;
@@ -359,21 +361,25 @@ export default {
               } else if (res.data.data == 0) {
                 this.$message({
                   message: "注册失败！",
+                  type: 'error',
                   center: true
                 });
               } else if (res.data.data == 2) {
                 this.$message({
                   message: "验证码错误！",
+                  type: 'error',
                   center: true
                 });
               } else if (res.data.data == 3) {
                 this.$message({
                   message: "该手机号已被注册！",
+                  type: 'error',
                   center: true
                 });
               } else if (res.data.data == 4) {
                 this.$message({
                   message: "用户名已存在！",
+                  type: 'error',
                   center: true
                 });
               }

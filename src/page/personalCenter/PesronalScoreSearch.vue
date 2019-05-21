@@ -85,6 +85,7 @@ export default {
               } else {
                 this.$message({
                   message: "未查询到此人证书！",
+                  type: 'error',
                   center: true
                 });
               }
