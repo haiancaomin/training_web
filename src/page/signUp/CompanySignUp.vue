@@ -635,7 +635,8 @@ this.centerDialogVisible1 = true;
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning'
+          type: 'warning',
+          customClass: 'zZindex'
         });
         this.noEmpShow = true;
       } 
@@ -647,7 +648,8 @@ this.centerDialogVisible2 = true;
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning'
+          type: 'warning',
+          customClass: 'zZindex'
         });
         this.noEmpShow = true;
       } 
@@ -659,7 +661,8 @@ this.centerDialogVisible3 = true;
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning'
+          type: 'warning',
+          customClass: 'zZindex'
         });
         this.noEmpShow = true;
       } 
@@ -671,7 +674,8 @@ this.centerDialogVisible4 = true;
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning'
+          type: 'warning',
+          customClass: 'zZindex'
         });
         this.noEmpShow = true;
       } 
