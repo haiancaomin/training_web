@@ -374,7 +374,7 @@ export default {
   text-align: left;
   margin: 5px 10px 0px 0px;
   font-size: 13px;
-  color: #888;
+ color: #F56C6C;
 }
 .order-pay {
   height: 50px;
