@@ -15,6 +15,7 @@
             placeholder="请输入密码"
             v-model="ruleForm.newPassword"
             id="newPassword1"
+            autocomplete="off"
           >
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>

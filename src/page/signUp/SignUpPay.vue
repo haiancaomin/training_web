@@ -40,43 +40,7 @@
             </div>
             <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
           </div>
-          <div class="pay-type">支付方式</div>
-          <el-collapse accordion id="pay_choose">
-            <el-collapse-item>
-              <template slot="title">
-                <div v-if="radio2==3" class="choose-zhifubao">
-                  <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
-                </div>
-                <span v-if="radio2==6" class="choose-weixin">
-                  <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                </span>
-                <span v-if="radio2==9" class="choose-bank">
-                  <img src="../../assets/weixin_mini.png" class="icon-mini">转账汇款
-                </span>
-              </template>
-              <div class="pay-choose">
-                <el-radio-group v-model="radio2">
-                  <div class="pay-zhifubao">
-                    <el-col :span="24">
-                      <el-radio :label="3">
-                        <img src="../../assets/zhifubao.jpg" class="pay-img">
-                      </el-radio>
-                    </el-col>
-                  </div>
-                  <div class="pay-weixin">
-                    <el-radio :label="6">
-                      <img src="../../assets/weixin.jpg" class="pay-img">
-                    </el-radio>
-                  </div>
-                  <div class="pay-bank">
-                    <el-radio :label="9">
-                      <img src="../../assets/weixin.jpg" class="pay-img">
-                    </el-radio>
-                  </div>
-                </el-radio-group>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
+          
 
           <div class="meal-body">
             <div class="pay-meal">购买套餐</div>
@@ -161,6 +125,44 @@
               </el-collapse-item>
             </el-collapse>
           </div>
+
+          <div class="pay-type">支付方式</div>
+          <el-collapse accordion id="pay_choose">
+            <el-collapse-item>
+              <template slot="title">
+                <div v-if="radio2==3" class="choose-zhifubao">
+                  <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
+                </div>
+                <div v-if="radio2==6" class="choose-weixin">
+                  <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
+                </div>
+                <div v-if="radio2==9" class="choose-bank">
+                  <img src="../../assets/zhuanzhuang.png" class="icon-mini">转账汇款
+                </div>
+              </template>
+              <div class="pay-choose">
+                <el-radio-group v-model="radio2">
+                  <div class="pay-zhifubao">
+                    <el-col :span="24">
+                      <el-radio :label="3">
+                        <img src="../../assets/zhifubao.jpg" class="pay-img">
+                      </el-radio>
+                    </el-col>
+                  </div>
+                  <div class="pay-weixin">
+                    <el-radio :label="6">
+                      <img src="../../assets/weixin.jpg" class="pay-img">
+                    </el-radio>
+                  </div>
+                  <div class="pay-bank">
+                    <el-radio :label="9">
+                      <img src="../../assets/huikuan_big.png" class="pay-img">
+                    </el-radio>
+                  </div>
+                </el-radio-group>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
 
         <div class="payment-body" v-if="radio2==3||radio2==6">
@@ -345,7 +347,7 @@ export default {
 .user-info {
   width: 880px;
   margin: 0 auto;
-  padding: 20px 0 30px 0;
+  padding: 20px 0 10px 0;
 }
 .pay-zhifubao {
   margin: 25px 0px 80px 0px;
@@ -362,6 +364,7 @@ export default {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
+  margin-top:30px;
 }
 .choose-zhifubao {
   border-bottom: solid 1px #eee;
@@ -572,6 +575,29 @@ export default {
 .check_operation {
   text-align: center
   }
+@font-face {
+  font-family: 'iconfont';  /* project id 1131189 */
+  src: url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.eot');
+  src: url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1131189_lmmwd56qp1.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 20px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  
+  
+}
+.bank_pay_type {
+  font-size: 14px;
+  margin:0px 0px 0px 3px;
+}
 </style>
 <style>
 #meal-body-collapse .el-collapse-item__header {

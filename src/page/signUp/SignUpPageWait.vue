@@ -12,6 +12,15 @@
             <a href="javascript:;" class="to-center2">我的订单</a>
           </router-link>支付
         </p>
+        <p class="success-context">
+          如需开具发票，请前往
+          <router-link to="/PersonalCenter/PersonalCenterInvoiceShow">
+            <a href="javascript:;" class="to-center2">客户中心</a>
+          </router-link>-
+          <router-link to="/PersonalCenter/PersonalCenterInvoiceShow">
+            <a href="javascript:;" class="to-center2">发票列表</a>
+          </router-link>填写发票信息
+        </p>
       </div>
       <div class="success-other">
         <router-link to="/PersonalCenter/PersonalCenterUncompletedOrder">

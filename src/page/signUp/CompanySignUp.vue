@@ -1,6 +1,17 @@
 <template>
   <div class="CompanySignUp">
     <div calss="batch-sign-up">
+       <el-dialog  :visible.sync="noEmpShow" width="500px" class="no_emp_dialog">
+        <div>
+          <p>您尚未添加公司人员，请先前往客户中心-公司人员添加公司人员</p>
+        </div>
+        <div class="operation_noemp">
+          <router-link to="/personalCenter/PersonalCenterAddPerson">
+          <el-button type="primary">立即前往</el-button>
+          </router-link>
+          <el-button type="primary" plain @click="noEmpShow=false">稍等一下</el-button>
+        </div>
+      </el-dialog>
       <div class="batch-sign-up-notice">
         <p id="signup-no-info-notice1">
           企业报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
@@ -568,6 +579,7 @@ export default {
       active: 0,
       signUpPage: 1,
       accountsPage: 0,
+      noEmpShow:false,
 
       selectCourseData: [{}],
       selectAddressData1: [{}],
@@ -625,6 +637,7 @@ this.centerDialogVisible1 = true;
           center: true,
           type: 'warning'
         });
+        this.noEmpShow = true;
       } 
     },
     chooseEmp2() {
@@ -636,6 +649,7 @@ this.centerDialogVisible2 = true;
           center: true,
           type: 'warning'
         });
+        this.noEmpShow = true;
       } 
     },
     chooseEmp3() {
@@ -647,6 +661,7 @@ this.centerDialogVisible3 = true;
           center: true,
           type: 'warning'
         });
+        this.noEmpShow = true;
       } 
     },
     chooseEmp4() {
@@ -658,6 +673,7 @@ this.centerDialogVisible4 = true;
           center: true,
           type: 'warning'
         });
+        this.noEmpShow = true;
       } 
     },
     submitForm1(formName) {
@@ -1192,6 +1208,15 @@ this.centerDialogVisible4 = true;
 }
 #signup-no-info-notice2 {
   margin: 20px 0px 30px 60px;
+}
+.operation_noemp {
+  margin:30px 0px 0px 0px;
+}
+.operation_noemp .el-button{
+  margin:0px 20px;
+}
+.no_emp_dialog {
+  text-align: center;
 }
 </style>
 

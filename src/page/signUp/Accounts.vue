@@ -61,7 +61,7 @@
                 <div class="order-meal-person-num" v-if="!personalFlag">
                   报名人数：
                   <span>{{empSize1}}</span>
-                  <el-button class="emp-edit" type="danger" @click="scanEmp1">编辑</el-button>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp1">编辑人员</el-button>
                 </div>
               </el-col>
             </div>
@@ -183,7 +183,7 @@
                 <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize2}}</span>
-                  <el-button class="emp-edit" type="danger" @click="scanEmp2">编辑</el-button>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp2">编辑人员</el-button>
                 </div>
               </el-col>
             </div>
@@ -304,7 +304,7 @@
                 <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize3}}</span>
-                  <el-button class="emp-edit" type="danger" @click="scanEmp3">编辑</el-button>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp3">编辑人员</el-button>
                 </div>
               </el-col>
             </div>
@@ -425,7 +425,7 @@
                 <div class="order-meal-person-num">
                   报名人数：
                   <span>{{empSize4}}</span>
-                  <el-button class="emp-edit" type="danger" @click="scanEmp4">编辑</el-button>
+                  <el-button class="emp-edit" type="danger" @click="scanEmp4">编辑人员</el-button>
                 </div>
               </el-col>
             </div>
@@ -1581,7 +1581,7 @@ export default {
 .emp-edit {
   margin: 5px 0px 0px 10px;
   height: 25px;
-  width: 50px;
+  width: 60px;
   line-height: 25px;
   padding: 0px;
   font-size: 12px;

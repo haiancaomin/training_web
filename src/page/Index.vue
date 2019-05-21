@@ -793,7 +793,7 @@ body > .el-container {
   height: 810px;
   width: 360px;
   padding: 0px 20px;
-  margin: 0px 200px 0px 0px;
+  margin: 0px 13% 0px 0px;
 }
 
 .logo {

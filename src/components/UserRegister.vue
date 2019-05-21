@@ -117,6 +117,7 @@ export default {
       show: true,
       count: "",
       regshow: false,
+
       ruleForm: {
         name: "",
         password: "",
@@ -243,28 +244,30 @@ export default {
       }
     }, //mousemove事件
     moseUpFn(e) {
-      this.mouseMoveStata = false;
-      var width = e.clientX - this.beginClientX;
+      if (!this.confirmSuccess) {
+        this.mouseMoveStata = false;
+        var width = e.clientX - this.beginClientX;
 
-      if (
-        (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
-        document.getElementsByClassName("handler1")[0] &&
-        document.getElementsByClassName("drag_bg1")[0]
-      ) {
-        document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
-        document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
-      } else if (
-        width >= this.checkWidth - 10 &&
-        width <= this.checkWidth + 10
-      ) {
-        this.successFunction();
+        if (
+          (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
+          document.getElementsByClassName("handler1")[0] &&
+          document.getElementsByClassName("drag_bg1")[0]
+        ) {
+          document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
+          document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
+        } else if (
+          width >= this.checkWidth - 10 &&
+          width <= this.checkWidth + 10
+        ) {
+          this.successFunction();
+        }
+        document
+          .getElementsByTagName("html")[0]
+          .removeEventListener("mousemove", this.mouseMoveFn);
+        document
+          .getElementsByTagName("html")[0]
+          .removeEventListener("mouseup", this.moseUpFn);
       }
-      document
-        .getElementsByTagName("html")[0]
-        .removeEventListener("mousemove", this.mouseMoveFn);
-      document
-        .getElementsByTagName("html")[0]
-        .removeEventListener("mouseup", this.moseUpFn);
     },
     changeType() {
       if (this.inputType == "text") {
@@ -343,38 +346,37 @@ export default {
             }&code=${this.ruleForm.code}`
           })
             .then(res => {
-              if(res.data.data == 0) {
+              if (res.data.data == 0) {
                 var that = this;
-              this.$message({
-                message: "注册成功！",
-                center: true,
-                onClose: function() {
-                  that.regshow = false;
-                  that.go();
-                }
-              });
-              } else if(res.data.data == 0){
                 this.$message({
-                message: "注册失败！",
-                center: true,
-              });
-              } else if(res.data.data == 2){
+                  message: "注册成功！",
+                  center: true,
+                  onClose: function() {
+                    that.regshow = false;
+                    that.go();
+                  }
+                });
+              } else if (res.data.data == 0) {
                 this.$message({
-                message: "验证码错误！",
-                center: true,
-              });
-              } else if(res.data.data == 3){
+                  message: "注册失败！",
+                  center: true
+                });
+              } else if (res.data.data == 2) {
                 this.$message({
-                message: "该手机号已被注册！",
-                center: true,
-              });
-              } else if(res.data.data == 4){
+                  message: "验证码错误！",
+                  center: true
+                });
+              } else if (res.data.data == 3) {
                 this.$message({
-                message: "用户名已存在！",
-                center: true,
-              });
+                  message: "该手机号已被注册！",
+                  center: true
+                });
+              } else if (res.data.data == 4) {
+                this.$message({
+                  message: "用户名已存在！",
+                  center: true
+                });
               }
-              
             })
             .catch(function(err) {
               console.log(err);
@@ -449,10 +451,10 @@ a {
   position: absolute;
   font-size: 18px;
   margin: -42px 0px 0px 320px;
-  -webkit-user-select:none;
-   -moz-user-select:none;
-   -ms-user-select:none;
-   user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .el-icon-view {

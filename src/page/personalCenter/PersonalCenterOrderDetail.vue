@@ -89,6 +89,10 @@
 
               </el-collapse-item>
             </el-collapse>
+
+            <div class="operation_back">
+              <a href="javascript:history.go(-1)"><el-button type="primary"  class="">返回</el-button></a>
+            </div>
           </div>
   </div>
 </template>
@@ -422,6 +426,13 @@ export default {
 .check_operation {
   text-align: center
   }
+.operation_back {
+  margin:30px 0px 0px 0px;
+  text-align: center;
+}
+.operation_back .el-button{
+  width:90px;
+}
 </style>
 <style>
 #meal-body-collapse .el-collapse-item__header {

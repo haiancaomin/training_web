@@ -10,6 +10,7 @@ import 'swiper/dist/css/swiper.css'
 import App from './App'
 import router from './router'
 import axios from 'axios' //引入axios
+import 'babel-polyfill'
 
 Vue.prototype.bus = new Vue()
 Vue.prototype.$ajax = axios
