@@ -44,7 +44,7 @@ export default {
     return {
       showCertificateDialog: false,
       countFocus: 0,
-      pictueUrl:"",
+      pictueUrl:[],
       ruleForm: {
         name: "",
         cardno: ""
@@ -79,8 +79,9 @@ export default {
           })
             .then(res => {
               if (res.data.data != false) {
-                console.log(res.data.data);
-                this.pictueUrl = res.data.data
+    
+                this.pictueUrl = res.data.data[1];
+                console.log(this.pictueUrl);
                 this.showCertificateDialog = true;
               } else {
                 this.$message({
