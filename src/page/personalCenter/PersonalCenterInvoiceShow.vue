@@ -155,8 +155,8 @@
           </tr>
         </table>
         <div class="info-edit">
-          <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">点击保存</el-button>
-          <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">稍等一下</el-button>
+          <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">保存</el-button>
+          <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">放弃</el-button>
         </div>
       </div>
     </div>
@@ -695,13 +695,11 @@ span {
   margin: 20px 0px 20px 20px;
 }
 .save_new_invoice {
-  width:90px;
-  padding:12px;
+  padding:12px 22px;
   margin:0px 80px 0px 0px;
 }
 .cancel_new_invoice {
-  width:90px;
-  padding:12px;
+  padding:12px 22px;
 }
 .deleteCheck_dialog {
   text-align: center;
