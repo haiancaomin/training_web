@@ -1,8 +1,40 @@
 <template>
   <div id="PersonalCenterAllOrder">
     <div class="order-dialog">
-      <el-dialog title="发票预览" :visible.sync="dialogVisible" width="800px">
-        <div class="table-body">
+      <el-dialog title="发票选择" :visible.sync="dialogVisible" width="800px" height="300px">
+        <div class="user_choose_invoice" v-show="showChooseInvoice">
+        <div>
+          <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
+            <div
+              class="invoice_body"
+              :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+              @click="chooseid=invoiceItem[0]"
+            >
+              <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
+              <div v-if="invoiceItem[0]==chooseid" class="choose_icon"><span class="el-icon-check"></span></div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
+                <img src="../../assets/pupiao.png">
+              </div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
+                <img src="../../assets/zhuanpiao.png">
+              </div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
+                <img src="../../assets/dianzi.png">
+              </div>
+
+              <div class="invoice_title">{{invoiceItem[1]}}</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
+              <div class="invoice_account">{{invoiceItem[7]}}</div>
+            </div>
+          </el-col>
+        </div>
+        
+        <div style="clear: both;"></div>
+        <div><el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button></div>
+        </div>
+        <div class="table-body" v-show="showChooseInvoiceDetail">
           <table border="1" cellspacing="0">
             <tr>
               <th colspan="4" class="invoice-show-table-th">开票信息表</th>
@@ -33,12 +65,13 @@
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">开票总金额</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{orderMoney}}</td>
+              <td class="invoice-show-table-td-input1">{{orderMoney}}</td>
+              <td class="invoice-show-table-td-info3">发票类型</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==0">普通发票</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
             </tr>
-            <tr>
-              <td class="invoice-show-table-td-info3">可开具的发票内容</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{otherContent}}</td>
-            </tr>
+           
           </table>
           <div class="info-save">
             <el-button type="primary" @click="checkOK">确认开票</el-button>
@@ -333,7 +366,7 @@ export default {
       dialogVisibleAgreement: false,
       dialogVisibleInfo: false,
       orderlist: [],
-     
+      invoiceList: [],
       orderDetail: [],
       userName:"",
       deleteOrderShow: false,
@@ -353,10 +386,57 @@ export default {
       invoiceid:'',
       orderMoney:'',
        expressID:'',
-      expressShow: false
+      expressShow: false,
+      chooseid:"",
+      showChooseInvoice:false,
+      showChooseInvoiceDetail:false,
     };
   },
+   watch: {
+    dialogVisible: function(val) {
+      if(!val){
+        this.showChooseInvoiceDetail=false;
+        this.chooseid="";
+      }
+    }
+  },
   methods: {
+    getInvoiceInfo(chooseid) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${chooseid}`
+      })
+        .then(res => {
+          console.log(res.data.data);
+            this.companyName = res.data.data.company;
+            this.companyAddress = res.data.data.address;
+            this.taxerID = res.data.data.taxpayerno;
+            this.contactPerson = res.data.data.person;
+            this.bank = res.data.data.bank;
+            this.phone = res.data.data.mobilephone;
+            this.account = res.data.data.account;
+            this.selectType = res.data.data.type;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    gotoShowChooseInvoiceDetail() {
+      if(this.chooseid == "") {
+        this.$message({
+          message: "请先选择发票",
+          center: true,
+          type: 'warning',
+          customClass: 'zZindex'
+        });
+      } else {
+this.showChooseInvoice=false;
+      this.showChooseInvoiceDetail=true;
+      this.getInvoiceInfo(this.chooseid);
+      }
+    },
     payNowShow(orderid) {
       this.$ajax({
         method: "get",
@@ -407,10 +487,9 @@ export default {
         });
     },
     checkAgainMore() {
-       this.dialogVisible = true;
       this.checkAgain = false;
     },
-    getInvoice(id,money) {
+    getInvoice(id, money) {
       this.orderID = id;
       this.orderMoney = money;
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -418,29 +497,23 @@ export default {
         var userid = userInfo.userid;
       }
       this.$ajax({
-          method: "get",
-          url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
+      })
+        .then(res => {
+          if (res.data.data.length == 0) {
+            this.noInvoice = true;
+          } else {
+            this.invoiceList = res.data.data;
+            this.dialogVisible = true;
+            this.showChooseInvoice = true;
+          }
         })
-          .then(res => {
-            if(res.data.data == "false") {
-              this.noInvoice = true;
-            } else {
-              this.companyName= res.data.data.company;
-              this.companyAddress=res.data.data.address;
-              this.taxerID=res.data.data.taxpayerno;
-              this.contactPerson=res.data.data.person;
-              this.bank=res.data.data.bank;
-              this.phone=res.data.data.mobilephone;
-              this.account=res.data.data.account;
-              this.otherContent=res.data.data.content;
-              this.invoiceid = res.data.data.invoiceid;
-              this.dialogVisible = true;
-            }
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     handleCurrentChange(val) {
       this.getNotPayOrderList(val);
@@ -895,6 +968,126 @@ input {
 }
 .bank_pay {
   margin:28px 0px 0px 0px;
+}
+.invoice_body {
+  width: 310px;
+  height: 146px;
+  margin: 0px auto 20px auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 12px #c7c5c5;
+  cursor: pointer;
+}
+.invoice_body:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.invoice_body_add {
+  width: 310px;
+  height: 146px;
+  margin: 20px auto 0px auto;
+  border-radius: 8px;
+  border: 1px dashed #c7c5c5;
+  cursor: pointer;
+}
+.invoice_body_add:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.pupiao {
+  background: -webkit-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -o-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -moz-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+}
+.gongpiao {
+  background: -webkit-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -o-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -moz-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+
+  background: linear-gradient(to right, #409eff, rgb(0, 128, 255));
+}
+.dianzi {
+  background: -webkit-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -o-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -moz-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+}
+.invoice_title {
+  position: absolute;
+  width: 235px;
+  height: 40px;
+  margin: 20px 0px 0px 60px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #fff;
+  text-align: left;
+}
+.invoice_type {
+  position: absolute;
+  margin: 65px 0px 0px 60px;
+  color: #fff;
+  font-size: 12px;
+  border: 1px solid #fff;
+  padding: 3px;
+}
+.invoice_account {
+  position: absolute;
+  margin: 110px 0px 0px 60px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
+.el-icon-delete {
+  color: #fff;
+  font-size: 16px;
+}
+.el-icon-delete:hover {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.el-icon-edit {
+  color: #fff;
+  font-size: 16px;
+  margin: 0px 15px 0px 0px;
+}
+.el-icon-edit:hover {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.invoice_delete {
+  position: absolute;
+  margin: 110px 0px 0px 240px;
+}
+.invoice_picture {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 20px 0px 0px 10px;
+}
+.invoice_picture img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.choose_this {
+  position: absolute;
+border: 25px solid rgba(36, 46, 104, 0.6);
+border-left: 25px solid transparent;  
+border-top: 25px solid transparent; 
+border-bottom-right-radius: 8px; 
+margin:96px 0px 0px 260px;
+width: 0;  
+}
+.choose_icon {
+  position: absolute;
+}
+.el-icon-check {
+  color:#fff;
+  margin:119px 0px 0px 282px;
+  font-weight: bold;
+  font-size: 22px;
 }
 </style>
 <style>

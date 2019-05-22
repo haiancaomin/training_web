@@ -1,19 +1,17 @@
 <template>
   <div id="PersonalCenterNotInvoice">
-    
     <div class="order-dialog">
-      
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
         <p>邮箱：231231332@dd.com</p>
       </el-dialog>
       <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule1">
         <div class="schedule-body">
-        <el-steps :space="250" :active="1" finish-status="success">
-  <el-step title="提交材料"></el-step>
-  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
-  <el-step title="完成"></el-step>
-</el-steps>
+          <el-steps :space="250" :active="1" finish-status="success">
+            <el-step title="提交材料"></el-step>
+            <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+            <el-step title="完成"></el-step>
+          </el-steps>
         </div>
       </el-dialog>
 
@@ -34,22 +32,58 @@
       </el-dialog>
 
       <el-dialog :visible.sync="noInvoice" width="400px" class="noInvoice">
-        <p>您尚未填写发票信息，点击<router-link to="/personalCenter/PersonalCenterInvoiceShow"><el-button type="primary" 
-        class="click-here">这里</el-button></router-link>填写发票信息</p>
+        <p>
+          您尚未填写发票信息，点击
+          <router-link to="/personalCenter/PersonalCenterInvoiceShow">
+            <el-button type="primary" class="click-here">这里</el-button>
+          </router-link>填写发票信息
+        </p>
       </el-dialog>
 
       <el-dialog title="开票进度" :visible.sync="scheduleSuccess" width="600px" id="schedule2">
         <div class="schedule-body">
-        <el-steps :space="250" :active="3" finish-status="success">
-  <el-step title="提交材料"></el-step>
-  <el-step title="人工审核" description="预计需要一个工作日"></el-step>
-  <el-step title="完成"></el-step>
-</el-steps>
+          <el-steps :space="250" :active="3" finish-status="success">
+            <el-step title="提交材料"></el-step>
+            <el-step title="人工审核" description="预计需要一个工作日"></el-step>
+            <el-step title="完成"></el-step>
+          </el-steps>
         </div>
       </el-dialog>
 
-      <el-dialog title="发票预览" :visible.sync="dialogVisible" width="800px">
-        <div class="table-body">
+      <el-dialog title="发票选择" :visible.sync="dialogVisible" width="800px" height="300px">
+        <div class="user_choose_invoice" v-show="showChooseInvoice">
+        <div>
+          <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
+            <div
+              class="invoice_body"
+              :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+              @click="chooseid=invoiceItem[0]"
+            >
+              <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
+              <div v-if="invoiceItem[0]==chooseid" class="choose_icon"><span class="el-icon-check"></span></div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
+                <img src="../../assets/pupiao.png">
+              </div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
+                <img src="../../assets/zhuanpiao.png">
+              </div>
+              <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
+                <img src="../../assets/dianzi.png">
+              </div>
+
+              <div class="invoice_title">{{invoiceItem[1]}}</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
+              <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
+              <div class="invoice_account">{{invoiceItem[7]}}</div>
+            </div>
+          </el-col>
+        </div>
+        
+        <div style="clear: both;"></div>
+        <div><el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button></div>
+        </div>
+        <div class="table-body" v-show="showChooseInvoiceDetail">
           <table border="1" cellspacing="0">
             <tr>
               <th colspan="4" class="invoice-show-table-th">开票信息表</th>
@@ -80,12 +114,13 @@
             </tr>
             <tr>
               <td class="invoice-show-table-td-info1">开票总金额</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{orderMoney}}</td>
+              <td class="invoice-show-table-td-input1">{{orderMoney}}</td>
+              <td class="invoice-show-table-td-info3">发票类型</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==0">普通发票</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
+              <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
             </tr>
-            <tr>
-              <td class="invoice-show-table-td-info3">可开具的发票内容</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{otherContent}}</td>
-            </tr>
+           
           </table>
           <div class="info-save">
             <el-button type="primary" @click="checkOK">确认开票</el-button>
@@ -93,12 +128,11 @@
         </div>
       </el-dialog>
 
-       <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center >
-         <div class="expressShow">
-           <p>物流单号：{{expressID}}</p>          
+      <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center>
+        <div class="expressShow">
+          <p>物流单号：{{expressID}}</p>
         </div>
-     </el-dialog>
-
+      </el-dialog>
     </div>
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -108,45 +142,73 @@
       </el-breadcrumb>
     </div>
     <div v-if="count">
-    <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
-      <div class="order-head">
-        <img src="../../assets/favicon.png" alt class="order-head-img">
-        <span class="order-head-title">智聚实训</span>
-        <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
+      <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
+        <div class="order-head">
+          <img src="../../assets/favicon.png" alt class="order-head-img">
+          <span class="order-head-title">智聚实训</span>
+          <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
+        </div>
+        <div class="order-picture">
+          <el-col :span="7">
+            <img :src="orderItem.picurl" alt class="order-img">
+          </el-col>
+          <el-col :span="17">
+            <div class="order-detail">
+              <p
+                v-for="(menuname,index) in orderItem.dlist"
+                :key="index"
+              >{{menuname.coursename}}（{{menuname.menuname}}）</p>
+            </div>
+            <p class="order-time">下单时间：{{orderItem.createdate}}</p>
+            <p class="order-num">订单号：{{orderItem.orderno}}</p>
+          </el-col>
+        </div>
+        <div class="order-pay">
+          <p class="order-pay-info">
+            报名{{orderItem.personcount}}人，实付款：
+            <span class="order-payment">¥{{orderItem.summoney}}</span>
+          </p>
+        </div>
+        <div class="order-operation">
+          <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
+          <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid">
+            <el-button type="primary" round plain>订单详情</el-button>
+          </router-link>
+          <el-button
+            type="primary"
+            round
+            @click="getInvoice(orderItem.orderid,orderItem.summoney)"
+            v-if="orderItem.status==1"
+          >开具发票</el-button>
+          <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
+          <el-button
+            type="primary"
+            round
+            plain
+            @click="scheduleSuccess = true"
+            v-if="orderItem.status==3"
+          >开票进度</el-button>
+          <el-button
+            type="success"
+            round
+            @click="checkExpress(orderItem.orderid)"
+            v-if="orderItem.status==3"
+          >发票物流</el-button>
+        </div>
       </div>
-      <div class="order-picture">
-        <el-col :span="7">
-          <img :src="orderItem.picurl" alt class="order-img">
-        </el-col>
-        <el-col :span="17">
-          <div class="order-detail">
-            <p v-for="(menuname,index) in orderItem.dlist" :key="index">{{menuname.coursename}}（{{menuname.menuname}}）</p>
-          </div>
-          <p class="order-time">下单时间：{{orderItem.createdate}}</p>
-          <p class="order-num">订单号：{{orderItem.orderno}}</p>
-        </el-col>
-      </div>
-      <div class="order-pay">
-        <p class="order-pay-info">报名{{orderItem.personcount}}人，实付款：
-          <span class="order-payment">¥{{orderItem.summoney}}</span>
-        </p>
-      </div>
-      <div class="order-operation">
-        <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
-        <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid"><el-button type="primary" round plain>订单详情</el-button></router-link>
-        <el-button type="primary" round @click="getInvoice(orderItem.orderid,orderItem.summoney)" v-if="orderItem.status==1">开具发票</el-button>
-        <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
-        <el-button type="primary" round plain @click="scheduleSuccess = true" v-if="orderItem.status==3">开票进度</el-button>
-        <el-button type="success" round @click="checkExpress(orderItem.orderid)" v-if="orderItem.status==3">发票物流</el-button>
-      </div>
-    </div>
     </div>
     <div v-if="count">
-    <div class="order-page">
-      <el-pagination background layout="prev, pager, next, jumper" :page-size="3" :total="count" @current-change="handleCurrentChange"></el-pagination>
+      <div class="order-page">
+        <el-pagination
+          background
+          layout="prev, pager, next, jumper"
+          :page-size="3"
+          :total="count"
+          @current-change="handleCurrentChange"
+        ></el-pagination>
+      </div>
     </div>
-    </div>
-     <div v-if="!count" class="noOrder">
+    <div v-if="!count" class="noOrder">
       <img src="../../assets/favicon.png" alt class="order-head-img">
       <p class="no-order-content">您还没有相关的订单</p>
     </div>
@@ -158,60 +220,107 @@ export default {
   name: "PersonalCenterNotInvoice",
   data() {
     return {
+      chooseid: "",
       contact: false,
       schedule: false,
       scheduleSuccess: false,
       dialogVisible: false,
       orderlist: [],
-      count:0,
-     
+      count: 0,
+      invoiceList: [],
       showEmpDia: false,
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1,
       noInvoice: false,
-      companyName: '',
-      companyAddress:'',
-      taxerID:'',
-      contactPerson:'',
-      bank:'',
-      phone:'',
-      account:'',
-      otherContent:'',
-      invoiceid:'',
-      orderMoney:'',
+      companyName: "",
+      companyAddress: "",
+      taxerID: "",
+      contactPerson: "",
+      bank: "",
+      phone: "",
+      account: "",
+      selectType: "",
+      invoiceid: "",
+      orderMoney: "",
       checkAgain: false,
-      orderID:'',
-      expressID:'',
-      expressShow: false
+      orderID: "",
+      expressID: "",
+      expressShow: false,
+      showChooseInvoice:false,
+      showChooseInvoiceDetail:false,
     };
   },
+  watch: {
+    dialogVisible: function(val) {
+      if(!val){
+        this.showChooseInvoiceDetail=false;
+        this.chooseid="";
+      }
+    }
+  },
   methods: {
+    getInvoiceInfo(chooseid) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${chooseid}`
+      })
+        .then(res => {
+          console.log(res.data.data);
+            this.companyName = res.data.data.company;
+            this.companyAddress = res.data.data.address;
+            this.taxerID = res.data.data.taxpayerno;
+            this.contactPerson = res.data.data.person;
+            this.bank = res.data.data.bank;
+            this.phone = res.data.data.mobilephone;
+            this.account = res.data.data.account;
+            this.selectType = res.data.data.type;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    gotoShowChooseInvoiceDetail() {
+      if(this.chooseid == "") {
+        this.$message({
+          message: "请先选择发票",
+          center: true,
+          type: 'warning',
+          customClass: 'zZindex'
+        });
+      } else {
+this.showChooseInvoice=false;
+      this.showChooseInvoiceDetail=true;
+      this.getInvoiceInfo(this.chooseid);
+      }
+    },
     checkExpress(id) {
       this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_findLognoByOrderid.do?orderid=${id}`
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_findLognoByOrderid.do?orderid=${id}`
+      })
+        .then(res => {
+          this.expressID = res.data.data;
         })
-          .then(res => {
-            this.expressID = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+        .catch(function(err) {
+          console.log(err);
+        });
       this.expressShow = true;
     },
     checkSubmit() {
       this.$ajax({
         method: "post",
-        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${this.orderID}&invoiceid=${this.invoiceid}`
+        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${
+          this.orderID
+        }&invoiceid=${this.invoiceid}`
       })
         .then(res => {
           this.checkAgain = false;
           this.$message({
             message: "提交成功！",
-            type: 'success',
+            type: "success",
             center: true
           });
           this.getNotPayOrderList(this.currentPage);
@@ -221,10 +330,9 @@ export default {
         });
     },
     checkAgainMore() {
-       this.dialogVisible = true;
       this.checkAgain = false;
     },
-    getInvoice(id,money) {
+    getInvoice(id, money) {
       this.orderID = id;
       this.orderMoney = money;
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -232,59 +340,51 @@ export default {
         var userid = userInfo.userid;
       }
       this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
+      })
+        .then(res => {
+          if (res.data.data.length == 0) {
+            this.noInvoice = true;
+          } else {
+            this.invoiceList = res.data.data;
+            this.dialogVisible = true;
+            this.showChooseInvoice = true;
+          }
         })
-          .then(res => {
-            if(res.data.data == "false") {
-              this.noInvoice = true;
-            } else {
-              this.companyName= res.data.data.company;
-              this.companyAddress=res.data.data.address;
-              this.taxerID=res.data.data.taxpayerno;
-              this.contactPerson=res.data.data.person;
-              this.bank=res.data.data.bank;
-              this.phone=res.data.data.mobilephone;
-              this.account=res.data.data.account;
-              this.otherContent=res.data.data.content;
-              this.invoiceid = res.data.data.invoiceid;
-              this.dialogVisible = true;
-            }
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     checkOK() {
       this.dialogVisible = false;
       this.checkAgain = true;
     },
     handleCurrentChange(val) {
-        this.getNotPayOrderList(val);
-        this.currentPage = val;
+      this.getNotPayOrderList(val);
+      this.currentPage = val;
     },
     getNotPayOrderList(selectIndex) {
-      var pageIndex = (selectIndex - 1)*3
+      var pageIndex = (selectIndex - 1) * 3;
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
       this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_findOrderList.do?userid=${userid}&status=1&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_findOrderList.do?userid=${userid}&status=1&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+      })
+        .then(res => {
+          this.orderlist = res.data.data;
+          this.count = res.data.count;
         })
-          .then(res => {
-            this.orderlist = res.data.data;
-            this.count = res.data.count;    
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     showNotice(id) {
       this.deleteOrderID = id;
@@ -301,7 +401,7 @@ export default {
           this.deleteOrderShow = false;
           this.$message({
             message: "删除成功！",
-            type: 'success',
+            type: "success",
             center: true
           });
           this.getNotPayOrderList(this.currentPage);
@@ -309,7 +409,7 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   mounted() {
     this.getNotPayOrderList(1);
@@ -353,7 +453,7 @@ export default {
   width: 141px;
   height: 141px;
   margin: 0px 0px 0px 10px;
-   object-fit:cover;
+  object-fit: cover;
 }
 .order-picture {
   height: 162px;
@@ -376,7 +476,7 @@ export default {
   text-align: left;
   margin: 5px 10px 0px 0px;
   font-size: 13px;
- color: #F56C6C;
+  color: #f56c6c;
 }
 .order-pay {
   height: 50px;
@@ -453,9 +553,10 @@ input {
 }
 .schedule-body {
   text-align: left;
-  padding:0px 0px 0px 115px;
+  padding: 0px 0px 0px 115px;
 }
-#schedule1,#schedule2 {
+#schedule1,
+#schedule2 {
   text-align: center;
 }
 .sign-submit {
@@ -465,29 +566,151 @@ input {
 .el-icon-delete {
   float: right;
   font-size: 18px;
-  margin: 6px 15px 0px 0px;
+  margin: 2px 15px 0px 0px;
 }
 .el-icon-delete:hover {
   color: #409eff;
   cursor: pointer;
 }
-.deleteOrderNotice,.checkAgain,.expressShow {
+.deleteOrderNotice,
+.checkAgain,
+.expressShow {
   text-align: center;
 }
 .delete-order-operation {
-  margin:30px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
 .click-here {
-  margin:0px 5px;
+  margin: 0px 5px;
 }
 .noOrder {
-  margin: 120px 0px 0px 0px; 
+  margin: 120px 0px 0px 0px;
   text-align: center;
 }
 .no-order-content {
   margin: 20px 0px 0px 0px;
   color: #999;
   font-size: 18px;
+}
+.invoice_body {
+  width: 310px;
+  height: 146px;
+  margin: 0px auto 20px auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 12px #c7c5c5;
+  cursor: pointer;
+}
+.invoice_body:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.invoice_body_add {
+  width: 310px;
+  height: 146px;
+  margin: 20px auto 0px auto;
+  border-radius: 8px;
+  border: 1px dashed #c7c5c5;
+  cursor: pointer;
+}
+.invoice_body_add:hover {
+  box-shadow: 0px 0px 12px #807e7e;
+}
+.pupiao {
+  background: -webkit-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -o-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -moz-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+}
+.gongpiao {
+  background: -webkit-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -o-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -moz-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+
+  background: linear-gradient(to right, #409eff, rgb(0, 128, 255));
+}
+.dianzi {
+  background: -webkit-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -o-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -moz-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+}
+.invoice_title {
+  position: absolute;
+  width: 235px;
+  height: 40px;
+  margin: 20px 0px 0px 60px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #fff;
+  text-align: left;
+}
+.invoice_type {
+  position: absolute;
+  margin: 65px 0px 0px 60px;
+  color: #fff;
+  font-size: 12px;
+  border: 1px solid #fff;
+  padding: 3px;
+}
+.invoice_account {
+  position: absolute;
+  margin: 110px 0px 0px 60px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
+.el-icon-delete {
+  color: #fff;
+  font-size: 16px;
+}
+.el-icon-delete:hover {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.el-icon-edit {
+  color: #fff;
+  font-size: 16px;
+  margin: 0px 15px 0px 0px;
+}
+.el-icon-edit:hover {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.invoice_delete {
+  position: absolute;
+  margin: 110px 0px 0px 240px;
+}
+.invoice_picture {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 20px 0px 0px 10px;
+}
+.invoice_picture img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.choose_this {
+  position: absolute;
+border: 25px solid rgba(36, 46, 104, 0.6);
+border-left: 25px solid transparent;  
+border-top: 25px solid transparent; 
+border-bottom-right-radius: 8px; 
+margin:96px 0px 0px 260px;
+width: 0;  
+}
+.choose_icon {
+  position: absolute;
+}
+.el-icon-check {
+  color:#fff;
+  margin:119px 0px 0px 282px;
+  font-weight: bold;
+  font-size: 22px;
 }
 </style>
 

@@ -6,139 +6,162 @@
         <el-breadcrumb-item>发票管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-col :span="12">
-    <div class="invoice_body pupiao">
-      <div class="invoice_picture"><img src="../../assets/pupiao.png"></div>
-      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
-      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司心南通有限公司心南通有限公司心南通有限公司心南通有限公司心南通有限公司</div>
-      <div class="invoice_type">普票</div>
-      <div class="invoice_account">484571289748</div>
+    <div class="deleteCheck_dialog">
+      <el-dialog :visible.sync="deleteCheck" width="300px">
+        <p class="check_contnt">确认删除？</p>
+        <el-button type="primary" @click="deleteInvoice(deleteInvoiceId)" >确认</el-button>
+        <el-button type="primary" plain @click="deleteCheck=false" >取消</el-button>
+      </el-dialog>
     </div>
-    </el-col>
-    <el-col :span="12">
-    <div class="invoice_body gongpiao">
-      <div class="invoice_picture"><img src="../../assets/zhuanpiao.png"></div>
-      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
-      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司</div>
-      <div class="invoice_type">专票</div>
-      <div class="invoice_account">484571289748</div>
+    <div v-if="showInvoice">
+      <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
+        <div
+          class="invoice_body"
+          :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+          @click="showInvoiceDetail(invoiceItem[0])"
+        >
+          <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
+            <img src="../../assets/pupiao.png">
+          </div>
+          <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
+            <img src="../../assets/zhuanpiao.png">
+          </div>
+          <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
+            <img src="../../assets/dianzi.png">
+          </div>
+          <div class="invoice_delete">
+            <span class="el-icon-edit" @click.stop="editInvoice(invoiceItem[0])"></span>
+            <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
+          </div>
+          <div class="invoice_title">{{invoiceItem[1]}}</div>
+          <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
+          <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
+          <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
+          <div class="invoice_account">{{invoiceItem[7]}}</div>
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="invoice_body_add" @click="addInvoice" v-if="this.invoiceList.length<10">
+          <div class="add_new_invoice">
+            <span class="el-icon-plus"></span>
+          </div>
+        </div>
+      </el-col>
     </div>
-    </el-col>
-    <el-col :span="12">
-    <div class="invoice_body dianzi">
-      <div class="invoice_picture"><img src="../../assets/dianzi.png"></div>
-      <div class="invoice_delete"><span class="el-icon-edit"></span><span class="el-icon-delete"></span></div>
-      <div class="invoice_title">智聚装配式绿色建筑创新中心南通有限公司心南通有限公司</div>
-      <div class="invoice_type">电子发票</div>
-      <div class="invoice_account">484571289748</div>
-    </div>
-    </el-col>
-    <el-col :span="12">
-    <div class="invoice_body_add">
-      <div class="add_new_invoice"><span class="el-icon-plus"></span></div>
-    </div>
-    </el-col>
-    <!-- <div v-if="ifEdit" class="table-body">
-      <table border="1" cellspacing="0">
-        <tr>
-          <th colspan="4" class="invoice-show-table-th">开票信息表</th>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info1">
-            <span>*</span>公司名称
-          </td>
-          <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input
-              v-model="companyName"
-              placeholder="请输入公司名称"
-              maxlength="30"
-              class="person-add-input"
-              id="companyNameInputFocus"
-            ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info1">
-            <span>*</span>公司地址
-          </td>
-          <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input
-              v-model="companyAddress"
-              placeholder="请输入公司地址"
-              maxlength="50"
-              class="person-add-input"
-            ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info1">
-            <span>*</span>社会统一信用编码
-          </td>
-          <td class="invoice-show-table-td-input2">
-            <el-input
-              v-model="taxerID"
-              placeholder="请输入纳税人识别号"
-              maxlength="30"
-              class="person-add-input"
-            ></el-input>
-          </td>
-          <td class="invoice-show-table-td-info2">
-            <span>*</span>联系人
-          </td>
-          <td class="invoice-show-table-td-input3">
-            <el-input
-              v-model="contactPerson"
-              placeholder="请输入联系人"
-              maxlength="5"
-              class="person-add-input"
-            ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info1">
-            <span>*</span>公司开户行
-          </td>
-          <td class="invoice-show-table-td-input2">
-            <el-input v-model="bank" placeholder="请输入公司开户行" maxlength="20" class="person-add-input"></el-input>
-          </td>
-          <td class="invoice-show-table-td-info2">
-            <span>*</span>联系电话
-          </td>
-          <td class="invoice-show-table-td-input3">
-            <el-input v-model="phone" placeholder="请输入联系电话" maxlength="11" class="person-add-input"></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info1">
-            <span>*</span>公司账号
-          </td>
-          <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input
-              v-model="account"
-              placeholder="请输入公司账号"
-              maxlength="20"
-              class="person-add-input"
-            ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td class="invoice-show-table-td-info3">可开具的发票内容</td>
-          <td colspan="3" class="invoice-show-table-td-input1">
-            <el-input
-              v-model="otherContent"
-              maxlength="50"
-              class="person-add-input"
-              id="otherContent"
-            ></el-input>
-          </td>
-        </tr>
-      </table>
-      <div class="info-edit">
-        <el-button type="success" @click="saveHaveInvoice" v-if="haveInvoice">点击保存</el-button>
-        <el-button type="success" @click="saveNoInvoice" v-if="!haveInvoice">点击保存</el-button>
+
+    <div v-if="addNewInvoice" class="table-body">
+      <div class="putongfapiao">
+        <table border="1" cellspacing="0">
+          <tr>
+            <th colspan="4" class="invoice-show-table-th">开票信息表</th>
+          </tr>
+          <tr>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>公司名称
+            </td>
+            <td colspan="3" class="invoice-show-table-td-input1">
+              <el-input
+                v-model="companyName"
+                placeholder="请输入公司名称"
+                maxlength="30"
+                class="person-add-input"
+                id="companyNameInputFocus"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>公司地址
+            </td>
+            <td colspan="3" class="invoice-show-table-td-input1">
+              <el-input
+                v-model="companyAddress"
+                placeholder="请输入公司地址"
+                maxlength="50"
+                class="person-add-input"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>社会统一信用编码
+            </td>
+            <td class="invoice-show-table-td-input2">
+              <el-input
+                v-model="taxerID"
+                placeholder="请输入纳税人识别号"
+                maxlength="30"
+                class="person-add-input"
+              ></el-input>
+            </td>
+            <td class="invoice-show-table-td-info2">
+              <span>*</span>联系人
+            </td>
+            <td class="invoice-show-table-td-input3">
+              <el-input
+                v-model="contactPerson"
+                placeholder="请输入联系人"
+                maxlength="6"
+                class="person-add-input"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>公司开户行
+            </td>
+            <td class="invoice-show-table-td-input2">
+              <el-input
+                v-model="bank"
+                placeholder="请输入公司开户行"
+                maxlength="20"
+                class="person-add-input"
+              ></el-input>
+            </td>
+            <td class="invoice-show-table-td-info2">
+              <span>*</span>联系电话
+            </td>
+            <td class="invoice-show-table-td-input3">
+              <el-input
+                v-model="phone"
+                placeholder="请输入联系电话"
+                maxlength="11"
+                class="person-add-input"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>公司账号
+            </td>
+            <td class="invoice-show-table-td-input1">
+              <el-input
+                v-model="account"
+                placeholder="请输入公司账号"
+                maxlength="20"
+                class="person-add-input"
+              ></el-input>
+            </td>
+            <td class="invoice-show-table-td-info1">
+              <span>*</span>发票类型
+            </td>
+            <td class="invoice-show-table-td-input1">
+              <el-select v-model="selectType" placeholder="请选择发票类型" class="type_select">
+                <el-option label="普通发票" value="0"></el-option>
+                <el-option label="专用发票" value="1"></el-option>
+                <el-option label="电子发票" value="2"></el-option>
+              </el-select>
+            </td>
+          </tr>
+        </table>
+        <div class="info-edit">
+          <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">点击保存</el-button>
+          <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">稍等一下</el-button>
+        </div>
       </div>
     </div>
-    <div v-if="!ifEdit" class="table-body">
+
+    <div v-if="InvoiceDetail" class="table-body">
       <table border="1" cellspacing="0">
         <tr>
           <th colspan="4" class="invoice-show-table-th">开票信息表</th>
@@ -165,17 +188,19 @@
         </tr>
         <tr>
           <td class="invoice-show-table-td-info1">公司账号</td>
-          <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
+          <td class="invoice-show-table-td-input1">{{account}}</td>
+          <td class="invoice-show-table-td-info1">发票类型</td>
+          <td class="invoice-show-table-td-input1" v-if="selectType==0">普通发票</td>
+          <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
+          <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
         </tr>
-        <tr>
-          <td class="invoice-show-table-td-info3">可开具的发票内容</td>
-          <td colspan="3" class="invoice-show-table-td-input1">{{otherContent}}</td>
-        </tr>
+
       </table>
       <div class="info-save">
-        <el-button type="primary" @click="editInvoice">点击编辑</el-button>
+        <el-button type="primary" @click="showEditInvoice" class="save_new_invoice">编辑</el-button>
+        <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">取消</el-button>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -184,8 +209,12 @@ export default {
   name: "PersonalCenterInvoiceShow",
   data() {
     return {
-      ifEdit: false,
       focusBoolean: true,
+      invoiceList: [],
+      showInvoice: true,
+      countFocus: 0,
+      addNewInvoice: false,
+      InvoiceDetail: false,
       companyName: "",
       companyAddress: "",
       taxerID: "",
@@ -193,115 +222,96 @@ export default {
       bank: "",
       phone: "",
       account: "",
-      otherContent: "",
-      invoiceid: "",
-      haveEdit: false,
-      haveInvoice: false
+      type: "",
+      selectType: "",
+      deleteCheck:false,
+      deleteInvoiceId: "",
+      ifEditInvoice:false,
+      editInvoiceId: ""
     };
   },
   methods: {
-    editInvoice() {
-      this.ifEdit = true;
-      if (
-        this.companyName == "" &&
-        this.companyAddress == "" &&
-        this.taxerID == "" &&
-        this.contactPerson == "" &&
-        this.bank == "" &&
-        this.phone == "" &&
-        this.account == "" &&
-        this.otherContent == ""
-      ) {
-        this.haveEdit = false;
-      } else {
-        this.haveEdit = true;
-      }
-    },
-    saveHaveInvoice() {
-      var userInfo = JSON.parse(sessionStorage.getItem("user"));
-      if (userInfo) {
-        var userid = userInfo.userid;
-      }
-      if (this.companyName == "") {
-        this.$message({
-          message: "公司名称不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.companyAddress == "") {
-        this.$message({
-          message: "公司地址不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.taxerID == "") {
-        this.$message({
-          message: "纳税人识别号不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (
-        this.taxerID.length != 15 &&
-        this.taxerID.length != 17 &&
-        this.taxerID.length != 18 &&
-        this.taxerID.length != 20
-      ) {
-        this.$message({
-          message: "纳税人识别号位数不正确！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.contactPerson == "") {
-        this.$message({
-          message: "联系人不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.bank == "") {
-        this.$message({
-          message: "公司开户行不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.phone == "") {
-        this.$message({
-          message: "联系电话不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else if (this.account == "") {
-        this.$message({
-          message: "公司账号不能为空！",
-          type: 'error',
-          center: true
-        });
-      } else {
-        this.$ajax({
-          method: "post",
-          url: `${
-            this.baseURL
-          }/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${
-            this.invoiceid
-          }",company:
-            "${this.companyName}",address:"${
-            this.companyAddress
-          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
-            this.account
-          }",content:"${this.otherContent}"}&userid=${userid}`
+    showInvoiceDetail(invoiceId) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${invoiceId}`
+      })
+        .then(res => {
+          console.log(res.data.data);
+            this.companyName = res.data.data.company;
+            this.companyAddress = res.data.data.address;
+            this.taxerID = res.data.data.taxpayerno;
+            this.contactPerson = res.data.data.person;
+            this.bank = res.data.data.bank;
+            this.phone = res.data.data.mobilephone;
+            this.account = res.data.data.account;
+            this.selectType = res.data.data.type;
+            this.showInvoice = false;
+            this.addNewInvoice = false;
+            this.InvoiceDetail = true;
+            this.editInvoiceId = invoiceId;
         })
-          .then(res => {
-            this.$message({
-              message: "修改成功！",
-              type: 'success',
-              center: true
-            });
-            this.ifEdit = false;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      }
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    showEditInvoice() {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${this.editInvoiceId}`
+      })
+        .then(res => {
+            this.companyName = res.data.data.company;
+            this.companyAddress = res.data.data.address;
+            this.taxerID = res.data.data.taxpayerno;
+            this.contactPerson = res.data.data.person;
+            this.bank = res.data.data.bank;
+            this.phone = res.data.data.mobilephone;
+            this.account = res.data.data.account;
+            this.selectType = res.data.data.type;
+            this.showInvoice = false;
+            this.addNewInvoice = true;
+            this.ifEditInvoice = true;
+            this.InvoiceDetail = false;
+            this.editInvoiceId = invoiceId;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    editInvoice(invoiceId) {
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${invoiceId}`
+      })
+        .then(res => {
+            this.companyName = res.data.data.company;
+            this.companyAddress = res.data.data.address;
+            this.taxerID = res.data.data.taxpayerno;
+            this.contactPerson = res.data.data.person;
+            this.bank = res.data.data.bank;
+            this.phone = res.data.data.mobilephone;
+            this.account = res.data.data.account;
+            this.selectType = res.data.data.type;
+            this.showInvoice = false;
+            this.addNewInvoice = true;
+            this.ifEditInvoice = true;
+            this.InvoiceDetail = false;
+            this.editInvoiceId = invoiceId;  
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    deleteCheckFun(invoiceId) {
+      this.deleteCheck= true;
+      this.deleteInvoiceId = invoiceId;
     },
     saveNoInvoice() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -311,46 +321,52 @@ export default {
       if (this.companyName == "") {
         this.$message({
           message: "公司名称不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.companyAddress == "") {
         this.$message({
           message: "公司地址不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.taxerID == "") {
         this.$message({
           message: "纳税人识别号不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.contactPerson == "") {
         this.$message({
           message: "联系人不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.bank == "") {
         this.$message({
           message: "公司开户行不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.phone == "") {
         this.$message({
           message: "联系电话不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else if (this.account == "") {
         this.$message({
           message: "公司账号不能为空！",
-          type: 'error',
+          type: "error",
           center: true
         });
-      } else {
+      } else if (this.selectType == "") {
+        this.$message({
+          message: "发票类型不能为空！",
+          type: "error",
+          center: true
+        });
+      } else if(!this.ifEditInvoice){
         this.$ajax({
           method: "post",
           url: `${
@@ -361,60 +377,135 @@ export default {
           }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
             bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
             this.account
-          }",content:"${this.otherContent}"}&userid=${userid}`
+          }",type:"${this.selectType}"}&userid=${userid}`
         })
           .then(res => {
             this.$message({
               message: "添加成功！",
+              type: "success",
+              center: true
+            });
+            this.showInvoice = true;
+            this.addNewInvoice = false;
+            this.InvoiceDetail = false;
+            this.companyName = "";
+            this.companyAddress = "";
+            this.taxerID = "";
+            this.contactPerson = "";
+            this.bank = "";
+            this.phone = "";
+            this.account = "";
+            this.selectType = "";
+            this.getInvoiceList();
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      } else if(this.ifEditInvoice) {
+          this.$ajax({
+          method: "post",
+          url: `${
+            this.baseURL
+          }/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${
+            this.editInvoiceId
+          }",company:
+            "${this.companyName}",address:"${
+            this.companyAddress
+          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
+            this.account
+          }",type:"${this.selectType}"}&userid=${userid}`
+        })
+          .then(res => {
+            this.$message({
+              message: "修改成功！",
               type: 'success',
               center: true
             });
-            this.ifEdit = false;
+             this.showInvoice = true;
+            this.addNewInvoice = false;
+            this.InvoiceDetail = false;
+            this.companyName = "";
+            this.companyAddress = "";
+            this.taxerID = "";
+            this.contactPerson = "";
+            this.bank = "";
+            this.phone = "";
+            this.account = "";
+            this.selectType = "";
+            this.ifEditInvoice = false;
+            this.getInvoiceList();
           })
           .catch(function(err) {
             console.log(err);
           });
       }
+    },
+    getInvoiceList() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
+      })
+        .then(res => {
+          if (res.data.data != "false") {
+            console.log(res.data.data);
+            this.invoiceList = res.data.data;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    addInvoice() {
+      this.showInvoice = false;
+      this.addNewInvoice = true;
+      this.InvoiceDetail = false;
+    },
+    cancelEdit() {
+      this.showInvoice = true;
+      this.addNewInvoice = false;
+      this.InvoiceDetail = false;
+      this.companyName = "";
+            this.companyAddress = "";
+            this.taxerID = "";
+            this.contactPerson = "";
+            this.bank = "";
+            this.phone = "";
+            this.account = "";
+            this.selectType = "";
+            this.ifEditInvoice = false;
+    },
+    deleteInvoice(invoiceid) {
+      this.$ajax({
+        method: "post",
+        url: `${
+          this.baseURL
+        }/zjsxpt/invoice_deleteInvoiceById.do?invoiceid=${invoiceid}`
+      })
+        .then(res => {
+          this.$message({
+              message: "删除成功！",
+              type: "success",
+              center: true
+            });
+          console.log(res.data);
+          this.getInvoiceList();
+          this.deleteCheck= false;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   },
   mounted() {
-    var userInfo = JSON.parse(sessionStorage.getItem("user"));
-    if (userInfo) {
-      var userid = userInfo.userid;
-    }
-    this.$ajax({
-      method: "post",
-      url: `${this.baseURL}//zjsxpt/invoice_getInvoiceById.do?userid=${userid}`
-    })
-      .then(res => {
-        if (res.data.data == "false") {
-          this.haveInvoice = false;
-        } else {
-          this.haveInvoice = true;
-          this.companyName = res.data.data.company;
-          this.companyAddress = res.data.data.address;
-          this.taxerID = res.data.data.taxpayerno;
-          this.contactPerson = res.data.data.person;
-          this.bank = res.data.data.bank;
-          this.phone = res.data.data.mobilephone;
-          this.account = res.data.data.account;
-          this.otherContent = res.data.data.content;
-          this.invoiceid = res.data.data.invoiceid;
-        }
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
+    this.getInvoiceList();
   },
-  updated: function() {
-    if (this.ifEdit && this.focusBoolean) {
-      this.focusBoolean = false;
-      document.getElementById("companyNameInputFocus").focus();
-    }
-    if (!this.ifEdit) {
-      this.focusBoolean = true;
-    }
-  }
 };
 </script>
 
@@ -488,19 +579,20 @@ span {
   text-overflow: ellipsis;
 }
 .invoice_body {
-  width:310px;
-  height:146px;
-  margin:20px auto 0px auto;
+  width: 310px;
+  height: 146px;
+  margin: 20px auto 0px auto;
   border-radius: 8px;
   box-shadow: 0px 0px 12px #c7c5c5;
+  cursor: pointer;
 }
 .invoice_body:hover {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .invoice_body_add {
-  width:310px;
-  height:146px;
-  margin:20px auto 0px auto;
+  width: 310px;
+  height: 146px;
+  margin: 20px auto 0px auto;
   border-radius: 8px;
   border: 1px dashed #c7c5c5;
   cursor: pointer;
@@ -509,93 +601,113 @@ span {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .pupiao {
-  background: -webkit-linear-gradient(to right, #67C23A , rgb(67, 197, 2));
-  background: -o-linear-gradient(to right, #67C23A, rgb(67, 197, 2));
-  background: -moz-linear-gradient(to right, #67C23A, rgb(67, 197, 2));
-  background: linear-gradient(to right, #67C23A , rgb(67, 197, 2));
+  background: -webkit-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -o-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: -moz-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: linear-gradient(to right, #67c23a, rgb(67, 197, 2));
 }
 .gongpiao {
-  background: -webkit-linear-gradient(to right, #409EFF , rgb(0, 128, 255));
-  background: -o-linear-gradient(to right, #409EFF, rgb(0, 128, 255));
-  background: -moz-linear-gradient(to right, #409EFF, rgb(0, 128, 255));
-  
-  background:linear-gradient(to right, #409EFF, rgb(0, 128, 255));
+  background: -webkit-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -o-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+  background: -moz-linear-gradient(to right, #409eff, rgb(0, 128, 255));
+
+  background: linear-gradient(to right, #409eff, rgb(0, 128, 255));
 }
 .dianzi {
-  background: -webkit-linear-gradient(to right, #E6A23C , rgb(228, 137, 0));
-  background: -o-linear-gradient(to right, #E6A23C, rgb(228, 137, 0));
-  background: -moz-linear-gradient(to right, #E6A23C, rgb(228, 137, 0));
-  background:linear-gradient(to right, #E6A23C, rgb(228, 137, 0))
+  background: -webkit-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -o-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: -moz-linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
+  background: linear-gradient(to right, #e6a23c, rgb(228, 137, 0));
 }
 .invoice_title {
-  position:absolute;
-  width:235px;
-  height:40px;
-  margin:20px 0px 0px 60px;
+  position: absolute;
+  width: 235px;
+  height: 40px;
+  margin: 20px 0px 0px 60px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  color:#fff;
+  color: #fff;
 }
 .invoice_type {
-  position:absolute;
-  margin:65px 0px 0px 60px;
-  color:#fff;
-  font-size:12px;
+  position: absolute;
+  margin: 65px 0px 0px 60px;
+  color: #fff;
+  font-size: 12px;
+  border: 1px solid #fff;
+  padding: 3px;
 }
 .invoice_account {
-  position:absolute;
-  margin:110px 0px 0px 60px;
-  color:#fff;
+  position: absolute;
+  margin: 110px 0px 0px 60px;
+  color: #fff;
   font-weight: bold;
-  font-size:13px;
+  font-size: 13px;
 }
 .el-icon-delete {
-  color:#fff;
+  color: #fff;
   font-size: 16px;
 }
 .el-icon-delete:hover {
-  color:#fff;
+  color: #fff;
   cursor: pointer;
   font-weight: bold;
 }
 .el-icon-edit {
-  color:#fff;
+  color: #fff;
   font-size: 16px;
-  margin:0px 15px 0px 0px;
+  margin: 0px 15px 0px 0px;
 }
-.el-icon-edit:hover{
-  color:#fff;
+.el-icon-edit:hover {
+  color: #fff;
   cursor: pointer;
   font-weight: bold;
 }
 .invoice_delete {
-  position:absolute;
+  position: absolute;
   margin: 110px 0px 0px 240px;
 }
-.invoice_picture{
-  position:absolute;
-  width:40px;
-  height:40px;
-  margin:20px 0px 0px 10px;
+.invoice_picture {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 20px 0px 0px 10px;
 }
-.invoice_picture img{
-  width:40px;
-  height:40px;
+.invoice_picture img {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .add_new_invoice {
   text-align: center;
-  height:146px;
+  height: 146px;
   line-height: 146px;
 }
 .el-icon-plus {
-  color:#c7c5c5;
-  font-size:26px;
+  color: #c7c5c5;
+  font-size: 26px;
 }
-.invoice_body_add:hover .el-icon-plus{
-  color:#807e7e;
+.invoice_body_add:hover .el-icon-plus {
+  color: #807e7e;
+}
+.choose_type_notice {
+  margin: 20px 0px 20px 20px;
+}
+.save_new_invoice {
+  width:90px;
+  padding:12px;
+  margin:0px 80px 0px 0px;
+}
+.cancel_new_invoice {
+  width:90px;
+  padding:12px;
+}
+.deleteCheck_dialog {
+  text-align: center;
+}
+.check_contnt {
+  margin:0px 0px 25px 0px;
 }
 </style>
 <style>
