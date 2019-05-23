@@ -805,6 +805,9 @@ width: 0;
   font-weight: bold;
   font-size: 22px;
 }
+.user_choose_invoice {
+  padding:0px 45px;
+}
 .td11{
   width:40px;
   height: 100px;
