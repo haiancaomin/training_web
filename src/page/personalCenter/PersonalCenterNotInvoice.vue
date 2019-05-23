@@ -420,7 +420,9 @@ this.showChooseInvoice=false;
         });
     },
     checkAgainMore() {
+      this.dialogVisible = true;
       this.checkAgain = false;
+      this.showChooseInvoiceDetail = true;
     },
 
     getInvoice(id, money) {

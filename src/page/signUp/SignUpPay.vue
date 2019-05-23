@@ -23,7 +23,7 @@
         </div>
         <div class="check_operation">
           <el-button type="primary" class="sign-submit" @click="payWait">我已确认</el-button>
-          <el-button type="primary" class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
+          <el-button type="primary" plain class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
         </div>
         </el-dialog>
 
