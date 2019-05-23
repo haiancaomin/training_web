@@ -336,6 +336,12 @@ export default {
           type: "error",
           center: true
         });
+      } else if (this.taxerID.match("[0-9A-Z]{18}") != this.taxerID) {
+        this.$message({
+          message: "请输入正确的纳税人识别号！",
+          type: "error",
+          center: true
+        });
       } else if (this.contactPerson == "") {
         this.$message({
           message: "联系人不能为空！",
@@ -354,13 +360,25 @@ export default {
           type: "error",
           center: true
         });
+      } else if (this.phone.match("1[34578][0-9]{9}") != this.phone) {
+        this.$message({
+          message: "请输入正确的联系电话！",
+          type: "error",
+          center: true
+        });
       } else if (this.account == "") {
         this.$message({
           message: "公司账号不能为空！",
           type: "error",
           center: true
         });
-      } else if (this.selectType == "") {
+      } else if (this.account.match("^[0-9]{16,19}") != this.account) {
+        this.$message({
+          message: "请输入正确的公司账号！",
+          type: "error",
+          center: true
+        });
+      }else if (this.selectType == "") {
         this.$message({
           message: "发票类型不能为空！",
           type: "error",
