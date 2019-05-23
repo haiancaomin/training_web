@@ -19,6 +19,10 @@ export default new Router({
         component: resolve => require(['@/components/Forget'], resolve)
       },
       {
+        path: '/paysuccess',
+        component: resolve => require(['@/components/paySuccess'], resolve)
+      },
+      {
         path: 'PersonalCenterOrderDetail/:orderid',
         component: resolve => require(['@/page/personalCenter/PersonalCenterOrderDetail'], resolve),
         props: true
