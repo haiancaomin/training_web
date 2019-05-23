@@ -11,8 +11,8 @@
           <h1 class="file-title">订单详情</h1>
 
             <el-collapse accordion  v-for="orderItem in orderDetail.dlist"
-                    :key="orderItem.detailid">
-              <el-collapse-item id="meal-body-collapse">
+                    :key="orderItem.detailid" v-model="activeNames">
+              <el-collapse-item id="meal-body-collapse" name="1">
                 <template slot="title">
                   <div
                     class="pay-meal-body"
@@ -102,6 +102,7 @@ export default {
   name: "PersonalCenterOrderDetail",
   data() {
     return {
+      activeNames: ['1'],
         showTable:false,
         tableData: [],
       orderDetail: []

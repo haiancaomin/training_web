@@ -84,6 +84,47 @@
         <div><el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button></div>
         </div>
         <div class="table-body" v-show="showChooseInvoiceDetail">
+
+
+
+          <table border="1" cellspacing="0">
+            <tr>
+              <td><div>购买方</div></td>
+              <td>
+                <div>
+                  <p>名称：</p>
+                  <p>纳税人识别号：</p>
+                  <p>地址、电话：</p>
+                  <p>开发行及账号：</p>
+                </div>
+              </td>
+              <td colspan="5"><div>area1</div></td>
+              <td><div>密码区</div></td>
+              <td colspan="4"><div>area2</div></td>
+            </tr>
+            <tr>
+              <td colspan="3"><div><p>货物或应税劳务、服务名称</p></div></td>
+              <td><div><p>规格型号</p></div></td>
+              <td><div><p>单位</p></div></td>
+              <td><div><p>数量</p></div></td>
+              <td colspan="3"><div><p>单价</p></div></td>
+              <td><div><p>金额</p></div></td>
+              <td><div><p>税率</p></div></td>
+              <td><div><p>税额</p></div></td>
+            </tr>
+            <tr>
+              <td colspan="3"><div>area</div></td>
+              <td><div>area</div></td>
+              <td><div>area</div></td>
+              <td><div>area</div></td>
+              <td colspan="3"><div>area</div></td>
+              <td><div>area</div></td>
+              <td><div>area</div></td>
+              <td><div>area</div></td>
+            </tr>
+          </table>
+
+
           <table border="1" cellspacing="0">
             <tr>
               <th colspan="4" class="invoice-show-table-th">开票信息表</th>
@@ -120,8 +161,13 @@
               <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
               <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
             </tr>
-           
           </table>
+
+
+
+
+
+
           <div class="info-save">
             <el-button type="primary" @click="checkOK">确认开票</el-button>
           </div>
