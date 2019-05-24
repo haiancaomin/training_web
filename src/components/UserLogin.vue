@@ -14,13 +14,13 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input :type="inputType" placeholder="请输入密码" v-model="ruleForm.password">
+          <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <div class="input-icon" @click="changeType">
+          <!-- <div class="input-icon" @click="changeType">
             <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
             <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
-          </div>
+          </div> -->
         </el-form-item>
 
         <el-form-item prop="inputVerificationCode" v-show="errorCount>2">
@@ -226,15 +226,15 @@ export default {
       }
     },
 
-    changeType() {
-      if (this.inputType == "text") {
-        this.inputType = "password";
-        this.showNewPassword = false;
-      } else {
-        this.inputType = "text";
-        this.showNewPassword = true;
-      }
-    },
+    // changeType() {
+    //   if (this.inputType == "text") {
+    //     this.inputType = "password";
+    //     this.showNewPassword = false;
+    //   } else {
+    //     this.inputType = "text";
+    //     this.showNewPassword = true;
+    //   }
+    // },
     closeDialog: function() {
       this.$emit("closed", false);
     },

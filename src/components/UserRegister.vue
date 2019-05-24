@@ -15,23 +15,23 @@
         </el-form-item>
 
         <el-form-item prop="password">
-          <el-input :type="inputType" placeholder="请输入密码" v-model="ruleForm.password">
+          <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <div class="input-icon" @click="changeType">
+          <!-- <div class="input-icon" @click="changeType">
             <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
             <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
-          </div>
+          </div> -->
         </el-form-item>
 
         <el-form-item prop="password2">
-          <el-input :type="inputType2" placeholder="请再次输入密码" v-model="ruleForm.password2">
+          <el-input type="password" placeholder="请再次输入密码" v-model="ruleForm.password2">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <div class="input-icon" @click="changeType2">
+          <!-- <div class="input-icon" @click="changeType2">
             <i class="iconfont" v-if="showNewPassword2">&#xe76c;</i>
             <i class="iconfont" v-if="!showNewPassword2">&#xe604;</i>
-          </div>
+          </div> -->
         </el-form-item>
 
         <el-form-item prop="phone">
@@ -269,24 +269,24 @@ export default {
           .removeEventListener("mouseup", this.moseUpFn);
       }
     },
-    changeType() {
-      if (this.inputType == "text") {
-        this.inputType = "password";
-        this.showNewPassword = false;
-      } else {
-        this.inputType = "text";
-        this.showNewPassword = true;
-      }
-    },
-    changeType2() {
-      if (this.inputType2 == "text") {
-        this.inputType2 = "password";
-        this.showNewPassword2 = false;
-      } else {
-        this.inputType2 = "text";
-        this.showNewPassword2 = true;
-      }
-    },
+    // changeType() {
+    //   if (this.inputType == "text") {
+    //     this.inputType = "password";
+    //     this.showNewPassword = false;
+    //   } else {
+    //     this.inputType = "text";
+    //     this.showNewPassword = true;
+    //   }
+    // },
+    // changeType2() {
+    //   if (this.inputType2 == "text") {
+    //     this.inputType2 = "password";
+    //     this.showNewPassword2 = false;
+    //   } else {
+    //     this.inputType2 = "text";
+    //     this.showNewPassword2 = true;
+    //   }
+    // },
     getCode(formName) {
       this.$refs[formName].validateField("phone", error => {
         if (!error) {
