@@ -1,7 +1,7 @@
 <template>
   <div id="SignUpPay">
-    <div>
-      <div clsss="pay-online">
+   
+      <div clsss="pay-online" v-show="notPay">
         <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
           <el-table :data="tableData" border max-height="400" style="width: 100%">
             <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
@@ -27,7 +27,7 @@
         </div>
         </el-dialog>
 
-        <div class="pay-online-body">
+        <div class="pay-online-body" >
           <div class="pay-online-check">
             <h1>确认订单信息</h1>
             
@@ -216,7 +216,9 @@
           </div>
         </div>
       </div>
-    </div>
+      <div v-show="!notPay" >
+        <div v-html="payHtml"></div>ss
+      </div>
   </div>
 </template>
 
@@ -224,6 +226,7 @@
 export default {
   data() {
     return {
+      notPay:true,
       isIndeterminate: true,
       showPersonInfo: false,
       enterCount: 0,
@@ -238,7 +241,10 @@ export default {
       showProtocol: false,
 
       tableData: [],
-      orderDetail: []
+      orderDetail: [],
+      orderID:"",
+      orderName:"",
+      payHtml:""
     };
   },
 
@@ -249,6 +255,7 @@ export default {
       this.userName = userInfo.name;
     }
     this.bus.$on("toNextPage", function(val) {
+      that.orderID = val.orderID;
       this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${
@@ -263,6 +270,7 @@ export default {
           console.log(err);
         });
     });
+    
   },
   methods: {
     checkEmp(empList) {
@@ -282,14 +290,40 @@ export default {
     },
   
     payNow() {
-      this.SignUpPayPage = 0;
-      this.SignUpSuccessPage = 1;
-      this.active = 4;
-      this.$emit("ToSignUpSuccessPage", {
-        SignUpPayPage: this.SignUpPayPage,
-        SignUpSuccessPage: this.SignUpSuccessPage,
-        active: this.active
-      });
+      console.log(this.orderDetail.dlist.length);
+      for(var i=0;i< this.orderDetail.dlist.length;i++) {
+        if(i==this.orderDetail.dlist.length-1) {
+          this.orderName += this.orderDetail.dlist[i].coursename+"（"+this.orderDetail.dlist[i].menuname+"）"
+        } else {
+          this.orderName += this.orderDetail.dlist[i].coursename+"（"+this.orderDetail.dlist[i].menuname+"）"+ "，"
+        }
+        
+      } 
+      console.log(this.orderName);
+      this.$ajax({
+        method: "get",
+        async:false,
+        url: `${
+          this.baseURL
+        }/zjsxpt/alipay.trade.page.pay.jsp?WIDout_trade_no=${this.orderID}&WIDtotal_amount=0.01&WIDsubject=${this.orderName}&WIDbody=测试123`
+      })
+        .then(res => {
+          
+          // this.payHtml = res.data;
+          // console.log(this.payHtml);
+          // this.notPay = false;
+      //     this.SignUpPayPage = 0;
+      // this.SignUpSuccessPage = 1;
+      // this.active = 4;
+      // this.$emit("ToSignUpSuccessPage", {
+      //   SignUpPayPage: this.SignUpPayPage,
+      //   SignUpSuccessPage: this.SignUpSuccessPage,
+      //   active: this.active
+      // });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     payWait() {
       this.showAccountDialog = false;

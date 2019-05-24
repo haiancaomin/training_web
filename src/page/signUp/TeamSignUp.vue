@@ -14,10 +14,7 @@
       </el-dialog>
       <div class="batch-sign-up-notice">
         <p id="signup-no-info-notice1">
-          团队报名请先确认已在客户中心添加过报名人员的信息, 如您还未添加过报名人员信息,请点击
-          <router-link to="/personalCenter/PersonalCenterAddPerson">
-            <span class="signup-here">这里</span>
-          </router-link>进入客户中心填写。
+          本公司可开具的发票类型有普通发票，专用发票和电子发票三种。
         </p>
         <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，请点击添加按钮选择新的报名条件进行报名。</p>
       </div>
