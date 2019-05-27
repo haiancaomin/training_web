@@ -27,7 +27,7 @@
           background
           layout="prev, pager, next"
           :total="fileLists.count"
-          :page-size="8"
+          :page-size="10"
           @current-change="handleCurrentChange"
           class="text-right"
           v-if="fileLists.count"
@@ -54,7 +54,7 @@ export default {
         url: `${this.baseURL}/zjsxpt/news_findFilesList.do?pageIndex=${(this
           .currentPage -
           1) *
-          8}&selectIndex=${this.currentPage}`
+          10}&selectIndex=${this.currentPage}`
       })
         .then(res => {
           this.fileLists = res.data;
