@@ -106,7 +106,7 @@
             </el-col>
           </el-row>
 
-          <div id="certify">
+          <div id="certify" v-if="swipershow">
             <swiper :options="swiperOption" ref="mySwiper">
               <swiper-slide v-for="baseItem in baseList" :key="baseItem.pid">
                 <img :src="baseItem.picurl">
@@ -208,21 +208,25 @@ export default {
       picurl: "",
       courseList: [],
       baseList: [],
+      swipershow:false,
       swiperOption: {
-        autoplay:true,
+        autoplay: {
+          disableOnInteraction: false
+        },
+        observer: true,
+        observeParents: true,
         watchSlidesProgress: true,
         slidesPerView: "auto",
         centeredSlides: true,
         loop: true,
-        loopedSlides: 5,
-        autoplay: true,
+        loopedSlides: 4,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
         pagination: {
-          el: ".swiper-pagination"
-          //clickable :true,
+          el: ".swiper-pagination",
+          clickable:true
         },
         on: {
           progress: function(progress) {
@@ -299,6 +303,7 @@ export default {
       })
         .then(res => {
           this.baseList = res.data.data;
+          this.swipershow=true;
           console.log(this.baseList);
         })
         .catch(function(err) {
