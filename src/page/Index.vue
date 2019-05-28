@@ -560,19 +560,15 @@ export default {
   overflow: hidden;
 }
 .index-base-con {
-  width: 180px;
   font-size: 14px;
   color: #888;
   line-height: 22px;
-  margin: 10px auto;
-  height: 62px;
-  text-align: center;
+  padding:0 15px 15px;
 }
 .index-base-name {
   font-size: 16px;
   color: #333333;
-  margin: 20px 0px 10px 0px;
-  height: 31px;
+  padding: 15px 15px 10px;
   text-align: center;
 }
 .index-base-list {
@@ -991,17 +987,12 @@ export default {
   height: 408px;
   background: #fff;
   box-shadow: 0 8px 30px #ddd;
+  overflow: hidden;
 }
 #certify .swiper-slide img {
   display: block;
-}
-#certify .swiper-slide p {
-  line-height: 98px;
-  padding-top: 0;
-  text-align: center;
-  color: #636363;
-  font-size: 1.1em;
-  margin: 0;
+  width: 520px;
+  height:310px;
 }
 #certify .swiper-pagination {
   width: 100%;
