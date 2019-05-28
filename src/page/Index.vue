@@ -108,25 +108,10 @@
 
           <div id="certify">
             <swiper :options="swiperOption" ref="mySwiper">
-              <swiper-slide>
-                <img src="../assets/certify01.png">
-                <p>非常难得又值钱的认证证书</p>
-              </swiper-slide>
-              <swiper-slide>
-                <img src="../assets/certify02.png">
-                <p>深圳市优秀互联网企业认定证书</p>
-              </swiper-slide>
-              <swiper-slide>
-                <img src="../assets/certify03.png">
-                <p>质量管理体系认证荣誉证书</p>
-              </swiper-slide>
-              <swiper-slide>
-                <img src="../assets/certify04.png">
-                <p>计算机软件著作权登记证书</p>
-              </swiper-slide>
-              <swiper-slide>
-                <img src="../assets/certify05.png">
-                <p>增值电信业务经营许可证</p>
+              <swiper-slide v-for="baseItem in baseList" :key="baseItem.pid">
+                <img :src="baseItem.picurl">
+                <div class="index-base-name">{{baseItem.name}}</div>
+                      <div class="index-base-con">{{baseItem.description}}</div>
               </swiper-slide>
             </swiper>
             <div class="swiper-pagination"></div>
@@ -224,6 +209,7 @@ export default {
       courseList: [],
       baseList: [],
       swiperOption: {
+        autoplay:true,
         watchSlidesProgress: true,
         slidesPerView: "auto",
         centeredSlides: true,
@@ -984,10 +970,6 @@ export default {
 .beian {
   color: #fff;
 }
-
-
-
-
 </style>
 <style>
 #certify {
@@ -999,7 +981,6 @@ export default {
 #certify .swiper-container {
   padding-bottom: 40px;
 }
-
 #certify .swiper-slide {
   width: 520px;
   height: 408px;
@@ -1020,7 +1001,6 @@ export default {
 #certify .swiper-pagination {
   width: 100%;
 }
-
 #certify .swiper-button-prev {
   left: -30px;
   width: 45px;
@@ -1029,12 +1009,10 @@ export default {
   background-position: 0 0;
   background-size: 100%;
 }
-
 #certify .swiper-button-prev:hover {
   background-position: 0 -46px;
   background-size: 100%;
 }
-
 #certify .swiper-button-next {
   right: -30px;
   width: 45px;
@@ -1043,7 +1021,6 @@ export default {
   background-position: 0 -93px;
   background-size: 100%;
 }
-
 #certify .swiper-button-next:hover {
   background-position: 0 -139px;
   background-size: 100%;
@@ -1056,7 +1033,6 @@ export default {
   height: 15px;
   opacity: 1;
 }
-
 #certify .swiper-pagination-bullets .swiper-pagination-bullet-active {
   border: 4px solid #00aadc;
   background-color: #fff;
