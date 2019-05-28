@@ -109,26 +109,28 @@
           <div id="certify">
             <div class="swiper-container">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <swiper :options="swiperOption" ref="mySwiper">
+                <swiper-slide>
                   <img src="../assets/certify01.png">
                   <p>非常难得又值钱的认证证书</p>
-                </div>
-                <div class="swiper-slide">
+                </swiper-slide>
+                <swiper-slide>
                   <img src="../assets/certify02.png">
                   <p>深圳市优秀互联网企业认定证书</p>
-                </div>
-                <div class="swiper-slide">
+                </swiper-slide>
+                <swiper-slide>
                   <img src="../assets/certify03.png">
                   <p>质量管理体系认证荣誉证书</p>
-                </div>
-                <div class="swiper-slide">
+                </swiper-slide>
+                <swiper-slide>
                   <img src="../assets/certify04.png">
                   <p>计算机软件著作权登记证书</p>
-                </div>
-                <div class="swiper-slide">
+                </swiper-slide>
+                <swiper-slide>
                   <img src="../assets/certify05.png">
                   <p>增值电信业务经营许可证</p>
-                </div>
+                </swiper-slide>
+                </swiper>
               </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -242,16 +244,16 @@ export default {
         },
         on: {
           progress: function(progress) {
-            for (i = 0; i < this.slides.length; i++) {
+            for (var i = 0; i < this.slides.length; i++) {
               var slide = this.slides.eq(i);
               var slideProgress = this.slides[i].progress;
-              modify = 1;
+              var modify = 1;
               if (Math.abs(slideProgress) > 1) {
                 modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
               }
-              translate = slideProgress * modify * 260 + "px";
-              scale = 1 - Math.abs(slideProgress) / 5;
-              zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+              var translate = slideProgress * modify * 260 + "px";
+              var scale = 1 - Math.abs(slideProgress) / 5;
+              var zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
               slide.transform(
                 "translateX(" + translate + ") scale(" + scale + ")"
               );
