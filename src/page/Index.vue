@@ -209,12 +209,13 @@ export default {
       courseList: [],
       baseList: [],
       swiperOption: {
-        autoplay:true,
+        
         watchSlidesProgress: true,
         slidesPerView: "auto",
         centeredSlides: true,
         loop: true,
-        loopedSlides: 5,
+        
+        loopedSlides: 1,
         autoplay: true,
         navigation: {
           nextEl: ".swiper-button-next",
