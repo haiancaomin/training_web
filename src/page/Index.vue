@@ -989,14 +989,19 @@ export default {
   color: #fff;
 }
 
+
+
+
+</style>
+<style>
 #certify {
   position: relative;
   width: 1200px;
   margin: 0 auto;
+  margin-top:40px;
 }
-
 #certify .swiper-container {
-  padding-bottom: 60px;
+  padding-bottom: 40px;
 }
 
 #certify .swiper-slide {
@@ -1016,7 +1021,6 @@ export default {
   font-size: 1.1em;
   margin: 0;
 }
-
 #certify .swiper-pagination {
   width: 100%;
   bottom: 20px;
@@ -1024,15 +1028,15 @@ export default {
 
 #certify .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0 5px;
-  border: 3px solid #fff;
+  border: 4px solid #fff;
   background-color: #d5d5d5;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   opacity: 1;
 }
 
 #certify .swiper-pagination-bullets .swiper-pagination-bullet-active {
-  border: 3px solid #00aadc;
+  border: 4px solid #00aadc;
   background-color: #fff;
 }
 
