@@ -106,12 +106,41 @@
             </el-col>
           </el-row>
 
-          <div class="base-body-list">
+          <div id="certify">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="../assets/certify01.png">
+                  <p>非常难得又值钱的认证证书</p>
+                </div>
+                <div class="swiper-slide">
+                  <img src="../assets/certify02.png">
+                  <p>深圳市优秀互联网企业认定证书</p>
+                </div>
+                <div class="swiper-slide">
+                  <img src="../assets/certify03.png">
+                  <p>质量管理体系认证荣誉证书</p>
+                </div>
+                <div class="swiper-slide">
+                  <img src="../assets/certify04.png">
+                  <p>计算机软件著作权登记证书</p>
+                </div>
+                <div class="swiper-slide">
+                  <img src="../assets/certify05.png">
+                  <p>增值电信业务经营许可证</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+          <!-- <div class="base-body-list">
             <el-row class="pad20 bg-white" id="index-base-background">
               <div v-for="baseItem in baseList" :key="baseItem.pid">
                 <el-col :span="6">
                   <router-link to="/base">
-                    <div class="index-base-list" id="index-base-list1">
+                    <div class="index-base-list">
                       <div class="index-base-img-div">
                         <img :src="baseItem.picurl" class="index-base-img">
                       </div>
@@ -122,7 +151,7 @@
                 </el-col>
               </div>
             </el-row>
-          </div>
+          </div>-->
         </div>
       </div>
       <div class="contact-outline-body">
@@ -185,18 +214,68 @@
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
       dialogVisible: false,
       regDialogVisible: false,
       showDown: true,
-      picurl:"",
+      picurl: "",
       courseList: [],
-      baseList: []
+      baseList: [],
+      swiperOption: {
+        watchSlidesProgress: true,
+        slidesPerView: "auto",
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 5,
+        autoplay: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        pagination: {
+          el: ".swiper-pagination"
+          //clickable :true,
+        },
+        on: {
+          progress: function(progress) {
+            for (i = 0; i < this.slides.length; i++) {
+              var slide = this.slides.eq(i);
+              var slideProgress = this.slides[i].progress;
+              modify = 1;
+              if (Math.abs(slideProgress) > 1) {
+                modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+              }
+              translate = slideProgress * modify * 260 + "px";
+              scale = 1 - Math.abs(slideProgress) / 5;
+              zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+              slide.transform(
+                "translateX(" + translate + ") scale(" + scale + ")"
+              );
+              slide.css("zIndex", zIndex);
+              slide.css("opacity", 1);
+              if (Math.abs(slideProgress) > 3) {
+                slide.css("opacity", 0);
+              }
+            }
+          },
+          setTransition: function(transition) {
+            for (var i = 0; i < this.slides.length; i++) {
+              var slide = this.slides.eq(i);
+              slide.transition(transition);
+            }
+          }
+        }
+      }
     };
   },
-  
+  components: {
+    swiper,
+    swiperSlide
+  },
   mounted() {
     this.getIndexPicture();
     this.initMap();
@@ -223,7 +302,7 @@ export default {
       })
         .then(res => {
           this.picurl = res.data.picurl;
-          console.log(this.picurl)
+          console.log(this.picurl);
         })
         .catch(function(err) {
           console.log(err);
@@ -301,210 +380,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.el-main {
-  color: #333;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-row {
-  margin-bottom: 20px;
-}
-.el-col {
-  border-radius: 4px;
-}
-
-.grid-content {
-  border-radius: 4px;
-
-  margin: 5px 0px 13px 0px;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 300px;
-  margin: 0;
-}
-
-.banner-img {
-  width: 100%;
-  height: 100%;
-}
-.login-box {
-  height: 300px;
-}
-.login-btn {
-  width: 80%;
-  margin: 25px 25px 0px 25px;
-}
-
-.welcome {
-  margin-top: 100px;
-}
-.index-floor-title {
-  font-size: 20px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-  border-left: 2px solid #409eff;
-  line-height: 40px;
-  padding-left: 15px;
-}
-.time {
-  font-size: 13px;
-  color: #999;
-}
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-}
-
-.button {
-  padding: 0;
-  float: right;
-}
-
-.image {
-  width: 100%;
-  display: block;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-
-.clearfix:after {
-  clear: both;
-}
-.pad20 {
-  padding: 20px;
-}
-.bg-white {
-  background: #fff;
-}
-.teacher-wall {
-  padding: 0 40px;
-}
-.no-margin-b {
-  margin-bottom: 0;
-}
-.hot-news-img {
-  width: 100%;
-}
-.swiper-container {
-  height: 195px;
-  margin-top: 20px;
-}
-.swiper-slide {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-}
-.index-news-list {
-  padding-left: 40px;
-}
-.full-width {
-  width: 100%;
-}
-.news-overview h3,
-.news-overview div,
-.news-overview p {
-  margin-bottom: 20px;
-  text-align: left;
-}
-.news-overview h3 {
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.news-overview p {
-  margin-bottom: 0;
-}
-.news-overview div {
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  line-height: 1.5;
-}
-.index-news-list .el-row:last-child {
-  margin-bottom: 0;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
-}
-
-.teacher-box .el-carousel__item {
-  background-color: #fff;
-  box-shadow: 10px 10px 12px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.teacher-box {
-  position: relative;
-  text-align: left;
-}
-.index-teacher-img {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 300px;
-}
-.title {
-  padding-top: 70px;
-  margin-left: 45px;
-  /* height: 29px; */
-  line-height: 29px;
-  position: relative;
-  font-size: 18px;
-  color: #666;
-  text-align: left;
-}
-.name {
-  margin-left: 45px;
-  height: 55px;
-  display: inline-block;
-  position: relative;
-  line-height: 55px;
-  padding-bottom: 9px;
-  padding-right: 55px;
-  border-bottom: 1px solid #dddddd;
-  font-size: 36px;
-  color: #333;
-  text-align: left;
-}
-.detail {
-  margin-left: 45px;
-  width: 275px;
-  margin-top: 30px;
-  padding-right: 5px;
-  position: relative;
-  line-height: 24px;
-  color: #bbb;
-  font-size: 14px;
-  text-align: left;
-}
-.el-main {
-  width: 1240px;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #fffffd;
-  border: 1px solid #e7e7e7;
-  margin: 80px auto 0px auto;
-}
-
 .index-sign-up1 {
   width: 160px;
   height: 50px;
@@ -515,7 +390,6 @@ body > .el-container {
   border: 1px solid #0a6998;
   border-radius: 25px;
   display: block;
-
   cursor: pointer;
   background: #fff;
   -webkit-transition: all 0.3s;
@@ -742,7 +616,7 @@ body > .el-container {
   height: 80px;
   width: 286px;
   border: solid 1px #eee;
- 
+
   object-fit: scale-down;
 }
 .friend-img-last {
@@ -750,8 +624,8 @@ body > .el-container {
   width: 286px;
   border: solid 1px #eee;
 }
-.friend-a{
- margin: 0px 20px 0px 0px;
+.friend-a {
+  margin: 0px 20px 0px 0px;
 }
 .index-footer {
   width: 1220px;
@@ -1111,6 +985,81 @@ body > .el-container {
 }
 .beian {
   color: #fff;
+}
+
+#certify {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#certify .swiper-container {
+  padding-bottom: 60px;
+}
+
+#certify .swiper-slide {
+  width: 520px;
+  height: 408px;
+  background: #fff;
+  box-shadow: 0 8px 30px #ddd;
+}
+#certify .swiper-slide img {
+  display: block;
+}
+#certify .swiper-slide p {
+  line-height: 98px;
+  padding-top: 0;
+  text-align: center;
+  color: #636363;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+#certify .swiper-pagination {
+  width: 100%;
+  bottom: 20px;
+}
+
+#certify .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 5px;
+  border: 3px solid #fff;
+  background-color: #d5d5d5;
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+#certify .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  border: 3px solid #00aadc;
+  background-color: #fff;
+}
+
+#certify .swiper-button-prev {
+  left: -30px;
+  width: 45px;
+  height: 45px;
+  background: url(../assets/wm_button_icon.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+
+#certify .swiper-button-prev:hover {
+  background-position: 0 -46px;
+  background-size: 100%;
+}
+
+#certify .swiper-button-next {
+  right: -30px;
+  width: 45px;
+  height: 45px;
+  background: url(../assets/wm_button_icon.png) no-repeat;
+  background-position: 0 -93px;
+  background-size: 100%;
+}
+
+#certify .swiper-button-next:hover {
+  background-position: 0 -139px;
+  background-size: 100%;
 }
 </style>
 

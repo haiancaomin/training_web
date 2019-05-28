@@ -52,39 +52,42 @@
 
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
         <div class="user_choose_invoice" v-show="showChooseInvoice">
-        <div>
-          <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
-            <div
-              class="invoice_body"
-              :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
-              @click="chooseid=invoiceItem[0]"
-            >
-              <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
-              <div v-if="invoiceItem[0]==chooseid" class="choose_icon"><span class="el-icon-check"></span></div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
-                <img src="../../assets/pupiao.png">
-              </div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
-                <img src="../../assets/zhuanpiao.png">
-              </div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
-                <img src="../../assets/dianzi.png">
-              </div>
+          <div>
+            <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
+              <div
+                class="invoice_body"
+                :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+                @click="chooseid=invoiceItem[0]"
+              >
+                <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
+                <div v-if="invoiceItem[0]==chooseid" class="choose_icon">
+                  <span class="el-icon-check"></span>
+                </div>
+                <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
+                  <img src="../../assets/pupiao.png">
+                </div>
+                <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
+                  <img src="../../assets/zhuanpiao.png">
+                </div>
+                <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
+                  <img src="../../assets/dianzi.png">
+                </div>
 
-              <div class="invoice_title">{{invoiceItem[1]}}</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
-              <div class="invoice_account">{{invoiceItem[7]}}</div>
-            </div>
-          </el-col>
-        </div>
-        
-        <div style="clear: both;"></div>
-        <div><el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button></div>
+                <div class="invoice_title">{{invoiceItem[1]}}</div>
+                <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
+                <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
+                <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
+                <div class="invoice_account">{{invoiceItem[7]}}</div>
+              </div>
+            </el-col>
+          </div>
+
+          <div style="clear: both;"></div>
+          <div>
+            <el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button>
+          </div>
         </div>
         <div class="table-body" v-show="showChooseInvoiceDetail">
-
           <h3 class="pupiao_title" v-if="selectType==0">增值税普通发票</h3>
           <h3 class="zhuanyong_title" v-if="selectType==1">增值税专用发票</h3>
           <h3 class="dianzi_title" v-if="selectType==2">增值税电子普通发票</h3>
@@ -92,14 +95,25 @@
           <div class="zhuanyong_underline" v-if="selectType==1"></div>
           <div class="dianzi_underline" v-if="selectType==2"></div>
 
-          <table  cellspacing="0" :class="{'pupiao_table':selectType==0,'zhuanyong_table':selectType==1,'dianzi_table':selectType==2}">
+          <table
+            cellspacing="0"
+            :class="{'pupiao_table':selectType==0,'zhuanyong_table':selectType==1,'dianzi_table':selectType==2}"
+          >
             <tr>
-              <td class="td11"><div>购买方</div></td>
+              <td class="td11">
+                <div>购买方</div>
+              </td>
               <td class="td12">
                 <div>
-                  <p><span class="td12_span1">名</span>称：</p>
+                  <p>
+                    <span class="td12_span1">名</span>称：
+                  </p>
                   <p>纳税人识别号：</p>
-                  <p><span class="td12_span3">地</span><span class="td12_span3">址、</span><span class="td12_span3">电</span>话：</p>
+                  <p>
+                    <span class="td12_span3">地</span>
+                    <span class="td12_span3">址、</span>
+                    <span class="td12_span3">电</span>话：
+                  </p>
                   <p>开发行及账号：</p>
                 </div>
               </td>
@@ -107,110 +121,183 @@
                 <div>
                   <p>{{companyName}}</p>
                   <p>{{taxerID}}</p>
-                  <p><span class="info_left">{{companyAddress}}</span>{{phone}}</p>
-                  <p><span class="info_left">{{bank}}</span>{{account}}</p>
+                  <p>
+                    <span class="info_left">{{companyAddress}}</span>
+                    {{phone}}
+                  </p>
+                  <p>
+                    <span class="info_left">{{bank}}</span>
+                    {{account}}
+                  </p>
                 </div>
               </td>
-              <td class="td14"><div>密码区</div></td>
-              <td colspan="4" class="td15"><div></div></td>
+              <td class="td14">
+                <div>密码区</div>
+              </td>
+              <td colspan="4" class="td15">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td21"><div><p>货物或应税劳务、服务名称</p></div></td>
-              <td class="td22"><div><p>规格型号</p></div></td>
-              <td class="td23"><div><p>单位</p></div></td>
-              <td class="td24"><div><p>数量</p></div></td>
-              <td colspan="3" class="td25"><div><p>单价</p></div></td>
-              <td class="td26"><div><p>金额</p></div></td>
-              <td class="td27"><div><p>税率</p></div></td>
-              <td class="td28"><div><p>税额</p></div></td>
+              <td colspan="3" class="td21">
+                <div>
+                  <p>货物或应税劳务、服务名称</p>
+                </div>
+              </td>
+              <td class="td22">
+                <div>
+                  <p>规格型号</p>
+                </div>
+              </td>
+              <td class="td23">
+                <div>
+                  <p>单位</p>
+                </div>
+              </td>
+              <td class="td24">
+                <div>
+                  <p>数量</p>
+                </div>
+              </td>
+              <td colspan="3" class="td25">
+                <div>
+                  <p>单价</p>
+                </div>
+              </td>
+              <td class="td26">
+                <div>
+                  <p>金额</p>
+                </div>
+              </td>
+              <td class="td27">
+                <div>
+                  <p>税率</p>
+                </div>
+              </td>
+              <td class="td28">
+                <div>
+                  <p>税额</p>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td31"><div></div></td>
-              <td class="td32"><div></div></td>
-              <td class="td33"><div></div></td>
-              <td class="td34"><div></div></td>
-              <td colspan="3" class="td35"><div></div></td>
-              <td class="td36"><div><p>{{orderMoney}}</p></div></td>
-              <td class="td37"><div></div></td>
-              <td class="td38"><div></div></td>
+              <td colspan="3" class="td31">
+                <div></div>
+              </td>
+              <td class="td32">
+                <div></div>
+              </td>
+              <td class="td33">
+                <div></div>
+              </td>
+              <td class="td34">
+                <div></div>
+              </td>
+              <td colspan="3" class="td35">
+                <div></div>
+              </td>
+              <td class="td36">
+                <div>
+                  <p>{{orderMoney}}</p>
+                </div>
+              </td>
+              <td class="td37">
+                <div></div>
+              </td>
+              <td class="td38">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td41"><div><p>合计</p></div></td>
-              <td class="td42"><div></div></td>
-              <td class="td43"><div></div></td>
-              <td class="td44"><div></div></td>
-              <td colspan="3" class="td45"><div></div></td>
-              <td class="td46"><div><p><span class="td_money">¥</span>{{orderMoney}}</p></div></td>
-              <td class="td47"><div></div></td>
-              <td class="td48"><div></div></td>
+              <td colspan="3" class="td41">
+                <div>
+                  <p>合计</p>
+                </div>
+              </td>
+              <td class="td42">
+                <div></div>
+              </td>
+              <td class="td43">
+                <div></div>
+              </td>
+              <td class="td44">
+                <div></div>
+              </td>
+              <td colspan="3" class="td45">
+                <div></div>
+              </td>
+              <td class="td46">
+                <div>
+                  <p>
+                    <span class="td_money">¥</span>
+                    {{orderMoney}}
+                  </p>
+                </div>
+              </td>
+              <td class="td47">
+                <div></div>
+              </td>
+              <td class="td48">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td51"><div><p>价税合计（大写）</p></div></td>
-              <td colspan="6" class="td52"><div></div></td>
-              <td class="td53"><div><p>小写</p></div></td>
-              <td class="td54"><div><p></p></div></td>
-              <td class="td55"><div><p><span class="td_money">¥</span>{{orderMoney}}</p></div></td>
+              <td colspan="3" class="td51">
+                <div>
+                  <p>价税合计（大写）</p>
+                </div>
+              </td>
+              <td colspan="6" class="td52">
+                <div></div>
+              </td>
+              <td class="td53">
+                <div>
+                  <p>小写</p>
+                </div>
+              </td>
+              <td class="td54">
+                <div>
+                  <p></p>
+                </div>
+              </td>
+              <td class="td55">
+                <div>
+                  <p>
+                    <span class="td_money">¥</span>
+                    {{orderMoney}}
+                  </p>
+                </div>
+              </td>
             </tr>
-             <tr>
-              <td class="td11"><div>销售方</div></td>
+            <tr>
+              <td class="td11">
+                <div>销售方</div>
+              </td>
               <td class="td12">
                 <div>
-                  <p><span class="td12_span1">名</span>称：</p>
+                  <p>
+                    <span class="td12_span1">名</span>称：
+                  </p>
                   <p>纳税人识别号：</p>
-                  <p><span class="td12_span3">地</span><span class="td12_span3">址、</span><span class="td12_span3">电</span>话：</p>
+                  <p>
+                    <span class="td12_span3">地</span>
+                    <span class="td12_span3">址、</span>
+                    <span class="td12_span3">电</span>话：
+                  </p>
                   <p>开发行及账号：</p>
                 </div>
               </td>
-              <td colspan="5" class="td13"><div></div></td>
-              <td class="td14"><div>备注</div></td>
-              <td colspan="4" class="td15"><div></div></td>
+              <td colspan="5" class="td13">
+                <div></div>
+              </td>
+              <td class="td14">
+                <div>备注</div>
+              </td>
+              <td colspan="4" class="td15">
+                <div></div>
+              </td>
             </tr>
-            
           </table>
-
-
-          <!-- <table border="1" cellspacing="0">
-            <tr>
-              <th colspan="4" class="invoice-show-table-th">开票信息表</th>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">公司名称</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{companyName}}</td>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">公司地址</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{companyAddress}}</td>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">纳税人识别号</td>
-              <td class="invoice-show-table-td-input2">{{taxerID}}</td>
-              <td class="invoice-show-table-td-info2">联系人</td>
-              <td class="invoice-show-table-td-input3">{{contactPerson}}</td>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">公司开户行</td>
-              <td class="invoice-show-table-td-input2">{{bank}}</td>
-              <td class="invoice-show-table-td-info2">联系电话</td>
-              <td class="invoice-show-table-td-input3">{{phone}}</td>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">公司账号</td>
-              <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
-            </tr>
-            <tr>
-              <td class="invoice-show-table-td-info1">开票总金额</td>
-              <td class="invoice-show-table-td-input1">{{orderMoney}}</td>
-              <td class="invoice-show-table-td-info3">发票类型</td>
-              <td class="invoice-show-table-td-input1" v-if="selectType==0">普通发票</td>
-              <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
-              <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
-            </tr>
-          </table> -->
-
-
-
-
-
 
           <div class="info-save">
             <el-button type="primary" @click="checkOK">确认开票</el-button>
@@ -256,7 +343,10 @@
         <div class="order-pay">
           <p class="order-pay-info">
             报名{{orderItem.personcount}}人，实付款：
-            <span class="order-payment"><span class="td_money">¥</span>{{orderItem.summoney}}</span>
+            <span class="order-payment">
+              <span class="td_money">¥</span>
+              {{orderItem.summoney}}
+            </span>
           </p>
         </div>
         <div class="order-operation">
@@ -337,15 +427,15 @@ export default {
       orderID: "",
       expressID: "",
       expressShow: false,
-      showChooseInvoice:false,
-      showChooseInvoiceDetail:false,
+      showChooseInvoice: false,
+      showChooseInvoiceDetail: false
     };
   },
   watch: {
     dialogVisible: function(val) {
-      if(!val){
-        this.showChooseInvoiceDetail=false;
-        this.chooseid="";
+      if (!val) {
+        this.showChooseInvoiceDetail = false;
+        this.chooseid = "";
       }
     }
   },
@@ -359,31 +449,31 @@ export default {
       })
         .then(res => {
           console.log(res.data.data);
-            this.companyName = res.data.data.company;
-            this.companyAddress = res.data.data.address;
-            this.taxerID = res.data.data.taxpayerno;
-            this.contactPerson = res.data.data.person;
-            this.bank = res.data.data.bank;
-            this.phone = res.data.data.mobilephone;
-            this.account = res.data.data.account;
-            this.selectType = res.data.data.type;
+          this.companyName = res.data.data.company;
+          this.companyAddress = res.data.data.address;
+          this.taxerID = res.data.data.taxpayerno;
+          this.contactPerson = res.data.data.person;
+          this.bank = res.data.data.bank;
+          this.phone = res.data.data.mobilephone;
+          this.account = res.data.data.account;
+          this.selectType = res.data.data.type;
         })
         .catch(function(err) {
           console.log(err);
         });
     },
     gotoShowChooseInvoiceDetail() {
-      if(this.chooseid == "") {
+      if (this.chooseid == "") {
         this.$message({
           message: "请先选择发票",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
       } else {
-this.showChooseInvoice=false;
-      this.showChooseInvoiceDetail=true;
-      this.getInvoiceInfo(this.chooseid);
+        this.showChooseInvoice = false;
+        this.showChooseInvoiceDetail = true;
+        this.getInvoiceInfo(this.chooseid);
       }
     },
     checkExpress(id) {
@@ -789,234 +879,243 @@ input {
 }
 .choose_this {
   position: absolute;
-border: 25px solid rgba(36, 46, 104, 0.6);
-border-left: 25px solid transparent;  
-border-top: 25px solid transparent; 
-border-bottom-right-radius: 8px; 
-margin:96px 0px 0px 260px;
-width: 0;  
+  border: 25px solid rgba(36, 46, 104, 0.6);
+  border-left: 25px solid transparent;
+  border-top: 25px solid transparent;
+  border-bottom-right-radius: 8px;
+  margin: 96px 0px 0px 260px;
+  width: 0;
 }
 .choose_icon {
   position: absolute;
 }
 .el-icon-check {
-  color:#fff;
-  margin:119px 0px 0px 282px;
+  color: #fff;
+  margin: 119px 0px 0px 282px;
   font-weight: bold;
   font-size: 22px;
 }
 .user_choose_invoice {
-  padding:0px 45px;
+  padding: 0px 45px;
 }
-.td11{
-  width:40px;
+.td11 {
+  width: 40px;
   height: 100px;
 }
-.td11 div{
- font-family: "kaiti";
- padding:10px;
- line-height: 20px;
+.td11 div {
+  font-family: "kaiti";
+  padding: 10px;
+  line-height: 20px;
 }
-.td12{
-  width:105px;
+.td12 {
+  width: 105px;
   height: 100px;
   border-right: 0px !important;
 }
-.td12 div{
- margin:7px 0px 0px 0px;
+.td12 div {
+  margin: 7px 0px 0px 0px;
 }
-.td12 p{
- font-family: "kaiti";
- margin:0px 0px 8px 0px;
+.td12 p {
+  font-family: "kaiti";
+  margin: 0px 0px 8px 0px;
 }
-.td12 span{
- font-family: "kaiti";
+.td12 span {
+  font-family: "kaiti";
 }
 .td12_span1 {
-  margin:0px 56px 0px 0px;
+  margin: 0px 56px 0px 0px;
 }
 .td12_span3 {
-  margin:0px 4.7px 0px 0px;
+  margin: 0px 4.7px 0px 0px;
 }
 .td13 {
-  width:380px;
+  width: 380px;
   height: 100px;
   border-left: 0px !important;
 }
-.td13 div{
- margin:7px 0px 0px 0px;
+.td13 div {
+  margin: 7px 0px 0px 0px;
 }
 .td13 p {
-  margin:0px 0px 8px 0px;
+  margin: 0px 0px 8px 0px;
   font-family: "kaiti";
   text-align: left;
-  color:#000;
+  color: #000;
 }
 .td14 {
-  width:30px;
+  width: 30px;
   height: 100px;
 }
-.td14 div{
+.td14 div {
   font-family: "kaiti";
- padding:10px;
- line-height: 20px;
+  padding: 10px;
+  line-height: 20px;
 }
 .td15 {
-  width:350px;
+  width: 350px;
   height: 100px;
 }
 .td21 {
-  width:245px;
+  width: 245px;
   height: 32px;
   border-bottom: 0px !important;
 }
-.td21 p,.td22 p,.td23 p,.td24 p,.td25 p,.td26 p,.td27 p,.td28 p,.td41 p,.td51 p,.td53 p{
+.td21 p,
+.td22 p,
+.td23 p,
+.td24 p,
+.td25 p,
+.td26 p,
+.td27 p,
+.td28 p,
+.td41 p,
+.td51 p,
+.td53 p {
   font-family: "kaiti";
 }
 .td22 {
-  width:115px;
+  width: 115px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td23 {
-  width:60px;
+  width: 60px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td24 {
-  width:105px;
+  width: 105px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td25 {
-  width:110px;
+  width: 110px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td26 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td27 {
-  width:50px;
+  width: 50px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td28 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td31 {
-  width:245px;
+  width: 245px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td32 {
-  width:115px;
+  width: 115px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td33 {
-  width:60px;
+  width: 60px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td34 {
-  width:105px;
+  width: 105px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td35 {
-  width:110px;
+  width: 110px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td36 {
-  width:125px;
+  width: 125px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
   vertical-align: top;
 }
-.td36 p{
+.td36 p {
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
 .td37 {
-  width:50px;
+  width: 50px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td38 {
-  width:125px;
+  width: 125px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td41 {
-  width:245px;
+  width: 245px;
   height: 32px;
   border-top: 0px !important;
 }
 .td42 {
-  width:115px;
+  width: 115px;
   height: 32px;
   border-top: 0px !important;
 }
 .td43 {
-  width:60px;
+  width: 60px;
   height: 32px;
   border-top: 0px !important;
 }
 .td44 {
-  width:105px;
+  width: 105px;
   height: 32px;
   border-top: 0px !important;
 }
 .td45 {
-  width:110px;
+  width: 110px;
   height: 32px;
   border-top: 0px !important;
 }
 .td46 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-top: 0px !important;
 }
-.td46 p{
+.td46 p {
   font-family: "kaiti";
-  color:#000;
-
+  color: #000;
 }
 .td47 {
-  width:50px;
+  width: 50px;
   height: 32px;
   border-top: 0px !important;
 }
 .td48 {
-  width:125px;
+  width: 125px;
   height: 30px;
   border-top: 0px !important;
 }
 .td51 {
-  width:245px;
+  width: 245px;
   height: 32px;
 }
 .td52 {
-  width:390px;
+  width: 390px;
   height: 32px;
   border-right: 0px !important;
 }
 .td53 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-left: 0px !important;
   border-right: 0px !important;
@@ -1028,78 +1127,84 @@ width: 0;
   border-right: 0px !important;
 }
 .td55 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-left: 0px !important;
 }
-.td55 p{
+.td55 p {
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
-.pupiao_table,.pupiao_table tr,.pupiao_table td{
-  border: 1px solid #67C23A;
+.pupiao_table,
+.pupiao_table tr,
+.pupiao_table td {
+  border: 1px solid #67c23a;
 }
-.pupiao_table{
-  color: #67C23A;
+.pupiao_table {
+  color: #67c23a;
 }
-.zhuanyong_table,.zhuanyong_table tr,.zhuanyong_table td{
-  border: 1px solid #409EFF;
+.zhuanyong_table,
+.zhuanyong_table tr,
+.zhuanyong_table td {
+  border: 1px solid #409eff;
 }
-.zhuanyong_table{
-  color: #409EFF;
+.zhuanyong_table {
+  color: #409eff;
 }
-.dianzi_table,.dianzi_table tr,.dianzi_table td{
-  border: 1px solid #E6A23C;
+.dianzi_table,
+.dianzi_table tr,
+.dianzi_table td {
+  border: 1px solid #e6a23c;
 }
 .dianzi_table {
-   color: #E6A23C;
+  color: #e6a23c;
 }
 .td_money {
-  margin:0px 5px 0px 0px;
+  margin: 0px 5px 0px 0px;
 }
 .info_left {
-  margin:0px 10px 0px 0px;
+  margin: 0px 10px 0px 0px;
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
 .pupiao_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#67C23A;
+  color: #67c23a;
   font-weight: bold;
 }
 .zhuanyong_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#409EFF;
+  color: #409eff;
   font-weight: bold;
 }
 .dianzi_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#E6A23C;
+  color: #e6a23c;
   font-weight: bold;
 }
 .pupiao_underline {
-  width:182px;
-   height:10px;
-  border-top:2px solid #67C23A;
-   border-bottom:2px solid #67C23A;
-  margin:20px auto;
+  width: 182px;
+  height: 10px;
+  border-top: 2px solid #67c23a;
+  border-bottom: 2px solid #67c23a;
+  margin: 20px auto;
 }
 .zhuanyong_underline {
-  width:182px;
-   height:10px;
-  border-top:2px solid #409EFF;
-  border-bottom:2px solid #409EFF;
-  margin:20px auto;
+  width: 182px;
+  height: 10px;
+  border-top: 2px solid #409eff;
+  border-bottom: 2px solid #409eff;
+  margin: 20px auto;
 }
 .dianzi_underline {
-  width:236px;
-   height:10px;
-  border-top:2px solid #E6A23C;
-  border-bottom:2px solid #E6A23C;
-  margin:20px auto;
+  width: 236px;
+  height: 10px;
+  border-top: 2px solid #e6a23c;
+  border-bottom: 2px solid #e6a23c;
+  margin: 20px auto;
 }
 </style>
 
