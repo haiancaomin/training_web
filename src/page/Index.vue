@@ -107,32 +107,28 @@
           </el-row>
 
           <div id="certify">
-            <div class="swiper-container">
-              <div class="swiper-wrapper">
-                <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide>
-                  <img src="../assets/certify01.png">
-                  <p>非常难得又值钱的认证证书</p>
-                </swiper-slide>
-                <swiper-slide>
-                  <img src="../assets/certify02.png">
-                  <p>深圳市优秀互联网企业认定证书</p>
-                </swiper-slide>
-                <swiper-slide>
-                  <img src="../assets/certify03.png">
-                  <p>质量管理体系认证荣誉证书</p>
-                </swiper-slide>
-                <swiper-slide>
-                  <img src="../assets/certify04.png">
-                  <p>计算机软件著作权登记证书</p>
-                </swiper-slide>
-                <swiper-slide>
-                  <img src="../assets/certify05.png">
-                  <p>增值电信业务经营许可证</p>
-                </swiper-slide>
-                </swiper>
-              </div>
-            </div>
+            <swiper :options="swiperOption" ref="mySwiper">
+              <swiper-slide>
+                <img src="../assets/certify01.png">
+                <p>非常难得又值钱的认证证书</p>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/certify02.png">
+                <p>深圳市优秀互联网企业认定证书</p>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/certify03.png">
+                <p>质量管理体系认证荣誉证书</p>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/certify04.png">
+                <p>计算机软件著作权登记证书</p>
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/certify05.png">
+                <p>增值电信业务经营许可证</p>
+              </swiper-slide>
+            </swiper>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
@@ -991,7 +987,7 @@ export default {
 
 #certify {
   position: relative;
-  width: 1200px;
+  width: 1220px;
   margin: 0 auto;
 }
 
@@ -1019,21 +1015,6 @@ export default {
 
 #certify .swiper-pagination {
   width: 100%;
-  bottom: 20px;
-}
-
-#certify .swiper-pagination-bullets .swiper-pagination-bullet {
-  margin: 0 5px;
-  border: 3px solid #fff;
-  background-color: #d5d5d5;
-  width: 10px;
-  height: 10px;
-  opacity: 1;
-}
-
-#certify .swiper-pagination-bullets .swiper-pagination-bullet-active {
-  border: 3px solid #00aadc;
-  background-color: #fff;
 }
 
 #certify .swiper-button-prev {
@@ -1064,4 +1045,20 @@ export default {
   background-size: 100%;
 }
 </style>
+<style>
+#certify .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 5px;
+  border: 3px solid #fff;
+  background-color: #d5d5d5;
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+#certify .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  border: 3px solid #00aadc;
+  background-color: #fff;
+}
+</style>
+
 
