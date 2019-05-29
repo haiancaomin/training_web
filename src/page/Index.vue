@@ -109,9 +109,11 @@
           <div id="certify" v-if="swipershow">
             <swiper :options="swiperOption" ref="mySwiper">
               <swiper-slide v-for="baseItem in baseList" :key="baseItem.pid">
-                <img :src="baseItem.picurl">
-                <div class="index-base-name">{{baseItem.name}}</div>
-                      <div class="index-base-con">{{baseItem.description}}</div>
+                <router-link to="/base">
+                  <img :src="baseItem.picurl">
+                  <div class="index-base-name">{{baseItem.name}}</div>
+                  <div class="index-base-con">{{baseItem.description}}</div>
+                </router-link>
               </swiper-slide>
             </swiper>
             <div class="swiper-pagination"></div>
@@ -208,7 +210,7 @@ export default {
       picurl: "",
       courseList: [],
       baseList: [],
-      swipershow:false,
+      swipershow: false,
       swiperOption: {
         autoplay: {
           disableOnInteraction: false
@@ -219,7 +221,7 @@ export default {
         slidesPerView: "auto",
         centeredSlides: true,
         loop: true,
-        loopAdditionalSlides : 5,
+        loopAdditionalSlides: 5,
         loopedSlides: 5,
         navigation: {
           nextEl: ".swiper-button-next",
@@ -227,7 +229,7 @@ export default {
         },
         pagination: {
           el: ".swiper-pagination",
-          clickable:true
+          clickable: true
         },
         on: {
           progress: function(progress) {
@@ -304,7 +306,7 @@ export default {
       })
         .then(res => {
           this.baseList = res.data.data;
-          this.swipershow=true;
+          this.swipershow = true;
           console.log(this.baseList);
         })
         .catch(function(err) {
@@ -564,7 +566,7 @@ export default {
   font-size: 14px;
   color: #888;
   line-height: 22px;
-  padding:0 15px 15px;
+  padding: 0 15px 15px;
 }
 .index-base-name {
   font-size: 16px;
@@ -978,7 +980,7 @@ export default {
   position: relative;
   width: 1220px;
   margin: 0 auto;
-  margin-top:40px;
+  margin-top: 40px;
 }
 #certify .swiper-container {
   padding-bottom: 40px;
@@ -993,7 +995,7 @@ export default {
 #certify .swiper-slide img {
   display: block;
   width: 520px;
-  height:310px;
+  height: 310px;
 }
 #certify .swiper-pagination {
   width: 100%;
