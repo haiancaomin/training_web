@@ -51,33 +51,46 @@
       </el-dialog>
 
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
+        
         <div class="user_choose_invoice" v-show="showChooseInvoice">
+          <div class="choose_head">
+            <span>请选择发票类型</span>
+            <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
+            <el-option label="普通发票" value="0"></el-option>
+            <el-option label="专用发票" value="1"></el-option>
+            <el-option label="电子发票" value="2"></el-option>
+            
+           
+          </el-select>
+          </div>
           <div>
             <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
               <div
                 class="invoice_body"
-                :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+                :class="{'pupiao':selectInvoiceType=='0','gongpiao':selectInvoiceType=='1','dianzi':selectInvoiceType=='2'}"
                 @click="chooseid=invoiceItem[0]"
               >
                 <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
                 <div v-if="invoiceItem[0]==chooseid" class="choose_icon">
                   <span class="el-icon-check"></span>
                 </div>
-                <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
+                <div class="invoice_picture" v-if="selectInvoiceType=='0'">
                   <img src="../../assets/pupiao.png">
                 </div>
-                <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
+                <div class="invoice_picture" v-if="selectInvoiceType=='1'">
                   <img src="../../assets/zhuanpiao.png">
                 </div>
-                <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
+                <div class="invoice_picture" v-if="selectInvoiceType=='2'">
                   <img src="../../assets/dianzi.png">
                 </div>
+                
 
                 <div class="invoice_title">{{invoiceItem[1]}}</div>
-                <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
-                <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
-                <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
-                <div class="invoice_account">{{invoiceItem[7]}}</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='0'">普通发票</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='1'">专用发票</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='2'">电子发票</div>
+                
+                <div class="invoice_account">{{invoiceItem[3]}}</div>
               </div>
             </el-col>
           </div>
@@ -88,16 +101,16 @@
           </div>
         </div>
         <div class="table-body" v-show="showChooseInvoiceDetail">
-          <h3 class="pupiao_title" v-if="selectType==0">增值税普通发票</h3>
-          <h3 class="zhuanyong_title" v-if="selectType==1">增值税专用发票</h3>
-          <h3 class="dianzi_title" v-if="selectType==2">增值税电子普通发票</h3>
-          <div class="pupiao_underline" v-if="selectType==0"></div>
-          <div class="zhuanyong_underline" v-if="selectType==1"></div>
-          <div class="dianzi_underline" v-if="selectType==2"></div>
+          <h3 class="pupiao_title" v-if="selectInvoiceType==0">增值税普通发票</h3>
+          <h3 class="zhuanyong_title" v-if="selectInvoiceType==1">增值税专用发票</h3>
+          <h3 class="dianzi_title" v-if="selectInvoiceType==2">增值税电子普通发票</h3>
+          <div class="pupiao_underline" v-if="selectInvoiceType==0"></div>
+          <div class="zhuanyong_underline" v-if="selectInvoiceType==1"></div>
+          <div class="dianzi_underline" v-if="selectInvoiceType==2"></div>
 
           <table
             cellspacing="0"
-            :class="{'pupiao_table':selectType==0,'zhuanyong_table':selectType==1,'dianzi_table':selectType==2}"
+            :class="{'pupiao_table':selectInvoiceType==0,'zhuanyong_table':selectInvoiceType==1,'dianzi_table':selectInvoiceType==2}"
           >
             <tr>
               <td class="td11">
@@ -400,6 +413,7 @@ export default {
   name: "PersonalCenterNotInvoice",
   data() {
     return {
+      selectInvoiceType:"0",
       chooseid: "",
       contact: false,
       schedule: false,
@@ -420,7 +434,7 @@ export default {
       bank: "",
       phone: "",
       account: "",
-      selectType: "",
+    
       invoiceid: "",
       orderMoney: "",
       checkAgain: false,
@@ -432,8 +446,14 @@ export default {
     };
   },
   watch: {
+    checkAgain: function(val) {
+      if (!val&&!this.dialogVisible) {
+        this.showChooseInvoiceDetail = false;
+        this.chooseid = "";
+      }
+    },
     dialogVisible: function(val) {
-      if (!val) {
+      if (!val&&!this.checkAgain) {
         this.showChooseInvoiceDetail = false;
         this.chooseid = "";
       }
@@ -456,7 +476,7 @@ export default {
           this.bank = res.data.data.bank;
           this.phone = res.data.data.mobilephone;
           this.account = res.data.data.account;
-          this.selectType = res.data.data.type;
+          
         })
         .catch(function(err) {
           console.log(err);
@@ -494,7 +514,7 @@ export default {
         method: "post",
         url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${
           this.orderID
-        }&invoiceid=${this.invoiceid}`
+        }&invoiceid=${this.chooseid}&invoicekind=${this.selectInvoiceType}`
       })
         .then(res => {
           this.checkAgain = false;
@@ -1205,6 +1225,14 @@ input {
   border-top: 2px solid #e6a23c;
   border-bottom: 2px solid #e6a23c;
   margin: 20px auto;
+}
+.choose_invoice_type {
+  width:120px;
+  margin:0px 0px 0px 5px;
+}
+.choose_head {
+  text-align: left;
+  margin:0px 0px 30px 65px;
 }
 </style>
 

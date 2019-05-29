@@ -16,28 +16,23 @@
     <div v-if="showInvoice">
       <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
         <div
-          class="invoice_body"
-          :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
+          class="invoice_body pupiao"
+          
           @click="showInvoiceDetail(invoiceItem[0])"
         >
-          <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
-            <img src="../../assets/pupiao.png">
+          <div class="invoice_picture">
+            <img src="../../assets/fapiao.png">
           </div>
-          <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
-            <img src="../../assets/zhuanpiao.png">
-          </div>
-          <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
-            <img src="../../assets/dianzi.png">
-          </div>
+         
           <div class="invoice_delete">
-            <span class="el-icon-edit" @click.stop="editInvoice(invoiceItem[0])"></span>
+            <!-- <span class="el-icon-edit" @click.stop="editInvoice(invoiceItem[0])"></span> -->
             <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
           </div>
           <div class="invoice_title">{{invoiceItem[1]}}</div>
-          <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
-          <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
-          <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
-          <div class="invoice_account">{{invoiceItem[7]}}</div>
+          <div class="invoice_account">银行账号：{{invoiceItem[7]}}</div>
+          <div class="invoice_type">税号：{{invoiceItem[3]}}</div>
+          
+          
         </div>
       </el-col>
       <el-col :span="12">
@@ -134,7 +129,7 @@
             <td class="invoice-show-table-td-info1">
               <span>*</span>公司账号
             </td>
-            <td class="invoice-show-table-td-input1">
+            <td colspan="3" class="invoice-show-table-td-input1">
               <el-input
                 v-model="account"
                 placeholder="请输入公司账号"
@@ -142,16 +137,7 @@
                 class="person-add-input"
               ></el-input>
             </td>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>发票类型
-            </td>
-            <td class="invoice-show-table-td-input1">
-              <el-select v-model="selectType" placeholder="请选择发票类型" class="type_select">
-                <el-option label="普通发票" value="0"></el-option>
-                <el-option label="专用发票" value="1"></el-option>
-                <el-option label="电子发票" value="2"></el-option>
-              </el-select>
-            </td>
+            
           </tr>
         </table>
         <div class="info-edit">
@@ -188,11 +174,8 @@
         </tr>
         <tr>
           <td class="invoice-show-table-td-info1">公司账号</td>
-          <td class="invoice-show-table-td-input1">{{account}}</td>
-          <td class="invoice-show-table-td-info1">发票类型</td>
-          <td class="invoice-show-table-td-input1" v-if="selectType==0">普通发票</td>
-          <td class="invoice-show-table-td-input1" v-if="selectType==1">专用发票</td>
-          <td class="invoice-show-table-td-input1" v-if="selectType==2">电子发票</td>
+          <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
+          
         </tr>
 
       </table>
@@ -223,7 +206,7 @@ export default {
       phone: "",
       account: "",
       type: "",
-      selectType: "",
+    
       deleteCheck:false,
       deleteInvoiceId: "",
       ifEditInvoice:false,
@@ -247,7 +230,7 @@ export default {
             this.bank = res.data.data.bank;
             this.phone = res.data.data.mobilephone;
             this.account = res.data.data.account;
-            this.selectType = res.data.data.type;
+           
             this.showInvoice = false;
             this.addNewInvoice = false;
             this.InvoiceDetail = true;
@@ -272,7 +255,7 @@ export default {
             this.bank = res.data.data.bank;
             this.phone = res.data.data.mobilephone;
             this.account = res.data.data.account;
-            this.selectType = res.data.data.type;
+            
             this.showInvoice = false;
             this.addNewInvoice = true;
             this.ifEditInvoice = true;
@@ -298,7 +281,7 @@ export default {
             this.bank = res.data.data.bank;
             this.phone = res.data.data.mobilephone;
             this.account = res.data.data.account;
-            this.selectType = res.data.data.type;
+            
             this.showInvoice = false;
             this.addNewInvoice = true;
             this.ifEditInvoice = true;
@@ -378,12 +361,6 @@ export default {
           type: "error",
           center: true
         });
-      }else if (this.selectType == "") {
-        this.$message({
-          message: "发票类型不能为空！",
-          type: "error",
-          center: true
-        });
       } else if(!this.ifEditInvoice){
         this.$ajax({
           method: "post",
@@ -395,7 +372,7 @@ export default {
           }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
             bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
             this.account
-          }",type:"${this.selectType}"}&userid=${userid}`
+          }"}&userid=${userid}`
         })
           .then(res => {
             this.$message({
@@ -413,7 +390,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
-            this.selectType = "";
+            
             this.getInvoiceList();
           })
           .catch(function(err) {
@@ -432,7 +409,7 @@ export default {
           }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
             bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
             this.account
-          }",type:"${this.selectType}"}&userid=${userid}`
+          }"}&userid=${userid}`
         })
           .then(res => {
             this.$message({
@@ -450,7 +427,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
-            this.selectType = "";
+            
             this.ifEditInvoice = false;
             this.getInvoiceList();
           })
@@ -496,7 +473,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
-            this.selectType = "";
+            
             this.ifEditInvoice = false;
     },
     deleteInvoice(invoiceid) {
@@ -622,13 +599,12 @@ span {
   background: -webkit-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
   background: -o-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
   background: -moz-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
-  background: linear-gradient(to right, #67c23a, rgb(67, 197, 2));
+  background: linear-gradient(to right, rgba(36, 46, 104, 0.8), rgba(36, 46, 104, 0.9));
 }
 .gongpiao {
   background: -webkit-linear-gradient(to right, #409eff, rgb(0, 128, 255));
   background: -o-linear-gradient(to right, #409eff, rgb(0, 128, 255));
   background: -moz-linear-gradient(to right, #409eff, rgb(0, 128, 255));
-
   background: linear-gradient(to right, #409eff, rgb(0, 128, 255));
 }
 .dianzi {
@@ -650,22 +626,24 @@ span {
 }
 .invoice_type {
   position: absolute;
-  margin: 65px 0px 0px 60px;
+  margin: 110px 0px 0px 60px;
   color: #fff;
   font-size: 12px;
-  border: 1px solid #fff;
-  padding: 3px;
+  font-weight: bold;
+  /* border: 1px solid #fff;
+  padding: 3px; */
 }
 .invoice_account {
   position: absolute;
-  margin: 110px 0px 0px 60px;
+  margin: 70px 0px 0px 60px;
   color: #fff;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
 }
 .el-icon-delete {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
+  margin: 0px 0px 0px 25px;
 }
 .el-icon-delete:hover {
   color: #fff;
@@ -674,8 +652,8 @@ span {
 }
 .el-icon-edit {
   color: #fff;
-  font-size: 16px;
-  margin: 0px 15px 0px 0px;
+  font-size: 14px;
+  margin: 0px 5px 0px 0px;
 }
 .el-icon-edit:hover {
   color: #fff;
@@ -684,7 +662,7 @@ span {
 }
 .invoice_delete {
   position: absolute;
-  margin: 110px 0px 0px 240px;
+  margin: 115px 0px 0px 260px;
 }
 .invoice_picture {
   position: absolute;
