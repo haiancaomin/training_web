@@ -25,7 +25,7 @@
       <h1 class="score-label">证书查询</h1>
     </div>
     <div class="PesronalScoreSearch-info">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <el-form-item prop="name">
           <el-input placeholder="请输入姓名" v-model="ruleForm.name" name="name" id="nameFocus">
             <i slot="prefix" class="iconfont">&#xe614;</i>
