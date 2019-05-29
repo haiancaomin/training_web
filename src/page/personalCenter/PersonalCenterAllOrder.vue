@@ -2,54 +2,82 @@
   <div id="PersonalCenterAllOrder">
     <div class="order-dialog">
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
-        <div class="user_choose_invoice" v-show="showChooseInvoice">
-        <div>
-          <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
-            <div
-              class="invoice_body"
-              :class="{'pupiao':invoiceItem[12]=='0','gongpiao':invoiceItem[12]=='1','dianzi':invoiceItem[12]=='2'}"
-              @click="chooseid=invoiceItem[0]"
-            >
-              <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
-              <div v-if="invoiceItem[0]==chooseid" class="choose_icon"><span class="el-icon-check"></span></div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='0'">
-                <img src="../../assets/pupiao.png">
-              </div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='1'">
-                <img src="../../assets/zhuanpiao.png">
-              </div>
-              <div class="invoice_picture" v-if="invoiceItem[12]=='2'">
-                <img src="../../assets/dianzi.png">
-              </div>
-
-              <div class="invoice_title">{{invoiceItem[1]}}</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='0'">普通发票</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='1'">专用发票</div>
-              <div class="invoice_type" v-if="invoiceItem[12]=='2'">电子发票</div>
-              <div class="invoice_account">{{invoiceItem[7]}}</div>
-            </div>
-          </el-col>
-        </div>
         
-        <div style="clear: both;"></div>
-        <div><el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button></div>
+        <div class="user_choose_invoice" v-show="showChooseInvoice">
+          <div class="choose_head">
+            <span>请选择发票类型</span>
+            <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
+            <el-option label="普通发票" value="0"></el-option>
+            <el-option label="专用发票" value="1"></el-option>
+            <el-option label="电子发票" value="2"></el-option>
+            
+           
+          </el-select>
+          </div>
+          <div>
+            <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
+              <div
+                class="invoice_body"
+                :class="{'pupiao':selectInvoiceType=='0','gongpiao':selectInvoiceType=='1','dianzi':selectInvoiceType=='2'}"
+                @click="chooseid=invoiceItem[0]"
+              >
+                <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
+                <div v-if="invoiceItem[0]==chooseid" class="choose_icon">
+                  <span class="el-icon-check"></span>
+                </div>
+                <div class="invoice_picture" v-if="selectInvoiceType=='0'">
+                  <img src="../../assets/pupiao.png">
+                </div>
+                <div class="invoice_picture" v-if="selectInvoiceType=='1'">
+                  <img src="../../assets/zhuanpiao.png">
+                </div>
+                <div class="invoice_picture" v-if="selectInvoiceType=='2'">
+                  <img src="../../assets/dianzi.png">
+                </div>
+                
+
+                <div class="invoice_title">{{invoiceItem[1]}}</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='0'">普通发票</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='1'">专用发票</div>
+                <div class="invoice_type" v-if="selectInvoiceType=='2'">电子发票</div>
+                
+                <div class="invoice_account">{{invoiceItem[3]}}</div>
+              </div>
+            </el-col>
+          </div>
+
+          <div style="clear: both;"></div>
+          <div>
+            <el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button>
+          </div>
         </div>
         <div class="table-body" v-show="showChooseInvoiceDetail">
-          <h3 class="pupiao_title" v-if="selectType==0">增值税普通发票</h3>
-          <h3 class="zhuanyong_title" v-if="selectType==1">增值税专用发票</h3>
-          <h3 class="dianzi_title" v-if="selectType==2">增值税电子普通发票</h3>
-          <div class="pupiao_underline" v-if="selectType==0"></div>
-          <div class="zhuanyong_underline" v-if="selectType==1"></div>
-          <div class="dianzi_underline" v-if="selectType==2"></div>
+          <h3 class="pupiao_title" v-if="selectInvoiceType==0">增值税普通发票</h3>
+          <h3 class="zhuanyong_title" v-if="selectInvoiceType==1">增值税专用发票</h3>
+          <h3 class="dianzi_title" v-if="selectInvoiceType==2">增值税电子普通发票</h3>
+          <div class="pupiao_underline" v-if="selectInvoiceType==0"></div>
+          <div class="zhuanyong_underline" v-if="selectInvoiceType==1"></div>
+          <div class="dianzi_underline" v-if="selectInvoiceType==2"></div>
 
-          <table  cellspacing="0" :class="{'pupiao_table':selectType==0,'zhuanyong_table':selectType==1,'dianzi_table':selectType==2}">
+          <table
+            cellspacing="0"
+            :class="{'pupiao_table':selectInvoiceType==0,'zhuanyong_table':selectInvoiceType==1,'dianzi_table':selectInvoiceType==2}"
+          >
             <tr>
-              <td class="td11"><div>购买方</div></td>
+              <td class="td11">
+                <div>购买方</div>
+              </td>
               <td class="td12">
                 <div>
-                  <p><span class="td12_span1">名</span>称：</p>
+                  <p>
+                    <span class="td12_span1">名</span>称：
+                  </p>
                   <p>纳税人识别号：</p>
-                  <p><span class="td12_span3">地</span><span class="td12_span3">址、</span><span class="td12_span3">电</span>话：</p>
+                  <p>
+                    <span class="td12_span3">地</span>
+                    <span class="td12_span3">址、</span>
+                    <span class="td12_span3">电</span>话：
+                  </p>
                   <p>开发行及账号：</p>
                 </div>
               </td>
@@ -57,66 +85,184 @@
                 <div>
                   <p>{{companyName}}</p>
                   <p>{{taxerID}}</p>
-                  <p><span class="info_left">{{companyAddress}}</span>{{phone}}</p>
-                  <p><span class="info_left">{{bank}}</span>{{account}}</p>
+                  <p>
+                    <span class="info_left">{{companyAddress}}</span>
+                    {{phone}}
+                  </p>
+                  <p>
+                    <span class="info_left">{{bank}}</span>
+                    {{account}}
+                  </p>
                 </div>
               </td>
-              <td class="td14"><div>密码区</div></td>
-              <td colspan="4" class="td15"><div></div></td>
+              <td class="td14">
+                <div>密码区</div>
+              </td>
+              <td colspan="4" class="td15">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td21"><div><p>货物或应税劳务、服务名称</p></div></td>
-              <td class="td22"><div><p>规格型号</p></div></td>
-              <td class="td23"><div><p>单位</p></div></td>
-              <td class="td24"><div><p>数量</p></div></td>
-              <td colspan="3" class="td25"><div><p>单价</p></div></td>
-              <td class="td26"><div><p>金额</p></div></td>
-              <td class="td27"><div><p>税率</p></div></td>
-              <td class="td28"><div><p>税额</p></div></td>
+              <td colspan="3" class="td21">
+                <div>
+                  <p>货物或应税劳务、服务名称</p>
+                </div>
+              </td>
+              <td class="td22">
+                <div>
+                  <p>规格型号</p>
+                </div>
+              </td>
+              <td class="td23">
+                <div>
+                  <p>单位</p>
+                </div>
+              </td>
+              <td class="td24">
+                <div>
+                  <p>数量</p>
+                </div>
+              </td>
+              <td colspan="3" class="td25">
+                <div>
+                  <p>单价</p>
+                </div>
+              </td>
+              <td class="td26">
+                <div>
+                  <p>金额</p>
+                </div>
+              </td>
+              <td class="td27">
+                <div>
+                  <p>税率</p>
+                </div>
+              </td>
+              <td class="td28">
+                <div>
+                  <p>税额</p>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td31"><div></div></td>
-              <td class="td32"><div></div></td>
-              <td class="td33"><div></div></td>
-              <td class="td34"><div></div></td>
-              <td colspan="3" class="td35"><div></div></td>
-              <td class="td36"><div><p>{{orderMoney}}</p></div></td>
-              <td class="td37"><div></div></td>
-              <td class="td38"><div></div></td>
+              <td colspan="3" class="td31">
+                <div></div>
+              </td>
+              <td class="td32">
+                <div></div>
+              </td>
+              <td class="td33">
+                <div></div>
+              </td>
+              <td class="td34">
+                <div></div>
+              </td>
+              <td colspan="3" class="td35">
+                <div></div>
+              </td>
+              <td class="td36">
+                <div>
+                  <p>{{orderMoney}}</p>
+                </div>
+              </td>
+              <td class="td37">
+                <div></div>
+              </td>
+              <td class="td38">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td41"><div><p>合计</p></div></td>
-              <td class="td42"><div></div></td>
-              <td class="td43"><div></div></td>
-              <td class="td44"><div></div></td>
-              <td colspan="3" class="td45"><div></div></td>
-              <td class="td46"><div><p><span class="td_money">¥</span>{{orderMoney}}</p></div></td>
-              <td class="td47"><div></div></td>
-              <td class="td48"><div></div></td>
+              <td colspan="3" class="td41">
+                <div>
+                  <p>合计</p>
+                </div>
+              </td>
+              <td class="td42">
+                <div></div>
+              </td>
+              <td class="td43">
+                <div></div>
+              </td>
+              <td class="td44">
+                <div></div>
+              </td>
+              <td colspan="3" class="td45">
+                <div></div>
+              </td>
+              <td class="td46">
+                <div>
+                  <p>
+                    <span class="td_money">¥</span>
+                    {{orderMoney}}
+                  </p>
+                </div>
+              </td>
+              <td class="td47">
+                <div></div>
+              </td>
+              <td class="td48">
+                <div></div>
+              </td>
             </tr>
             <tr>
-              <td colspan="3" class="td51"><div><p>价税合计（大写）</p></div></td>
-              <td colspan="6" class="td52"><div></div></td>
-              <td class="td53"><div><p>小写</p></div></td>
-              <td class="td54"><div><p></p></div></td>
-              <td class="td55"><div><p><span class="td_money">¥</span>{{orderMoney}}</p></div></td>
+              <td colspan="3" class="td51">
+                <div>
+                  <p>价税合计（大写）</p>
+                </div>
+              </td>
+              <td colspan="6" class="td52">
+                <div></div>
+              </td>
+              <td class="td53">
+                <div>
+                  <p>小写</p>
+                </div>
+              </td>
+              <td class="td54">
+                <div>
+                  <p></p>
+                </div>
+              </td>
+              <td class="td55">
+                <div>
+                  <p>
+                    <span class="td_money">¥</span>
+                    {{orderMoney}}
+                  </p>
+                </div>
+              </td>
             </tr>
-             <tr>
-              <td class="td11"><div>销售方</div></td>
+            <tr>
+              <td class="td11">
+                <div>销售方</div>
+              </td>
               <td class="td12">
                 <div>
-                  <p><span class="td12_span1">名</span>称：</p>
+                  <p>
+                    <span class="td12_span1">名</span>称：
+                  </p>
                   <p>纳税人识别号：</p>
-                  <p><span class="td12_span3">地</span><span class="td12_span3">址、</span><span class="td12_span3">电</span>话：</p>
+                  <p>
+                    <span class="td12_span3">地</span>
+                    <span class="td12_span3">址、</span>
+                    <span class="td12_span3">电</span>话：
+                  </p>
                   <p>开发行及账号：</p>
                 </div>
               </td>
-              <td colspan="5" class="td13"><div></div></td>
-              <td class="td14"><div>备注</div></td>
-              <td colspan="4" class="td15"><div></div></td>
+              <td colspan="5" class="td13">
+                <div></div>
+              </td>
+              <td class="td14">
+                <div>备注</div>
+              </td>
+              <td colspan="4" class="td15">
+                <div></div>
+              </td>
             </tr>
-            
           </table>
+
           <div class="info-save">
             <el-button type="primary" @click="checkOK">确认开票</el-button>
           </div>
@@ -397,6 +543,7 @@ export default {
   name: "PersonalCenterAllOrder",
   data() {
     return {
+      selectInvoiceType:"0",
       contact: false,
       count: 0,
       dialogVisible: false,
@@ -436,11 +583,17 @@ export default {
       showChooseInvoiceDetail:false,
     };
   },
-   watch: {
+  watch: {
+    checkAgain: function(val) {
+      if (!val&&!this.dialogVisible) {
+        this.showChooseInvoiceDetail = false;
+        this.chooseid = "";
+      }
+    },
     dialogVisible: function(val) {
-      if(!val){
-        this.showChooseInvoiceDetail=false;
-        this.chooseid="";
+      if (!val&&!this.checkAgain) {
+        this.showChooseInvoiceDetail = false;
+        this.chooseid = "";
       }
     }
   },
@@ -515,13 +668,15 @@ this.showChooseInvoice=false;
     checkSubmit() {
       this.$ajax({
         method: "post",
-        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${this.orderID}&invoiceid=${this.invoiceid}`
+        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${
+          this.orderID
+        }&invoiceid=${this.chooseid}&invoicekind=${this.selectInvoiceType}`
       })
         .then(res => {
           this.checkAgain = false;
           this.$message({
             message: "提交成功！",
-            type: 'success',
+            type: "success",
             center: true
           });
           this.getNotPayOrderList(this.currentPage);
@@ -1431,6 +1586,14 @@ width: 0;
   border-top:2px solid #E6A23C;
   border-bottom:2px solid #E6A23C;
   margin:20px auto;
+}
+.choose_invoice_type {
+  width:120px;
+  margin:0px 0px 0px 5px;
+}
+.choose_head {
+  text-align: left;
+  margin:0px 0px 30px 65px;
 }
 </style>
 <style>
