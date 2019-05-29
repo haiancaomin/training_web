@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <div id="fileList_body">
     <div class="file-container">
       <h1 class="file-title">资料下载</h1>
       <ul class="file-box">
@@ -34,7 +34,7 @@
         ></el-pagination>
       </el-row>
     </div>
-  </el-main>
+  </div>
 </template>
 <script>
 export default {
@@ -72,17 +72,21 @@ export default {
 </script>
 
 <style scoped>
-.el-main {
-  padding-top: 60px;
+#fileList_body {
   width: 1000px;
-  margin: 0 auto;
+  margin: 0px auto;
+  margin-top:80px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  padding: 0px 20px 20px 20px;
 }
 .el-row {
   padding: 20px 0;
 }
 
 .file-container {
-  padding: 20px;
+ 
   background: #fff;
   margin-top: 20px;
 }
@@ -96,7 +100,7 @@ export default {
   border-left: 2px solid #409eff;
 }
 .file-box {
-  padding: 30px 30px 0px 30px;
+  padding: 10px 30px 0px 30px;
 }
 .file-box li {
   margin:10px 0px 0px 0px;

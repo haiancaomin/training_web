@@ -144,7 +144,7 @@ export default {
 .news-container {
   width: 1000px;
   margin: 0 auto;
-  padding-top: 60px;
+  margin-top: 80px;
 }
 .hot-box {
   position: relative;

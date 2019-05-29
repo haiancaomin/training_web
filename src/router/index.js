@@ -144,6 +144,10 @@ export default new Router({
         component: resolve => require(['@/page/inspection/Inspection'], resolve)
       },
       {
+        path: '/MessageBoard',
+        component: resolve => require(['@/page/MessageBoard/MessageBoard'], resolve)
+      },
+      {
         path: '/newsList',
         component: resolve => require(['@/page/news/newsList'], resolve)
       },

@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <div id="course_body">
     <div class="course-container">
       <el-tabs type="border-card" stretch @tab-click="handleClick" v-model="activeNames[0]">
         <el-tab-pane label="生产类" name="0">
@@ -330,7 +330,7 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-  </el-main>
+  </div>
 </template>
 <script>
 export default {
@@ -377,10 +377,14 @@ export default {
 </script>
 
 <style scoped>
-.el-main {
-  padding-top: 60px;
+#course_body {
   width: 1100px;
-  margin: 0 auto;
+  margin: 0px auto;
+  margin-top:80px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  padding: 20px;
 }
 .el-row {
   padding: 20px 0;
@@ -389,9 +393,9 @@ export default {
   border-bottom: 1px solid #eee;
 }
 .course-container {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   background: #fff;
-  margin-top: 20px;
+  
 }
 .teacher {
   cursor: pointer;

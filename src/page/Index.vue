@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="index_body">
     <div class="index-body">
       <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
         <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
@@ -372,6 +372,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#index_body {
+  margin-top:80px;
+}
 .index-sign-up1 {
   width: 160px;
   height: 50px;
@@ -642,7 +645,7 @@ export default {
   transform: scale(1.1);
 }
 .company-show {
-  height: 810px;
+  height: 730px;
   width: 100%;
 
   /* background: url(../assets/company.jpg) no-repeat; */
@@ -659,7 +662,7 @@ export default {
 }
 
 .logo {
-  padding: 240px 0px 20px 0px;
+  padding: 160px 0px 20px 0px;
   text-align: center;
 }
 .logo-words {

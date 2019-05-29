@@ -100,7 +100,7 @@ export default {
 .base-container {
   width: 1200px;
   margin: 0 auto;
-  padding-top: 100px;
+  margin-top: 80px;
   display: flex;
 }
 .tac .el-col {

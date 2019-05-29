@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <div id="news_detail_body">
     <div class="file-container">
       <h1 class="file-title">资讯详情</h1>
       <h1 class="text-center news-title">{{newsContent.title}}</h1>
@@ -9,7 +9,7 @@
       </div>
       <div class="preview" v-html='newsContent.content'></div>
     </div>
-  </el-main>
+  </div>
 </template>
 <script>
 export default {
@@ -41,19 +41,23 @@ export default {
 </script>
 
 <style scoped>
-.el-main {
-  padding-top: 60px;
+#news_detail_body {
   width: 1000px;
-  margin: 0 auto;
+  margin: 0px auto;
+  margin-top:80px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  padding: 20px;
 }
 .el-row {
   padding: 20px 0;
 }
 
 .file-container {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   background: #fff;
-  margin-top: 20px;
+
 }
 .file-title {
   font-size: 18px;
