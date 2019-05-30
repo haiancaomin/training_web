@@ -26,7 +26,6 @@ router.beforeEach((to, from, next) => {
     if (window.sessionStorage.user != undefined) {
       next()
     } else if (to.path == '/SignUp' || to.path == '/PersonalCenter' || to.path == '/MessageBoard') {
-     
       next(false)
       sessionStorage.setItem('redirect',to.fullPath)
       document.getElementById('loginBtn').click()

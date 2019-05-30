@@ -145,7 +145,10 @@ export default new Router({
       },
       {
         path: '/MessageBoard',
-        component: resolve => require(['@/page/MessageBoard/MessageBoard'], resolve)
+        component: resolve => require(['@/page/MessageBoard/MessageBoard'], resolve),
+        meta: {
+          auth: true
+        }
       },
       {
         path: '/newsList',

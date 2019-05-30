@@ -215,7 +215,7 @@ export default {
         this.$message({
           message: "检测到您还未登录,请登录后操作！",
           center: true,
-          type: 'warning'
+          type: 'error'
         });
       }
       
