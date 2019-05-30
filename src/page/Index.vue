@@ -373,7 +373,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #index_body {
-  margin-top:80px;
+  margin-top: 80px;
 }
 .index-sign-up1 {
   width: 160px;
