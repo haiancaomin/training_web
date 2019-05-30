@@ -25,6 +25,18 @@
       label="查看回复">
     </el-table-column>
   </el-table>
+
+   <div v-if="count">
+  <div class="suggest-page">
+        <el-pagination
+          background
+          layout="prev, pager, next, jumper"
+          :page-size="10"
+          :total="count"
+          @current-change="handleCurrentChange"
+        ></el-pagination>
+      </div>
+   </div>
   </div>
 </template>
 
@@ -33,6 +45,7 @@ export default {
   name: "MessageBoard",
   data() {
     return {
+      count: 0,
       textarea:"",
       tableData: []
     };
@@ -51,13 +64,18 @@ export default {
             }/zjsxpt/feedback_findFeedbackList.do?pageIndex=${(selectIndex-1)*10}&selectIndex=${selectIndex}&userid=${userid}`
           })
             .then(res => {
+              console.log(res);
               this.tableData = res.data.data;
-              console.log(this.tableData);
+              this.count = res.data.count;
             })
             .catch(function(err) {
               console.log(err);
             });
-    }
+    },
+    handleCurrentChange(val) {
+      this.getFeedbackList(val);
+     
+    },
   },
   mounted() {
     this.getFeedbackList(1);
@@ -104,7 +122,10 @@ export default {
 .board_submit {
   text-align: center;
 }
-
+.suggest-page {
+  text-align: center;
+  margin-top: 20px;
+}
 </style>
 <style>
 .borad_content textarea {

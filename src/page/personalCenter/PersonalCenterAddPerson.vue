@@ -1,5 +1,33 @@
 <template>
   <div id="PersonalCenterAddPerson">
+    <el-dialog :visible.sync="repeatShow" width="500px" title="重复人员信息" center class="checkAgain">
+      <p class="repeat_notice">下列员工信息已在本平台录入，其它员工信息已上传成功，如需调整，请在工作日10点--17点联系我们，联系电话0513-81055866</p>
+        <el-table
+    :data="empList"
+    stripe
+    border max-height="600"
+    style="width: 100%">
+    <el-table-column
+    label="序号"
+      type="index"
+      width="50">
+    </el-table-column>
+    <el-table-column
+      prop="cardno"
+      label="省份证号"
+      width="220">
+    </el-table-column>
+    <el-table-column
+      prop="empname"
+      label="姓名"
+     >
+    </el-table-column>
+    
+  </el-table>
+  <div class="operation_repeat_check">
+    <el-button type="primary" @click="repeatShow=false">确定</el-button>
+  </div>
+      </el-dialog>
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
@@ -128,7 +156,9 @@ export default {
       fileUid: "",
       oneAdd: false,
       batchAdd: false,
+      repeatShow: false,
       countFocus: 0,
+      empList:[],
       ruleForm: {
         empname: "",
         sex: "",
@@ -179,14 +209,16 @@ export default {
       if (file.size / 1024 > 100) {
         this.$message({
           message: "文件不能大于100kb！",
-          type: 'error',
+          type: "error",
           center: true
         });
-        return false; 
-      } else if(file.name.split(".")[file.name.split(".").length-1] != "xlsx") {
+        return false;
+      } else if (
+        file.name.split(".")[file.name.split(".").length - 1] != "xlsx"
+      ) {
         this.$message({
           message: "请使用模板文件上传！",
-          type: 'error',
+          type: "error",
           center: true
         });
         return false;
@@ -196,18 +228,26 @@ export default {
     uploadError(err, file, fileList) {
       this.$message({
         message: "请按照模板要求上传文件！",
-        type: 'error',
+        type: "error",
         center: true
       });
     },
     uploadSuccess(response, file, fileList) {
-      this.$message({
+      if(!response.data) {
+        this.$message({
         message: "上传成功！人员信息已更新",
-        type: 'success',
+        type: "success",
         center: true
       });
       this.$refs.upload.clearFiles();
       this.$router.push({ path: `/PersonalCenter/PersonalCenterPersonInfo` });
+      } else if (response.data == "2") {
+        this.empList = response.empList;
+        this.repeatShow = true;
+        this.$refs.upload.clearFiles();
+        
+      }
+      
     },
     addOne() {
       this.oneAdd = true;
@@ -235,16 +275,27 @@ export default {
               this.ruleForm.worktype
             }',cardno:'${this.ruleForm.cardno}',phone:'${
               this.ruleForm.phone
-            }',address:'${this.ruleForm.address}',education:'${this.ruleForm.education}'}&userid=${userid}`
+            }',address:'${this.ruleForm.address}',education:'${
+              this.ruleForm.education
+            }'}&userid=${userid}`
           })
             .then(res => {
-              this.$message({
-                message: "添加成功！",
-                type: 'success',
-                center: true
-              });
-              this.ruleForm = {};
-              console.log(res);
+              if (res.data.data == "0") {
+                this.$message({
+                  message: "添加成功！",
+                  type: "success",
+                  center: true
+                });
+                this.ruleForm = {};
+              } else if (res.data.data == "2") {
+                this.$notify({
+                  title: "错误",
+                  message:
+                    "该员工信息已在本平台录入，如需调整，请在工作日10点--17点联系我们，联系电话0513-81055866",
+                  duration: 0,
+                  type: "error"
+                });
+              }
             })
             .catch(function(err) {
               console.log(err);
@@ -354,7 +405,7 @@ export default {
   text-decoration: underline;
 }
 .batch-model-text:hover {
-  color: #67C23A;
+  color: #67c23a;
 }
 .batch-model {
   margin: 30px 0px 0px 0px;
@@ -406,6 +457,16 @@ export default {
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
+.repeat_notice {
+  margin-bottom: 10px;
+  color:#F56C6C;
+  font-size: 13px;
+  font-weight: bold;
+}
+.operation_repeat_check {
+  text-align: center;
+  margin-top: 20px;
+}
 </style>
 <style>
 #form_box .person-add-input .el-input__inner {
@@ -413,6 +474,9 @@ export default {
 }
 #form_box .person-add-select .el-input__inner {
   height: 44px;
+}
+.cell {
+  text-align: center;
 }
 </style>
 
