@@ -191,10 +191,10 @@
     </div>
     <div class="index-footer-outline-body">
       <div class="index-footer">
-        <p><a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备18020368号-2</a></p>
-        <p><a href="http://www.zhjcx.cn/" target="_blank" class="beian">©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a></p>
+        <p><a href="http://www.beian.miit.gov.cn" target="_blank" class="beian">苏ICP备18020368号-2</a></p>
+        <p><a href="http://www.zhjcx.cn/" target="_blank" class="our_company">©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a></p>
         <p>
-          <span>地址：南通市开发区通盛大道188号C座6楼</span>
+          <span class="our_company_address">地址：南通市开发区通盛大道188号C座6楼</span>
           <span>联系电话： 0513-81055866</span>
           <span>(工作时间：工作日10点--17点)</span>
         </p>
@@ -981,16 +981,19 @@ export default {
     bottom: 30px;
   }
 }
-.beian {
+.beian:hover,.our_company:hover {
   color: #fff;
 }
 .index-footer p,.index-footer a,.index-footer span{
-color: #fff;
+color: #ddd;
 
 font-size:13px;
 }
 .index-footer p{
 margin-bottom: 10px;
+}
+.our_company_address {
+  margin-right:20px;
 }
 </style>
 <style>
