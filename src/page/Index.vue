@@ -663,9 +663,9 @@ export default {
 .login-sign {
   float: right;
   background: rgba(255, 255, 255, 0.6);
-  height: 810px;
+  height: 730px;
   width: 360px;
-  padding: 0px 20px;
+  padding: 0 20px;
   margin: 0px 13% 0px 0px;
 }
 
@@ -718,9 +718,8 @@ export default {
   font-weight: 500;
  
 }
-.title-type {
-
-  margin:-30px 0px 0px 0px;
+.title-type{
+  padding-top: 50px;
 }
 .title-type1 {
   font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
