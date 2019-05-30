@@ -11,17 +11,17 @@
       width="50">
     </el-table-column>
     <el-table-column
-      prop="date"
+      prop="question"
       label="问题描述"
-      width="480">
+      width="370">
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="createdate"
       label="提交时间"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="answer"
       label="查看回复">
     </el-table-column>
   </el-table>
@@ -34,30 +34,33 @@ export default {
   data() {
     return {
       textarea:"",
-      tableData: [{
-          date: '案说法大师的去问驱蚊器恶趣味·1',
-          name: '2018-01-01 01:09:22',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+      tableData: []
     };
   },
 
   methods: {
-    handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+    getFeedbackList(selectIndex) {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
       }
+      this.$ajax({
+            method: "get",
+            url: `${
+              this.baseURL
+            }/zjsxpt/feedback_findFeedbackList.do?pageIndex=${(selectIndex-1)*10}&selectIndex=${selectIndex}&userid=${userid}`
+          })
+            .then(res => {
+              this.tableData = res.data.data;
+              console.log(this.tableData);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+    }
   },
   mounted() {
-    
+    this.getFeedbackList(1);
   }
 };
 </script>
@@ -107,6 +110,7 @@ export default {
 .borad_content textarea {
   height:100px;
 }
+
 </style>
 
 
