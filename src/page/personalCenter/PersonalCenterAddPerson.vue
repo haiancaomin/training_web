@@ -99,7 +99,7 @@
         <el-upload
           class="upload-demo"
           drag
-          ref="fileUpload"
+          ref="upload"
           :action="uploadUrl"
           :on-success="uploadSuccess"
           :on-error="uploadError"
@@ -206,6 +206,8 @@ export default {
         type: 'success',
         center: true
       });
+      this.$refs.upload.clearFiles();
+      this.$router.push({ path: `/PersonalCenter/PersonalCenterPersonInfo` });
     },
     addOne() {
       this.oneAdd = true;

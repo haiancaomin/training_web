@@ -17,8 +17,8 @@
           <p>
             反馈内容
             <span class="must_input">（*必填）</span>
-            <span class="my_suggest_split">|</span><span class="my_suggest" @click="gotoMyboard">我的反馈</span>
-            
+            <span class="my_suggest_split">|</span>
+            <span class="my_suggest" @click="gotoMyboard">我的反馈</span>
           </p>
           <el-input
             type="textarea"
@@ -30,13 +30,14 @@
         <div class="board_picture">
           <el-upload
             class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="3"
-            :on-exceed="handleExceed"
+            ref="upload"
+            :action="uploadUrl"
+            :on-success="uploadSuccess"
+            :on-remove="removeUpload"
+            :on-exceed="noticeOut"
+            :before-upload="checkSize"
+            accept=".jpg, .png"
+            :limit="1"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <span slot="tip" class="el-upload__tip">您可以上传反馈图片</span>
@@ -44,10 +45,10 @@
         </div>
         <div class="board_mobile">
           <p>联系方式</p>
-          <el-input v-model="input" placeholder="如您方便，请留下您的联系方式，以便我们及时回复您。"></el-input>
+          <el-input v-model="mobile" placeholder="如您方便，请留下您的联系方式，以便我们及时回复您。"></el-input>
         </div>
         <div class="board_submit">
-          <el-button type="primary">提交反馈</el-button>
+          <el-button type="primary" @click="submitUpload">提交反馈</el-button>
         </div>
       </div>
     </el-dialog>
@@ -192,7 +193,9 @@ export default {
       show_get_contact_info: true,
       show_erweima: true,
       showBoardDialog: false,
-      textarea:""
+      textarea: "",
+      mobile: "",
+      fileUid: ""
     };
   },
   components: {
@@ -205,20 +208,106 @@ export default {
   computed: {
     defaultActive() {
       return "/" + this.$route.path.split("/")[1];
+    },
+    uploadUrl: function() {
+      return this.baseURL + "/zjsxpt/attachment_upload.do";
     }
   },
   methods: {
-    haveSuggest() {
+    submitUpload() {
       if (window.sessionStorage.user != undefined) {
-        this.showBoardDialog = true
+        if (this.textarea == "") {
+          this.$message({
+            message: "问题描述必填！",
+            center: true,
+            type: "error"
+          });
+        } else {
+          var userInfo = JSON.parse(sessionStorage.getItem("user"));
+          if (userInfo) {
+            var userid = userInfo.userid;
+          }
+          this.$ajax({
+            method: "post",
+            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${
+              this.textarea
+            }&attachmentid=${this.fileUid}&phone=${
+              this.mobile
+            }&userid=${userid}`
+          })
+            .then(res => {
+              this.$message({
+                message: "您的意见我们已经收到，谢谢！",
+                type: "success",
+                center: true
+              });
+              this.showBoardDialog = false;
+              this.textarea = "";
+              this.mobile = "";
+              this.fileUid = "";
+              this.$refs.upload.clearFiles();
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
       } else {
         this.$message({
           message: "检测到您还未登录,请登录后操作！",
           center: true,
-          type: 'error'
+          type: "error"
         });
       }
-      
+    },
+    checkSize(file) {
+      if (file.size / 1024 > 1024) {
+        this.$message({
+          message: "文件不能大于1MB！",
+          type: "error",
+          center: true
+        });
+        return false;
+      } else if (
+        file.name.split(".")[file.name.split(".").length - 1] != "jpg" &&
+        file.name.split(".")[file.name.split(".").length - 1] != "png"
+      ) {
+        this.$message({
+          message: "只能上传jpg/png文件",
+          type: "error",
+          center: true
+        });
+        return false;
+      }
+    },
+
+    uploadSuccess(response, file, fileList) {
+      this.fileUid = response.data;
+      console.log(this.fileUid);
+    },
+    removeUpload(file, fileList) {
+      if (file.response) {
+        this.fileUid = "";
+        console.log(this.fileUid);
+      }
+    },
+    noticeOut(files, fileList) {
+      this.$message({
+        message: "最多上传一个文件！",
+        type: "error",
+        center: true
+      });
+    },
+    haveSuggest() {
+      if (window.sessionStorage.user != undefined) {
+        this.showBoardDialog = true;
+      } else {
+        this.$message({
+          message: "检测到您还未登录,请登录后操作！",
+          center: true,
+          type: "error"
+        });
+      }
     },
     enter_to_message_board() {
       this.show_to_message_board = false;
@@ -503,19 +592,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 .must_input {
-  color:#F56C6C;
-  font-family: "arial"
+  color: #f56c6c;
+  font-family: "arial";
 }
 .my_suggest_split {
   font-family: "arial";
-  color:#409EFF;
-  margin-right:3px;
+  color: #409eff;
+  margin-right: 3px;
   font-weight: bold;
   font-size: 12px;
 }
 .my_suggest {
   font-family: "arial";
-  color:#409EFF;
+  color: #409eff;
   text-decoration: underline;
   font-weight: bold;
   font-size: 12px;
@@ -524,27 +613,28 @@ export default {
 .my_suggest:hover {
   font-weight: 100;
 }
-.borad_content p,.board_mobile p {
+.borad_content p,
+.board_mobile p {
   font-family: "arial";
   margin-bottom: 5px;
 }
 .board_picture {
-  margin-top:10px;
+  margin-top: 10px;
 }
 .el-upload__tip {
   font-family: "arial";
-  margin-left:5px;
+  margin-left: 5px;
 }
 .board_mobile {
-  margin-top:20px;
+  margin-top: 20px;
 }
 .board_submit {
- text-align: center;
-  margin-top:10px;
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
 <style>
 .borad_content textarea {
-  height:100px;
+  height: 100px;
 }
 </style>

@@ -1,36 +1,30 @@
 <template>
   <div id="MessageBoard">
-    <div class="borad_content">
-        <p>反馈内容<span>（*必填）</span></p>
-        <el-input
-  type="textarea"
-  :rows="2"
-  placeholder="欢迎提出您在使用过程中遇到的问题或宝贵建议，感谢您对智聚实训的支持。"
-  v-model="textarea">
-</el-input>
-    </div>
-    <div class="board_picture">
-        <el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  >
-  <el-button size="small" type="primary">点击上传</el-button>
-  <span slot="tip" class="el-upload__tip">您可以上传反馈图片</span>
-</el-upload>
-    </div>
-    <div class="board_mobile">
-        <p>联系方式</p>
-        <el-input v-model="input" placeholder="如您方便，请留下您的联系方式，以便我们及时回复您。"></el-input>
-    </div>
-    <div class="board_submit">
-        <el-button type="primary">提交反馈</el-button>
-    </div>
+    <h1 class="my_suggest_h1_label">我的反馈</h1>
+    <el-table
+    :data="tableData"
+    stripe
+    style="width: 100%">
+    <el-table-column
+    label="序号"
+      type="index"
+      width="50">
+    </el-table-column>
+    <el-table-column
+      prop="date"
+      label="问题描述"
+      width="480">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="提交时间"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="查看回复">
+    </el-table-column>
+  </el-table>
   </div>
 </template>
 
@@ -39,7 +33,12 @@ export default {
   name: "MessageBoard",
   data() {
     return {
-      textarea:""
+      textarea:"",
+      tableData: [{
+          date: '案说法大师的去问驱蚊器恶趣味·1',
+          name: '2018-01-01 01:09:22',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }]
     };
   },
 
@@ -73,6 +72,16 @@ export default {
   border: 1px solid #e7e7e7;
   padding: 20px;
 }
+.my_suggest_h1_label {
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #e4e7ed;
+  background: #e4e7ed;
+  padding: 0 15px;
+  border-radius: 3px;
+  margin: 0px 0px 10px 0px;
+  border-left: 2px solid #409eff;
+}
 .borad_content,.board_picture,.board_mobile,.board_submit {
   margin:20px 200px;
 }
@@ -92,6 +101,7 @@ export default {
 .board_submit {
   text-align: center;
 }
+
 </style>
 <style>
 .borad_content textarea {
