@@ -993,7 +993,7 @@ font-size:13px;
 margin-bottom: 10px;
 }
 .our_company_address {
-  margin-right:20px;
+  margin-right:10px;
 }
 </style>
 <style>
