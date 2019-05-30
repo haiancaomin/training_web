@@ -815,7 +815,7 @@ export default {
 .course-type {
   width: 1220px;
   background: #fff;
-  padding: 50px 0px 100px 0px;
+  padding: 0px 0px 100px 0px;
   margin: 0px auto;
 }
 .course-info {

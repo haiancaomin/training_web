@@ -14,7 +14,7 @@
     </el-table-column>
     <el-table-column
       prop="cardno"
-      label="省份证号"
+      label="身份证号"
       width="220">
     </el-table-column>
     <el-table-column
