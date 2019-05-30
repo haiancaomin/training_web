@@ -33,6 +33,7 @@
 
       <div class="course-outline-body">
         <div class="course-type">
+          
           <el-row class="no-margin-b">
             <el-col :span="24">
               <div class="grid-content">
@@ -40,7 +41,7 @@
               </div>
             </el-col>
           </el-row>
-
+          
           <el-row class="no-margin-b">
             <div class="course-body">
               <div v-for="courseItem in courseList" :key="courseItem.courseid">
@@ -715,6 +716,11 @@ export default {
   font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 28px;
   font-weight: 500;
+ 
+}
+.title-type {
+
+  margin:-30px 0px 0px 0px;
 }
 .title-type1 {
   font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
