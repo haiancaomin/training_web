@@ -11,16 +11,58 @@
       v-on:regclosed="closeRegDialog"
       v-on:goToLog="goToLogin"
     ></user-register>
+    <el-dialog title="意见反馈" :visible.sync="showBoardDialog" center width="500px" id="schedule1">
+      <div id="MessageBoard">
+        <div class="borad_content">
+          <p>
+            反馈内容
+            <span class="must_input">（*必填）</span>
+            <span class="my_suggest_split">|</span><span class="my_suggest" @click="gotoMyboard">我的反馈</span>
+            
+          </p>
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="欢迎提出您在使用过程中遇到的问题或宝贵建议，感谢您对智聚实训的支持。"
+            v-model="textarea"
+          ></el-input>
+        </div>
+        <div class="board_picture">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <span slot="tip" class="el-upload__tip">您可以上传反馈图片</span>
+          </el-upload>
+        </div>
+        <div class="board_mobile">
+          <p>联系方式</p>
+          <el-input v-model="input" placeholder="如您方便，请留下您的联系方式，以便我们及时回复您。"></el-input>
+        </div>
+        <div class="board_submit">
+          <el-button type="primary">提交反馈</el-button>
+        </div>
+      </div>
+    </el-dialog>
     <div class="message_board_outline">
       <div class="message_board">
         <div
           class="to_message_board"
           @mouseenter="enter_to_message_board"
           @mouseleave="leave_to_message_board"
+          @click="haveSuggest"
         >
           <p class="iconfont" v-show="show_to_message_board">&#xe602;</p>
-          <div class="hover_to_message_board" v-show="!show_to_message_board">尽情留言</div>
+          <div class="hover_to_message_board" v-show="!show_to_message_board">意见反馈</div>
         </div>
+
         <div class="split_line">
           <div class="line"></div>
         </div>
@@ -40,18 +82,38 @@
           <div class="hover_erweima" v-show="!show_erweima">关注我们</div>
         </div>
       </div>
-      <div class="contact_us" v-show="!show_get_contact_info">
+      <div
+        class="contact_us"
+        v-show="!show_get_contact_info"
+        @mouseenter="enter_get_contact_info"
+        @mouseleave="leave_get_contact_info"
+      >
         <p>电话：</p>
         <p>0513-81055866</p>
         <p>&nbsp;</p>
         <p>邮箱：</p>
         <p>MKT_Dept@zhjcx.cn</p>
       </div>
-      <div class="contact_us_arrow" v-show="!show_get_contact_info"></div>
-      <div class="check_erweima" v-show="!show_erweima">
+      <div
+        class="contact_us_arrow"
+        v-show="!show_get_contact_info"
+        @mouseenter="enter_get_contact_info"
+        @mouseleave="leave_get_contact_info"
+      ></div>
+      <div
+        class="check_erweima"
+        v-show="!show_erweima"
+        @mouseenter="enter_erweima"
+        @mouseleave="leave_erweima"
+      >
         <img src="../assets/erweima.jpg">
       </div>
-      <div class="check_erweima_arrow" v-show="!show_erweima"></div>
+      <div
+        class="check_erweima_arrow"
+        v-show="!show_erweima"
+        @mouseenter="enter_erweima"
+        @mouseleave="leave_erweima"
+      ></div>
     </div>
     <el-header>
       <router-link to="/index">
@@ -71,6 +133,7 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="personalCenter">个人中心</el-dropdown-item>
+            <el-dropdown-item command="MessageBoard">意见反馈</el-dropdown-item>
             <el-dropdown-item command="logOut">注销</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -109,9 +172,6 @@
         <el-menu-item index="/download">
           <a href="javascript:;">资料下载</a>
         </el-menu-item>
-        <el-menu-item index="/MessageBoard">
-          <a href="javascript:;">留言板</a>
-        </el-menu-item>
       </el-menu>
     </el-header>
     <router-view></router-view>
@@ -130,7 +190,9 @@ export default {
       showUser: false,
       show_to_message_board: true,
       show_get_contact_info: true,
-      show_erweima: true
+      show_erweima: true,
+      showBoardDialog: false,
+      textarea:""
     };
   },
   components: {
@@ -146,6 +208,18 @@ export default {
     }
   },
   methods: {
+    haveSuggest() {
+      if (window.sessionStorage.user != undefined) {
+        this.showBoardDialog = true
+      } else {
+        this.$message({
+          message: "检测到您还未登录,请登录后操作！",
+          center: true,
+          type: 'warning'
+        });
+      }
+      
+    },
     enter_to_message_board() {
       this.show_to_message_board = false;
     },
@@ -164,11 +238,17 @@ export default {
     leave_erweima() {
       this.show_erweima = true;
     },
+    gotoMyboard() {
+      this.showBoardDialog = false;
+      this.$router.push({ path: `/MessageBoard` });
+    },
     handleCommand(command) {
       if (command == "logOut") {
         this.logOut();
       } else if (command == "personalCenter") {
         this.$router.push({ path: `/PersonalCenter/PersonalCenterAllOrder` });
+      } else if (command == "MessageBoard") {
+        this.showBoardDialog = true;
       }
     },
     addUserInfo() {
@@ -357,11 +437,11 @@ export default {
   background: #fff;
   z-index: 101;
   text-align: center;
-  padding:8px 0px 0px 0px;
+  padding: 8px 0px 0px 0px;
 }
-.contact_us p{
- font-size: 12px;
- font-weight: bold;
+.contact_us p {
+  font-size: 12px;
+  font-weight: bold;
 }
 .contact_us_arrow {
   border: 1px solid #ccc;
@@ -386,7 +466,7 @@ export default {
   border-radius: 6px;
   background: #fff;
   z-index: 101;
-  padding:2px;
+  padding: 2px;
 }
 .check_erweima img {
   width: 100px;
@@ -421,5 +501,50 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+}
+.must_input {
+  color:#F56C6C;
+  font-family: "arial"
+}
+.my_suggest_split {
+  font-family: "arial";
+  color:#409EFF;
+  margin-right:3px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.my_suggest {
+  font-family: "arial";
+  color:#409EFF;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+.my_suggest:hover {
+  font-weight: 100;
+}
+.borad_content p,.board_mobile p {
+  font-family: "arial";
+  margin-bottom: 5px;
+}
+.board_picture {
+  margin-top:10px;
+}
+.el-upload__tip {
+  font-family: "arial";
+  margin-left:5px;
+}
+.board_mobile {
+  margin-top:20px;
+}
+.board_submit {
+ text-align: center;
+  margin-top:10px;
+}
+</style>
+<style>
+.borad_content textarea {
+  height:100px;
 }
 </style>

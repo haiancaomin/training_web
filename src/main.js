@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth)) {
     if (window.sessionStorage.user != undefined) {
       next()
-    } else if (to.path == '/SignUp' || to.path == '/PersonalCenter') {
+    } else if (to.path == '/SignUp' || to.path == '/PersonalCenter' || to.path == '/MessageBoard') {
      
       next(false)
       sessionStorage.setItem('redirect',to.fullPath)
