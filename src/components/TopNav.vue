@@ -236,7 +236,8 @@ export default {
             }&userid=${userid}`
           })
             .then(res => {
-              this.$message({
+              if(res.data.data == "0") {
+                this.$message({
                 message: "您的意见我们已经收到，谢谢！",
                 type: "success",
                 center: true
@@ -246,7 +247,21 @@ export default {
               this.mobile = "";
               this.fileUid = "";
               this.$refs.upload.clearFiles();
-              console.log(res);
+              
+              } else if(res.data.data == "2") {
+                this.$message({
+                message: "您今天提交的次数太多了，请明天再试！",
+                type: "warning",
+                center: true
+              });
+              } else {
+                this.$message({
+                message: "未知错误！",
+                type: "error",
+                center: true
+              });
+              }
+              
             })
             .catch(function(err) {
               console.log(err);
