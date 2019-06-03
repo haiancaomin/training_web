@@ -1,21 +1,19 @@
 <template>
   <div class="CompanySignUp">
     <div calss="batch-sign-up">
-       <el-dialog  :visible.sync="noEmpShow" width="500px" class="no_emp_dialog">
+      <el-dialog :visible.sync="noEmpShow" width="500px" class="no_emp_dialog">
         <div>
           <p>您尚未添加公司人员，请先前往客户中心-公司人员添加公司人员</p>
         </div>
         <div class="operation_noemp">
           <router-link to="/personalCenter/PersonalCenterAddPerson">
-          <el-button type="primary">立即前往</el-button>
+            <el-button type="primary">立即前往</el-button>
           </router-link>
           <el-button type="primary" plain @click="noEmpShow=false">稍等一下</el-button>
         </div>
       </el-dialog>
       <div class="batch-sign-up-notice">
-        <p id="signup-no-info-notice1">
-          本公司可开具的发票类型有普通发票，专用发票和电子发票三种。
-        </p>
+        <p id="signup-no-info-notice1">本公司可开具的发票类型有普通发票，专用发票和电子发票三种。</p>
         <p class="info-notice" id="signup-no-info-notice2">注：如报名条件不同，请点击添加按钮选择新的报名条件进行报名。</p>
       </div>
       <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm">
@@ -30,7 +28,6 @@
                         v-model="ruleForm.course1"
                         placeholder="请选择课程"
                         @change="getAddressList1(ruleForm.course1),getTimeList1(ruleForm.course1),getMealList1(ruleForm.course1)"
-                       
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -143,11 +140,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button
-                          type="primary"
-                          @click="chooseEmp1"
-                          class="choose-person"
-                        >选择人员</el-button>
+                        <el-button type="primary" @click="chooseEmp1" class="choose-person">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -276,7 +269,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary"  @click="chooseEmp2">选择人员</el-button>
+                        <el-button type="primary" @click="chooseEmp2">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -407,7 +400,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary"  @click="chooseEmp3">选择人员</el-button>
+                        <el-button type="primary" @click="chooseEmp3">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -536,7 +529,7 @@
                         >确定</el-button>
                       </el-dialog>
                       <div class="div-delete">
-                        <el-button type="primary"  @click="chooseEmp4">选择人员</el-button>
+                        <el-button type="primary" @click="chooseEmp4">选择人员</el-button>
                       </div>
                     </el-form-item>
                   </div>
@@ -576,7 +569,7 @@ export default {
       active: 0,
       signUpPage: 1,
       accountsPage: 0,
-      noEmpShow:false,
+      noEmpShow: false,
 
       selectCourseData: [{}],
       selectAddressData1: [{}],
@@ -626,96 +619,115 @@ export default {
   },
   methods: {
     chooseEmp1() {
-      if(this.tableData1.length>0) {
-this.centerDialogVisible1 = true;
+      if (this.tableData1.length > 0) {
+        this.centerDialogVisible1 = true;
       } else {
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
         this.noEmpShow = true;
-      } 
+      }
     },
     chooseEmp2() {
-      if(this.tableData1.length>0) {
-this.centerDialogVisible2 = true;
+      if (this.tableData1.length > 0) {
+        this.centerDialogVisible2 = true;
       } else {
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
         this.noEmpShow = true;
-      } 
+      }
     },
     chooseEmp3() {
-      if(this.tableData1.length>0) {
-this.centerDialogVisible3 = true;
+      if (this.tableData1.length > 0) {
+        this.centerDialogVisible3 = true;
       } else {
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
         this.noEmpShow = true;
-      } 
+      }
     },
     chooseEmp4() {
-      if(this.tableData1.length>0) {
-this.centerDialogVisible4 = true;
+      if (this.tableData1.length > 0) {
+        this.centerDialogVisible4 = true;
       } else {
         this.$message({
           message: "请先前往客户中心-公司人员添加公司人员",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
         this.noEmpShow = true;
-      } 
+      }
     },
     submitForm1(formName) {
-
       var from1Empty = 0;
       var from2Empty = 0;
       var from3Empty = 0;
       var from4Empty = 0;
+      console.log(this.ruleForm.course1);
+      console.log(this.ruleForm.Address1);
+      console.log(this.ruleForm.time1 == null);
+      console.log(this.ruleForm.meal1 == null);
+      console.log(this.personSize1);
       if (
-        this.ruleForm.course1 == ""||this.ruleForm.course1 == null||
-        this.ruleForm.Address1 == "" || this.ruleForm.Address1 == null||
-        this.ruleForm.time1 == "" || this.ruleForm.time1 == null||
-        this.ruleForm.meal1 == "" || this.ruleForm.meal1 == null||
+        this.ruleForm.course1 == "" ||
+        this.ruleForm.course1 == null ||
+        this.ruleForm.Address1 == "" ||
+        this.ruleForm.Address1 == null ||
+        this.ruleForm.time1 == "" ||
+        this.ruleForm.time1 == null ||
+        this.ruleForm.meal1 == "" ||
+        this.ruleForm.meal1 == null ||
         this.personSize1 < 1
       ) {
-        
         from1Empty = 1;
       }
       if (
-        this.ruleForm.course2 == ""||this.ruleForm.course2 == null||
-        this.ruleForm.Address2 == "" || this.ruleForm.Address2 == null||
-        this.ruleForm.time2 == "" || this.ruleForm.time2 == null||
-        this.ruleForm.meal2 == "" || this.ruleForm.meal2 == null||
+        this.ruleForm.course2 == "" ||
+        this.ruleForm.course2 == null ||
+        this.ruleForm.Address2 == "" ||
+        this.ruleForm.Address2 == null ||
+        this.ruleForm.time2 == "" ||
+        this.ruleForm.time2 == null ||
+        this.ruleForm.meal2 == "" ||
+        this.ruleForm.meal2 == null ||
         this.personSize2 < 1
       ) {
         from2Empty = 1;
       }
       if (
-        this.ruleForm.course3 == ""||this.ruleForm.course3 == null||
-        this.ruleForm.Address3 == "" || this.ruleForm.Address3 == null||
-        this.ruleForm.time3 == "" || this.ruleForm.time3 == null||
-        this.ruleForm.meal3 == "" || this.ruleForm.meal3 == null||
+        this.ruleForm.course3 == "" ||
+        this.ruleForm.course3 == null ||
+        this.ruleForm.Address3 == "" ||
+        this.ruleForm.Address3 == null ||
+        this.ruleForm.time3 == "" ||
+        this.ruleForm.time3 == null ||
+        this.ruleForm.meal3 == "" ||
+        this.ruleForm.meal3 == null ||
         this.personSize3 < 1
       ) {
         from3Empty = 1;
       }
       if (
-        this.ruleForm.course4 == ""||this.ruleForm.course4 == null||
-        this.ruleForm.Address4 == "" || this.ruleForm.Address4 == null||
-        this.ruleForm.time4 == "" || this.ruleForm.time4 == null||
-        this.ruleForm.meal4 == "" || this.ruleForm.meal4 == null||
+        this.ruleForm.course4 == "" ||
+        this.ruleForm.course4 == null ||
+        this.ruleForm.Address4 == "" ||
+        this.ruleForm.Address4 == null ||
+        this.ruleForm.time4 == "" ||
+        this.ruleForm.time4 == null ||
+        this.ruleForm.meal4 == "" ||
+        this.ruleForm.meal4 == null ||
         this.personSize4 < 1
       ) {
         from4Empty = 1;
@@ -729,7 +741,7 @@ this.centerDialogVisible4 = true;
       ) {
         this.$message({
           message: "您的报名信息不完整！",
-          type: 'error',
+          type: "error",
           center: true
         });
       } else {
@@ -764,7 +776,6 @@ this.centerDialogVisible4 = true;
           meal4: this.ruleForm.meal4,
           multipleSelection4: this.multipleSelection4
         });
-        
       }
     },
     addNew1() {
@@ -1200,11 +1211,6 @@ this.centerDialogVisible4 = true;
 .sign-submit {
   margin: 20px 0px 0px 240px;
 }
-.signup-here {
-  color: #616bf7;
-  font-weight: bold;
-  font-size: 17px;
-}
 #signup-no-info-notice1 {
   margin: 10px 0px 0px 60px;
 }
@@ -1212,13 +1218,12 @@ this.centerDialogVisible4 = true;
   margin: 20px 0px 30px 60px;
 }
 .operation_noemp {
-  margin:30px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
-.operation_noemp .el-button{
-  margin:0px 20px;
+.operation_noemp .el-button {
+  margin: 0px 20px;
 }
 .no_emp_dialog {
   text-align: center;
 }
 </style>
-

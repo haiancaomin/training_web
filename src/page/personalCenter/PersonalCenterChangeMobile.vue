@@ -28,7 +28,7 @@
               :on-remove="removeUpload"
               :on-exceed="noticeOut"
               :before-upload="checkSize"
-               accept=".jpg,.png"
+              accept=".jpg, .png"
               :limit="2"
               multiple
             >
@@ -118,14 +118,17 @@ export default {
       if (file.size / 1024 > 1024) {
         this.$message({
           message: "文件不能大于1MB！",
-          type: 'error',
+          type: "error",
           center: true
         });
         return false;
-      } else if(file.name.split(".")[file.name.split(".").length-1] != "jpg"&&file.name.split(".")[file.name.split(".").length-1] != "png") {
+      } else if (
+        file.name.split(".")[file.name.split(".").length - 1] != "jpg" &&
+        file.name.split(".")[file.name.split(".").length - 1] != "png"
+      ) {
         this.$message({
           message: "只能上传jpg/png文件",
-          type: 'error',
+          type: "error",
           center: true
         });
         return false;
@@ -148,7 +151,7 @@ export default {
           } else {
             this.$message({
               message: "获取客户信息失败或网络异常！",
-              type: 'error',
+              type: "error",
               center: true
             });
           }
@@ -159,7 +162,6 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
-     
     },
     removeUpload(file, fileList) {
       if (file.response) {
@@ -169,7 +171,7 @@ export default {
     noticeOut(files, fileList) {
       this.$message({
         message: "最多上传两个文件！",
-        type: 'error',
+        type: "error",
         center: true
       });
     },
@@ -187,7 +189,7 @@ export default {
           if (this.fileUid == "") {
             this.$message({
               message: "请上传文件！",
-              type: 'error',
+              type: "error",
               center: true
             });
           } else {
@@ -206,7 +208,7 @@ export default {
               .then(res => {
                 this.$message({
                   message: "上传成功！",
-                  type: 'success',
+                  type: "success",
                   center: true
                 });
                 this.changeMobileStatus = 1;
@@ -252,7 +254,6 @@ export default {
 <style scoped>
 #PersonalCenterChangeMobile {
   width: 730px;
-
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -274,27 +275,6 @@ export default {
 }
 .el-upload__tip {
   margin: 0px 0px 0px 80px;
-}
-.input-input {
-  border: 1px solid #c5cddb;
-  width: 358px;
-  border-radius: 2px;
-  height: 44px;
-  line-height: 44px;
-  background: #fff;
-  font-size: 14px;
-  padding: 0px 10px 0px 40px;
-}
-.input-input:hover {
-  border: 1px solid #409eff;
-}
-.input-input:focus {
-  border: 1px solid #409eff;
-}
-.input-icon1 {
-  position: absolute;
-  font-size: 18px;
-  margin: 1px 0px 0px 12px;
 }
 .change-mobile-form {
   padding: 0px 179px 0px 190px;
@@ -362,7 +342,3 @@ export default {
   margin: 0px 5px 0px 0px;
 }
 </style>
-
-
-
-

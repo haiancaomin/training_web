@@ -118,17 +118,17 @@ export default {
       if (file.size / 1024 > 1024) {
         this.$message({
           message: "文件不能大于1MB！",
-          type: 'error',
+          type: "error",
           center: true
         });
         return false;
       } else if (
-        file.name.split(".")[file.name.split(".").length-1] != "jpg" &&
-        file.name.split(".")[file.name.split(".").length-1] != "png"
+        file.name.split(".")[file.name.split(".").length - 1] != "jpg" &&
+        file.name.split(".")[file.name.split(".").length - 1] != "png"
       ) {
         this.$message({
           message: "只能上传jpg/png文件",
-          type: 'error',
+          type: "error",
           center: true
         });
         return false;
@@ -149,7 +149,7 @@ export default {
           } else {
             this.$message({
               message: "获取客户信息失败或网络异常！",
-              type: 'error',
+              type: "error",
               center: true
             });
           }
@@ -165,7 +165,7 @@ export default {
           if (this.fileUid == "") {
             this.$message({
               message: "请上传文件！",
-              type: 'error',
+              type: "error",
               center: true
             });
           } else {
@@ -184,7 +184,7 @@ export default {
               .then(res => {
                 this.$message({
                   message: "上传成功！",
-                  type: 'success',
+                  type: "success",
                   center: true
                 });
                 this.authenticationStatus = 1;
@@ -219,7 +219,7 @@ export default {
     noticeOut(files, fileList) {
       this.$message({
         message: "最多上传两个文件！",
-        type: 'error',
+        type: "error",
         center: true
       });
     }
@@ -260,31 +260,15 @@ export default {
   margin: 0px 0px 0px 20px;
   padding: 0px 0px 20px 0px;
 }
-.el-input {
-  width: 300px;
-}
 .PersonalPassword-change {
   margin: 30px 179px 0px 190px;
 }
-
 .haveSubmit {
   margin: 100px 0px 0px 150px;
 }
-
 .PersonalPassword-change-commit {
   text-align: center;
   margin: 0px 0px 0px 0px;
-}
-.test-but {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 180px;
-  width: 120px;
-  height: 36px;
-  margin: auto;
-  line-height: 36px;
-  text-align: center;
 }
 .crumb {
   padding: 10px 0px 10px 0px;
@@ -308,11 +292,6 @@ export default {
 }
 #contact {
   text-align: center;
-}
-.input-icon1 {
-  position: absolute;
-  font-size: 18px;
-  margin: 1px 0px 0px 12px;
 }
 .el-input {
   width: 360px;

@@ -380,7 +380,7 @@ export default {
 #course_body {
   width: 1100px;
   margin: 0px auto;
-  margin-top:80px;
+  margin-top: 80px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -395,11 +395,6 @@ export default {
 .course-container {
   padding: 0px 20px 20px 20px;
   background: #fff;
-  
-}
-.teacher {
-  cursor: pointer;
-  color: #409eff;
 }
 .teacher-img {
   float: left;

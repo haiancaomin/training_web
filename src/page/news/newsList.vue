@@ -60,8 +60,8 @@
   </div>
 </template>
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper"
-import "swiper/dist/css/swiper.css"
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
       ],
       hotNews: [],
       newsList: {},
-      newsLists:[],
+      newsLists: [],
       type: "0",
       currentPage: 1,
       swiperOption: {
@@ -180,7 +180,6 @@ export default {
   height: 195px;
   margin-top: 10px;
 }
-
 .swiper-slide a {
   color: #333;
   display: flex;
@@ -214,7 +213,6 @@ export default {
 }
 .news-overview h3 {
   font-weight: bold;
-  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 20px;
@@ -246,9 +244,6 @@ export default {
   height: 100%;
   transition: all linear 0.3s;
 }
-/* .news-list .list-row:last-child {
-  margin-bottom: 0;
-} */
 </style>
 <style>
 .news-container .el-tabs__item {
@@ -257,4 +252,3 @@ export default {
   line-height: 55px;
 }
 </style>
-

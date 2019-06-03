@@ -30,8 +30,6 @@
           <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
         </el-tab-pane>
       </el-tabs>
-
-      
     </div>
 
     <!-- 考试信息选择页面 -->
@@ -41,7 +39,10 @@
 
     <!-- 支付页面 -->
     <div class="pay" v-show="SignUpPayPage">
-      <SignUpPay  v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage" v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"></SignUpPay>
+      <SignUpPay
+        v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage"
+        v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"
+      ></SignUpPay>
     </div>
 
     <div class="success" v-if="SignUpSuccessPage == 1">
@@ -55,13 +56,13 @@
 
 <script>
 import CompanySignUp from "@/page/signUp/CompanySignUp";
-import SchoolSignUp from '@/page/signUp/SchoolSignUp';
-import PersonalSignUp from '@/page/signUp/PersonalSignUp';
-import TeamSignUp from '@/page/signUp/TeamSignUp'
-import Accounts from '@/page/signUp/Accounts';
-import SignUpPay from '@/page/signUp/SignUpPay';
-import SignUpSuccess from '@/page/signUp/SignUpSuccess';
-import SignUpPageWait from '@/page/signUp/SignUpPageWait';
+import SchoolSignUp from "@/page/signUp/SchoolSignUp";
+import PersonalSignUp from "@/page/signUp/PersonalSignUp";
+import TeamSignUp from "@/page/signUp/TeamSignUp";
+import Accounts from "@/page/signUp/Accounts";
+import SignUpPay from "@/page/signUp/SignUpPay";
+import SignUpSuccess from "@/page/signUp/SignUpSuccess";
+import SignUpPageWait from "@/page/signUp/SignUpPageWait";
 
 export default {
   name: "SignUp",
@@ -77,82 +78,14 @@ export default {
   },
   data() {
     return {
-      orderShow1: true,
-      orderShow2: true,
-      orderShow3: true,
-      orderShow4: true,
-      checkAll: false,
-
-      isIndeterminate: true,
-      showPersonInfo: false,
-
-      radio2: 3,
       signUpPage: 1,
       accountsPage: 0,
       SignUpPayPage: 0,
-      SignUpSuccessPage:0,
-      SignUpPageWaitPage:0,
-  
-      thirdPage: 0,
-      fourthPage: 0,
-      fifthPage: 0,
-      sixth1: 0,
-      sixth2: 0,
-      payOnline: 1,
-      payOffline: 0,
-      active: 0,
-      maxSetp: 6,
-      num1: 1,
-      num2: 1,
-      num3: 1,
-      num4: 1,
-      selectCourseData: [{}],
-      selectAddressData1: [{}],
-      selectTimeData1: [{}],
-      selectMealData1: [{}],
-      multipleSelection1: [],
-      personSize1: 0,
-      centerDialogVisible1: false,
-      selectAddressData2: [{}],
-      selectTimeData2: [{}],
-      selectMealData2: [{}],
-      multipleSelection2: [],
-      personSize2: 0,
-      centerDialogVisible2: false,
-      selectAddressData3: [{}],
-      selectTimeData3: [{}],
-      selectMealData3: [{}],
-      multipleSelection3: [],
-      personSize3: 0,
-      centerDialogVisible3: false,
-      selectAddressData4: [{}],
-      selectTimeData4: [{}],
-      selectMealData4: [{}],
-      multipleSelection4: [],
-      personSize4: 0,
-      centerDialogVisible4: false,
-      ruleForm: {
-        course1: "",
-        Address1: "",
-        time1: "",
-        meal1: "",
-        course2: "",
-        Address2: "",
-        time2: "",
-        meal2: "",
-        course3: "",
-        Address3: "",
-        time3: "",
-        meal3: "",
-        course4: "",
-        Address4: "",
-        time4: "",
-        meal4: ""
-      },
-      tableData1: [{}]
+      SignUpSuccessPage: 0,
+      SignUpPageWaitPage: 0,
+      active: 0
     };
   },
-
   methods: {
     gotoAccountsPage: function(msg) {
       (this.active = msg.active),
@@ -173,7 +106,7 @@ export default {
       (this.active = msg.active),
         (this.SignUpPayPage = msg.SignUpPayPage),
         (this.SignUpPageWaitPage = msg.SignUpPageWaitPage);
-    },
+    }
   }
 };
 </script>
@@ -187,7 +120,6 @@ export default {
   width: 1000px;
   height: 950px;
   margin: 0px auto;
-
   padding: 10px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
 }
@@ -217,7 +149,4 @@ export default {
   padding: 30px 0px 0px 30px;
   margin: 10px 0px 0px 0px;
 }
-
 </style>
-
-

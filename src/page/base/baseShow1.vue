@@ -1,9 +1,8 @@
 <template>
   <div class="base-box">
-    <el-collapse v-model="activeNames" @change="handleChange" v-if="swipershow">
+    <el-collapse v-model="activeNames" v-if="swipershow">
       <el-collapse-item :title="baseInfo.basename" name="1" class="base-intro">
         <swiper :options="swiperOption" ref="mySwiper">
-          <!-- slides -->
           <swiper-slide v-for="(item,key) in baseInfo.pictureUrl" :key="key">
             <img :src="item" class="base-intro-pic">
           </swiper-slide>
@@ -25,8 +24,6 @@
           </el-carousel-item>
         </el-carousel>
         <div class="guanjiang-content">
-          <!-- <h1>Title</h1>
-          <h2>Subtitle</h2>-->
           <pre>{{item.area_summary}}</pre>
         </div>
       </el-collapse-item>
@@ -34,15 +31,13 @@
   </div>
 </template>
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper"
-import "swiper/dist/css/swiper.css"
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
       activeNames: ["1"],
       baseInfo: [],
-      areaList0: {},
-      arealistrest: [],
       swipershow: false,
       swiperOption: {
         autoplay: {
@@ -87,20 +82,11 @@ export default {
       })
         .then(res => {
           this.baseInfo = res.data.data;
-          // this.areaList0 = res.data.data.arealist.length
-          //   ? res.data.data.arealist[0]
-          //   : {};
-          // this.arealistrest = res.data.data.arealist.length
-          //   ? res.data.data.arealist.slice(1)
-          //   : [];
           this.swipershow = true;
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
-    handleChange(val) {
-      console.log(val);
     }
   }
 };
@@ -129,7 +115,6 @@ pre {
   width: 100%;
   height: 100%;
 }
-
 .guanjiang-pic {
   width: 100%;
   height: 300px;
@@ -141,22 +126,9 @@ pre {
 .base-content {
   padding-top: 30px;
 }
-
-/* .guanjiang-content h1 {
-  font-size: 41px;
-}
-.guanjiang-content h2 {
-  font-size: 14px;
-} */
 .guanjiang-content {
   padding: 5px 10px;
 }
-.clearfix:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
 </style>
 <style>
 .base-box .el-collapse-item__header {

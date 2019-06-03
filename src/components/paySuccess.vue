@@ -31,6 +31,14 @@ export default {
 };
 </script>
 <style scoped>
+.success {
+  width: 1000px;
+  height: 560px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  margin: 80px auto 0 auto;
+}
 .sign-up-suc-notice2 {
   text-align: center;
   font-family: "微软雅黑";
@@ -56,13 +64,4 @@ export default {
 .to-center2 {
   color: #409eff;
 }
-.success {
-  width: 1000px;
-  height: 560px;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #fff;
-  border: 1px solid #e7e7e7;
-  margin: 80px auto 0 auto;
-}
 </style>
-

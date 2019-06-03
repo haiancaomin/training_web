@@ -4,19 +4,23 @@
       <el-dialog :visible.sync="showCertificateDialog" title="证书展示" width="1000px">
         <p class="count_certificate">{{ruleForm.name}}共有{{pictueUrl.length}}张证书</p>
         <div class="certificate-page">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :page-size="1"
-          :total="pictueUrl.length"
-          @current-change="handleCurrentChange"
-        ></el-pagination>
-      </div>
-        <div class="certificate" >
-          
-          <iframe align="middle" frameborder="0" height="800" scrolling="no" 
-     width="800" :src="pictueUrl[currentPage-1]" >
-    </iframe>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :page-size="1"
+            :total="pictueUrl.length"
+            @current-change="handleCurrentChange"
+          ></el-pagination>
+        </div>
+        <div class="certificate">
+          <iframe
+            align="middle"
+            frameborder="0"
+            height="800"
+            scrolling="no"
+            width="800"
+            :src="pictueUrl[currentPage-1]"
+          ></iframe>
         </div>
       </el-dialog>
     </div>
@@ -56,9 +60,8 @@ export default {
   data() {
     return {
       showCertificateDialog: false,
-      countFocus: 0,
       currentPage: 1,
-      pictueUrl:[],
+      pictueUrl: [],
       ruleForm: {
         name: "",
         cardno: ""
@@ -96,13 +99,12 @@ export default {
           })
             .then(res => {
               if (res.data.data != false) {
-    
                 this.pictueUrl = res.data.data;
                 this.showCertificateDialog = true;
               } else {
                 this.$message({
                   message: "未查询到此人证书！",
-                  type: 'error',
+                  type: "error",
                   center: true
                 });
               }
@@ -126,7 +128,6 @@ export default {
 <style scoped>
 #PesronalScoreSearch {
   width: 1000px;
-
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -136,19 +137,8 @@ export default {
 .PesronalScoreSearch-info {
   padding: 40px 0px 50px 300px;
 }
-.PesronalScoreSearch-search {
-  margin: 0px 0px 0px 60px;
-}
-
-.el-table th > .cell {
-  text-align: center;
-}
-
 .order-dialog {
   text-align: center;
-}
-.pull-out {
-  margin: 20px 0px 0px 0px;
 }
 .score-label {
   font-size: 18px;
@@ -160,27 +150,6 @@ export default {
   margin: 0px 0px 10px 0px;
   border-left: 2px solid #409eff;
 }
-.input-input {
-  border: 1px solid #c5cddb;
-  width: 358px;
-  border-radius: 2px;
-  height: 44px;
-  line-height: 44px;
-  background: #fff;
-  font-size: 14px;
-  padding: 0px 10px 0px 40px;
-}
-.input-input:hover {
-  border: 1px solid #409eff;
-}
-.input-input:focus {
-  border: 1px solid #409eff;
-}
-.input-icon1 {
-  position: absolute;
-  font-size: 16px;
-  margin: 2px 0px 0px 14px;
-}
 .login-self {
   width: 358px;
   font-size: 18px;
@@ -191,7 +160,6 @@ export default {
 }
 .certificate {
   margin: 0px auto;
- 
   width: 800px;
   border: 1px solid #e4e7ed;
 }
@@ -217,14 +185,12 @@ export default {
 }
 .count_certificate {
   text-align: left;
-  margin:0px 0px 0px 85px;
-  font-size:16px;
-  font-weight:bold;
+  margin: 0px 0px 0px 85px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .certificate-page {
   text-align: left;
-  margin:20px 0px 20px 75px;
+  margin: 20px 0px 20px 75px;
 }
 </style>
-
-

@@ -2,17 +2,14 @@
   <div id="PersonalCenterAllOrder">
     <div class="order-dialog">
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
-        
         <div class="user_choose_invoice" v-show="showChooseInvoice">
           <div class="choose_head">
             <span>请选择发票类型</span>
             <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
-            <el-option label="普通发票" value="0"></el-option>
-            <el-option label="专用发票" value="1"></el-option>
-            <el-option label="电子发票" value="2"></el-option>
-            
-           
-          </el-select>
+              <el-option label="普通发票" value="0"></el-option>
+              <el-option label="专用发票" value="1"></el-option>
+              <el-option label="电子发票" value="2"></el-option>
+            </el-select>
           </div>
           <div>
             <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
@@ -34,13 +31,12 @@
                 <div class="invoice_picture" v-if="selectInvoiceType=='2'">
                   <img src="../../assets/dianzi.png">
                 </div>
-                
 
                 <div class="invoice_title">{{invoiceItem[1]}}</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='0'">普通发票</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='1'">专用发票</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='2'">电子发票</div>
-                
+
                 <div class="invoice_account">{{invoiceItem[3]}}</div>
               </div>
             </el-col>
@@ -275,8 +271,7 @@
     </div>
 
     <div class="order-dialog" id="orderDialog">
-    
-       <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
+      <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
         <p>开具发票上传后将无法修改，是否再次确认发票信息</p>
         <div class="delete-order-operation">
           <el-button type="primary" @click="checkAgainMore">再次确认</el-button>
@@ -285,8 +280,12 @@
       </el-dialog>
 
       <el-dialog :visible.sync="noInvoice" width="400px" class="noInvoice">
-        <p>您尚未填写发票信息，点击<router-link to="/personalCenter/PersonalCenterInvoiceShow"><el-button type="primary" 
-        class="click-here">这里</el-button></router-link>填写发票信息</p>
+        <p>
+          您尚未填写发票信息，点击
+          <router-link to="/personalCenter/PersonalCenterInvoiceShow">
+            <el-button type="primary" class="click-here">这里</el-button>
+          </router-link>填写发票信息
+        </p>
       </el-dialog>
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：845923412</p>
@@ -340,47 +339,49 @@
                 </div>
                 <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
               </div>
-              
 
               <div class="meal-body">
                 <div class="pay-meal">购买套餐</div>
-                
-                  <div class="pay-meal-body" v-for="orderItem in orderDetail.dlist" :key="orderItem.detailid">
-                    <div class="meal_img f-fl">
-                      <img :src="orderItem.picurl" alt>
-                    </div>
-                    <div class="meal_body f-fl">
-                      <a class="title">
-                        <span>{{orderItem.coursename}}（{{orderItem.menuname}}）</span>
-                      </a>
 
-                      <div class="promotion">
-                        报名人数：
-                        <span>{{orderItem.personcount}}</span>
-                      </div>
-                    </div>
-                    <div class="meal_price">￥{{orderItem.money}}</div>
+                <div
+                  class="pay-meal-body"
+                  v-for="orderItem in orderDetail.dlist"
+                  :key="orderItem.detailid"
+                >
+                  <div class="meal_img f-fl">
+                    <img :src="orderItem.picurl" alt>
                   </div>
-               
+                  <div class="meal_body f-fl">
+                    <a class="title">
+                      <span>{{orderItem.coursename}}（{{orderItem.menuname}}）</span>
+                    </a>
+
+                    <div class="promotion">
+                      报名人数：
+                      <span>{{orderItem.personcount}}</span>
+                    </div>
+                  </div>
+                  <div class="meal_price">￥{{orderItem.money}}</div>
+                </div>
               </div>
 
               <div class="pay-type">支付方式</div>
-              <el-collapse accordion>
+              <el-collapse accordion id="pay_choose">
                 <el-collapse-item>
                   <template slot="title">
-                    <div v-if="radio2==3" class="choose-zhifubao">
+                    <!-- <div v-if="radio2==3" class="choose-zhifubao">
                       <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
                     </div>
                     <span v-if="radio2==6" class="choose-weixin">
                       <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                    </span>
+                    </span>-->
                     <span v-if="radio2==9" class="choose-bank">
-                  <img src="../../assets/zhuanzhuang.png" class="icon-mini">转账汇款
-                </span>
+                      <img src="../../assets/zhuanzhuang.png" class="icon-mini">转账汇款
+                    </span>
                   </template>
                   <div class="pay-choose">
                     <el-radio-group v-model="radio2">
-                      <div class="pay-zhifubao">
+                      <!-- <div class="pay-zhifubao">
                         <el-col :span="24">
                           <el-radio :label="3">
                             <img src="../../assets/zhifubao.jpg" class="pay-img">
@@ -391,12 +392,12 @@
                         <el-radio :label="6">
                           <img src="../../assets/weixin.jpg" class="pay-img">
                         </el-radio>
-                      </div>
+                      </div>-->
                       <div class="pay-bank">
-                    <el-radio :label="9">
-                      <img src="../../assets/huikuan_big.png" class="pay-img">
-                    </el-radio>
-                  </div>
+                        <el-radio :label="9">
+                          <img src="../../assets/huikuan_big.png" class="pay-img">
+                        </el-radio>
+                      </div>
                     </el-radio-group>
                   </div>
                 </el-collapse-item>
@@ -413,7 +414,8 @@
                     <div class="pay-price-btn_price">
                       <span class="price_title">待付款:</span>
                       <span class="price_account">
-                        <span class="price_account_icon">￥</span> {{orderDetail.summoney}}
+                        <span class="price_account_icon">￥</span>
+                        {{orderDetail.summoney}}
                       </span>
                     </div>
                     <span class="pay-price-btn_btn">立即支付</span>
@@ -426,16 +428,14 @@
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
-              <p
-                class="offline-notice"
-              >转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
-              <p class="margin_height">&nbsp;</p>
-              <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
-              <br>
-              <p>开 户 行：中国**银行股份有限公司**支行</p>
-              <p>收款户名：***</p>
-              <p>帐 号：1234567890</p>
-            </div>
+                      <p class="offline-notice">转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
+                      <p class="margin_height">&nbsp;</p>
+                      <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
+                      <br>
+                      <p>开 户 行：中国**银行股份有限公司**支行</p>
+                      <p>收款户名：***</p>
+                      <p>帐 号：1234567890</p>
+                    </div>
                   </div>
                 </el-col>
                 <el-col :span="6">
@@ -443,10 +443,10 @@
                     <div class="pay-price-btn_price bank_pay">
                       <span class="price_title">待付款:</span>
                       <span class="price_account">
-                        <span class="price_account_icon">￥</span> {{orderDetail.summoney}}
+                        <span class="price_account_icon">￥</span>
+                        {{orderDetail.summoney}}
                       </span>
                     </div>
-                  
                   </div>
                 </el-col>
               </div>
@@ -455,11 +455,11 @@
         </div>
       </el-dialog>
 
-      <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center >
-         <div class="expressShow">
-           <p>物流单号：{{expressID}}</p>          
+      <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center>
+        <div class="expressShow">
+          <p>物流单号：{{expressID}}</p>
         </div>
-     </el-dialog>
+      </el-dialog>
     </div>
 
     <div class="crumb">
@@ -482,7 +482,10 @@
           </el-col>
           <el-col :span="17">
             <div class="order-detail">
-              <p v-for="(menuname,index) in orderItem.dlist" :key="index">{{menuname.coursename}}（{{menuname.menuname}}）</p>
+              <p
+                v-for="(menuname,index) in orderItem.dlist"
+                :key="index"
+              >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
@@ -500,12 +503,20 @@
         </div>
         <div class="order-operation">
           <el-button type="primary" round plain @click="contact = true">联系我们</el-button>
-          <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid"><el-button type="primary" round plain>订单详情</el-button></router-link>
-          <el-button type="primary" round @click="payNowShow(orderItem.orderid)" v-if="orderItem.status==0">立即支付</el-button>
+          <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid">
+            <el-button type="primary" round plain>订单详情</el-button>
+          </router-link>
           <el-button
             type="primary"
             round
-            @click="getInvoice(orderItem.orderid,orderItem.summoney)" v-if="orderItem.status==1"
+            @click="payNowShow(orderItem.orderid)"
+            v-if="orderItem.status==0"
+          >立即支付</el-button>
+          <el-button
+            type="primary"
+            round
+            @click="getInvoice(orderItem.orderid,orderItem.summoney)"
+            v-if="orderItem.status==1"
           >开具发票</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
           <el-button
@@ -515,7 +526,12 @@
             @click="scheduleSuccess = true"
             v-if="orderItem.status==3"
           >开票进度</el-button>
-          <el-button type="success" round @click="checkExpress(orderItem.orderid)" v-if="orderItem.status==3">发票物流</el-button>
+          <el-button
+            type="success"
+            round
+            @click="checkExpress(orderItem.orderid)"
+            v-if="orderItem.status==3"
+          >发票物流</el-button>
         </div>
       </div>
     </div>
@@ -531,7 +547,7 @@
         ></el-pagination>
       </div>
     </div>
-     <div v-if="!count" class="noOrder">
+    <div v-if="!count" class="noOrder">
       <img src="../../assets/favicon.png" alt class="order-head-img">
       <p class="no-order-content">您还没有相关的订单</p>
     </div>
@@ -543,55 +559,48 @@ export default {
   name: "PersonalCenterAllOrder",
   data() {
     return {
-      selectInvoiceType:"0",
+      selectInvoiceType: "0",
       contact: false,
       count: 0,
       dialogVisible: false,
       radio2: 9,
       num: false,
       payShow: false,
-     
-      showEmpDia: false,
       scheduleSuccess: false,
       schedule: false,
-      dialogVisibleAgreement: false,
-      dialogVisibleInfo: false,
       orderlist: [],
       invoiceList: [],
       orderDetail: [],
-      userName:"",
+      userName: "",
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1,
-      orderID:"",
+      orderID: "",
       checkAgain: false,
       noInvoice: false,
-       companyName: '',
-      companyAddress:'',
-      taxerID:'',
-      contactPerson:'',
-      bank:'',
-      phone:'',
-      account:'',
-      otherContent:'',
-      invoiceid:'',
-      orderMoney:'',
-       expressID:'',
+      companyName: "",
+      companyAddress: "",
+      taxerID: "",
+      bank: "",
+      phone: "",
+      account: "",
+      orderMoney: "",
+      expressID: "",
       expressShow: false,
-      chooseid:"",
-      showChooseInvoice:false,
-      showChooseInvoiceDetail:false,
+      chooseid: "",
+      showChooseInvoice: false,
+      showChooseInvoiceDetail: false
     };
   },
   watch: {
     checkAgain: function(val) {
-      if (!val&&!this.dialogVisible) {
+      if (!val && !this.dialogVisible) {
         this.showChooseInvoiceDetail = false;
         this.chooseid = "";
       }
     },
     dialogVisible: function(val) {
-      if (!val&&!this.checkAgain) {
+      if (!val && !this.checkAgain) {
         this.showChooseInvoiceDetail = false;
         this.chooseid = "";
       }
@@ -607,39 +616,39 @@ export default {
       })
         .then(res => {
           console.log(res.data.data);
-            this.companyName = res.data.data.company;
-            this.companyAddress = res.data.data.address;
-            this.taxerID = res.data.data.taxpayerno;
-            this.contactPerson = res.data.data.person;
-            this.bank = res.data.data.bank;
-            this.phone = res.data.data.mobilephone;
-            this.account = res.data.data.account;
-            this.selectType = res.data.data.type;
+          this.companyName = res.data.data.company;
+          this.companyAddress = res.data.data.address;
+          this.taxerID = res.data.data.taxpayerno;
+
+          this.bank = res.data.data.bank;
+          this.phone = res.data.data.mobilephone;
+          this.account = res.data.data.account;
+          this.selectType = res.data.data.type;
         })
         .catch(function(err) {
           console.log(err);
         });
     },
     gotoShowChooseInvoiceDetail() {
-      if(this.chooseid == "") {
+      if (this.chooseid == "") {
         this.$message({
           message: "请先选择发票",
           center: true,
-          type: 'warning',
-          customClass: 'zZindex'
+          type: "warning",
+          customClass: "zZindex"
         });
       } else {
-this.showChooseInvoice=false;
-      this.showChooseInvoiceDetail=true;
-      this.getInvoiceInfo(this.chooseid);
+        this.showChooseInvoice = false;
+        this.showChooseInvoiceDetail = true;
+        this.getInvoiceInfo(this.chooseid);
       }
     },
     payNowShow(orderid) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${
-          orderid
-        }`
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
       })
         .then(res => {
           this.orderDetail = res.data.data;
@@ -652,17 +661,15 @@ this.showChooseInvoice=false;
     },
     checkExpress(id) {
       this.$ajax({
-          method: "get",
-          url: `${
-            this.baseURL
-          }/zjsxpt/course_findLognoByOrderid.do?orderid=${id}`
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_findLognoByOrderid.do?orderid=${id}`
+      })
+        .then(res => {
+          this.expressID = res.data.data;
         })
-          .then(res => {
-            this.expressID = res.data.data;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
+        .catch(function(err) {
+          console.log(err);
+        });
       this.expressShow = true;
     },
     checkSubmit() {
@@ -756,7 +763,7 @@ this.showChooseInvoice=false;
           this.deleteOrderShow = false;
           this.$message({
             message: "删除成功！",
-            type: 'success',
+            type: "success",
             center: true
           });
           this.getNotPayOrderList(this.currentPage);
@@ -768,9 +775,7 @@ this.showChooseInvoice=false;
     checkOK() {
       this.dialogVisible = false;
       this.checkAgain = true;
-    },
-  
-  
+    }
   },
   mounted() {
     var userInfo = JSON.parse(sessionStorage.getItem("user")),
@@ -786,7 +791,6 @@ this.showChooseInvoice=false;
 <style scoped>
 #PersonalCenterAllOrder {
   width: 730px;
-
   box-shadow: 0 0 2px #c7c5c5;
   border: 1px solid #e7e7e7;
   margin: 0px 0px 0px 20px;
@@ -797,7 +801,7 @@ this.showChooseInvoice=false;
   width: 600px;
   margin: 20px auto 0px auto;
   box-shadow: 0 0 6px #c7c5c5;
-  border: 1px solid #fff;
+  border: 1px solid #c7c5c5;
 }
 .order-card:hover {
   box-shadow: 0 0 20px #c7c5c5;
@@ -820,7 +824,7 @@ this.showChooseInvoice=false;
   width: 141px;
   height: 141px;
   margin: 0px 0px 0px 10px;
-  object-fit:cover
+  object-fit: cover;
 }
 .order-picture {
   height: 162px;
@@ -843,7 +847,7 @@ this.showChooseInvoice=false;
   text-align: left;
   margin: 5px 10px 0px 0px;
   font-size: 13px;
-  color: #F56C6C;
+  color: #f56c6c;
 }
 .order-pay {
   height: 50px;
@@ -858,45 +862,17 @@ this.showChooseInvoice=false;
   font-weight: bold;
 }
 .order-operation {
-  padding: 10px;
+  padding: 8px 10px 0px 10px;
   text-align: right;
 }
 .order-page {
   text-align: center;
   margin: 30px 0px 10px 0px;
 }
-
 table {
   text-align: center;
   margin: 0px auto;
 }
-.invoice-show-table-th {
-  height: 60px;
-}
-.invoice-show-table-td-info1 {
-  height: 40px;
-  width: 150px;
-}
-.invoice-show-table-td-info2 {
-  height: 40px;
-  width: 100px;
-}
-.invoice-show-table-td-info3 {
-  height: 80px;
-}
-.invoice-show-table-td-input2 {
-  width: 250px;
-}
-.invoice-show-table-td-input3 {
-  width: 150px;
-  word-break: break-all;
-}
-input {
-  width: 100%;
-  padding: 0px 10px;
-  text-align: center;
-}
-.info-edit,
 .info-save {
   margin: 20px 0px 0px 0px;
   text-align: center;
@@ -912,7 +888,6 @@ input {
   padding: 10px 0px 10px 0px;
   font-size: 20px;
   text-align: left;
-
   border-left: 2px solid #409eff;
   line-height: 40px;
   padding-left: 15px;
@@ -923,7 +898,6 @@ input {
 }
 .pay-online-body {
   width: 900px;
-
   margin: 10px 20px 0px 20px;
   padding: 20px;
 }
@@ -953,7 +927,7 @@ input {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
-  margin-top:30px;
+  margin-top: 30px;
 }
 .choose-zhifubao {
   border-bottom: solid 1px #eee;
@@ -979,7 +953,7 @@ input {
   width: 860px;
   margin: 0px -40px 0px 0px;
   font-size: 14px;
-  color: #E6A23C;
+  color: #e6a23c;
 }
 .pay-zhifubao {
   margin: 25px 0px 80px 0px;
@@ -1003,11 +977,6 @@ input {
 .f-fr {
   float: right;
 }
-.pay-meal-body {
-  height: 88px;
-  border-bottom: 1px solid #eee;
-  margin: 20px 0px 0px 0px;
-}
 .meal_body {
   margin-left: 12px;
   font-size: 12px;
@@ -1018,10 +987,6 @@ input {
   color: #333;
   line-height: 19px;
   text-decoration: none;
-}
-.meal_body .time {
-  margin-top: 8px;
-  color: #999;
 }
 .meal_body .promotion {
   margin-top: 28px;
@@ -1045,12 +1010,7 @@ input {
   font-size: 14px;
 }
 .agreement-con {
-
   text-align: left;
-}
-.agreement {
-  cursor: pointer;
-  color: #49af4f;
 }
 .pay-meal-body img {
   width: 120px;
@@ -1072,11 +1032,6 @@ input {
   border-radius: 2px;
   text-align: center;
 }
-
-.pay-price-btn_price {
-  text-align: right;
-  margin-bottom: 5px;
-}
 .pay-price-btn_price .price_account {
   font-size: 24px;
   font-weight: 600;
@@ -1086,11 +1041,9 @@ input {
   font-weight: 300;
   font-size: 14px;
 }
-
-
 .offline-context p {
   font-family: "微软雅黑";
-  font-size:12px;
+  font-size: 12px;
   padding: 0px;
 }
 .offline-notice {
@@ -1099,23 +1052,9 @@ input {
   padding: 0px;
   margin: 0px;
 }
-.pay-online-check h4 {
-  color: #666666;
-  display: inline-block;
-  line-height: 24px;
-  height: 24px;
-  font-size: 14px;
-  position: relative;
-  top: -1px;
-  margin-left: 20px;
-}
 .pay-online-check h1 {
   display: inline-block;
   font-size: 18px;
-}
-.sign-submit {
-  text-align: center;
-  margin: 20px 0px 0px 0px;
 }
 #contact {
   text-align: center;
@@ -1137,17 +1076,15 @@ input {
   text-align: left;
   padding: 0px 0px 0px 115px;
 }
-.deleteOrderNotice {
-  text-align: center;
-}
 .delete-order-operation {
-  margin:30px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
-.deleteOrderNotice,.checkAgain {
+.deleteOrderNotice,
+.checkAgain {
   text-align: center;
 }
 .noOrder {
-  margin: 120px 0px 0px 0px; 
+  margin: 120px 0px 0px 0px;
   text-align: center;
 }
 .no-order-content {
@@ -1155,20 +1092,19 @@ input {
   color: #999;
   font-size: 18px;
 }
-.pay-price-btn_price2 {
-  text-align: right;
-  margin: 28px 0px 0px 0px;
-}
 .pay-weixin {
-  margin: 0px 0px 15px 0px;
+  margin: 0px 0px 0px 0px;
+}
+.pay-bank {
+  margin: 15px 0px 0px 0px;
 }
 .margin_height {
-  font-size:8px;
+  font-size: 8px;
   line-height: 8px;
-  height:8px;
+  height: 8px;
 }
 .bank_pay {
-  margin:28px 0px 0px 0px;
+  margin: 28px 0px 0px 0px;
 }
 .invoice_body {
   width: 310px;
@@ -1177,20 +1113,8 @@ input {
   border-radius: 8px;
   box-shadow: 0px 0px 12px #c7c5c5;
   cursor: pointer;
- 
 }
 .invoice_body:hover {
-  box-shadow: 0px 0px 12px #807e7e;
-}
-.invoice_body_add {
-  width: 310px;
-  height: 146px;
-  margin: 20px auto 0px auto;
-  border-radius: 8px;
-  border: 1px dashed #c7c5c5;
-  cursor: pointer;
-}
-.invoice_body_add:hover {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .pupiao {
@@ -1239,29 +1163,6 @@ input {
   font-weight: bold;
   font-size: 13px;
 }
-.el-icon-delete {
-  color: #fff;
-  font-size: 16px;
-}
-.el-icon-delete:hover {
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-.el-icon-edit {
-  color: #fff;
-  font-size: 16px;
-  margin: 0px 15px 0px 0px;
-}
-.el-icon-edit:hover {
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-.invoice_delete {
-  position: absolute;
-  margin: 110px 0px 0px 240px;
-}
 .invoice_picture {
   position: absolute;
   width: 40px;
@@ -1275,234 +1176,240 @@ input {
 }
 .choose_this {
   position: absolute;
-border: 25px solid rgba(36, 46, 104, 0.6);
-border-left: 25px solid transparent;  
-border-top: 25px solid transparent; 
-border-bottom-right-radius: 8px; 
-margin:96px 0px 0px 260px;
-width: 0;  
+  border: 25px solid rgba(36, 46, 104, 0.6);
+  border-left: 25px solid transparent;
+  border-top: 25px solid transparent;
+  border-bottom-right-radius: 8px;
+  margin: 96px 0px 0px 260px;
+  width: 0;
 }
 .choose_icon {
   position: absolute;
 }
 .el-icon-check {
-  color:#fff;
-  margin:119px 0px 0px 282px;
+  color: #fff;
+  margin: 119px 0px 0px 282px;
   font-weight: bold;
   font-size: 22px;
 }
 .user_choose_invoice {
-  padding:0px 45px;
+  padding: 0px 45px;
 }
-.td11{
-  width:40px;
+.td11 {
+  width: 40px;
   height: 100px;
 }
-.td11 div{
- font-family: "kaiti";
- padding:10px;
- line-height: 20px;
+.td11 div {
+  font-family: "kaiti";
+  padding: 10px;
+  line-height: 20px;
 }
-.td12{
-  width:105px;
+.td12 {
+  width: 105px;
   height: 100px;
   border-right: 0px !important;
 }
-.td12 div{
- margin:7px 0px 0px 0px;
+.td12 div {
+  margin: 7px 0px 0px 0px;
 }
-.td12 p{
- font-family: "kaiti";
- margin:0px 0px 8px 0px;
+.td12 p {
+  font-family: "kaiti";
+  margin: 0px 0px 8px 0px;
 }
-.td12 span{
- font-family: "kaiti";
+.td12 span {
+  font-family: "kaiti";
 }
 .td12_span1 {
-  margin:0px 56px 0px 0px;
-}
-.td12_span3 {
-  margin:0px 4.7px 0px 0px;
+  margin: 0px 56px 0px 0px;
 }
 .td13 {
-  width:380px;
+  width: 380px;
   height: 100px;
   border-left: 0px !important;
 }
-.td13 div{
- margin:7px 0px 0px 0px;
+.td13 div {
+  margin: 7px 0px 0px 0px;
 }
 .td13 p {
-  margin:0px 0px 8px 0px;
+  margin: 0px 0px 8px 0px;
   font-family: "kaiti";
   text-align: left;
-  color:#000;
+  color: #000;
 }
 .td14 {
-  width:30px;
+  width: 30px;
   height: 100px;
 }
-.td14 div{
+.td14 div {
   font-family: "kaiti";
- padding:10px;
- line-height: 20px;
+  padding: 10px;
+  line-height: 20px;
 }
 .td15 {
-  width:350px;
+  width: 350px;
   height: 100px;
 }
 .td21 {
-  width:245px;
+  width: 245px;
   height: 32px;
   border-bottom: 0px !important;
 }
-.td21 p,.td22 p,.td23 p,.td24 p,.td25 p,.td26 p,.td27 p,.td28 p,.td41 p,.td51 p,.td53 p{
+.td21 p,
+.td22 p,
+.td23 p,
+.td24 p,
+.td25 p,
+.td26 p,
+.td27 p,
+.td28 p,
+.td41 p,
+.td51 p,
+.td53 p {
   font-family: "kaiti";
 }
 .td22 {
-  width:115px;
+  width: 115px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td23 {
-  width:60px;
+  width: 60px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td24 {
-  width:105px;
+  width: 105px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td25 {
-  width:110px;
+  width: 110px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td26 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td27 {
-  width:50px;
+  width: 50px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td28 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-bottom: 0px !important;
 }
 .td31 {
-  width:245px;
+  width: 245px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td32 {
-  width:115px;
+  width: 115px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td33 {
-  width:60px;
+  width: 60px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td34 {
-  width:105px;
+  width: 105px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td35 {
-  width:110px;
+  width: 110px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td36 {
-  width:125px;
+  width: 125px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
   vertical-align: top;
 }
-.td36 p{
+.td36 p {
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
 .td37 {
-  width:50px;
+  width: 50px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td38 {
-  width:125px;
+  width: 125px;
   height: 150px;
   border-bottom: 0px !important;
   border-top: 0px !important;
 }
 .td41 {
-  width:245px;
+  width: 245px;
   height: 32px;
   border-top: 0px !important;
 }
 .td42 {
-  width:115px;
+  width: 115px;
   height: 32px;
   border-top: 0px !important;
 }
 .td43 {
-  width:60px;
+  width: 60px;
   height: 32px;
   border-top: 0px !important;
 }
 .td44 {
-  width:105px;
+  width: 105px;
   height: 32px;
   border-top: 0px !important;
 }
 .td45 {
-  width:110px;
+  width: 110px;
   height: 32px;
   border-top: 0px !important;
 }
 .td46 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-top: 0px !important;
 }
-.td46 p{
+.td46 p {
   font-family: "kaiti";
-  color:#000;
-
+  color: #000;
 }
 .td47 {
-  width:50px;
+  width: 50px;
   height: 32px;
   border-top: 0px !important;
 }
 .td48 {
-  width:125px;
+  width: 125px;
   height: 30px;
   border-top: 0px !important;
 }
 .td51 {
-  width:245px;
+  width: 245px;
   height: 32px;
 }
 .td52 {
-  width:390px;
+  width: 390px;
   height: 32px;
   border-right: 0px !important;
 }
 .td53 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-left: 0px !important;
   border-right: 0px !important;
@@ -1514,97 +1421,104 @@ width: 0;
   border-right: 0px !important;
 }
 .td55 {
-  width:125px;
+  width: 125px;
   height: 32px;
   border-left: 0px !important;
 }
-.td55 p{
+.td55 p {
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
-.pupiao_table,.pupiao_table tr,.pupiao_table td{
-  border: 1px solid #67C23A;
+.pupiao_table,
+.pupiao_table tr,
+.pupiao_table td {
+  border: 1px solid #67c23a;
 }
-.pupiao_table{
-  color: #67C23A;
+.pupiao_table {
+  color: #67c23a;
 }
-.zhuanyong_table,.zhuanyong_table tr,.zhuanyong_table td{
-  border: 1px solid #409EFF;
+.zhuanyong_table,
+.zhuanyong_table tr,
+.zhuanyong_table td {
+  border: 1px solid #409eff;
 }
-.zhuanyong_table{
-  color: #409EFF;
+.zhuanyong_table {
+  color: #409eff;
 }
-.dianzi_table,.dianzi_table tr,.dianzi_table td{
-  border: 1px solid #E6A23C;
+.dianzi_table,
+.dianzi_table tr,
+.dianzi_table td {
+  border: 1px solid #e6a23c;
 }
 .dianzi_table {
-   color: #E6A23C;
+  color: #e6a23c;
 }
 .td_money {
-  margin:0px 5px 0px 0px;
+  margin: 0px 5px 0px 0px;
 }
 .info_left {
-  margin:0px 10px 0px 0px;
+  margin: 0px 10px 0px 0px;
   font-family: "kaiti";
-  color:#000;
+  color: #000;
 }
 .pupiao_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#67C23A;
+  color: #67c23a;
   font-weight: bold;
 }
 .zhuanyong_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#409EFF;
+  color: #409eff;
   font-weight: bold;
 }
 .dianzi_title {
   font-family: "kaiti";
   font-size: 26px;
-  color:#E6A23C;
+  color: #e6a23c;
   font-weight: bold;
 }
 .pupiao_underline {
-  width:182px;
-   height:10px;
-  border-top:2px solid #67C23A;
-   border-bottom:2px solid #67C23A;
-  margin:20px auto;
+  width: 182px;
+  height: 10px;
+  border-top: 2px solid #67c23a;
+  border-bottom: 2px solid #67c23a;
+  margin: 20px auto;
 }
 .zhuanyong_underline {
-  width:182px;
-   height:10px;
-  border-top:2px solid #409EFF;
-  border-bottom:2px solid #409EFF;
-  margin:20px auto;
+  width: 182px;
+  height: 10px;
+  border-top: 2px solid #409eff;
+  border-bottom: 2px solid #409eff;
+  margin: 20px auto;
 }
 .dianzi_underline {
-  width:236px;
-   height:10px;
-  border-top:2px solid #E6A23C;
-  border-bottom:2px solid #E6A23C;
-  margin:20px auto;
+  width: 236px;
+  height: 10px;
+  border-top: 2px solid #e6a23c;
+  border-bottom: 2px solid #e6a23c;
+  margin: 20px auto;
 }
 .choose_invoice_type {
-  width:120px;
-  margin:0px 0px 0px 5px;
+  width: 120px;
+  margin: 0px 0px 0px 5px;
 }
 .choose_head {
   text-align: left;
-  margin:0px 0px 30px 65px;
+  margin: 0px 0px 30px 65px;
 }
 </style>
 <style>
 #payNow .el-dialog__header {
-    padding: 0px 20px 10px;
+  padding: 0px 20px 10px;
 }
 #payNow .el-dialog__body {
-    padding: 0px 20px 30px 20px;
-    color: #606266;
-    font-size: 14px;
+  padding: 0px 20px 30px 20px;
+  color: #606266;
+  font-size: 14px;
 }
-
+#pay_choose .el-collapse-item__content {
+  padding-bottom: 15px;
+}
 </style>
-

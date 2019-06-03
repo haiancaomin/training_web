@@ -9,30 +9,22 @@
     <div class="deleteCheck_dialog">
       <el-dialog :visible.sync="deleteCheck" width="300px">
         <p class="check_contnt">确认删除？</p>
-        <el-button type="primary" @click="deleteInvoice(deleteInvoiceId)" >确认</el-button>
-        <el-button type="primary" plain @click="deleteCheck=false" >取消</el-button>
+        <el-button type="primary" @click="deleteInvoice(deleteInvoiceId)">确认</el-button>
+        <el-button type="primary" plain @click="deleteCheck=false">取消</el-button>
       </el-dialog>
     </div>
     <div v-if="showInvoice">
       <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
-        <div
-          class="invoice_body pupiao"
-          
-          @click="showInvoiceDetail(invoiceItem[0])"
-        >
+        <div class="invoice_body pupiao" @click="showInvoiceDetail(invoiceItem[0])">
           <div class="invoice_picture">
             <img src="../../assets/fapiao.png">
           </div>
-         
           <div class="invoice_delete">
-            <!-- <span class="el-icon-edit" @click.stop="editInvoice(invoiceItem[0])"></span> -->
             <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
           </div>
           <div class="invoice_title">{{invoiceItem[1]}}</div>
           <div class="invoice_account">银行账号：{{invoiceItem[7]}}</div>
           <div class="invoice_type">税号：{{invoiceItem[3]}}</div>
-          
-          
         </div>
       </el-col>
       <el-col :span="12">
@@ -137,7 +129,6 @@
                 class="person-add-input"
               ></el-input>
             </td>
-            
           </tr>
         </table>
         <div class="info-edit">
@@ -175,9 +166,7 @@
         <tr>
           <td class="invoice-show-table-td-info1">公司账号</td>
           <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
-          
         </tr>
-
       </table>
       <div class="info-save">
         <el-button type="primary" @click="showEditInvoice" class="save_new_invoice">编辑</el-button>
@@ -192,10 +181,8 @@ export default {
   name: "PersonalCenterInvoiceShow",
   data() {
     return {
-      focusBoolean: true,
       invoiceList: [],
       showInvoice: true,
-      countFocus: 0,
       addNewInvoice: false,
       InvoiceDetail: false,
       companyName: "",
@@ -205,11 +192,9 @@ export default {
       bank: "",
       phone: "",
       account: "",
-      type: "",
-    
-      deleteCheck:false,
+      deleteCheck: false,
       deleteInvoiceId: "",
-      ifEditInvoice:false,
+      ifEditInvoice: false,
       editInvoiceId: ""
     };
   },
@@ -223,18 +208,18 @@ export default {
       })
         .then(res => {
           console.log(res.data.data);
-            this.companyName = res.data.data.company;
-            this.companyAddress = res.data.data.address;
-            this.taxerID = res.data.data.taxpayerno;
-            this.contactPerson = res.data.data.person;
-            this.bank = res.data.data.bank;
-            this.phone = res.data.data.mobilephone;
-            this.account = res.data.data.account;
-           
-            this.showInvoice = false;
-            this.addNewInvoice = false;
-            this.InvoiceDetail = true;
-            this.editInvoiceId = invoiceId;
+          this.companyName = res.data.data.company;
+          this.companyAddress = res.data.data.address;
+          this.taxerID = res.data.data.taxpayerno;
+          this.contactPerson = res.data.data.person;
+          this.bank = res.data.data.bank;
+          this.phone = res.data.data.mobilephone;
+          this.account = res.data.data.account;
+
+          this.showInvoice = false;
+          this.addNewInvoice = false;
+          this.InvoiceDetail = true;
+          this.editInvoiceId = invoiceId;
         })
         .catch(function(err) {
           console.log(err);
@@ -243,57 +228,31 @@ export default {
     showEditInvoice() {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${this.editInvoiceId}`
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?invoiceid=${
+          this.editInvoiceId
+        }`
       })
         .then(res => {
-            this.companyName = res.data.data.company;
-            this.companyAddress = res.data.data.address;
-            this.taxerID = res.data.data.taxpayerno;
-            this.contactPerson = res.data.data.person;
-            this.bank = res.data.data.bank;
-            this.phone = res.data.data.mobilephone;
-            this.account = res.data.data.account;
-            
-            this.showInvoice = false;
-            this.addNewInvoice = true;
-            this.ifEditInvoice = true;
-            this.InvoiceDetail = false;
-            this.editInvoiceId = invoiceId;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    editInvoice(invoiceId) {
-      this.$ajax({
-        method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${invoiceId}`
-      })
-        .then(res => {
-            this.companyName = res.data.data.company;
-            this.companyAddress = res.data.data.address;
-            this.taxerID = res.data.data.taxpayerno;
-            this.contactPerson = res.data.data.person;
-            this.bank = res.data.data.bank;
-            this.phone = res.data.data.mobilephone;
-            this.account = res.data.data.account;
-            
-            this.showInvoice = false;
-            this.addNewInvoice = true;
-            this.ifEditInvoice = true;
-            this.InvoiceDetail = false;
-            this.editInvoiceId = invoiceId;  
+          this.companyName = res.data.data.company;
+          this.companyAddress = res.data.data.address;
+          this.taxerID = res.data.data.taxpayerno;
+          this.contactPerson = res.data.data.person;
+          this.bank = res.data.data.bank;
+          this.phone = res.data.data.mobilephone;
+          this.account = res.data.data.account;
+
+          this.showInvoice = false;
+          this.addNewInvoice = true;
+          this.ifEditInvoice = true;
+          this.InvoiceDetail = false;
+          this.editInvoiceId = invoiceId;
         })
         .catch(function(err) {
           console.log(err);
         });
     },
     deleteCheckFun(invoiceId) {
-      this.deleteCheck= true;
+      this.deleteCheck = true;
       this.deleteInvoiceId = invoiceId;
     },
     saveNoInvoice() {
@@ -361,7 +320,7 @@ export default {
           type: "error",
           center: true
         });
-      } else if(!this.ifEditInvoice){
+      } else if (!this.ifEditInvoice) {
         this.$ajax({
           method: "post",
           url: `${
@@ -390,14 +349,14 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
-            
+
             this.getInvoiceList();
           })
           .catch(function(err) {
             console.log(err);
           });
-      } else if(this.ifEditInvoice) {
-          this.$ajax({
+      } else if (this.ifEditInvoice) {
+        this.$ajax({
           method: "post",
           url: `${
             this.baseURL
@@ -414,10 +373,10 @@ export default {
           .then(res => {
             this.$message({
               message: "修改成功！",
-              type: 'success',
+              type: "success",
               center: true
             });
-             this.showInvoice = true;
+            this.showInvoice = true;
             this.addNewInvoice = false;
             this.InvoiceDetail = false;
             this.companyName = "";
@@ -427,7 +386,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
-            
+
             this.ifEditInvoice = false;
             this.getInvoiceList();
           })
@@ -467,14 +426,14 @@ export default {
       this.addNewInvoice = false;
       this.InvoiceDetail = false;
       this.companyName = "";
-            this.companyAddress = "";
-            this.taxerID = "";
-            this.contactPerson = "";
-            this.bank = "";
-            this.phone = "";
-            this.account = "";
-            
-            this.ifEditInvoice = false;
+      this.companyAddress = "";
+      this.taxerID = "";
+      this.contactPerson = "";
+      this.bank = "";
+      this.phone = "";
+      this.account = "";
+
+      this.ifEditInvoice = false;
     },
     deleteInvoice(invoiceid) {
       this.$ajax({
@@ -485,13 +444,13 @@ export default {
       })
         .then(res => {
           this.$message({
-              message: "删除成功！",
-              type: "success",
-              center: true
-            });
+            message: "删除成功！",
+            type: "success",
+            center: true
+          });
           console.log(res.data);
           this.getInvoiceList();
-          this.deleteCheck= false;
+          this.deleteCheck = false;
         })
         .catch(function(err) {
           console.log(err);
@@ -500,7 +459,7 @@ export default {
   },
   mounted() {
     this.getInvoiceList();
-  },
+  }
 };
 </script>
 
@@ -528,20 +487,12 @@ table {
   height: 40px;
   width: 100px;
 }
-.invoice-show-table-td-info3 {
-  height: 80px;
-}
 .invoice-show-table-td-input2 {
   width: 250px;
 }
 .invoice-show-table-td-input3 {
   width: 150px;
   word-break: break-all;
-}
-input {
-  width: 100%;
-  padding: 0px 10px;
-  text-align: center;
 }
 span {
   color: red;
@@ -561,7 +512,6 @@ span {
   padding: 10px 0px 10px 0px;
   font-size: 20px;
   text-align: left;
-
   border-left: 2px solid #409eff;
   line-height: 40px;
   padding-left: 15px;
@@ -599,7 +549,11 @@ span {
   background: -webkit-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
   background: -o-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
   background: -moz-linear-gradient(to right, #67c23a, rgb(67, 197, 2));
-  background: linear-gradient(to right, rgba(36, 46, 104, 0.8), rgba(36, 46, 104, 0.9));
+  background: linear-gradient(
+    to right,
+    rgba(36, 46, 104, 0.8),
+    rgba(36, 46, 104, 0.9)
+  );
 }
 .gongpiao {
   background: -webkit-linear-gradient(to right, #409eff, rgb(0, 128, 255));
@@ -630,8 +584,6 @@ span {
   color: #fff;
   font-size: 12px;
   font-weight: bold;
-  /* border: 1px solid #fff;
-  padding: 3px; */
 }
 .invoice_account {
   position: absolute;
@@ -646,16 +598,6 @@ span {
   margin: 0px 0px 0px 25px;
 }
 .el-icon-delete:hover {
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-.el-icon-edit {
-  color: #fff;
-  font-size: 14px;
-  margin: 0px 5px 0px 0px;
-}
-.el-icon-edit:hover {
   color: #fff;
   cursor: pointer;
   font-weight: bold;
@@ -687,27 +629,17 @@ span {
 .invoice_body_add:hover .el-icon-plus {
   color: #807e7e;
 }
-.choose_type_notice {
-  margin: 20px 0px 20px 20px;
-}
 .save_new_invoice {
-  padding:12px 22px;
-  margin:0px 80px 0px 0px;
+  padding: 12px 22px;
+  margin: 0px 80px 0px 0px;
 }
 .cancel_new_invoice {
-  padding:12px 22px;
+  padding: 12px 22px;
 }
 .deleteCheck_dialog {
   text-align: center;
 }
 .check_contnt {
-  margin:0px 0px 25px 0px;
+  margin: 0px 0px 25px 0px;
 }
 </style>
-<style>
-#otherContent {
-  height: 80px;
-}
-</style>
-
-

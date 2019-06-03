@@ -5,8 +5,6 @@
         <el-menu
           :default-active="$route.path"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           :unique-opened="true"
           router
         >
@@ -51,11 +49,10 @@ export default {
     this.getBaseList("0", this.showDefault);
     this.getBaseList("1");
   },
-
   watch: {
     $route(to, from) {
-      if(to.path=='/base'){
-        this.showDefault()
+      if (to.path == "/base") {
+        this.showDefault();
       }
     }
   },
@@ -85,12 +82,6 @@ export default {
       if (id == undefined) {
         this.$router.push({ path: `/base/overview/${this.baseList1[0].bid}` });
       }
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
     }
   }
 };
@@ -107,4 +98,3 @@ export default {
   width: 300px;
 }
 </style>
-

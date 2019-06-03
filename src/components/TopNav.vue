@@ -144,7 +144,6 @@
         :default-active="defaultActive"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         text-color="#fff"
         active-text-color="#ffd04b"
         router
@@ -236,32 +235,30 @@ export default {
             }&userid=${userid}`
           })
             .then(res => {
-              if(res.data.data == "0") {
+              if (res.data.data == "0") {
                 this.$message({
-                message: "您的意见我们已经收到，谢谢！",
-                type: "success",
-                center: true
-              });
-              this.showBoardDialog = false;
-              this.textarea = "";
-              this.mobile = "";
-              this.fileUid = "";
-              this.$refs.upload.clearFiles();
-              
-              } else if(res.data.data == "2") {
+                  message: "您的意见我们已经收到，谢谢！",
+                  type: "success",
+                  center: true
+                });
+                this.showBoardDialog = false;
+                this.textarea = "";
+                this.mobile = "";
+                this.fileUid = "";
+                this.$refs.upload.clearFiles();
+              } else if (res.data.data == "2") {
                 this.$message({
-                message: "您今天提交的次数太多了，请明天再试！",
-                type: "warning",
-                center: true
-              });
+                  message: "您今天提交的次数太多了，请明天再试！",
+                  type: "warning",
+                  center: true
+                });
               } else {
                 this.$message({
-                message: "未知错误！",
-                type: "error",
-                center: true
-              });
+                  message: "未知错误！",
+                  type: "error",
+                  center: true
+                });
               }
-              
             })
             .catch(function(err) {
               console.log(err);
@@ -362,13 +359,6 @@ export default {
         this.userName = userInfo.name;
       }
     },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath, this.defaultActive);
-    },
-    clickRegister: function() {
-      this.dialogVisible = false;
-      this.regDialogVisible = true;
-    },
     clickLogin: function() {
       this.regDialogVisible = false;
       this.dialogVisible = true;
@@ -398,7 +388,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-header {
   background: rgba(36, 46, 104, 0.8);
@@ -411,7 +400,6 @@ export default {
   z-index: 99;
   height: 80px !important;
 }
-
 .logo {
   float: left;
 }
@@ -462,7 +450,6 @@ export default {
   color: rgb(255, 208, 75);
   margin-left: 10px;
 }
-
 .message_board {
   width: 62px;
   height: 223px;
@@ -557,7 +544,6 @@ export default {
   position: fixed;
   margin: 302px 72px 0px 0px;
   z-index: 102;
-
   right: 0;
 }
 .check_erweima {

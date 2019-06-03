@@ -1,5 +1,12 @@
 <template>
   <div id="PersonalCenterPersonInfo">
+    <el-dialog :visible.sync="deleteCheckDialog" width="300px" class="deleteCheck_dialog">
+      <p>确认删除吗？</p>
+      <div class="delete_check_operation">
+        <el-button type="primary" @click="deletePerson">确认</el-button>
+        <el-button type="primary" plain @click="deleteCheckDialog=false">取消</el-button>
+      </div>
+    </el-dialog>
     <el-dialog title="人员信息修改" :visible.sync="showEditDia" width="600px" center>
       <div class="edit-body">
         <el-form
@@ -35,19 +42,19 @@
             </el-input>
           </el-form-item>
 
-           <el-form-item prop="education">
-          <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
-            <el-option label="小学及以下" value="小学及以下"></el-option>
-            <el-option label="初中" value="初中"></el-option>
-            <el-option label="中专" value="中专"></el-option>
-            <el-option label="高中" value="高中"></el-option>
-            <el-option label="大专" value="大专"></el-option>
-            <el-option label="本科" value="本科"></el-option>
-            <el-option label="硕士" value="硕士"></el-option>
-            <el-option label="博士及以上" value="博士及以上"></el-option>
-            <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
-          </el-select>
-        </el-form-item>
+          <el-form-item prop="education">
+            <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
+              <el-option label="小学及以下" value="小学及以下"></el-option>
+              <el-option label="初中" value="初中"></el-option>
+              <el-option label="中专" value="中专"></el-option>
+              <el-option label="高中" value="高中"></el-option>
+              <el-option label="大专" value="大专"></el-option>
+              <el-option label="本科" value="本科"></el-option>
+              <el-option label="硕士" value="硕士"></el-option>
+              <el-option label="博士及以上" value="博士及以上"></el-option>
+              <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
+            </el-select>
+          </el-form-item>
 
           <el-form-item prop="cardno">
             <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
@@ -66,9 +73,6 @@
               <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
             </el-input>
           </el-form-item>
-
-         
-
           <el-form-item>
             <div class="sign-submit">
               <el-button type="primary" @click="submitNewInfo('ruleForm')" class="operation-btn">确认</el-button>
@@ -93,7 +97,14 @@
       </el-form-item>
     </el-form>
 
-    <el-table :data="tableData" border max-height="450" stripe v-loading="loading" style="width: 700px">
+    <el-table
+      :data="tableData"
+      border
+      max-height="450"
+      stripe
+      v-loading="loading"
+      style="width: 700px"
+    >
       <el-table-column label="序号" type="index" width="50"></el-table-column>
       <el-table-column prop="create_date" label="录入时间" sortable width="160"></el-table-column>
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
@@ -113,7 +124,12 @@
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="editPerson(scope.row.empid)">编辑</el-button>
-          <el-button type="text" size="small" prop="empid" @click="deletePerson(scope.row.empid)">删除</el-button>
+          <el-button
+            type="text"
+            size="small"
+            prop="empid"
+            @click="deletePersonClick(scope.row.empid)"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -126,8 +142,8 @@ export default {
   data() {
     return {
       loading: true,
-      tableDataLength: 0,
       showEditDia: false,
+      deleteCheckDialog: false,
       searchKey: "",
       ruleForm1: {
         keyWord: ""
@@ -175,7 +191,7 @@ export default {
           { min: 1, max: 20, message: "长度在 1 到 20个字符", trigger: "blur" }
         ]
       },
-      tableData: [{}]
+      tableData: []
     };
   },
   methods: {
@@ -219,18 +235,18 @@ export default {
               this.ruleForm.sex
             },age:'${this.ruleForm.age}',worktype:'${
               this.ruleForm.worktype
-            }',education:'${
-              this.ruleForm.education
-            }',cardno:'${this.ruleForm.cardno}',phone:'${
-              this.ruleForm.phone
-            }',address:'${this.ruleForm.address}'}&userid=${userid}`
+            }',education:'${this.ruleForm.education}',cardno:'${
+              this.ruleForm.cardno
+            }',phone:'${this.ruleForm.phone}',address:'${
+              this.ruleForm.address
+            }'}&userid=${userid}`
           })
             .then(res => {
               this.showEditDia = false;
               this.getPersonInfo();
               this.$message({
                 message: "修改成功！",
-                type: 'success',
+                type: "success",
                 center: true
               });
             })
@@ -243,26 +259,29 @@ export default {
         }
       });
     },
-    deletePerson(empid) {
+    deletePersonClick(empid) {
+      this.deleteEmPID = empid;
+      this.deleteCheckDialog = true;
+    },
+    deletePerson() {
       this.$ajax({
         method: "post",
         url: `${
           this.baseURL
-        }/zjsxpt/employee_deleteEmployeeById.do?employeeId=${empid}`
+        }/zjsxpt/employee_deleteEmployeeById.do?employeeId=${this.deleteEmPID}`
       })
         .then(res => {
           this.$message({
             message: "删除成功！",
-            type: 'success',
+            type: "success",
             center: true
           });
-          console.log("delete success!");
+          this.deleteCheckDialog = false;
           this.getPersonInfo();
         })
         .catch(function(err) {
           console.log(err);
         });
-      
     },
     getPersonInfo() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -370,6 +389,12 @@ export default {
   margin: 0 auto;
   width: 358px;
 }
+.deleteCheck_dialog {
+  text-align: center;
+}
+.delete_check_operation {
+  margin-top: 40px;
+}
 @font-face {
   font-family: "iconfont"; /* project id 1131189 */
   src: url("//at.alicdn.com/t/font_1131189_b13898ksm7.eot");
@@ -402,5 +427,3 @@ export default {
   text-align: center;
 }
 </style>
-
-

@@ -3,13 +3,7 @@
     <el-dialog title="账号登录" :visible.sync="logshow" width="500px" @closed="closeDialog">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" id="loginForm">
         <el-form-item prop="name">
-          <el-input
-            placeholder="请输入用户名/手机号"
-            v-model="ruleForm.name"
-            name="name"
-            id="usernameFocus"
-            auto-complete="on"
-          >
+          <el-input placeholder="请输入用户名/手机号" v-model="ruleForm.name" name="name" id="usernameFocus">
             <i slot="prefix" class="iconfont">&#xe614;</i>
           </el-input>
         </el-form-item>
@@ -17,10 +11,6 @@
           <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <!-- <div class="input-icon" @click="changeType">
-            <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
-            <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
-          </div> -->
         </el-form-item>
 
         <el-form-item prop="inputVerificationCode" v-show="errorCount>2">
@@ -60,16 +50,13 @@ import UserRegister from "@/components/UserRegister";
 export default {
   data() {
     return {
-      beginClientX: 0 /*距离屏幕左端距离*/,
-      mouseMoveStata: false /*触发拖动状态  判断*/,
-      maxwidth: 320 /*拖动最大宽度，依据滑块宽度算出来的*/,
+      beginClientX: 0,
+      mouseMoveStata: false,
+      maxwidth: 320,
       checkWidth: 0,
-      confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
+      confirmWords: "拖动滑块完成拼图",
       confirmSuccess: false,
       countFocus: 0,
-
-      showNewPassword: false,
-      inputType: "password",
       logshow: false,
       errorCount: 0,
       ruleForm: {
@@ -92,6 +79,9 @@ export default {
     dialogVisible: function(val) {
       this.logshow = val;
       if (!val) {
+        this.ruleForm.name = "";
+        this.ruleForm.password = "";
+        this.$refs["ruleForm"].clearValidate();
         this.confirmSuccess = false;
         if (
           document.getElementsByClassName("handler")[0] &&
@@ -145,7 +135,7 @@ export default {
     },
     mousedownFn: function(e) {
       if (!this.confirmSuccess) {
-        e.preventDefault && e.preventDefault(); //阻止文字选中等 浏览器默认事件
+        e.preventDefault && e.preventDefault();
         this.mouseMoveStata = true;
         this.beginClientX = e.clientX;
         document
@@ -155,7 +145,7 @@ export default {
       document
         .getElementsByTagName("html")[0]
         .addEventListener("mouseup", this.moseUpFn);
-    }, //mousedoen 事件
+    },
     successFunction() {
       if (this.errorCount > 2) {
         this.confirmSuccess = true;
@@ -181,7 +171,7 @@ export default {
         document.getElementsByClassName("drag_bg")[0].style.width =
           this.maxwidth + "px";
       }
-    }, //验证成功函数
+    },
     mouseMoveFn(e) {
       if (this.errorCount > 2) {
         if (this.mouseMoveStata) {
@@ -194,7 +184,7 @@ export default {
           }
         }
       }
-    }, //mousemove事件
+    },
     moseUpFn(e) {
       if (!this.confirmSuccess) {
         if (this.errorCount > 2) {
@@ -225,16 +215,6 @@ export default {
         }
       }
     },
-
-    // changeType() {
-    //   if (this.inputType == "text") {
-    //     this.inputType = "password";
-    //     this.showNewPassword = false;
-    //   } else {
-    //     this.inputType = "text";
-    //     this.showNewPassword = true;
-    //   }
-    // },
     closeDialog: function() {
       this.$emit("closed", false);
     },
@@ -259,7 +239,7 @@ export default {
                 if (res.data.data != false) {
                   this.$message({
                     message: "登录成功！",
-                    type: 'success',
+                    type: "success",
                     center: true
                   });
                   sessionStorage.setItem("user", JSON.stringify(res.data.data));
@@ -274,9 +254,10 @@ export default {
                 } else {
                   this.$message({
                     message: "用户名不存在或密码错误！",
-                    type: 'error',
+                    type: "error",
                     center: true
                   });
+                  this.errorCount++;
                 }
               })
               .catch(function(err) {
@@ -285,9 +266,10 @@ export default {
           } else {
             this.$message({
               message: "请拖动滑块完成拼图！",
-              type: 'error',
+              type: "error",
               center: true
             });
+            this.errorCount++;
           }
         } else {
           console.log("error submit!!");
@@ -316,31 +298,10 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 a {
   color: #42b983;
   text-decoration: none;
-}
-
-.el-row {
-  margin-bottom: 20px;
-}
-.el-col {
-  border-radius: 4px;
-}
-
-.bg-purple-light {
-  background: #e5e9f2;
-  padding: 20px 0px 20px 0px;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
 }
 .forgetpwd {
   color: darkgrey;
@@ -355,30 +316,11 @@ a {
 .User-Login {
   text-align: center;
 }
-
 .login-self {
   width: 358px;
   font-size: 18px;
   height: 44px;
 }
-.input-icon {
-  position: absolute;
-  font-size: 18px;
-  margin: -42px 0px 0px 320px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.el-icon-view {
-  font-size: 18px;
-}
-.input-icon:hover {
-  color: #409eff;
-  cursor: pointer;
-}
-
 .el-form {
   padding: 0px 50px;
 }
@@ -402,7 +344,6 @@ a {
   line-height: 44px;
   margin: 0px 0px 0px 2px;
 }
-
 .drag {
   position: relative;
   background-color: #e8e8e8;
@@ -460,5 +401,3 @@ a {
   height: 44px;
 }
 </style>
-
-

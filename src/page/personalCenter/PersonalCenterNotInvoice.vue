@@ -51,17 +51,14 @@
       </el-dialog>
 
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
-        
         <div class="user_choose_invoice" v-show="showChooseInvoice">
           <div class="choose_head">
             <span>请选择发票类型</span>
             <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
-            <el-option label="普通发票" value="0"></el-option>
-            <el-option label="专用发票" value="1"></el-option>
-            <el-option label="电子发票" value="2"></el-option>
-            
-           
-          </el-select>
+              <el-option label="普通发票" value="0"></el-option>
+              <el-option label="专用发票" value="1"></el-option>
+              <el-option label="电子发票" value="2"></el-option>
+            </el-select>
           </div>
           <div>
             <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
@@ -83,13 +80,12 @@
                 <div class="invoice_picture" v-if="selectInvoiceType=='2'">
                   <img src="../../assets/dianzi.png">
                 </div>
-                
 
                 <div class="invoice_title">{{invoiceItem[1]}}</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='0'">普通发票</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='1'">专用发票</div>
                 <div class="invoice_type" v-if="selectInvoiceType=='2'">电子发票</div>
-                
+
                 <div class="invoice_account">{{invoiceItem[3]}}</div>
               </div>
             </el-col>
@@ -356,10 +352,7 @@
         <div class="order-pay">
           <p class="order-pay-info">
             报名{{orderItem.personcount}}人，实付款：
-            <span class="order-payment">
-              <span class="td_money">¥</span>
-              {{orderItem.summoney}}
-            </span>
+            <span class="order-payment">¥{{orderItem.summoney}}</span>
           </p>
         </div>
         <div class="order-operation">
@@ -413,7 +406,7 @@ export default {
   name: "PersonalCenterNotInvoice",
   data() {
     return {
-      selectInvoiceType:"0",
+      selectInvoiceType: "0",
       chooseid: "",
       contact: false,
       schedule: false,
@@ -422,7 +415,6 @@ export default {
       orderlist: [],
       count: 0,
       invoiceList: [],
-      showEmpDia: false,
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1,
@@ -434,8 +426,6 @@ export default {
       bank: "",
       phone: "",
       account: "",
-    
-      invoiceid: "",
       orderMoney: "",
       checkAgain: false,
       orderID: "",
@@ -447,13 +437,13 @@ export default {
   },
   watch: {
     checkAgain: function(val) {
-      if (!val&&!this.dialogVisible) {
+      if (!val && !this.dialogVisible) {
         this.showChooseInvoiceDetail = false;
         this.chooseid = "";
       }
     },
     dialogVisible: function(val) {
-      if (!val&&!this.checkAgain) {
+      if (!val && !this.checkAgain) {
         this.showChooseInvoiceDetail = false;
         this.chooseid = "";
       }
@@ -476,7 +466,6 @@ export default {
           this.bank = res.data.data.bank;
           this.phone = res.data.data.mobilephone;
           this.account = res.data.data.account;
-          
         })
         .catch(function(err) {
           console.log(err);
@@ -633,7 +622,7 @@ export default {
   width: 600px;
   margin: 20px auto 0px auto;
   box-shadow: 0 0 6px #c7c5c5;
-  border: 1px solid #fff;
+  border: 1px solid #c7c5c5;
 }
 .order-card:hover {
   box-shadow: 0 0 20px #c7c5c5;
@@ -694,50 +683,21 @@ export default {
   font-weight: bold;
 }
 .order-operation {
-  padding: 10px;
+  padding: 8px 10px 0px 10px;
   text-align: right;
 }
 .order-page {
   text-align: center;
   margin: 30px 0px 10px 0px;
 }
-
 table {
   text-align: center;
   margin: 0px auto;
 }
-.invoice-show-table-th {
-  height: 60px;
-}
-.invoice-show-table-td-info1 {
-  height: 40px;
-  width: 150px;
-}
-.invoice-show-table-td-info2 {
-  height: 40px;
-  width: 100px;
-}
-.invoice-show-table-td-info3 {
-  height: 80px;
-}
-.invoice-show-table-td-input2 {
-  width: 250px;
-}
-.invoice-show-table-td-input3 {
-  width: 150px;
-  word-break: break-all;
-}
-input {
-  width: 100%;
-  padding: 0px 10px;
-  text-align: center;
-}
-.info-edit,
 .info-save {
   margin: 20px 0px 0px 0px;
   text-align: center;
 }
-
 .order-dialog {
   text-align: center;
 }
@@ -745,7 +705,6 @@ input {
   padding: 10px 0px 10px 0px;
   font-size: 20px;
   text-align: left;
-
   border-left: 2px solid #409eff;
   line-height: 40px;
   padding-left: 15px;
@@ -761,10 +720,6 @@ input {
 #schedule1,
 #schedule2 {
   text-align: center;
-}
-.sign-submit {
-  text-align: center;
-  margin: 20px 0px 0px 0px;
 }
 .el-icon-delete {
   float: right;
@@ -804,17 +759,6 @@ input {
   cursor: pointer;
 }
 .invoice_body:hover {
-  box-shadow: 0px 0px 12px #807e7e;
-}
-.invoice_body_add {
-  width: 310px;
-  height: 146px;
-  margin: 20px auto 0px auto;
-  border-radius: 8px;
-  border: 1px dashed #c7c5c5;
-  cursor: pointer;
-}
-.invoice_body_add:hover {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .pupiao {
@@ -862,29 +806,6 @@ input {
   color: #fff;
   font-weight: bold;
   font-size: 13px;
-}
-.el-icon-delete {
-  color: #fff;
-  font-size: 16px;
-}
-.el-icon-delete:hover {
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-.el-icon-edit {
-  color: #fff;
-  font-size: 16px;
-  margin: 0px 15px 0px 0px;
-}
-.el-icon-edit:hover {
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-.invoice_delete {
-  position: absolute;
-  margin: 110px 0px 0px 240px;
 }
 .invoice_picture {
   position: absolute;
@@ -944,9 +865,6 @@ input {
 }
 .td12_span1 {
   margin: 0px 56px 0px 0px;
-}
-.td12_span3 {
-  margin: 0px 4.7px 0px 0px;
 }
 .td13 {
   width: 380px;
@@ -1227,19 +1145,11 @@ input {
   margin: 20px auto;
 }
 .choose_invoice_type {
-  width:120px;
-  margin:0px 0px 0px 5px;
+  width: 120px;
+  margin: 0px 0px 0px 5px;
 }
 .choose_head {
   text-align: left;
-  margin:0px 0px 30px 65px;
+  margin: 0px 0px 30px 65px;
 }
 </style>
-
-
-
-
-
-
-
-

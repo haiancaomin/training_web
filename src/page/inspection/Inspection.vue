@@ -1,35 +1,30 @@
 <template>
   <div id="inspection">
-    
-      <h1 class="inspection-label">高端考察</h1>
-   
-      <el-card shadow="hover" v-for="inspectionItem in inspectionList" :key="inspectionItem.eid">
-        <img :src="inspectionItem.picurl" class="inspection-picture">
-        <div class="inspection_info">
+    <h1 class="inspection-label">高端考察</h1>
+
+    <el-card shadow="hover" v-for="inspectionItem in inspectionList" :key="inspectionItem.eid">
+      <img :src="inspectionItem.picurl" class="inspection-picture">
+      <div class="inspection_info">
         <p class="inspection-title">{{inspectionItem.title}}</p>
         <p class="inspection-time">考察时间：{{inspectionItem.inspectdate}}</p>
         <p class="inspection-end-time">报名截止时间：{{inspectionItem.deadline}}</p>
-       </div>
-        <div class="operation_btn">
+      </div>
+      <div class="operation_btn">
         <router-link :to="'/InspectionDetail/'+inspectionItem.eid">
           <el-button type="primary" class="see-detail">查看详情</el-button>
         </router-link>
-        </div>
-       
-        
-        
-      </el-card>
-    
-      <div class="order-page">
-        <el-pagination
-          background
-          layout="prev, pager, next, jumper"
-          :page-size="3"
-          :total="count"
-          @current-change="handleCurrentChange"
-        ></el-pagination>
       </div>
-    
+    </el-card>
+
+    <div class="order-page">
+      <el-pagination
+        background
+        layout="prev, pager, next, jumper"
+        :page-size="3"
+        :total="count"
+        @current-change="handleCurrentChange"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -74,7 +69,7 @@ export default {
 #inspection {
   width: 1000px;
   margin: 0px auto;
-  margin-top:80px;
+  margin-top: 80px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -89,34 +84,31 @@ export default {
   width: 380px;
 }
 .inspection_info {
-  float:right;
+  float: right;
 }
 .inspection-title {
-  width:480px;
+  width: 480px;
   font-size: 18px;
   font-weight: bold;
-  margin:5px 0px 22px 0px;
+  margin: 5px 0px 22px 0px;
 }
 .inspection-time {
   font-weight: 530;
-  margin:5px 0px 22px 0px;
+  margin: 5px 0px 22px 0px;
 }
 .inspection-end-time {
-  color: #F56C6C;
+  color: #f56c6c;
   font-weight: bold;
-  margin:5px 0px 22px 0px;
+  margin: 5px 0px 22px 0px;
 }
 .el-button {
-  width:122px;
-  height:40px;
-  padding:0px;
-  
+  width: 122px;
+  height: 40px;
+  padding: 0px;
 }
 .operation_btn {
-position: absolute;
- margin:-45px 0px 0px 750px;
- 
- 
+  position: absolute;
+  margin: -45px 0px 0px 750px;
 }
 .el-pagination {
   text-align: center;
@@ -133,5 +125,3 @@ position: absolute;
   border-left: 2px solid #409eff;
 }
 </style>
-
-

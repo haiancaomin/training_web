@@ -2,32 +2,15 @@
   <div id="PersonalCenterAddPerson">
     <el-dialog :visible.sync="repeatShow" width="500px" title="重复人员信息" center class="checkAgain">
       <p class="repeat_notice">下列员工信息已在本平台录入，其它员工信息已上传成功，如需调整，请在工作日10点--17点联系我们，联系电话0513-81055866</p>
-        <el-table
-    :data="empList"
-    stripe
-    border max-height="600"
-    style="width: 100%">
-    <el-table-column
-    label="序号"
-      type="index"
-      width="50">
-    </el-table-column>
-    <el-table-column
-      prop="cardno"
-      label="身份证号"
-      width="220">
-    </el-table-column>
-    <el-table-column
-      prop="empname"
-      label="姓名"
-     >
-    </el-table-column>
-    
-  </el-table>
-  <div class="operation_repeat_check">
-    <el-button type="primary" @click="repeatShow=false">确定</el-button>
-  </div>
-      </el-dialog>
+      <el-table :data="empList" stripe border max-height="600" style="width: 100%">
+        <el-table-column label="序号" type="index" width="50"></el-table-column>
+        <el-table-column prop="cardno" label="身份证号" width="220"></el-table-column>
+        <el-table-column prop="empname" label="姓名"></el-table-column>
+      </el-table>
+      <div class="operation_repeat_check">
+        <el-button type="primary" @click="repeatShow=false">确定</el-button>
+      </div>
+    </el-dialog>
     <div class="crumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
@@ -153,12 +136,11 @@ export default {
   name: "PersonalCenterAddPerson",
   data() {
     return {
-      fileUid: "",
       oneAdd: false,
       batchAdd: false,
       repeatShow: false,
       countFocus: 0,
-      empList:[],
+      empList: [],
       ruleForm: {
         empname: "",
         sex: "",
@@ -233,21 +215,19 @@ export default {
       });
     },
     uploadSuccess(response, file, fileList) {
-      if(!response.data) {
+      if (!response.data) {
         this.$message({
-        message: "上传成功！人员信息已更新",
-        type: "success",
-        center: true
-      });
-      this.$refs.upload.clearFiles();
-      this.$router.push({ path: `/PersonalCenter/PersonalCenterPersonInfo` });
+          message: "上传成功！人员信息已更新",
+          type: "success",
+          center: true
+        });
+        this.$refs.upload.clearFiles();
+        this.$router.push({ path: `/PersonalCenter/PersonalCenterPersonInfo` });
       } else if (response.data == "2") {
         this.empList = response.empList;
         this.repeatShow = true;
         this.$refs.upload.clearFiles();
-        
       }
-      
     },
     addOne() {
       this.oneAdd = true;
@@ -333,47 +313,16 @@ export default {
 <style scoped>
 #PersonalCenterAddPerson {
   width: 730px;
-
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
   margin: 0px 0px 0px 20px;
   padding: 0px 0px 20px 0px;
 }
-#native .el-select {
-  width: 119px;
-  margin: 0px 100px 0px 0px;
-}
-
-#add-birthday {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
-#add-workspace {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
-#add-school {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
-#add-workType {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
-#add-mail {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
-#add-qualification {
-  float: right;
-  margin: -100px 0px 0px 0px;
-}
 .el-input,
 .el-select {
   width: 358px;
 }
-
 .el-form {
   margin: 30px 0px 0px 0px;
   text-align: center;
@@ -416,10 +365,6 @@ export default {
   text-align: center;
   padding: 0px 180px;
 }
-.batch-submit {
-  margin: 0px 0px 20px 0px;
-  text-align: center;
-}
 #iconAge,
 #iconWorktype,
 #iconName,
@@ -459,7 +404,7 @@ export default {
 }
 .repeat_notice {
   margin-bottom: 10px;
-  color:#F56C6C;
+  color: #f56c6c;
   font-size: 13px;
   font-weight: bold;
 }
@@ -479,6 +424,3 @@ export default {
   text-align: center;
 }
 </style>
-
-
-

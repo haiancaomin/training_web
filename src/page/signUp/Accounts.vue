@@ -568,7 +568,6 @@ export default {
       coursehour2: "",
       coursehour3: "",
       coursehour4: "",
-
       picurl1: "",
       picurl2: "",
       picurl3: "",
@@ -644,21 +643,17 @@ export default {
       SignUpPayPage: 0,
       active: 1,
       personalFlag: false,
-      name:"",
-      cardno:"",
-      education:"",
-      phone:"",
-      signUpType:""
+      name: "",
+      cardno: "",
+      education: "",
+      phone: "",
+      signUpType: ""
     };
   },
   mounted() {
     this.getEmpData();
-
     let accountsThis = this;
     this.bus.$on("todata", function(res) {
-      
-        
-      console.log(res);
       if (
         res.multipleSelection1 ||
         res.multipleSelection2 ||
@@ -668,10 +663,20 @@ export default {
         accountsThis.signUpType = res.type;
         if (
           res.course1 != "" &&
+          res.course1 != null &&
+          res.course1 != undefined &&
           res.Address1 != "" &&
+          res.Address1 != null &&
+          res.Address1 != undefined &&
           res.time1 != "" &&
+          res.time1 != null &&
+          res.time1 != undefined &&
           res.meal1 != "" &&
-          res.multipleSelection1 != ""
+          res.meal1 != null &&
+          res.meal1 != undefined &&
+          res.multipleSelection1 != "" &&
+          res.multipleSelection1 != null &&
+          res.multipleSelection1 != undefined
         ) {
           accountsThis.orderShow1 = true;
           accountsThis.course1 = res.course1;
@@ -752,10 +757,20 @@ export default {
 
         if (
           res.course2 != "" &&
+          res.course2 != null &&
+          res.course2 != undefined &&
           res.Address2 != "" &&
+          res.Address2 != null &&
+          res.Address2 != undefined &&
           res.time2 != "" &&
+          res.time2 != null &&
+          res.time2 != undefined &&
           res.meal2 != "" &&
-          res.multipleSelection2 != ""
+          res.meal2 != null &&
+          res.meal2 != undefined &&
+          res.multipleSelection2 != "" &&
+          res.multipleSelection2 != null &&
+          res.multipleSelection2 != undefined
         ) {
           accountsThis.orderShow2 = true;
           accountsThis.course2 = res.course2;
@@ -836,10 +851,20 @@ export default {
 
         if (
           res.course3 != "" &&
+          res.course3 != null &&
+          res.course3 != undefined &&
           res.Address3 != "" &&
+          res.Address3 != null &&
+          res.Address3 != undefined &&
           res.time3 != "" &&
+          res.time3 != null &&
+          res.time3 != undefined &&
           res.meal3 != "" &&
-          res.multipleSelection3 != ""
+          res.meal3 != null &&
+          res.meal3 != undefined &&
+          res.multipleSelection3 != "" &&
+          res.multipleSelection3 != null &&
+          res.multipleSelection3 != undefined
         ) {
           accountsThis.orderShow3 = true;
           accountsThis.course3 = res.course3;
@@ -920,10 +945,20 @@ export default {
 
         if (
           res.course4 != "" &&
+          res.course4 != null &&
+          res.course4 != undefined &&
           res.Address4 != "" &&
+          res.Address4 != null &&
+          res.Address4 != undefined &&
           res.time4 != "" &&
+          res.time4 != null &&
+          res.time4 != undefined &&
           res.meal4 != "" &&
-          res.multipleSelection4 != ""
+          res.meal4 != null &&
+          res.meal4 != undefined &&
+          res.multipleSelection4 != "" &&
+          res.multipleSelection4 != null &&
+          res.multipleSelection4 != undefined
         ) {
           accountsThis.orderShow4 = true;
           accountsThis.course4 = res.course4;
@@ -1003,65 +1038,64 @@ export default {
         }
       } else {
         accountsThis.personalFlag = true;
-        
-        accountsThis.course1 = res.course1,
-          accountsThis.Address1 = res.Address1,
-          accountsThis.time1 = res.time1,
-          accountsThis.meal1 = res.meal1,
-          accountsThis.name = res.name,
-        accountsThis.cardno = res.cardno,
-        accountsThis.education =res.education,
-        accountsThis.phone = res.phone
+
+        (accountsThis.course1 = res.course1),
+          (accountsThis.Address1 = res.Address1),
+          (accountsThis.time1 = res.time1),
+          (accountsThis.meal1 = res.meal1),
+          (accountsThis.name = res.name),
+          (accountsThis.cardno = res.cardno),
+          (accountsThis.education = res.education),
+          (accountsThis.phone = res.phone);
         this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
-              res.meal1
-            }`
+          method: "get",
+          url: `${this.baseURL}/zjsxpt/course_getSetMenuById.do?menuid=${
+            res.meal1
+          }`
+        })
+          .then(res => {
+            accountsThis.menuname1 = res.data.data.menuname;
+            accountsThis.coursename1 = res.data.data.coursename;
+            accountsThis.examtime1 = res.data.data.examtime;
+            accountsThis.examaddress1 = res.data.data.examaddress;
+            accountsThis.price1 = res.data.data.price;
+            accountsThis.subtotal1 =
+              Number(accountsThis.empSize1) * Number(res.data.data.price);
+            accountsThis.totalPrice =
+              Number(accountsThis.totalPrice) + Number(accountsThis.subtotal1);
           })
-            .then(res => {
-              accountsThis.menuname1 = res.data.data.menuname;
-              accountsThis.coursename1 = res.data.data.coursename;
-              accountsThis.examtime1 = res.data.data.examtime;
-              accountsThis.examaddress1 = res.data.data.examaddress;
-              accountsThis.price1 = res.data.data.price;
-              accountsThis.subtotal1 =
-                Number(accountsThis.empSize1) * Number(res.data.data.price);
-              accountsThis.totalPrice =
-                Number(accountsThis.totalPrice) +
-                Number(accountsThis.subtotal1);
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
+          .catch(function(err) {
+            console.log(err);
+          });
 
-          this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
-              res.course1
-            }`
+        this.$ajax({
+          method: "get",
+          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+            res.course1
+          }`
+        })
+          .then(res => {
+            accountsThis.coursehour1 = res.data.data.coursehour;
+            accountsThis.coursename1 = res.data.data.coursename;
+            accountsThis.picurl1 = res.data.data.picurl;
           })
-            .then(res => {
-              accountsThis.coursehour1 = res.data.data.coursehour;
-              accountsThis.coursename1 = res.data.data.coursename;
-              accountsThis.picurl1 = res.data.data.picurl;
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
+          .catch(function(err) {
+            console.log(err);
+          });
 
-          this.$ajax({
-            method: "get",
-            url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
-              res.time1
-            }`
+        this.$ajax({
+          method: "get",
+          url: `${this.baseURL}/zjsxpt/course_getTrainTimeById.do?timeid=${
+            res.time1
+          }`
+        })
+          .then(res => {
+            accountsThis.trainDate1 = res.data.data.traintime;
           })
-            .then(res => {
-              accountsThis.trainDate1 = res.data.data.traintime;
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
-            accountsThis.orderShow1 = true;
+          .catch(function(err) {
+            console.log(err);
+          });
+        accountsThis.orderShow1 = true;
       }
     });
   },
@@ -1403,120 +1437,125 @@ export default {
       if (userInfo) {
         var userid = userInfo.userid;
       }
-      if(!this.personalFlag){
- var courseids = "";
-      var menuids = "";
-      var traintimeids = "";
-      var employeeids = "";
-      if (this.orderShow1 && this.empSize1 > 0) {
-        courseids += this.course1 + ",";
-        menuids += this.meal1 + ",";
-        traintimeids += this.time1 + ",";
-        employeeids += this.empids1 + ";";
-      }
-      if (this.orderShow2 && this.empSize2 > 0) {
-        courseids += this.course2 + ",";
-        menuids += this.meal2 + ",";
-        traintimeids += this.time2 + ",";
-        employeeids += this.empids2 + ";";
-      }
-      if (this.orderShow3 && this.empSize3 > 0) {
-        courseids += this.course3 + ",";
-        menuids += this.meal3 + ",";
-        traintimeids += this.time3 + ",";
-        employeeids += this.empids3 + ";";
-      }
-      if (this.orderShow4 && this.empSize4 > 0) {
-        courseids += this.course4 + ",";
-        menuids += this.meal4 + ",";
-        traintimeids += this.time4 + ",";
-        employeeids += this.empids4 + ";";
-      }
-      if (
-        this.empSize1 < 1 &&
-        this.empSize2 < 1 &&
-        this.empSize3 < 1 &&
-        this.empSize4 < 1
-      ) {
-        this.$message({
-          message: "网络延迟或选择人员为0!",
-          type: 'error',
-          center: true
-        });
-      } else if (
-        !this.orderShow1 &&
-        !this.orderShow2 &&
-        !this.orderShow3 &&
-        !this.orderShow4
-      ) {
-        this.$message({
-          message: "没有任何订单!",
-          type: 'error',
-          center: true
-        });
-      } else {
-        this.$ajax({
-          method: "post",
-          url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${
-            this.totalPrice
-          }","courseids":"${courseids}",
-        "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${this.signUpType}`
-        })
-          .then(res => {
-            this.accountsPage = 0;
-            this.SignUpPayPage = 1;
-            this.active = 2;
-            this.$emit("ToSignUpPayPage", {
-              accountsPage: this.accountsPage,
-              SignUpPayPage: this.SignUpPayPage,
-              active: this.active
-            });
-            this.bus.$emit("toNextPage", {
-              orderID: res.data.orderid
-            });
-          })
-          .catch(function(err) {
-            console.log(err);
+      if (!this.personalFlag) {
+        var courseids = "";
+        var menuids = "";
+        var traintimeids = "";
+        var employeeids = "";
+        if (this.orderShow1 && this.empSize1 > 0) {
+          courseids += this.course1 + ",";
+          menuids += this.meal1 + ",";
+          traintimeids += this.time1 + ",";
+          employeeids += this.empids1 + ";";
+        }
+        if (this.orderShow2 && this.empSize2 > 0) {
+          courseids += this.course2 + ",";
+          menuids += this.meal2 + ",";
+          traintimeids += this.time2 + ",";
+          employeeids += this.empids2 + ";";
+        }
+        if (this.orderShow3 && this.empSize3 > 0) {
+          courseids += this.course3 + ",";
+          menuids += this.meal3 + ",";
+          traintimeids += this.time3 + ",";
+          employeeids += this.empids3 + ";";
+        }
+        if (this.orderShow4 && this.empSize4 > 0) {
+          courseids += this.course4 + ",";
+          menuids += this.meal4 + ",";
+          traintimeids += this.time4 + ",";
+          employeeids += this.empids4 + ";";
+        }
+        if (
+          this.empSize1 < 1 &&
+          this.empSize2 < 1 &&
+          this.empSize3 < 1 &&
+          this.empSize4 < 1
+        ) {
+          this.$message({
+            message: "网络延迟或选择人员为0!",
+            type: "error",
+            center: true
           });
-      }
-      } else {
-
-        if(this.orderShow1) {
+        } else if (
+          !this.orderShow1 &&
+          !this.orderShow2 &&
+          !this.orderShow3 &&
+          !this.orderShow4
+        ) {
+          this.$message({
+            message: "没有任何订单!",
+            type: "error",
+            center: true
+          });
+        } else {
           this.$ajax({
-          method: "post",
-          url: `${this.baseURL}/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}",
+            method: "post",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${
+              this.totalPrice
+            }","courseids":"${courseids}",
+        "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${
+              this.signUpType
+            }`
+          })
+            .then(res => {
+              this.accountsPage = 0;
+              this.SignUpPayPage = 1;
+              this.active = 2;
+              this.$emit("ToSignUpPayPage", {
+                accountsPage: this.accountsPage,
+                SignUpPayPage: this.SignUpPayPage,
+                active: this.active
+              });
+              this.bus.$emit("toNextPage", {
+                orderID: res.data.orderid
+              });
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+      } else {
+        if (this.orderShow1) {
+          this.$ajax({
+            method: "post",
+            url: `${
+              this.baseURL
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}",
           "courseids":"${this.course1}",
           "menuids":"${this.meal1}",
           "traintimeids":"${this.time1}",
           "employeeids":""}&userid=${userid}&type=3&emp=
-          {"name":"${this.name}","cardno":"${this.cardno}","education":"${this.education}","phone":"${this.phone}"}`
-
-        })
-          .then(res => {
-            this.accountsPage = 0;
-            this.SignUpPayPage = 1;
-            this.active = 2;
-            this.$emit("ToSignUpPayPage", {
-              accountsPage: this.accountsPage,
-              SignUpPayPage: this.SignUpPayPage,
-              active: this.active
-            });
-            this.bus.$emit("toNextPage", {
-              orderID: res.data.orderid
-            });
+          {"name":"${this.name}","cardno":"${this.cardno}","education":"${
+              this.education
+            }","phone":"${this.phone}"}`
           })
-          .catch(function(err) {
-            console.log(err);
-          });
+            .then(res => {
+              this.accountsPage = 0;
+              this.SignUpPayPage = 1;
+              this.active = 2;
+              this.$emit("ToSignUpPayPage", {
+                accountsPage: this.accountsPage,
+                SignUpPayPage: this.SignUpPayPage,
+                active: this.active
+              });
+              this.bus.$emit("toNextPage", {
+                orderID: res.data.orderid
+              });
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         } else {
           this.$message({
-          message: "没有任何订单!",
-          type: 'error',
-          center: true
-        });
+            message: "没有任何订单!",
+            type: "error",
+            center: true
+          });
         }
       }
-     
     }
   }
 };
@@ -1540,17 +1579,15 @@ export default {
   border-bottom: 1px solid #e4e4e4;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
+  text-align: right;
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
 }
 .order-img {
   width: 120px;
   height: 87px;
   object-fit: cover;
-}
-.order-subtotal {
-  text-align: right;
-  padding: 12px;
-  font-size: 14px;
-  color: #333;
 }
 .order-info-title {
   width: 940px;
@@ -1569,7 +1606,6 @@ export default {
   text-align: left;
   margin: 5px 0px 0px 30px;
   height: 40px;
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

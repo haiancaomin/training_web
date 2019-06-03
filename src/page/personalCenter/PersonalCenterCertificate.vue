@@ -1,7 +1,6 @@
 <template>
   <div id="PersonalCenterCertificate">
     <el-dialog :visible.sync="showCertificateDialog" width="1000px">
-    
       <div class="certificate">
         <img :src="pictueUrl" alt>
       </div>
@@ -27,6 +26,12 @@
         <el-table-column label="序号" type="index" width="50"></el-table-column>
         <el-table-column prop="cardno" label="身份证号" width="170"></el-table-column>
         <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
+        <!-- <el-table-column prop="" label="标签" width="80" :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      :filter-method="filterTag"><template slot-scope="scope">
+        <el-tag
+          
+          disable-transitions>理论</el-tag>
+        </template></el-table-column>-->
         <el-table-column prop="coursename" label="通过课程" width="300"></el-table-column>
         <el-table-column prop="ispass" label="是否通过" width="100"></el-table-column>
         <el-table-column prop="acceptdate" label="获取时间" width="180"></el-table-column>
@@ -51,16 +56,19 @@ export default {
   data() {
     return {
       showCertificateDialog: false,
-      pictueUrl:"",
+      pictueUrl: "",
       searchKey: "",
       ruleForm1: {
         keyWord: ""
       },
-      tableData: [],
-      multipleSelection: []
+      tableData: []
+      // courseType:[]
     };
   },
   methods: {
+    // filterTag(value, row) {
+    //     return row.tag === value;
+    //   },
     showCertificate(zsid) {
       this.$ajax({
         method: "post",
@@ -68,21 +76,19 @@ export default {
       })
         .then(res => {
           if (res.data.data != false) {
-
-                this.pictueUrl = res.data.data
-                this.showCertificateDialog = true;
-              } else {
-                this.$message({
-                  message: "接口异常！",
-                  type: 'error',
-                  center: true
-                });
-              }
+            this.pictueUrl = res.data.data;
+            this.showCertificateDialog = true;
+          } else {
+            this.$message({
+              message: "接口异常！",
+              type: "error",
+              center: true
+            });
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
-      
     },
     submitForm(formName, searchKey) {
       this.getCertificateList(searchKey);
@@ -100,6 +106,15 @@ export default {
       })
         .then(res => {
           this.tableData = res.data.data;
+          // for(var i=0;i<this.tableData.length;i++) {
+
+          //   this.courseType.push(this.tableData[i].coursename);
+          //   console.log(this.courseType);
+          // }
+          // var x = new Set(this.courseType);
+          // console.log(x);
+          // let zz = Array.from(x);
+          // console.log(zz);
         })
         .catch(function(err) {
           console.log(err);
@@ -116,7 +131,6 @@ export default {
 <style scoped>
 #PersonalCenterCertificate {
   width: 730px;
-
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -139,20 +153,11 @@ export default {
 .get-certificate-list {
   padding: 0px 20px;
 }
-.check {
-  text-align: center;
-  margin: 20px 0px 0px 0px;
-}
-
 .certificate {
   margin: 0px auto;
   height: 1000px;
   width: 800px;
   border: 1px solid #e4e7ed;
-}
-.page {
-  text-align: center;
-  margin: 20px 0px 0px 0px;
 }
 .el-input {
   width: 250px;
@@ -165,5 +170,3 @@ export default {
   padding: 0px;
 }
 </style>
-
-

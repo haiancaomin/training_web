@@ -5,8 +5,6 @@
         <el-menu
           :default-active="$route.path"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -51,13 +49,6 @@
             <span slot="title">企业认证</span>
           </el-menu-item>
 
-          <!-- <el-menu-item index="/PersonalCenter/PersonalCenterReport">
-            <i class="el-icon-message"></i>
-            <div class="report-con">
-              <span slot="title">统计汇报</span>
-            </div>
-            <el-badge :value="1" :hidden="false" class="item"></el-badge>
-          </el-menu-item> -->
           <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
             <i class="el-icon-printer"></i>
             <span slot="title">证书查询</span>
@@ -86,29 +77,26 @@
 export default {
   name: "PersonalCenter",
   data() {
-    return {
-     
-    };
+    return {};
   },
   mounted() {
     this.showDefault();
   },
   watch: {
     $route(to, from) {
-      if(to.path=='/PersonalCenter'){
-        this.showDefault()
+      if (to.path == "/PersonalCenter") {
+        this.showDefault();
       }
     }
   },
   methods: {
     showDefault() {
-      this.$router.push({ path: this.$route.path=="/PersonalCenter"?"/PersonalCenter/PersonalCenterAllOrder":this.$route.path });
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      this.$router.push({
+        path:
+          this.$route.path == "/PersonalCenter"
+            ? "/PersonalCenter/PersonalCenterAllOrder"
+            : this.$route.path
+      });
     }
   }
 };
@@ -126,7 +114,6 @@ export default {
 .tac .el-col {
   width: 210px;
 }
-
 .router-view {
   margin: 0px 0px 0px 1000px;
 }
@@ -139,13 +126,4 @@ i {
 .in-submenu {
   padding: 0px 0px 0px 35px;
 }
-.el-badge {
-  margin: 0px 0px 2px 50px;
-}
-.report-con {
-  display: inline-block;
-  margin: 0px 0px 2px 0px;
-}
 </style>
-
-

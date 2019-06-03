@@ -25,15 +25,10 @@
             </router-link>
           </div>
         </div>
-        <!-- <div class="login-self" @click="clickLogin">
-          <span class="el-icon-mobile-phone" ></span>
-          <span >登录/注册</span>
-        </div>-->
       </div>
 
       <div class="course-outline-body">
         <div class="course-type">
-          
           <el-row class="no-margin-b">
             <el-col :span="24">
               <div class="grid-content">
@@ -41,7 +36,7 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row class="no-margin-b">
             <div class="course-body">
               <div v-for="courseItem in courseList" :key="courseItem.courseid">
@@ -121,23 +116,6 @@
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
           </div>
-          <!-- <div class="base-body-list">
-            <el-row class="pad20 bg-white" id="index-base-background">
-              <div v-for="baseItem in baseList" :key="baseItem.pid">
-                <el-col :span="6">
-                  <router-link to="/base">
-                    <div class="index-base-list">
-                      <div class="index-base-img-div">
-                        <img :src="baseItem.picurl" class="index-base-img">
-                      </div>
-                      <div class="index-base-name">{{baseItem.name}}</div>
-                      <div class="index-base-con">{{baseItem.description}}</div>
-                    </div>
-                  </router-link>
-                </el-col>
-              </div>
-            </el-row>
-          </div>-->
         </div>
       </div>
       <div class="contact-outline-body">
@@ -192,8 +170,16 @@
     </div>
     <div class="index-footer-outline-body">
       <div class="index-footer">
-        <p><a href="http://www.beian.miit.gov.cn" target="_blank" class="beian">苏ICP备18020368号-2</a></p>
-        <p><a href="http://www.zhjcx.cn/" target="_blank" class="our_company">©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a></p>
+        <p>
+          <a href="http://www.beian.miit.gov.cn" target="_blank" class="beian">苏ICP备18020368号-2</a>
+        </p>
+        <p>
+          <a
+            href="http://www.zhjcx.cn/"
+            target="_blank"
+            class="our_company"
+          >©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a>
+        </p>
         <p>
           <span class="our_company_address">地址：南通市开发区通盛大道188号C座6楼</span>
           <span>联系电话： 0513-81055866</span>
@@ -211,8 +197,6 @@ import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
-      dialogVisible: false,
-      regDialogVisible: false,
       showDown: true,
       picurl: "",
       courseList: [],
@@ -333,18 +317,12 @@ export default {
         });
     },
     scrollAnimation(currentY, targetY) {
-      // 获取当前位置方法
-      // const currentY = document.documentElement.scrollTop || document.body.scrollTop
-
-      // 计算需要移动的距离
       let needScrollTop = targetY - currentY;
       let _currentY = currentY;
       setTimeout(() => {
-        // 一次调用滑动帧数，每次调用会不一样
         const dist = Math.ceil(needScrollTop / 10);
         _currentY += dist;
         window.scrollTo(_currentY, currentY);
-        // 如果移动幅度小于十个像素，直接移动，否则递归调用，实现动画效果
         if (needScrollTop > 10 || needScrollTop < -10) {
           this.scrollAnimation(_currentY, targetY);
         } else {
@@ -356,28 +334,21 @@ export default {
       var map = new BMap.Map("map");
       var point = new BMap.Point(120.9622853521, 31.9312175342);
       map.centerAndZoom(point, 17);
-      var marker = new BMap.Marker(point); // 创建标注
+      var marker = new BMap.Marker(point);
       map.addOverlay(marker);
       marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-      //添加地图类型控件
       map.addControl(
         new BMap.MapTypeControl({
           mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
         })
       );
       map.addControl(new BMap.NavigationControl());
-
-      map.setCurrentCity("南通市"); // 设置地图显示的城市 此项是必须设置的
-      // map.enableScrollWheelZoom(true);
-    },
-    handleClick(tab, event) {
-      console.log(tab, event);
+      map.setCurrentCity("南通市");
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #index_body {
   margin-top: 80px;
@@ -400,12 +371,10 @@ export default {
   z-index: 1;
   margin: 40px 0px 0px 0px;
 }
-
 .index-sign-up1:hover {
   background: #0a6998;
   color: #fff;
 }
-
 .index-sign-up2 {
   width: 160px;
   height: 50px;
@@ -416,7 +385,6 @@ export default {
   border: 1px solid #0a6998;
   border-radius: 25px;
   display: block;
-
   cursor: pointer;
   background: #fff;
   -webkit-transition: all 0.3s;
@@ -424,153 +392,14 @@ export default {
   transition: all 0.3s;
   z-index: 1;
 }
-
 .index-sign-up2:hover {
   background: #0a6998;
   color: #fff;
-}
-
-.el-carousel {
-  z-index: 0;
-}
-#index-carousel {
-  margin: -50px 0px 0px 0px;
 }
 .sign-up-main {
   height: 115px;
   margin: 70px 0px 0px 0px;
   padding: 0px 73px;
-}
-.login-welcome {
-  height: 115px;
-}
-.index-login-signup {
-  margin: -50px 0px 0px 0px;
-}
-
-.signip-con {
-  color: #aaa;
-  font-size: 13px;
-  position: relative;
-  top: 50px;
-}
-.index-course-list {
-  display: inline-block;
-  padding: 12px;
-  margin-right: 24px;
-  width: 340px;
-  height: 140px;
-  font-size: 0;
-  vertical-align: top;
-  margin-bottom: 4px;
-}
-
-.index-course-img {
-  float: left;
-
-  height: 80px;
-  width: 80px;
-  font-size: 0;
-  margin: 15px 20px 0px 0px;
-}
-.index-course-img1 {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-}
-.index-course-list:hover .index-course-img1 {
-  animation: borderRadius 1s;
-  -moz-animation: borderRadius 1s; /* Firefox */
-  -webkit-animation: borderRadius 1s; /* Safari and Chrome */
-  -o-animation: borderRadius 1s; /* Opera */
-  animation-iteration-count: 1;
-  -webkit-animation-iteration-count: 1;
-  border-radius: 0px;
-}
-@keyframes borderRadius {
-  0% {
-    border-radius: 50%;
-  }
-  100% {
-    border-radius: 0px;
-  }
-}
-
-@-moz-keyframes borderRadius /* Firefox */ {
-  0% {
-    border-radius: 50%;
-  }
-  100% {
-    border-radius: 0px;
-  }
-}
-
-@-webkit-keyframes borderRadius /* Safari and Chrome */ {
-  0% {
-    border-radius: 50%;
-  }
-  100% {
-    border-radius: 0px;
-  }
-}
-
-@-o-keyframes borderRadius /* Opera */ {
-  0% {
-    border-radius: 50%;
-  }
-  100% {
-    border-radius: 0px;
-  }
-}
-.index-course-tit {
-  position: relative;
-  margin: 15px 0px 10px 0px;
-  font-size: 14px;
-  line-height: 19px;
-  color: #333;
-  text-align: left;
-}
-.index-course-content {
-  position: relative;
-  margin: 0px 0px 10px 100px;
-  font-size: 16px;
-  line-height: 24px;
-  word-break: break-all;
-  color: #333;
-  width: 220px;
-  text-align: left;
-}
-.index-course-other {
-  position: relative;
-  font-size: 12px;
-  line-height: 16px;
-  color: #666;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin: 0px 0px 0px 100px;
-  text-align: left;
-}
-.index-signup-but {
-  color: #49af4f;
-  cursor: pointer;
-}
-.index-register {
-  text-align: center;
-}
-#index-course-list1 {
-  border: 1px solid #fff;
-}
-.index-base-img {
-  display: block;
-  width: 280px;
-  height: 200px;
-  transition: all ease-in-out 0.5s;
-}
-.index-base-img-div {
-  width: 280px;
-  height: 200px;
-  overflow: hidden;
 }
 .index-base-con {
   font-size: 14px;
@@ -583,28 +412,6 @@ export default {
   color: #333333;
   padding: 15px 15px 10px;
   text-align: center;
-}
-.index-base-list {
-  width: 280px;
-  height: 350px;
-  background: #fff;
-  box-shadow: 0 0 2px #c7c5c5;
-  overflow: hidden;
-}
-#index-base-background {
-  padding: 0px 0px 0px 20px;
-  background: #1d2939;
-}
-.index-base-more {
-  margin: 0px 50px 0px 0px;
-  float: right;
-  color: #666;
-  font-size: 14px;
-  line-height: 31px;
-}
-.index-base-more:hover {
-  color: #0a6995;
-  font-weight: bold;
 }
 .index-friend {
   margin: 20px 0px 0px 0px;
@@ -629,12 +436,9 @@ export default {
   width: 1220px;
   height: 150px;
   background: #242e68;
-  
   text-align: left;
-  
   padding: 40px 0px 0px 300px;
   margin: 0px auto;
-
 }
 .index-footer-outline-body {
   background: #242e68;
@@ -642,24 +446,11 @@ export default {
 .index-mobile {
   margin: 10px 0px 0px 0px;
 }
-.index-course-list:hover {
-  box-shadow: -2px 2px 5px #c7c5c5;
-}
-
-.index-base-list:hover {
-  box-shadow: 0 0 8px #c7c5c5;
-}
-.index-base-list:hover .index-base-img {
-  transform: scale(1.1);
-}
 .company-show {
   height: 730px;
   width: 100%;
-
-  /* background: url(../assets/company.jpg) no-repeat; */
   background-size: 100% 810px;
 }
-
 .login-sign {
   float: right;
   background: rgba(255, 255, 255, 0.6);
@@ -668,7 +459,6 @@ export default {
   padding: 0 20px;
   margin: 0px 13% 0px 0px;
 }
-
 .logo {
   padding: 160px 0px 20px 0px;
   text-align: center;
@@ -697,18 +487,9 @@ export default {
   text-align: center;
   margin: 20px 0px;
 }
-.login {
-  padding: 0px 20px;
-}
-
-.el-icon-mobile-phone {
-  margin: 0px 5px 0px 0px;
-}
-
 .course-outline-body {
   background: #fff;
 }
-
 .grid-content {
   text-align: center;
 }
@@ -716,9 +497,8 @@ export default {
   font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 28px;
   font-weight: 500;
- 
 }
-.title-type{
+.title-type {
   padding-top: 50px;
 }
 .title-type1 {
@@ -747,9 +527,6 @@ export default {
 .base-list-outline-body {
   background: #1d2939;
 }
-.base-body-list {
-  margin: 50px 0px 50px 0px;
-}
 .friend-url {
   background: #fff;
   padding: 80px 0px 20px 0px;
@@ -765,7 +542,6 @@ export default {
 }
 .contact {
   background: #fff;
-
   width: 1220px;
   margin: 0px auto;
 }
@@ -817,6 +593,51 @@ export default {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
 }
+@keyframes myfirst {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+@-moz-keyframes myfirst /* Firefox */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+@-webkit-keyframes myfirst /* Safari and Chrome */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+@-o-keyframes myfirst /* Opera */ {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 60px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
 .course-type {
   width: 1220px;
   background: #fff;
@@ -834,7 +655,6 @@ export default {
 .course-show-img {
   width: 100%;
   height: 100%;
-
   transition: all ease-in-out 0.5s;
 }
 .course-img-body {
@@ -852,7 +672,6 @@ export default {
 .course-outbody:hover .course-show-img {
   transform: scale(1.2);
 }
-
 .course-name {
   position: absolute;
   width: 200px;
@@ -875,7 +694,6 @@ export default {
   line-height: 24px;
   margin: 14px 0 3px;
   color: #333;
-
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -932,7 +750,6 @@ export default {
   opacity: 1;
   margin-top: -100px;
 }
-
 .more-course {
   opacity: 1;
   transition: all ease-in-out 0.3s;
@@ -940,65 +757,21 @@ export default {
 .course-no-over:hover .more-course {
   opacity: 0;
 }
-
-@keyframes myfirst {
-  0% {
-    bottom: 30px;
-  }
-  50% {
-    bottom: 60px;
-  }
-  100% {
-    bottom: 30px;
-  }
-}
-
-@-moz-keyframes myfirst /* Firefox */ {
-  0% {
-    bottom: 30px;
-  }
-  50% {
-    bottom: 60px;
-  }
-  100% {
-    bottom: 30px;
-  }
-}
-@-webkit-keyframes myfirst /* Safari and Chrome */ {
-  0% {
-    bottom: 30px;
-  }
-  50% {
-    bottom: 60px;
-  }
-  100% {
-    bottom: 30px;
-  }
-}
-@-o-keyframes myfirst /* Opera */ {
-  0% {
-    bottom: 30px;
-  }
-  50% {
-    bottom: 60px;
-  }
-  100% {
-    bottom: 30px;
-  }
-}
-.beian:hover,.our_company:hover {
+.beian:hover,
+.our_company:hover {
   color: #fff;
 }
-.index-footer p,.index-footer a,.index-footer span{
-color: #ddd;
-
-font-size:13px;
+.index-footer p,
+.index-footer a,
+.index-footer span {
+  color: #ddd;
+  font-size: 13px;
 }
-.index-footer p{
-margin-bottom: 10px;
+.index-footer p {
+  margin-bottom: 10px;
 }
 .our_company_address {
-  margin-right:10px;
+  margin-right: 10px;
 }
 </style>
 <style>
@@ -1035,7 +808,7 @@ margin-bottom: 10px;
   background-size: 100%;
 }
 #certify .swiper-button-prev:hover {
-  background-position: 0 -46px;
+  background-position: 0 -46.5px;
   background-size: 100%;
 }
 #certify .swiper-button-next {
@@ -1063,5 +836,3 @@ margin-bottom: 10px;
   background-color: #fff;
 }
 </style>
-
-

@@ -7,7 +7,7 @@
         <span class="mr15">时间：{{newsContent.createdate}}</span>
         <span>作者：{{newsContent.createuser}}</span>
       </div>
-      <div class="preview" v-html='newsContent.content'></div>
+      <div class="preview" v-html="newsContent.content"></div>
     </div>
   </div>
 </template>
@@ -15,12 +15,12 @@
 export default {
   data() {
     return {
-      newsContent:{}
+      newsContent: {}
     };
   },
-  props:['id'],
-  mounted(){
-    this.getNewsDetail()
+  props: ["id"],
+  mounted() {
+    this.getNewsDetail();
   },
   methods: {
     getNewsDetail() {
@@ -44,7 +44,7 @@ export default {
 #news_detail_body {
   width: 1000px;
   margin: 0px auto;
-  margin-top:80px;
+  margin-top: 80px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -53,11 +53,9 @@ export default {
 .el-row {
   padding: 20px 0;
 }
-
 .file-container {
   padding: 0px 20px 20px 20px;
   background: #fff;
-
 }
 .file-title {
   font-size: 18px;
@@ -68,27 +66,21 @@ export default {
   border-radius: 3px;
 }
 .preview {
-  /* width: 1000px;
-  margin: 0 auto; */
   margin: 40px 30px;
   overflow: hidden;
 }
-.text-center{
-  text-align: center
+.text-center {
+  text-align: center;
 }
-.news-title{
+.news-title {
   margin: 20px 30px;
-  font-weight: bold
+  font-weight: bold;
 }
-.news-tags{
-  color:#999;
+.news-tags {
+  color: #999;
   margin: 0 30px;
 }
-.mr15{
+.mr15 {
   margin-right: 15px;
 }
-
 </style>
-
-
-

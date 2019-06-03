@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       baseOverView: {},
-      picurl:[]
+      picurl: []
     };
   },
   props: ["id"],
@@ -77,5 +77,3 @@ pre {
   padding-top: 30px;
 }
 </style>
-
-

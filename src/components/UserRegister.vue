@@ -18,20 +18,12 @@
           <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <!-- <div class="input-icon" @click="changeType">
-            <i class="iconfont" v-if="showNewPassword">&#xe76c;</i>
-            <i class="iconfont" v-if="!showNewPassword">&#xe604;</i>
-          </div> -->
         </el-form-item>
 
         <el-form-item prop="password2">
           <el-input type="password" placeholder="请再次输入密码" v-model="ruleForm.password2">
             <i slot="prefix" class="iconfont">&#xe7c9;</i>
           </el-input>
-          <!-- <div class="input-icon" @click="changeType2">
-            <i class="iconfont" v-if="showNewPassword2">&#xe76c;</i>
-            <i class="iconfont" v-if="!showNewPassword2">&#xe604;</i>
-          </div> -->
         </el-form-item>
 
         <el-form-item prop="phone">
@@ -101,23 +93,16 @@ export default {
       }
     };
     return {
-      beginClientX: 0 /*距离屏幕左端距离*/,
-      mouseMoveStata: false /*触发拖动状态  判断*/,
-      maxwidth: 320 /*拖动最大宽度，依据滑块宽度算出来的*/,
+      beginClientX: 0,
+      mouseMoveStata: false,
+      maxwidth: 320,
       checkWidth: 0,
-      confirmWords: "拖动滑块完成拼图" /*滑块文字*/,
+      confirmWords: "拖动滑块完成拼图",
       confirmSuccess: false,
       countFocus: 0,
-
-      showNewPassword: false,
-      showNewPassword2: false,
-      inputType: "password",
-      inputType2: "password",
-      iconColor: "",
       show: true,
       count: "",
       regshow: false,
-
       ruleForm: {
         name: "",
         password: "",
@@ -165,6 +150,12 @@ export default {
     regDialogVisible: function(val) {
       this.regshow = val;
       if (!val) {
+        this.ruleForm.name = "";
+        this.ruleForm.password = "";
+        this.ruleForm.password2 = "";
+        this.ruleForm.phone = "";
+        this.ruleForm.code = "";
+        this.$refs["ruleForm"].clearValidate();
         this.confirmSuccess = false;
         if (
           document.getElementsByClassName("handler1")[0] &&
@@ -192,11 +183,10 @@ export default {
       }
     }
   },
-
   methods: {
     mousedownFn: function(e) {
       if (!this.confirmSuccess) {
-        e.preventDefault && e.preventDefault(); //阻止文字选中等 浏览器默认事件
+        e.preventDefault && e.preventDefault();
         this.mouseMoveStata = true;
         this.beginClientX = e.clientX;
         document
@@ -206,7 +196,7 @@ export default {
       document
         .getElementsByTagName("html")[0]
         .addEventListener("mouseup", this.moseUpFn);
-    }, //mousedoen 事件
+    },
     successFunction() {
       this.confirmSuccess = true;
       this.confirmWords = "验证通过";
@@ -230,7 +220,7 @@ export default {
         this.maxwidth + "px";
       document.getElementsByClassName("drag_bg1")[0].style.width =
         this.maxwidth + "px";
-    }, //验证成功函数
+    },
     mouseMoveFn(e) {
       if (this.mouseMoveStata) {
         let width = e.clientX - this.beginClientX;
@@ -242,7 +232,7 @@ export default {
             width + "px";
         }
       }
-    }, //mousemove事件
+    },
     moseUpFn(e) {
       if (!this.confirmSuccess) {
         this.mouseMoveStata = false;
@@ -269,24 +259,6 @@ export default {
           .removeEventListener("mouseup", this.moseUpFn);
       }
     },
-    // changeType() {
-    //   if (this.inputType == "text") {
-    //     this.inputType = "password";
-    //     this.showNewPassword = false;
-    //   } else {
-    //     this.inputType = "text";
-    //     this.showNewPassword = true;
-    //   }
-    // },
-    // changeType2() {
-    //   if (this.inputType2 == "text") {
-    //     this.inputType2 = "password";
-    //     this.showNewPassword2 = false;
-    //   } else {
-    //     this.inputType2 = "text";
-    //     this.showNewPassword2 = true;
-    //   }
-    // },
     getCode(formName) {
       this.$refs[formName].validateField("phone", error => {
         if (!error) {
@@ -319,7 +291,7 @@ export default {
           } else {
             this.$message({
               message: "请拖动滑块完成拼图！",
-              type: 'error',
+              type: "error",
               center: true
             });
           }
@@ -351,7 +323,7 @@ export default {
                 var that = this;
                 this.$message({
                   message: "注册成功！",
-                  type: 'success',
+                  type: "success",
                   center: true,
                   onClose: function() {
                     that.regshow = false;
@@ -361,25 +333,25 @@ export default {
               } else if (res.data.data == 0) {
                 this.$message({
                   message: "注册失败！",
-                  type: 'error',
+                  type: "error",
                   center: true
                 });
               } else if (res.data.data == 2) {
                 this.$message({
                   message: "验证码错误！",
-                  type: 'error',
+                  type: "error",
                   center: true
                 });
               } else if (res.data.data == 3) {
                 this.$message({
                   message: "该手机号已被注册！",
-                  type: 'error',
+                  type: "error",
                   center: true
                 });
               } else if (res.data.data == 4) {
                 this.$message({
                   message: "用户名已存在！",
-                  type: 'error',
+                  type: "error",
                   center: true
                 });
               }
@@ -411,7 +383,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 a {
   color: #42b983;
@@ -420,57 +391,14 @@ a {
 .el-form {
   padding: 0px 50px;
 }
-
-.forgetpwd {
-  color: darkgrey;
-  font-size: 12px;
-  padding: 0 40px 0 0;
-  margin: 0 0 0 25px;
-}
 .register {
   font-size: 12px;
   margin: 0 0 0 300px;
 }
 .User-Register {
   white-space: nowrap;
-}
-
-.el-radio-group {
-  padding: 0px 300px 0px 0px;
-}
-.User-Register {
   text-align: center;
 }
-.test-but {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 42px;
-  width: 120px;
-  height: 36px;
-  margin: auto;
-  line-height: 36px;
-  text-align: center;
-}
-
-.input-icon {
-  position: absolute;
-  font-size: 18px;
-  margin: -42px 0px 0px 320px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.el-icon-view {
-  font-size: 18px;
-}
-.input-icon:hover {
-  color: #409eff;
-  cursor: pointer;
-}
-
 .get-button-con {
   height: 44px;
   width: 112px;
@@ -571,6 +499,3 @@ a {
   height: 44px;
 }
 </style>
-
-
-
