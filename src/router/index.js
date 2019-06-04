@@ -135,6 +135,9 @@ export default new Router({
             path: 'PersonalCenterCertificate',
             component: resolve => require(['@/page/personalCenter/PersonalCenterCertificate'], resolve)
           }, {
+            path: 'PersonalCenterjieye',
+            component: resolve => require(['@/page/personalCenter/PersonalCenterjieye'], resolve)
+          }, {
             path: 'PersonalCenterChangeMobile',
             component: resolve => require(['@/page/personalCenter/PersonalCenterChangeMobile'], resolve)
           }

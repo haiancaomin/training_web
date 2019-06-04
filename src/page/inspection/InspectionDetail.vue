@@ -12,10 +12,10 @@
     </div>
     <div class="table_download">
       <p class="file_download">
-        <a :href="invitationUrl" v-if="invitationUrl != ''">邀请函</a>
+        <a :href="invitationUrl" target="_blank" v-if="invitationUrl != ''">邀请函</a>
       </p>
       <p class="file_download">
-        <a :href="receiptFormUrl" v-if="receiptFormUrl != ''">回执表</a>
+        <a :href="receiptFormUrl" target="_blank" v-if="receiptFormUrl != ''">回执表</a>
       </p>
     </div>
 

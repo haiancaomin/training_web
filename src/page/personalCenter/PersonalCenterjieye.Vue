@@ -1,5 +1,5 @@
 <template>
-  <div id="PersonalCenterCertificate">
+  <div id="PersonalCenterjieye">
     <el-dialog :visible.sync="showCertificateDialog" width="1000px">
       <div class="certificate">
         <img :src="pictueUrl" alt>
@@ -9,7 +9,7 @@
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/PersonalCenter/PersonalCenterCertificate' }">证书查询</el-breadcrumb-item>
-        <el-breadcrumb-item>实训证书</el-breadcrumb-item>
+        <el-breadcrumb-item>结业证明</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-form :model="ruleForm1" ref="ruleForm1">
@@ -25,25 +25,21 @@
     <div class="get-certificate-list">
       <el-table :data="tableData" max-height="450" style="width: 700px">
         <el-table-column label="序号" type="index" width="50"></el-table-column>
-        <el-table-column prop="cardno" label="身份证号" width="170"></el-table-column>
+        <el-table-column prop="cardno" label="证书编号" width="170"></el-table-column>
         <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
-        <!-- <el-table-column prop="" label="标签" width="80" :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-      :filter-method="filterTag"><template slot-scope="scope">
-        <el-tag
-          
-          disable-transitions>理论</el-tag>
-        </template></el-table-column>-->
-        <el-table-column prop="coursename" label="通过课程" width="300"></el-table-column>
-        <el-table-column prop="ispass" label="是否通过" width="100"></el-table-column>
+        <el-table-column prop="coursename" label="身份证号" width="300"></el-table-column>
+        <el-table-column prop="ispass" label="课程" width="100" :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+      :filter-method="filterHandler" :filter-multiple="false"></el-table-column>
+        <el-table-column prop="acceptdate" label="批次" width="180"></el-table-column>
         <el-table-column prop="acceptdate" label="获取时间" width="180"></el-table-column>
-        <el-table-column fixed="right" label="证书查询" width="90">
+        <el-table-column fixed="right" label="证明预览" width="90">
           <template slot-scope="scope">
             <el-button
               type="primary"
               prop="zsid"
               @click="showCertificate(scope.row.zsid)"
               class="search-btn2"
-            >查询证书</el-button>
+            >证明预览</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,7 +49,7 @@
 
 <script>
 export default {
-  name: "PersonalCenterCertificate",
+  name: "PersonalCenterjieye",
   data() {
     return {
       showCertificateDialog: false,
@@ -130,7 +126,7 @@ export default {
 </script>
 
 <style scoped>
-#PersonalCenterCertificate {
+#PersonalCenterjieye {
   width: 730px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;

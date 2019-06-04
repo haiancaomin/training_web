@@ -121,6 +121,19 @@
       <el-table-column prop="address" label="工作地" width="120"></el-table-column>
       <el-table-column prop="education" label="学历" width="120"></el-table-column>
       <el-table-column prop="examno" label="考试编号" width="120"></el-table-column>
+      <el-table-column prop="examno" label="结业证书" width="120">
+        <template slot-scope="scope">
+        <el-tag type="primary"
+          disable-transitions>结业证书</el-tag>
+      </template></el-table-column>
+      <el-table-column prop="examno" label="实训证书" width="120">
+        <template slot-scope="scope">
+          <router-link to="/PersonalCenter/PersonalCenterCertificate">
+        <el-tag type="success"
+          disable-transitions>实训证书</el-tag>
+          </router-link>
+      </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="editPerson(scope.row.empid)">编辑</el-button>

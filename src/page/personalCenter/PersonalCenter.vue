@@ -26,7 +26,7 @@
               <span class="in-submenu">订单发票</span>
             </el-menu-item>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span>公司人员</span>
@@ -49,10 +49,19 @@
             <span slot="title">企业认证</span>
           </el-menu-item>
 
-          <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
-            <i class="el-icon-printer"></i>
-            <span slot="title">证书查询</span>
-          </el-menu-item>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>证书查询</span>
+            </template>
+            <el-menu-item index="/PersonalCenter/PersonalCenterCertificate">
+              <span class="in-submenu">实训证书</span>
+            </el-menu-item>
+            <el-menu-item index="/PersonalCenter/PersonalCenterjieye">
+              <span class="in-submenu">结业证明</span>
+            </el-menu-item>
+            
+          </el-submenu>
 
           <el-submenu index="4">
             <template slot="title">

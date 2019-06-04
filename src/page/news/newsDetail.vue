@@ -4,8 +4,8 @@
       <h1 class="file-title">资讯详情</h1>
       <h1 class="text-center news-title">{{newsContent.title}}</h1>
       <div class="news-tags text-center">
-        <span class="mr15">时间：{{newsContent.createdate}}</span>
-        <span>作者：{{newsContent.createuser}}</span>
+        <span class="mr15">发布时间：{{newsContent.createdate}}</span>
+        
       </div>
       <div class="preview" v-html="newsContent.content"></div>
     </div>

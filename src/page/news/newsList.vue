@@ -1,19 +1,19 @@
 <template>
   <div class="news-container">
     <el-row class="pad20 mt20 bg-white" v-if="hotNews.length">
-      <el-col :span="9" class="hot-img">
+      <el-col :span="12" class="hot-img">
         <div class="grid-content hot-box">
           <div class="hot-news-tag">热点</div>
           <img :src="hotNews[0].picurl" class="hot-news-img">
         </div>
       </el-col>
-      <el-col :span="15">
+      <el-col :span="12">
         <div class="grid-content hot-box">
           <swiper :options="swiperOption" ref="mySwiper">
             <swiper-slide v-for="(item,key) in hotNews" :key="key">
-              <router-link :to="'/newsDetail/'+item.newsid">
-                <p>{{item.title}}</p>
-                <span>{{item.createdate}}</span>
+              <router-link :to="'/newsDetail/'+item.newsid">   
+                <p class="hot_news_title">{{item.title}}</p>
+                <p class="hot_news_date">{{item.createdate}}</p>
               </router-link>
             </swiper-slide>
           </swiper>
@@ -22,7 +22,7 @@
     </el-row>
     <el-row class="pad20 mt20 bg-white">
       <el-col class="news-list">
-        <div class="grid-content">
+        <div class="grid-content list_body">
           <el-tabs v-model="activeName" @tab-click="handleClick" stretch>
             <el-tab-pane :label="v.label" :name="v.name" v-for="(v,k) in tabs" :key="k">
               <router-link
@@ -35,9 +35,13 @@
                     <img :src="item.picurl">
                   </div>
                   <div class="news-overview">
+                    <div class="news_type"><el-tag v-if="type==0" >行业政策</el-tag></div>
+                    <div class="news_type"><el-tag v-if="type==1" >地方动态</el-tag></div>
+                    <div class="news_type"><el-tag v-if="type==2" >企业新闻</el-tag></div>
+                    <div class="news_type"><el-tag v-if="type==3" >国际信息</el-tag></div>
+                    <p>发布时间：{{item.createdate}}</p>
                     <h3>{{item.title}}</h3>
-                    <div>{{item.preview}}</div>
-                    <p>{{item.createdate}}</p>
+                    <!-- <div>{{item.preview}}</div> -->
                   </div>
                 </div>
               </router-link>
@@ -175,6 +179,7 @@ export default {
 }
 .hot-news-img {
   width: 100%;
+  height:310px;
 }
 .swiper-container {
   height: 195px;
@@ -185,53 +190,45 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.swiper-slide a p {
-  width: 400px;
+.hot_news_title {
+  width: 310px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
 }
-.swiper-slide a:hover {
-  color: #409eff;
+.hot_news_date {
+  width: 140px;
+  font-size: 14px;
+  text-align: right;
+  
 }
-.news-overview h3,
-.news-overview div,
-.news-overview p {
+.news-overview h3 {
   margin-bottom: 20px;
   text-align: left;
   color: #333;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+  font-size: 18px;
+}
+.swiper-slide a:hover {
+  color: #409eff;
 }
 .list-row:hover .news-overview h3 {
   color: #409eff;
 }
 .list-row:hover .news-img img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 .news-overview {
   flex: 1;
 }
-.news-overview h3 {
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 20px;
-}
-.news-overview p {
-  margin-bottom: 0;
-  text-align: right;
-}
-.news-overview div {
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  line-height: 1.5;
-}
-.news-list .list-row {
-  margin-bottom: 20px;
+.list-row {
+  border-bottom: 1px solid #ddd;
   display: flex;
+  padding:20px 0px;
 }
 .news-list .list-row .news-img {
   width: 250px;
@@ -243,6 +240,22 @@ export default {
   width: 100%;
   height: 100%;
   transition: all linear 0.3s;
+}
+.news-overview p {
+  position: absolute;
+  margin:135px 0px 0px 0px;
+  color: #666;
+  font-size:12px;
+}
+.news_type {
+  position: absolute;
+  margin:85px 0px 0px 0px;
+}
+.el-pagination {
+  margin-top:20px;
+}
+.list_body {
+  padding:0px 20px;
 }
 </style>
 <style>
