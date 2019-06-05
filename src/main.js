@@ -10,12 +10,14 @@
 // import 'swiper/dist/css/swiper.css'
 import App from './App'
 import router from './router'
+import global from './js/global.js'
 // import axios from 'axios' //引入axios
 import 'babel-polyfill'
 
 Vue.prototype.bus = new Vue()
 Vue.prototype.$ajax = axios
 Vue.prototype.baseURL = process.env.API_ROOT
+Vue.prototype.global = global
 Vue.config.productionTip = false
 
 // Vue.use(ElementUI);

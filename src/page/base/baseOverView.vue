@@ -3,7 +3,7 @@
     <el-row>
       <h1 class="base-intro">{{baseOverView.basename}}</h1>
       <el-carousel :interval="4000" type="card" class="overview-box">
-        <el-carousel-item v-for="(item,key) in picurl" :key="key">
+        <el-carousel-item v-for="(item,key) in picurl" :key="key">      
           <img :src="item" class="overview-img">
         </el-carousel-item>
       </el-carousel>

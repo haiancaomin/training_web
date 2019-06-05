@@ -120,19 +120,31 @@
       <el-table-column prop="phone" label="手机" width="120"></el-table-column>
       <el-table-column prop="address" label="工作地" width="120"></el-table-column>
       <el-table-column prop="education" label="学历" width="120"></el-table-column>
-      <el-table-column prop="examno" label="考试编号" width="120"></el-table-column>
       <el-table-column prop="examno" label="结业证书" width="120">
         <template slot-scope="scope">
-        <el-tag type="primary"
-          disable-transitions>结业证书</el-tag>
-      </template></el-table-column>
+          <el-button
+            type="primary"
+            plain
+            size="mini"
+            v-if="scope.row.dflag"
+            class="dflag_true"
+            @click="gotoPersonalCenterjieye(scope.row.empid)"
+          >结业证明</el-button>
+          <el-tag type="info" disable-transitions v-else>暂无证明</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="examno" label="实训证书" width="120">
         <template slot-scope="scope">
-          <router-link to="/PersonalCenter/PersonalCenterCertificate">
-        <el-tag type="success"
-          disable-transitions>实训证书</el-tag>
-          </router-link>
-      </template>
+          <el-button
+            type="success"
+            plain
+            size="mini"
+            v-if="scope.row.cflag"
+            class="cflag_true"
+            @click="PersonalCenterCertificate(scope.row.empid)"
+          >实训证书</el-button>
+          <el-tag type="info" disable-transitions v-else>暂无证书</el-tag>
+        </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
@@ -208,6 +220,10 @@ export default {
     };
   },
   methods: {
+    gotoPersonalCenterjieye(empid) {
+      this.global.setGlobalEmpId(empid);
+      this.$router.push({ path: `/PersonalCenter/PersonalCenterjieye` });
+    },
     editPerson(empid) {
       this.showEditDia = true;
       this.$ajax({
@@ -427,6 +443,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   line-height: 44px;
   margin: 0px 0px 0px 2px;
+}
+.can_Operation {
+  cursor: pointer;
+}
+.dflag_true,
+.cflag_true {
+  padding: 9px 10px;
 }
 </style>
 <style>

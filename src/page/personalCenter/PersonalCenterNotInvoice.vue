@@ -367,13 +367,7 @@
             v-if="orderItem.status==1"
           >开具发票</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
-          <el-button
-            type="primary"
-            round
-            plain
-            @click="scheduleSuccess = true"
-            v-if="orderItem.status==3"
-          >开票进度</el-button>
+          
           <el-button
             type="success"
             round
