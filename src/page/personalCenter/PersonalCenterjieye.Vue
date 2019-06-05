@@ -42,7 +42,7 @@
       </el-breadcrumb>
     </div>
     <div class="fifter_term_show" v-if="resultCount>0">
-      筛选条件:
+      筛选条件:{{resultCount}}
       <div v-if="ispassTerm!=''">是否通过{{ispassTerm}}</div>
     </div>
     <el-form :model="ruleForm1" ref="ruleForm1">
@@ -71,7 +71,7 @@
         <el-table-column prop="cardno" label="身份证号" width="200"></el-table-column>
         <el-table-column prop="coursename" label="课程" width="320"
         :filters="couseTerm"
-          :filter-method="filterTag"
+          :filter-method="filterCourse"
           :filter-multiple="false"
           filter-placement="bottom"
         ></el-table-column>
@@ -129,20 +129,14 @@ export default {
       couseTerm: [],
       ispassTerm: "",
       checkIfAll: false,
+      courseTermValue: "",
       ruleForm1: {
         keyWord: ""
       },
-      tableData: [],
-      
-     
+      tableData: []
     }
-    
-  },
-   computed: {
-    
   },
   methods: {
-    
     getCourseList() {
       this.$ajax({
         method: "get",
@@ -169,6 +163,14 @@ export default {
           console.log(err);
         });
     },
+    filterCourse(value, row) {
+      this.courseTermValue = value;
+      if (row.coursename === value) {
+        this.count++;
+      } 
+      this.checkIfAll = true;
+      return row.coursename === value;
+    },
     filterTag(value, row) {
       this.ispassTerm = value;
       if (row.ispass === value) {
@@ -178,6 +180,7 @@ export default {
       return row.ispass === value;
     },
     clearCount() {
+      alert("ss");
       if (this.count == 0 && this.checkIfAll == true) {
         this.$notify({
           title: "无筛选结果",
@@ -190,7 +193,6 @@ export default {
       this.checkIfAll = false;
       this.resultCount = this.count;
       this.count = 0;
-      
     },
     printJieye() {
       let subOutputRankPrint = document.getElementById("certificate_div");
