@@ -26,8 +26,7 @@
             <span class="gray_style">培养项目，特此证明。期待您在为日来发展道路上有更好的表现！</span>
           </div>
           <div class="dialog_coursename">
-            <span class="first_word">上</span>海市装配式建筑构件生产专项岗
-            <span class="first_last">位</span>
+            <span class="first_word">上</span>海市装配式建筑构件生产专项岗<span class="first_last">位</span>
             技术研修班——{{dialog_coursename}}
           </div>
           <div class="dialog_createdate">{{dialog_createdate}}</div>
@@ -129,21 +128,18 @@ export default {
       courseList: [],
       couseTerm: [],
       ispassTerm: "",
+      checkIfAll: false,
       ruleForm1: {
         keyWord: ""
       },
-      tableData: []
-      // courseType:[]
-    };
+      tableData: [],
+      
+     
+    }
+    
   },
    computed: {
-    courseFifter() {
-      const { text, value } = this;
-      return {
-        text,
-        value
-      };
-    }
+    
   },
   methods: {
     
@@ -157,15 +153,15 @@ export default {
           this.courseList = res.data.data;
           
           for (var i = 0; i < this.courseList.length; i++) {
+            var courseFifter={};
             console.log(this.courseList[i].coursename);
-            this.courseFifter.text = this.courseList[i].coursename;
-            this.courseFifter.value = this.courseList[i].coursename;
+            courseFifter.text = this.courseList[i].coursename;
+            courseFifter.value = this.courseList[i].coursename;
             console.log(this.courseList[i].coursename);
             console.log(i);
-            console.log(this.courseFifter);
+            console.log(courseFifter);
+            this.couseTerm.push(courseFifter);
             
-            this.couseTerm.push(this.courseFifter);
-            this.courseFifter = "";
           }
           
         })
@@ -177,22 +173,24 @@ export default {
       this.ispassTerm = value;
       if (row.ispass === value) {
         this.count++;
-       
-      }
+      } 
+      this.checkIfAll = true;
       return row.ispass === value;
     },
     clearCount() {
-      if (this.count == 0) {
+      if (this.count == 0 && this.checkIfAll == true) {
         this.$notify({
           title: "无筛选结果",
           message: "筛选结果为空！",
           duration: 0,
           type: "error"
         });
+        this.$refs.ss.clearFilter();
       }
+      this.checkIfAll = false;
       this.resultCount = this.count;
       this.count = 0;
-      this.$refs.ss.clearFilter();
+      
     },
     printJieye() {
       let subOutputRankPrint = document.getElementById("certificate_div");
