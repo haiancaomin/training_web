@@ -2,8 +2,8 @@
   <div id="PersonalCenterNotInvoice">
     <div class="order-dialog">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
-        <p>电话：845923412</p>
-        <p>邮箱：231231332@dd.com</p>
+        <p>电话：0513-81055866</p>
+        <p>邮箱：MKT_Dept@zhjcx.cn</p>
       </el-dialog>
       <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule1">
         <div class="schedule-body">
@@ -1145,5 +1145,8 @@ table {
 .choose_head {
   text-align: left;
   margin: 0px 0px 30px 65px;
+}
+#contact p {
+  margin-bottom:10px;
 }
 </style>

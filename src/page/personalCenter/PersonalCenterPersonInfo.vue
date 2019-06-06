@@ -220,6 +220,10 @@ export default {
     };
   },
   methods: {
+    PersonalCenterCertificate(empid) {
+      this.global.setGlobalEmpId(empid);
+      this.$router.push({ path: `/PersonalCenter/PersonalCenterCertificate` });
+    },
     gotoPersonalCenterjieye(empid) {
       this.global.setGlobalEmpId(empid);
       this.$router.push({ path: `/PersonalCenter/PersonalCenterjieye` });

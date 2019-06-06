@@ -76,7 +76,7 @@
             <td class="invoice-show-table-td-input2">
               <el-input
                 v-model="taxerID"
-                placeholder="请输入纳税人识别号"
+                placeholder="请输入社会统一信用编码"
                 maxlength="30"
                 class="person-add-input"
               ></el-input>
@@ -274,13 +274,13 @@ export default {
         });
       } else if (this.taxerID == "") {
         this.$message({
-          message: "纳税人识别号不能为空！",
+          message: "社会统一信用编码不能为空！",
           type: "error",
           center: true
         });
       } else if (this.taxerID.match("[0-9A-Z]{18}") != this.taxerID) {
         this.$message({
-          message: "请输入正确的纳税人识别号！",
+          message: "请输入正确的社会统一信用编码！",
           type: "error",
           center: true
         });
@@ -314,7 +314,7 @@ export default {
           type: "error",
           center: true
         });
-      } else if (this.account.match("^[0-9]{16,19}") != this.account) {
+      } else if (this.account.match("^[0-9]*") != this.account) {
         this.$message({
           message: "请输入正确的公司账号！",
           type: "error",

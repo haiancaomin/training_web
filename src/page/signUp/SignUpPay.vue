@@ -8,17 +8,25 @@
         </el-table>
         <el-button type="primary" class="sign-submit1" @click="showTable=false">确认</el-button>
       </el-dialog>
-      <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" center>用户付费协议文案</el-dialog>
+      <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" center class="pay_agreement">
+        <p>1、考点接受报名40人，报满截止。</p>
+        <p>2、如需取消考试，请提前3个工作日邮件通知。</p>
+        <p>3、培训日前5天未支付培训费用的，报名名额取消</p>
+        <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
+        <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
+      </el-dialog>
 
       <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
         <div class="offline-context">
-          <p class="offline-notice">转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
+          <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
           <p>&nbsp;</p>
-          <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
-          <br>
-          <p>开 户 行：中国**银行股份有限公司**支行</p>
-          <p>收款户名：***</p>
-          <p>帐 号：1234567890</p>
+         
+          <p><span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司</p>
+          <p><span>统一社会信用代码：</span>91320691MA1W0DXN1N</p>
+          <p><span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室</p>
+          <p><span>电 话：</span>0513-81055866</p>
+          <p><span>开户银行：</span>中国银行南通经济技术开发区支行</p>
+          <p><span>账 号：</span>484571289748</p>
         </div>
         <div class="check_operation">
           <el-button type="primary" class="sign-submit" @click="payWait">我已确认</el-button>
@@ -36,7 +44,7 @@
             购买帐号：
             <span>{{userName}}</span>
           </div>
-          <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
+          <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付</div>
         </div>
 
         <div class="meal-body">
@@ -590,6 +598,12 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.offline-context p {
+  margin:10px 0px 0px 0px;
+}
+.offline-context p span{
+  font-weight: bold;
+}
 @font-face {
   font-family: "iconfont"; /* project id 1131189 */
   src: url("//at.alicdn.com/t/font_1131189_lmmwd56qp1.eot");
@@ -607,6 +621,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+}
+.pay_agreement p {
+  margin-bottom:10px;
 }
 </style>
 <style>

@@ -958,7 +958,7 @@ export default {
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+        }/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData1 = res.data.data;
@@ -1025,7 +1025,7 @@ export default {
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+        }/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData2 = res.data.data;
@@ -1074,7 +1074,7 @@ export default {
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+        }/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData3 = res.data.data;
@@ -1123,7 +1123,7 @@ export default {
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+        }/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData4 = res.data.data;

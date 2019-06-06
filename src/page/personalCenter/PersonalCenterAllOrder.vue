@@ -288,8 +288,8 @@
         </p>
       </el-dialog>
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
-        <p>电话：845923412</p>
-        <p>邮箱：231231332@dd.com</p>
+        <p>电话：0513-81055866</p>
+        <p>邮箱：MKT_Dept@zhjcx.cn</p>
       </el-dialog>
       <el-dialog title="开票进度" :visible.sync="schedule" width="600px" id="schedule1">
         <div class="schedule-body">
@@ -325,6 +325,13 @@
       </el-dialog>
 
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
+        <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" append-to-body center class="pay_agreement">
+        <p>1、考点接受报名40人，报满截止。</p>
+        <p>2、如需取消考试，请提前3个工作日邮件通知。</p>
+        <p>3、培训日前5天未支付培训费用的，报名名额取消</p>
+        <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
+        <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
+      </el-dialog>
         <div class="pay">
           <div class="pay-online">
             <div class="pay-online-body">
@@ -337,7 +344,7 @@
                   购买帐号：
                   <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
+                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付</div>
               </div>
 
               <div class="meal-body">
@@ -425,16 +432,22 @@
             </div>
             <div class="payment-body" v-if="radio2==9">
               <div class="payment-sub-body">
+                <div class="agreement_check">
+                    完成支付则表示您同意
+                    <span class="agreement" @click="showProtocol=true">《智聚用户付费协议》</span>
+                  </div>
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
-                      <p class="offline-notice">转账汇款成功后，请在工作日9:30-17:00致电进行款项确认。电话：1234567890</p>
-                      <p class="margin_height">&nbsp;</p>
-                      <strong>对公帐户：</strong>（可通过网银转帐或银行柜台电汇）
-                      <br>
-                      <p>开 户 行：中国**银行股份有限公司**支行</p>
-                      <p>收款户名：***</p>
-                      <p>帐 号：1234567890</p>
+                      <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
+          <p>&nbsp;</p>
+         
+          <p><span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司</p>
+          <p><span>统一社会信用代码：</span>91320691MA1W0DXN1N</p>
+          <p><span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室</p>
+          <p><span>电 话：</span>0513-81055866</p>
+          <p><span>开户银行：</span>中国银行南通经济技术开发区支行</p>
+          <p><span>账 号：</span>484571289748</p>
                     </div>
                   </div>
                 </el-col>
@@ -448,6 +461,7 @@
                       </span>
                     </div>
                   </div>
+                  
                 </el-col>
               </div>
             </div>
@@ -554,6 +568,7 @@ export default {
     return {
       selectInvoiceType: "0",
       contact: false,
+      showProtocol:false,
       count: 0,
       dialogVisible: false,
       radio2: 9,
@@ -993,7 +1008,7 @@ table {
 }
 .payment-sub-body {
   width: 860px;
-  height: 120px;
+  height: 160px;
   box-sizing: border-box;
   background: #fefcef;
   border: 1px solid #ddd;
@@ -1097,7 +1112,7 @@ table {
   height: 8px;
 }
 .bank_pay {
-  margin: 28px 0px 0px 0px;
+  margin: 48px 0px 0px 0px;
 }
 .invoice_body {
   width: 310px;
@@ -1500,6 +1515,26 @@ table {
 .choose_head {
   text-align: left;
   margin: 0px 0px 30px 65px;
+}
+.offline-context p span {
+  font-weight: bold;
+}
+.pay_agreement p {
+  margin-bottom:10px;
+}
+.agreement {
+  cursor: pointer;
+  color: #49af4f;
+}
+.agreement_check {
+  position: absolute;
+  margin:107px 0px 0px 507px;
+}
+#contact p {
+  margin-bottom:10px;
+}
+.expressShow {
+  text-align: center;
 }
 </style>
 <style>

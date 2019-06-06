@@ -14,14 +14,15 @@
           </el-tooltip>
         </div>
         <div id="certificate_div">
-          <!-- <div class="dialog_batch">{{dialog_batch}}</div> -->
           <div class="dialog_cardno">ID Card:{{dialog_cardno}}</div>
           <div class="dialog_dno">No：{{dialog_dno}}</div>
           <div class="dialog_empname">{{dialog_empname}}</div>
           <div class="dialog_detail">
             <span class="gray_style">您于</span>
-            2018年06月01日-2018年06月03日
-            <span class="gray_style">参与了</span>
+            {{year1}}年{{month1}}月{{date1}}日——{{year2}}年{{month2}}月{{date2}}日
+            <span
+              class="gray_style"
+            >参与了</span>
             {{dialog_coursename}}
             <span class="gray_style">培养项目，特此证明。期待您在为日来发展道路上有更好的表现！</span>
           </div>
@@ -41,9 +42,61 @@
         <el-breadcrumb-item>结业证明</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="fifter_term_show" v-if="resultCount>0">
-      筛选条件:{{resultCount}}
-      <div v-if="ispassTerm!=''">是否通过{{ispassTerm}}</div>
+    <div class="fifter_term_show">
+      <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
+        <div class="select_course">
+          <el-form-item prop="course1">
+            <el-select
+              v-model="ruleForm.course1"
+              placeholder="选择课程"
+              @change="getTimeList1(ruleForm.course1)"
+            >
+              <el-option
+                v-for="item in courseList"
+                :key="item.courseid"
+                :label="item.coursename"
+                :value="item.courseid"
+              ></el-option>
+              <i slot="prefix" class="iconfont">&#xe60a;</i>
+            </el-select>
+          </el-form-item>
+        </div>
+
+        <div class="select_batch">
+          <el-form-item prop="time1">
+            <el-select placeholder="选择批次（先选择课程）" :disabled="true" v-if="ruleForm.course1==''" value>
+              <i slot="prefix" class="iconfont">&#xe6e0;</i>
+            </el-select>
+            <el-select v-model="ruleForm.time1" placeholder="请选择批次" v-if="!ruleForm.course1==''">
+              <el-option
+                v-for="item in selectTimeData1"
+                :key="item.timeid"
+                :label="item.traintime"
+                :value="item.traintime"
+              ></el-option>
+              <i slot="prefix" class="iconfont">&#xe6e0;</i>
+            </el-select>
+          </el-form-item>
+        </div>
+
+        <div class="select_ispass">
+          <el-form-item prop="formIsPass">
+            <el-select v-model="ruleForm.formIsPass" placeholder="是否通过" class="person-add-select">
+              <el-option label="是" value="0"></el-option>
+              <el-option label="否" value="1"></el-option>
+              <i slot="prefix" class="iconfont">&#xe61a;</i>
+            </el-select>
+          </el-form-item>
+        </div>
+
+        <div class="select_submit">
+          <el-form-item>
+            <div class="nextPage1">
+              <el-button type="primary" @click="submitForm1('ruleForm')">筛选</el-button>
+            </div>
+          </el-form-item>
+        </div>
+      </el-form>
     </div>
     <el-form :model="ruleForm1" ref="ruleForm1">
       <el-form-item prop="keyWord">
@@ -59,32 +112,21 @@
       <el-table
         :data="tableData"
         max-height="450"
-        @filter-change="clearCount"
         v-loading="loading"
         stripe
+        border
+        :highlight-current-row="true"
         style="width: 700px"
         ref="ss"
       >
         <el-table-column label="序号" type="index" width="50"></el-table-column>
         <el-table-column prop="dno" label="证书编号" width="100"></el-table-column>
-        <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
+        <el-table-column prop="empname" label="姓名" width="120"></el-table-column>
         <el-table-column prop="cardno" label="身份证号" width="200"></el-table-column>
-        <el-table-column prop="coursename" label="课程" width="320"
-        :filters="couseTerm"
-          :filter-method="filterCourse"
-          :filter-multiple="false"
-          filter-placement="bottom"
-        ></el-table-column>
-        <el-table-column
-          prop="ispass"
-          label="是否通过"
-          width="100"
-          :filters="[{ text: '是', value: '是' }, { text: '否', value: '否' }]"
-          :filter-method="filterTag"
-          :filter-multiple="false"
-          filter-placement="bottom"
-        ></el-table-column>
-        <el-table-column prop="batch" label="批次" width="180"></el-table-column>
+        <el-table-column prop="coursename" label="课程" width="340"></el-table-column>
+        <el-table-column prop="ispass" label="是否通过" width="100"></el-table-column>
+
+        <el-table-column prop="batchStr" label="批次" width="200"></el-table-column>
         <el-table-column fixed="right" label="结业证明" width="90">
           <template slot-scope="scope">
             <el-button
@@ -114,8 +156,8 @@ export default {
       pictueUrl: "",
       searchKey: "",
       coursename: "",
-      need_search_all: "",
-      batch: "",
+      need_search_all: false,
+      batchStr: "",
       ispass: "",
       dialog_batch: "",
       dialog_cardno: "",
@@ -126,6 +168,7 @@ export default {
       count: 0,
       resultCount: 0,
       courseList: [],
+      selectTimeData1: [],
       couseTerm: [],
       ispassTerm: "",
       checkIfAll: false,
@@ -133,66 +176,75 @@ export default {
       ruleForm1: {
         keyWord: ""
       },
-      tableData: []
-    }
+      ruleForm: {
+        course1: "",
+        time1: "",
+        formIsPass: ""
+      },
+      tableData: [],
+      year1: "",
+      month1: "",
+      date1: "",
+      year2: "",
+      month2: "",
+      date2: ""
+    };
   },
   methods: {
+    submitForm1(formName) {
+      if (
+        this.ruleForm.course1 != "" &&
+        this.ruleForm.course1 != null &&
+        this.ruleForm.course1 != undefined
+      ) {
+        this.$ajax({
+          method: "get",
+          url: `${this.baseURL}/zjsxpt/course_getCourseById.do?courseid=${
+            this.ruleForm.course1
+          }`
+        })
+          .then(res => {
+            this.coursename = res.data.data.coursename;
+            this.batchStr = this.ruleForm.time1;
+            this.ispass = this.ruleForm.formIsPass;
+            this.getJieYeListBySearch();
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      } else {
+        this.coursename = "";
+        this.batchStr = "";
+        this.ispass = this.ruleForm.formIsPass;
+        this.getJieYeListBySearch();
+      }
+    },
+    getTimeList1(course) {
+      this.ruleForm.time1 = "";
+      this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectTimeData1 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getCourseList() {
       this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/course_getCourseList.do`
       })
         .then(res => {
-          
           this.courseList = res.data.data;
-          
-          for (var i = 0; i < this.courseList.length; i++) {
-            var courseFifter={};
-            console.log(this.courseList[i].coursename);
-            courseFifter.text = this.courseList[i].coursename;
-            courseFifter.value = this.courseList[i].coursename;
-            console.log(this.courseList[i].coursename);
-            console.log(i);
-            console.log(courseFifter);
-            this.couseTerm.push(courseFifter);
-            
-          }
-          
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
-    filterCourse(value, row) {
-      this.courseTermValue = value;
-      if (row.coursename === value) {
-        this.count++;
-      } 
-      this.checkIfAll = true;
-      return row.coursename === value;
-    },
-    filterTag(value, row) {
-      this.ispassTerm = value;
-      if (row.ispass === value) {
-        this.count++;
-      } 
-      this.checkIfAll = true;
-      return row.ispass === value;
-    },
-    clearCount() {
-      alert("ss");
-      if (this.count == 0 && this.checkIfAll == true) {
-        this.$notify({
-          title: "无筛选结果",
-          message: "筛选结果为空！",
-          duration: 0,
-          type: "error"
-        });
-        this.$refs.ss.clearFilter();
-      }
-      this.checkIfAll = false;
-      this.resultCount = this.count;
-      this.count = 0;
     },
     printJieye() {
       let subOutputRankPrint = document.getElementById("certificate_div");
@@ -214,7 +266,13 @@ export default {
         .then(res => {
           if (res.data.data != false) {
             this.showCertificateDialog = true;
-            this.dialog_batch = res.data.data.batch;
+            this.dialog_batch = res.data.data.batchStr;
+            this.year1 = this.dialog_batch.split("-")[0];
+            this.month1 = this.dialog_batch.split("-")[1];
+            this.date1 = this.dialog_batch.split("-")[2].split("~")[0];
+            this.year2 = this.dialog_batch.split("-")[2].split("~")[1];
+            this.month2 = this.dialog_batch.split("-")[3];
+            this.date2 = this.dialog_batch.split("-")[4];
             this.dialog_cardno = res.data.data.cardno;
             this.dialog_dno = res.data.data.dno;
             this.dialog_empname = res.data.data.empname;
@@ -233,6 +291,12 @@ export default {
         });
     },
     submitForm(formName, searchKey) {
+      this.coursename = "";
+      this.batchStr = "";
+      this.ispass = "";
+      this.ruleForm.course1 = "";
+      this.ruleForm.time1 = "";
+      this.ruleForm.formIsPass = "";
       this.searchKey = searchKey;
       this.getJieYeListBySearch();
     },
@@ -265,14 +329,14 @@ export default {
           this.baseURL
         }/zjsxpt/invoice_findDiplomaList.do?userid=${userid}&coursename=${
           this.coursename
-        }&batch=${this.batch}&ispass=${this.ispass}&value=${this.searchKey}`
+        }&batch=${this.batchStr}&ispass=${this.ispass}&value=${this.searchKey}`
       })
         .then(res => {
           this.tableData = res.data.data;
           this.loading = false;
           if (
             this.coursename == "" &&
-            this.batch == "" &&
+            this.batchStr == "" &&
             this.ispass == "" &&
             this.searchKey == ""
           ) {
@@ -281,7 +345,7 @@ export default {
             this.need_search_all = true;
           }
           this.coursename = "";
-          this.batch = "";
+          this.batchStr = "";
           this.ispass = "";
           this.searchKey = "";
         })
@@ -298,16 +362,6 @@ export default {
     }
     this.global.setGlobalEmpId("");
     this.getCourseList();
-
-    // for(var i=0;i<this.tableData.length;i++) {
-
-    //   this.courseType.push(this.tableData[i].coursename);
-    //   console.log(this.courseType);
-    // }
-    // var x = new Set(this.courseType);
-    // console.log(x);
-    // let zz = Array.from(x);
-    // console.log(zz);
   }
 };
 </script>
@@ -407,14 +461,14 @@ export default {
   width: 520px;
   color: #040000;
   letter-spacing: 2.5px;
-  font-family: "SimSun";
+  font-family: "KaiTi";
   line-height: 20px;
   font-weight: bold;
   font-size: 15px;
 }
 .gray_style {
   color: #a6a8ab;
-  font-family: "SimSun";
+  font-family: "KaiTi";
   font-weight: bold;
   font-size: 15px;
 }
@@ -439,6 +493,51 @@ export default {
 }
 .first_last {
   margin-right: 10px;
+}
+.select_course {
+  position: absolute;
+  margin: 0px 0px 0px 105px;
+}
+.select_course .el-select {
+  width: 150px;
+}
+.select_batch {
+  position: absolute;
+  margin: 0px 0px 0px 259px;
+}
+.select_ispass {
+  position: absolute;
+  margin: 0px 0px 0px 482px;
+}
+.select_ispass .el-select {
+  width: 150px;
+}
+.select_submit {
+  position: absolute;
+  margin: 0px 0px 0px 636px;
+}
+.fifter_term_show {
+  height: 50px;
+}
+@font-face {
+  font-family: "iconfont"; /* project id 1131189 */
+  src: url("//at.alicdn.com/t/font_1131189_4d5jvooav36.eot");
+  src: url("//at.alicdn.com/t/font_1131189_4d5jvooav36.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1131189_4d5jvooav36.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1131189_4d5jvooav36.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1131189_4d5jvooav36.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1131189_4d5jvooav36.svg#iconfont") format("svg");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 18px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 40px;
+  margin: 0px 0px 0px 2px;
 }
 </style>
 <style>
