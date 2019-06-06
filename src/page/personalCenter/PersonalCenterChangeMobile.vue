@@ -53,8 +53,8 @@
 
     <div class="haveSubmit" v-if="changeMobileStatus == '1'">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
-        <p>电话：845923412</p>
-        <p>邮箱：231231332@dd.com</p>
+        <p>电话：0513-81055866</p>
+        <p>邮箱：MKT_Dept@zhjcx.cn</p>
       </el-dialog>
 
       <el-steps :space="200" :active="1" finish-status="success">
