@@ -3,15 +3,17 @@
     <el-row class="pad20 mt20 bg-white" v-if="hotNews.length">
       <el-col :span="12" class="hot-img">
         <div class="grid-content hot-box">
-          <div class="hot-news-tag">热点</div>
-          <img :src="hotNews[0].picurl" class="hot-news-img">
+          <router-link :to="'/newsDetail/'+hotNews[0].newsid">
+            <div class="hot-news-tag">热点</div>
+            <img :src="hotNews[0].picurl" class="hot-news-img">
+          </router-link>
         </div>
       </el-col>
       <el-col :span="12">
         <div class="grid-content hot-box">
           <swiper :options="swiperOption" ref="mySwiper">
             <swiper-slide v-for="(item,key) in hotNews" :key="key">
-              <router-link :to="'/newsDetail/'+item.newsid">   
+              <router-link :to="'/newsDetail/'+item.newsid">
                 <p class="hot_news_title">{{item.title}}</p>
                 <p class="hot_news_date">{{item.createdate}}</p>
               </router-link>
@@ -35,10 +37,18 @@
                     <img :src="item.picurl">
                   </div>
                   <div class="news-overview">
-                    <div class="news_type"><el-tag v-if="type==0" >行业政策</el-tag></div>
-                    <div class="news_type"><el-tag v-if="type==1" >地方动态</el-tag></div>
-                    <div class="news_type"><el-tag v-if="type==2" >企业新闻</el-tag></div>
-                    <div class="news_type"><el-tag v-if="type==3" >国际信息</el-tag></div>
+                    <div class="news_type">
+                      <el-tag v-if="type==0">行业政策</el-tag>
+                    </div>
+                    <div class="news_type">
+                      <el-tag v-if="type==1">地方动态</el-tag>
+                    </div>
+                    <div class="news_type">
+                      <el-tag v-if="type==2">企业新闻</el-tag>
+                    </div>
+                    <div class="news_type">
+                      <el-tag v-if="type==3">国际信息</el-tag>
+                    </div>
                     <p>发布时间：{{item.createdate}}</p>
                     <h3>{{item.title}}</h3>
                     <!-- <div>{{item.preview}}</div> -->
@@ -179,7 +189,7 @@ export default {
 }
 .hot-news-img {
   width: 100%;
-  height:310px;
+  height: 310px;
 }
 .swiper-container {
   height: 195px;
@@ -201,7 +211,6 @@ export default {
   width: 140px;
   font-size: 14px;
   text-align: right;
-  
 }
 .news-overview h3 {
   margin-bottom: 20px;
@@ -228,7 +237,7 @@ export default {
 .list-row {
   border-bottom: 1px solid #ddd;
   display: flex;
-  padding:20px 0px;
+  padding: 20px 0px;
 }
 .news-list .list-row .news-img {
   width: 250px;
@@ -243,19 +252,19 @@ export default {
 }
 .news-overview p {
   position: absolute;
-  margin:135px 0px 0px 0px;
+  margin: 135px 0px 0px 0px;
   color: #666;
-  font-size:12px;
+  font-size: 12px;
 }
 .news_type {
   position: absolute;
-  margin:85px 0px 0px 0px;
+  margin: 85px 0px 0px 0px;
 }
 .el-pagination {
-  margin-top:20px;
+  margin-top: 20px;
 }
 .list_body {
-  padding:0px 20px;
+  padding: 0px 20px;
 }
 </style>
 <style>
