@@ -46,14 +46,26 @@ export default {
     };
   },
   mounted() {
-    this.getBaseList("0", this.showDefault);
+    if(this.global.baseShowFlag=="0") {
+      this.getBaseList("0", this.showDefault);
     this.getBaseList("1");
+    } 
+    
+    this.global.setBaseShowFlag("1");
+   
+  },
+  destroyed() {
+    this.global.setBaseShowFlag("0");
+    
   },
   watch: {
     $route(to, from) {
-      if (to.path == "/base") {
+      if (to.path == "/base"&&this.global.baseShowFlag=="0") {
         this.showDefault();
+      } else if (to.path == "/base"&&this.global.baseShowFlag=="1") {
+        window.history.back(-1);
       }
+      
     }
   },
   methods: {
