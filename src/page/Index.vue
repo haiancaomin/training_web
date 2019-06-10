@@ -38,44 +38,42 @@
           </el-row>
 
           <el-row class="no-margin-b">
-            <div class="course-body">
-              <div v-for="courseItem in courseList" :key="courseItem.courseid">
-                <el-col :span="6">
-                  <router-link to="/course">
-                    <div class="course-outbody">
-                      <div class="course-img-body">
-                        <img :src="courseItem.picurl" class="course-show-img">
-                      </div>
+            <div class="course-body clearfix">
+              <el-col :span="6" v-for="courseItem in courseList" :key="courseItem.courseid">
+                <router-link to="/course">
+                  <div class="course-outbody">
+                    <div class="course-img-body">
+                      <img :src="courseItem.picurl" class="course-show-img">
+                    </div>
 
-                      <div class="course-info">
-                        <img src="../assets/contentBack.png">
-                        <div class="course-name" v-if="courseItem.coursename.length>11">
-                          <marquee
-                            behavior="alternate"
-                            direction="left"
-                            loop="infinite"
-                            scrollamount="1"
-                          >
-                            <h3 class="big_h3">{{courseItem.coursename}}</h3>
-                          </marquee>
-                        </div>
-                        <div class="course-name" v-if="courseItem.coursename.length<=11">
-                          <h3 class="little_h3">{{courseItem.coursename}}</h3>
-                        </div>
-                        <div class="course-description" v-if="courseItem.description.length>15">
-                          <el-tooltip content="Top center" placement="bottom">
-                            <div slot="content">{{courseItem.description}}</div>
-                            <h3>{{courseItem.description}}</h3>
-                          </el-tooltip>
-                        </div>
-                        <div class="course-description" v-if="courseItem.description.length<=15">
+                    <div class="course-info">
+                      <img src="../assets/contentBack.png">
+                      <div class="course-name" v-if="courseItem.coursename.length>11">
+                        <marquee
+                          behavior="alternate"
+                          direction="left"
+                          loop="infinite"
+                          scrollamount="1"
+                        >
+                          <h3 class="big_h3">{{courseItem.coursename}}</h3>
+                        </marquee>
+                      </div>
+                      <div class="course-name" v-if="courseItem.coursename.length<=11">
+                        <h3 class="little_h3">{{courseItem.coursename}}</h3>
+                      </div>
+                      <div class="course-description" v-if="courseItem.description.length>15">
+                        <el-tooltip content="Top center" placement="bottom">
+                          <div slot="content">{{courseItem.description}}</div>
                           <h3>{{courseItem.description}}</h3>
-                        </div>
+                        </el-tooltip>
+                      </div>
+                      <div class="course-description" v-if="courseItem.description.length<=15">
+                        <h3>{{courseItem.description}}</h3>
                       </div>
                     </div>
-                  </router-link>
-                </el-col>
-              </div>
+                  </div>
+                </router-link>
+              </el-col>
 
               <el-col :span="6">
                 <router-link to="/course">
@@ -350,6 +348,11 @@ export default {
 </script>
 
 <style scoped>
+.clearfix:after{
+  content:'';
+  display: block;
+  clear: both;
+}
 #index_body {
   margin-top: 80px;
 }
