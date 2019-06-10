@@ -8,6 +8,7 @@
     </div>
 
     <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+      <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽情期待。现在您也可以不进行认证，不会影响功能使用。</P>
       <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
         <el-form-item prop="companyName">
           <div class="input-body" id="loginForm">
@@ -344,6 +345,11 @@ export default {
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
   margin: 0px 5px 0px 0px;
+}
+.authentication_notice {
+  font-size: 12px;
+  color:#f56c6c;
+  margin:0px 0px 20px 0px;
 }
 </style>
 <style>

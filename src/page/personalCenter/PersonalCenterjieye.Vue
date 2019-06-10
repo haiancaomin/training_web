@@ -24,13 +24,13 @@
               class="gray_style"
             >参与了</span>
             {{dialog_coursename}}
-            <span class="gray_style">培养项目，特此证明。期待您在为日来发展道路上有更好的表现！</span>
+            <span class="gray_style">培养项目，特此证明。期待您在未来发展道路上有更好的表现！</span>
           </div>
           <div class="dialog_coursename">
             <span class="first_word">上</span>海市装配式建筑构件生产专项岗<span class="first_last">位</span>
             技术研修班——{{dialog_coursename}}
           </div>
-          <div class="dialog_createdate">{{dialog_createdate}}</div>
+          <div class="dialog_createdate">{{dialog_createdate.split(" ")[0]}}</div>
           <img src="../../assets/jieye_img.png" alt class="jieye_img">
         </div>
       </div>
@@ -426,7 +426,7 @@ export default {
 }
 .dialog_dno {
   position: absolute;
-  margin: 100px 0px 0px 580px;
+  margin: 100px 0px 0px 600px;
   color: #f8b62d;
   font-family: "DFKai-SB";
 }
@@ -443,16 +443,18 @@ export default {
 .dialog_coursename {
   position: absolute;
   width: 580px;
-  margin: 220px 0px 0px 117px;
-  letter-spacing: 9px;
+  margin: 218px 0px 0px 117px;
+  letter-spacing: 4px;
   text-align: center;
   color: #040000;
-  font-size: 24px;
-  line-height: 33px;
-  font-family: "Microsoft YaHei";
+  font-size: 28px;
+  line-height: 37px;
+  font-family: "SimSun";
+  font-weight: 700;
 }
 .dialog_coursename span {
-  font-family: "Microsoft YaHei";
+  font-family: "SimSun";
+  font-weight: 700;
 }
 .dialog_detail {
   position: absolute;
@@ -474,7 +476,7 @@ export default {
 }
 .dialog_createdate {
   position: absolute;
-  margin: 937px 0px 0px 535px;
+  margin: 937px 0px 0px 562px;
   color: #040000;
   font-family: "DFKai-SB";
   font-size: 16px;
@@ -489,7 +491,7 @@ export default {
   color: #409eff;
 }
 .first_word {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 .first_last {
   margin-right: 10px;

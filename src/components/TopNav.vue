@@ -265,11 +265,45 @@ export default {
             });
         }
       } else {
-        this.$message({
-          message: "检测到您还未登录,请登录后操作！",
-          center: true,
-          type: "error"
-        });
+        if (this.textarea == "") {
+          this.$message({
+            message: "问题描述必填！",
+            center: true,
+            type: "error"
+          });
+        } else {
+          this.$ajax({
+            method: "post",
+            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${
+              this.textarea
+            }&attachmentid=${this.fileUid}&phone=${
+              this.mobile
+            }`
+          })
+            .then(res => {
+              if (res.data.data == "0") {
+                this.$message({
+                  message: "您的意见我们已经收到，谢谢！",
+                  type: "success",
+                  center: true
+                });
+                this.showBoardDialog = false;
+                this.textarea = "";
+                this.mobile = "";
+                this.fileUid = "";
+                this.$refs.upload.clearFiles();
+              }  else {
+                this.$message({
+                  message: "未知错误！",
+                  type: "error",
+                  center: true
+                });
+              }
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
       }
     },
     checkSize(file) {
@@ -311,15 +345,9 @@ export default {
       });
     },
     haveSuggest() {
-      if (window.sessionStorage.user != undefined) {
+     
         this.showBoardDialog = true;
-      } else {
-        this.$message({
-          message: "检测到您还未登录,请登录后操作！",
-          center: true,
-          type: "error"
-        });
-      }
+      
     },
     enter_to_message_board() {
       this.show_to_message_board = false;
@@ -340,8 +368,21 @@ export default {
       this.show_erweima = true;
     },
     gotoMyboard() {
-      this.showBoardDialog = false;
-      this.$router.push({ path: `/MessageBoard` });
+       if (window.sessionStorage.user != undefined) {
+        this.showBoardDialog = false;
+        this.$router.push({ path: `/MessageBoard` });
+      } else {
+        this.showBoardDialog = false;
+         document.getElementById('loginBtn').click();
+        this.$message({
+          message: "检测到您还未登录,请登录后操作！",
+          center: true,
+          type: "error",
+          customClass: "zZindex"
+        });
+      }
+      
+      
     },
     handleCommand(command) {
       if (command == "logOut") {
