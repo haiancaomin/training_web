@@ -50,9 +50,7 @@ export default {
       this.getBaseList("0", this.showDefault);
     this.getBaseList("1");
     } 
-    
     this.global.setBaseShowFlag("1");
-   
   },
   destroyed() {
     this.global.setBaseShowFlag("0");

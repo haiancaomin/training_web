@@ -7,4 +7,8 @@ export default {
     setBaseShowFlag(baseShowFlag) {
         this.baseShowFlag = baseShowFlag;
     },
+    personalCenterShowFlag:"0",
+    setPersonalCenterShowFlag(personalCenterShowFlag) {
+        this.personalCenterShowFlag = personalCenterShowFlag;
+    },
 }

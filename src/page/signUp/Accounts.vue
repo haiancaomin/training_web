@@ -1501,7 +1501,14 @@ export default {
             }`
           })
             .then(res => {
-              this.accountsPage = 0;
+              if(res.data.data == "2") {
+                this.$message({
+            message: "下单金额异常!",
+            type: "error",
+            center: true
+          });
+              } else {
+                this.accountsPage = 0;
               this.SignUpPayPage = 1;
               this.active = 2;
               this.$emit("ToSignUpPayPage", {
@@ -1512,6 +1519,8 @@ export default {
               this.bus.$emit("toNextPage", {
                 orderID: res.data.orderid
               });
+              }
+              
             })
             .catch(function(err) {
               console.log(err);

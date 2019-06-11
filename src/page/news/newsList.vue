@@ -95,8 +95,8 @@ export default {
           disableOnInteraction: false
         },
         direction: "vertical",
-        slidesPerView: 7,
-        height: 200,
+        slidesPerView: 10,
+        height: 300,
         loop: true
       },
       activeName: "first"
@@ -192,7 +192,7 @@ export default {
   height: 310px;
 }
 .swiper-container {
-  height: 195px;
+  height: 300px;
   margin-top: 10px;
 }
 .swiper-slide a {

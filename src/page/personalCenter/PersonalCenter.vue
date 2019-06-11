@@ -89,12 +89,20 @@ export default {
     return {};
   },
   mounted() {
-    this.showDefault();
+    if(this.global.personalCenterShowFlag=="0") {
+      this.showDefault();
+    } 
+    this.global.setPersonalCenterShowFlag("1");
+  },
+  destroyed() {
+    this.global.setPersonalCenterShowFlag("0");
   },
   watch: {
     $route(to, from) {
-      if (to.path == "/PersonalCenter") {
+      if (to.path == "/PersonalCenter"&&this.global.personalCenterShowFlag=="0") {
         this.showDefault();
+      } else if (to.path == "/PersonalCenter"&&this.global.personalCenterShowFlag=="1") {
+        window.history.back(-1);
       }
     }
   },
