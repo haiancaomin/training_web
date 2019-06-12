@@ -20,8 +20,9 @@ Vue.prototype.baseURL = process.env.API_ROOT
 Vue.prototype.global = global
 Vue.config.productionTip = false
 
-// Vue.use(ElementUI);
-// Vue.use(VueAwesomeSwiper, /* { default global options } */ )
+
+Vue.config.productionTip = false
+
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth)) {

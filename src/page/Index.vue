@@ -671,9 +671,13 @@ export default {
   height: 170px;
   margin: 20px 10px 5px 10px;
   border-radius: 4px;
+  box-shadow: 0 0 8px #999;
 }
 .course-outbody:hover .course-show-img {
   transform: scale(1.2);
+}
+.course-outbody:hover {
+  box-shadow: 0 0 8px #409eff;
 }
 .course-name {
   position: absolute;

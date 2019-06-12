@@ -54,7 +54,6 @@ export default {
   },
   destroyed() {
     this.global.setBaseShowFlag("0");
-    
   },
   watch: {
     $route(to, from) {

@@ -178,7 +178,7 @@ export default {
 }
 .download {
   position: absolute;
-  margin: -52px 0px 0px 765px;
+  margin: -52px 0px 0px 805px;
 }
 .download_btn {
   height: 35px;
