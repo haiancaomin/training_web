@@ -411,7 +411,7 @@
 export default {
   data() {
     return {
-      activeNames: ["0", "1", "2", "3"],
+      activeNames: ["0"],
       prodCourseLists: [],
       workCourseLists: [],
       designCourseLists: [],
@@ -557,6 +557,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+      color: #666
 }
 </style>
 <style>

@@ -754,7 +754,6 @@ export default {
               console.log(err);
             });
         }
-
         if (
           res.course2 != "" &&
           res.course2 != null &&
