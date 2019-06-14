@@ -6,7 +6,7 @@
     </div>
     <div class="block">
      <div class="base_name">{{baseInfo.basename}}</div>
-          <img :src="baseInfo.pictureUrl[0]" class="base-scan-img">
+          <img :src="baseInfo.pictureUrl[0]" class="base-scan-img" v-if="baseInfo.pictureUrl">
          <div class="base_summary">
            
         <pre>{{baseInfo.summary}}</pre>
