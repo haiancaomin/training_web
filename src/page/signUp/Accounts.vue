@@ -1506,7 +1506,13 @@ export default {
             type: "error",
             center: true
           });
-              } else {
+              } else if(res.data.data == "3") {
+                this.$message({
+            message: "您的报名人数超过了剩余名额!",
+            type: "error",
+            center: true
+          });
+              }else{
                 this.accountsPage = 0;
               this.SignUpPayPage = 1;
               this.active = 2;
