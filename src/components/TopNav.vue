@@ -134,7 +134,7 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="personalCenter">个人中心</el-dropdown-item>
-            <el-dropdown-item command="MessageBoard">意见反馈</el-dropdown-item>
+            <el-dropdown-item command="MessageBoard">我的反馈</el-dropdown-item>
             <el-dropdown-item command="logOut">注销</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -390,7 +390,7 @@ export default {
       } else if (command == "personalCenter") {
         this.$router.push({ path: `/PersonalCenter/PersonalCenterAllOrder` });
       } else if (command == "MessageBoard") {
-        this.showBoardDialog = true;
+        this.$router.push({ path: `/MessageBoard` });
       }
     },
     addUserInfo() {

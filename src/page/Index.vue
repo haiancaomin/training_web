@@ -542,6 +542,7 @@ export default {
 }
 #map {
   height: 450px;
+  box-shadow: 0 0 6px #c7c5c5;
 }
 .contact {
   background: #fff;

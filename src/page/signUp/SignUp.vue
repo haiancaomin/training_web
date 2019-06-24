@@ -1,6 +1,7 @@
 <template>
+<div class="out_body">
   <div id="signup">
-    <el-steps :active="active" finish-status="success" simple style="margin-top: 80px">
+    <el-steps :active="active" finish-status="success" simple>
       <el-step title="报名信息"></el-step>
       <el-step title="订单确认"></el-step>
       <el-step title="费用"></el-step>
@@ -52,6 +53,7 @@
       <SignUpPageWait></SignUpPageWait>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -114,8 +116,10 @@ export default {
 <style scoped>
 #signup {
   width: 1000px;
-  margin: auto;
+  margin: 80px auto 0px auto;
+  padding:10px 0px 10px 0px;
 }
+
 .sign-up-info {
   width: 1000px;
   height: 950px;
@@ -125,7 +129,7 @@ export default {
 }
 .test-info-choice {
   width: 1000px;
-  margin: 0px auto;
+  margin: 10px auto;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
@@ -148,5 +152,10 @@ export default {
   border: 1px solid #e7e7e7;
   padding: 30px 0px 0px 30px;
   margin: 10px 0px 0px 0px;
+}
+.el-steps {
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fff;
+  border: 1px solid #e7e7e7;
 }
 </style>
