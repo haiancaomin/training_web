@@ -77,6 +77,7 @@
                         v-model="ruleForm.time1"
                         placeholder="请选择培训时间"
                         v-if="!ruleForm.course1==''"
+                        @change="change_traintime1"
                       >
                         <el-option
                           v-for="item in selectTimeData1"
@@ -85,6 +86,12 @@
                           :value="item.timeid"
                         ></el-option>
                       </el-select>
+                      <div
+                        class="left_num"
+                        :class="{'warning_color':warningColor1}"
+                        v-if="leftNum1>0&&showLeftNum1"
+                      >该批次剩余可报名人数：{{leftNum1}}</div>
+                      <div class="warning_color" v-if="leftNum1<1&&showLeftNum1">报名人数已满</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal1">
@@ -206,6 +213,7 @@
                         v-model="ruleForm.time2"
                         placeholder="请选择培训时间"
                         v-if="!ruleForm.course2==''"
+                        @change="change_traintime2"
                       >
                         <el-option
                           v-for="item in selectTimeData2"
@@ -214,6 +222,12 @@
                           :value="item.timeid"
                         ></el-option>
                       </el-select>
+                      <div
+                        class="left_num"
+                        :class="{'warning_color':warningColor2}"
+                        v-if="leftNum2>0&&showLeftNum2"
+                      >该批次剩余可报名人数：{{leftNum2}}</div>
+                      <div class="warning_color" v-if="leftNum2<1&&showLeftNum2">报名人数已满</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal2">
@@ -337,6 +351,7 @@
                         v-model="ruleForm.time3"
                         placeholder="请选择培训时间"
                         v-if="!ruleForm.course3==''"
+                        @change="change_traintime3"
                       >
                         <el-option
                           v-for="item in selectTimeData3"
@@ -345,6 +360,12 @@
                           :value="item.timeid"
                         ></el-option>
                       </el-select>
+                      <div
+                        class="left_num"
+                        :class="{'warning_color':warningColor3}"
+                        v-if="leftNum3>0&&showLeftNum3"
+                      >该批次剩余可报名人数：{{leftNum3}}</div>
+                      <div class="warning_color" v-if="leftNum3<1&&showLeftNum3">报名人数已满</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal3">
@@ -466,6 +487,7 @@
                         v-model="ruleForm.time4"
                         placeholder="请选择培训时间"
                         v-if="!ruleForm.course4==''"
+                        @change="change_traintime4"
                       >
                         <el-option
                           v-for="item in selectTimeData4"
@@ -474,6 +496,12 @@
                           :value="item.timeid"
                         ></el-option>
                       </el-select>
+                      <div
+                        class="left_num"
+                        :class="{'warning_color':warningColor4}"
+                        v-if="leftNum4>0&&showLeftNum4"
+                      >该批次剩余可报名人数：{{leftNum4}}</div>
+                      <div class="warning_color" v-if="leftNum4<1&&showLeftNum4">报名人数已满</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal4">
@@ -614,7 +642,23 @@ export default {
         time4: "",
         meal4: ""
       },
-      tableData1: []
+      tableData1: [],
+      leftNum1: 0,
+      leftNum2: 0,
+      leftNum3: 0,
+      leftNum4: 0,
+      showLeftNum1: false,
+      showLeftNum2: false,
+      showLeftNum3: false,
+      showLeftNum4: false,
+      choose_traintime1: "",
+      choose_traintime2: "",
+      choose_traintime3: "",
+      choose_traintime4: "",
+      warningColor1: false,
+      warningColor2: false,
+      warningColor3: false,
+      warningColor4: false
     };
   },
   methods: {
@@ -744,7 +788,317 @@ export default {
           type: "error",
           center: true
         });
+      } else if (
+        from1Empty == 0 &&
+        from2Empty == 0 &&
+        from3Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime2 &&
+        this.choose_traintime2 == this.choose_traintime3 &&
+        this.choose_traintime3 == this.choose_traintime4 &&
+        this.personSize1 +
+          this.personSize2 +
+          this.personSize3 +
+          this.personSize4 >
+          this.leftNum1
+      ) {
+        this.warningColor1 = this.warningColor2 = this.warningColor3 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from2Empty == 0 &&
+        from3Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime2 &&
+        this.choose_traintime2 == this.choose_traintime3 &&
+        this.personSize1 + this.personSize2 + this.personSize3 > this.leftNum1
+      ) {
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor1 = this.warningColor2 = this.warningColor3 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from2Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime2 &&
+        this.choose_traintime2 == this.choose_traintime4 &&
+        this.personSize1 + this.personSize2 + this.personSize4 > this.leftNum1
+      ) {
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        this.warningColor1 = this.warningColor2 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from3Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime3 &&
+        this.choose_traintime3 == this.choose_traintime4 &&
+        this.personSize1 + this.personSize3 + this.personSize4 > this.leftNum1
+      ) {
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        this.warningColor1 = this.warningColor3 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from2Empty == 0 &&
+        from3Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime2 == this.choose_traintime3 &&
+        this.choose_traintime3 == this.choose_traintime4 &&
+        this.personSize2 + this.personSize3 + this.personSize4 > this.leftNum2
+      ) {
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        this.warningColor2 = this.warningColor3 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from2Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime2 &&
+        this.personSize1 + this.personSize2 > this.leftNum1
+      ) {
+        if (
+          from3Empty == 0 &&
+          from4Empty == 0 &&
+          this.choose_traintime3 == this.choose_traintime4 &&
+          this.personSize3 + this.personSize4 > this.leftNum3
+        ) {
+          this.warningColor3 = this.warningColor4 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor1 = this.warningColor2 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from3Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime3 &&
+        this.personSize1 + this.personSize3 > this.leftNum1
+      ) {
+        if (
+          from2Empty == 0 &&
+          from4Empty == 0 &&
+          this.choose_traintime2 == this.choose_traintime4 &&
+          this.personSize2 + this.personSize4 > this.leftNum2
+        ) {
+          this.warningColor2 = this.warningColor4 = true;
+        }
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor1 = this.warningColor3 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from1Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime1 == this.choose_traintime4 &&
+        this.personSize1 + this.personSize4 > this.leftNum1
+      ) {
+        if (
+          from3Empty == 0 &&
+          from2Empty == 0 &&
+          this.choose_traintime3 == this.choose_traintime2 &&
+          this.personSize3 + this.personSize2 > this.leftNum3
+        ) {
+          this.warningColor3 = this.warningColor2 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        this.warningColor1 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from3Empty == 0 &&
+        from2Empty == 0 &&
+        this.choose_traintime3 == this.choose_traintime2 &&
+        this.personSize3 + this.personSize2 > this.leftNum3
+      ) {
+        if (
+          from1Empty == 0 &&
+          from4Empty == 0 &&
+          this.choose_traintime1 == this.choose_traintime4 &&
+          this.personSize1 + this.personSize4 > this.leftNum1
+        ) {
+          this.warningColor1 = this.warningColor4 = true;
+        }
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor3 = this.warningColor2 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from4Empty == 0 &&
+        from2Empty == 0 &&
+        this.choose_traintime4 == this.choose_traintime2 &&
+        this.personSize4 + this.personSize2 > this.leftNum4
+      ) {
+        if (
+          from3Empty == 0 &&
+          from1Empty == 0 &&
+          this.choose_traintime3 == this.choose_traintime1 &&
+          this.personSize3 + this.personSize1 > this.leftNum3
+        ) {
+          this.warningColor3 = this.warningColor1 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+
+        this.warningColor4 = this.warningColor2 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        from3Empty == 0 &&
+        from4Empty == 0 &&
+        this.choose_traintime3 == this.choose_traintime4 &&
+        this.personSize3 + this.personSize4 > this.leftNum3
+      ) {
+        if (
+          from1Empty == 0 &&
+          from2Empty == 0 &&
+          this.choose_traintime1 == this.choose_traintime2 &&
+          this.personSize1 + this.personSize2 > this.leftNum1
+        ) {
+          this.warningColor1 = this.warningColor2 = true;
+        }
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        this.warningColor3 = this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor1 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor2 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+          this.warningColor4 = true;
+        }
+        this.warningColor3 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
+      } else if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
+        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
+          this.warningColor2 = true;
+        }
+        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
+          this.warningColor3 = true;
+        }
+        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+          this.warningColor1 = true;
+        }
+        this.warningColor4 = true;
+        this.$message({
+          message: "您的报名人数超过了剩余名额！",
+          type: "error",
+          center: true
+        });
       } else {
+        this.warningColor1 = this.warningColor2 = this.warningColor3 = this.warningColor4 = false;
         this.signUpPage = 0;
         this.accountsPage = 1;
         this.active = 1;
@@ -754,7 +1108,7 @@ export default {
           active: this.active
         });
         this.bus.$emit("todata", {
-          type: "1",
+          type: "2",
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,
@@ -791,7 +1145,8 @@ export default {
       this.form1 = false;
       this.but1 = false;
       this.del1 = false;
-
+      this.showLeftNum1 = false;
+      this.leftNum1 = 0;
       if (this.form4 == true) {
         this.but4 = true;
         if (this.form3 == false && this.form2 == false) {
@@ -831,6 +1186,8 @@ export default {
       this.form2 = false;
       this.but2 = false;
       this.del2 = false;
+      this.showLeftNum2 = false;
+      this.leftNum2 = 0;
       if (this.form4 == true) {
         this.but4 = true;
         if (this.form3 == false && this.form1 == false) {
@@ -868,6 +1225,8 @@ export default {
       this.form3 = false;
       this.but3 = false;
       this.del3 = false;
+      this.showLeftNum3 = false;
+      this.leftNum3 = 0;
       if (this.form4 == true) {
         this.but4 = true;
         if (this.form1 == false && this.form2 == false) {
@@ -907,6 +1266,8 @@ export default {
       this.form4 = false;
       this.but4 = false;
       this.del4 = false;
+      this.showLeftNum4 = false;
+      this.leftNum4 = 0;
       if (this.form3 == true) {
         this.but3 = true;
         if (this.form1 == false && this.form2 == false) {
@@ -956,9 +1317,7 @@ export default {
     getTimeList1(course) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData1 = res.data.data;
@@ -1023,9 +1382,7 @@ export default {
     getTimeList2(course) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData2 = res.data.data;
@@ -1072,9 +1429,7 @@ export default {
     getTimeList3(course) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData3 = res.data.data;
@@ -1121,9 +1476,7 @@ export default {
     getTimeList4(course) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
       })
         .then(res => {
           this.selectTimeData4 = res.data.data;
@@ -1149,6 +1502,66 @@ export default {
     handleSelectionChange4(val) {
       this.multipleSelection4 = val;
       this.personSize4 = this.multipleSelection4.length;
+    },
+    change_traintime1(val) {
+      this.warningColor1 = false;
+      this.choose_traintime1 = val;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getRemainderByTime.do?timeid=${val}`
+      })
+        .then(res => {
+          this.leftNum1 = res.data.data;
+          this.showLeftNum1 = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    change_traintime2(val) {
+      this.warningColor2 = false;
+      this.choose_traintime2 = val;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getRemainderByTime.do?timeid=${val}`
+      })
+        .then(res => {
+          this.leftNum2 = res.data.data;
+          this.showLeftNum2 = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    change_traintime3(val) {
+      this.warningColor3 = false;
+      this.choose_traintime3 = val;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getRemainderByTime.do?timeid=${val}`
+      })
+        .then(res => {
+          this.leftNum3 = res.data.data;
+          this.showLeftNum3 = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    change_traintime4(val) {
+      this.warningColor4 = false;
+      this.choose_traintime4 = val;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getRemainderByTime.do?timeid=${val}`
+      })
+        .then(res => {
+          this.leftNum4 = res.data.data;
+          this.showLeftNum4 = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   },
   mounted() {
@@ -1225,5 +1638,93 @@ export default {
 }
 .no_emp_dialog {
   text-align: center;
+}
+.left_num {
+  position: absolute;
+  margin: -10px 0px 0px 70px;
+  font-size: 12px;
+  color: #67c23a;
+}
+.warning_color {
+  position: absolute;
+  margin: -10px 0px 0px 70px;
+  font-size: 12px;
+  color: #f56c6c;
+  font-weight: bold;
+  animation: warnNum 0.5s;
+  -moz-animation: warnNum 0.5s; /* Firefox */
+  -webkit-animation: warnNum 0.5s; /* Safari and Chrome */
+  -o-animation: warnNum 0.5s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes warnNum {
+  0% {
+    margin-left: 70px;
+  }
+  25% {
+    margin-left: 80px;
+  }
+  50% {
+    margin-left: 60px;
+  }
+  75% {
+    margin-left: 80px;
+  }
+  100% {
+    margin-left: 70px;
+  }
+}
+
+@-moz-keyframes warnNum /* Firefox */ {
+  0% {
+    margin-left: 70px;
+  }
+  25% {
+    margin-left: 80px;
+  }
+  50% {
+    margin-left: 60px;
+  }
+  75% {
+    margin-left: 80px;
+  }
+  100% {
+    margin-left: 70px;
+  }
+}
+@-webkit-keyframes warnNum /* Safari and Chrome */ {
+  0% {
+    margin-left: 70px;
+  }
+  25% {
+    margin-left: 80px;
+  }
+  50% {
+    margin-left: 60px;
+  }
+  75% {
+    margin-left: 80px;
+  }
+  100% {
+    margin-left: 70px;
+  }
+}
+@-o-keyframes warnNum /* Opera */ {
+  0% {
+    margin-left: 70px;
+  }
+  25% {
+    margin-left: 80px;
+  }
+  50% {
+    margin-left: 60px;
+  }
+  75% {
+    margin-left: 80px;
+  }
+  100% {
+    margin-left: 70px;
+  }
 }
 </style>

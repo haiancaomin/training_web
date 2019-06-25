@@ -29,7 +29,7 @@
         </el-col>
         <el-col :span="3">
           <div class="order-meal-title5">
-            <span>考试地点</span>
+            <span>培训地点</span>
           </div>
         </el-col>
 
@@ -1148,6 +1148,15 @@ export default {
     showPersonInfofun1() {
       this.showPersonInfo1 = false;
       this.empSize1 = this.multipleSelection1.length;
+      this.empids1 = "";
+      if (this.multipleSelection1.length >= 1) {
+        for (var i = 0; i < this.multipleSelection1.length - 1; i++) {
+          this.empids1 += this.multipleSelection1[i].empid + ",";
+        }
+        var last1 = this.multipleSelection1.length - 1;
+        this.empids1 += this.multipleSelection1[last1].empid;
+      }
+      console.log(this.empids1);
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal1);
       this.subtotal1 = Number(this.empSize1) * Number(this.price1);
       this.totalPrice = Number(this.totalPrice) + Number(this.subtotal1);
@@ -1223,6 +1232,14 @@ export default {
     showPersonInfofun2() {
       this.showPersonInfo2 = false;
       this.empSize2 = this.multipleSelection2.length;
+      this.empids2 = "";
+      if (this.multipleSelection2.length >= 1) {
+        for (var i = 0; i < this.multipleSelection2.length - 1; i++) {
+          this.empids2 += this.multipleSelection2[i].empid + ",";
+        }
+        var last2 = this.multipleSelection2.length - 1;
+        this.empids2 += this.multipleSelection2[last2].empid;
+      }
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal2);
       this.subtotal2 = Number(this.empSize2) * Number(this.price2);
       this.totalPrice = Number(this.totalPrice) + Number(this.subtotal2);
@@ -1298,6 +1315,14 @@ export default {
     showPersonInfofun3() {
       this.showPersonInfo3 = false;
       this.empSize3 = this.multipleSelection3.length;
+      this.empids3 = "";
+      if (this.multipleSelection3.length >= 1) {
+        for (var i = 0; i < this.multipleSelection3.length - 1; i++) {
+          this.empids3 += this.multipleSelection3[i].empid + ",";
+        }
+        var last3 = this.multipleSelection3.length - 1;
+        this.empids3 += this.multipleSelection3[last3].empid;
+      }
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal3);
       this.subtotal3 = Number(this.empSize3) * Number(this.price3);
       this.totalPrice = Number(this.totalPrice) + Number(this.subtotal3);
@@ -1372,6 +1397,14 @@ export default {
     showPersonInfofun4() {
       this.showPersonInfo4 = false;
       this.empSize4 = this.multipleSelection4.length;
+      this.empids4 = "";
+      if (this.multipleSelection4.length >= 1) {
+        for (var i = 0; i < this.multipleSelection4.length - 1; i++) {
+          this.empids4 += this.multipleSelection4[i].empid + ",";
+        }
+        var last4 = this.multipleSelection4.length - 1;
+        this.empids4 += this.multipleSelection4[last4].empid;
+      }
       this.totalPrice = Number(this.totalPrice) - Number(this.subtotal4);
       this.subtotal4 = Number(this.empSize4) * Number(this.price4);
       this.totalPrice = Number(this.totalPrice) + Number(this.subtotal4);

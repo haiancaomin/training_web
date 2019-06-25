@@ -156,47 +156,57 @@ export default {
 pre {
   white-space: pre-wrap;
   text-align: justify;
+  z-index: 1;
 }
 .base-box {
   margin-left: -300px;
   background: #fff;
   width: 1200px;
-  z-index: 9;
+  z-index: 1;
   box-shadow: 0 0 2px #c7c5c5;
   border: 1px solid #e7e7e7;
 }
 .el-collapse-item {
   font-size: 14px;
+  z-index: 1;
 }
 .base-intro .swiper-slide {
   width: 300px;
   height: 300px;
+  z-index: 1;
 }
 .base-intro-pic {
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 .guanjiang-pic {
   width: 100%;
   height: 300px;
+  z-index: 1;
 }
 .base-intro .swiper-container {
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 .base-content {
   padding-top: 30px;
+  z-index: 1;
 }
 .guanjiang-content {
   padding: 5px 10px;
+  z-index: 1;
 }
 #base-scan {
   width: 100%;
   margin: 0 auto;
+  z-index: 1;
 }
 .base-scan-img {
   width: 100%;
   height: 600px;
+  z-index: 1;
 }
 .base_summary {
   
@@ -204,13 +214,14 @@ pre {
   width:100%;
   
   padding:20px 75px 30px 75px;
+  z-index: 1;
 }
 .base_summary pre {
   color:#333;
   font-size: 18px;
   line-height: 30px;
   font-family: "SimSun";
- 
+ z-index: 1;
 }
 .base_name {
   position: absolute;
@@ -224,26 +235,28 @@ pre {
     margin:520px 0px 30px 200px;
     padding:28px;
     font-family: "Microsoft YaHei";
-    
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
-    
+    z-index: 1;
 }
 .back_blue {
   background: rgb(0, 143, 255);
   width: 100%;
   height: 600px;
+  z-index: 1;
 }
 .back_blue_img {
   position: absolute;
   margin: 60px 0px 0px 50px;
   width: 620px;
   height: 470px;
+  z-index: 1;
 }
 .back_blue_img img {
   width: 600px;
   height: 450px;
   border-radius: 8px;
+  z-index: 1;
 }
 .back_blue_areaname {
   width: 400px;
@@ -254,6 +267,7 @@ pre {
   font-size: 30px;
   font-family: "YouYuan";
   font-weight: bold;
+  z-index: 1;
 }
 .back_blue_summary {
   position: absolute;
@@ -264,23 +278,27 @@ pre {
   line-height: 30px;
   font-family: "SimSun";
   text-indent: 35px;
+  z-index: 1;
 }
 
 .back_white {
   background: #fff;
   width: 100%;
   height: 600px;
+  z-index: 1;
 }
 .back_white_img {
   position: absolute;
   margin: 60px 0px 0px 530px;
   width: 620px;
   height: 470px;
+  z-index: 1;
 }
 .back_white_img img {
   width: 600px;
   height: 450px;
   border-radius: 8px;
+  z-index: 1;
 }
 .back_white_areaname {
   width: 400px;
@@ -291,6 +309,7 @@ pre {
   font-size: 30px;
   font-family: "YouYuan";
   font-weight: bold;
+  z-index: 1;
 }
 .back_white_summary {
   position: absolute;
@@ -301,11 +320,13 @@ pre {
   line-height: 30px;
   font-family: "SimSun";
   text-indent: 35px;
+  z-index: 1;
 }
 .img_div {
   box-shadow: 0 0 12px #aaa;
    margin:10px;
    border-radius: 8px;
+   z-index: 1;
 }
 .back_blue .split_div {
   border-style: solid;
@@ -313,6 +334,8 @@ pre {
   border-color: transparent transparent #fff #fff;
   position: absolute;
   margin:400px 0px 0px 0px;
+  z-index: 1;
+  
 }
 .back_white .split_div {
   border-style: solid;
@@ -320,12 +343,15 @@ pre {
   border-color: transparent transparent rgb(0, 143, 255) rgb(0, 143, 255);
   position: absolute;
   margin:400px 0px 0px 0px;
+  z-index: 1;
+
 }
 .el-icon-back {
   font-size: 25px;
   margin:11px 0px 0px 11px;
   font-weight: bold;
   color:#666;
+  z-index: 1;
 }
 .back_btn_hover {
   background: #49af4f;
@@ -334,10 +360,12 @@ pre {
   height:48px;
   padding: 5px 5px 5px 10px;;
   border-radius: 8px;
+  z-index: 1;
 }
 .zhiju_connect {
   position: absolute;
   margin:-29px 0px 0px 550px;
+  z-index: 1;
 }
 .connect_top {
   height:30px;
@@ -345,6 +373,7 @@ pre {
   background: rgb(0, 143, 255);
   border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    z-index: 1;
 }
 .connect_bottom {
   height:30px;
@@ -352,6 +381,7 @@ pre {
   background: #fff;
   border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    z-index: 1;
 }
 .back_btn {
   border: 1px solid #ccc;
@@ -364,6 +394,7 @@ pre {
   background: #fff;
   border-radius: 8px;
   cursor: pointer;
+  z-index: 2;
   animation: myfirst 2s;
   -moz-animation: myfirst 2s; /* Firefox */
   -webkit-animation: myfirst 2s; /* Safari and Chrome */

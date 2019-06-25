@@ -754,7 +754,7 @@ export default {
           active: this.active
         });
         this.bus.$emit("todata", {
-          type: "1",
+          type: "3",
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,

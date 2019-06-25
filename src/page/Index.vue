@@ -16,6 +16,7 @@
             <span class="feature-detail">共享</span>
             <span class="feature-detail-last">共赢</span>
           </div>
+          
           <div class="sign-up-main">
             <router-link to="/SignUp">
               <p class="index-sign-up2">报名入口&gt;&gt;</p>
@@ -781,6 +782,7 @@ export default {
 .our_company_address {
   margin-right: 10px;
 }
+
 </style>
 <style>
 #certify {
