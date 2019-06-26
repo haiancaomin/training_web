@@ -1,5 +1,12 @@
 <template>
   <div id="index_body">
+    <div class="index_first_enter" v-if="userFirstEnterIndex">
+      <div class="zhiju">
+            <img src="../assets/favicon.png" alt>
+            <span class="zhiju_words">智聚实训</span>
+          </div>
+    </div>
+    <div class="index_hava_enter" >
     <div class="index-body">
       <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
         <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
@@ -188,6 +195,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -196,6 +204,7 @@ import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
+      userFirstEnterIndex:false,
       showDown: true,
       picurl: "",
       courseList: [],
@@ -258,6 +267,14 @@ export default {
     swiperSlide
   },
   mounted() {
+    if(this.global.firstEnter) {
+      this.userFirstEnterIndex = true;
+      this.global.setFirstEnter(false);
+      let that =this;
+      setTimeout( function(){
+     that.userFirstEnterIndex = false;
+}, 2200 );
+    } 
     this.getIndexPicture();
     this.initMap();
     var that = this;
@@ -349,6 +366,230 @@ export default {
 </script>
 
 <style scoped>
+.zhiju {
+  z-index: 300;
+  width:360px;
+  margin:0px auto;
+  text-align: center;
+  margin-top:330px;
+  animation: zhiju 2s;
+  -moz-animation: zhiju 2s; /* Firefox */
+  -webkit-animation: zhiju 2s; /* Safari and Chrome */
+  -o-animation: zhiju 2s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+.zhiju img {
+  z-index: 300;
+  height:50px;
+  width:50px;
+  opacity:0;
+  margin:-20px 20px 0px 0px;
+  animation: zhiju_img 2s;
+  -moz-animation: zhiju_img 2s; /* Firefox */
+  -webkit-animation: zhiju_img 2s; /* Safari and Chrome */
+  -o-animation: zhiju_img 2s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes zhiju_img {
+  0% {
+    opacity:0;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+  50% {
+    opacity:1;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+   opacity:0;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+}
+
+@-moz-keyframes zhiju_img /* Firefox */ {
+  0% {
+    opacity:0;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+  50% {
+    opacity:1;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+   opacity:0;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes zhiju_img /* Safari and Chrome */ {
+   0% {
+    opacity:0;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+  50% {
+    opacity:1;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+   opacity:0;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+}
+@-o-keyframes zhiju_img /* Opera */ {
+  0% {
+    opacity:0;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+  50% {
+    opacity:1;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+   opacity:0;
+   -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+}
+.zhiju_words {
+  z-index: 300;
+  color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  font-size: 48px;
+  font-family: "Microsoft YaHei";
+  animation: zhiju_words 2s;
+  -moz-animation: zhiju_words 2s; /* Firefox */
+  -webkit-animation: zhiju_words 2s; /* Safari and Chrome */
+  -o-animation: zhiju_words 2s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes zhiju_words {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+
+@-moz-keyframes zhiju_words /* Firefox */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+@-webkit-keyframes zhiju_words /* Safari and Chrome */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+@-o-keyframes zhiju_words /* Opera */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+.index_first_enter{
+  width: 100%;
+  height: 3200px;
+   background:rgba(0, 0, 0, 0);
+  z-index: 200;
+  position: absolute;
+  margin-top:-80px;
+animation: index_first_enter 2s;
+  -moz-animation: index_first_enter 2s; /* Firefox */
+  -webkit-animation: index_first_enter 2s; /* Safari and Chrome */
+  -o-animation: index_first_enter 2s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes index_first_enter {
+  0% {
+    background:rgba(0, 0, 0, 1);
+  }
+  50% {
+    background:rgba(0, 0, 0, 1);
+  }
+  100% {
+   background:rgba(0, 0, 0, 0);
+  }
+}
+
+@-moz-keyframes index_first_enter /* Firefox */ {
+  0% {
+    background:rgba(0, 0, 0, 1);
+  }
+  50% {
+    background:rgba(0, 0, 0, 1);
+  }
+  100% {
+   background:rgba(0, 0, 0, 0);
+  }
+}
+@-webkit-keyframes index_first_enter /* Safari and Chrome */ {
+   0% {
+    background:rgba(0, 0, 0, 1);
+  }
+  50% {
+    background:rgba(0, 0, 0, 1);
+  }
+  100% {
+   background:rgba(0, 0, 0, 0);
+  }
+}
+@-o-keyframes index_first_enter /* Opera */ {
+  0% {
+    background:rgba(0, 0, 0, 1);
+  }
+  50% {
+    background:rgba(0, 0, 0, 1);
+  }
+  100% {
+   background:rgba(0, 0, 0, 0);
+  }
+}
 .clearfix:after{
   content:'';
   display: block;

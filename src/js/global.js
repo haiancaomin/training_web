@@ -11,4 +11,8 @@ export default {
     setPersonalCenterShowFlag(personalCenterShowFlag) {
         this.personalCenterShowFlag = personalCenterShowFlag;
     },
+    firstEnter: false,
+    setFirstEnter(firstEnter) {
+        this.firstEnter = firstEnter;
+    }
 }

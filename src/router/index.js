@@ -6,6 +6,10 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     path: '/',
+    component: resolve => require(['@/page/animation'], resolve)
+  },
+  {
+    path: '/',
     component: resolve => require(['@/components/TopNav'], resolve),
     children: [{
         path: '',
