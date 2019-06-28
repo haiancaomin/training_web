@@ -945,12 +945,16 @@ export default {
       }else if (
         this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
         this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
+        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4 
+        && from1Empty == 0
+        && from2Empty == 0
+        && from3Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame1 = this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息1！",
           type: "error",
           center: true
         });
@@ -959,11 +963,15 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 &&
         this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 &&
         this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3
+        && from1Empty == 0
+        && from2Empty == 0
+        && from3Empty == 0
+        
       ) {
         this.checkSame1 = this.checkSame2 = this.checkSame3 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息2！",
           type: "error",
           center: true
         });
@@ -972,11 +980,14 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course4 &&
         this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time4 &&
         this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal4
+        && from1Empty == 0
+        && from2Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame1 = this.checkSame2 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息3！",
           type: "error",
           center: true
         });
@@ -985,11 +996,14 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
         this.ruleForm.time1 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
         this.ruleForm.meal1 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
+        && from1Empty == 0
+        && from3Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame1 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息4！",
           type: "error",
           center: true
         });
@@ -998,11 +1012,14 @@ export default {
         this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
         this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
         this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
+        && from2Empty == 0
+        && from3Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息55！",
           type: "error",
           center: true
         });
@@ -1011,11 +1028,15 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course2 &&
         this.ruleForm.time1 == this.ruleForm.time2 &&
         this.ruleForm.meal1 == this.ruleForm.meal2
+        && from1Empty == 0
+        && from2Empty == 0
       ) {
         if (
         this.ruleForm.course3 == this.ruleForm.course4 &&
         this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal3 == this.ruleForm.meal4
+        this.ruleForm.meal3 == this.ruleForm.meal4 
+        && from3Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum3 = this.showLeftNum4 = false;
@@ -1023,7 +1044,7 @@ export default {
         this.checkSame1 = this.checkSame2 = true;
         this.showLeftNum1 = this.showLeftNum2 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息6！",
           type: "error",
           center: true
         });
@@ -1032,11 +1053,15 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course3 &&
         this.ruleForm.time1 == this.ruleForm.time3 &&
         this.ruleForm.meal1 == this.ruleForm.meal3
+        && from1Empty == 0
+        && from3Empty == 0
       ) {
         if (
         this.ruleForm.course2 == this.ruleForm.course4 &&
         this.ruleForm.time2 == this.ruleForm.time4 &&
         this.ruleForm.meal2 == this.ruleForm.meal4
+        && from2Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame2 = this.checkSame4 = true;
         this.showLeftNum2 = this.showLeftNum4 = false;
@@ -1044,7 +1069,7 @@ export default {
         this.checkSame1 = this.checkSame3 = true;
         this.showLeftNum1 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息7！",
           type: "error",
           center: true
         });
@@ -1053,11 +1078,16 @@ export default {
         this.ruleForm.course1 == this.ruleForm.course4 &&
         this.ruleForm.time1 == this.ruleForm.time4 &&
         this.ruleForm.meal1 == this.ruleForm.meal4
+        && from1Empty == 0
+        && from4Empty == 0
       ) {
         if (
         this.ruleForm.course2 == this.ruleForm.course3 &&
         this.ruleForm.time2 == this.ruleForm.time3 &&
         this.ruleForm.meal2 == this.ruleForm.meal3
+        && from2Empty == 0
+        && from3Empty == 0
+
       ) {
         this.checkSame2 = this.checkSame3 = true;
         this.showLeftNum2 = this.showLeftNum3 = false;
@@ -1065,7 +1095,7 @@ export default {
         this.checkSame1 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息8！",
           type: "error",
           center: true
         });
@@ -1074,11 +1104,15 @@ export default {
         this.ruleForm.course2 == this.ruleForm.course3 &&
         this.ruleForm.time2 == this.ruleForm.time3 &&
         this.ruleForm.meal2 == this.ruleForm.meal3
+        && from2Empty == 0
+        && from3Empty == 0
       ) {
         if (
         this.ruleForm.course1 == this.ruleForm.course4 &&
         this.ruleForm.time1 == this.ruleForm.time4 &&
         this.ruleForm.meal1 == this.ruleForm.meal4
+        && from1Empty == 0
+        && from4Empty == 0
       ) {
         this.checkSame1 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum4 = false;
@@ -1086,7 +1120,7 @@ export default {
         this.checkSame2 = this.checkSame3 = true;
         this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息9！",
           type: "error",
           center: true
         });
@@ -1094,12 +1128,16 @@ export default {
       else if (
         this.ruleForm.course2 == this.ruleForm.course4 &&
         this.ruleForm.time2 == this.ruleForm.time4 &&
-        this.ruleForm.meal2 == this.ruleForm.meal4
+        this.ruleForm.meal2 == this.ruleForm.meal4      
+        && from2Empty == 0
+        && from4Empty == 0
       ) {
         if (
         this.ruleForm.course1 == this.ruleForm.course3 &&
         this.ruleForm.time1 == this.ruleForm.time3 &&
         this.ruleForm.meal1 == this.ruleForm.meal3
+        && from1Empty == 0
+        && from3Empty == 0
       ) {
         this.checkSame1 = this.checkSame3 = true;
         this.showLeftNum1 = this.showLeftNum3 = false;
@@ -1107,7 +1145,7 @@ export default {
         this.checkSame2 = this.checkSame4 = true;
         this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息10！",
           type: "error",
           center: true
         });
@@ -1116,11 +1154,15 @@ export default {
         this.ruleForm.course3 == this.ruleForm.course4 &&
         this.ruleForm.time3 == this.ruleForm.time4 &&
         this.ruleForm.meal3 == this.ruleForm.meal4
+        && from3Empty == 0
+        && from4Empty == 0
       ) {
         if (
         this.ruleForm.course1 == this.ruleForm.course2 &&
         this.ruleForm.time1 == this.ruleForm.time2 &&
         this.ruleForm.meal1 == this.ruleForm.meal2
+        && from1Empty == 0
+        && from2Empty == 0
       ) {
         this.checkSame1 = this.checkSame2 = true;
         this.showLeftNum1 = this.showLeftNum2 = false;
@@ -1128,7 +1170,7 @@ export default {
         this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息！",
+          message: "有条件相同的报名信息11！",
           type: "error",
           center: true
         });
@@ -1478,6 +1520,9 @@ export default {
         });
     },
     getAddressList1(course) {
+      this.showLeftNum1 = false;
+      this.ruleForm.Address1 = null;
+      this.ruleForm.time1 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1494,6 +1539,8 @@ export default {
         });
     },
     getTimeList1(course) {
+      this.showLeftNum1 = false;
+      this.ruleForm.time1 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1547,6 +1594,9 @@ export default {
         });
     },
     getAddressList2(course) {
+      this.showLeftNum2 = false;
+      this.ruleForm.Address2 = null;
+      this.ruleForm.time2 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1563,6 +1613,8 @@ export default {
         });
     },
     getTimeList2(course) {
+      this.showLeftNum2 = false;
+      this.ruleForm.time2 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1597,6 +1649,9 @@ export default {
       this.personSize2 = this.multipleSelection2.length;
     },
     getAddressList3(course) {
+      this.showLeftNum3 = false;
+      this.ruleForm.Address3 = null;
+      this.ruleForm.time3 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1613,6 +1668,8 @@ export default {
         });
     },
     getTimeList3(course) {
+      this.showLeftNum3 = false;
+      this.ruleForm.time3 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1647,6 +1704,9 @@ export default {
       this.personSize3 = this.multipleSelection3.length;
     },
     getAddressList4(course) {
+      this.showLeftNum4 = false;
+      this.ruleForm.Address4 = null;
+      this.ruleForm.time4 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1663,6 +1723,8 @@ export default {
         });
     },
     getTimeList4(course) {
+      this.showLeftNum4 = false;
+      this.ruleForm.time4 = null;
       this.$ajax({
         method: "get",
         url: `${
@@ -1697,6 +1759,22 @@ export default {
       this.personSize4 = this.multipleSelection4.length;
     },
     change_traintime1(val) {
+      if(this.ruleForm.time1 != ""&& this.ruleForm.time1 != null && this.ruleForm.time1 != undefined) {
+        this.showLeftNum1 = true;
+      }
+      if(this.ruleForm.time2 != ""&& this.ruleForm.time2 != null && this.ruleForm.time2 != undefined) {
+        this.showLeftNum2 = true;
+      }
+      if(this.ruleForm.time3 != ""&& this.ruleForm.time3 != null && this.ruleForm.time3 != undefined) {
+        this.showLeftNum3 = true;
+      }
+      if(this.ruleForm.time4 != ""&& this.ruleForm.time4 != null && this.ruleForm.time4 != undefined) {
+        this.showLeftNum4 = true;
+      }
+      this.checkSame1 = false;
+      this.checkSame2 = false;
+      this.checkSame3 = false;
+      this.checkSame4 = false;
       this.warningColor1 = false;
       this.choose_traintime1 = val;
       this.$ajax({
@@ -1712,6 +1790,22 @@ export default {
         });
     },
     change_traintime2(val) {
+      if(this.ruleForm.time1 != ""&& this.ruleForm.time1 != null && this.ruleForm.time1 != undefined) {
+        this.showLeftNum1 = true;
+      }
+      if(this.ruleForm.time2 != ""&& this.ruleForm.time2 != null && this.ruleForm.time2 != undefined) {
+        this.showLeftNum2 = true;
+      }
+      if(this.ruleForm.time3 != ""&& this.ruleForm.time3 != null && this.ruleForm.time3 != undefined) {
+        this.showLeftNum3 = true;
+      }
+      if(this.ruleForm.time4 != ""&& this.ruleForm.time4 != null && this.ruleForm.time4 != undefined) {
+        this.showLeftNum4 = true;
+      }
+      this.checkSame1 = false;
+      this.checkSame2 = false;
+      this.checkSame3 = false;
+      this.checkSame4 = false;
       this.warningColor2 = false;
       this.choose_traintime2 = val;
       this.$ajax({
@@ -1727,6 +1821,22 @@ export default {
         });
     },
     change_traintime3(val) {
+      if(this.ruleForm.time1 != ""&& this.ruleForm.time1 != null && this.ruleForm.time1 != undefined) {
+        this.showLeftNum1 = true;
+      }
+      if(this.ruleForm.time2 != ""&& this.ruleForm.time2 != null && this.ruleForm.time2 != undefined) {
+        this.showLeftNum2 = true;
+      }
+      if(this.ruleForm.time3 != ""&& this.ruleForm.time3 != null && this.ruleForm.time3 != undefined) {
+        this.showLeftNum3 = true;
+      }
+      if(this.ruleForm.time4 != ""&& this.ruleForm.time4 != null && this.ruleForm.time4 != undefined) {
+        this.showLeftNum4 = true;
+      }
+      this.checkSame1 = false;
+      this.checkSame2 = false;
+      this.checkSame3 = false;
+      this.checkSame4 = false;
       this.warningColor3 = false;
       this.choose_traintime3 = val;
       this.$ajax({
@@ -1742,6 +1852,22 @@ export default {
         });
     },
     change_traintime4(val) {
+      if(this.ruleForm.time1 != ""&& this.ruleForm.time1 != null && this.ruleForm.time1 != undefined) {
+        this.showLeftNum1 = true;
+      }
+      if(this.ruleForm.time2 != ""&& this.ruleForm.time2 != null && this.ruleForm.time2 != undefined) {
+        this.showLeftNum2 = true;
+      }
+      if(this.ruleForm.time3 != ""&& this.ruleForm.time3 != null && this.ruleForm.time3 != undefined) {
+        this.showLeftNum3 = true;
+      }
+      if(this.ruleForm.time4 != ""&& this.ruleForm.time4 != null && this.ruleForm.time4 != undefined) {
+        this.showLeftNum4 = true;
+      }
+      this.checkSame1 = false;
+      this.checkSame2 = false;
+      this.checkSame3 = false;
+      this.checkSame4 = false;
       this.warningColor4 = false;
       this.choose_traintime4 = val;
       this.$ajax({
