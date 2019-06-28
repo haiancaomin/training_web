@@ -20,7 +20,7 @@
           </div>
           <div class="logo" style="padding-top:0">
             <img src="../assets/favicon.png" alt>
-            <span class="logo-words">智聚创新</span>
+            <span class="logo-words">智聚实训</span>
           </div>
           <div class="feature">
             <span class="feature-detail">求是</span>
