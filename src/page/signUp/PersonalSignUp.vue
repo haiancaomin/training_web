@@ -347,6 +347,7 @@ export default {
       this.ruleForm.time1 = null;
       this.ruleForm.Address1 = null;
       this.ruleForm.meal1 = null;
+      this.showLeftNum1 = false;
     }
   },
   mounted() {

@@ -275,13 +275,21 @@ export default {
             }'}&userid=${userid}`
           })
             .then(res => {
-              this.showEditDia = false;
-              this.getPersonInfo();
-              this.$message({
-                message: "修改成功！",
-                type: "success",
-                center: true
-              });
+              if (res.data.data == 2) {
+                this.$message({
+                  message: "该身份证的员工已在本平台录入！",
+                  type: "error",
+                  center: true
+                });
+              } else {
+                this.showEditDia = false;
+                this.getPersonInfo();
+                this.$message({
+                  message: "修改成功！",
+                  type: "success",
+                  center: true
+                });
+              }
             })
             .catch(function(err) {
               console.log(err);

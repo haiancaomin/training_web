@@ -1532,12 +1532,7 @@ export default {
             method: "post",
             url: `${
               this.baseURL
-            }/zjsxpt/course_saveOrder.do?order={"summoney":"${
-              this.totalPrice
-            }","courseids":"${courseids}",
-        "menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${
-              this.signUpType
-            }`
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}","menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${this.signUpType}`
           })
             .then(res => {
               if(res.data.data == "2") {
@@ -1577,14 +1572,7 @@ export default {
             method: "post",
             url: `${
               this.baseURL
-            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}",
-          "courseids":"${this.course1}",
-          "menuids":"${this.meal1}",
-          "traintimeids":"${this.time1}",
-          "employeeids":""}&userid=${userid}&type=3&emp=
-          {"name":"${this.name}","cardno":"${this.cardno}","education":"${
-              this.education
-            }","phone":"${this.phone}"}`
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}","courseids":"${this.course1}","menuids":"${this.meal1}","traintimeids":"${this.time1}","employeeids":""}&userid=${userid}&type=3&emp={"name":"${this.name}","cardno":"${this.cardno}","education":"${this.education}","phone":"${this.phone}"}`
           })
             .then(res => {
               this.accountsPage = 0;

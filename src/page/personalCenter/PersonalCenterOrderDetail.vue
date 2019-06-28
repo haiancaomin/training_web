@@ -39,17 +39,18 @@
           </template>
           <div class="more_info">
             <div class="more_info_up">
-              <el-col :span="4">
-                <div>预计考试时间</div>
-              </el-col>
+              
               <el-col :span="4">
                 <div>预计开课时间</div>
               </el-col>
               <el-col :span="4">
                 <div>培训时长</div>
               </el-col>
+              <el-col :span="4">
+                <div>城市</div>
+              </el-col>
               <el-col :span="6">
-                <div>考试地点</div>
+                <div>培训地点</div>
               </el-col>
               <el-col :span="2">
                 <div>单价</div>
@@ -60,20 +61,21 @@
             </div>
 
             <div class="more_info_down">
-              <el-col :span="4">
-                <div class="down_cell">{{orderItem.examtime}}</div>
-              </el-col>
+             
               <el-col :span="4">
                 <div class="down_cell">{{orderItem.traintime}}</div>
               </el-col>
               <el-col :span="4">
                 <div class="down_cell">{{orderItem.coursehour}}</div>
               </el-col>
+               <el-col :span="4">
+                <div class="down_cell">{{orderItem.city}}</div>
+              </el-col>
               <el-col :span="6">
                 <div class="down_cell">
                   <el-tooltip content="Top center" placement="bottom">
-                    <div slot="content">{{orderItem.examaddress}}</div>
-                    <h3 class="examaddress_div_h3">{{orderItem.examaddress}}</h3>
+                    <div slot="content">{{orderItem.address}}</div>
+                    <h3 class="examaddress_div_h3">{{orderItem.address}}</h3>
                   </el-tooltip>
                 </div>
               </el-col>
