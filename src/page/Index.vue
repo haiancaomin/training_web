@@ -15,8 +15,12 @@
         </div>
         <div class="login-sign">
           <div class="logo">
+            <img src="../assets/association.png" alt>
+            <span class="logo-words">预制构件专业委员会</span>
+          </div>
+          <div class="logo" style="padding-top:0">
             <img src="../assets/favicon.png" alt>
-            <span class="logo-words">智聚实训</span>
+            <span class="logo-words">智聚创新</span>
           </div>
           <div class="feature">
             <span class="feature-detail">求是</span>
@@ -24,6 +28,12 @@
             <span class="feature-detail">共享</span>
             <span class="feature-detail-last">共赢</span>
           </div>
+          <!-- <div class="feature">
+            <span class="feature-detail">诚实</span>
+            <span class="feature-detail">自信</span>
+            <span class="feature-detail">提高</span>
+            <span class="feature-detail-last">创新</span>
+          </div> -->
           
           <div class="sign-up-main">
             <router-link to="/SignUp">
@@ -918,7 +928,8 @@ animation: index-sign-up2 1.5s;
   text-align: center;
 }
 .logo-words {
-  font-size: 32px;
+  /* font-size: 32px; */
+  font-size: 28px;
   font-weight: 700;
   color: #343a40;
   text-shadow: 5px 5px 10px #c7c5c5;
