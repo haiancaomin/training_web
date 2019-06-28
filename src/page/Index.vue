@@ -4,6 +4,7 @@
       <div class="zhiju">
             <img src="../assets/favicon.png" alt>
             <span class="zhiju_words">智聚实训</span>
+            <p class="powered">Powered by zhiju</p>
           </div>
     </div>
     <div class="index_hava_enter" >
@@ -531,6 +532,78 @@ export default {
    letter-spacing:6px;
   }
 }
+.powered {
+z-index: 300;
+  color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "Microsoft YaHei";
+  margin:0px 0px 0px 80px;
+  animation: powered 2s;
+  -moz-animation: powered 2s; /* Firefox */
+  -webkit-animation: powered 2s; /* Safari and Chrome */
+  -o-animation: powered 2s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes powered {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+
+@-moz-keyframes powered /* Firefox */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+@-webkit-keyframes powered /* Safari and Chrome */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
+@-o-keyframes powered /* Opera */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:12px;
+  }
+  50% {
+    color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 0);
+   letter-spacing:6px;
+  }
+}
 .index_first_enter{
   width: 100%;
   height: 3200px;
@@ -615,6 +688,45 @@ animation: index_first_enter 2s;
   transition: all 0.3s;
   z-index: 1;
   margin: 40px 0px 0px 0px;
+animation: index-sign-up1 1.5s;
+  -moz-animation: index-sign-up1 1.5s; /* Firefox */
+  -webkit-animation: index-sign-up1 1.5s; /* Safari and Chrome */
+  -o-animation: index-sign-up1 1.5s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes index-sign-up1 {
+  0% {
+    margin: 40px 0px 0px -90px;
+  }
+  100% {
+   margin: 40px 0px 0px 0px;
+  }
+}
+
+@-moz-keyframes index-sign-up1 /* Firefox */ {
+   0% {
+    margin: 40px 0px 0px -90px;
+  }
+  100% {
+   margin: 40px 0px 0px 0px;
+  }
+}
+@-webkit-keyframes index-sign-up1 /* Safari and Chrome */ {
+  0% {
+    margin: 40px 0px 0px -90px;
+  }
+  100% {
+   margin: 40px 0px 0px 0px;
+  }
+}
+@-o-keyframes index-sign-up1 /* Opera */ {
+  0% {
+    margin: 40px 0px 0px -90px;
+  }
+  100% {
+   margin: 40px 0px 0px 0px;
+  }
 }
 .index-sign-up1:hover {
   background: #0a6998;
@@ -636,6 +748,45 @@ animation: index_first_enter 2s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
+animation: index-sign-up2 1.5s;
+  -moz-animation: index-sign-up2 1.5s; /* Firefox */
+  -webkit-animation: index-sign-up2 1.5s; /* Safari and Chrome */
+  -o-animation: index-sign-up2 1.5s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes index-sign-up2 {
+  0% {
+    margin: 0px 0px 0px 90px;
+  }
+  100% {
+   margin: 0px;
+  }
+}
+
+@-moz-keyframes index-sign-up2 /* Firefox */ {
+   0% {
+    margin: 0px 0px 0px 90px;
+  }
+  100% {
+   margin: 0px;
+  }
+}
+@-webkit-keyframes index-sign-up2 /* Safari and Chrome */ {
+  0% {
+    margin: 0px 0px 0px 90px;
+  }
+  100% {
+   margin: 0px;
+  }
+}
+@-o-keyframes index-sign-up2 /* Opera */ {
+  0% {
+    margin: 0px 0px 0px 90px;
+  }
+  100% {
+   margin: 0px;
+  }
 }
 .index-sign-up2:hover {
   background: #0a6998;
@@ -695,6 +846,64 @@ animation: index_first_enter 2s;
   height: 730px;
   width: 100%;
   background-size: 100% 810px;
+  opacity: 1;
+  animation: company-show 1.5s;
+  -moz-animation: company-show 1.5s; /* Firefox */
+  -webkit-animation: company-show 1.5s; /* Safari and Chrome */
+  -o-animation: company-show 1.5s; /* Opera */
+  animation-iteration-count: 1.5;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes company-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+  opacity: 1;
+  }
+}
+
+@-moz-keyframes company-show /* Firefox */ {
+   0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  66% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+}
+@-webkit-keyframes company-show /* Safari and Chrome */ {
+   0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  66% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
+}
+@-o-keyframes company-show /* Opera */ {
+  0% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  66% {
+    color:rgba(255, 255, 255, 0);
+    letter-spacing:0px;
+  }
+  100% {
+   color:rgba(255, 255, 255, 1);
+   letter-spacing:6px;
+  }
 }
 .login-sign {
   float: right;

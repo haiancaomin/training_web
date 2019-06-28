@@ -9,7 +9,7 @@
           <el-select
             v-model="ruleForm.course1"
             placeholder="请选择课程"
-            @change="getAddressList1(ruleForm.course1),getTimeList1(ruleForm.course1),getMealList1(ruleForm.course1)"
+            @change="getCity1(ruleForm.course1),getMealList1(ruleForm.course1),clearAll1()"
           >
             <el-option
               v-for="item in selectCourseData"
@@ -25,22 +25,67 @@
           <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value>
             <i slot="prefix" class="iconfont">&#xe601;</i>
           </el-select>
-          <el-select v-model="ruleForm.Address1" placeholder="请选择培训地点" v-if="!ruleForm.course1==''">
-            <el-option
-              v-for="item in selectAddressData1"
-              :key="item.addrid"
-              :label="item.address"
-              :value="item.address"
-            ></el-option>
-            <i slot="prefix" class="iconfont">&#xe601;</i>
-          </el-select>
+          <el-col :span="4">
+            <el-select
+              class="choose_city"
+              v-model="city1"
+              placeholder="城市"
+              v-if="!ruleForm.course1==''"
+              @change="getAddressList1(ruleForm.course1)"
+            >
+              <el-option
+                v-for="(index,item) in selectCity1Data1"
+                :key="index"
+                :label="item[index]"
+                :value="index"
+              ></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="12">
+            <el-select
+              class="choose_city_address"
+              placeholder="请先选择城市"
+              :disabled="true"
+              v-if="!ruleForm.course1==''&&(city1==''||city1==null)"
+              value
+            ></el-select>
+          </el-col>
+          <el-col :span="12">
+            <el-select
+              class="choose_city_address"
+              v-model="ruleForm.Address1"
+              placeholder="请选择培训地点"
+              v-if="!ruleForm.course1==''&&!city1==''"
+              @change="getTimeList1(ruleForm.course1)"
+            >
+              <el-option
+                v-for="(index,item) in selectAddressData1"
+                :key="index"
+                :label="item[index]"
+                :value="index"
+              ></el-option>
+            </el-select>
+          </el-col>
         </el-form-item>
 
         <el-form-item prop="time1">
           <el-select placeholder="请先选择课程" :disabled="true" v-if="ruleForm.course1==''" value>
             <i slot="prefix" class="iconfont">&#xe6e0;</i>
           </el-select>
-          <el-select v-model="ruleForm.time1" placeholder="请选择培训时间" v-if="!ruleForm.course1==''">
+          <el-select
+            placeholder="请先选择培训地点"
+            :disabled="true"
+            v-if="!ruleForm.course1==''&&(ruleForm.Address1==''||ruleForm.Address1==null)"
+            value
+          >
+            <i slot="prefix" class="iconfont">&#xe6e0;</i>
+          </el-select>
+          <el-select
+            v-model="ruleForm.time1"
+            placeholder="请选择培训时间"
+            v-if="ruleForm.course1!=''&&ruleForm.Address1!=''&&ruleForm.Address1!=null"
+             @change="change_traintime1"
+          >
             <el-option
               v-for="item in selectTimeData1"
               :key="item.timeid"
@@ -49,6 +94,11 @@
             ></el-option>
             <i slot="prefix" class="iconfont">&#xe6e0;</i>
           </el-select>
+          <div
+            class="left_num"
+            v-if="leftNum1>0&&showLeftNum1"
+          >该批次剩余可报名人数：{{leftNum1}}</div>
+          <div class="warning_color" v-if="leftNum1<1&&showLeftNum1">报名人数已满</div>
         </el-form-item>
 
         <el-form-item prop="meal1">
@@ -118,12 +168,15 @@ export default {
     return {
       signUpPage: 1,
       accountsPage: 0,
-
+      warningColor1: false,
+       leftNum1: 0,
+      showLeftNum1: false,
       selectCourseData: [{}],
       selectAddressData1: [{}],
       selectTimeData1: [{}],
       selectMealData1: [{}],
-
+      selectCity1Data1: [],
+      city1: "",
       ruleForm: {
         course1: "",
         Address1: "",
@@ -166,8 +219,30 @@ export default {
     };
   },
   methods: {
+    change_traintime1(val) {
+      this.warningColor1 = false;
+      this.choose_traintime1 = val;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getRemainderByTime.do?timeid=${val}`
+      })
+        .then(res => {
+          this.leftNum1 = res.data.data;
+          this.showLeftNum1 = true;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      if(this.leftNum1<1) {
+        this.$message({
+          message: "您的报名信息不完整！",
+          type: "error",
+          center: true
+        });
+      } else {
+        this.$refs[formName].validate(valid => {
         if (valid) {
           this.signUpPage = 0;
           this.accountsPage = 1;
@@ -178,6 +253,7 @@ export default {
             active: this.active
           });
           this.bus.$emit("todata", {
+            city1: this.city1,
             course1: this.ruleForm.course1,
             Address1: this.ruleForm.Address1,
             time1: this.ruleForm.time1,
@@ -191,6 +267,8 @@ export default {
           console.log("error submit!!");
         }
       });
+      }
+      
     },
     getCourseList() {
       this.$ajax({
@@ -199,20 +277,20 @@ export default {
       })
         .then(res => {
           this.selectCourseData = res.data.data;
+          console.log(this.selectCourseData);
         })
         .catch(function(err) {
           console.log(err);
         });
     },
     getAddressList1(course) {
-      this.ruleForm.time1 = null;
-      this.ruleForm.Address1 = null;
-      this.ruleForm.meal1 = null;
       this.$ajax({
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
+        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}&city=${
+          this.city1
+        }`
       })
         .then(res => {
           this.selectAddressData1 = res.data.data;
@@ -226,10 +304,13 @@ export default {
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainTimeList.do?courseid=${course}`
+        }/zjsxpt/course_getTimeList.do?courseid=${course}&city=${
+          this.city1
+        }&address=${this.ruleForm.Address1}`
       })
         .then(res => {
           this.selectTimeData1 = res.data.data;
+          console.log(this.selectTimeData1);
         })
         .catch(function(err) {
           console.log(err);
@@ -248,6 +329,24 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
+    },
+    getCity1(course) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getCityList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectCity1Data1 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    clearAll1() {
+      this.city1 = null;
+      this.ruleForm.time1 = null;
+      this.ruleForm.Address1 = null;
+      this.ruleForm.meal1 = null;
     }
   },
   mounted() {
@@ -301,5 +400,99 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
   line-height: 40px;
   margin: 0px 0px 0px 2px;
+}
+.demo-ruleForm .choose_city {
+  width: 120px;
+}
+.demo-ruleForm .choose_city_address {
+  width: 164px;
+}
+.left_num {
+  position: absolute;
+  margin: -10px 0px 0px 0px;
+  font-size: 12px;
+  color: #67c23a;
+}
+.warning_color {
+  position: absolute;
+  margin: -10px 0px 0px 0px;
+  font-size: 12px;
+  color: #f56c6c;
+  font-weight: bold;
+  animation: warnNum 0.5s;
+  -moz-animation: warnNum 0.5s; /* Firefox */
+  -webkit-animation: warnNum 0.5s; /* Safari and Chrome */
+  -o-animation: warnNum 0.5s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+@keyframes warnNum {
+  0% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 10px;
+  }
+  50% {
+    margin-left: -10px;
+  }
+  75% {
+    margin-left: 10px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-moz-keyframes warnNum /* Firefox */ {
+  0% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 10px;
+  }
+  50% {
+    margin-left: -10px;
+  }
+  75% {
+    margin-left: 10px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+@-webkit-keyframes warnNum /* Safari and Chrome */ {
+  0% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 10px;
+  }
+  50% {
+    margin-left: -10px;
+  }
+  75% {
+    margin-left: 10px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+@-o-keyframes warnNum /* Opera */ {
+  0% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 10px;
+  }
+  50% {
+    margin-left: -10px;
+  }
+  75% {
+    margin-left: 10px;
+  }
+  100% {
+    margin-left: 0px;
+  }
 }
 </style>

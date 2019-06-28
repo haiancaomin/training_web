@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="3">
           <div class="order-meal-title4">
-            <span>预计考试时间</span>
+            <span>城市</span>
           </div>
         </el-col>
         <el-col :span="3">
@@ -90,14 +90,14 @@
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examtime1}}</span>
+                <span>{{city1}}</span>
               </div>
             </div>
           </el-col>
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examaddress1}}</span>
+                <span>{{Address1}}</span>
               </div>
             </div>
           </el-col>
@@ -212,14 +212,14 @@
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examtime2}}</span>
+                <span>{{city2}}</span>
               </div>
             </div>
           </el-col>
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examaddress2}}</span>
+                <span>{{Address2}}</span>
               </div>
             </div>
           </el-col>
@@ -333,14 +333,14 @@
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examtime3}}</span>
+                <span>{{city3}}</span>
               </div>
             </div>
           </el-col>
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examaddress3}}</span>
+                <span>{{Address3}}</span>
               </div>
             </div>
           </el-col>
@@ -454,14 +454,14 @@
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examtime4}}</span>
+                <span>{{city4}}</span>
               </div>
             </div>
           </el-col>
           <el-col :span="3">
             <div class="order-meal-property-outbody">
               <div class="order-meal-property">
-                <span>{{examaddress4}}</span>
+                <span>{{Address4}}</span>
               </div>
             </div>
           </el-col>
@@ -636,7 +636,10 @@ export default {
       tableData2: [],
       tableData3: [],
       tableData4: [],
-
+      city1:"",
+      city2:"",
+      city3:"",
+      city4:"",
       tableDataRe: [],
       totalPrice: 0,
       accountsPage: 1,
@@ -654,6 +657,10 @@ export default {
     this.getEmpData();
     let accountsThis = this;
     this.bus.$on("todata", function(res) {
+      accountsThis.city1 = res.city1;
+      accountsThis.city2 = res.city2;
+      accountsThis.city3 = res.city3;
+      accountsThis.city4 = res.city4;
       if (
         res.multipleSelection1 ||
         res.multipleSelection2 ||

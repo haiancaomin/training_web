@@ -27,7 +27,7 @@
                       <el-select
                         v-model="ruleForm.course1"
                         placeholder="请选择课程"
-                        @change="getAddressList1(ruleForm.course1),getTimeList1(ruleForm.course1),getMealList1(ruleForm.course1)"
+                        @change="getCity1(ruleForm.course1),getMealList1(ruleForm.course1),clearAll1()"
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -52,18 +52,47 @@
                         v-if="ruleForm.course1==''"
                         value
                       ></el-select>
-                      <el-select
-                        v-model="ruleForm.Address1"
-                        placeholder="请选择培训地点"
-                        v-if="!ruleForm.course1==''"
-                      >
-                        <el-option
-                          v-for="item in selectAddressData1"
-                          :key="item.addrid"
-                          :label="item.address"
-                          :value="item.address"
-                        ></el-option>
-                      </el-select>
+                      <el-col :span="5">
+                        <el-select
+                          class="choose_city"
+                          v-model="city1"
+                          placeholder="城市"
+                          v-if="!ruleForm.course1==''"
+                          @change="getAddressList1(ruleForm.course1)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectCity1Data1"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          placeholder="请先选择城市"
+                          :disabled="true"
+                          v-if="!ruleForm.course1==''&&(city1==''||city1==null)"
+                          value
+                        ></el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          v-model="ruleForm.Address1"
+                          placeholder="请选择培训地点"
+                          v-if="!ruleForm.course1==''&&!city1==''"
+                          @change="getTimeList1(ruleForm.course1)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectAddressData1"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
                     </el-form-item>
 
                     <el-form-item label="时间选择" prop="time1">
@@ -74,9 +103,15 @@
                         value
                       ></el-select>
                       <el-select
+                        placeholder="请先选择培训地点"
+                        :disabled="true"
+                        v-if="!ruleForm.course1==''&&(ruleForm.Address1==''||ruleForm.Address1==null)"
+                        value
+                      ></el-select>
+                      <el-select
                         v-model="ruleForm.time1"
                         placeholder="请选择培训时间"
-                        v-if="!ruleForm.course1==''"
+                        v-if="ruleForm.course1!=''&&ruleForm.Address1!=''&&ruleForm.Address1!=null"
                         @change="change_traintime1"
                       >
                         <el-option
@@ -92,6 +127,7 @@
                         v-if="leftNum1>0&&showLeftNum1"
                       >该批次剩余可报名人数：{{leftNum1}}</div>
                       <div class="warning_color" v-if="leftNum1<1&&showLeftNum1">报名人数已满</div>
+                      <div class="warning_color" v-if="checkSame1">有相同的报名条件</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal1">
@@ -163,7 +199,7 @@
                       <el-select
                         v-model="ruleForm.course2"
                         placeholder="请选择课程"
-                        @change="getAddressList2(ruleForm.course2),getTimeList2(ruleForm.course2),getMealList2(ruleForm.course2)"
+                        @change="getCity2(ruleForm.course2),getMealList2(ruleForm.course2),clearAll2()"
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -188,18 +224,47 @@
                         v-if="ruleForm.course2==''"
                         value
                       ></el-select>
-                      <el-select
-                        v-model="ruleForm.Address2"
-                        placeholder="请选择培训地点"
-                        v-if="!ruleForm.course2==''"
-                      >
-                        <el-option
-                          v-for="item in selectAddressData2"
-                          :key="item.addrid"
-                          :label="item.address"
-                          :value="item.address"
-                        ></el-option>
-                      </el-select>
+                      <el-col :span="5">
+                        <el-select
+                          class="choose_city"
+                          v-model="city2"
+                          placeholder="城市"
+                          v-if="!ruleForm.course2==''"
+                          @change="getAddressList2(ruleForm.course2)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectCity1Data2"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          placeholder="请先选择城市"
+                          :disabled="true"
+                          v-if="!ruleForm.course2==''&&(city2==''||city2==null)"
+                          value
+                        ></el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          v-model="ruleForm.Address2"
+                          placeholder="请选择培训地点"
+                          v-if="!ruleForm.course2==''&&!city2==''"
+                          @change="getTimeList2(ruleForm.course2)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectAddressData2"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
                     </el-form-item>
 
                     <el-form-item label="时间选择" prop="time2">
@@ -210,9 +275,15 @@
                         value
                       ></el-select>
                       <el-select
+                        placeholder="请先选择培训地点"
+                        :disabled="true"
+                        v-if="!ruleForm.course2==''&&(ruleForm.Address2==''||ruleForm.Address2==null)"
+                        value
+                      ></el-select>
+                      <el-select
                         v-model="ruleForm.time2"
                         placeholder="请选择培训时间"
-                        v-if="!ruleForm.course2==''"
+                        v-if="ruleForm.course2!=''&&ruleForm.Address2!=''&&ruleForm.Address2!=null"
                         @change="change_traintime2"
                       >
                         <el-option
@@ -228,6 +299,7 @@
                         v-if="leftNum2>0&&showLeftNum2"
                       >该批次剩余可报名人数：{{leftNum2}}</div>
                       <div class="warning_color" v-if="leftNum2<1&&showLeftNum2">报名人数已满</div>
+                      <div class="warning_color" v-if="checkSame2">有相同的报名条件</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal2">
@@ -301,7 +373,7 @@
                       <el-select
                         v-model="ruleForm.course3"
                         placeholder="请选择课程"
-                        @change="getAddressList3(ruleForm.course3),getTimeList3(ruleForm.course3),getMealList3(ruleForm.course3)"
+                        @change="getCity3(ruleForm.course3),getMealList3(ruleForm.course3),clearAll3()"
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -326,18 +398,47 @@
                         v-if="ruleForm.course3==''"
                         value
                       ></el-select>
-                      <el-select
-                        v-model="ruleForm.Address3"
-                        placeholder="请选择培训地点"
-                        v-if="!ruleForm.course3==''"
-                      >
-                        <el-option
-                          v-for="item in selectAddressData3"
-                          :key="item.addrid"
-                          :label="item.address"
-                          :value="item.address"
-                        ></el-option>
-                      </el-select>
+                      <el-col :span="5">
+                        <el-select
+                          class="choose_city"
+                          v-model="city3"
+                          placeholder="城市"
+                          v-if="!ruleForm.course3==''"
+                          @change="getAddressList3(ruleForm.course3)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectCity1Data3"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          placeholder="请先选择城市"
+                          :disabled="true"
+                          v-if="!ruleForm.course3==''&&(city3==''||city3==null)"
+                          value
+                        ></el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          v-model="ruleForm.Address3"
+                          placeholder="请选择培训地点"
+                          v-if="!ruleForm.course3==''&&!city3==''"
+                          @change="getTimeList3(ruleForm.course3)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectAddressData3"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
                     </el-form-item>
 
                     <el-form-item label="时间选择" prop="time3">
@@ -348,9 +449,15 @@
                         value
                       ></el-select>
                       <el-select
+                        placeholder="请先选择培训地点"
+                        :disabled="true"
+                        v-if="!ruleForm.course3==''&&(ruleForm.Address3==''||ruleForm.Address3==null)"
+                        value
+                      ></el-select>
+                      <el-select
                         v-model="ruleForm.time3"
                         placeholder="请选择培训时间"
-                        v-if="!ruleForm.course3==''"
+                        v-if="ruleForm.course3!=''&&ruleForm.Address3!=''&&ruleForm.Address3!=null"
                         @change="change_traintime3"
                       >
                         <el-option
@@ -366,6 +473,7 @@
                         v-if="leftNum3>0&&showLeftNum3"
                       >该批次剩余可报名人数：{{leftNum3}}</div>
                       <div class="warning_color" v-if="leftNum3<1&&showLeftNum3">报名人数已满</div>
+                      <div class="warning_color" v-if="checkSame3">有相同的报名条件</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal3">
@@ -437,7 +545,7 @@
                       <el-select
                         v-model="ruleForm.course4"
                         placeholder="请选择课程"
-                        @change="getAddressList4(ruleForm.course4),getTimeList4(ruleForm.course4),getMealList4(ruleForm.course4)"
+                        @change="getCity4(ruleForm.course4),getMealList4(ruleForm.course4),clearAll4()"
                       >
                         <el-option
                           v-for="item in selectCourseData"
@@ -462,21 +570,50 @@
                         v-if="ruleForm.course4==''"
                         value
                       ></el-select>
-                      <el-select
-                        v-model="ruleForm.Address4"
-                        placeholder="请选择培训地点"
-                        v-if="!ruleForm.course4==''"
-                      >
-                        <el-option
-                          v-for="item in selectAddressData4"
-                          :key="item.addrid"
-                          :label="item.address"
-                          :value="item.address"
-                        ></el-option>
-                      </el-select>
+                      <el-col :span="5">
+                        <el-select
+                          class="choose_city"
+                          v-model="city4"
+                          placeholder="城市"
+                          v-if="!ruleForm.course4==''"
+                          @change="getAddressList4(ruleForm.course4)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectCity1Data4"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          placeholder="请先选择城市"
+                          :disabled="true"
+                          v-if="!ruleForm.course4==''&&(city4==''||city4==null)"
+                          value
+                        ></el-select>
+                      </el-col>
+                      <el-col :span="12">
+                        <el-select
+                          class="choose_city_address"
+                          v-model="ruleForm.Address4"
+                          placeholder="请选择培训地点"
+                          v-if="!ruleForm.course4==''&&!city4==''"
+                          @change="getTimeList4(ruleForm.course4)"
+                        >
+                          <el-option
+                            v-for="(index,item) in selectAddressData4"
+                            :key="index"
+                            :label="item[index]"
+                            :value="index"
+                          ></el-option>
+                        </el-select>
+                      </el-col>
                     </el-form-item>
 
-                    <el-form-item label="时间选择" prop="time4">
+                    <el-form-item label="时间选择" prop="time1">
                       <el-select
                         placeholder="请先选择课程"
                         :disabled="true"
@@ -484,9 +621,15 @@
                         value
                       ></el-select>
                       <el-select
+                        placeholder="请先选择培训地点"
+                        :disabled="true"
+                        v-if="!ruleForm.course4==''&&(ruleForm.Address4==''||ruleForm.Address4==null)"
+                        value
+                      ></el-select>
+                      <el-select
                         v-model="ruleForm.time4"
                         placeholder="请选择培训时间"
-                        v-if="!ruleForm.course4==''"
+                        v-if="ruleForm.course4!=''&&ruleForm.Address4!=''&&ruleForm.Address4!=null"
                         @change="change_traintime4"
                       >
                         <el-option
@@ -502,6 +645,7 @@
                         v-if="leftNum4>0&&showLeftNum4"
                       >该批次剩余可报名人数：{{leftNum4}}</div>
                       <div class="warning_color" v-if="leftNum4<1&&showLeftNum4">报名人数已满</div>
+                      <div class="warning_color" v-if="checkSame4">有相同的报名条件</div>
                     </el-form-item>
 
                     <el-form-item label="套餐选择" prop="meal4">
@@ -593,12 +737,22 @@ export default {
       form4: false,
       but4: false,
       del4: false,
-
+      checkSame1:false,
+      checkSame2:false,
+      checkSame3:false,
+      checkSame4:false,
+      city1: "",
+      city2: "",
+      city3: "",
+      city4: "",
       active: 0,
       signUpPage: 1,
       accountsPage: 0,
       noEmpShow: false,
-
+      selectCity1Data1: [],
+      selectCity1Data2: [],
+      selectCity1Data3: [],
+      selectCity1Data4: [],
       selectCourseData: [{}],
       selectAddressData1: [{}],
       selectTimeData1: [{}],
@@ -788,252 +942,198 @@ export default {
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from2Empty == 0 &&
-        from3Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime2 &&
-        this.choose_traintime2 == this.choose_traintime3 &&
-        this.choose_traintime3 == this.choose_traintime4 &&
-        this.personSize1 +
-          this.personSize2 +
-          this.personSize3 +
-          this.personSize4 >
-          this.leftNum1
+      }else if (
+        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
       ) {
-        this.warningColor1 = this.warningColor2 = this.warningColor3 = this.warningColor4 = true;
+        this.checkSame1 = this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
+        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from2Empty == 0 &&
-        from3Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime2 &&
-        this.choose_traintime2 == this.choose_traintime3 &&
-        this.personSize1 + this.personSize2 + this.personSize3 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 &&
+        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 &&
+        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3
       ) {
-        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
-          this.warningColor4 = true;
-        }
-        this.warningColor1 = this.warningColor2 = this.warningColor3 = true;
+        this.checkSame1 = this.checkSame2 = this.checkSame3 = true;
+        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from2Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime2 &&
-        this.choose_traintime2 == this.choose_traintime4 &&
-        this.personSize1 + this.personSize2 + this.personSize4 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course4 &&
+        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time4 &&
+        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal4
       ) {
-        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
-          this.warningColor3 = true;
-        }
-        this.warningColor1 = this.warningColor2 = this.warningColor4 = true;
+        this.checkSame1 = this.checkSame2 = this.checkSame4 = true;
+        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from3Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime3 &&
-        this.choose_traintime3 == this.choose_traintime4 &&
-        this.personSize1 + this.personSize3 + this.personSize4 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+        this.ruleForm.time1 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+        this.ruleForm.meal1 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
       ) {
-        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
-          this.warningColor2 = true;
-        }
-        this.warningColor1 = this.warningColor3 = this.warningColor4 = true;
+        this.checkSame1 = this.checkSame3 = this.checkSame4 = true;
+        this.showLeftNum1 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from2Empty == 0 &&
-        from3Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime2 == this.choose_traintime3 &&
-        this.choose_traintime3 == this.choose_traintime4 &&
-        this.personSize2 + this.personSize3 + this.personSize4 > this.leftNum2
+      }
+      else if (
+        this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+        this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+        this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
       ) {
-        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
-          this.warningColor1 = true;
-        }
-        this.warningColor2 = this.warningColor3 = this.warningColor4 = true;
+        this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
+        this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from2Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime2 &&
-        this.personSize1 + this.personSize2 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course2 &&
+        this.ruleForm.time1 == this.ruleForm.time2 &&
+        this.ruleForm.meal1 == this.ruleForm.meal2
       ) {
         if (
-          from3Empty == 0 &&
-          from4Empty == 0 &&
-          this.choose_traintime3 == this.choose_traintime4 &&
-          this.personSize3 + this.personSize4 > this.leftNum3
-        ) {
-          this.warningColor3 = this.warningColor4 = true;
-        }
-        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
-          this.warningColor3 = true;
-        }
-        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
-          this.warningColor4 = true;
-        }
-        this.warningColor1 = this.warningColor2 = true;
+        this.ruleForm.course3 == this.ruleForm.course4 &&
+        this.ruleForm.time3 == this.ruleForm.time4 &&
+        this.ruleForm.meal3 == this.ruleForm.meal4
+      ) {
+        this.checkSame3 = this.checkSame4 = true;
+        this.showLeftNum3 = this.showLeftNum4 = false;
+      }
+        this.checkSame1 = this.checkSame2 = true;
+        this.showLeftNum1 = this.showLeftNum2 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from3Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime3 &&
-        this.personSize1 + this.personSize3 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course3 &&
+        this.ruleForm.time1 == this.ruleForm.time3 &&
+        this.ruleForm.meal1 == this.ruleForm.meal3
       ) {
         if (
-          from2Empty == 0 &&
-          from4Empty == 0 &&
-          this.choose_traintime2 == this.choose_traintime4 &&
-          this.personSize2 + this.personSize4 > this.leftNum2
-        ) {
-          this.warningColor2 = this.warningColor4 = true;
-        }
-        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
-          this.warningColor2 = true;
-        }
-        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
-          this.warningColor4 = true;
-        }
-        this.warningColor1 = this.warningColor3 = true;
+        this.ruleForm.course2 == this.ruleForm.course4 &&
+        this.ruleForm.time2 == this.ruleForm.time4 &&
+        this.ruleForm.meal2 == this.ruleForm.meal4
+      ) {
+        this.checkSame2 = this.checkSame4 = true;
+        this.showLeftNum2 = this.showLeftNum4 = false;
+      }
+        this.checkSame1 = this.checkSame3 = true;
+        this.showLeftNum1 = this.showLeftNum3 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from1Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime1 == this.choose_traintime4 &&
-        this.personSize1 + this.personSize4 > this.leftNum1
+      }
+      else if (
+        this.ruleForm.course1 == this.ruleForm.course4 &&
+        this.ruleForm.time1 == this.ruleForm.time4 &&
+        this.ruleForm.meal1 == this.ruleForm.meal4
       ) {
         if (
-          from3Empty == 0 &&
-          from2Empty == 0 &&
-          this.choose_traintime3 == this.choose_traintime2 &&
-          this.personSize3 + this.personSize2 > this.leftNum3
-        ) {
-          this.warningColor3 = this.warningColor2 = true;
-        }
-        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
-          this.warningColor3 = true;
-        }
-        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
-          this.warningColor2 = true;
-        }
-        this.warningColor1 = this.warningColor4 = true;
+        this.ruleForm.course2 == this.ruleForm.course3 &&
+        this.ruleForm.time2 == this.ruleForm.time3 &&
+        this.ruleForm.meal2 == this.ruleForm.meal3
+      ) {
+        this.checkSame2 = this.checkSame3 = true;
+        this.showLeftNum2 = this.showLeftNum3 = false;
+      }
+        this.checkSame1 = this.checkSame4 = true;
+        this.showLeftNum1 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from3Empty == 0 &&
-        from2Empty == 0 &&
-        this.choose_traintime3 == this.choose_traintime2 &&
-        this.personSize3 + this.personSize2 > this.leftNum3
+      }
+      else if (
+        this.ruleForm.course2 == this.ruleForm.course3 &&
+        this.ruleForm.time2 == this.ruleForm.time3 &&
+        this.ruleForm.meal2 == this.ruleForm.meal3
       ) {
         if (
-          from1Empty == 0 &&
-          from4Empty == 0 &&
-          this.choose_traintime1 == this.choose_traintime4 &&
-          this.personSize1 + this.personSize4 > this.leftNum1
-        ) {
-          this.warningColor1 = this.warningColor4 = true;
-        }
-        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
-          this.warningColor1 = true;
-        }
-        if (from4Empty == 0 && this.personSize4 > this.leftNum4) {
-          this.warningColor4 = true;
-        }
-        this.warningColor3 = this.warningColor2 = true;
+        this.ruleForm.course1 == this.ruleForm.course4 &&
+        this.ruleForm.time1 == this.ruleForm.time4 &&
+        this.ruleForm.meal1 == this.ruleForm.meal4
+      ) {
+        this.checkSame1 = this.checkSame4 = true;
+        this.showLeftNum1 = this.showLeftNum4 = false;
+      }
+        this.checkSame2 = this.checkSame3 = true;
+        this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from4Empty == 0 &&
-        from2Empty == 0 &&
-        this.choose_traintime4 == this.choose_traintime2 &&
-        this.personSize4 + this.personSize2 > this.leftNum4
+      }
+      else if (
+        this.ruleForm.course2 == this.ruleForm.course4 &&
+        this.ruleForm.time2 == this.ruleForm.time4 &&
+        this.ruleForm.meal2 == this.ruleForm.meal4
       ) {
         if (
-          from3Empty == 0 &&
-          from1Empty == 0 &&
-          this.choose_traintime3 == this.choose_traintime1 &&
-          this.personSize3 + this.personSize1 > this.leftNum3
-        ) {
-          this.warningColor3 = this.warningColor1 = true;
-        }
-        if (from3Empty == 0 && this.personSize3 > this.leftNum3) {
-          this.warningColor3 = true;
-        }
-        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
-          this.warningColor1 = true;
-        }
-
-        this.warningColor4 = this.warningColor2 = true;
+        this.ruleForm.course1 == this.ruleForm.course3 &&
+        this.ruleForm.time1 == this.ruleForm.time3 &&
+        this.ruleForm.meal1 == this.ruleForm.meal3
+      ) {
+        this.checkSame1 = this.checkSame3 = true;
+        this.showLeftNum1 = this.showLeftNum3 = false;
+      }
+        this.checkSame2 = this.checkSame4 = true;
+        this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (
-        from3Empty == 0 &&
-        from4Empty == 0 &&
-        this.choose_traintime3 == this.choose_traintime4 &&
-        this.personSize3 + this.personSize4 > this.leftNum3
+      }
+      else if (
+        this.ruleForm.course3 == this.ruleForm.course4 &&
+        this.ruleForm.time3 == this.ruleForm.time4 &&
+        this.ruleForm.meal3 == this.ruleForm.meal4
       ) {
         if (
-          from1Empty == 0 &&
-          from2Empty == 0 &&
-          this.choose_traintime1 == this.choose_traintime2 &&
-          this.personSize1 + this.personSize2 > this.leftNum1
-        ) {
-          this.warningColor1 = this.warningColor2 = true;
-        }
-        if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
-          this.warningColor1 = true;
-        }
-        if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
-          this.warningColor2 = true;
-        }
-        this.warningColor3 = this.warningColor4 = true;
+        this.ruleForm.course1 == this.ruleForm.course2 &&
+        this.ruleForm.time1 == this.ruleForm.time2 &&
+        this.ruleForm.meal1 == this.ruleForm.meal2
+      ) {
+        this.checkSame1 = this.checkSame2 = true;
+        this.showLeftNum1 = this.showLeftNum2 = false;
+      }
+        this.checkSame3 = this.checkSame4 = true;
+        this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "您的报名人数超过了剩余名额！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
-      } else if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
+      }
+      else if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
         if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
           this.warningColor2 = true;
         }
@@ -1109,6 +1209,10 @@ export default {
         });
         this.bus.$emit("todata", {
           type: "2",
+          city1: this.city1,
+          city2: this.city2,
+          city3: this.city3,
+          city4: this.city4,
           course1: this.ruleForm.course1,
           Address1: this.ruleForm.Address1,
           time1: this.ruleForm.time1,
@@ -1285,6 +1389,34 @@ export default {
         }
       }
     },
+    clearAll1() {
+      this.city1 = null;
+      this.ruleForm.time1 = null;
+      this.ruleForm.Address1 = null;
+      this.ruleForm.meal1 = null;
+      this.showLeftNum1 = false;
+    },
+    clearAll2() {
+      this.city2 = null;
+      this.ruleForm.time2 = null;
+      this.ruleForm.Address2 = null;
+      this.ruleForm.meal2 = null;
+      this.showLeftNum2 = false;
+    },
+    clearAll3() {
+      this.city3 = null;
+      this.ruleForm.time3 = null;
+      this.ruleForm.Address3 = null;
+      this.ruleForm.meal3 = null;
+      this.showLeftNum3 = false;
+    },
+    clearAll4() {
+      this.city4 = null;
+      this.ruleForm.time4 = null;
+      this.ruleForm.Address4 = null;
+      this.ruleForm.meal4 = null;
+      this.showLeftNum4 = false;
+    },
     getCourseList() {
       this.$ajax({
         method: "get",
@@ -1297,15 +1429,62 @@ export default {
           console.log(err);
         });
     },
+    getCity1(course) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getCityList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectCity1Data1 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getCity2(course) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getCityList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectCity1Data2 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getCity3(course) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getCityList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectCity1Data3 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    getCity4(course) {
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/course_getCityList.do?courseid=${course}`
+      })
+        .then(res => {
+          this.selectCity1Data4 = res.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getAddressList1(course) {
-      this.ruleForm.time1 = null;
-      this.ruleForm.Address1 = null;
-      this.ruleForm.meal1 = null;
       this.$ajax({
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
+        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}&city=${
+          this.city1
+        }`
       })
         .then(res => {
           this.selectAddressData1 = res.data.data;
@@ -1317,10 +1496,15 @@ export default {
     getTimeList1(course) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_getTimeList.do?courseid=${course}&city=${
+          this.city1
+        }&address=${this.ruleForm.Address1}`
       })
         .then(res => {
           this.selectTimeData1 = res.data.data;
+          console.log(this.selectTimeData1);
         })
         .catch(function(err) {
           console.log(err);
@@ -1363,14 +1547,13 @@ export default {
         });
     },
     getAddressList2(course) {
-      this.ruleForm.time2 = null;
-      this.ruleForm.Address2 = null;
-      this.ruleForm.meal2 = null;
       this.$ajax({
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
+        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}&city=${
+          this.city2
+        }`
       })
         .then(res => {
           this.selectAddressData2 = res.data.data;
@@ -1382,7 +1565,11 @@ export default {
     getTimeList2(course) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_getTimeList.do?courseid=${course}&city=${
+          this.city2
+        }&address=${this.ruleForm.Address2}`
       })
         .then(res => {
           this.selectTimeData2 = res.data.data;
@@ -1410,14 +1597,13 @@ export default {
       this.personSize2 = this.multipleSelection2.length;
     },
     getAddressList3(course) {
-      this.ruleForm.time3 = null;
-      this.ruleForm.Address3 = null;
-      this.ruleForm.meal3 = null;
       this.$ajax({
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
+        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}&city=${
+          this.city3
+        }`
       })
         .then(res => {
           this.selectAddressData3 = res.data.data;
@@ -1429,7 +1615,11 @@ export default {
     getTimeList3(course) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_getTimeList.do?courseid=${course}&city=${
+          this.city3
+        }&address=${this.ruleForm.Address3}`
       })
         .then(res => {
           this.selectTimeData3 = res.data.data;
@@ -1457,14 +1647,13 @@ export default {
       this.personSize3 = this.multipleSelection3.length;
     },
     getAddressList4(course) {
-      this.ruleForm.time4 = null;
-      this.ruleForm.Address4 = null;
-      this.ruleForm.meal4 = null;
       this.$ajax({
         method: "get",
         url: `${
           this.baseURL
-        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}`
+        }/zjsxpt/course_getTrainAddressList.do?courseid=${course}&city=${
+          this.city4
+        }`
       })
         .then(res => {
           this.selectAddressData4 = res.data.data;
@@ -1476,7 +1665,11 @@ export default {
     getTimeList4(course) {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_getTimeList.do?courseid=${course}`
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_getTimeList.do?courseid=${course}&city=${
+          this.city4
+        }&address=${this.ruleForm.Address4}`
       })
         .then(res => {
           this.selectTimeData4 = res.data.data;
@@ -1620,6 +1813,12 @@ export default {
 }
 .div-zone .el-select {
   width: 250px;
+}
+.div-zone .choose_city {
+  width: 80px;
+}
+.div-zone .choose_city_address {
+  width: 164px;
 }
 .sign-submit {
   margin: 20px 0px 0px 240px;
