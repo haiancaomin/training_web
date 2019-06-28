@@ -119,8 +119,10 @@
     <el-header>
       <router-link to="/index">
         <div class="logo">
-          <img src="../assets/favicon.png" alt>
-          <span class="logo-words">智聚实训</span>
+            <img src="../assets/association.png" alt>
+            <span class="logo-words" style="margin-right:15px;">预制构件专业委员会</span>
+            <img src="../assets/favicon.png" alt>
+            <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
       <div id="loginBtn" class="login-self" @click="clickLogin" v-if="!showUser">
@@ -276,9 +278,7 @@ export default {
             method: "post",
             url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${
               this.textarea
-            }&attachmentid=${this.fileUid}&phone=${
-              this.mobile
-            }`
+            }&attachmentid=${this.fileUid}&phone=${this.mobile}`
           })
             .then(res => {
               if (res.data.data == "0") {
@@ -292,7 +292,7 @@ export default {
                 this.mobile = "";
                 this.fileUid = "";
                 this.$refs.upload.clearFiles();
-              }  else {
+              } else {
                 this.$message({
                   message: "未知错误！",
                   type: "error",
@@ -345,9 +345,7 @@ export default {
       });
     },
     haveSuggest() {
-     
-        this.showBoardDialog = true;
-      
+      this.showBoardDialog = true;
     },
     enter_to_message_board() {
       this.show_to_message_board = false;
@@ -368,12 +366,12 @@ export default {
       this.show_erweima = true;
     },
     gotoMyboard() {
-       if (window.sessionStorage.user != undefined) {
+      if (window.sessionStorage.user != undefined) {
         this.showBoardDialog = false;
         this.$router.push({ path: `/MessageBoard` });
       } else {
         this.showBoardDialog = false;
-         document.getElementById('loginBtn').click();
+        document.getElementById("loginBtn").click();
         this.$message({
           message: "检测到您还未登录,请登录后操作！",
           center: true,
@@ -381,8 +379,6 @@ export default {
           customClass: "zZindex"
         });
       }
-      
-      
     },
     handleCommand(command) {
       if (command == "logOut") {
