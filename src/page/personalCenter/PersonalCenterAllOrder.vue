@@ -487,7 +487,7 @@
       <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
         <div class="order-head">
           <img src="../../assets/favicon.png" alt class="order-head-img">
-          <span class="order-head-title">智聚培训</span>
+          <span class="order-head-title">智聚实训</span>
           <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
         </div>
         <div class="order-picture">
