@@ -954,7 +954,7 @@ export default {
         this.checkSame1 = this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息1！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -971,7 +971,7 @@ export default {
         this.checkSame1 = this.checkSame2 = this.checkSame3 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息2！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -987,7 +987,7 @@ export default {
         this.checkSame1 = this.checkSame2 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息3！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1003,7 +1003,7 @@ export default {
         this.checkSame1 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息4！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1019,7 +1019,7 @@ export default {
         this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息55！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1044,7 +1044,7 @@ export default {
         this.checkSame1 = this.checkSame2 = true;
         this.showLeftNum1 = this.showLeftNum2 = false;
         this.$message({
-          message: "有条件相同的报名信息6！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1069,7 +1069,7 @@ export default {
         this.checkSame1 = this.checkSame3 = true;
         this.showLeftNum1 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息7！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1095,7 +1095,7 @@ export default {
         this.checkSame1 = this.checkSame4 = true;
         this.showLeftNum1 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息8！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1120,7 +1120,7 @@ export default {
         this.checkSame2 = this.checkSame3 = true;
         this.showLeftNum2 = this.showLeftNum3 = false;
         this.$message({
-          message: "有条件相同的报名信息9！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1145,7 +1145,7 @@ export default {
         this.checkSame2 = this.checkSame4 = true;
         this.showLeftNum2 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息10！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
@@ -1170,7 +1170,7 @@ export default {
         this.checkSame3 = this.checkSame4 = true;
         this.showLeftNum3 = this.showLeftNum4 = false;
         this.$message({
-          message: "有条件相同的报名信息11！",
+          message: "有条件相同的报名信息！",
           type: "error",
           center: true
         });
