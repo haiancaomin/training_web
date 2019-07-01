@@ -120,7 +120,7 @@
       <el-table-column prop="phone" label="手机" width="120"></el-table-column>
       <el-table-column prop="address" label="工作地" width="120"></el-table-column>
       <el-table-column prop="education" label="学历" width="120"></el-table-column>
-      <el-table-column prop="examno" label="结业证书" width="120">
+      <el-table-column prop="examno" label="结业证明" width="120">
         <template slot-scope="scope">
           <el-button
             type="primary"
