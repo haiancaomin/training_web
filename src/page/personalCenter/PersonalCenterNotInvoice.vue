@@ -72,13 +72,13 @@
                   <span class="el-icon-check"></span>
                 </div>
                 <div class="invoice_picture" v-if="selectInvoiceType=='0'">
-                  <img src="../../assets/pupiao.png">
+                  <img src="../../assets/pupiao.png" />
                 </div>
                 <div class="invoice_picture" v-if="selectInvoiceType=='1'">
-                  <img src="../../assets/zhuanpiao.png">
+                  <img src="../../assets/zhuanpiao.png" />
                 </div>
                 <div class="invoice_picture" v-if="selectInvoiceType=='2'">
-                  <img src="../../assets/dianzi.png">
+                  <img src="../../assets/dianzi.png" />
                 </div>
 
                 <div class="invoice_title">{{invoiceItem[1]}}</div>
@@ -330,13 +330,13 @@
     <div v-if="count">
       <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
         <div class="order-head">
-          <img src="../../assets/favicon.png" alt class="order-head-img">
+          <img src="../../assets/favicon.png" alt class="order-head-img" />
           <span class="order-head-title">智聚实训</span>
           <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
         </div>
         <div class="order-picture">
           <el-col :span="7">
-            <img :src="orderItem.picurl" alt class="order-img">
+            <img :src="orderItem.picurl" alt class="order-img" />
           </el-col>
           <el-col :span="17">
             <div class="order-detail">
@@ -367,7 +367,7 @@
             v-if="orderItem.status==1"
           >开具发票</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
-          
+
           <el-button
             type="success"
             round
@@ -389,7 +389,7 @@
       </div>
     </div>
     <div v-if="!count" class="noOrder">
-      <img src="../../assets/favicon.png" alt class="order-head-img">
+      <img src="../../assets/favicon.png" alt class="order-head-img" />
       <p class="no-order-content">您还没有相关的订单</p>
     </div>
   </div>
@@ -447,9 +447,7 @@ export default {
     getInvoiceInfo(chooseid) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${chooseid}`
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?invoiceid=${chooseid}`
       })
         .then(res => {
           console.log(res.data.data);
@@ -495,9 +493,7 @@ export default {
     checkSubmit() {
       this.$ajax({
         method: "post",
-        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${
-          this.orderID
-        }&invoiceid=${this.chooseid}&invoicekind=${this.selectInvoiceType}`
+        url: `${this.baseURL}/zjsxpt/course_confirmInvoice.do?orderid=${this.orderID}&invoiceid=${this.chooseid}&invoicekind=${this.selectInvoiceType}`
       })
         .then(res => {
           this.checkAgain = false;
@@ -527,9 +523,7 @@ export default {
       }
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
+        url: `${this.baseURL}/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
       })
         .then(res => {
           if (res.data.data.length == 0) {
@@ -553,16 +547,20 @@ export default {
       this.currentPage = val;
     },
     getNotPayOrderList(selectIndex) {
-      var pageIndex = (selectIndex - 1) * 3;
+      var pageIndex;
+      if (selectIndex == 0) {
+        pageIndex = 0;
+        selectIndex = 1;
+      } else {
+        pageIndex = (selectIndex - 1) * 3;
+      }
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_findOrderList.do?userid=${userid}&status=1&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+        url: `${this.baseURL}/zjsxpt/course_findOrderList.do?userid=${userid}&status=1&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
       })
         .then(res => {
           this.orderlist = res.data.data;
@@ -579,9 +577,7 @@ export default {
     deleteOrder() {
       this.$ajax({
         method: "post",
-        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${
-          this.deleteOrderID
-        }`
+        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${this.deleteOrderID}`
       })
         .then(res => {
           this.deleteOrderShow = false;
@@ -590,6 +586,9 @@ export default {
             type: "success",
             center: true
           });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
           this.getNotPayOrderList(this.currentPage);
         })
         .catch(function(err) {
@@ -1147,6 +1146,6 @@ table {
   margin: 0px 0px 30px 65px;
 }
 #contact p {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 </style>

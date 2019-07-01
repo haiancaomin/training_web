@@ -15,13 +15,20 @@
       </el-dialog>
 
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
-        <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" append-to-body center class="pay_agreement">
-        <p>1、考点接受报名40人，报满截止。</p>
-        <p>2、如需取消考试，请提前3个工作日邮件通知。</p>
-        <p>3、培训日前5天未支付培训费用的，报名名额取消</p>
-        <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
-        <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
-      </el-dialog>
+        <el-dialog
+          title="用户付费协议"
+          :visible.sync="showProtocol"
+          width="600px"
+          append-to-body
+          center
+          class="pay_agreement"
+        >
+          <p>1、考点接受报名40人，报满截止。</p>
+          <p>2、如需取消考试，请提前3个工作日邮件通知。</p>
+          <p>3、培训日前5天未支付培训费用的，报名名额取消</p>
+          <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
+          <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
+        </el-dialog>
         <div class="pay">
           <div class="pay-online">
             <div class="pay-online-body">
@@ -46,7 +53,7 @@
                   :key="orderItem.detailid"
                 >
                   <div class="meal_img f-fl">
-                    <img :src="orderItem.picurl" alt>
+                    <img :src="orderItem.picurl" alt />
                   </div>
                   <div class="meal_body f-fl">
                     <a class="title">
@@ -73,7 +80,7 @@
                       <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
                     </span>-->
                     <span v-if="radio2==9" class="choose-bank">
-                      <img src="../../assets/zhuanzhuang.png" class="icon-mini">转账汇款
+                      <img src="../../assets/zhuanzhuang.png" class="icon-mini" />转账汇款
                     </span>
                   </template>
                   <div class="pay-choose">
@@ -92,7 +99,7 @@
                       </div>-->
                       <div class="pay-bank">
                         <el-radio :label="9">
-                          <img src="../../assets/huikuan_big.png" class="pay-img">
+                          <img src="../../assets/huikuan_big.png" class="pay-img" />
                         </el-radio>
                       </div>
                     </el-radio-group>
@@ -123,21 +130,33 @@
             <div class="payment-body" v-if="radio2==9">
               <div class="payment-sub-body">
                 <div class="agreement_check">
-                    完成支付则表示您同意
-                    <span class="agreement" @click="showProtocol=true">《智聚用户付费协议》</span>
-                  </div>
+                  完成支付则表示您同意
+                  <span class="agreement" @click="showProtocol=true">《智聚用户付费协议》</span>
+                </div>
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
                       <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
-          <p>&nbsp;</p>
-         
-          <p><span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司</p>
-          <p><span>统一社会信用代码：</span>91320691MA1W0DXN1N</p>
-          <p><span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室</p>
-          <p><span>电 话：</span>0513-81055866</p>
-          <p><span>开户银行：</span>中国银行南通经济技术开发区支行</p>
-          <p><span>账 号：</span>484571289748</p>
+                      <p>&nbsp;</p>
+
+                      <p>
+                        <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+                      </p>
+                      <p>
+                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+                      </p>
+                      <p>
+                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+                      </p>
+                      <p>
+                        <span>电 话：</span>0513-81055866
+                      </p>
+                      <p>
+                        <span>开户银行：</span>中国银行南通经济技术开发区支行
+                      </p>
+                      <p>
+                        <span>账 号：</span>484571289748
+                      </p>
                     </div>
                   </div>
                 </el-col>
@@ -169,13 +188,13 @@
     <div v-if="count">
       <div class="order-card" v-for="orderItem in orderlist" :key="orderItem.orderid">
         <div class="order-head">
-          <img src="../../assets/favicon.png" alt class="order-head-img">
+          <img src="../../assets/favicon.png" alt class="order-head-img" />
           <span class="order-head-title">智聚实训</span>
           <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
         </div>
         <div class="order-picture">
           <el-col :span="7">
-            <img :src="orderItem.picurl" alt class="order-img">
+            <img :src="orderItem.picurl" alt class="order-img" />
           </el-col>
           <el-col :span="17">
             <div class="order-detail">
@@ -215,7 +234,7 @@
       </div>
     </div>
     <div v-if="!count" class="noOrder">
-      <img src="../../assets/favicon.png" alt class="order-head-img">
+      <img src="../../assets/favicon.png" alt class="order-head-img" />
       <p class="no-order-content">您还没有相关的订单</p>
     </div>
   </div>
@@ -237,16 +256,14 @@ export default {
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1,
-      showProtocol:false,
+      showProtocol: false
     };
   },
   methods: {
     payNowShow(orderid) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
+        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
       })
         .then(res => {
           this.orderDetail = res.data.data;
@@ -263,16 +280,20 @@ export default {
     },
 
     getNotPayOrderList(selectIndex) {
-      var pageIndex = (selectIndex - 1) * 3;
+      var pageIndex;
+      if (selectIndex == 0) {
+        pageIndex = 0;
+        selectIndex = 1;
+      } else {
+        pageIndex = (selectIndex - 1) * 3;
+      }
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         var userid = userInfo.userid;
       }
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_findOrderList.do?userid=${userid}&status=0&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
+        url: `${this.baseURL}/zjsxpt/course_findOrderList.do?userid=${userid}&status=0&pageIndex=${pageIndex}&selectIndex=${selectIndex}`
       })
         .then(res => {
           this.orderlist = res.data.data;
@@ -289,9 +310,7 @@ export default {
     deleteOrder() {
       this.$ajax({
         method: "post",
-        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${
-          this.deleteOrderID
-        }`
+        url: `${this.baseURL}/zjsxpt/course_deleteOrderById.do?orderid=${this.deleteOrderID}`
       })
         .then(res => {
           this.deleteOrderShow = false;
@@ -300,6 +319,9 @@ export default {
             type: "success",
             center: true
           });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
           this.getNotPayOrderList(this.currentPage);
         })
         .catch(function(err) {
@@ -620,7 +642,7 @@ export default {
   font-weight: bold;
 }
 .pay_agreement p {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 .agreement {
   cursor: pointer;
@@ -628,10 +650,10 @@ export default {
 }
 .agreement_check {
   position: absolute;
-  margin:107px 0px 0px 507px;
+  margin: 107px 0px 0px 507px;
 }
 #contact p {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 </style>
 <style>
