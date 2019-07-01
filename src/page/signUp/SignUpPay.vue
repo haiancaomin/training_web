@@ -8,7 +8,13 @@
         </el-table>
         <el-button type="primary" class="sign-submit1" @click="showTable=false">确认</el-button>
       </el-dialog>
-      <el-dialog title="用户付费协议" :visible.sync="showProtocol" width="600px" center class="pay_agreement">
+      <el-dialog
+        title="用户付费协议"
+        :visible.sync="showProtocol"
+        width="600px"
+        center
+        class="pay_agreement"
+      >
         <p>1、考点接受报名40人，报满截止。</p>
         <p>2、如需取消考试，请提前3个工作日邮件通知。</p>
         <p>3、培训日前5天未支付培训费用的，报名名额取消</p>
@@ -18,15 +24,30 @@
 
       <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
         <div class="offline-context">
+          <p style="color:#e4393c">
+            <span>备注：</span>转账汇款时请务必填写款项备注，备注信息为课程订单编号，便于财务核实
+          </p>
           <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
           <p>&nbsp;</p>
-         
-          <p><span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司</p>
-          <p><span>统一社会信用代码：</span>91320691MA1W0DXN1N</p>
-          <p><span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室</p>
-          <p><span>电 话：</span>0513-81055866</p>
-          <p><span>开户银行：</span>中国银行南通经济技术开发区支行</p>
-          <p><span>账 号：</span>484571289748</p>
+
+          <p>
+            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+          </p>
+          <p>
+            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+          </p>
+          <p>
+            <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+          </p>
+          <p>
+            <span>电 话：</span>0513-81055866
+          </p>
+          <p>
+            <span>开户银行：</span>中国银行南通经济技术开发区支行
+          </p>
+          <p>
+            <span>账 号：</span>484571289748
+          </p>
         </div>
         <div class="check_operation">
           <el-button type="primary" class="sign-submit" @click="payWait">我已确认</el-button>
@@ -56,7 +77,7 @@
                 <div class="pay-meal-body">
                   <div class="pay-meal-body">
                     <div class="meal_img f-fl">
-                      <img :src="orderItem.picurl" alt>
+                      <img :src="orderItem.picurl" alt />
                     </div>
                     <div class="meal_body f-fl">
                       <p class="title">
@@ -74,7 +95,6 @@
               </template>
               <div class="more_info">
                 <div class="more_info_up">
-                  
                   <el-col :span="4">
                     <div>预计开课时间</div>
                   </el-col>
@@ -96,7 +116,6 @@
                 </div>
 
                 <div class="more_info_down">
-                  
                   <el-col :span="4">
                     <div class="down_cell">{{orderItem.traintime}}</div>
                   </el-col>
@@ -143,7 +162,7 @@
                 <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
               </div>-->
               <div v-if="radio2==9" class="choose-bank">
-                <img src="../../assets/zhuanzhuang.png" class="icon-mini">转账汇款
+                <img src="../../assets/zhuanzhuang.png" class="icon-mini" />转账汇款
               </div>
             </template>
             <div class="pay-choose">
@@ -162,7 +181,7 @@
                 </div>-->
                 <div class="pay-bank">
                   <el-radio :label="9">
-                    <img src="../../assets/huikuan_big.png" class="pay-img">
+                    <img src="../../assets/huikuan_big.png" class="pay-img" />
                   </el-radio>
                 </div>
               </el-radio-group>
@@ -263,9 +282,7 @@ export default {
       that.orderID = val.orderID;
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${
-          val.orderID
-        }`
+        url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${val.orderID}`
       })
         .then(res => {
           that.orderDetail = res.data.data;
@@ -280,9 +297,7 @@ export default {
     checkEmp(empList) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${empList}`
+        url: `${this.baseURL}/zjsxpt/course_getEmployeeByEmpIds.do?employeeids=${empList}`
       })
         .then(res => {
           this.tableData = res.data.data;
@@ -314,11 +329,7 @@ export default {
       this.$ajax({
         method: "get",
         async: false,
-        url: `${
-          this.baseURL
-        }/zjsxpt/alipay.trade.page.pay.jsp?WIDout_trade_no=${
-          this.orderID
-        }&WIDtotal_amount=0.01&WIDsubject=${this.orderName}&WIDbody=测试123`
+        url: `${this.baseURL}/zjsxpt/alipay.trade.page.pay.jsp?WIDout_trade_no=${this.orderID}&WIDtotal_amount=0.01&WIDsubject=${this.orderName}&WIDbody=测试123`
       })
         .then(res => {})
         .catch(function(err) {
@@ -601,9 +612,9 @@ export default {
   white-space: nowrap;
 }
 .offline-context p {
-  margin:10px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
 }
-.offline-context p span{
+.offline-context p span {
   font-weight: bold;
 }
 @font-face {
@@ -625,7 +636,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 .pay_agreement p {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 </style>
 <style>

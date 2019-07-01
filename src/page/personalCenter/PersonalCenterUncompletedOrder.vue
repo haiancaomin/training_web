@@ -136,6 +136,9 @@
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
+                      <p style="color:#e4393c">
+                        <span>备注：</span>转账汇款时请务必填写款项备注，备注信息为课程订单编号，便于财务核实
+                      </p>
                       <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
                       <p>&nbsp;</p>
 
@@ -540,7 +543,7 @@ export default {
 }
 .payment-sub-body {
   width: 860px;
-  height: 160px;
+  height: 190px;
   box-sizing: border-box;
   background: #fefcef;
   border: 1px solid #ddd;
