@@ -14,7 +14,7 @@
       </el-dialog>
       <div class="batch-sign-up-notice">
         <p id="signup-no-info-notice1">本公司可开具的发票类型有普通发票，专用发票和电子发票三种。</p>
-        <p class="info-notice" id="signup-no-info-notice2">注：请仔细确认报名人员，付款成功后，无法更换！如报名条件不同，请点击添加按钮选择新的报名条件进行报名。</p>
+        <p class="info-notice" id="signup-no-info-notice2">注：请仔细确认报名人员，付款成功后，无法更换！如报名条件不同，请点击添加按钮选择新的报名条件进行报名。如报名人数已满，请联系 0513-81055866！</p>
       </div>
       <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm">
         <ol>
