@@ -16,12 +16,12 @@
         <div class="login-sign">
           <div class="logo">
             <img src="../assets/association.png" alt>
-            <span class="logo-words">预制构件专业委员会</span>
+            <span class="logo-words">预制构件专业委员会<br>南通考培基地</span>
           </div>
-          <div class="logo" style="padding-top:0">
+          <!-- <div class="logo" style="padding-top:0">
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
-          </div>
+          </div> -->
           <div class="feature">
             <span class="feature-detail">求是</span>
             <span class="feature-detail">创新</span>
