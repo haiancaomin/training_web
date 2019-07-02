@@ -2,210 +2,203 @@
   <div id="index_body">
     <div class="index_first_enter" v-if="userFirstEnterIndex">
       <div class="zhiju">
-            <img src="../assets/favicon.png" alt>
-            <span class="zhiju_words">智聚实训</span>
-            <p class="powered">Powered by zhiju</p>
-          </div>
+        <img src="../assets/favicon.png" alt />
+        <span class="zhiju_words">智聚实训</span>
+        <p class="powered">Powered by zhiju</p>
+      </div>
     </div>
-    <div class="index_hava_enter" >
-    <div class="index-body">
-      <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
-        <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
-          <i class="el-icon-arrow-down"></i>
-        </div>
-        <div class="login-sign">
-          <div class="logo">
-            <img src="../assets/association.png" alt>
-            <span class="logo-words">预制构件专业委员会<br>南通考培基地</span>
+    <div class="index_hava_enter">
+      <div class="index-body">
+        <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
+          <div class="font"></div>
+          <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
+            <i class="el-icon-arrow-down"></i>
           </div>
-          <!-- <div class="logo">
+          <div class="login-sign">
+            <div class="logo">
+              <span class="logo-words">南通考培基地</span>
+            </div>
+            <!-- <div class="logo">
             <img src="../assets/favicon.png" alt>
             <span class="logo-words">智聚实训</span>
-          </div> -->
-          <div class="feature">
-            <span class="feature-detail">求是</span>
-            <span class="feature-detail">创新</span>
-            <span class="feature-detail">共享</span>
-            <span class="feature-detail-last">共赢</span>
-          </div>
-          <!-- <div class="feature">
-            <span class="feature-detail">诚实</span>
-            <span class="feature-detail">自信</span>
-            <span class="feature-detail">提高</span>
-            <span class="feature-detail-last">创新</span>
-          </div> -->
-          
-          <div class="sign-up-main">
-            <router-link to="/SignUp">
-              <p class="index-sign-up2">报名入口&gt;&gt;</p>
-            </router-link>
-            <router-link to="/PesronalScoreSearch">
-              <p class="index-sign-up1">证书公示&gt;&gt;</p>
-            </router-link>
+            </div>-->
+            <div class="feature">
+              <span class="feature-detail">求是</span>
+              <span class="feature-detail">创新</span>
+              <span class="feature-detail">共享</span>
+              <span class="feature-detail-last">共赢</span>
+            </div>
+            <div class="sign-up-main">
+              <router-link to="/SignUp">
+                <p class="index-sign-up2">报名入口&gt;&gt;</p>
+              </router-link>
+              <router-link to="/PesronalScoreSearch">
+                <p class="index-sign-up1">证书公示&gt;&gt;</p>
+              </router-link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="course-outline-body">
-        <div class="course-type">
-          <el-row class="no-margin-b">
-            <el-col :span="24">
-              <div class="grid-content">
-                <h1 class="title-type">培训课程</h1>
-              </div>
-            </el-col>
-          </el-row>
+        <div class="course-outline-body">
+          <div class="course-type">
+            <el-row class="no-margin-b">
+              <el-col :span="24">
+                <div class="grid-content">
+                  <h1 class="title-type">培训课程</h1>
+                </div>
+              </el-col>
+            </el-row>
 
-          <el-row class="no-margin-b">
-            <div class="course-body clearfix">
-              <el-col :span="6" v-for="courseItem in courseList" :key="courseItem.courseid">
-                <router-link to="/course">
-                  <div class="course-outbody">
-                    <div class="course-img-body">
-                      <img :src="courseItem.picurl" class="course-show-img">
-                    </div>
-
-                    <div class="course-info">
-                      <img src="../assets/contentBack.png">
-                      <div class="course-name" v-if="courseItem.coursename.length>11">
-                        <marquee
-                          behavior="alternate"
-                          direction="left"
-                          loop="infinite"
-                          scrollamount="1"
-                        >
-                          <h3 class="big_h3">{{courseItem.coursename}}</h3>
-                        </marquee>
+            <el-row class="no-margin-b">
+              <div class="course-body clearfix">
+                <el-col :span="6" v-for="courseItem in courseList" :key="courseItem.courseid">
+                  <router-link to="/course">
+                    <div class="course-outbody">
+                      <div class="course-img-body">
+                        <img :src="courseItem.picurl" class="course-show-img" />
                       </div>
-                      <div class="course-name" v-if="courseItem.coursename.length<=11">
-                        <h3 class="little_h3">{{courseItem.coursename}}</h3>
-                      </div>
-                      <div class="course-description" v-if="courseItem.description.length>15">
-                        <el-tooltip content="Top center" placement="bottom">
-                          <div slot="content">{{courseItem.description}}</div>
+
+                      <div class="course-info">
+                        <img src="../assets/contentBack.png" />
+                        <div class="course-name" v-if="courseItem.coursename.length>11">
+                          <marquee
+                            behavior="alternate"
+                            direction="left"
+                            loop="infinite"
+                            scrollamount="1"
+                          >
+                            <h3 class="big_h3">{{courseItem.coursename}}</h3>
+                          </marquee>
+                        </div>
+                        <div class="course-name" v-if="courseItem.coursename.length<=11">
+                          <h3 class="little_h3">{{courseItem.coursename}}</h3>
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length>15">
+                          <el-tooltip content="Top center" placement="bottom">
+                            <div slot="content">{{courseItem.description}}</div>
+                            <h3>{{courseItem.description}}</h3>
+                          </el-tooltip>
+                        </div>
+                        <div class="course-description" v-if="courseItem.description.length<=15">
                           <h3>{{courseItem.description}}</h3>
-                        </el-tooltip>
-                      </div>
-                      <div class="course-description" v-if="courseItem.description.length<=15">
-                        <h3>{{courseItem.description}}</h3>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </router-link>
-              </el-col>
+                  </router-link>
+                </el-col>
 
-              <el-col :span="6">
-                <router-link to="/course">
-                  <div v-if="courseList.length < 8" class="course-no-over">
-                    <p class="more-course">更多课程，尽情期待！</p>
-                    <div class="course-hover-show">
-                      <img src="../assets/favicon.png" alt>
-                      <span class="logo-words">智聚实训</span>
+                <el-col :span="6">
+                  <router-link to="/course">
+                    <div v-if="courseList.length < 8" class="course-no-over">
+                      <p class="more-course">更多课程，尽情期待！</p>
+                      <div class="course-hover-show">
+                        <img src="../assets/favicon.png" alt />
+                        <span class="logo-words">智聚实训</span>
+                      </div>
                     </div>
-                  </div>
-                </router-link>
+                  </router-link>
+                </el-col>
+              </div>
+            </el-row>
+          </div>
+        </div>
+        <div class="base-list-outline-body">
+          <div class="base-list">
+            <el-row class="no-margin-b">
+              <el-col :span="24">
+                <div class="grid-content">
+                  <h1 class="title-type1">基地展示</h1>
+                </div>
               </el-col>
+            </el-row>
+
+            <div id="certify" v-if="swipershow">
+              <swiper :options="swiperOption" ref="mySwiper">
+                <swiper-slide v-for="baseItem in baseList" :key="baseItem.pid">
+                  <router-link to="/base">
+                    <img :src="baseItem.picurl" />
+                    <div class="index-base-name">{{baseItem.name}}</div>
+                    <div class="index-base-con">{{baseItem.description}}</div>
+                  </router-link>
+                </swiper-slide>
+              </swiper>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
             </div>
-          </el-row>
+          </div>
         </div>
-      </div>
-      <div class="base-list-outline-body">
-        <div class="base-list">
-          <el-row class="no-margin-b">
-            <el-col :span="24">
-              <div class="grid-content">
-                <h1 class="title-type1">基地展示</h1>
+        <div class="contact-outline-body">
+          <div class="contact">
+            <el-row class="no-margin-b">
+              <el-col :span="24">
+                <div class="grid-content" id="contact">
+                  <h1 class="title-type2">联系我们</h1>
+                </div>
+              </el-col>
+            </el-row>
+            <div class="index-contact">
+              <span class="contact-mobile">电话：0513-81055866</span>
+              <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
+              <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
+            </div>
+            <div id="map"></div>
+          </div>
+        </div>
+        <div class="friend-url-outline-body">
+          <div class="friend-url">
+            <div class="friend-title">
+              <div class="friend-title-con">
+                <span>友情链接</span>
               </div>
-            </el-col>
-          </el-row>
+            </div>
+            <el-row class="no-margin-b">
+              <div class="index-friend">
+                <a
+                  href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx"
+                  target="_blank"
+                  class="friend-a"
+                >
+                  <img src="../assets/zhiliangxiehui.png" alt class="friend-img" />
+                </a>
 
-          <div id="certify" v-if="swipershow">
-            <swiper :options="swiperOption" ref="mySwiper">
-              <swiper-slide v-for="baseItem in baseList" :key="baseItem.pid">
-                <router-link to="/base">
-                  <img :src="baseItem.picurl">
-                  <div class="index-base-name">{{baseItem.name}}</div>
-                  <div class="index-base-con">{{baseItem.description}}</div>
-                </router-link>
-              </swiper-slide>
-            </swiper>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-outline-body">
-        <div class="contact">
-          <el-row class="no-margin-b">
-            <el-col :span="24">
-              <div class="grid-content" id="contact">
-                <h1 class="title-type2">联系我们</h1>
+                <a href="http://prefabcenter.tongji.edu.cn/" target="_blank" class="friend-a">
+                  <img src="../assets/guojiazhongxin.png" alt class="friend-img" />
+                </a>
+
+                <a href="http://tjprefab.com.cn/" target="_blank" class="friend-a">
+                  <img src="../assets/tongjilvjian.png" alt class="friend-img" />
+                </a>
+
+                <a href="http://www.ntadi.cc/" target="_blank" class="friend-a-last">
+                  <img src="../assets/nantongshiyuan.png" alt class="friend-img-last" />
+                </a>
               </div>
-            </el-col>
-          </el-row>
-          <div class="index-contact">
-            <span class="contact-mobile">电话：0513-81055866</span>
-            <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
-            <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
+            </el-row>
           </div>
-          <div id="map"></div>
         </div>
       </div>
-      <div class="friend-url-outline-body">
-        <div class="friend-url">
-          <div class="friend-title">
-            <div class="friend-title-con">
-              <span>友情链接</span>
-            </div>
-          </div>
-          <el-row class="no-margin-b">
-            <div class="index-friend">
-              <a
-                href="http://www.gczlsh.com/DesktopModules/HT/chinese/home/index.aspx"
-                target="_blank"
-                class="friend-a"
-              >
-                <img src="../assets/zhiliangxiehui.png" alt class="friend-img">
-              </a>
-
-              <a href="http://prefabcenter.tongji.edu.cn/" target="_blank" class="friend-a">
-                <img src="../assets/guojiazhongxin.png" alt class="friend-img">
-              </a>
-
-              <a href="http://tjprefab.com.cn/" target="_blank" class="friend-a">
-                <img src="../assets/tongjilvjian.png" alt class="friend-img">
-              </a>
-
-              <a href="http://www.ntadi.cc/" target="_blank" class="friend-a-last">
-                <img src="../assets/nantongshiyuan.png" alt class="friend-img-last">
-              </a>
-            </div>
-          </el-row>
+      <div class="index-footer-outline-body">
+        <div class="index-footer">
+          <p>
+            <a href="http://www.beian.miit.gov.cn" target="_blank" class="beian">苏ICP备18020368号-2</a>
+          </p>
+          <p>
+            <a
+              href="http://www.zhjcx.cn/"
+              target="_blank"
+              class="our_company"
+            >©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a>
+          </p>
+          <p>
+            <span class="our_company_address">地址：南通市开发区通盛大道188号C座6楼</span>
+            <span>联系电话： 0513-81055866</span>
+            <span>(工作时间：工作日10点--17点)</span>
+          </p>
+          <p class="index-mobile"></p>
         </div>
       </div>
     </div>
-    <div class="index-footer-outline-body">
-      <div class="index-footer">
-        <p>
-          <a href="http://www.beian.miit.gov.cn" target="_blank" class="beian">苏ICP备18020368号-2</a>
-        </p>
-        <p>
-          <a
-            href="http://www.zhjcx.cn/"
-            target="_blank"
-            class="our_company"
-          >©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a>
-        </p>
-        <p>
-          <span class="our_company_address">地址：南通市开发区通盛大道188号C座6楼</span>
-          <span>联系电话： 0513-81055866</span>
-          <span>(工作时间：工作日10点--17点)</span>
-        </p>
-        <p class="index-mobile"></p>
-      </div>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -215,7 +208,7 @@ import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
-      userFirstEnterIndex:false,
+      userFirstEnterIndex: false,
       showDown: true,
       picurl: "",
       courseList: [],
@@ -278,14 +271,14 @@ export default {
     swiperSlide
   },
   mounted() {
-    if(this.global.firstEnter) {
+    if (this.global.firstEnter) {
       this.userFirstEnterIndex = true;
       this.global.setFirstEnter(false);
-      let that =this;
-      setTimeout( function(){
-     that.userFirstEnterIndex = false;
-}, 2200 );
-    } 
+      let that = this;
+      setTimeout(function() {
+        that.userFirstEnterIndex = false;
+      }, 2200);
+    }
     this.getIndexPicture();
     this.initMap();
     var that = this;
@@ -377,12 +370,21 @@ export default {
 </script>
 
 <style scoped>
+.font {
+  background: rgba(255, 255, 255, 0.3) url(../assets/font.png) no-repeat right
+    top;
+  padding-right: 50px;
+  width: calc(87% - 360px);
+  height: 300px;
+  float: left;
+  margin-top: 110px;
+}
 .zhiju {
   z-index: 300;
-  width:360px;
-  margin:0px auto;
+  width: 360px;
+  margin: 0px auto;
   text-align: center;
-  margin-top:330px;
+  margin-top: 330px;
   animation: zhiju 2s;
   -moz-animation: zhiju 2s; /* Firefox */
   -webkit-animation: zhiju 2s; /* Safari and Chrome */
@@ -392,10 +394,10 @@ export default {
 }
 .zhiju img {
   z-index: 300;
-  height:50px;
-  width:50px;
-  opacity:0;
-  margin:-20px 20px 0px 0px;
+  height: 50px;
+  width: 50px;
+  opacity: 0;
+  margin: -20px 20px 0px 0px;
   animation: zhiju_img 2s;
   -moz-animation: zhiju_img 2s; /* Firefox */
   -webkit-animation: zhiju_img 2s; /* Safari and Chrome */
@@ -405,77 +407,77 @@ export default {
 }
 @keyframes zhiju_img {
   0% {
-    opacity:0;
+    opacity: 0;
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
   50% {
-    opacity:1;
-   -moz-transform: rotate(0deg);
+    opacity: 1;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
   100% {
-   opacity:0;
-   -moz-transform: rotate(0deg);
+    opacity: 0;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
 }
 
 @-moz-keyframes zhiju_img /* Firefox */ {
   0% {
-    opacity:0;
+    opacity: 0;
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
   50% {
-    opacity:1;
-   -moz-transform: rotate(0deg);
+    opacity: 1;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
   100% {
-   opacity:0;
-   -moz-transform: rotate(0deg);
+    opacity: 0;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
 }
 @-webkit-keyframes zhiju_img /* Safari and Chrome */ {
-   0% {
-    opacity:0;
+  0% {
+    opacity: 0;
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
   50% {
-    opacity:1;
-   -moz-transform: rotate(0deg);
+    opacity: 1;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
   100% {
-   opacity:0;
-   -moz-transform: rotate(0deg);
+    opacity: 0;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
 }
 @-o-keyframes zhiju_img /* Opera */ {
   0% {
-    opacity:0;
+    opacity: 0;
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
   50% {
-    opacity:1;
-   -moz-transform: rotate(0deg);
+    opacity: 1;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
   100% {
-   opacity:0;
-   -moz-transform: rotate(0deg);
+    opacity: 0;
+    -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
   }
 }
 .zhiju_words {
   z-index: 300;
-  color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+  color: rgba(255, 255, 255, 0);
+  letter-spacing: 6px;
   font-size: 48px;
   font-family: "Microsoft YaHei";
   animation: zhiju_words 2s;
@@ -487,69 +489,69 @@ export default {
 }
 @keyframes zhiju_words {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 
 @-moz-keyframes zhiju_words /* Firefox */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 @-webkit-keyframes zhiju_words /* Safari and Chrome */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 @-o-keyframes zhiju_words /* Opera */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 .powered {
-z-index: 300;
-  color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+  z-index: 300;
+  color: rgba(255, 255, 255, 0);
+  letter-spacing: 6px;
   font-size: 11px;
   font-weight: bold;
   font-family: "Microsoft YaHei";
-  margin:0px 0px 0px 80px;
+  margin: 0px 0px 0px 80px;
   animation: powered 2s;
   -moz-animation: powered 2s; /* Firefox */
   -webkit-animation: powered 2s; /* Safari and Chrome */
@@ -559,69 +561,69 @@ z-index: 300;
 }
 @keyframes powered {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 
 @-moz-keyframes powered /* Firefox */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 @-webkit-keyframes powered /* Safari and Chrome */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
 @-o-keyframes powered /* Opera */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:12px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 12px;
   }
   50% {
-    color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
   100% {
-   color:rgba(255, 255, 255, 0);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 6px;
   }
 }
-.index_first_enter{
+.index_first_enter {
   width: 100%;
   height: 3200px;
-   background:rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
   z-index: 200;
   position: absolute;
-  margin-top:-80px;
-animation: index_first_enter 2s;
+  margin-top: -80px;
+  animation: index_first_enter 2s;
   -moz-animation: index_first_enter 2s; /* Firefox */
   -webkit-animation: index_first_enter 2s; /* Safari and Chrome */
   -o-animation: index_first_enter 2s; /* Opera */
@@ -630,51 +632,51 @@ animation: index_first_enter 2s;
 }
 @keyframes index_first_enter {
   0% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   50% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   100% {
-   background:rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
   }
 }
 
 @-moz-keyframes index_first_enter /* Firefox */ {
   0% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   50% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   100% {
-   background:rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
   }
 }
 @-webkit-keyframes index_first_enter /* Safari and Chrome */ {
-   0% {
-    background:rgba(0, 0, 0, 1);
+  0% {
+    background: rgba(0, 0, 0, 1);
   }
   50% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   100% {
-   background:rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
   }
 }
 @-o-keyframes index_first_enter /* Opera */ {
   0% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   50% {
-    background:rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1);
   }
   100% {
-   background:rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
   }
 }
-.clearfix:after{
-  content:'';
+.clearfix:after {
+  content: "";
   display: block;
   clear: both;
 }
@@ -698,7 +700,7 @@ animation: index_first_enter 2s;
   transition: all 0.3s;
   z-index: 1;
   margin: 40px 0px 0px 0px;
-animation: index-sign-up1 1.5s;
+  animation: index-sign-up1 1.5s;
   -moz-animation: index-sign-up1 1.5s; /* Firefox */
   -webkit-animation: index-sign-up1 1.5s; /* Safari and Chrome */
   -o-animation: index-sign-up1 1.5s; /* Opera */
@@ -710,16 +712,16 @@ animation: index-sign-up1 1.5s;
     margin: 40px 0px 0px -90px;
   }
   100% {
-   margin: 40px 0px 0px 0px;
+    margin: 40px 0px 0px 0px;
   }
 }
 
 @-moz-keyframes index-sign-up1 /* Firefox */ {
-   0% {
+  0% {
     margin: 40px 0px 0px -90px;
   }
   100% {
-   margin: 40px 0px 0px 0px;
+    margin: 40px 0px 0px 0px;
   }
 }
 @-webkit-keyframes index-sign-up1 /* Safari and Chrome */ {
@@ -727,7 +729,7 @@ animation: index-sign-up1 1.5s;
     margin: 40px 0px 0px -90px;
   }
   100% {
-   margin: 40px 0px 0px 0px;
+    margin: 40px 0px 0px 0px;
   }
 }
 @-o-keyframes index-sign-up1 /* Opera */ {
@@ -735,7 +737,7 @@ animation: index-sign-up1 1.5s;
     margin: 40px 0px 0px -90px;
   }
   100% {
-   margin: 40px 0px 0px 0px;
+    margin: 40px 0px 0px 0px;
   }
 }
 .index-sign-up1:hover {
@@ -758,7 +760,7 @@ animation: index-sign-up1 1.5s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   z-index: 1;
-animation: index-sign-up2 1.5s;
+  animation: index-sign-up2 1.5s;
   -moz-animation: index-sign-up2 1.5s; /* Firefox */
   -webkit-animation: index-sign-up2 1.5s; /* Safari and Chrome */
   -o-animation: index-sign-up2 1.5s; /* Opera */
@@ -770,16 +772,16 @@ animation: index-sign-up2 1.5s;
     margin: 0px 0px 0px 90px;
   }
   100% {
-   margin: 0px;
+    margin: 0px;
   }
 }
 
 @-moz-keyframes index-sign-up2 /* Firefox */ {
-   0% {
+  0% {
     margin: 0px 0px 0px 90px;
   }
   100% {
-   margin: 0px;
+    margin: 0px;
   }
 }
 @-webkit-keyframes index-sign-up2 /* Safari and Chrome */ {
@@ -787,7 +789,7 @@ animation: index-sign-up2 1.5s;
     margin: 0px 0px 0px 90px;
   }
   100% {
-   margin: 0px;
+    margin: 0px;
   }
 }
 @-o-keyframes index-sign-up2 /* Opera */ {
@@ -795,7 +797,7 @@ animation: index-sign-up2 1.5s;
     margin: 0px 0px 0px 90px;
   }
   100% {
-   margin: 0px;
+    margin: 0px;
   }
 }
 .index-sign-up2:hover {
@@ -869,50 +871,50 @@ animation: index-sign-up2 1.5s;
     opacity: 0;
   }
   100% {
-  opacity: 1;
+    opacity: 1;
   }
 }
 
 @-moz-keyframes company-show /* Firefox */ {
-   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+  0% {
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   66% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   100% {
-   color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
 }
 @-webkit-keyframes company-show /* Safari and Chrome */ {
-   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+  0% {
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   66% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   100% {
-   color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
 }
 @-o-keyframes company-show /* Opera */ {
   0% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   66% {
-    color:rgba(255, 255, 255, 0);
-    letter-spacing:0px;
+    color: rgba(255, 255, 255, 0);
+    letter-spacing: 0px;
   }
   100% {
-   color:rgba(255, 255, 255, 1);
-   letter-spacing:6px;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 6px;
   }
 }
 .login-sign {
@@ -1243,7 +1245,6 @@ animation: index-sign-up2 1.5s;
 .our_company_address {
   margin-right: 10px;
 }
-
 </style>
 <style>
 #certify {

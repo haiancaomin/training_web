@@ -107,7 +107,7 @@
         @mouseenter="enter_erweima"
         @mouseleave="leave_erweima"
       >
-        <img src="../assets/erweima.jpg">
+        <img src="../assets/erweima.jpg" />
       </div>
       <div
         class="check_erweima_arrow"
@@ -119,10 +119,8 @@
     <el-header>
       <router-link to="/index">
         <div class="logo">
-            <img src="../assets/association.png" alt>
-            <span class="logo-words" style="margin-right:15px;">预制构件专业委员会</span>
-            <img src="../assets/favicon.png" alt>
-            <span class="logo-words">智聚实训</span>
+          <img src="../assets/favicon.png" alt />
+          <span class="logo-words">智聚实训</span>
         </div>
       </router-link>
       <div id="loginBtn" class="login-self" @click="clickLogin" v-if="!showUser">
@@ -230,11 +228,7 @@ export default {
           }
           this.$ajax({
             method: "post",
-            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${
-              this.textarea
-            }&attachmentid=${this.fileUid}&phone=${
-              this.mobile
-            }&userid=${userid}`
+            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${this.textarea}&attachmentid=${this.fileUid}&phone=${this.mobile}&userid=${userid}`
           })
             .then(res => {
               if (res.data.data == "0") {
@@ -276,9 +270,7 @@ export default {
         } else {
           this.$ajax({
             method: "post",
-            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${
-              this.textarea
-            }&attachmentid=${this.fileUid}&phone=${this.mobile}`
+            url: `${this.baseURL}/zjsxpt/feedback_addFeedback.do?question=${this.textarea}&attachmentid=${this.fileUid}&phone=${this.mobile}`
           })
             .then(res => {
               if (res.data.data == "0") {
