@@ -373,7 +373,6 @@ export default {
 .font {
   background: rgba(255, 255, 255, 0.3) url(../assets/font.png) no-repeat right
     top;
-  padding-right: 50px;
   width: calc(87% - 360px);
   height: 300px;
   float: left;
