@@ -44,7 +44,7 @@
           </div>
         </el-col>
       </div>
-
+      <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
       <div class="order-group" v-if="orderShow1">
         <div class="order-info-body">
           <el-col :span="8">
@@ -1722,6 +1722,11 @@ export default {
 .operation-zone > .el-button {
   width: 100px;
   margin: 0px 20px;
+}
+.info-notice {
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #ee5f5b;
 }
 </style>
 <style>

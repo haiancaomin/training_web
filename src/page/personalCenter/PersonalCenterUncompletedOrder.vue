@@ -41,7 +41,8 @@
                   购买帐号：
                   <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付</div>
+                <div class="pay-online-tips">注意：购买后不支持退款、转让，请确认订单信息后再支付，并在24小时内支付。</div>
+                <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
               <div class="meal-body">
@@ -657,6 +658,11 @@ export default {
 }
 #contact p {
   margin-bottom: 10px;
+}
+.info-notice {
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #ee5f5b;
 }
 </style>
 <style>

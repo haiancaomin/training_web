@@ -4,10 +4,11 @@
       <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
         <div class="user_choose_invoice" v-show="showChooseInvoice">
           <div class="choose_head">
+            
             <span>请选择发票类型</span>
-            <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
-              <el-option label="普通发票" value="0"></el-option>
-              <el-option label="专用发票" value="1"></el-option>
+            <el-select v-model="selectInvoiceType" placeholder="请选择类型" class="choose_invoice_type">
+              <!-- <el-option label="普通发票" value="0"></el-option>
+              <el-option label="专用发票" value="1"></el-option> -->
               <el-option label="电子发票" value="2"></el-option>
             </el-select>
           </div>
@@ -272,6 +273,7 @@
 
     <div class="order-dialog" id="orderDialog">
       <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
+        <p class="notice20190702">本期培训的发票将在7月5号开具</p>
         <p>开具发票上传后将无法修改，是否再次确认发票信息</p>
         <div class="delete-order-operation">
           <el-button type="primary" @click="checkAgainMore">再次确认</el-button>
@@ -351,7 +353,8 @@
                   购买帐号：
                   <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付</div>
+                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付，并在24小时内支付。</div>
+                <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
               <div class="meal-body">
@@ -587,7 +590,7 @@ export default {
   name: "PersonalCenterAllOrder",
   data() {
     return {
-      selectInvoiceType: "0",
+      selectInvoiceType: "2",
       contact: false,
       showProtocol: false,
       count: 0,
@@ -1554,6 +1557,14 @@ table {
 }
 .expressShow {
   text-align: center;
+}
+.notice20190702 {
+  color:#F56C6C;
+}
+.info-notice {
+  font-family: "微软雅黑";
+  font-size: 12px;
+  color: #ee5f5b;
 }
 </style>
 <style>
