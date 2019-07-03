@@ -55,8 +55,8 @@
           <div class="choose_head">
             <span>请选择发票类型</span>
             <el-select v-model="selectInvoiceType" placeholder="请输入学历" class="choose_invoice_type">
-              <el-option label="普通发票" value="0"></el-option>
-              <el-option label="专用发票" value="1"></el-option>
+              <!-- <el-option label="普通发票" value="0"></el-option>
+              <el-option label="专用发票" value="1"></el-option> -->
               <el-option label="电子发票" value="2"></el-option>
             </el-select>
           </div>
@@ -400,7 +400,7 @@ export default {
   name: "PersonalCenterNotInvoice",
   data() {
     return {
-      selectInvoiceType: "0",
+      selectInvoiceType: "2",
       chooseid: "",
       contact: false,
       schedule: false,
