@@ -25,12 +25,15 @@ Vue.config.productionTip = false
 
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(m => m.meta.auth)) {
+
+  if (!!window.ActiveXObject || "ActiveXObject" in window) {
+    alert("访问本网站请勿使用IE浏览器，或将浏览器切换为极速模式！");
+  } else if (to.matched.some(m => m.meta.auth)) {
     if (window.sessionStorage.user != undefined) {
       next()
     } else if (to.path == '/SignUp' || to.path == '/PersonalCenter' || to.path == '/MessageBoard') {
       next(false)
-      sessionStorage.setItem('redirect',to.fullPath)
+      sessionStorage.setItem('redirect', to.fullPath)
       document.getElementById('loginBtn').click()
       Vue.prototype.$message({
         message: '检测到您还未登录,请登录后操作！',
