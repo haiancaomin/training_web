@@ -175,7 +175,7 @@ export default {
           { required: true, message: "请输入手机号", trigger: "blur" },
           {
             message: "请输入正确的手机号",
-            pattern: /^1[34578]\d{9}$/,
+            pattern: /^1[3456789]\d{9}$/,
             trigger: "blur"
           }
         ],
