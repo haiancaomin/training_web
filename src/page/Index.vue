@@ -9,9 +9,10 @@
     </div>
     <div class="index_hava_enter">
       <div class="index-body">
+        <div class="company_show_outline_body">
         <div class="company-show" :style="{backgroundImage: 'url(' + picurl + ')' }">
           <div class="font"></div>
-          <div class="more" v-show="showDown" @click="scrollAnimation(0, 731)">
+          <div class="more" v-show="showDown" @click="scrollAnimation(0, 851)">
             <i class="el-icon-arrow-down"></i>
           </div>
           <div class="login-sign">
@@ -37,6 +38,7 @@
               </router-link>
             </div>
           </div>
+        </div>
         </div>
 
         <div class="course-outline-body">
@@ -286,7 +288,7 @@ export default {
       if (
         document.documentElement.clientHeight +
           document.documentElement.scrollTop >
-        880
+        930
       ) {
         that.showDown = false;
       } else {
@@ -371,12 +373,14 @@ export default {
 
 <style scoped>
 .font {
+  right:0;
+  position: absolute;
   background: rgba(255, 255, 255, 0.3) url(../assets/font.png) no-repeat right
     top;
-  width: calc(87% - 360px);
+  width: calc(72% - 360px);
   height: 300px;
   float: left;
-  margin-top: 110px;
+  margin: 170px calc(72% - 360px) 0px 0px;
 }
 .zhiju {
   z-index: 300;
@@ -617,10 +621,10 @@ export default {
 }
 .index_first_enter {
   width: 100%;
-  height: 3200px;
+  height:1000px;
   background: rgba(0, 0, 0, 0);
   z-index: 200;
-  position: absolute;
+  position: fixed;
   margin-top: -80px;
   animation: index_first_enter 2s;
   -moz-animation: index_first_enter 2s; /* Firefox */
@@ -854,75 +858,20 @@ export default {
   margin: 10px 0px 0px 0px;
 }
 .company-show {
-  height: 730px;
-  width: 100%;
-  background-size: 100% 810px;
+  height: 850px;
+  width: 1920px;
+  margin:0px auto;
+  background-size: 100% 850px;
   opacity: 1;
-  animation: company-show 1.5s;
-  -moz-animation: company-show 1.5s; /* Firefox */
-  -webkit-animation: company-show 1.5s; /* Safari and Chrome */
-  -o-animation: company-show 1.5s; /* Opera */
-  animation-iteration-count: 1.5;
-  -webkit-animation-iteration-count: 1;
-}
-@keyframes company-show {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-moz-keyframes company-show /* Firefox */ {
-  0% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  66% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  100% {
-    color: rgba(255, 255, 255, 1);
-    letter-spacing: 6px;
-  }
-}
-@-webkit-keyframes company-show /* Safari and Chrome */ {
-  0% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  66% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  100% {
-    color: rgba(255, 255, 255, 1);
-    letter-spacing: 6px;
-  }
-}
-@-o-keyframes company-show /* Opera */ {
-  0% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  66% {
-    color: rgba(255, 255, 255, 0);
-    letter-spacing: 0px;
-  }
-  100% {
-    color: rgba(255, 255, 255, 1);
-    letter-spacing: 6px;
-  }
 }
 .login-sign {
-  float: right;
+  right:0;
+  position: absolute;
   background: rgba(255, 255, 255, 0.6);
-  height: 730px;
+  height: 850px;
   width: 360px;
   padding: 0 20px;
-  margin: 0px 13% 0px 0px;
+  margin: 0px 17% 0px 0px;
 }
 .logo {
   padding: 160px 0px 20px 0px;
@@ -1243,6 +1192,14 @@ export default {
 }
 .our_company_address {
   margin-right: 10px;
+}
+.index-body {
+  width:100%;
+  overflow: hidden;
+}
+.company_show_outline_body {
+  width:100%;
+  background:#409eff;
 }
 </style>
 <style>

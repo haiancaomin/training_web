@@ -14,14 +14,14 @@
       </el-dialog>
       <div class="batch-sign-up-notice">
         <p id="signup-no-info-notice1">本公司可开具的发票类型有普通发票，专用发票和电子发票三种。</p>
-        <p class="info-notice" id="signup-no-info-notice2">注：请仔细确认报名人员，付款成功后，无法更换！如报名条件不同，请点击添加按钮选择新的报名条件进行报名。如报名人数已满，请联系 0513-81055866 协调！</p>
+        <p class="info-notice" id="signup-no-info-notice2">注：请仔细确认报名人员，付款成功后，无法更换！如报名人数已满，请联系 0513-81055866 协调！</p>
       </div>
       <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm">
         <ol>
           <div class="up-div">
             <div class="div-zone">
-              <el-col :span="12" v-if="form1" id="divZone1">
-                <li class="form1">
+              <!-- <el-col :span="12" v-if="form1" id="divZone1"> -->
+                <div class="form1">
                   <div class="info-need">
                     <el-form-item label="课程选择" prop="course1">
                       <el-select
@@ -36,13 +36,13 @@
                           :value="item.courseid"
                         ></el-option>
                       </el-select>
-                      <span class="el-icon-plus" id="el-icon-plus1" @click="addNew1" v-if="but1"></span>
+                      <!-- <span class="el-icon-plus" id="el-icon-plus1" @click="addNew1" v-if="but1"></span>
                       <span
                         class="el-icon-minus"
                         id="el-icon-minus1"
                         @click="deletes1()"
                         v-if="del1"
-                      ></span>
+                      ></span> -->
                     </el-form-item>
 
                     <el-form-item label="培训地点" prop="Address1">
@@ -187,11 +187,11 @@
                       </div>
                     </el-form-item>
                   </div>
-                </li>
-              </el-col>
+                </div>
+              <!-- </el-col> -->
             </div>
 
-            <div class="div-zone">
+            <!-- <div class="div-zone">
               <el-col :span="12" v-if="form2">
                 <li class="form2">
                   <div class="info-need">
@@ -361,10 +361,10 @@
                   </div>
                 </li>
               </el-col>
-            </div>
+            </div> -->
           </div>
 
-          <div class="down-div">
+          <!-- <div class="down-div">
             <div class="div-zone">
               <el-col :span="12" v-if="form3">
                 <li class="form3">
@@ -708,7 +708,7 @@
                 </li>
               </el-col>
             </div>
-          </div>
+          </div> -->
           <el-col :span="24">
             <div class="nextPage1-batch">
               <el-form-item>
@@ -812,7 +812,9 @@ export default {
       warningColor1: false,
       warningColor2: false,
       warningColor3: false,
-      warningColor4: false
+      warningColor4: false,
+      empids1:"",
+      checkRepeatEmp: true
     };
   },
   methods: {
@@ -917,6 +919,7 @@ export default {
       ) {
         from3Empty = 1;
       }
+      
       if (
         this.ruleForm.course4 == "" ||
         this.ruleForm.course4 == null ||
@@ -931,6 +934,7 @@ export default {
         from4Empty = 1;
       }
 
+      
       if (
         from1Empty == 1 &&
         from2Empty == 1 &&
@@ -942,239 +946,240 @@ export default {
           type: "error",
           center: true
         });
-      }else if (
-        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
-        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4 
-        && from1Empty == 0
-        && from2Empty == 0
-        && from3Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
-        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 &&
-        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3
-        && from1Empty == 0
-        && from2Empty == 0
-        && from3Empty == 0
+      } 
+      // }else if (
+      //   this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+      //   this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4 
+      //   && from1Empty == 0
+      //   && from2Empty == 0
+      //   && from3Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
+      //   this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course3 &&
+      //   this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time3 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal3
+      //   && from1Empty == 0
+      //   && from2Empty == 0
+      //   && from3Empty == 0
         
-      ) {
-        this.checkSame1 = this.checkSame2 = this.checkSame3 = true;
-        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course4 &&
-        this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal4
-        && from1Empty == 0
-        && from2Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame2 = this.checkSame4 = true;
-        this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
-        this.ruleForm.time1 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
-        && from1Empty == 0
-        && from3Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame3 = this.checkSame4 = true;
-        this.showLeftNum1 = this.showLeftNum3 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
-        this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
-        && from2Empty == 0
-        && from3Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
-        this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course2 &&
-        this.ruleForm.time1 == this.ruleForm.time2 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2
-        && from1Empty == 0
-        && from2Empty == 0
-      ) {
-        if (
-        this.ruleForm.course3 == this.ruleForm.course4 &&
-        this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal3 == this.ruleForm.meal4 
-        && from3Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame3 = this.checkSame4 = true;
-        this.showLeftNum3 = this.showLeftNum4 = false;
-      }
-        this.checkSame1 = this.checkSame2 = true;
-        this.showLeftNum1 = this.showLeftNum2 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course3 &&
-        this.ruleForm.time1 == this.ruleForm.time3 &&
-        this.ruleForm.meal1 == this.ruleForm.meal3
-        && from1Empty == 0
-        && from3Empty == 0
-      ) {
-        if (
-        this.ruleForm.course2 == this.ruleForm.course4 &&
-        this.ruleForm.time2 == this.ruleForm.time4 &&
-        this.ruleForm.meal2 == this.ruleForm.meal4
-        && from2Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame2 = this.checkSame4 = true;
-        this.showLeftNum2 = this.showLeftNum4 = false;
-      }
-        this.checkSame1 = this.checkSame3 = true;
-        this.showLeftNum1 = this.showLeftNum3 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course1 == this.ruleForm.course4 &&
-        this.ruleForm.time1 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal4
-        && from1Empty == 0
-        && from4Empty == 0
-      ) {
-        if (
-        this.ruleForm.course2 == this.ruleForm.course3 &&
-        this.ruleForm.time2 == this.ruleForm.time3 &&
-        this.ruleForm.meal2 == this.ruleForm.meal3
-        && from2Empty == 0
-        && from3Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame2 = this.checkSame3 = true;
+      //   this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum3 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course2 && this.ruleForm.course2 == this.ruleForm.course4 &&
+      //   this.ruleForm.time1 == this.ruleForm.time2 && this.ruleForm.time2 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal2 && this.ruleForm.meal2 == this.ruleForm.meal4
+      //   && from1Empty == 0
+      //   && from2Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame2 = this.checkSame4 = true;
+      //   this.showLeftNum1 = this.showLeftNum2 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+      //   this.ruleForm.time1 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
+      //   && from1Empty == 0
+      //   && from3Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame3 = this.checkSame4 = true;
+      //   this.showLeftNum1 = this.showLeftNum3 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course2 == this.ruleForm.course3 && this.ruleForm.course3 == this.ruleForm.course4 &&
+      //   this.ruleForm.time2 == this.ruleForm.time3 && this.ruleForm.time3 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal2 == this.ruleForm.meal3 && this.ruleForm.meal3 == this.ruleForm.meal4
+      //   && from2Empty == 0
+      //   && from3Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame2 = this.checkSame3 = this.checkSame4 = true;
+      //   this.showLeftNum2 = this.showLeftNum3 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course2 &&
+      //   this.ruleForm.time1 == this.ruleForm.time2 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal2
+      //   && from1Empty == 0
+      //   && from2Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course3 == this.ruleForm.course4 &&
+      //   this.ruleForm.time3 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal3 == this.ruleForm.meal4 
+      //   && from3Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame3 = this.checkSame4 = true;
+      //   this.showLeftNum3 = this.showLeftNum4 = false;
+      // }
+      //   this.checkSame1 = this.checkSame2 = true;
+      //   this.showLeftNum1 = this.showLeftNum2 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course3 &&
+      //   this.ruleForm.time1 == this.ruleForm.time3 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal3
+      //   && from1Empty == 0
+      //   && from3Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course2 == this.ruleForm.course4 &&
+      //   this.ruleForm.time2 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal2 == this.ruleForm.meal4
+      //   && from2Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame2 = this.checkSame4 = true;
+      //   this.showLeftNum2 = this.showLeftNum4 = false;
+      // }
+      //   this.checkSame1 = this.checkSame3 = true;
+      //   this.showLeftNum1 = this.showLeftNum3 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course1 == this.ruleForm.course4 &&
+      //   this.ruleForm.time1 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal4
+      //   && from1Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course2 == this.ruleForm.course3 &&
+      //   this.ruleForm.time2 == this.ruleForm.time3 &&
+      //   this.ruleForm.meal2 == this.ruleForm.meal3
+      //   && from2Empty == 0
+      //   && from3Empty == 0
 
-      ) {
-        this.checkSame2 = this.checkSame3 = true;
-        this.showLeftNum2 = this.showLeftNum3 = false;
-      }
-        this.checkSame1 = this.checkSame4 = true;
-        this.showLeftNum1 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course2 == this.ruleForm.course3 &&
-        this.ruleForm.time2 == this.ruleForm.time3 &&
-        this.ruleForm.meal2 == this.ruleForm.meal3
-        && from2Empty == 0
-        && from3Empty == 0
-      ) {
-        if (
-        this.ruleForm.course1 == this.ruleForm.course4 &&
-        this.ruleForm.time1 == this.ruleForm.time4 &&
-        this.ruleForm.meal1 == this.ruleForm.meal4
-        && from1Empty == 0
-        && from4Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame4 = true;
-        this.showLeftNum1 = this.showLeftNum4 = false;
-      }
-        this.checkSame2 = this.checkSame3 = true;
-        this.showLeftNum2 = this.showLeftNum3 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course2 == this.ruleForm.course4 &&
-        this.ruleForm.time2 == this.ruleForm.time4 &&
-        this.ruleForm.meal2 == this.ruleForm.meal4      
-        && from2Empty == 0
-        && from4Empty == 0
-      ) {
-        if (
-        this.ruleForm.course1 == this.ruleForm.course3 &&
-        this.ruleForm.time1 == this.ruleForm.time3 &&
-        this.ruleForm.meal1 == this.ruleForm.meal3
-        && from1Empty == 0
-        && from3Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame3 = true;
-        this.showLeftNum1 = this.showLeftNum3 = false;
-      }
-        this.checkSame2 = this.checkSame4 = true;
-        this.showLeftNum2 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
-      else if (
-        this.ruleForm.course3 == this.ruleForm.course4 &&
-        this.ruleForm.time3 == this.ruleForm.time4 &&
-        this.ruleForm.meal3 == this.ruleForm.meal4
-        && from3Empty == 0
-        && from4Empty == 0
-      ) {
-        if (
-        this.ruleForm.course1 == this.ruleForm.course2 &&
-        this.ruleForm.time1 == this.ruleForm.time2 &&
-        this.ruleForm.meal1 == this.ruleForm.meal2
-        && from1Empty == 0
-        && from2Empty == 0
-      ) {
-        this.checkSame1 = this.checkSame2 = true;
-        this.showLeftNum1 = this.showLeftNum2 = false;
-      }
-        this.checkSame3 = this.checkSame4 = true;
-        this.showLeftNum3 = this.showLeftNum4 = false;
-        this.$message({
-          message: "有条件相同的报名信息！",
-          type: "error",
-          center: true
-        });
-      }
+      // ) {
+      //   this.checkSame2 = this.checkSame3 = true;
+      //   this.showLeftNum2 = this.showLeftNum3 = false;
+      // }
+      //   this.checkSame1 = this.checkSame4 = true;
+      //   this.showLeftNum1 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course2 == this.ruleForm.course3 &&
+      //   this.ruleForm.time2 == this.ruleForm.time3 &&
+      //   this.ruleForm.meal2 == this.ruleForm.meal3
+      //   && from2Empty == 0
+      //   && from3Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course1 == this.ruleForm.course4 &&
+      //   this.ruleForm.time1 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal4
+      //   && from1Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame4 = true;
+      //   this.showLeftNum1 = this.showLeftNum4 = false;
+      // }
+      //   this.checkSame2 = this.checkSame3 = true;
+      //   this.showLeftNum2 = this.showLeftNum3 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course2 == this.ruleForm.course4 &&
+      //   this.ruleForm.time2 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal2 == this.ruleForm.meal4      
+      //   && from2Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course1 == this.ruleForm.course3 &&
+      //   this.ruleForm.time1 == this.ruleForm.time3 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal3
+      //   && from1Empty == 0
+      //   && from3Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame3 = true;
+      //   this.showLeftNum1 = this.showLeftNum3 = false;
+      // }
+      //   this.checkSame2 = this.checkSame4 = true;
+      //   this.showLeftNum2 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
+      // else if (
+      //   this.ruleForm.course3 == this.ruleForm.course4 &&
+      //   this.ruleForm.time3 == this.ruleForm.time4 &&
+      //   this.ruleForm.meal3 == this.ruleForm.meal4
+      //   && from3Empty == 0
+      //   && from4Empty == 0
+      // ) {
+      //   if (
+      //   this.ruleForm.course1 == this.ruleForm.course2 &&
+      //   this.ruleForm.time1 == this.ruleForm.time2 &&
+      //   this.ruleForm.meal1 == this.ruleForm.meal2
+      //   && from1Empty == 0
+      //   && from2Empty == 0
+      // ) {
+      //   this.checkSame1 = this.checkSame2 = true;
+      //   this.showLeftNum1 = this.showLeftNum2 = false;
+      // }
+      //   this.checkSame3 = this.checkSame4 = true;
+      //   this.showLeftNum3 = this.showLeftNum4 = false;
+      //   this.$message({
+      //     message: "有条件相同的报名信息！",
+      //     type: "error",
+      //     center: true
+      //   });
+      // }
       else if (from1Empty == 0 && this.personSize1 > this.leftNum1) {
         if (from2Empty == 0 && this.personSize2 > this.leftNum2) {
           this.warningColor2 = true;
@@ -1240,7 +1245,16 @@ export default {
           center: true
         });
       } else {
-        this.warningColor1 = this.warningColor2 = this.warningColor3 = this.warningColor4 = false;
+        this.$ajax({
+        method: "get",
+        url: `${
+          this.baseURL
+        }/zjsxpt/course_validateEmployee.do?timeid=${this.ruleForm.time1}&employeeids=${this.empids1}`
+      })
+        .then(res => {
+          this.checkRepeatEmp = res.data.data;
+          if (this.checkRepeatEmp) {
+             this.warningColor1 = this.warningColor2 = this.warningColor3 = this.warningColor4 = false;
         this.signUpPage = 0;
         this.accountsPage = 1;
         this.active = 1;
@@ -1275,6 +1289,17 @@ export default {
           time4: this.ruleForm.time4,
           meal4: this.ruleForm.meal4,
           multipleSelection4: this.multipleSelection4
+        });
+          } else {
+            this.$message({
+          message: "您有报名人员已经报名本批次，请重新选择人员!",
+          type: "error",
+          center: true
+        });
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
         });
       }
     },
@@ -1572,7 +1597,16 @@ export default {
         });
     },
     handleSelectionChange1(val) {
+      this.empids1 = "";
       this.multipleSelection1 = val;
+       if (this.multipleSelection1.length >= 1) {
+        for (var i = 0; i < this.multipleSelection1.length - 1; i++) {
+          this.empids1 += this.multipleSelection1[i].empid + ",";
+        }
+        var last1 = this.multipleSelection1.length - 1;
+        this.empids1 += this.multipleSelection1[last1].empid;
+      }
+
       this.personSize1 = this.multipleSelection1.length;
     },
     getDiaTableData1() {
@@ -2051,5 +2085,9 @@ export default {
   100% {
     margin-left: 70px;
   }
+}
+.form1 {
+  width:465px;
+  margin:0px auto;
 }
 </style>

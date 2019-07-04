@@ -1482,28 +1482,10 @@ export default {
         var traintimeids = "";
         var employeeids = "";
         if (this.orderShow1 && this.empSize1 > 0) {
-          courseids += this.course1 + ",";
-          menuids += this.meal1 + ",";
-          traintimeids += this.time1 + ",";
-          employeeids += this.empids1 + ";";
-        }
-        if (this.orderShow2 && this.empSize2 > 0) {
-          courseids += this.course2 + ",";
-          menuids += this.meal2 + ",";
-          traintimeids += this.time2 + ",";
-          employeeids += this.empids2 + ";";
-        }
-        if (this.orderShow3 && this.empSize3 > 0) {
-          courseids += this.course3 + ",";
-          menuids += this.meal3 + ",";
-          traintimeids += this.time3 + ",";
-          employeeids += this.empids3 + ";";
-        }
-        if (this.orderShow4 && this.empSize4 > 0) {
-          courseids += this.course4 + ",";
-          menuids += this.meal4 + ",";
-          traintimeids += this.time4 + ",";
-          employeeids += this.empids4 + ";";
+          courseids += this.course1;
+          menuids += this.meal1;
+          traintimeids += this.time1;
+          employeeids += this.empids1;
         }
         if (
           this.empSize1 < 1 &&
@@ -1532,9 +1514,10 @@ export default {
             method: "post",
             url: `${
               this.baseURL
-            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseids":"${courseids}","menuids":"${menuids}","traintimeids":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${this.signUpType}`
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.totalPrice}","courseid":"${courseids}","menuid":"${menuids}","traintimeid":"${traintimeids}","employeeids":"${employeeids}"}&userid=${userid}&type=${this.signUpType}`
           })
             .then(res => {
+              console.log(res.data.data);
               if(res.data.data == "2") {
                 this.$message({
             message: "下单金额异常!",
@@ -1547,7 +1530,13 @@ export default {
             type: "error",
             center: true
           });
-              }else{
+              }else if(res.data.data == "4") {
+                this.$message({
+            message: "您有报名人员已经报名本批次，请重新选择人员!",
+            type: "error",
+            center: true
+          });
+              }else {
                 this.accountsPage = 0;
               this.SignUpPayPage = 1;
               this.active = 2;
@@ -1572,10 +1561,17 @@ export default {
             method: "post",
             url: `${
               this.baseURL
-            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}","courseids":"${this.course1}","menuids":"${this.meal1}","traintimeids":"${this.time1}","employeeids":""}&userid=${userid}&type=3&emp={"name":"${this.name}","cardno":"${this.cardno}","education":"${this.education}","phone":"${this.phone}"}`
+            }/zjsxpt/course_saveOrder.do?order={"summoney":"${this.price1}","courseid":"${this.course1}","menuid":"${this.meal1}","traintimeid":"${this.time1}","employeeids":""}&userid=${userid}&type=3&emp={"name":"${this.name}","cardno":"${this.cardno}","education":"${this.education}","phone":"${this.phone}"}`
           })
             .then(res => {
-              this.accountsPage = 0;
+              if(res.data.data == "4") {
+                this.$message({
+            message: "您报名的人员已经报名本批次!",
+            type: "error",
+            center: true
+          });
+              } else {
+                this.accountsPage = 0;
               this.SignUpPayPage = 1;
               this.active = 2;
               this.$emit("ToSignUpPayPage", {
@@ -1586,6 +1582,8 @@ export default {
               this.bus.$emit("toNextPage", {
                 orderID: res.data.orderid
               });
+              }
+              
             })
             .catch(function(err) {
               console.log(err);

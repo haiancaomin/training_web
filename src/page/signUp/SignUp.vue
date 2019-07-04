@@ -122,7 +122,7 @@ export default {
 
 .sign-up-info {
   width: 1000px;
-  height: 950px;
+  height: 570px;
   margin: 0px auto;
   padding: 10px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
