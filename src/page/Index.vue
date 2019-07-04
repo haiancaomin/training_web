@@ -619,7 +619,9 @@ export default {
   }
 }
 .index_first_enter {
-  width: 100%;
+   width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
   height:1000px;
   background: rgba(0, 0, 0, 0);
   z-index: 200;
@@ -683,7 +685,13 @@ export default {
   clear: both;
 }
 #index_body {
-  margin-top: 80px;
+  position: relative;
+    width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
+    margin: 0 auto;
+    margin-top:80px;
+   
 }
 .index-sign-up1 {
   width: 160px;
@@ -852,16 +860,21 @@ export default {
 }
 .index-footer-outline-body {
   background: #242e68;
+  width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
+
 }
 .index-mobile {
   margin: 10px 0px 0px 0px;
 }
 .company-show {
   height: 850px;
-  width: 1920px;
+  width: 100%;
   margin:0px auto;
   background-size: 100% 850px;
   opacity: 1;
+  overflow: hidden;
 }
 .login-sign {
   right:0;
@@ -940,6 +953,9 @@ export default {
 }
 .base-list-outline-body {
   background: #1d2939;
+  width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
 }
 .friend-url {
   background: #fff;
@@ -950,6 +966,9 @@ export default {
 }
 .friend-url-outline-body {
   background: #fff;
+  width: 100%;
+  min-width: 1220px;
+  max-width: 1920px;
 }
 #map {
   height: 450px;
@@ -1193,13 +1212,18 @@ export default {
   margin-right: 10px;
 }
 .index-body {
-  width:100%;
-  overflow: hidden;
+  
+ width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
 }
 .company_show_outline_body {
-  width:100%;
+  width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
   background:#409eff;
 }
+
 </style>
 <style>
 #certify {

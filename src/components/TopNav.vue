@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="outline-body">
     <user-login
       :dialogVisible="dialogVisible"
       v-on:closed="closeDialog"
@@ -116,6 +116,7 @@
         @mouseleave="leave_erweima"
       ></div>
     </div>
+    <div class="top_nav_outline_body">
     <el-header>
       <router-link to="/index">
         <div class="logo">
@@ -174,6 +175,7 @@
         </el-menu-item>
       </el-menu>
     </el-header>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -418,16 +420,39 @@ export default {
 </script>
 
 <style scoped>
+.outline-body {
+  position: relative;
+    width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
+    margin: 0 auto;
+    margin-bottom:-80px;
+}
+.message_board_outline {
+  width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
+}
+.top_nav_outline_body {
+  width:100%;
+  min-width: 1220px;
+    max-width: 1920px;
+  position: fixed;
+  margin-top:-80px;
+  z-index: 100;
+}
 .el-header {
   background: rgba(36, 46, 104, 0.8);
   color: #fff;
   line-height: 80px !important;
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
+    min-width: 1220px;
+    max-width: 1920px;
   z-index: 99;
   height: 80px !important;
+  margin:0px auto;
+
+ 
 }
 .logo {
   float: left;
@@ -485,7 +510,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 6px;
   position: fixed;
-  margin: 200px 20px 0px 0px;
+  margin: 280px 20px 0px 0px;
   background: #fff;
   right: 0;
   z-index: 100;
