@@ -373,14 +373,13 @@ export default {
 
 <style scoped>
 .font {
-  right:0;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.3) url(../assets/font.png) no-repeat right
+
+  background:  url(../assets/font.png) no-repeat right
     top;
-  width: calc(72% - 360px);
+  width: 800px;
   height: 300px;
   float: left;
-  margin: 170px calc(72% - 360px) 0px 0px;
+  margin: 150px 0px 0px 100px;
 }
 .zhiju {
   z-index: 300;
