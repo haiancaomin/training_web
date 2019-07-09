@@ -226,7 +226,6 @@
                   <el-input
                     v-model="phone"
                     placeholder="请输入联系电话"
-                    maxlength="11"
                     class="person-add-input"
                   ></el-input>
                 </td>
@@ -454,12 +453,6 @@ export default {
           type: "error",
           center: true
         });
-      } else if (this.phone.match("1[34578][0-9]{9}") != this.phone) {
-        this.$message({
-          message: "请输入正确的联系电话！",
-          type: "error",
-          center: true
-        });
       } else if (this.account == "" && this.invoiceType == 0) {
         this.$message({
           message: "公司账号不能为空！",
@@ -483,7 +476,7 @@ export default {
         });
       } else if (
         this.mail.match(
-          "^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$"
+          "^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"
         ) != this.mail
       ) {
         this.$message({
