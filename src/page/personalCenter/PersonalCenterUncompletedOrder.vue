@@ -13,6 +13,73 @@
           <el-button type="primary" plain @click="deleteOrder">确认</el-button>
         </div>
       </el-dialog>
+      
+      <el-dialog title="汇款须知" :visible.sync="noticeComment" width="600px" center class="noticeComment_dialog">
+        <p class="noticeComment_p">您汇款时是否备注了订单号 <span class="noticeComment_span">{{payCommentOrderID}}</span> </p>
+        <p class="noticeComment_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+        <div class="noticeComment_operation">
+          <el-button type="primary"  class="operation_left"  @click="noticeComment=false">忘备注了</el-button>
+          <el-button type="primary" plain class="operation_right" @click="havaComment()">我备注了</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog title="汇款信息" :visible.sync="account_info" center width="620px">
+        <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
+                      </p>
+                     
+                      <p>&nbsp;</p>
+
+                      <p>
+                        <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+                      </p>
+                      <p>
+                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+                      </p>
+                      <p>
+                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+                      </p>
+                      <p>
+                        <span>电 话：</span>0513-81055866
+                      </p>
+                      <p>
+                        <span>开户银行：</span>中国银行南通经济技术开发区支行
+                      </p>
+                      <p>
+                        <span>账 号：</span>484571289748
+                      </p>
+                      <p>&nbsp;</p>
+                       <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
+                      </p>
+        <div class="account_info_operation">
+          <el-button type="primary" @click="account_info=false">取消</el-button>
+          <el-button type="primary" plain @click="account_info=false">确认</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog title="汇款须知" :visible.sync="noticeOnce" width="600px" class="noticeOnce_dialog">
+        <p class="noticeOnce_p">如您使用转账汇款方式支付，请在</p>
+        <p class="noticeOnce_p">
+          汇款时备注订单编号
+          <span class="noticeOnce_span">{{noticeOrderNum}}</span>。
+        </p>
+        <p class="noticeOnce_p">如果您未备注此订单编号，汇款可能被退回，</p>
+        <p class="noticeOnce_p">支付超时，您的报名将会失败。</p>
+        <div class="delete-order-operation">
+          <el-button type="primary" @click="noticeOnce=false" class="operation_left">稍后再付</el-button>
+          <el-button type="primary" plain @click="IKnowOnce()" v-if="allowOperation" class="operation_right">我知道了</el-button>
+          <el-button
+            type="primary"
+            plain
+            disabled
+            v-if="!allowOperation"
+            class="operation_right"
+          >等待{{timeCount}}秒</el-button>
+        </div>
+      </el-dialog>
+
+       
 
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
         <el-dialog
@@ -29,11 +96,21 @@
           <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
           <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
         </el-dialog>
+
+        <el-dialog title="汇款须知" :visible.sync="noticeTwice" width="600px" append-to-body center class="noticeTwice_dialog">
+        <p class="noticeTwice_p">您汇款时是否备注了订单号 <span class="noticeTwice_span">{{noticeOrderNum}}</span> </p>
+        <p class="noticeTwice_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+
+        <div class="noticeTwice_operation">
+          <el-button type="primary"  class="operation_left" @click="noticeTwice=false">忘备注了</el-button>
+          <el-button type="primary" plain class="operation_right" @click="pay_and_comment()">我备注了</el-button>
+        </div>
+      </el-dialog>
         <div class="pay">
           <div class="pay-online">
             <div class="pay-online-body">
               <div class="pay-online-check">
-                <h1>确认订单信息</h1>
+                <h1>订单支付</h1>
               </div>
 
               <div class="user-info">
@@ -45,7 +122,7 @@
                 <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
-              <div class="meal-body">
+              <!-- <div class="meal-body">
                 <div class="pay-meal">购买套餐</div>
 
                 <div
@@ -68,7 +145,7 @@
                   </div>
                   <div class="meal_price">￥{{orderItem.money}}</div>
                 </div>
-              </div>
+              </div>-->
 
               <div class="pay-type">支付方式</div>
               <el-collapse accordion id="pay_choose">
@@ -137,10 +214,10 @@
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
-                      <p style="color:#e4393c">
-                        <span>备注：</span>转账汇款时请务必填写款项备注，备注信息为课程订单编号，便于财务核实
+                      <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
                       </p>
-                      <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
+                     
                       <p>&nbsp;</p>
 
                       <p>
@@ -161,6 +238,12 @@
                       <p>
                         <span>账 号：</span>484571289748
                       </p>
+                      <p>&nbsp;</p>
+                       <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
+                      </p>
+                     
+                      
                     </div>
                   </div>
                 </el-col>
@@ -173,6 +256,7 @@
                         {{orderDetail.summoney}}
                       </span>
                     </div>
+                    <span class="pay-price-btn_btn" @click="havaPay()">我已汇款</span>
                   </div>
                 </el-col>
               </div>
@@ -222,7 +306,10 @@
           <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid">
             <el-button type="primary" round plain>订单详情</el-button>
           </router-link>
-          <el-button type="primary" round @click="payNowShow(orderItem.orderid)">立即支付</el-button>
+          <el-button type="primary" round @click="payNowShow(orderItem.orderid)"  v-if="orderItem.status==0">立即支付</el-button>
+          <el-button type="success" round v-if="orderItem.status==0" @click="payComment(orderItem.orderno,orderItem.orderid)">我已汇款</el-button>
+          <el-button type="primary" round @click="check_info(orderItem.orderno)"  v-if="orderItem.status==1">汇款信息</el-button>
+          <el-button type="success" round disabled v-if="orderItem.status==1">等待确认</el-button>
         </div>
       </div>
     </div>
@@ -260,23 +347,120 @@ export default {
       deleteOrderShow: false,
       deleteOrderID: "",
       currentPage: 1,
-      showProtocol: false
+      showProtocol: false,
+      noticeOrderNum: "",
+      noticeOnce: false,
+      allowOperation: false,
+      timeCount:0,
+      timer:false,
+      noticeTwice:false,
+      payAndCommentOrderID:"",
+      account_info:false,
+      accountInfoOrderId:"",
+      noticeComment:false,
+      payCommentOrderID:"",
+      userSubmitOrderID:""
     };
   },
+  watch: {
+    noticeOnce: function(val) {
+      if(!val) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    }
+  },
   methods: {
+    havaComment() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_confirmPay.do?orderid=${this.userSubmitOrderID}`
+      })
+        .then(res => {
+          this.noticeComment = false;
+          this.$message({
+            message: "确认信息已收到，请耐心等待本公司财务确认！",
+            type: "success",
+            center: true
+          });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    payComment(orderno,orderid) {
+      
+      this.noticeComment=true;
+      this.userSubmitOrderID = orderid;
+      this.payCommentOrderID = orderno;
+    },
+    check_info(orderno) {
+      this.account_info=true;
+      this.accountInfoOrderId = orderno;
+    },
+    pay_and_comment() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_confirmPay.do?orderid=${this.payAndCommentOrderID}`
+      })
+        .then(res => {
+          this.payShow = false;
+          this.noticeTwice = false;
+          this.$message({
+            message: "确认信息已收到，请耐心等待本公司财务确认！",
+            type: "success",
+            center: true
+          });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    havaPay() {
+      this.noticeTwice = true;
+    },
+    IKnowOnce() {
+      this.payShow=true;
+      this.noticeOnce=false;
+    },
     payNowShow(orderid) {
       this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
       })
         .then(res => {
+          this.payAndCommentOrderID=orderid;
           this.orderDetail = res.data.data;
           console.log(this.orderDetail);
+          this.noticeOnce = true;
+          this.noticeOrderNum = this.orderDetail.orderno;
+          const TIME_COUNT = 5;
+          
+          if (!this.timer) {
+            this.timeCount = TIME_COUNT;
+            this.allowOperation = false;
+            this.timer = setInterval(() => {
+              if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                this.timeCount--;
+              } else {
+                this.allowOperation = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000);
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
-      this.payShow = true;
     },
     handleCurrentChange(val) {
       this.getNotPayOrderList(val);
@@ -418,7 +602,7 @@ export default {
   font-weight: bold;
 }
 .order-operation {
-  padding: 8px 10px 0px 10px;
+  padding: 8px 10px 0px 0px;
   text-align: right;
 }
 .order-page {
@@ -471,7 +655,7 @@ export default {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .choose-zhifubao {
   border-bottom: solid 1px #eee;
@@ -544,7 +728,7 @@ export default {
 }
 .payment-sub-body {
   width: 860px;
-  height: 190px;
+  height: 290px;
   box-sizing: border-box;
   background: #fefcef;
   border: 1px solid #ddd;
@@ -588,7 +772,8 @@ export default {
 }
 .offline-context p {
   font-family: "微软雅黑";
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 24px;
   padding: 0px;
 }
 .offline-notice {
@@ -654,7 +839,7 @@ export default {
 }
 .agreement_check {
   position: absolute;
-  margin: 107px 0px 0px 507px;
+  margin: 137px 0px 0px 507px;
 }
 #contact p {
   margin-bottom: 10px;
@@ -663,6 +848,52 @@ export default {
   font-family: "微软雅黑";
   font-size: 12px;
   color: #ee5f5b;
+}
+.noticeOnce_p {
+  font-size: 20px;
+  line-height: 35px;
+}
+.noticeOnce_span {
+  color: #f56c6c;
+  font-weight: bold;
+}
+.operation_left {
+  margin-right: 100px;
+}
+.notice_must {
+  font-size: 16px;
+}
+.noticeTwice_dialog p{
+  text-align: center;
+  font-size: 16px;
+}
+.noticeTwice_span {
+  color: #f56c6c;
+  font-weight: bold;
+}
+.noticeTwice_operation .operation_left{
+  margin-left: 125px;
+}
+.noticeTwice_operation{
+  margin-top: 50px;
+}
+.account_info_operation .el-button{
+  margin-right:100px;
+}
+.account_info_operation {
+  margin-left:140px;
+  margin-top:40px;
+}
+.noticeComment_p {
+  text-align: center;
+  font-size: 16px;
+}
+.noticeComment_p span{
+  color: #f56c6c;
+  font-weight: bold;
+}
+.noticeComment_operation {
+  margin:40px 0px 0px 120px;
 }
 </style>
 <style>
@@ -676,5 +907,8 @@ export default {
 }
 #pay_choose .el-collapse-item__content {
   padding-bottom: 15px;
+}
+.el-button + .el-button {
+  margin-left: 0px;
 }
 </style>
