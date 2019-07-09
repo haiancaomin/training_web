@@ -475,9 +475,7 @@ export default {
           center: true
         });
       } else if (
-        this.mail.match(
-          "^\w+@[a-z0-9]+\.[a-z]{2,4}$"
-        ) != this.mail
+        this.mail.match("\\w+@[a-z0-9]+\.[a-z]{2,4}") != this.mail
       ) {
         this.$message({
           message: "请输入正确的邮箱！",
