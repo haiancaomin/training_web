@@ -476,7 +476,7 @@ export default {
         });
       } else if (
         this.mail.match(
-          "^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"
+          "^\w+@[a-z0-9]+\.[a-z]{2,4}$"
         ) != this.mail
       ) {
         this.$message({
