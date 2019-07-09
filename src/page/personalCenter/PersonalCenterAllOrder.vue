@@ -578,7 +578,7 @@ export default {
           console.log(this.orderDetail);
           this.noticeOnce = true;
           this.noticeOrderNum = this.orderDetail.orderno;
-          const TIME_COUNT = 0;
+          const TIME_COUNT = 5;
           
           if (!this.timer) {
             this.timeCount = TIME_COUNT;
