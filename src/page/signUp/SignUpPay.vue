@@ -1,6 +1,8 @@
 <template>
   <div id="SignUpPay">
     <div clsss="pay-online" v-show="notPay">
+      
+
       <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
         <el-table :data="tableData" border max-height="400" style="width: 100%">
           <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
@@ -24,10 +26,9 @@
 
       <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
         <div class="offline-context">
-          <p style="color:#e4393c">
-            <span>备注：</span>转账汇款时请务必填写款项备注，备注信息为课程订单编号，便于财务核实
+          <p>
+            <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于财务核实。
           </p>
-          <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
           <p>&nbsp;</p>
 
           <p>
@@ -48,10 +49,21 @@
           <p>
             <span>账 号：</span>484571289748
           </p>
+          <p id="last_line_notice">
+            <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于财务核实。
+          </p>
         </div>
         <div class="check_operation">
-          <el-button type="primary" class="sign-submit" @click="payWait">我已确认</el-button>
-          <el-button type="primary" plain class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
+          
+          <el-button type="primary" class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
+          <el-button type="primary" plain class="sign-submit" @click="payWait"  v-if="allowOperation">我已确认</el-button>
+          <el-button
+            type="primary"
+            plain
+            disabled
+            v-if="!allowOperation"
+            class="sign-submit"
+          >等待{{timeCount}}秒</el-button>
         </div>
       </el-dialog>
 
@@ -235,7 +247,7 @@
               </div>
 
               <div>
-                <span class="pay-price-btn_btn2" @click="showAccountDialog=true">汇款账户</span>
+                <span class="pay-price-btn_btn2" @click="clickWait()">汇款账户</span>
               </div>
             </div>
           </el-col>
@@ -269,7 +281,12 @@ export default {
       orderDetail: [],
       orderID: "",
       orderName: "",
-      payHtml: ""
+      payHtml: "",
+     
+      timer:false,
+      timeCount:0,
+      allowOperation: false,
+      needOrderno:""
     };
   },
 
@@ -287,14 +304,40 @@ export default {
       })
         .then(res => {
           that.orderDetail = res.data.data;
-          console.log(that.orderDetail);
+          that.needOrderno = that.orderDetail.orderno;
+         
         })
         .catch(function(err) {
           console.log(err);
         });
     });
   },
+  watch: {
+    showAccountDialog: function(val) {
+      if(!val) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    }
+  },
   methods: {
+    clickWait() {
+      this.showAccountDialog=true;
+      const TIME_COUNT = 10;
+          if (!this.timer) {
+            this.timeCount = TIME_COUNT;
+            this.allowOperation = false;
+            this.timer = setInterval(() => {
+              if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                this.timeCount--;
+              } else {
+                this.allowOperation = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000);
+          }
+    },
     checkEmp(empList) {
       this.$ajax({
         method: "get",
@@ -643,6 +686,9 @@ export default {
   font-family: "微软雅黑";
   font-size: 12px;
   color: #ee5f5b;
+}
+#last_line_notice {
+  margin: 30px 0px 0px 0px;
 }
 </style>
 <style>
