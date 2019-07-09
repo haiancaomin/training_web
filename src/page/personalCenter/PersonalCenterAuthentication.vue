@@ -327,7 +327,7 @@ export default {
             }
             this.$ajax({
               method: "post",
-              url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${this.ruleForm.companyName}&attachmentids=${this.fileUid}&userid=${userid}&type=${this.type}`
+              url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${this.type==1?this.ruleForm.companyName:(this.type==2?this.ruleForm2.companyName:this.ruleForm3.companyName)}&attachmentids=${this.fileUid}&userid=${userid}&type=${this.type}`
             })
               .then(res => {
                 this.$message({
@@ -356,6 +356,7 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
+      this.fileUid=this.fileUid.slice(0,this.fileUid.length-1)
       console.log(file);
       console.log(fileList);
     },
