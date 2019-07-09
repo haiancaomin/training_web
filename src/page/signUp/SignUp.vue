@@ -27,7 +27,7 @@
           </el-tab-pane> -->
 
           <!-- 团队报名 -->
-          <el-tab-pane label="团队报名" v-if="type==3">
+          <el-tab-pane label="个人/好友组队报名" v-if="type==3">
             <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
           </el-tab-pane>
         </el-tabs>
@@ -71,7 +71,7 @@ export default {
   components: {
     CompanySignUp,
     SchoolSignUp,
-    PersonalSignUp,
+    // PersonalSignUp,
     TeamSignUp,
     Accounts,
     SignUpPay,
