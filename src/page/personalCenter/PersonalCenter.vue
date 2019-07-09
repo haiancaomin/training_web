@@ -46,7 +46,7 @@
 
           <el-menu-item index="/PersonalCenter/PersonalCenterAuthentication">
             <i class="el-icon-success"></i>
-            <span slot="title">企业认证</span>
+            <span slot="title">账号认证</span>
           </el-menu-item>
 
           <el-submenu index="3">
