@@ -242,7 +242,7 @@ export default {
       }
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceByUserId.do??userid=${userid}`
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceByUserId.do?userid=${userid}`
       })
         .then(res => {
           var that = this;
