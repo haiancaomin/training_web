@@ -575,7 +575,7 @@ export default {
   position: fixed;
   width: 150px;
   height: 100px;
-  margin: 262px 79px 0px 0px;
+  margin: 342px 79px 0px 0px;
   right: 0;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -596,7 +596,7 @@ export default {
   width: 0px;
   height: 0px;
   position: fixed;
-  margin: 302px 72px 0px 0px;
+  margin: 382px 72px 0px 0px;
   z-index: 102;
   right: 0;
 }
@@ -604,7 +604,7 @@ export default {
   position: fixed;
   width: 105px;
   height: 105px;
-  margin: 337px 79px 0px 0px;
+  margin: 417px 79px 0px 0px;
   right: 0;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -624,7 +624,7 @@ export default {
   width: 0px;
   height: 0px;
   position: fixed;
-  margin: 382px 72px 0px 0px;
+  margin: 462px 72px 0px 0px;
   z-index: 102;
   right: 0;
 }
