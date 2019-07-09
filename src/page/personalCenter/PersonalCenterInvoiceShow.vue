@@ -435,39 +435,6 @@ export default {
           type: "error",
           center: true
         });
-      } else if (this.contactPerson == "" && this.invoiceType == 0) {
-        this.$message({
-          message: "联系人不能为空！",
-          type: "error",
-          center: true
-        });
-      } else if (this.bank == "" && this.invoiceType == 0) {
-        this.$message({
-          message: "公司开户行不能为空！",
-          type: "error",
-          center: true
-        });
-      } else if (this.phone == "") {
-        this.$message({
-          message: "联系电话不能为空！",
-          type: "error",
-          center: true
-        });
-      } else if (this.account == "" && this.invoiceType == 0) {
-        this.$message({
-          message: "公司账号不能为空！",
-          type: "error",
-          center: true
-        });
-      } else if (
-        this.account.match("^[0-9]*") != this.account &&
-        this.invoiceType == 0
-      ) {
-        this.$message({
-          message: "请输入正确的公司账号！",
-          type: "error",
-          center: true
-        });
       } else if (this.mail == "") {
         this.$message({
           message: "邮箱不能为空！",
