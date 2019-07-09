@@ -55,13 +55,13 @@
       <el-tab-pane label="校园认证">
         <div class="PersonalPassword-change">
           <P class="authentication_notice">完成校园认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
-          <el-form :model="ruleForm3" ref="ruleForm3" :rules="rules3" class="demo-ruleForm">
+          <el-form :model="ruleForm2" ref="ruleForm2" :rules="rules2" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
                 <el-input
                   type="text"
                   placeholder="请输入学校名称"
-                  v-model="ruleForm3.companyName"
+                  v-model="ruleForm2.companyName"
                   class="companyNameFocus"
                 >
                   <i slot="prefix" class="el-icon-edit-outline"></i>
@@ -96,7 +96,7 @@
 
             <div class="PersonalPassword-change-commit">
               <el-form-item>
-                <el-button type="primary" @click="submitUpload('ruleForm3')" class="login-self">立即认证</el-button>
+                <el-button type="primary" @click="submitUpload('ruleForm2')" class="login-self">立即认证</el-button>
               </el-form-item>
             </div>
           </el-form>
@@ -105,13 +105,13 @@
       <el-tab-pane label="个人认证">
         <div class="PersonalPassword-change">
           <P class="authentication_notice">完成个人认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
-          <el-form :model="ruleForm2" ref="ruleForm2" :rules="rules2" class="demo-ruleForm">
+          <el-form :model="ruleForm3" ref="ruleForm3" :rules="rules3" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
                 <el-input
                   type="text"
                   placeholder="请输入姓名"
-                  v-model="ruleForm2.companyName"
+                  v-model="ruleForm3.companyName"
                   class="companyNameFocus"
                 >
                   <i slot="prefix" class="el-icon-edit-outline"></i>
@@ -146,7 +146,7 @@
 
             <div class="PersonalPassword-change-commit">
               <el-form-item>
-                <el-button type="primary" @click="submitUpload('ruleForm2')" class="login-self">立即认证</el-button>
+                <el-button type="primary" @click="submitUpload('ruleForm3')" class="login-self">立即认证</el-button>
               </el-form-item>
             </div>
           </el-form>
@@ -210,13 +210,13 @@ export default {
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
         ]
       },
-      rules2: {
+      rules3: {
         companyName: [
           { required: true, message: "请输入姓名", trigger: "blur" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
         ]
       },
-      rules3: {
+      rules2: {
         companyName: [
           { required: true, message: "请输入学校名称", trigger: "blur" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
@@ -233,7 +233,7 @@ export default {
   },
   methods: {
     tabSwitch:function(tab){
-      this.type=tab.index+1
+      this.type=Number(tab.index)+1
     },
     invoiceEmpty() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
