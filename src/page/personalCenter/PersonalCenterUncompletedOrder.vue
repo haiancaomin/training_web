@@ -49,7 +49,7 @@
                         <span>账 号：</span>484571289748
                       </p>
                       <p>&nbsp;</p>
-                       <p >
+                       <p>
                         <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
                       </p>
         <div class="account_info_operation">

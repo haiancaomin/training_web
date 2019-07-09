@@ -11,7 +11,15 @@
       <!-- 报名信息页面 -->
       <div class="sign-up-info" v-if="signUpPage">
         <el-tabs type="border-card">
-          <p class="el-row no-data" v-if="status!=3">请先到客户中心完成账号认证！</p>
+          <div class="no_certificate">
+          <div class="no_certificate_div" v-if="status!=3">
+            检测到您尚未进行账号验证！请先点击
+            <router-link to="/PersonalCenter/PersonalCenterAuthentication">
+           <el-button type="primary" class="operation_right">这里</el-button>
+            </router-link>
+            完成账号认证，再进行报名！
+          </div>
+          </div>
 
           <!-- 公司报名 -->
           <el-tab-pane label="公司报名" v-if="type==1&&status==3">
@@ -191,5 +199,14 @@ export default {
   box-shadow: 0 0 2px #c7c5c5;
   background: #fff;
   border: 1px solid #e7e7e7;
+}
+.no_certificate {
+  height:400px;
+}
+.no_certificate_div {
+  font-size: 18px;
+  font-weight: bold;
+  color:#f56c6c;
+  margin:250px 0px 0px 170px;
 }
 </style>
