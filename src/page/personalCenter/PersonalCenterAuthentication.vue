@@ -52,66 +52,16 @@
           </el-form>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="个人认证">
-        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
-          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
-          <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
-            <el-form-item prop="companyName">
-              <div class="input-body" id="loginForm">
-                <el-input
-                  type="text"
-                  placeholder="请输入姓名"
-                  v-model="ruleForm.companyName"
-                  class="companyNameFocus"
-                >
-                  <i slot="prefix" class="el-icon-edit-outline"></i>
-                </el-input>
-              </div>
-            </el-form-item>
-
-            <el-form-item>
-              <div class="com-upload">
-                <el-upload
-                  class="upload-demo"
-                  ref="upload"
-                  drag
-                  :action="uploadUrl"
-                  :on-success="uploadSuccess"
-                  :on-remove="removeUpload"
-                  :on-exceed="noticeOut"
-                  :before-upload="checkSize"
-                  accept=".jpg, .png"
-                  :limit="2"
-                  multiple
-                >
-                  <i class="el-icon-upload"></i>
-                  <div class="el-upload__text">
-                    请上传
-                    <em>身份证照片</em>
-                  </div>
-                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
-                </el-upload>
-              </div>
-            </el-form-item>
-
-            <div class="PersonalPassword-change-commit">
-              <el-form-item>
-                <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
-              </el-form-item>
-            </div>
-          </el-form>
-        </div>
-      </el-tab-pane>
       <el-tab-pane label="校园认证">
         <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
-          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
-          <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
+          <P class="authentication_notice">完成校园认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <el-form :model="ruleForm3" ref="ruleForm3" :rules="rules3" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
                 <el-input
                   type="text"
                   placeholder="请输入学校名称"
-                  v-model="ruleForm.companyName"
+                  v-model="ruleForm3.companyName"
                   class="companyNameFocus"
                 >
                   <i slot="prefix" class="el-icon-edit-outline"></i>
@@ -146,12 +96,63 @@
 
             <div class="PersonalPassword-change-commit">
               <el-form-item>
-                <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
+                <el-button type="primary" @click="submitUpload('ruleForm3')" class="login-self">立即认证</el-button>
               </el-form-item>
             </div>
           </el-form>
         </div>
       </el-tab-pane>
+      <el-tab-pane label="个人认证">
+        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+          <P class="authentication_notice">完成个人认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <el-form :model="ruleForm2" ref="ruleForm2" :rules="rules2" class="demo-ruleForm">
+            <el-form-item prop="companyName">
+              <div class="input-body" id="loginForm">
+                <el-input
+                  type="text"
+                  placeholder="请输入姓名"
+                  v-model="ruleForm2.companyName"
+                  class="companyNameFocus"
+                >
+                  <i slot="prefix" class="el-icon-edit-outline"></i>
+                </el-input>
+              </div>
+            </el-form-item>
+
+            <el-form-item>
+              <div class="com-upload">
+                <el-upload
+                  class="upload-demo"
+                  ref="upload"
+                  drag
+                  :action="uploadUrl"
+                  :on-success="uploadSuccess"
+                  :on-remove="removeUpload"
+                  :on-exceed="noticeOut"
+                  :before-upload="checkSize"
+                  accept=".jpg, .png"
+                  :limit="2"
+                  multiple
+                >
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">
+                    请上传
+                    <em>身份证照片</em>
+                  </div>
+                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
+                </el-upload>
+              </div>
+            </el-form-item>
+
+            <div class="PersonalPassword-change-commit">
+              <el-form-item>
+                <el-button type="primary" @click="submitUpload('ruleForm2')" class="login-self">立即认证</el-button>
+              </el-form-item>
+            </div>
+          </el-form>
+        </div>
+      </el-tab-pane>
+      
     </el-tabs>
 
     <div class="haveSubmit" v-if="authenticationStatus == '1'">
@@ -197,9 +198,27 @@ export default {
       ruleForm: {
         companyName: ""
       },
+      ruleForm2: {
+        companyName: ""
+      },
+      ruleForm3: {
+        companyName: ""
+      },
       rules: {
         companyName: [
           { required: true, message: "请输入公司名称", trigger: "blur" },
+          { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
+        ]
+      },
+      rules2: {
+        companyName: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
+        ]
+      },
+      rules3: {
+        companyName: [
+          { required: true, message: "请输入学校名称", trigger: "blur" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
         ]
       },

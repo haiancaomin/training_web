@@ -1,65 +1,65 @@
 <template>
-<div class="out_body">
-  <div id="signup">
-    <el-steps :active="active" finish-status="success" simple>
-      <el-step title="报名信息"></el-step>
-      <el-step title="订单确认"></el-step>
-      <el-step title="费用"></el-step>
-      <el-step title="完成"></el-step>
-    </el-steps>
+  <div class="out_body">
+    <div id="signup">
+      <el-steps :active="active" finish-status="success" simple>
+        <el-step title="报名信息"></el-step>
+        <el-step title="订单确认"></el-step>
+        <el-step title="费用"></el-step>
+        <el-step title="完成"></el-step>
+      </el-steps>
 
-    <!-- 报名信息页面 -->
-    <div class="sign-up-info" v-if="signUpPage">
-      <el-tabs type="border-card">
-        <!-- 公司报名 -->
-        <el-tab-pane label="公司报名">
-          <company-signUp v-on:ToAccountsPage="gotoAccountsPage"></company-signUp>
-        </el-tab-pane>
+      <!-- 报名信息页面 -->
+      <div class="sign-up-info" v-if="signUpPage">
+        <el-tabs type="border-card">
+          <!-- 公司报名 -->
+          <el-tab-pane label="公司报名" v-if="type==1">
+            <company-signUp v-on:ToAccountsPage="gotoAccountsPage"></company-signUp>
+          </el-tab-pane>
 
-        <!-- 校园报名 -->
-        <el-tab-pane label="校园报名">
-          <school-signUp v-on:ToAccountsPage="gotoAccountsPage"></school-signUp>
-        </el-tab-pane>
+          <!-- 校园报名 -->
+          <el-tab-pane label="校园报名" v-if="type==2">
+            <school-signUp v-on:ToAccountsPage="gotoAccountsPage"></school-signUp>
+          </el-tab-pane>
 
-        <!-- 个人报名 -->
-        <el-tab-pane label="个人报名">
-          <personal-signUp v-on:ToAccountsPage="gotoAccountsPage"></personal-signUp>
-        </el-tab-pane>
+          <!-- 个人报名 -->
+          <!-- <el-tab-pane label="个人报名" v-if="type==3">
+            <personal-signUp v-on:ToAccountsPage="gotoAccountsPage"></personal-signUp>
+          </el-tab-pane> -->
 
-        <!-- 团队报名 -->
-        <el-tab-pane label="团队报名">
-          <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
+          <!-- 团队报名 -->
+          <el-tab-pane label="团队报名" v-if="type==3">
+            <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
 
-    <!-- 考试信息选择页面 -->
-    <div class="test-info-choice" v-show="accountsPage">
-      <accounts v-on:ToSignUpPayPage="gotoSignUpPayPage"></accounts>
-    </div>
+      <!-- 考试信息选择页面 -->
+      <div class="test-info-choice" v-show="accountsPage">
+        <accounts v-on:ToSignUpPayPage="gotoSignUpPayPage"></accounts>
+      </div>
 
-    <!-- 支付页面 -->
-    <div class="pay" v-show="SignUpPayPage">
-      <SignUpPay
-        v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage"
-        v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"
-      ></SignUpPay>
-    </div>
+      <!-- 支付页面 -->
+      <div class="pay" v-show="SignUpPayPage">
+        <SignUpPay
+          v-on:ToSignUpSuccessPage="gotoSignUpSuccessPage"
+          v-on:ToSignUpPageWaitPage="gotoSignUpPageWaitPage"
+        ></SignUpPay>
+      </div>
 
-    <div class="success" v-if="SignUpSuccessPage == 1">
-      <SignUpSuccess></SignUpSuccess>
-    </div>
-    <div class="success" v-if="SignUpPageWaitPage == 1">
-      <SignUpPageWait></SignUpPageWait>
+      <div class="success" v-if="SignUpSuccessPage == 1">
+        <SignUpSuccess></SignUpSuccess>
+      </div>
+      <div class="success" v-if="SignUpPageWaitPage == 1">
+        <SignUpPageWait></SignUpPageWait>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import CompanySignUp from "@/page/signUp/CompanySignUp";
 import SchoolSignUp from "@/page/signUp/SchoolSignUp";
-import PersonalSignUp from "@/page/signUp/PersonalSignUp";
+// import PersonalSignUp from "@/page/signUp/PersonalSignUp";
 import TeamSignUp from "@/page/signUp/TeamSignUp";
 import Accounts from "@/page/signUp/Accounts";
 import SignUpPay from "@/page/signUp/SignUpPay";
@@ -85,10 +85,35 @@ export default {
       SignUpPayPage: 0,
       SignUpSuccessPage: 0,
       SignUpPageWaitPage: 0,
-      active: 0
+      active: 0,
+      type: 1
     };
   },
+  mounted() {
+    this.getUserAuth();
+  },
   methods: {
+    getUserAuth: function() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/login_getUserById.do?userid=${userid}`
+      })
+        .then(res => {
+          if (res.data.data != false) {
+            this.type=res.data.data.type
+            sessionStorage.setItem("user", JSON.stringify(res.data.data));
+          } else {
+            console.log(res);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     gotoAccountsPage: function(msg) {
       (this.active = msg.active),
         (this.signUpPage = msg.signUpPage),
@@ -117,7 +142,7 @@ export default {
 #signup {
   width: 1000px;
   margin: 80px auto 0px auto;
-  padding:10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
 }
 
 .sign-up-info {
