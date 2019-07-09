@@ -84,7 +84,7 @@
                   ></el-input>
                 </td>
                 <td class="invoice-show-table-td-info2">
-                  <span>*</span>联系人
+                  联系人
                 </td>
                 <td class="invoice-show-table-td-input3">
                   <el-input
@@ -97,7 +97,7 @@
               </tr>
               <tr>
                 <td class="invoice-show-table-td-info1">
-                  <span>*</span>公司开户行
+                  公司开户行
                 </td>
                 <td class="invoice-show-table-td-input2">
                   <el-input
@@ -108,7 +108,7 @@
                   ></el-input>
                 </td>
                 <td class="invoice-show-table-td-info2">
-                  <span>*</span>联系电话
+                  联系电话
                 </td>
                 <td class="invoice-show-table-td-input3">
                   <el-input
@@ -121,7 +121,7 @@
               </tr>
               <tr>
                 <td class="invoice-show-table-td-info1">
-                  <span>*</span>公司账号
+                  公司账号
                 </td>
                 <td class="invoice-show-table-td-input2">
                   <el-input
@@ -220,7 +220,7 @@
                   ></el-input>
                 </td>-->
                 <td class="invoice-show-table-td-info2">
-                  <span>*</span>联系电话
+                  联系电话
                 </td>
                 <td class="invoice-show-table-td-input3">
                   <el-input
