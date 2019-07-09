@@ -1,61 +1,158 @@
 <template>
   <div id="PersonalCenterAuthentication">
-    <div class="crumb">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
-        <el-breadcrumb-item>企业认证</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
-
-    <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
-      <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽情期待。现在您也可以不进行认证，不会影响功能使用。</P>
-      <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
-        <el-form-item prop="companyName">
-          <div class="input-body" id="loginForm">
-            <el-input
-              type="text"
-              placeholder="请输入公司名称"
-              v-model="ruleForm.companyName"
-              id="companyNameFocus"
-            >
-              <i slot="prefix" class="el-icon-edit-outline"></i>
-            </el-input>
-          </div>
-        </el-form-item>
-
-        <el-form-item>
-          <div class="com-upload">
-            <el-upload
-              class="upload-demo"
-              ref="upload"
-              drag
-              :action="uploadUrl"
-              :on-success="uploadSuccess"
-              :on-remove="removeUpload"
-              :on-exceed="noticeOut"
-              :before-upload="checkSize"
-              accept=".jpg, .png"
-              :limit="2"
-              multiple
-            >
-              <i class="el-icon-upload"></i>
-              <div class="el-upload__text">
-                请上传
-                <em>法人身份照扫描件</em>和
-                <em>营业执照扫描件</em>
+    <el-tabs type="border-card">
+      <el-tab-pane label="企业认证">
+        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
+            <el-form-item prop="companyName">
+              <div class="input-body" id="loginForm">
+                <el-input
+                  type="text"
+                  placeholder="请输入公司名称"
+                  v-model="ruleForm.companyName"
+                  class="companyNameFocus"
+                >
+                  <i slot="prefix" class="el-icon-edit-outline"></i>
+                </el-input>
               </div>
-              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
-            </el-upload>
-          </div>
-        </el-form-item>
+            </el-form-item>
 
-        <div class="PersonalPassword-change-commit">
-          <el-form-item>
-            <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
-          </el-form-item>
+            <el-form-item>
+              <div class="com-upload">
+                <el-upload
+                  class="upload-demo"
+                  ref="upload"
+                  drag
+                  :action="uploadUrl"
+                  :on-success="uploadSuccess"
+                  :on-remove="removeUpload"
+                  :on-exceed="noticeOut"
+                  :before-upload="checkSize"
+                  accept=".jpg, .png"
+                  :limit="2"
+                  multiple
+                >
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">
+                    请上传
+                    <em>法人身份照扫描件</em>和
+                    <em>营业执照扫描件</em>
+                  </div>
+                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
+                </el-upload>
+              </div>
+            </el-form-item>
+
+            <div class="PersonalPassword-change-commit">
+              <el-form-item>
+                <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
+              </el-form-item>
+            </div>
+          </el-form>
         </div>
-      </el-form>
-    </div>
+      </el-tab-pane>
+      <el-tab-pane label="个人认证">
+        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
+            <el-form-item prop="companyName">
+              <div class="input-body" id="loginForm">
+                <el-input
+                  type="text"
+                  placeholder="请输入姓名"
+                  v-model="ruleForm.companyName"
+                  class="companyNameFocus"
+                >
+                  <i slot="prefix" class="el-icon-edit-outline"></i>
+                </el-input>
+              </div>
+            </el-form-item>
+
+            <el-form-item>
+              <div class="com-upload">
+                <el-upload
+                  class="upload-demo"
+                  ref="upload"
+                  drag
+                  :action="uploadUrl"
+                  :on-success="uploadSuccess"
+                  :on-remove="removeUpload"
+                  :on-exceed="noticeOut"
+                  :before-upload="checkSize"
+                  accept=".jpg, .png"
+                  :limit="2"
+                  multiple
+                >
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">
+                    请上传
+                    <em>身份证照片</em>
+                  </div>
+                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
+                </el-upload>
+              </div>
+            </el-form-item>
+
+            <div class="PersonalPassword-change-commit">
+              <el-form-item>
+                <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
+              </el-form-item>
+            </div>
+          </el-form>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="校园认证">
+        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
+            <el-form-item prop="companyName">
+              <div class="input-body" id="loginForm">
+                <el-input
+                  type="text"
+                  placeholder="请输入学校名称"
+                  v-model="ruleForm.companyName"
+                  class="companyNameFocus"
+                >
+                  <i slot="prefix" class="el-icon-edit-outline"></i>
+                </el-input>
+              </div>
+            </el-form-item>
+
+            <el-form-item>
+              <div class="com-upload">
+                <el-upload
+                  class="upload-demo"
+                  ref="upload"
+                  drag
+                  :action="uploadUrl"
+                  :on-success="uploadSuccess"
+                  :on-remove="removeUpload"
+                  :on-exceed="noticeOut"
+                  :before-upload="checkSize"
+                  accept=".jpg, .png"
+                  :limit="2"
+                  multiple
+                >
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">
+                    请上传
+                    <em>学生证</em>
+                  </div>
+                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
+                </el-upload>
+              </div>
+            </el-form-item>
+
+            <div class="PersonalPassword-change-commit">
+              <el-form-item>
+                <el-button type="primary" @click="submitUpload('ruleForm')" class="login-self">立即认证</el-button>
+              </el-form-item>
+            </div>
+          </el-form>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
 
     <div class="haveSubmit" v-if="authenticationStatus == '1'">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
@@ -135,7 +232,9 @@ export default {
               type: "error",
               center: true,
               onClose: function() {
-                that.$router.push({'path':'/PersonalCenter/PersonalCenterInvoiceShow'})
+                that.$router.push({
+                  path: "/PersonalCenter/PersonalCenterInvoiceShow"
+                });
               }
             });
           }
@@ -267,21 +366,21 @@ export default {
         console.log(err);
       });
   },
-  updated: function() {
-    this.countFocus++;
-    if (this.authenticationStatus == 0 && this.countFocus < 2) {
-      document.getElementById("companyNameFocus").focus();
-    }
-  }
+  // updated: function() {
+  //   this.countFocus++;
+  //   if (this.authenticationStatus == 0 && this.countFocus < 2) {
+  //     document.querySelectorAll(".companyNameFocus").focus();
+  //   }
+  // }
 };
 </script>
 
 <style scoped>
 #PersonalCenterAuthentication {
   width: 730px;
-  box-shadow: 0 0 2px #c7c5c5;
+  /* box-shadow: 0 0 2px #c7c5c5; */
   background: #fffffd;
-  border: 1px solid #e7e7e7;
+  /* border: 1px solid #e7e7e7; */
   margin: 0px 0px 0px 20px;
   padding: 0px 0px 20px 0px;
 }
