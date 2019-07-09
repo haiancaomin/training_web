@@ -115,6 +115,35 @@ export default {
     }
   },
   methods: {
+    invoiceEmpty() {
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        var userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceByUserId.do??userid=${userid}`
+      })
+        .then(res => {
+          var that = this;
+          if (res.data.data) {
+            console.log(res.data.data);
+          } else {
+            this.$message({
+              message:
+                "您还未填写开票信息，请在“客户中心——>发票管理”先完善开票信息！",
+              type: "error",
+              center: true,
+              onClose: function() {
+                that.$router.push({'path':'/PersonalCenter/PersonalCenterInvoiceShow'})
+              }
+            });
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     checkSize(file) {
       if (file.size / 1024 > 1024) {
         this.$message({
@@ -176,11 +205,7 @@ export default {
             }
             this.$ajax({
               method: "post",
-              url: `${
-                this.baseURL
-              }/zjsxpt/invoice_identifyCompany.do?companyname=${
-                this.ruleForm.companyName
-              }&attachmentids=${this.fileUid}&userid=${userid}`
+              url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${this.ruleForm.companyName}&attachmentids=${this.fileUid}&userid=${userid}`
             })
               .then(res => {
                 this.$message({
@@ -226,15 +251,14 @@ export default {
     }
   },
   mounted() {
+    this.invoiceEmpty();
     var userInfo = JSON.parse(sessionStorage.getItem("user"));
     if (userInfo) {
       var userid = userInfo.userid;
     }
     this.$ajax({
       method: "get",
-      url: `${
-        this.baseURL
-      }/zjsxpt/invoice_findCompanyStatusById.do?userid=${userid}`
+      url: `${this.baseURL}/zjsxpt/invoice_findCompanyStatusById.do?userid=${userid}`
     })
       .then(res => {
         this.authenticationStatus = res.data.data;
@@ -348,8 +372,8 @@ export default {
 }
 .authentication_notice {
   font-size: 12px;
-  color:#f56c6c;
-  margin:0px 0px 20px 0px;
+  color: #f56c6c;
+  margin: 0px 0px 20px 0px;
 }
 </style>
 <style>
