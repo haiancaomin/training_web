@@ -11,6 +11,8 @@
       <!-- 报名信息页面 -->
       <div class="sign-up-info" v-if="signUpPage">
         <el-tabs type="border-card">
+          <p class="el-row no-data" v-if="status!=3">请先到客户中心完成账号认证！</p>
+
           <!-- 公司报名 -->
           <el-tab-pane label="公司报名" v-if="type==1&&status==3">
             <company-signUp v-on:ToAccountsPage="gotoAccountsPage"></company-signUp>
@@ -24,7 +26,7 @@
           <!-- 个人报名 -->
           <!-- <el-tab-pane label="个人报名" v-if="type==3">
             <personal-signUp v-on:ToAccountsPage="gotoAccountsPage"></personal-signUp>
-          </el-tab-pane> -->
+          </el-tab-pane>-->
 
           <!-- 团队报名 -->
           <el-tab-pane label="个人/好友组队报名" v-if="type==3&&status==3">
@@ -87,7 +89,7 @@ export default {
       SignUpPageWaitPage: 0,
       active: 0,
       type: 1,
-      status:0
+      status: 0
     };
   },
   mounted() {
@@ -105,8 +107,8 @@ export default {
       })
         .then(res => {
           if (res.data.data != false) {
-            this.type=res.data.data.type
-            this.status=res.data.data.status
+            this.type = res.data.data.type;
+            this.status = res.data.data.status;
             sessionStorage.setItem("user", JSON.stringify(res.data.data));
           } else {
             console.log(res);
@@ -141,6 +143,11 @@ export default {
 </script>
 
 <style scoped>
+.no-data {
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+}
 #signup {
   width: 1000px;
   margin: 80px auto 0px auto;
