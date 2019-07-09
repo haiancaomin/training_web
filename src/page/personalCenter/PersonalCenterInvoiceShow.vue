@@ -17,7 +17,7 @@
       <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
         <div class="invoice_body pupiao" @click="showInvoiceDetail(invoiceItem[0])">
           <div class="invoice_picture">
-            <img src="../../assets/fapiao.png">
+            <img src="../../assets/fapiao.png" />
           </div>
           <div class="invoice_delete">
             <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
@@ -37,105 +37,243 @@
     </div>
 
     <div v-if="addNewInvoice" class="table-body">
-      <div class="putongfapiao">
-        <table border="1" cellspacing="0">
-          <tr>
-            <th colspan="4" class="invoice-show-table-th">开票信息表</th>
-          </tr>
-          <tr>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>公司名称
-            </td>
-            <td colspan="3" class="invoice-show-table-td-input1">
-              <el-input
-                v-model="companyName"
-                placeholder="请输入公司名称"
-                maxlength="30"
-                class="person-add-input"
-                id="companyNameInputFocus"
-              ></el-input>
-            </td>
-          </tr>
-          <tr>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>公司地址
-            </td>
-            <td colspan="3" class="invoice-show-table-td-input1">
-              <el-input
-                v-model="companyAddress"
-                placeholder="请输入公司地址"
-                maxlength="50"
-                class="person-add-input"
-              ></el-input>
-            </td>
-          </tr>
-          <tr>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>社会统一信用编码
-            </td>
-            <td class="invoice-show-table-td-input2">
-              <el-input
-                v-model="taxerID"
-                placeholder="请输入社会统一信用编码"
-                maxlength="30"
-                class="person-add-input"
-              ></el-input>
-            </td>
-            <td class="invoice-show-table-td-info2">
-              <span>*</span>联系人
-            </td>
-            <td class="invoice-show-table-td-input3">
-              <el-input
-                v-model="contactPerson"
-                placeholder="请输入联系人"
-                maxlength="6"
-                class="person-add-input"
-              ></el-input>
-            </td>
-          </tr>
-          <tr>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>公司开户行
-            </td>
-            <td class="invoice-show-table-td-input2">
-              <el-input
-                v-model="bank"
-                placeholder="请输入公司开户行"
-                maxlength="20"
-                class="person-add-input"
-              ></el-input>
-            </td>
-            <td class="invoice-show-table-td-info2">
-              <span>*</span>联系电话
-            </td>
-            <td class="invoice-show-table-td-input3">
-              <el-input
-                v-model="phone"
-                placeholder="请输入联系电话"
-                maxlength="11"
-                class="person-add-input"
-              ></el-input>
-            </td>
-          </tr>
-          <tr>
-            <td class="invoice-show-table-td-info1">
-              <span>*</span>公司账号
-            </td>
-            <td colspan="3" class="invoice-show-table-td-input1">
-              <el-input
-                v-model="account"
-                placeholder="请输入公司账号"
-                maxlength="20"
-                class="person-add-input"
-              ></el-input>
-            </td>
-          </tr>
-        </table>
-        <div class="info-edit">
-          <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">保存</el-button>
-          <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">放弃</el-button>
-        </div>
-      </div>
+      <el-tabs type="border-card" @tab-click="tabSwitch">
+        <el-tab-pane label="公司发票">
+          <div class="putongfapiao">
+            <table border="1" cellspacing="0">
+              <tr>
+                <th colspan="4" class="invoice-show-table-th">开票信息表</th>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>发票抬头
+                </td>
+                <td colspan="3" class="invoice-show-table-td-input1">
+                  <el-input
+                    v-model="companyName"
+                    placeholder="请输入公司名称"
+                    maxlength="30"
+                    class="person-add-input"
+                    id="companyNameInputFocus"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>邮寄地址
+                </td>
+                <td colspan="3" class="invoice-show-table-td-input1">
+                  <el-input
+                    v-model="companyAddress"
+                    placeholder="请输入公司地址"
+                    maxlength="50"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>社会统一信用编码
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="taxerID"
+                    placeholder="请输入社会统一信用编码"
+                    maxlength="30"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>联系人
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="contactPerson"
+                    placeholder="请输入联系人"
+                    maxlength="6"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>公司开户行
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="bank"
+                    placeholder="请输入公司开户行"
+                    maxlength="20"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>联系电话
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="phone"
+                    placeholder="请输入联系电话"
+                    maxlength="11"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>公司账号
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="account"
+                    placeholder="请输入公司账号"
+                    maxlength="20"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>邮箱
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="mail"
+                    placeholder="请输入邮箱"
+                    maxlength="30"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+            </table>
+            <div class="info-edit">
+              <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">保存</el-button>
+              <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">放弃</el-button>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="个人发票">
+          <div class="putongfapiao">
+            <table border="1" cellspacing="0">
+              <tr>
+                <th colspan="4" class="invoice-show-table-th">开票信息表</th>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>发票抬头
+                </td>
+                <td colspan="3" class="invoice-show-table-td-input1">
+                  <el-input
+                    v-model="companyName"
+                    placeholder="请输入公司名称"
+                    maxlength="30"
+                    class="person-add-input"
+                    id="companyNameInputFocus"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>邮寄地址
+                </td>
+                <td colspan="3" class="invoice-show-table-td-input1">
+                  <el-input
+                    v-model="companyAddress"
+                    placeholder="请输入公司地址"
+                    maxlength="50"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+              <!-- <tr>
+                <td class="invoice-show-table-td-info1">
+                  <span>*</span>社会统一信用编码
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="taxerID"
+                    placeholder="请输入社会统一信用编码"
+                    maxlength="30"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>联系人
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="contactPerson"
+                    placeholder="请输入联系人"
+                    maxlength="6"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>-->
+              <tr>
+                <!-- <td class="invoice-show-table-td-info1">
+                  <span>*</span>公司开户行
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="bank"
+                    placeholder="请输入公司开户行"
+                    maxlength="20"
+                    class="person-add-input"
+                  ></el-input>
+                </td>-->
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>联系电话
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="phone"
+                    placeholder="请输入联系电话"
+                    maxlength="11"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+                <td class="invoice-show-table-td-info2">
+                  <span>*</span>邮箱
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="mail"
+                    placeholder="请输入邮箱"
+                    maxlength="30"
+                    class="person-add-input"
+                  ></el-input>
+                </td>
+              </tr>
+              <tr>
+                <!-- <td class="invoice-show-table-td-info1">
+                  <span>*</span>公司账号
+                </td>
+                <td class="invoice-show-table-td-input2">
+                  <el-input
+                    v-model="account"
+                    placeholder="请输入公司账号"
+                    maxlength="20"
+                    class="person-add-input"
+                  ></el-input>
+                </td>-->
+                <!-- <td class="invoice-show-table-td-info2">
+                  <span>*</span>邮箱
+                </td>
+                <td class="invoice-show-table-td-input3">
+                  <el-input
+                    v-model="mail"
+                    placeholder="请输入邮箱"
+                    maxlength="30"
+                    class="person-add-input"
+                  ></el-input>
+                </td>-->
+              </tr>
+            </table>
+            <div class="info-edit">
+              <el-button type="primary" @click="saveNoInvoice" class="save_new_invoice">保存</el-button>
+              <el-button type="primary" plain @click="cancelEdit" class="cancel_new_invoice">放弃</el-button>
+            </div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </div>
 
     <div v-if="InvoiceDetail" class="table-body">
@@ -165,7 +303,9 @@
         </tr>
         <tr>
           <td class="invoice-show-table-td-info1">公司账号</td>
-          <td colspan="3" class="invoice-show-table-td-input1">{{account}}</td>
+          <td class="invoice-show-table-td-input2">{{account}}</td>
+          <td class="invoice-show-table-td-info2">邮箱</td>
+          <td class="invoice-show-table-td-input3">{{mail}}</td>
         </tr>
       </table>
       <div class="info-save">
@@ -181,6 +321,7 @@ export default {
   name: "PersonalCenterInvoiceShow",
   data() {
     return {
+      invoiceType: 0,
       invoiceList: [],
       showInvoice: true,
       addNewInvoice: false,
@@ -190,6 +331,7 @@ export default {
       taxerID: "",
       contactPerson: "",
       bank: "",
+      mail: "",
       phone: "",
       account: "",
       deleteCheck: false,
@@ -199,12 +341,21 @@ export default {
     };
   },
   methods: {
+    tabSwitch(tab) {
+      this.invoiceType = tab.index;
+      this.companyName = "";
+      this.companyAddress = "";
+      this.taxerID = "";
+      this.contactPerson = "";
+      this.bank = "";
+      this.phone = "";
+      this.account = "";
+      this.mail = "";
+    },
     showInvoiceDetail(invoiceId) {
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_getInvoiceById.do?invoiceid=${invoiceId}`
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?invoiceid=${invoiceId}`
       })
         .then(res => {
           console.log(res.data.data);
@@ -228,9 +379,7 @@ export default {
     showEditInvoice() {
       this.$ajax({
         method: "get",
-        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?invoiceid=${
-          this.editInvoiceId
-        }`
+        url: `${this.baseURL}/zjsxpt/invoice_getInvoiceById.do?invoiceid=${this.editInvoiceId}`
       })
         .then(res => {
           this.companyName = res.data.data.company;
@@ -262,35 +411,38 @@ export default {
       }
       if (this.companyName == "") {
         this.$message({
-          message: "公司名称不能为空！",
+          message: "发票抬头不能为空！",
           type: "error",
           center: true
         });
       } else if (this.companyAddress == "") {
         this.$message({
-          message: "公司地址不能为空！",
+          message: "邮寄地址不能为空！",
           type: "error",
           center: true
         });
-      } else if (this.taxerID == "") {
+      } else if (this.taxerID == "" && this.invoiceType == 0) {
         this.$message({
           message: "社会统一信用编码不能为空！",
           type: "error",
           center: true
         });
-      } else if (this.taxerID.match("[0-9A-Z]{18}") != this.taxerID) {
+      } else if (
+        this.taxerID.match("[0-9A-Z]{18}") != this.taxerID &&
+        this.invoiceType == 0
+      ) {
         this.$message({
           message: "请输入正确的社会统一信用编码！",
           type: "error",
           center: true
         });
-      } else if (this.contactPerson == "") {
+      } else if (this.contactPerson == "" && this.invoiceType == 0) {
         this.$message({
           message: "联系人不能为空！",
           type: "error",
           center: true
         });
-      } else if (this.bank == "") {
+      } else if (this.bank == "" && this.invoiceType == 0) {
         this.$message({
           message: "公司开户行不能为空！",
           type: "error",
@@ -308,30 +460,43 @@ export default {
           type: "error",
           center: true
         });
-      } else if (this.account == "") {
+      } else if (this.account == "" && this.invoiceType == 0) {
         this.$message({
           message: "公司账号不能为空！",
           type: "error",
           center: true
         });
-      } else if (this.account.match("^[0-9]*") != this.account) {
+      } else if (
+        this.account.match("^[0-9]*") != this.account &&
+        this.invoiceType == 0
+      ) {
         this.$message({
           message: "请输入正确的公司账号！",
+          type: "error",
+          center: true
+        });
+      } else if (this.mail == "") {
+        this.$message({
+          message: "邮箱不能为空！",
+          type: "error",
+          center: true
+        });
+      } else if (
+        this.mail.match(
+          "^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$"
+        ) != this.mail
+      ) {
+        this.$message({
+          message: "请输入正确的邮箱！",
           type: "error",
           center: true
         });
       } else if (!this.ifEditInvoice) {
         this.$ajax({
           method: "post",
-          url: `${
-            this.baseURL
-          }/zjsxpt/invoice_saveInvoice.do?invoice={"company":
-            "${this.companyName}",address:"${
-            this.companyAddress
-          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
-            this.account
-          }"}&userid=${userid}`
+          url: `${this.baseURL}/zjsxpt/invoice_saveInvoice.do?invoice={"company":
+            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",mail:"${this.mail}"}&userid=${userid}`
         })
           .then(res => {
             this.$message({
@@ -349,6 +514,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
+            this.mail = "";
 
             this.getInvoiceList();
           })
@@ -358,17 +524,9 @@ export default {
       } else if (this.ifEditInvoice) {
         this.$ajax({
           method: "post",
-          url: `${
-            this.baseURL
-          }/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${
-            this.editInvoiceId
-          }",company:
-            "${this.companyName}",address:"${
-            this.companyAddress
-          }",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
-            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${
-            this.account
-          }"}&userid=${userid}`
+          url: `${this.baseURL}/zjsxpt/invoice_updateInvoice.do?invoice={invoiceid:"${this.editInvoiceId}",company:
+            "${this.companyName}",address:"${this.companyAddress}",taxpayerno:"${this.taxerID}",person:"${this.contactPerson}",
+            bank:"${this.bank}",mobilephone:"${this.phone}",account:"${this.account}",mail:"${this.mail}"}&userid=${userid}`
         })
           .then(res => {
             this.$message({
@@ -386,6 +544,7 @@ export default {
             this.bank = "";
             this.phone = "";
             this.account = "";
+            this.mail = "";
 
             this.ifEditInvoice = false;
             this.getInvoiceList();
@@ -395,6 +554,7 @@ export default {
           });
       }
     },
+
     getInvoiceList() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -402,9 +562,7 @@ export default {
       }
       this.$ajax({
         method: "get",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
+        url: `${this.baseURL}/zjsxpt/invoice_findInvoiceListByUserid.do?userid=${userid}`
       })
         .then(res => {
           if (res.data.data != "false") {
@@ -438,9 +596,7 @@ export default {
     deleteInvoice(invoiceid) {
       this.$ajax({
         method: "post",
-        url: `${
-          this.baseURL
-        }/zjsxpt/invoice_deleteInvoiceById.do?invoiceid=${invoiceid}`
+        url: `${this.baseURL}/zjsxpt/invoice_deleteInvoiceById.do?invoiceid=${invoiceid}`
       })
         .then(res => {
           this.$message({
