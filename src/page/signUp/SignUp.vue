@@ -12,12 +12,12 @@
       <div class="sign-up-info" v-if="signUpPage">
         <el-tabs type="border-card">
           <!-- 公司报名 -->
-          <el-tab-pane label="公司报名" v-if="type==1">
+          <el-tab-pane label="公司报名" v-if="type==1&&status==3">
             <company-signUp v-on:ToAccountsPage="gotoAccountsPage"></company-signUp>
           </el-tab-pane>
 
           <!-- 校园报名 -->
-          <el-tab-pane label="校园报名" v-if="type==2">
+          <el-tab-pane label="校园报名" v-if="type==2&&status==3">
             <school-signUp v-on:ToAccountsPage="gotoAccountsPage"></school-signUp>
           </el-tab-pane>
 
@@ -27,7 +27,7 @@
           </el-tab-pane> -->
 
           <!-- 团队报名 -->
-          <el-tab-pane label="个人/好友组队报名" v-if="type==3">
+          <el-tab-pane label="个人/好友组队报名" v-if="type==3&&status==3">
             <team-signUp v-on:ToAccountsPage="gotoAccountsPage"></team-signUp>
           </el-tab-pane>
         </el-tabs>
@@ -86,7 +86,8 @@ export default {
       SignUpSuccessPage: 0,
       SignUpPageWaitPage: 0,
       active: 0,
-      type: 1
+      type: 1,
+      status:0
     };
   },
   mounted() {
@@ -105,6 +106,7 @@ export default {
         .then(res => {
           if (res.data.data != false) {
             this.type=res.data.data.type
+            this.status=res.data.data.status
             sessionStorage.setItem("user", JSON.stringify(res.data.data));
           } else {
             console.log(res);
