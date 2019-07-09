@@ -1,279 +1,87 @@
 <template>
   <div id="PersonalCenterAllOrder">
-    <div class="order-dialog">
-      <el-dialog title="发票选择" :visible.sync="dialogVisible" width="1000px" height="300px">
-        <div class="user_choose_invoice" v-show="showChooseInvoice">
-          <div class="choose_head">
-            
-            <span>请选择发票类型</span>
-            <el-select v-model="selectInvoiceType" placeholder="请选择类型" class="choose_invoice_type">
-              <!-- <el-option label="普通发票" value="0"></el-option>
-              <el-option label="专用发票" value="1"></el-option> -->
-              <el-option label="电子发票" value="2"></el-option>
-            </el-select>
-          </div>
-          <div>
-            <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
-              <div
-                class="invoice_body"
-                :class="{'pupiao':selectInvoiceType=='0','gongpiao':selectInvoiceType=='1','dianzi':selectInvoiceType=='2'}"
-                @click="chooseid=invoiceItem[0]"
-              >
-                <div v-if="invoiceItem[0]==chooseid" class="choose_this"></div>
-                <div v-if="invoiceItem[0]==chooseid" class="choose_icon">
-                  <span class="el-icon-check"></span>
-                </div>
-                <div class="invoice_picture" v-if="selectInvoiceType=='0'">
-                  <img src="../../assets/pupiao.png" />
-                </div>
-                <div class="invoice_picture" v-if="selectInvoiceType=='1'">
-                  <img src="../../assets/zhuanpiao.png" />
-                </div>
-                <div class="invoice_picture" v-if="selectInvoiceType=='2'">
-                  <img src="../../assets/dianzi.png" />
-                </div>
-
-                <div class="invoice_title">{{invoiceItem[1]}}</div>
-                <div class="invoice_type" v-if="selectInvoiceType=='0'">普通发票</div>
-                <div class="invoice_type" v-if="selectInvoiceType=='1'">专用发票</div>
-                <div class="invoice_type" v-if="selectInvoiceType=='2'">电子发票</div>
-
-                <div class="invoice_account">{{invoiceItem[3]}}</div>
-              </div>
-            </el-col>
-          </div>
-
-          <div style="clear: both;"></div>
-          <div>
-            <el-button type="primary" @click="gotoShowChooseInvoiceDetail">下一步</el-button>
-          </div>
-        </div>
-        <div class="table-body" v-show="showChooseInvoiceDetail">
-          <h3 class="pupiao_title" v-if="selectInvoiceType==0">增值税普通发票</h3>
-          <h3 class="zhuanyong_title" v-if="selectInvoiceType==1">增值税专用发票</h3>
-          <h3 class="dianzi_title" v-if="selectInvoiceType==2">增值税电子普通发票</h3>
-          <div class="pupiao_underline" v-if="selectInvoiceType==0"></div>
-          <div class="zhuanyong_underline" v-if="selectInvoiceType==1"></div>
-          <div class="dianzi_underline" v-if="selectInvoiceType==2"></div>
-
-          <table
-            cellspacing="0"
-            :class="{'pupiao_table':selectInvoiceType==0,'zhuanyong_table':selectInvoiceType==1,'dianzi_table':selectInvoiceType==2}"
-          >
-            <tr>
-              <td class="td11">
-                <div>购买方</div>
-              </td>
-              <td class="td12">
-                <div>
-                  <p>
-                    <span class="td12_span1">名</span>称：
-                  </p>
-                  <p>纳税人识别号：</p>
-                  <p>
-                    <span class="td12_span3">地</span>
-                    <span class="td12_span3">址、</span>
-                    <span class="td12_span3">电</span>话：
-                  </p>
-                  <p>开发行及账号：</p>
-                </div>
-              </td>
-              <td colspan="5" class="td13">
-                <div>
-                  <p>{{companyName}}</p>
-                  <p>{{taxerID}}</p>
-                  <p>
-                    <span class="info_left">{{companyAddress}}</span>
-                    {{phone}}
-                  </p>
-                  <p>
-                    <span class="info_left">{{bank}}</span>
-                    {{account}}
-                  </p>
-                </div>
-              </td>
-              <td class="td14">
-                <div>密码区</div>
-              </td>
-              <td colspan="4" class="td15">
-                <div></div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3" class="td21">
-                <div>
-                  <p>货物或应税劳务、服务名称</p>
-                </div>
-              </td>
-              <td class="td22">
-                <div>
-                  <p>规格型号</p>
-                </div>
-              </td>
-              <td class="td23">
-                <div>
-                  <p>单位</p>
-                </div>
-              </td>
-              <td class="td24">
-                <div>
-                  <p>数量</p>
-                </div>
-              </td>
-              <td colspan="3" class="td25">
-                <div>
-                  <p>单价</p>
-                </div>
-              </td>
-              <td class="td26">
-                <div>
-                  <p>金额</p>
-                </div>
-              </td>
-              <td class="td27">
-                <div>
-                  <p>税率</p>
-                </div>
-              </td>
-              <td class="td28">
-                <div>
-                  <p>税额</p>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3" class="td31">
-                <div></div>
-              </td>
-              <td class="td32">
-                <div></div>
-              </td>
-              <td class="td33">
-                <div></div>
-              </td>
-              <td class="td34">
-                <div></div>
-              </td>
-              <td colspan="3" class="td35">
-                <div></div>
-              </td>
-              <td class="td36">
-                <div>
-                  <p>{{orderMoney}}</p>
-                </div>
-              </td>
-              <td class="td37">
-                <div></div>
-              </td>
-              <td class="td38">
-                <div></div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3" class="td41">
-                <div>
-                  <p>合计</p>
-                </div>
-              </td>
-              <td class="td42">
-                <div></div>
-              </td>
-              <td class="td43">
-                <div></div>
-              </td>
-              <td class="td44">
-                <div></div>
-              </td>
-              <td colspan="3" class="td45">
-                <div></div>
-              </td>
-              <td class="td46">
-                <div>
-                  <p>
-                    <span class="td_money">¥</span>
-                    {{orderMoney}}
-                  </p>
-                </div>
-              </td>
-              <td class="td47">
-                <div></div>
-              </td>
-              <td class="td48">
-                <div></div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3" class="td51">
-                <div>
-                  <p>价税合计（大写）</p>
-                </div>
-              </td>
-              <td colspan="6" class="td52">
-                <div></div>
-              </td>
-              <td class="td53">
-                <div>
-                  <p>小写</p>
-                </div>
-              </td>
-              <td class="td54">
-                <div>
-                  <p></p>
-                </div>
-              </td>
-              <td class="td55">
-                <div>
-                  <p>
-                    <span class="td_money">¥</span>
-                    {{orderMoney}}
-                  </p>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="td11">
-                <div>销售方</div>
-              </td>
-              <td class="td12">
-                <div>
-                  <p>
-                    <span class="td12_span1">名</span>称：
-                  </p>
-                  <p>纳税人识别号：</p>
-                  <p>
-                    <span class="td12_span3">地</span>
-                    <span class="td12_span3">址、</span>
-                    <span class="td12_span3">电</span>话：
-                  </p>
-                  <p>开发行及账号：</p>
-                </div>
-              </td>
-              <td colspan="5" class="td13">
-                <div></div>
-              </td>
-              <td class="td14">
-                <div>备注</div>
-              </td>
-              <td colspan="4" class="td15">
-                <div></div>
-              </td>
-            </tr>
-          </table>
-
-          <div class="info-save">
-            <el-button type="primary" @click="checkOK">确认开票</el-button>
-          </div>
+    <el-dialog :visible.sync="deleteOrderShow" width="400px" class="deleteOrderNotice">
+        <p>是否确认删除，删除执行后将无法撤销</p>
+        <div class="delete-order-operation">
+          <el-button type="primary" @click="deleteOrderShow=false">取消</el-button>
+          <el-button type="primary" plain @click="deleteOrder">确认</el-button>
         </div>
       </el-dialog>
-    </div>
+      
+      <el-dialog title="汇款须知" :visible.sync="noticeComment" width="600px" center class="noticeComment_dialog">
+        <p class="noticeComment_p">您汇款时是否备注了订单号 <span class="noticeComment_span">{{payCommentOrderID}}</span> </p>
+        <p class="noticeComment_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+        <div class="noticeComment_operation">
+          <el-button type="primary"  class="operation_left"  @click="noticeComment=false">忘备注了</el-button>
+          <el-button type="primary" plain class="operation_right" @click="havaComment()">我备注了</el-button>
+        </div>
+      </el-dialog>
 
-    <div class="order-dialog">
-      <el-dialog title="物流编号" :visible.sync="num" width="400px">顺丰快递：84592341112412</el-dialog>
-    </div>
+      <el-dialog title="汇款信息" :visible.sync="account_info" center width="620px">
+        <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
+                      </p>
+                     
+                      <p>&nbsp;</p>
 
-    <div class="order-dialog" id="orderDialog">
+                      <p>
+                        <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+                      </p>
+                      <p>
+                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+                      </p>
+                      <p>
+                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+                      </p>
+                      <p>
+                        <span>电 话：</span>0513-81055866
+                      </p>
+                      <p>
+                        <span>开户银行：</span>中国银行南通经济技术开发区支行
+                      </p>
+                      <p>
+                        <span>账 号：</span>484571289748
+                      </p>
+                      <p>&nbsp;</p>
+                       <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
+                      </p>
+        <div class="account_info_operation">
+          <el-button type="primary" @click="account_info=false">取消</el-button>
+          <el-button type="primary" plain @click="account_info=false">确认</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog title="汇款须知" :visible.sync="noticeOnce" width="600px" center class="noticeOnce_dialog">
+        <p class="noticeOnce_p">如您使用转账汇款方式支付，请在</p>
+        <p class="noticeOnce_p">
+          汇款时备注订单编号
+          <span class="noticeOnce_span">{{noticeOrderNum}}</span>。
+        </p>
+        <p class="noticeOnce_p">如果您未备注此订单编号，汇款可能被退回，</p>
+        <p class="noticeOnce_p">支付超时，您的报名将会失败。</p>
+        <div class="noticeOnce_operation">
+          <el-button type="primary" @click="noticeOnce=false" class="operation_left">稍后再付</el-button>
+          <el-button type="primary" plain @click="IKnowOnce()" v-if="allowOperation" class="operation_right">我知道了</el-button>
+          <el-button
+            type="primary"
+            plain
+            disabled
+            v-if="!allowOperation"
+            class="operation_right"
+          >等待{{timeCount}}秒</el-button>
+        </div>
+      </el-dialog>
+
+    <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center>
+        <div class="expressShow">
+          <p>物流单号：{{expressID}}</p>
+        </div>
+      </el-dialog>
+
+    <div class="order-dialog" id="orderDialog" center>
       <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
-        <p class="notice20190702">本期培训的发票将在7月5号开具</p>
+        
         <p>开具发票上传后将无法修改，是否再次确认发票信息</p>
         <div class="delete-order-operation">
           <el-button type="primary" @click="checkAgainMore">再次确认</el-button>
@@ -322,8 +130,8 @@
       </el-dialog>
 
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
-        <p>电话：845923412</p>
-        <p>邮箱：231231332@dd.com</p>
+        <p>电话：0513-81055866</p>
+        <p>邮箱：MKT_Dept@zhjcx.cn</p>
       </el-dialog>
 
       <el-dialog :visible.sync="payShow" width="1000px" id="payNow">
@@ -341,6 +149,15 @@
           <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
           <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
         </el-dialog>
+        <el-dialog title="汇款须知" :visible.sync="noticeTwice" width="600px" append-to-body center class="noticeTwice_dialog">
+        <p class="noticeTwice_p">您汇款时是否备注了订单号 <span class="noticeTwice_span">{{noticeOrderNum}}</span> </p>
+        <p class="noticeTwice_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+
+        <div class="noticeTwice_operation">
+          <el-button type="primary"  class="operation_left" @click="noticeTwice=false">忘备注了</el-button>
+          <el-button type="primary" plain class="operation_right" @click="pay_and_comment()">我备注了</el-button>
+        </div>
+      </el-dialog>
         <div class="pay">
           <div class="pay-online">
             <div class="pay-online-body">
@@ -357,7 +174,7 @@
                 <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
-              <div class="meal-body">
+              <!-- <div class="meal-body">
                 <div class="pay-meal">购买套餐</div>
 
                 <div
@@ -380,7 +197,7 @@
                   </div>
                   <div class="meal_price">￥{{orderItem.money}}</div>
                 </div>
-              </div>
+              </div> -->
 
               <div class="pay-type">支付方式</div>
               <el-collapse accordion id="pay_choose">
@@ -449,10 +266,10 @@
                 <el-col :span="18">
                   <div class="agreement-con">
                     <div class="offline-context">
-                      <p style="color:#e4393c">
-                        <span>备注：</span>转账汇款时请务必填写款项备注，备注信息为课程订单编号，便于财务核实
+                      <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
                       </p>
-                      <p class="offline-notice">转账汇款成功后，请在工作日10点--17点致电进行款项确认。电话：0513-81055866</p>
+                     
                       <p>&nbsp;</p>
 
                       <p>
@@ -473,6 +290,12 @@
                       <p>
                         <span>账 号：</span>484571289748
                       </p>
+                      <p>&nbsp;</p>
+                       <p >
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
+                      </p>
+                     
+                      
                     </div>
                   </div>
                 </el-col>
@@ -485,6 +308,7 @@
                         {{orderDetail.summoney}}
                       </span>
                     </div>
+                    <span class="pay-price-btn_btn" @click="havaPay()">我已汇款</span>
                   </div>
                 </el-col>
               </div>
@@ -544,18 +368,10 @@
           <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid">
             <el-button type="primary" round plain>订单详情</el-button>
           </router-link>
-          <el-button
-            type="primary"
-            round
-            @click="payNowShow(orderItem.orderid)"
-            v-if="orderItem.status==0"
-          >立即支付</el-button>
-          <el-button
-            type="primary"
-            round
-            @click="getInvoice(orderItem.orderid,orderItem.summoney)"
-            v-if="orderItem.status==1"
-          >开具发票</el-button>
+          <el-button type="primary" round @click="payNowShow(orderItem.orderid)"  v-if="orderItem.status==0">立即支付</el-button>
+          <el-button type="success" round v-if="orderItem.status==0" @click="payComment(orderItem.orderno,orderItem.orderid)">我已汇款</el-button>
+          <el-button type="primary" round @click="check_info(orderItem.orderno)"  v-if="orderItem.status==1">汇款信息</el-button>
+          <el-button type="success" round disabled v-if="orderItem.status==1">等待确认</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
           <el-button
             type="success"
@@ -621,10 +437,28 @@ export default {
       expressShow: false,
       chooseid: "",
       showChooseInvoice: false,
-      showChooseInvoiceDetail: false
+      showChooseInvoiceDetail: false,
+      noticeOrderNum: "",
+      noticeOnce: false,
+      allowOperation: false,
+      timeCount:0,
+      timer:false,
+      noticeTwice:false,
+      payAndCommentOrderID:"",
+      account_info:false,
+      accountInfoOrderId:"",
+      noticeComment:false,
+      payCommentOrderID:"",
+      userSubmitOrderID:""
     };
   },
   watch: {
+    noticeOnce: function(val) {
+      if(!val) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    },
     checkAgain: function(val) {
       if (!val && !this.dialogVisible) {
         this.showChooseInvoiceDetail = false;
@@ -639,6 +473,66 @@ export default {
     }
   },
   methods: {
+    havaComment() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_confirmPay.do?orderid=${this.userSubmitOrderID}`
+      })
+        .then(res => {
+          this.noticeComment = false;
+          this.$message({
+            message: "确认信息已收到，请耐心等待本公司财务确认！",
+            type: "success",
+            center: true
+          });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    payComment(orderno,orderid) {
+      
+      this.noticeComment=true;
+      this.userSubmitOrderID = orderid;
+      this.payCommentOrderID = orderno;
+    },
+    check_info(orderno) {
+      this.account_info=true;
+      this.accountInfoOrderId = orderno;
+    },
+    pay_and_comment() {
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_confirmPay.do?orderid=${this.payAndCommentOrderID}`
+      })
+        .then(res => {
+          this.payShow = false;
+          this.noticeTwice = false;
+          this.$message({
+            message: "确认信息已收到，请耐心等待本公司财务确认！",
+            type: "success",
+            center: true
+          });
+          this.count--;
+          this.currentPage =
+            this.count % 3 == 0 ? this.currentPage - 1 : this.currentPage;
+          this.getNotPayOrderList(this.currentPage);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    havaPay() {
+      this.noticeTwice = true;
+    },
+    IKnowOnce() {
+      this.payShow=true;
+      this.noticeOnce=false;
+    },
     getInvoiceInfo(chooseid) {
       this.$ajax({
         method: "get",
@@ -679,13 +573,30 @@ export default {
         url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
       })
         .then(res => {
+          this.payAndCommentOrderID=orderid;
           this.orderDetail = res.data.data;
           console.log(this.orderDetail);
+          this.noticeOnce = true;
+          this.noticeOrderNum = this.orderDetail.orderno;
+          const TIME_COUNT = 0;
+          
+          if (!this.timer) {
+            this.timeCount = TIME_COUNT;
+            this.allowOperation = false;
+            this.timer = setInterval(() => {
+              if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                this.timeCount--;
+              } else {
+                this.allowOperation = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000);
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
-      this.payShow = true;
     },
     checkExpress(id) {
       this.$ajax({
@@ -907,7 +818,6 @@ table {
   margin: 20px 0px 0px 0px;
   text-align: center;
 }
-
 .order-dialog {
   text-align: center;
 }
@@ -957,7 +867,7 @@ table {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .choose-zhifubao {
   border-bottom: solid 1px #eee;
@@ -1030,7 +940,7 @@ table {
 }
 .payment-sub-body {
   width: 860px;
-  height: 190px;
+  height: 290px;
   box-sizing: border-box;
   background: #fefcef;
   border: 1px solid #ddd;
@@ -1073,7 +983,8 @@ table {
 }
 .offline-context p {
   font-family: "微软雅黑";
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 24px;
   padding: 0px;
 }
 .offline-notice {
@@ -1550,7 +1461,7 @@ table {
 }
 .agreement_check {
   position: absolute;
-  margin: 107px 0px 0px 507px;
+  margin: 137px 0px 0px 507px;
 }
 #contact p {
   margin-bottom: 10px;
@@ -1566,6 +1477,56 @@ table {
   font-size: 12px;
   color: #ee5f5b;
 }
+.noticeOnce_p {
+  font-size: 20px;
+  line-height: 35px;
+  text-align: center;
+}
+.noticeOnce_span {
+  color: #f56c6c;
+  font-weight: bold;
+}
+.operation_left {
+  margin-right: 100px;
+}
+.notice_must {
+  font-size: 16px;
+}
+.noticeTwice_dialog p{
+  text-align: center;
+  font-size: 16px;
+}
+.noticeTwice_span {
+  color: #f56c6c;
+  font-weight: bold;
+}
+.noticeTwice_operation .operation_left{
+  margin-left: 125px;
+}
+.noticeTwice_operation{
+  margin-top: 50px;
+}
+.account_info_operation .el-button{
+  margin-right:100px;
+}
+.account_info_operation {
+  margin-left:140px;
+  margin-top:40px;
+}
+.noticeComment_p {
+  text-align: center;
+  font-size: 16px;
+}
+.noticeComment_p span{
+  color: #f56c6c;
+  font-weight: bold;
+}
+.noticeComment_operation {
+  margin:40px 0px 0px 120px;
+}
+.noticeOnce_operation {
+  margin: 40px 0px 0px 120px;
+}
 </style>
 <style>
 #payNow .el-dialog__header {
@@ -1578,5 +1539,8 @@ table {
 }
 #pay_choose .el-collapse-item__content {
   padding-bottom: 15px;
+}
+.el-button + .el-button {
+  margin-left: 0px;
 }
 </style>
