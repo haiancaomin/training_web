@@ -1,8 +1,8 @@
 <template>
   <div id="PersonalCenterAuthentication">
-    <el-tabs type="border-card" @tab-click='tabSwitch'>
+    <el-tabs type="border-card" @tab-click='tabSwitch' v-if="authenticationStatus == '0'">
       <el-tab-pane label="企业认证">
-        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+        <div class="PersonalPassword-change">
           <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
           <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
             <el-form-item prop="companyName">
@@ -53,7 +53,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="校园认证">
-        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+        <div class="PersonalPassword-change">
           <P class="authentication_notice">完成校园认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
           <el-form :model="ruleForm3" ref="ruleForm3" :rules="rules3" class="demo-ruleForm">
             <el-form-item prop="companyName">
@@ -103,7 +103,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="个人认证">
-        <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
+        <div class="PersonalPassword-change">
           <P class="authentication_notice">完成个人认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
           <el-form :model="ruleForm2" ref="ruleForm2" :rules="rules2" class="demo-ruleForm">
             <el-form-item prop="companyName">
