@@ -28,7 +28,7 @@
         </div>
       </el-col>
       <el-col :span="12">
-        <div class="invoice_body_add" @click="addInvoice" v-if="this.invoiceList.length<10">
+        <div class="invoice_body_add" @click="addInvoice" v-if="this.invoiceList.length<1">
           <div class="add_new_invoice">
             <span class="el-icon-plus"></span>
           </div>
