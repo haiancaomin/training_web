@@ -1,6 +1,6 @@
 <template>
   <div id="PersonalCenterAuthentication">
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" @tab-click='tabSwitch'>
       <el-tab-pane label="企业认证">
         <div class="PersonalPassword-change" v-if="authenticationStatus == '0'">
           <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
@@ -191,6 +191,7 @@ export default {
   name: "PersonalCenterAuthentication",
   data() {
     return {
+      type:1,
       contact: false,
       countFocus: 0,
       ruleForm: {
@@ -212,6 +213,9 @@ export default {
     }
   },
   methods: {
+    tabSwitch:function(tab){
+      this.type=tab.index+1
+    },
     invoiceEmpty() {
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
@@ -304,7 +308,7 @@ export default {
             }
             this.$ajax({
               method: "post",
-              url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${this.ruleForm.companyName}&attachmentids=${this.fileUid}&userid=${userid}`
+              url: `${this.baseURL}/zjsxpt/invoice_identifyCompany.do?companyname=${this.ruleForm.companyName}&attachmentids=${this.fileUid}&userid=${userid}&type=${this.type}`
             })
               .then(res => {
                 this.$message({
