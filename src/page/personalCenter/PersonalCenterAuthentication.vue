@@ -3,7 +3,7 @@
     <el-tabs type="border-card" @tab-click='tabSwitch' v-if="authenticationStatus == '0'">
       <el-tab-pane label="企业认证">
         <div class="PersonalPassword-change">
-          <P class="authentication_notice">完成公司认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <P class="authentication_notice">完成认证后，您才可以正常使用本平台的报名功能。</P>
           <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
@@ -54,7 +54,7 @@
       </el-tab-pane>
       <el-tab-pane label="校园认证">
         <div class="PersonalPassword-change">
-          <P class="authentication_notice">完成校园认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <P class="authentication_notice">完成认证后，您才可以正常使用本平台的报名功能。</P>
           <el-form :model="ruleForm2" ref="ruleForm2" :rules="rules2" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
@@ -104,7 +104,7 @@
       </el-tab-pane>
       <el-tab-pane label="个人认证">
         <div class="PersonalPassword-change">
-          <P class="authentication_notice">完成个人认证后，您可以在招聘功能上线后发布招聘信息，其它功能也尽请期待。</P>
+          <P class="authentication_notice">完成认证后，您才可以正常使用本平台的报名功能。</P>
           <el-form :model="ruleForm3" ref="ruleForm3" :rules="rules3" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">
@@ -137,7 +137,7 @@
                   <i class="el-icon-upload"></i>
                   <div class="el-upload__text">
                     请上传
-                    <em>身份证照片</em>
+                    <em>身份证正反面</em>
                   </div>
                   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
                 </el-upload>
@@ -154,7 +154,13 @@
       </el-tab-pane>
       
     </el-tabs>
-
+    <div class="submitHava" v-if="authenticationStatus != '0'">
+      <div class="crumb">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/personalCenter/PersonalCenterAllOrder' }">客户中心</el-breadcrumb-item>
+        <el-breadcrumb-item>账号认证</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <div class="haveSubmit" v-if="authenticationStatus == '1'">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：0513-81055866</p>
@@ -183,6 +189,8 @@
       <p>
         <i class="iconfont" id="happy">&#xe60b;</i>您的公司认证已完成！
       </p>
+    </div>
+
     </div>
   </div>
 </template>
@@ -320,7 +328,14 @@ export default {
               type: "error",
               center: true
             });
-          } else {
+          } else if(this.fileUid.split(",").length != 3) {
+            this.$message({
+              message: "请上传两个文件！",
+              type: "error",
+              center: true
+            });
+          } else
+            {
             var userInfo = JSON.parse(sessionStorage.getItem("user"));
             if (userInfo) {
               var userid = userInfo.userid;
@@ -356,7 +371,6 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.fileUid += response.data + ",";
-      this.fileUid=this.fileUid.slice(0,this.fileUid.length-1)
       console.log(file);
       console.log(fileList);
     },
@@ -497,6 +511,14 @@ export default {
   font-size: 12px;
   color: #f56c6c;
   margin: 0px 0px 20px 0px;
+}
+.submitHava {
+  width: 730px;
+  box-shadow: 0 0 2px #c7c5c5;
+  background: #fffffd;
+  border: 1px solid #e7e7e7;
+  margin: 0px 0px 0px 0px;
+ height:450px;
 }
 </style>
 <style>
