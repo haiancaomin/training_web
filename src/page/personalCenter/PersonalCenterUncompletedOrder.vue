@@ -317,8 +317,7 @@
               >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
-            <!-- <p class="order-time">剩余支付时间：{{h+'小时'+m+'分'+s+'秒'}}</p> -->
-            <p class="order-time">剩余支付时间：{{setInterval(getLoseEfficacyTime(orderItem.createdate),1000)}}</p>
+            <p class="order-time">剩余支付时间：{{h+'小时'+m+'分'+s+'秒'}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
           </el-col>
         </div>
@@ -576,8 +575,8 @@ export default {
       this.userName = userInfo.name;
     }
     this.getNotPayOrderList(1);
-    // var that=this;
-    // setInterval(that.getLoseEfficacyTime(that.orderItem.createdate),1000)
+    var that=this;
+    setInterval(that.getLoseEfficacyTime(1562728881000),1000)
   }
 };
 </script>
