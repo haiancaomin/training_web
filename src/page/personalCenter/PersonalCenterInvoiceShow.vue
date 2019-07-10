@@ -23,8 +23,10 @@
             <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
           </div>
           <div class="invoice_title">{{invoiceItem[1]}}</div>
-          <div class="invoice_account">银行账号：{{invoiceItem[7]}}</div>
-          <div class="invoice_type">税号：{{invoiceItem[3]}}</div>
+          <div class="invoice_type" v-if="invoiceItem[3]!=null">税号：{{invoiceItem[3]}}</div>
+          <div class="invoice_account" v-if="invoiceItem[3]==null">个人发票</div>
+          <div class="invoice_account" v-else>公司发票</div>
+          
         </div>
       </el-col>
       <el-col :span="12">
@@ -336,7 +338,8 @@ export default {
       deleteCheck: false,
       deleteInvoiceId: "",
       ifEditInvoice: false,
-      editInvoiceId: ""
+      editInvoiceId: "",
+     
     };
   },
   methods: {
@@ -365,6 +368,7 @@ export default {
           this.bank = res.data.data.bank;
           this.phone = res.data.data.mobilephone;
           this.account = res.data.data.account;
+          this.mail = res.data.data.mail;
 
           this.showInvoice = false;
           this.addNewInvoice = false;
@@ -388,6 +392,7 @@ export default {
           this.bank = res.data.data.bank;
           this.phone = res.data.data.mobilephone;
           this.account = res.data.data.account;
+          this.mail = res.data.data.mail;
 
           this.showInvoice = false;
           this.addNewInvoice = true;
@@ -548,6 +553,7 @@ export default {
       this.bank = "";
       this.phone = "";
       this.account = "";
+      this.mail = "";
 
       this.ifEditInvoice = false;
     },
@@ -694,14 +700,14 @@ span {
 }
 .invoice_type {
   position: absolute;
-  margin: 110px 0px 0px 60px;
+  margin: 70px 0px 0px 60px;
   color: #fff;
   font-size: 12px;
   font-weight: bold;
 }
 .invoice_account {
   position: absolute;
-  margin: 70px 0px 0px 60px;
+  margin: 115px 0px 0px 60px;
   color: #fff;
   font-weight: bold;
   font-size: 12px;
