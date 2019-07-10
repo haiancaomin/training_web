@@ -414,7 +414,7 @@ export default {
   methods: {
     getLoseEfficacyTime(timeString) {
       var now = Date.parse(new Date());
-      var loseEfficacyTime = timestamp + 86400000;
+      var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000;
       var range=loseEfficacyTime-now;
       var h=Math.floor(range/1000/3600);
       var m=Math.floor((range-h*3600*1000)/1000/60);
