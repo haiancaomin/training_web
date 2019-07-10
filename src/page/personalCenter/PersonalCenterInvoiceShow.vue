@@ -19,9 +19,9 @@
           <div class="invoice_picture">
             <img src="../../assets/fapiao.png" />
           </div>
-          <div class="invoice_delete">
+          <!-- <div class="invoice_delete">
             <span class="el-icon-delete" @click.stop="deleteCheckFun(invoiceItem[0])"></span>
-          </div>
+          </div> -->
           <div class="invoice_title">{{invoiceItem[1]}}</div>
           <div class="invoice_type" v-if="invoiceItem[3]!=null">税号：{{invoiceItem[3]}}</div>
           <div class="invoice_account" v-if="invoiceItem[3]==null">个人发票</div>
