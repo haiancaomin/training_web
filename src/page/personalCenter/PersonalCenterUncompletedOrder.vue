@@ -317,7 +317,7 @@
               >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
-            <p class="order-time">剩余支付时间：{{loseTime}}</p>
+            <p class="order-time">剩余支付时间：{{h+'小时'+m+'分'+s+'秒'}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
           </el-col>
         </div>
@@ -401,7 +401,9 @@ export default {
       noticeComment: false,
       payCommentOrderID: "",
       userSubmitOrderID: "",
-      loseTime:''
+      h:'',
+      m:'',
+      s:''
     };
   },
   watch: {
@@ -417,10 +419,9 @@ export default {
       var now = Date.parse(new Date());
       var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000;
       var range=loseEfficacyTime-now;
-      var h=Math.floor(range/1000/3600);
-      var m=Math.floor((range-h*3600*1000)/1000/60);
-      var s=Math.floor((range-h*3600*1000-m*60*1000)/1000)
-      return h+'小时'+m+'分'+s+'秒'
+      this.h=Math.floor(range/1000/3600);
+      this.m=Math.floor((range-h*3600*1000)/1000/60);
+      this.s=Math.floor((range-h*3600*1000-m*60*1000)/1000)
     },
     havaComment() {
       this.$ajax({
