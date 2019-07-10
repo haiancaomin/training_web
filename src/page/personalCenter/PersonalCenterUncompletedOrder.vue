@@ -292,6 +292,7 @@
               >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
+            <p class="order-time">订单失效时间：{{getLoseEfficacyTime(orderItem.createdate)}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
           </el-col>
         </div>
@@ -371,6 +372,21 @@ export default {
     }
   },
   methods: {
+    getLoseEfficacyTime(timeString) {
+
+    var timestamp = Date.parse(new Date(timeString));
+
+    var loseEfficacyTime = timestamp + 86400000;
+
+var d = new Date(loseEfficacyTime);
+var date = (d.getFullYear()) + "-" + 
+           (d.getMonth() + 1) + "-" +
+           (d.getDate()) + " " + 
+           (d.getHours()) + ":" + 
+           (d.getMinutes()) + ":" + 
+           (d.getSeconds());
+return date;
+    },
     havaComment() {
       this.$ajax({
         method: "post",
