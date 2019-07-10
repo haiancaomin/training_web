@@ -1263,7 +1263,7 @@ export default {
           active: this.active
         });
         this.bus.$emit("todata", {
-          type: "4",
+          type: "3",
           city1: this.city1,
           city2: this.city2,
           city3: this.city3,
