@@ -575,7 +575,7 @@ export default {
       this.userName = userInfo.name;
     }
     this.getNotPayOrderList(1);
-    this.loseTime=setInterval(getLoseEfficacyTime(orderItem.createdate),1000)
+    this.loseTime=setInterval(this.getLoseEfficacyTime(orderItem.createdate),1000)
   }
 };
 </script>
