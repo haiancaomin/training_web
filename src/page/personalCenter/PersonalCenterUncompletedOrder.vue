@@ -317,7 +317,7 @@
               >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
-            <p class="order-time">剩余支付时间：{{getLoseEfficacyTime(orderItem.createdate)}}</p>
+            <p class="order-time">剩余支付时间：{{setInterval(getLoseEfficacyTime(orderItem.createdate),1000)}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
           </el-col>
         </div>
