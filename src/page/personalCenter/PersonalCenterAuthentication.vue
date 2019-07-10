@@ -187,7 +187,7 @@
 
     <div class="authenticationSuccess" v-if="authenticationStatus == '3'">
       <p>
-        <i class="iconfont" id="happy">&#xe60b;</i>您的公司认证已完成！
+        <i class="iconfont" id="happy">&#xe60b;</i>认证已完成！
       </p>
     </div>
 
