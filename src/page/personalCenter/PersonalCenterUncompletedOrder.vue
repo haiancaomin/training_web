@@ -576,7 +576,7 @@ export default {
     }
     this.getNotPayOrderList(1);
     var that=this;
-    setInterval(that.getLoseEfficacyTime(orderItem.createdate),1000)
+    setInterval(that.getLoseEfficacyTime(that.orderItem.createdate),1000)
   }
 };
 </script>
