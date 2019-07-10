@@ -11,7 +11,7 @@
       <!-- 报名信息页面 -->
       <div class="sign-up-info" v-if="signUpPage">
         <el-tabs type="border-card">
-          <div class="no_certificate">
+          <div class="no_certificate" v-if="status!=3">
           <div class="no_certificate_div" v-if="status!=3">
             检测到您尚未进行账号验证！请先点击
             <router-link to="/PersonalCenter/PersonalCenterAuthentication">

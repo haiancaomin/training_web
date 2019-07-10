@@ -59,7 +59,8 @@
           <span class="noticeOnce_span">{{noticeOrderNum}}</span>。
         </p>
         <p class="noticeOnce_p">如果您未备注此订单编号，汇款可能被退回，</p>
-        <p class="noticeOnce_p">支付超时，您的报名将会失败。</p>
+        <p class="noticeOnce_p"><span class="noticeOnce_span">{{noticeLeftDay}}天{{noticeLeftHour}}小时{{noticeLeftMinute}}分{{noticeLeftSecond}}秒后未支付</span>, 
+     您的订单将被自动取消。</p>
         <div class="noticeOnce_operation">
           <el-button type="primary" @click="noticeOnce=false" class="operation_left">稍后再付</el-button>
           <el-button type="primary" plain @click="IKnowOnce()" v-if="allowOperation" class="operation_right">我知道了</el-button>
@@ -350,6 +351,7 @@
               >{{menuname.coursename}}（{{menuname.menuname}}）</p>
             </div>
             <p class="order-time">下单时间：{{orderItem.createdate}}</p>
+            <p class="order-lost-time">付款失效时间：{{getLoseEfficacyTime(orderItem.createdate)}}</p>
             <p class="order-num">订单号：{{orderItem.orderno}}</p>
           </el-col>
         </div>
@@ -449,7 +451,12 @@ export default {
       accountInfoOrderId:"",
       noticeComment:false,
       payCommentOrderID:"",
-      userSubmitOrderID:""
+      userSubmitOrderID:"",
+      noticeCreateDate:"",
+      noticeLeftDay:"",
+      noticeLeftHour:"",
+      noticeLeftMinute:"",
+      noticeLeftSecond:"",
     };
   },
   watch: {
@@ -473,6 +480,40 @@ export default {
     }
   },
   methods: {
+    getLoseEfficacyTime(timeString) {
+      var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000;
+      var d = new Date(loseEfficacyTime);   
+      var year = d.getFullYear();
+      var month = d.getMonth()+1;
+     
+       if(month<10) {
+        month = "0"+month;
+      }
+      var day = d.getDate();
+      if(day<10) {
+        day += "0";
+      }
+      var hour = d.getHours();
+      if(hour<10) {
+        hour += "0";
+      }
+      var minute = d.getMinutes();
+      if(minute<10) {
+        minute += "0";
+      }
+      var second = d.getSeconds();
+      if(second<10) {
+        second += "0";
+      }
+
+var loseTime = year + "-" + 
+           month + "-" +
+           day + " " + 
+          hour + ":" + 
+           minute + ":" + 
+           second;
+      return loseTime;
+    },
     havaComment() {
       this.$ajax({
         method: "post",
@@ -578,6 +619,19 @@ export default {
           console.log(this.orderDetail);
           this.noticeOnce = true;
           this.noticeOrderNum = this.orderDetail.orderno;
+          this.noticeCreateDate = this.orderDetail.createdate;
+           var loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000;
+           var now = (new Date()).getTime();
+          var leftTime = loseEfficacyTime - now;
+          var leftDay = parseInt(leftTime/(3600*24*1000));
+          var leftHour = parseInt(leftTime/(3600*1000)-leftDay*24);
+          var leftMinute = parseInt(leftTime/(60*1000)-leftDay*24*60-leftHour*60);
+          var leftSecond = parseInt(leftTime/1000-leftDay*24*3600-leftHour*3600-leftMinute*60);
+     
+           this.noticeLeftDay = leftDay;
+      this.noticeLeftHour= leftHour;
+      this.noticeLeftMinute=leftMinute;
+      this.noticeLeftSecond=leftSecond;
           const TIME_COUNT = 5;
           
           if (!this.timer) {
@@ -776,18 +830,23 @@ export default {
   font-size: 16px;
   margin: 0px 0px 0px 0px;
   color: #333;
-  height: 100px;
+  height: 70px;
 }
 .order-time {
   text-align: left;
-  margin: 0px 10px 0px 0px;
-  font-size: 13px;
+  margin: 0px 0px 5px 0px;
+  color: #888;
+}
+.order-lost-time {
+  text-align: left;
+  margin: 0px 0px 0px 0px;
+
   color: #888;
 }
 .order-num {
   text-align: left;
   margin: 5px 10px 0px 0px;
-  font-size: 13px;
+  font-weight: bold;
   color: #f56c6c;
 }
 .order-pay {

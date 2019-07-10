@@ -26,8 +26,10 @@
 
       <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
         <div class="offline-context">
+
+         
           <p>
-            <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于财务核实。
+            <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 24小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
           <p>&nbsp;</p>
 
@@ -50,7 +52,7 @@
             <span>账 号：</span>484571289748
           </p>
           <p id="last_line_notice">
-            <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于财务核实。
+             <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 24小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
         </div>
         <div class="check_operation">
@@ -77,8 +79,7 @@
             购买帐号：
             <span>{{userName}}</span>
           </div>
-          <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付，并在24小时内支付。</div>
-          <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
+          <div class="info-notice">注意：请仔细确认报名人员，并在24小时内支付，超时订单自动失效。付款成功后，人员无法更换！</div>
         </div>
 
         <div class="meal-body">
@@ -686,6 +687,7 @@ export default {
   font-family: "微软雅黑";
   font-size: 12px;
   color: #ee5f5b;
+  margin-top:2px;
 }
 #last_line_notice {
   margin: 30px 0px 0px 0px;
