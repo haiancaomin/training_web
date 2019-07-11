@@ -458,6 +458,7 @@ a {
   height: 44px;
   border: 1px solid #ccc;
   cursor: move;
+  z-index:10;
 }
 .handler_bg1 {
   background: #fff;
