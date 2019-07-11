@@ -23,7 +23,7 @@
               :class="{'handler_ok_bg':confirmSuccess}"
               class="handler handler_bg"
               style="position: absolute;top: 0px;left: 0px;"
-            ></div>
+            ><i class="el-icon-d-arrow-right" v-if="!confirmSuccess"></i></div>
             <div class="checkPoint"></div>
           </div>
         </el-form-item>
@@ -54,7 +54,7 @@ export default {
       mouseMoveStata: false,
       maxwidth: 320,
       checkWidth: 0,
-      confirmWords: "拖动滑块完成拼图",
+      confirmWords: "拖动左边滑块完成拼图",
       confirmSuccess: false,
       countFocus: 0,
       logshow: false,
@@ -91,7 +91,7 @@ export default {
           document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
         }
 
-        this.confirmWords = "拖动滑块完成拼图";
+        this.confirmWords = "拖动左边滑块完成拼图";
         this.mouseMoveStata = false;
         if (document.getElementsByClassName("drag_text")[0]) {
           document.getElementsByClassName("drag_text")[0].style.color = "";
@@ -117,6 +117,27 @@ export default {
         document.getElementsByClassName("checkPoint")[0].style.left =
           this.checkWidth + "px";
       }
+    },
+    errorCount: function(val) {
+      this.confirmSuccess = false;
+      if (
+          document.getElementsByClassName("handler")[0] &&
+          document.getElementsByClassName("drag_bg")[0]
+        ) {
+          document.getElementsByClassName("handler")[0].style.left = 0 + "px";
+          document.getElementsByClassName("drag_bg")[0].style.width = 0 + "px";
+        }
+
+        this.confirmWords = "拖动左边滑块完成拼图";
+        this.mouseMoveStata = false;
+        if (document.getElementsByClassName("drag_text")[0]) {
+          document.getElementsByClassName("drag_text")[0].style.color = "";
+        }
+        this.setCheckPoint();
+        document.getElementsByClassName("checkPoint")[0].style.left =
+          this.checkWidth + "px";
+        document.getElementsByClassName("checkPoint")[0].style.visibility =
+          "visible";
     }
   },
   computed: {
@@ -265,7 +286,7 @@ export default {
               });
           } else {
             this.$message({
-              message: "请拖动滑块完成拼图！",
+              message: "拖动左边滑块完成拼图！",
               type: "error",
               center: true
             });
@@ -359,9 +380,59 @@ a {
   cursor: move;
 }
 .handler_bg {
-  background: #fff
-    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0ZDhlNWY5My05NmI0LTRlNWQtOGFjYi03ZTY4OGYyMTU2ZTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTEyNTVEMURGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTEyNTVEMUNGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTc5NzNmZS02OTQxLTQyOTYtYTIwNi02NDI2YTNkOWU5YmUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NGQ4ZTVmOTMtOTZiNC00ZTVkLThhY2ItN2U2ODhmMjE1NmU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+YiRG4AAAALFJREFUeNpi/P//PwMlgImBQkA9A+bOnfsIiBOxKcInh+yCaCDuByoswaIOpxwjciACFegBqZ1AvBSIS5OTk/8TkmNEjwWgQiUgtQuIjwAxUF3yX3xyGIEIFLwHpKyAWB+I1xGSwxULIGf9A7mQkBwTlhBXAFLHgPgqEAcTkmNCU6AL9d8WII4HOvk3ITkWJAXWUMlOoGQHmsE45ViQ2KuBuASoYC4Wf+OUYxz6mQkgwAAN9mIrUReCXgAAAABJRU5ErkJggg==")
-    no-repeat center;
+  background: #fff;
+  font-size: 18px;
+    animation: myfirst 2s;
+  -moz-animation: myfirst 2s; /* Firefox */
+  -webkit-animation: myfirst 2s; /* Safari and Chrome */
+  -o-animation: myfirst 2s; /* Opera */
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+@keyframes myfirst {
+  0% {
+     padding:0px 10px 0px 0px;
+  }
+  50% {
+     padding:0px 0px 0px 10px;
+  }
+  100% {
+     padding:0px 10px 0px 0px;
+  }
+}
+
+@-moz-keyframes myfirst /* Firefox */ {
+  0% {
+     padding:0px 10px 0px 0px;
+  }
+  50% {
+     padding:0px 0px 0px 10px;
+  }
+  100% {
+     padding:0px 10px 0px 0px;
+  }
+}
+@-webkit-keyframes myfirst /* Safari and Chrome */ {
+  0% {
+     padding:0px 10px 0px 0px;
+  }
+  50% {
+     padding:0px 0px 0px 10px;
+  }
+  100% {
+     padding:0px 10px 0px 0px;
+  }
+}
+@-o-keyframes myfirst /* Opera */ {
+  0% {
+     padding:0px 10px 0px 0px;
+  }
+  50% {
+     padding:0px 0px 0px 10px;
+  }
+  100% {
+     padding:0px 10px 0px 0px;
+  }
 }
 .handler_ok_bg {
   background: #fff
@@ -387,13 +458,13 @@ a {
 .checkPoint {
   width: 44px;
   height: 44px;
-  background-color: #fff;
-  opacity: 0.5;
+  background-color: #cfcfcf;
+  opacity: 0.9;
   position: absolute;
   margin: -44px 0px 0px 0px;
-  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.8) inset;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.6) inset;
   border-radius: 5px;
-  border: 1px solid #dddddd;
+  border: 1px solid #fff;
 }
 </style>
 <style>
