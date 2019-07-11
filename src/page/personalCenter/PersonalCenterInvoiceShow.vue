@@ -129,7 +129,7 @@
                   <el-input
                     v-model="account"
                     placeholder="请输入公司账号"
-                    maxlength="20"
+                    maxlength="30"
                     class="person-add-input"
                   ></el-input>
                 </td>
