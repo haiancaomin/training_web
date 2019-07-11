@@ -1251,7 +1251,7 @@ export default {
   width: 100%;
 }
 #certify .swiper-button-prev {
-  left: -30px;
+  /* left: -30px; */
   width: 45px;
   height: 45px;
   background: url(../assets/wm_button_icon.png) no-repeat;
@@ -1263,7 +1263,7 @@ export default {
   background-size: 100%;
 }
 #certify .swiper-button-next {
-  right: -30px;
+  /* right: -30px; */
   width: 45px;
   height: 45px;
   background: url(../assets/wm_button_icon.png) no-repeat;
