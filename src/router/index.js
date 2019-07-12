@@ -14,6 +14,9 @@ export default new Router({
       }, {
         path: '/index',
         component: resolve => require(['@/page/Index'], resolve)
+      }, {
+        path: '/test',
+        component: resolve => require(['@/page/test'], resolve)
       },
       {
         path: '/Forget',
