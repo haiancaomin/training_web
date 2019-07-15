@@ -39,7 +39,7 @@
         </el-form-item>
 
         <el-form-item>
-          <div class="drag1" ref="dragDiv">
+          <!-- <div class="drag1" ref="dragDiv">
             <div class="drag_bg1"></div>
             <div class="drag_text1">{{confirmWords}}</div>
             <div
@@ -51,7 +51,9 @@
             ><i class="el-icon-d-arrow-right" v-if="!confirmSuccess"></i></div>
 
             <div class="checkPoint1"></div>
-          </div>
+          </div> -->
+          <div class="num_result_div"><el-input placeholder="请输入计算结果" v-model="numResult"></el-input></div>
+          <div class="num_div">{{num1}} + {{num2}} = </div>
         </el-form-item>
 
         <el-form-item prop="code" id="regVerification">
@@ -109,6 +111,9 @@ export default {
       show: true,
       count: "",
       regshow: false,
+      num1:0,
+      num2:0,
+      numResult:"",
       ruleForm: {
         name: "",
         password: "",
@@ -160,12 +165,18 @@ export default {
   watch: {
     regDialogVisible: function(val) {
       this.regshow = val;
+      if(!val) {
+        this.num1 = Math.ceil(Math.random()*49);
+        this.num2 = Math.ceil(Math.random()*49);  
+      }
       if (!val) {
         this.ruleForm.name = "";
         this.ruleForm.password = "";
         this.ruleForm.password2 = "";
         this.ruleForm.phone = "";
         this.ruleForm.code = "";
+        this.ruleForm.qq = "";
+        this.numResult = "";
         this.$refs["ruleForm"].clearValidate();
         this.confirmSuccess = false;
         if (
@@ -273,7 +284,7 @@ export default {
     getCode(formName) {
       this.$refs[formName].validateField("phone", error => {
         if (!error) {
-          if (this.confirmSuccess) {
+          if (this.numResult == this.num1 + this.num2) {
             this.$ajax({
               method: "get",
               url: `${this.baseURL}/zjsxpt/login_sendMessage.do?phone=${
@@ -301,7 +312,7 @@ export default {
               });
           } else {
             this.$message({
-              message: "拖动左边滑块完成拼图！",
+              message: "未完成计算验证或计算有误！",
               type: "error",
               center: true
             });
@@ -320,7 +331,13 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
-        if (valid) {
+        if (this.numResult != this.num1 + this.num2) {
+          this.$message({
+              message: "未完成计算验证或计算有误！",
+              type: "error",
+              center: true
+            });
+        } else if (valid) {
           this.$ajax({
             method: "get",
             url: `${this.baseURL}/zjsxpt/login_register.do?name=${
@@ -341,30 +358,38 @@ export default {
                     that.go();
                   }
                 });
-              } else if (res.data.data == 0) {
+              } else if (res.data.data == 1) {
                 this.$message({
                   message: "注册失败！",
                   type: "error",
                   center: true
                 });
+                this.num1 = Math.ceil(Math.random()*49);
+        this.num2 = Math.ceil(Math.random()*49); 
               } else if (res.data.data == 2) {
                 this.$message({
                   message: "验证码错误！",
                   type: "error",
                   center: true
                 });
+                this.num1 = Math.ceil(Math.random()*49);
+        this.num2 = Math.ceil(Math.random()*49); 
               } else if (res.data.data == 3) {
                 this.$message({
                   message: "该手机号已被注册！",
                   type: "error",
                   center: true
                 });
+                this.num1 = Math.ceil(Math.random()*49);
+        this.num2 = Math.ceil(Math.random()*49); 
               } else if (res.data.data == 4) {
                 this.$message({
                   message: "用户名已存在！",
                   type: "error",
                   center: true
                 });
+                this.num1 = Math.ceil(Math.random()*49);
+        this.num2 = Math.ceil(Math.random()*49); 
               }
             })
             .catch(function(err) {
@@ -378,10 +403,15 @@ export default {
     },
     setCheckPoint() {
       this.checkWidth = Math.floor(Math.random() * 200 + 50);
+    },
+    getRandomNum() {
+      Math.ceil(Math.random()*49);
     }
   },
   mounted() {
     this.setCheckPoint();
+    this.num1 = Math.ceil(Math.random()*49);
+    this.num2 = Math.ceil(Math.random()*49);  
   },
   updated() {
     document.getElementsByClassName("checkPoint1")[0].style.left =
@@ -547,6 +577,18 @@ a {
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.6) inset;
   border-radius: 5px;
   border: 1px solid #fff;
+}
+.num_div {
+  width:170px;
+  letter-spacing: 3px;
+  font-size:25px;
+  text-align: center;
+  padding:0px 0px 0px 5px;
+}
+.num_result_div {
+  position: absolute;
+  margin:0px 0px 0px 170px;
+
 }
 </style>
 <style>
