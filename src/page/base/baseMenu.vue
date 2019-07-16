@@ -1,12 +1,17 @@
 <template>
   <div class="base-container">
     <el-row class="tac">
-      <el-col :span="12">
+      
         <el-menu
           :default-active="$route.path"
-          class="el-menu-vertical-demo"
+          class="el-menu-demo"
+          mode="horizontal"
           :unique-opened="true"
           router
+          id="base_menu"
+          text-color="#fff"
+        active-text-color="#ffd04b"
+        background-color="#1d2939"
         >
           <el-submenu index="1">
             <template slot="title">
@@ -31,7 +36,7 @@
             >{{item.basename}}</el-menu-item>
           </el-submenu>
         </el-menu>
-      </el-col>
+     
     </el-row>
     <router-view></router-view>
   </div>
@@ -98,12 +103,17 @@ export default {
 
 <style scoped>
 .base-container {
-  width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 1220px;
+  max-width:1920px;
   margin-top: 80px;
-  display: flex;
+  background: #1d2939;
 }
-.tac .el-col {
-  width: 300px;
+.tac {
+  width:1220px;
+  margin:0px auto;
+}
+#base_menu {
+ border-bottom:0px;
 }
 </style>

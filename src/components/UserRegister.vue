@@ -179,29 +179,29 @@ export default {
         this.numResult = "";
         this.$refs["ruleForm"].clearValidate();
         this.confirmSuccess = false;
-        if (
-          document.getElementsByClassName("handler1")[0] &&
-          document.getElementsByClassName("drag_bg1")[0]
-        ) {
-          document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
-          document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
-        }
+        // if (
+        //   document.getElementsByClassName("handler1")[0] &&
+        //   document.getElementsByClassName("drag_bg1")[0]
+        // ) {
+        //   document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
+        //   document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
+        // }
 
-        this.confirmWords = "拖动左边滑块完成拼图";
-        this.mouseMoveStata = false;
-        if (document.getElementsByClassName("drag_text1")[0]) {
-          document.getElementsByClassName("drag_text1")[0].style.color = "";
-        }
+        // this.confirmWords = "拖动左边滑块完成拼图";
+        // this.mouseMoveStata = false;
+        // if (document.getElementsByClassName("drag_text1")[0]) {
+        //   document.getElementsByClassName("drag_text1")[0].style.color = "";
+        // }
 
-        document
-          .getElementsByTagName("html")[0]
-          .addEventListener("mousemove", this.mouseMoveFn);
-        document
-          .getElementsByTagName("html")[0]
-          .addEventListener("mouseup", this.moseUpFn);
-        this.setCheckPoint();
-        document.getElementsByClassName("checkPoint1")[0].style.visibility =
-          "visible";
+        // document
+        //   .getElementsByTagName("html")[0]
+        //   .addEventListener("mousemove", this.mouseMoveFn);
+        // document
+        //   .getElementsByTagName("html")[0]
+        //   .addEventListener("mouseup", this.moseUpFn);
+        // this.setCheckPoint();
+        // document.getElementsByClassName("checkPoint1")[0].style.visibility =
+        //   "visible";
       }
     }
   },
@@ -219,68 +219,68 @@ export default {
         .getElementsByTagName("html")[0]
         .addEventListener("mouseup", this.moseUpFn);
     },
-    successFunction() {
-      this.confirmSuccess = true;
-      this.confirmWords = "验证通过";
-      document.getElementsByClassName("checkPoint1")[0].style.visibility =
-        "hidden";
-      if (window.addEventListener) {
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mousemove", this.mouseMoveFn);
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mouseup", this.moseUpFn);
-      } else {
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mouseup", () => {});
-      }
+    // successFunction() {
+    //   this.confirmSuccess = true;
+    //   this.confirmWords = "验证通过";
+    //   document.getElementsByClassName("checkPoint1")[0].style.visibility =
+    //     "hidden";
+    //   if (window.addEventListener) {
+    //     document
+    //       .getElementsByTagName("html")[0]
+    //       .removeEventListener("mousemove", this.mouseMoveFn);
+    //     document
+    //       .getElementsByTagName("html")[0]
+    //       .removeEventListener("mouseup", this.moseUpFn);
+    //   } else {
+    //     document
+    //       .getElementsByTagName("html")[0]
+    //       .removeEventListener("mouseup", () => {});
+    //   }
 
-      document.getElementsByClassName("drag_text1")[0].style.color = "#fff";
-      document.getElementsByClassName("handler1")[0].style.left =
-        this.maxwidth + "px";
-      document.getElementsByClassName("drag_bg1")[0].style.width =
-        this.maxwidth + "px";
-    },
-    mouseMoveFn(e) {
-      if (this.mouseMoveStata) {
-        let width = e.clientX - this.beginClientX;
+    //   document.getElementsByClassName("drag_text1")[0].style.color = "#fff";
+    //   document.getElementsByClassName("handler1")[0].style.left =
+    //     this.maxwidth + "px";
+    //   document.getElementsByClassName("drag_bg1")[0].style.width =
+    //     this.maxwidth + "px";
+    // },
+    // mouseMoveFn(e) {
+    //   if (this.mouseMoveStata) {
+    //     let width = e.clientX - this.beginClientX;
 
-        if (width > 0 && width <= this.maxwidth) {
-          document.getElementsByClassName("handler1")[0].style.left =
-            width + "px";
-          document.getElementsByClassName("drag_bg1")[0].style.width =
-            width + "px";
-        }
-      }
-    },
-    moseUpFn(e) {
-      if (!this.confirmSuccess) {
-        this.mouseMoveStata = false;
-        var width = e.clientX - this.beginClientX;
+    //     if (width > 0 && width <= this.maxwidth) {
+    //       document.getElementsByClassName("handler1")[0].style.left =
+    //         width + "px";
+    //       document.getElementsByClassName("drag_bg1")[0].style.width =
+    //         width + "px";
+    //     }
+    //   }
+    // },
+    // moseUpFn(e) {
+    //   if (!this.confirmSuccess) {
+    //     this.mouseMoveStata = false;
+    //     var width = e.clientX - this.beginClientX;
 
-        if (
-          (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
-          document.getElementsByClassName("handler1")[0] &&
-          document.getElementsByClassName("drag_bg1")[0]
-        ) {
-          document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
-          document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
-        } else if (
-          width >= this.checkWidth - 10 &&
-          width <= this.checkWidth + 10
-        ) {
-          this.successFunction();
-        }
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mousemove", this.mouseMoveFn);
-        document
-          .getElementsByTagName("html")[0]
-          .removeEventListener("mouseup", this.moseUpFn);
-      }
-    },
+    //     if (
+    //       (width < this.checkWidth - 10 || width > this.checkWidth + 10) &&
+    //       document.getElementsByClassName("handler1")[0] &&
+    //       document.getElementsByClassName("drag_bg1")[0]
+    //     ) {
+    //       document.getElementsByClassName("handler1")[0].style.left = 0 + "px";
+    //       document.getElementsByClassName("drag_bg1")[0].style.width = 0 + "px";
+    //     } else if (
+    //       width >= this.checkWidth - 10 &&
+    //       width <= this.checkWidth + 10
+    //     ) {
+    //       this.successFunction();
+    //     }
+    //     document
+    //       .getElementsByTagName("html")[0]
+    //       .removeEventListener("mousemove", this.mouseMoveFn);
+    //     document
+    //       .getElementsByTagName("html")[0]
+    //       .removeEventListener("mouseup", this.moseUpFn);
+    //   }
+    // },
     getCode(formName) {
       this.$refs[formName].validateField("phone", error => {
         if (!error) {
@@ -414,8 +414,8 @@ export default {
     this.num2 = Math.ceil(Math.random()*49);  
   },
   updated() {
-    document.getElementsByClassName("checkPoint1")[0].style.left =
-      this.checkWidth + "px";
+    // document.getElementsByClassName("checkPoint1")[0].style.left =
+    //   this.checkWidth + "px";
     this.countFocus++;
     if (this.regshow && this.countFocus < 2) {
       document.getElementById("nameRegFocus").focus();

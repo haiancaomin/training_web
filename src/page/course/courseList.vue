@@ -520,7 +520,7 @@ export default {
 .course_detail_div {
   width: 785px;
   height: 180px;
-  background-color: #09b97d;
+  background-color: rgb(9, 185, 125);
   margin: 0px 0px 0px 130px;
   padding: 30px 0px 0px 150px;
   transition: all ease-in-out 0.3s;
