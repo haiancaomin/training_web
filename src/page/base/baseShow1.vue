@@ -456,6 +456,9 @@ pre {
   padding: 14px 0px 0px 0px;
   letter-spacing: 1px;
 }
+.signup_btn:hover {
+  background-color: rgba(255, 99, 42,0.8);
+}
 </style>
 <style>
 .base-box .el-collapse-item__header {

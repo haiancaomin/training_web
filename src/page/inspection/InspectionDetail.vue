@@ -1,13 +1,17 @@
 <template>
   <div id="InspectionDetail">
-    <h1 class="inspection-detail-label">考察详情</h1>
+    <router-link to="/Inspection">
+    <div class="back_btn">点击返回</div>
+    </router-link>
+    <div class="inspection_detail_body">
+
     <div class="title_date">
       <h3>{{title}}</h3>
       <p>发布时间：{{createdate}}</p>
     </div>
     <div class="sigun_up">
       <a :href="link" target="_blank">
-        <el-button type="primary">立即报名</el-button>
+        <div class="see-detail">立即报名</div>
       </a>
     </div>
     <div class="table_download">
@@ -27,6 +31,7 @@
       width="800"
       :src="invitationUrl"
     ></iframe>
+    </div>
   </div>
 </template>
 
@@ -105,13 +110,19 @@ export default {
 
 <style scoped>
 #InspectionDetail {
-  width: 1000px;
-  margin: 0px auto;
+  width: 100%;
+  min-width: 1220px;
+  max-width: 1920px;
+  
   margin-top: 80px;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #ffffff;
-  border: 1px solid #e7e7e7;
-  padding: 20px;
+  
+  background: #fff;
+  padding:20px 0px 50px 0px;
+}
+.inspection_detail_body {
+  width:1220px;
+  background: #fff;
+  margin: 0px auto;
 }
 .inspection-detail-label {
   font-size: 18px;
@@ -127,7 +138,7 @@ export default {
   text-align: left;
 }
 iframe {
-  margin: 0px 0px 0px 80px;
+  margin: 0px 0px 0px 210px;
 }
 .file_download a {
   color: #409eff;
@@ -140,7 +151,7 @@ iframe {
   text-decoration: underline;
 }
 .file_download {
-  margin: 10px 0px 10px 80px;
+  margin: 10px 0px 10px 210px;
   text-decoration: underline;
 }
 .title_date {
@@ -164,5 +175,84 @@ iframe {
 .sigun_up {
   text-align: center;
   margin: 20px 0px;
+}
+.back_btn{
+position: fixed;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 5px;
+  width: 130px;
+  height: 38px;
+  background: rgb(9, 185, 125, 0.7);
+  border-radius: 19px;
+  margin: 400px 0px 0px 1160px;
+  padding: 10px 0px 0px 30px;
+  box-shadow: 0 0 5px #bbb;
+  animation: course_back 2s;
+  -moz-animation: course_back 2s; /* Firefox */
+  -webkit-animation: course_back 2s; /* Safari and Chrome */
+  -o-animation: course_back 2s; /* Opera */
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+@keyframes course_back {
+  0% {
+    margin: 490px 0px 0px 1160px;
+  }
+  50% {
+    margin: 510px 0px 0px 1160px;
+  }
+  100% {
+    margin: 490px 0px 0px 1160px;
+  }
+}
+
+@-moz-keyframes course_back /* Firefox */ {
+  0% {
+    margin: 190px 0px 0px 1060px;
+  }
+  50% {
+    margin: 210px 0px 0px 1060px;
+  }
+  100% {
+    margin: 190px 0px 0px 1060px;
+  }
+}
+@-webkit-keyframes course_back /* Safari and Chrome */ {
+  0% {
+    margin: 190px 0px 0px 1060px;
+  }
+  50% {
+    margin: 210px 0px 0px 1060px;
+  }
+  100% {
+    margin: 190px 0px 0px 1060px;
+  }
+}
+@-o-keyframes course_back /* Opera */ {
+  0% {
+    margin: 190px 0px 0px 1060px;
+  }
+  50% {
+    margin: 210px 0px 0px 1060px;
+  }
+  100% {
+    margin: 190px 0px 0px 1060px;
+  }
+}
+.see-detail {
+  width: 150px;
+  height: 44px;
+  font-size: 18px;
+  line-height: 44px;
+  text-align: center;
+  color: #fff;
+  background-color: rgb(9, 185, 125, 0.7);
+  margin:0px auto;
+  border-radius: 3px;
+}
+.see-detail:hover {
+  background-color: rgb(9, 185, 125, 0.5);
 }
 </style>
