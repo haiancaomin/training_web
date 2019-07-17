@@ -53,7 +53,7 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacher(key)">讲师一览</div>
                     <router-link to="/SignUp">
-                      <div class="signup_now" v-if="getShowFlag(val.courseid)=='true'">立即报名</div>
+                      <div class="signup_now" v-if="getShowFlag(val.courseid)">立即报名</div>
                     </router-link>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
@@ -121,12 +121,16 @@
               </div>
             </div>
           </el-tab-pane>
-         
+
           <el-tab-pane label="设计类" name="2">
             <el-row v-if="designCourseLists.length==0" class="no-data">暂无数据</el-row>
 
             <div class="outline_body">
-              <div class="course_list_outlinebody" v-for="(val,key) in designCourseLists" :key="key">
+              <div
+                class="course_list_outlinebody"
+                v-for="(val,key) in designCourseLists"
+                :key="key"
+              >
                 <div class="course_split_title">
                   <div class="split_line_left"></div>
                   <div class="split_title">{{val.coursename}}</div>
@@ -186,7 +190,11 @@
             <el-row v-if="schoolCourseLists.length==0" class="no-data">暂无数据</el-row>
 
             <div class="outline_body">
-              <div class="course_list_outlinebody" v-for="(val,key) in schoolCourseLists" :key="key">
+              <div
+                class="course_list_outlinebody"
+                v-for="(val,key) in schoolCourseLists"
+                :key="key"
+              >
                 <div class="course_split_title">
                   <div class="split_line_left"></div>
                   <div class="split_title">{{val.coursename}}</div>
@@ -261,17 +269,20 @@ export default {
     this.getCourses("0");
   },
   methods: {
-    getShowFlag(courseid) {
-      this.$ajax({
+    async getShowFlag(courseid) {
+      var showFlag;
+      await this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/course_getFlagByCoureseid.do?courseid=${courseid}`
       })
-        .then(res => {    
-         return res.data.data; 
+        .then(res => {
+          showFlag = res.data.data;
         })
         .catch(function(err) {
           console.log(err);
         });
+        console.log(showFlag)
+      return showFlag;
     },
     showTeacher(key) {
       document.getElementsByClassName("course_list_body")[key].style.display =
@@ -286,40 +297,64 @@ export default {
         "none";
     },
     showTeacherWork(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length].style.display =
-        "none";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length].style.display =
-        "block";
+      document.getElementsByClassName("course_list_body")[
+        key + this.prodCourseLists.length
+      ].style.display = "none";
+      document.getElementsByClassName("teacher_div")[
+        key + this.prodCourseLists.length
+      ].style.display = "block";
     },
     closeShowTeacherWork(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length].style.display =
-        "block";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length].style.display =
-        "none";
+      document.getElementsByClassName("course_list_body")[
+        key + this.prodCourseLists.length
+      ].style.display = "block";
+      document.getElementsByClassName("teacher_div")[
+        key + this.prodCourseLists.length
+      ].style.display = "none";
     },
     showTeacherDesign(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length+this.workCourseLists.length].style.display =
-        "none";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length+this.workCourseLists.length].style.display =
-        "block";
+      document.getElementsByClassName("course_list_body")[
+        key + this.prodCourseLists.length + this.workCourseLists.length
+      ].style.display = "none";
+      document.getElementsByClassName("teacher_div")[
+        key + this.prodCourseLists.length + this.workCourseLists.length
+      ].style.display = "block";
     },
     closeShowTeacherDesign(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length+this.workCourseLists.length].style.display =
-        "block";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length+this.workCourseLists.length].style.display =
-        "none";
+      document.getElementsByClassName("course_list_body")[
+        key + this.prodCourseLists.length + this.workCourseLists.length
+      ].style.display = "block";
+      document.getElementsByClassName("teacher_div")[
+        key + this.prodCourseLists.length + this.workCourseLists.length
+      ].style.display = "none";
     },
     showTeacherSchool(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length+this.workCourseLists.length+this.designCourseLists.length].style.display =
-        "none";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length+this.workCourseLists.length+this.designCourseLists.length].style.display =
-        "block";
+      document.getElementsByClassName("course_list_body")[
+        key +
+          this.prodCourseLists.length +
+          this.workCourseLists.length +
+          this.designCourseLists.length
+      ].style.display = "none";
+      document.getElementsByClassName("teacher_div")[
+        key +
+          this.prodCourseLists.length +
+          this.workCourseLists.length +
+          this.designCourseLists.length
+      ].style.display = "block";
     },
     closeShowTeacherSchool(key) {
-      document.getElementsByClassName("course_list_body")[key+this.prodCourseLists.length+this.workCourseLists.length+this.designCourseLists.length].style.display =
-        "block";
-      document.getElementsByClassName("teacher_div")[key+this.prodCourseLists.length+this.workCourseLists.length+this.designCourseLists.length].style.display =
-        "none";
+      document.getElementsByClassName("course_list_body")[
+        key +
+          this.prodCourseLists.length +
+          this.workCourseLists.length +
+          this.designCourseLists.length
+      ].style.display = "block";
+      document.getElementsByClassName("teacher_div")[
+        key +
+          this.prodCourseLists.length +
+          this.workCourseLists.length +
+          this.designCourseLists.length
+      ].style.display = "none";
     },
     getCourses(type) {
       this.$ajax({
