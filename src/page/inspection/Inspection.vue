@@ -1,7 +1,8 @@
 <template>
   <div id="inspection">
     <div class="inspection_list_body">
-      <div class="inspection_list_title">高端考察</div>
+      <div class="inspection_list_title">高端专业考察</div>
+      <div class="inspection_list_undertake">同济大学国家土建结构预制装配化工程技术研究中心主办</div>
       <div
         class="inspection_info_body"
         v-for="inspectionItem in inspectionList"
@@ -152,12 +153,21 @@ export default {
   border-left: 2px solid #409eff;
 }
 .inspection_list_title {
-  width: 400px;
+  width: 1000px;
   margin: 0px auto;
   text-align: center;
   font-size: 40px;
   color: #fff;
   letter-spacing: 2px;
+}
+.inspection_list_undertake {
+  width: 1000px;
+  margin: 0px auto;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-top:18px;
 }
 </style>
 <style>

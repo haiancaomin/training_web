@@ -72,7 +72,7 @@
                 v-for="item in selectTimeData1"
                 :key="item.timeid"
                 :label="item.traintime"
-                :value="item.traintime"
+                :value="item.timeid"
               ></el-option>
               <i slot="prefix" class="iconfont">&#xe6e0;</i>
             </el-select>

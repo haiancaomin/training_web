@@ -53,12 +53,9 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacher(key)">讲师一览</div>
                     <router-link to="/SignUp">
-<<<<<<< HEAD
-                      <div class="signup_now">立即报名{{getShowFlag(val.courseid)}}</div>
-=======
-                      <div class="signup_now" v-if="getShowFlag(val.courseid)">立即报名</div>
->>>>>>> 9494fb9d6a4cc80b83d64c4e35f837831f1d52e3
+                      <div class="signup_now" v-if="val.flag=='true'">立即报名</div>
                     </router-link>
+                    <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                   </div>
@@ -116,8 +113,9 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacherWork(key)">讲师一览</div>
                     <router-link to="/SignUp">
-                      <div class="signup_now">立即报名</div>
+                      <div class="signup_now" v-if="val.flag=='true'">立即报名</div>
                     </router-link>
+                    <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                   </div>
@@ -180,8 +178,9 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacherDesign(key)">讲师一览</div>
                     <router-link to="/SignUp">
-                      <div class="signup_now">立即报名</div>
+                      <div class="signup_now" v-if="val.flag=='true'">立即报名</div>
                     </router-link>
+                    <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                   </div>
@@ -244,8 +243,9 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacherSchool(key)">讲师一览</div>
                     <router-link to="/SignUp">
-                      <div class="signup_now">立即报名</div>
+                      <div class="signup_now" v-if="val.flag=='true'">立即报名</div>
                     </router-link>
+                    <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                   </div>
@@ -273,39 +273,6 @@ export default {
     this.getCourses("0");
   },
   methods: {
-<<<<<<< HEAD
-    getShowFlag(courseid) {
-      var testFlag = 1;
-      this.$ajax({
-=======
-    async getShowFlag(courseid) {
-      var showFlag;
-      await this.$ajax({
->>>>>>> 9494fb9d6a4cc80b83d64c4e35f837831f1d52e3
-        method: "get",
-        
-        url: `${this.baseURL}/zjsxpt/course_getFlagByCoureseid.do?courseid=${courseid}`
-      })
-<<<<<<< HEAD
-        .then(res => {    
-          
-          testFlag = 2;
-          return testFlag;
-=======
-        .then(res => {
-          showFlag = res.data.data;
->>>>>>> 9494fb9d6a4cc80b83d64c4e35f837831f1d52e3
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-<<<<<<< HEAD
-        return testFlag;
-=======
-        console.log(showFlag)
-      return showFlag;
->>>>>>> 9494fb9d6a4cc80b83d64c4e35f837831f1d52e3
-    },
     showTeacher(key) {
       document.getElementsByClassName("course_list_body")[key].style.display =
         "none";
@@ -865,7 +832,26 @@ export default {
   transition: all ease-in-out 0.3s;
   cursor: pointer;
 }
-.course_list_body:hover .signup_now {
+.hava_no_course {
+  position: absolute;
+  width: 100px;
+  height: 38px;
+  background: #fff;
+  border-radius: 19px;
+  margin: 100px 0px 0px 500px;
+  animation: course_name_div 1.5s;
+  -moz-animation: course_name_div 1.5s; /* Firefox */
+  -webkit-animation: course_name_div 1.5s; /* Safari and Chrome */
+  -o-animation: course_name_div 1.5s; /* Opera */
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  padding: 9px 0px 0px 21px;
+  color: #49af4f;
+  font-weight: bold;
+  transition: all ease-in-out 0.3s;
+  cursor: not-allowed;
+}
+.course_list_body:hover .signup_now,.course_list_body:hover .hava_no_course {
   color: rgba(94, 69, 255, 0.9);
 }
 .outline_body {
