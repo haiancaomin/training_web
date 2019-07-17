@@ -53,7 +53,7 @@
                   <div class="course_detail_div">
                     <div class="check_teacher" @click="showTeacher(key)">讲师一览</div>
                     <router-link to="/SignUp">
-                      <div class="signup_now" v-if="getShowFlag(val.courseid)">立即报名</div>
+                      <div class="signup_now" v-if="getShowFlag(val.courseid)=='true'">立即报名</div>
                     </router-link>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
@@ -262,27 +262,16 @@ export default {
   },
   methods: {
     getShowFlag(courseid) {
-      var resultFlag;
       this.$ajax({
         method: "get",
         url: `${this.baseURL}/zjsxpt/course_getFlagByCoureseid.do?courseid=${courseid}`
       })
-        .then(res => {     
-          resultFlag = res.data.data;
-          console.log(resultFlag);
+        .then(res => {    
+         return res.data.data; 
         })
         .catch(function(err) {
           console.log(err);
         });
-        debugger
-      if(resultFlag==true) {
-        console.log(resultFlag);
-         return true; 
-      } else {
-        console.log(resultFlag);
-        return false;
-      }
-      
     },
     showTeacher(key) {
       document.getElementsByClassName("course_list_body")[key].style.display =
