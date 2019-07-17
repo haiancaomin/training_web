@@ -277,10 +277,16 @@ export default {
     getShowFlag(courseid) {
       var testFlag = 1;
       this.$ajax({
+=======
+    async getShowFlag(courseid) {
+      var showFlag;
+      await this.$ajax({
+>>>>>>> 9494fb9d6a4cc80b83d64c4e35f837831f1d52e3
         method: "get",
         
         url: `${this.baseURL}/zjsxpt/course_getFlagByCoureseid.do?courseid=${courseid}`
       })
+<<<<<<< HEAD
         .then(res => {    
           
           testFlag = 2;
