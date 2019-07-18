@@ -379,9 +379,9 @@ export default {
   max-width: 1920px;
   margin: 0px auto;
   margin-top: 80px;
-  box-shadow: 0 0 2px #c7c5c5;
+  
   background: #ffffff;
-  border: 1px solid #e7e7e7;
+ 
   padding: 10px 0px 60px 0px;
 }
 .el-row {
