@@ -163,11 +163,11 @@ export default {
   background: #ffffff;
   margin: 80px auto 0px auto;
   padding: 20px 0px 0px 0px;
-  height:100%;
+  
 }
 .score_search_div {
   width: 1220px;
-  height:fill-available;
+  
   margin: 0px auto;
 }
 .PesronalScoreSearch-info {
@@ -235,6 +235,7 @@ export default {
   width: 100%;
   min-width: 1220px;
   max-width: 1920px;
+  margin-top:50px;
 }
 .index-footer {
   width: 1220px;
