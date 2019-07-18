@@ -31,13 +31,13 @@
       <router-link to="/course">
         <div class="scan_course">
           <div class="goto_course">了解课程</div>
-          <img src="../../assets/course_scan_img.png" />
+          <img src="../../assets/course_scan_img.jpg" />
         </div>
       </router-link>
       <router-link to="/base">
       <div class="scan_base">
         <div class="goto_base">了解基地</div>
-          <img src="../../assets/base_scan_img.png" />
+          <img src="../../assets/base_scan_img.jpg" />
       </div>
       </router-link>
       <div class="certificate_title">证书查询</div>

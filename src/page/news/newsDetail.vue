@@ -1,7 +1,7 @@
 <template>
   <div id="news_detail_body">
     <div class="file-container">
-      <h1 class="file-title">资讯详情</h1>
+      
       <h1 class="text-center news-title">{{newsContent.title}}</h1>
       <div class="news-tags text-center">
         <span class="mr15">发布时间：{{newsContent.createdate}}</span>
@@ -42,18 +42,19 @@ export default {
 
 <style scoped>
 #news_detail_body {
-  width: 1000px;
-  margin: 0px auto;
+  width: 100%;
+  min-width: 1220px;
+  max-width: 1920px;
   margin-top: 80px;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #fffffd;
-  border: 1px solid #e7e7e7;
+  background: #ffffff;
   padding: 20px;
 }
 .el-row {
   padding: 20px 0;
 }
 .file-container {
+  width:1220px;
+  margin:0px auto;
   padding: 0px 20px 20px 20px;
   background: #fff;
 }
