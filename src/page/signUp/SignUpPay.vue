@@ -29,30 +29,30 @@
 
          
           <p>
-            <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 24小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
+            <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
           <p>&nbsp;</p>
 
           <p>
-            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
-          </p>
-          <p>
-            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-          </p>
-          <p>
-            <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-          </p>
-          <p>
-            <span>电 话：</span>0513-81055866
-          </p>
-          <p>
-            <span>开户银行：</span>中国银行南通经济技术开发区支行
-          </p>
-          <p>
-            <span>账 号：</span>484571289748
-          </p>
+                        <span>户名：</span>上海汇绿电子商务有限公司
+                      </p>
+                      <!-- <p>
+                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+                      </p>
+                      <p>
+                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+                      </p>
+                      <p>
+                        <span>电 话：</span>0513-81055866
+                      </p> -->
+                      <p>
+                        <span>开户银行：</span>建设银行上海市第二支行
+                      </p>
+                      <p>
+                        <span>账 号：</span>31001502500050057342
+                      </p>
           <p id="last_line_notice">
-             <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 24小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
+             <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
         </div>
         <div class="check_operation">
@@ -79,7 +79,7 @@
             购买帐号：
             <span>{{userName}}</span>
           </div>
-          <div class="info-notice">注意：请仔细确认报名人员，并在24小时内支付，超时订单自动失效。付款成功后，人员无法更换！</div>
+          <div class="info-notice">注意：请仔细确认报名人员，并在48小时内支付，超时订单自动失效。付款成功后，人员无法更换！</div>
         </div>
 
         <div class="meal-body">

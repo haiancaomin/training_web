@@ -94,7 +94,7 @@ export default {
     showDefault() {
       var id = this.$route.params.id;
       if (id == undefined) {
-        this.$router.push({ path: `/base/overview/${this.baseList1[0].bid}` });
+        this.$router.push({ path: `/base/show1/${this.baseList1[1].bid}` });
       }
     }
   }
