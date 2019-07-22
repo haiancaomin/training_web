@@ -84,18 +84,20 @@ export default {
 
 <style scoped>
 #fileList_body {
-  width: 1000px;
+  width: 100%;
+  min-width: 1220px;
+  max-width: 1920px;
   margin: 0px auto;
   margin-top: 80px;
-  box-shadow: 0 0 2px #c7c5c5;
-  background: #fffffd;
-  border: 1px solid #e7e7e7;
-  padding: 0px 20px 20px 20px;
+  background: #fff;
+  padding: 10px; 
 }
 .el-row {
   padding: 20px 0;
 }
 .file-container {
+  width:1220px;
+  margin:0px auto;
   background: #fff;
   margin-top: 20px;
 }
@@ -178,7 +180,7 @@ export default {
 }
 .download {
   position: absolute;
-  margin: -52px 0px 0px 805px;
+  margin: -52px 0px 0px 1055px;
 }
 .download_btn {
   height: 35px;

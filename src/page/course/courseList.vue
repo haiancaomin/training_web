@@ -379,9 +379,7 @@ export default {
   max-width: 1920px;
   margin: 0px auto;
   margin-top: 80px;
-  
   background: #ffffff;
- 
   padding: 10px 0px 60px 0px;
 }
 .el-row {

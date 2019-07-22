@@ -66,7 +66,7 @@ img {
 }
 body {
   color: #333;
-  background: #eee;
+  background: #fff;
   font-size: 14px;
 }
 .zZindex{

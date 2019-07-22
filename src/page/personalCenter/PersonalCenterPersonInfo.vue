@@ -31,7 +31,7 @@
           </el-form-item>
 
           <el-form-item prop="age">
-            <el-input v-model.number="ruleForm.age" placeholder="请输入年龄" class="person-add-input">
+            <el-input v-model.number="ruleForm.age" placeholder="请输入年龄" class="person-add-input" type="number">
               <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
             </el-input>
           </el-form-item>
@@ -103,23 +103,12 @@
       max-height="450"
       stripe
       v-loading="loading"
-      style="width: 700px"
+      id="personal_info_el_table"
     >
       <el-table-column label="序号" type="index" width="50"></el-table-column>
-      <el-table-column prop="create_date" label="录入时间" sortable width="160"></el-table-column>
+      
       <el-table-column prop="empname" label="姓名" width="80"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="50">
-        <template slot-scope="scope">
-          <i v-if="scope.row.sex==0">男</i>
-          <i v-if="scope.row.sex==1">女</i>
-        </template>
-      </el-table-column>
-      <el-table-column prop="age" label="年龄" width="50"></el-table-column>
-      <el-table-column prop="worktype" label="工种" width="80"></el-table-column>
       <el-table-column prop="cardno" label="身份证号" width="180"></el-table-column>
-      <el-table-column prop="phone" label="手机" width="120"></el-table-column>
-      <el-table-column prop="address" label="工作地" width="120"></el-table-column>
-      <el-table-column prop="education" label="学历" width="120"></el-table-column>
       <el-table-column prop="examno" label="结业证明" width="120">
         <template slot-scope="scope">
           <el-button
@@ -146,6 +135,19 @@
           <el-tag type="info" disable-transitions v-else>暂无证书</el-tag>
         </template>
       </el-table-column>
+      <el-table-column prop="sex" label="性别" width="50">
+        <template slot-scope="scope">
+          <i v-if="scope.row.sex==0">男</i>
+          <i v-if="scope.row.sex==1">女</i>
+        </template>
+      </el-table-column>
+      <el-table-column prop="age" label="年龄" width="50"></el-table-column>
+      <el-table-column prop="worktype" label="工种" width="80"></el-table-column>
+      
+      <el-table-column prop="phone" label="手机" width="120"></el-table-column>
+      <el-table-column prop="address" label="工作地" width="120"></el-table-column>
+      <el-table-column prop="education" label="学历" width="120"></el-table-column>
+      <el-table-column prop="create_date" label="录入时间" sortable width="160"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="editPerson(scope.row.empid)">编辑</el-button>
@@ -380,7 +382,7 @@ export default {
 
 <style scoped>
 #PersonalCenterPersonInfo {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -406,7 +408,7 @@ export default {
 }
 .el-input {
   width: 250px;
-  margin: 0px 0px 0px 395px;
+  margin: 0px 0px 0px 602px;
 }
 .search-btn {
   margin: 0px 0px 0px 0px;
@@ -462,6 +464,9 @@ export default {
 .dflag_true,
 .cflag_true {
   padding: 9px 10px;
+}
+#personal_info_el_table {
+  width:907px;
 }
 </style>
 <style>

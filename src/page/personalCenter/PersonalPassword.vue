@@ -169,7 +169,7 @@ export default {
 
 <style scoped>
 #PersonalPassword {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;

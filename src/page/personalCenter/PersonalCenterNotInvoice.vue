@@ -604,7 +604,7 @@ export default {
 
 <style scoped>
 #PersonalCenterNotInvoice {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   border: 1px solid #e7e7e7;
   margin: 0px 0px 0px 20px;
@@ -616,6 +616,7 @@ export default {
   margin: 20px auto 0px auto;
   box-shadow: 0 0 6px #c7c5c5;
   border: 1px solid #c7c5c5;
+  border-radius: 6px;
 }
 .order-card:hover {
   box-shadow: 0 0 20px #c7c5c5;
@@ -717,7 +718,7 @@ table {
 .el-icon-delete {
   float: right;
   font-size: 18px;
-  margin: 2px 15px 0px 0px;
+  margin: 6px 15px 0px 0px;
 }
 .el-icon-delete:hover {
   color: #409eff;

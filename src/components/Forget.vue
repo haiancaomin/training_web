@@ -1,5 +1,6 @@
 <template>
   <div id="Forget">
+    <div class="forget_body_div">
     <h1 class="file-title">忘记密码</h1>
     <div class="form_outline_body">
       <div class="PersonalPassword-change">
@@ -63,6 +64,7 @@
           </div>
         </el-form>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -197,13 +199,16 @@ export default {
 
 <style scoped>
 #Forget {
-  width: 1000px;
-  margin: 0px auto;
-  box-shadow: 0 0 2px #c7c5c5;
+  width: 100%;
+  min-width: 1220PX;
+  max-width: 1920px;
   background: #fff;
-  border: 1px solid #e7e7e7;
-  padding: 0px 30px 30px 30px;
+  padding: 10px 0px 50px 0px;
   margin-top: 80px;
+}
+.forget_body_div {
+  width:1220px;
+  margin:0px auto;
 }
 .file-title {
   font-size: 18px;
@@ -217,11 +222,12 @@ export default {
 }
 .PersonalPassword-change {
   text-align: center;
-  margin: 0px 288px;
+  margin: 0px 430px;
   margin-top: 30px;
 }
 .form_outline_body {
   margin: 0px auto;
+ 
 }
 .wait-button-con {
   display: inline-block;

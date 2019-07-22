@@ -13,6 +13,7 @@
         <el-button type="primary" plain @click="deleteCheck=false">取消</el-button>
       </el-dialog>
     </div>
+   
     <div v-if="showInvoice">
       <el-col :span="12" v-for="invoiceItem in invoiceList" :key="invoiceItem[0]">
         <div class="invoice_body pupiao" @click="showInvoiceDetail(invoiceItem[0])">
@@ -585,7 +586,7 @@ export default {
 
 <style scoped>
 #PersonalCenterInvoiceShow {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -644,8 +645,8 @@ span {
   text-overflow: ellipsis;
 }
 .invoice_body {
-  width: 310px;
-  height: 146px;
+  width: 390px;
+  height: 176px;
   margin: 20px auto 0px auto;
   border-radius: 8px;
   box-shadow: 0px 0px 12px #c7c5c5;
@@ -655,8 +656,8 @@ span {
   box-shadow: 0px 0px 12px #807e7e;
 }
 .invoice_body_add {
-  width: 310px;
-  height: 146px;
+  width: 390px;
+  height: 176px;
   margin: 20px auto 0px auto;
   border-radius: 8px;
   border: 1px dashed #c7c5c5;
@@ -689,25 +690,26 @@ span {
 }
 .invoice_title {
   position: absolute;
-  width: 235px;
+  width: 275px;
   height: 40px;
-  margin: 20px 0px 0px 60px;
+  margin: 33px 0px 0px 80px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
   color: #fff;
+  font-size:16px;
 }
 .invoice_type {
   position: absolute;
-  margin: 70px 0px 0px 60px;
+  margin: 85px 0px 0px 80px;
   color: #fff;
   font-size: 12px;
   font-weight: bold;
 }
 .invoice_account {
   position: absolute;
-  margin: 115px 0px 0px 60px;
+  margin: 130px 0px 0px 80px;
   color: #fff;
   font-weight: bold;
   font-size: 12px;
@@ -733,14 +735,14 @@ span {
   margin: 20px 0px 0px 10px;
 }
 .invoice_picture img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 .add_new_invoice {
   text-align: center;
-  height: 146px;
-  line-height: 146px;
+  height: 176px;
+  line-height: 176px;
 }
 .el-icon-plus {
   color: #c7c5c5;

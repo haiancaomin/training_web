@@ -24,7 +24,7 @@
         </div>
       </el-dialog>
     </div>
-    <div class="score_search_div">
+    <div class="score_search_div" :class="{'big_height':largerHeight}">
       <div class="left_line"></div>
       <div class="right_line"></div>
       <div class="split_line"></div>
@@ -113,9 +113,12 @@ export default {
             trigger: "blur"
           }
         ]
-      }
+      },
+      largerHeight:false,
+      bomHeight:0
     };
   },
+
   methods: {
     handleCurrentChange(val) {
       this.currentPage = val;
@@ -151,6 +154,19 @@ export default {
   },
   mounted() {
     document.getElementById("nameFocus").focus();
+ 
+     
+    // window.addEventListener("scroll", function() {
+    //   if (
+    //     document.documentElement.clientHeight +
+    //       document.documentElement.scrollTop >
+    //     600
+    //   ) {
+    //     that.largerHeight = true;
+    //   } else {
+    //     that.largerHeight = false;
+    //   }
+    // });
   }
 };
 </script>
@@ -163,7 +179,6 @@ export default {
   background: #ffffff;
   margin: 80px auto 0px auto;
   padding: 20px 0px 0px 0px;
-  
 }
 .score_search_div {
   width: 1220px;
@@ -331,6 +346,9 @@ export default {
 }
 .goto_course:hover, .goto_base:hover{
  background-color: rgba(230, 128, 78,0.8);
+}
+.big_height {
+  height:800px;
 }
 </style>
 <style>

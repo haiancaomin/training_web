@@ -156,9 +156,9 @@ export default {
 #PersonalCenterOrderDetail {
   width: 1000px;
   margin: 0px auto;
-  box-shadow: 0 0 2px #c7c5c5;
+ 
   background: #fff;
-  border: 1px solid #e7e7e7;
+  
   padding: 0px 30px 30px 30px;
   margin-top: 80px;
 }

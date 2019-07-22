@@ -28,6 +28,7 @@
 
     <div v-if="oneAdd" class="form-body">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" id="form_box">
+        <div class="div_left">
         <el-form-item prop="empname">
           <el-input
             v-model="ruleForm.empname"
@@ -48,7 +49,7 @@
         </el-form-item>
 
         <el-form-item prop="age">
-          <el-input v-model.number="ruleForm.age" placeholder="请输入年龄" class="person-add-input">
+          <el-input v-model="ruleForm.age" placeholder="请输入年龄" class="person-add-input" type="number">
             <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
           </el-input>
         </el-form-item>
@@ -58,7 +59,8 @@
             <i slot="prefix" class="iconfont" id="iconWorktype">&#xe626;</i>
           </el-input>
         </el-form-item>
-
+        </div>
+        <div class="div_right">
         <el-form-item prop="education">
           <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
             <el-option label="小学及以下" value="小学及以下"></el-option>
@@ -90,7 +92,8 @@
             <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
           </el-input>
         </el-form-item>
-
+        </div>
+        <div class="add_person_div">
         <el-form-item>
           <div class="worker-add">
             <el-button
@@ -100,6 +103,7 @@
             >添&nbsp;&nbsp;&nbsp;&nbsp;加</el-button>
           </div>
         </el-form-item>
+        </div>
       </el-form>
     </div>
     <div v-if="batchAdd" class="batch-add">
@@ -312,7 +316,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAddPerson {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -411,6 +415,18 @@ export default {
 .operation_repeat_check {
   text-align: center;
   margin-top: 20px;
+}
+.div_left {
+  position: absolute;
+  margin:-260px 0px 0px -200px;
+}
+.div_right {
+  position: absolute;
+  margin:-260px 0px 0px 200px;
+}
+.add_person_div {
+  
+  margin:300px 0px 0px 0px;
 }
 </style>
 <style>

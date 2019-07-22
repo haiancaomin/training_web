@@ -76,7 +76,7 @@
       </el-form-item>
     </el-form>
     <div class="get-certificate-list">
-      <el-table :data="tableData" max-height="450" style="width: 700px" v-loading="loading" stripe border
+      <el-table :data="tableData" max-height="450"  v-loading="loading" stripe border
         :highlight-current-row="true">
         <el-table-column label="序号" type="index" width="50"></el-table-column>
         <el-table-column prop="cardno" label="身份证号" width="170"></el-table-column>
@@ -283,7 +283,7 @@ export default {
 
 <style scoped>
 #PersonalCenterCertificate {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -314,7 +314,7 @@ export default {
 }
 .el-input {
   width: 250px;
-  margin: 0px 0px 0px 382px;
+  margin: 0px 0px 0px 604px;
 }
 .search-btn2 {
   padding: 8px 10px;
@@ -328,25 +328,23 @@ export default {
 }
 .select_course {
   position: absolute;
-  margin:0px 0px 0px 259px;
+  margin:0px 0px 0px 481px;
 }
 .select_course .el-select{
   width:150px;
 }
 .select_batch {
   position: absolute;
-  margin:0px 0px 0px 413px;
+  margin:0px 0px 0px 635px;
 }
 .select_submit {
   position: absolute;
-  margin:0px 0px 0px 636px;
+  margin:0px 0px 0px 858px;
 }
 .fifter_term_show {
   height: 50px;
 }
-.search-btn2 {
-  padding: 8px 10px;
-}
+
 @font-face {
   font-family: 'iconfont';  /* project id 1131189 */
   src: url('//at.alicdn.com/t/font_1131189_4d5jvooav36.eot');

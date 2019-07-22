@@ -36,7 +36,8 @@
                   <i class="el-icon-upload"></i>
                   <div class="el-upload__text">
                     请上传
-                    <em>法人身份照扫描件</em>和
+                    <em>法人身份照扫描件</em>
+                    和
                     <em>营业执照扫描件</em>
                   </div>
                   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
@@ -88,6 +89,8 @@
                   <div class="el-upload__text">
                     请上传
                     <em>学生证</em>
+                    或
+                    <em>校园相关证件</em>
                   </div>
                   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
                 </el-upload>
@@ -415,7 +418,7 @@ export default {
 
 <style scoped>
 #PersonalCenterAuthentication {
-  width: 730px;
+  width: 950px;
   /* box-shadow: 0 0 2px #c7c5c5; */
   background: #fffffd;
   /* border: 1px solid #e7e7e7; */
@@ -423,10 +426,10 @@ export default {
   padding: 0px 0px 20px 0px;
 }
 .PersonalPassword-change {
-  margin: 30px 179px 0px 190px;
+  margin: 30px 279px 0px 290px;
 }
 .haveSubmit {
-  margin: 100px 0px 0px 150px;
+  margin: 100px 0px 0px 270px;
 }
 .PersonalPassword-change-commit {
   text-align: center;
@@ -513,7 +516,7 @@ export default {
   margin: 0px 0px 20px 0px;
 }
 .submitHava {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;

@@ -253,7 +253,7 @@ export default {
 
 <style scoped>
 #PersonalCenterChangeMobile {
-  width: 730px;
+  width: 950px;
   box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
   border: 1px solid #e7e7e7;
@@ -277,7 +277,7 @@ export default {
   margin: 0px 0px 0px 80px;
 }
 .change-mobile-form {
-  padding: 0px 179px 0px 190px;
+  padding: 0px 289px 0px 300px;
 }
 .login-self {
   width: 360px;

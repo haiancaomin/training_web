@@ -1,22 +1,24 @@
 <template>
   <div id="MessageBoard">
-    <h1 class="my_suggest_h1_label">我的反馈</h1>
-    <el-table :data="tableData" stripe style="width: 100%">
-      <el-table-column label="序号" type="index" width="50"></el-table-column>
-      <el-table-column prop="question" label="问题描述" width="370"></el-table-column>
-      <el-table-column prop="createdate" label="提交时间" width="180"></el-table-column>
-      <el-table-column prop="answer" label="查看回复"></el-table-column>
-    </el-table>
+    <div class="messageBoard_div">
+      <h1 class="my_suggest_h1_label">我的反馈</h1>
+      <el-table :data="tableData" stripe style="width: 100%">
+        <el-table-column label="序号" type="index" width="50"></el-table-column>
+        <el-table-column prop="question" label="问题描述" width="400"></el-table-column>
+        <el-table-column prop="createdate" label="提交时间" width="180"></el-table-column>
+        <el-table-column prop="answer" label="查看回复"></el-table-column>
+      </el-table>
 
-    <div v-if="count">
-      <div class="suggest-page">
-        <el-pagination
-          background
-          layout="prev, pager, next, jumper"
-          :page-size="10"
-          :total="count"
-          @current-change="handleCurrentChange"
-        ></el-pagination>
+      <div v-if="count">
+        <div class="suggest-page">
+          <el-pagination
+            background
+            layout="prev, pager, next, jumper"
+            :page-size="10"
+            :total="count"
+            @current-change="handleCurrentChange"
+          ></el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -67,13 +69,16 @@ export default {
 
 <style scoped>
 #MessageBoard {
-  width: 1000px;
-  margin: 0px auto;
+  width: 100%;
+  min-width: 1220px;
+  max-width: 1920px;
   margin-top: 80px;
-  box-shadow: 0 0 2px #c7c5c5;
   background: #fffffd;
-  border: 1px solid #e7e7e7;
   padding: 20px;
+}
+.messageBoard_div {
+  width: 1220px;
+  margin: 0px auto;
 }
 .my_suggest_h1_label {
   font-size: 18px;
