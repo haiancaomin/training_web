@@ -17,41 +17,6 @@
         </div>
       </el-dialog>
 
-      <el-dialog title="汇款信息" :visible.sync="account_info" center width="620px">
-        <p>
-                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
-                      </p>
-                     
-                      <p>&nbsp;</p>
-
-                      <p>
-                        <span>户名：</span>上海汇绿电子商务有限公司
-                      </p>
-                      <!-- <p>
-                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-                      </p>
-                      <p>
-                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-                      </p>
-                      <p>
-                        <span>电 话：</span>0513-81055866
-                      </p> -->
-                      <p>
-                        <span>开户银行：</span>建设银行上海市第二支行
-                      </p>
-                      <p>
-                        <span>账 号：</span>31001502500050057342
-                      </p>
-                      <p>&nbsp;</p>
-                       <p >
-                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{accountInfoOrderId}}</span> ，便于财务核实。
-                      </p>
-        <div class="account_info_operation">
-          <el-button type="primary" @click="account_info=false">取消</el-button>
-          <el-button type="primary" plain @click="account_info=false">确认</el-button>
-        </div>
-      </el-dialog>
-
       <el-dialog title="汇款须知" :visible.sync="noticeOnce" width="600px" center class="noticeOnce_dialog">
         <p class="noticeOnce_p">如您使用转账汇款方式支付，请在</p>
         <p class="noticeOnce_p">
@@ -171,7 +136,7 @@
                   购买帐号：
                   <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付，并在48小时内支付。</div>
+                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付，并在<span v-if="typeflag=='0'">24</span><span v-if="typeflag=='1'">48</span>小时内支付。</div>
                 <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
@@ -201,33 +166,33 @@
               </div> -->
 
               <div class="pay-type">支付方式</div>
-              <el-collapse accordion id="pay_choose">
-                <el-collapse-item>
+              <el-collapse accordion v-model="activeName" id="pay_choose">
+                <el-collapse-item name="1">
                   <template slot="title">
-                    <!-- <div v-if="radio2==3" class="choose-zhifubao">
+                    <div v-if="radio2==3" class="choose-zhifubao">
                       <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
                     </div>
-                    <span v-if="radio2==6" class="choose-weixin">
+                    <!-- <span v-if="radio2==6" class="choose-weixin">
                       <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                    </span>-->
+                    </span> -->
                     <span v-if="radio2==9" class="choose-bank">
                       <img src="../../assets/zhuanzhuang.png" class="icon-mini" />转账汇款
                     </span>
                   </template>
                   <div class="pay-choose">
                     <el-radio-group v-model="radio2">
-                      <!-- <div class="pay-zhifubao">
+                      <div class="pay-zhifubao" v-if="typeflag=='0'">
                         <el-col :span="24">
                           <el-radio :label="3">
                             <img src="../../assets/zhifubao.jpg" class="pay-img">
                           </el-radio>
                         </el-col>
                       </div>
-                      <div class="pay-weixin">
+                      <!-- <div class="pay-weixin">
                         <el-radio :label="6">
                           <img src="../../assets/weixin.jpg" class="pay-img">
                         </el-radio>
-                      </div>-->
+                      </div> -->
                       <div class="pay-bank">
                         <el-radio :label="9">
                           <img src="../../assets/huikuan_big.png" class="pay-img" />
@@ -239,21 +204,25 @@
               </el-collapse>
             </div>
 
-            <div class="payment-body" v-if="radio2==3||radio2==6">
-              <div class="payment-sub-body">
+            <div class="payment-body-zhifubao" v-if="radio2==3||radio2==6">
+              <div class="payment-sub-body-zhifubao">
+                <div class="agreement_check">
+                  完成支付则表示您同意
+                  <span class="agreement" @click="showProtocol=true">《智聚用户付费协议》</span>
+                </div>
                 <el-col :span="18">
                   <div class="agreement-con">&nbsp;</div>
                 </el-col>
                 <el-col :span="6">
                   <div class="pay-price-btn f-fr">
-                    <div class="pay-price-btn_price">
+                    <div class="pay-price-btn_price_zhifubao">
                       <span class="price_title">待付款:</span>
                       <span class="price_account">
                         <span class="price_account_icon">￥</span>
                         {{orderDetail.summoney}}
                       </span>
                     </div>
-                    <span class="pay-price-btn_btn">立即支付</span>
+                    <span class="pay-price-btn_btn" @click="payNow">立即支付</span>
                   </div>
                 </el-col>
               </div>
@@ -273,24 +242,39 @@
                      
                       <p>&nbsp;</p>
 
-                      <p>
-                        <span>户名：</span>上海汇绿电子商务有限公司
-                      </p>
-                      <!-- <p>
-                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-                      </p>
-                      <p>
-                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-                      </p>
-                      <p>
-                        <span>电 话：</span>0513-81055866
-                      </p> -->
-                      <p>
-                        <span>开户银行：</span>建设银行上海市第二支行
-                      </p>
-                      <p>
-                        <span>账 号：</span>31001502500050057342
-                      </p>
+                      <div v-if="typeflag=='0'">
+          <p>
+            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+          </p>
+          <p>
+            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+          </p>
+          <p>
+            <span>地    址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+          </p>
+          <p>
+            <span>电    话：</span>0513-81055866
+          </p>
+          <p>
+            <span>开户银行：</span>中国银行南通经济技术开发区支行
+          </p>
+          <p>
+            <span>账    号：</span>484571289748
+          </p>
+          </div>
+
+          <div v-if="typeflag=='1'">
+          <p>
+            <span>户名：</span>上海汇绿电子商务有限公司
+          </p>
+          <p>
+            <span>开户银行：</span>建设银行上海市第二支行
+          </p>
+          <p>
+            <span>账 号：</span>31001502500050057342
+          </p>
+          </div>
+                     
                       <p>&nbsp;</p>
                        <p >
                         <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
@@ -372,7 +356,7 @@
           </router-link>
           <el-button type="primary" round @click="payNowShow(orderItem.orderid)"  v-if="orderItem.status==0">立即支付</el-button>
           <el-button type="success" round v-if="orderItem.status==0" @click="payComment(orderItem.orderno,orderItem.orderid)">我已汇款</el-button>
-          <el-button type="primary" round @click="check_info(orderItem.orderno)"  v-if="orderItem.status==1">汇款信息</el-button>
+          
           <el-button type="success" round disabled v-if="orderItem.status==1">等待确认</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
           <el-button
@@ -457,6 +441,9 @@ export default {
       noticeLeftHour:"",
       noticeLeftMinute:"",
       noticeLeftSecond:"",
+      activeName: '1',
+      orderNameZhifubao:"",
+      typeflag:"",
     };
   },
   watch: {
@@ -541,10 +528,7 @@ var loseTime = year + "-" +
       this.userSubmitOrderID = orderid;
       this.payCommentOrderID = orderno;
     },
-    check_info(orderno) {
-      this.account_info=true;
-      this.accountInfoOrderId = orderno;
-    },
+   
     pay_and_comment() {
       this.$ajax({
         method: "post",
@@ -616,11 +600,19 @@ var loseTime = year + "-" +
         .then(res => {
           this.payAndCommentOrderID=orderid;
           this.orderDetail = res.data.data;
-          console.log(this.orderDetail);
+   
           this.noticeOnce = true;
           this.noticeOrderNum = this.orderDetail.orderno;
           this.noticeCreateDate = this.orderDetail.createdate;
-           var loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000*2;
+          this.typeflag= this.orderDetail.dlist[0].typeflag;
+          console.log(this.typeflag);
+          var loseEfficacyTime='';
+          if(this.typeflag == "0") {
+            loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000;
+          } else if(this.typeflag == "1"){
+            loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000*2;
+          }
+           
            var now = (new Date()).getTime();
           var leftTime = loseEfficacyTime - now;
           var leftDay = parseInt(leftTime/(3600*24*1000));
@@ -770,6 +762,28 @@ var loseTime = year + "-" +
     checkOK() {
       this.dialogVisible = false;
       this.checkAgain = true;
+    },
+    payNow() {
+     
+      this.orderNameZhifubao +=
+        this.orderDetail.dlist[0].coursename +
+        "（" +
+        this.orderDetail.dlist[0].menuname +
+        "）";
+        
+      this.$ajax({
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_doPost.do?WIDout_trade_no=${this.orderDetail.orderno}&WIDtotal_amount=${this.orderDetail.summoney}&WIDsubject=${this.orderNameZhifubao}&WIDbody=`
+      })
+        .then(res => {
+          const div = document.createElement('div'); // 创建div
+                            div.innerHTML = res.data; // 将返回的form 放入div
+                            document.body.appendChild(div);
+                            document.forms[0].submit();
+        })
+        .catch(function(err) {
+         
+        });
     }
   },
   mounted() {
@@ -1000,7 +1014,18 @@ table {
 }
 .payment-sub-body {
   width: 860px;
-  height: 290px;
+  height: 300px;
+  box-sizing: border-box;
+  background: #fefcef;
+  border: 1px solid #ddd;
+  padding: 15px 40px;
+  margin: 0px 40px;
+  color: #666;
+  font-size: 14px;
+}
+.payment-sub-body-zhifubao {
+  width: 860px;
+  height: 190px;
   box-sizing: border-box;
   background: #fefcef;
   border: 1px solid #ddd;
@@ -1038,6 +1063,15 @@ table {
   color: #ff6600;
 }
 .pay-price-btn_price .price_account_icon {
+  font-weight: 300;
+  font-size: 14px;
+}
+.pay-price-btn_price_zhifubao .price_account {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ff6600;
+}
+.pay-price-btn_price_zhifubao .price_account_icon {
   font-weight: 300;
   font-size: 14px;
 }
@@ -1586,6 +1620,11 @@ table {
 }
 .noticeOnce_operation {
   margin: 40px 0px 0px 120px;
+}
+.pay-price-btn_price_zhifubao {
+  text-align: right;
+  margin-bottom: 5px;
+  margin-top:25px;
 }
 </style>
 <style>

@@ -14,9 +14,6 @@ export default new Router({
       }, {
         path: '/index',
         component: resolve => require(['@/page/Index'], resolve)
-      }, {
-        path: '/test',
-        component: resolve => require(['@/page/test'], resolve)
       },
       {
         path: '/Forget',
@@ -80,6 +77,11 @@ export default new Router({
         path: '/SignUpSuccess',
         name: 'SignUpSuccess',
         component: resolve => require(['@/page/signUp/SignUpSuccess'], resolve)
+      },
+      {
+        path: '/SignUpError',
+        name: 'SignUpError',
+        component: resolve => require(['@/page/signUp/SignUpError'], resolve)
       },
       {
         path: '/SignUpPageWait',

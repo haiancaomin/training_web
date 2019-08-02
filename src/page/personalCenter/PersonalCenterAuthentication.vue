@@ -4,6 +4,7 @@
       <el-tab-pane label="企业认证">
         <div class="PersonalPassword-change">
           <P class="authentication_notice">完成认证后，您才可以正常使用本平台的报名功能。</P>
+           <p class="authentication_notice">公司名称请尽量与发票抬头相同</p>
           <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
             <el-form-item prop="companyName">
               <div class="input-body" id="loginForm">

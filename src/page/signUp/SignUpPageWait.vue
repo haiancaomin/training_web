@@ -7,13 +7,7 @@
         请尽快前往
         <router-link to="/PersonalCenter/PersonalCenterAllOrder">
           <a href="javascript:;" class="to-center2 to_myorder">我的订单</a>
-        </router-link>支付
-      </p>
-      <p class="success-context second_p">
-        如需开具发票，请前往
-        <router-link to="/PersonalCenter/PersonalCenterInvoiceShow">
-          <a href="javascript:;" class="to-center2">发票管理</a>
-        </router-link>填写发票信息
+        </router-link>支付, 支付完成后，我们会自动为您开具发票
       </p>
     </div>
     <div class="success-other">

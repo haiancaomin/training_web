@@ -59,7 +59,7 @@
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                     <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}</span></div>
+                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
                   </div>
                 </div>
               </div>
@@ -120,8 +120,8 @@
                     <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
-                    <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}</span></div>
+                   <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
+                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
                   </div>
                 </div>
               </div>
@@ -187,7 +187,8 @@
                     <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
-                    <div class="course_price_div"><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}</span></div>
+                    <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
+                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
                   </div>
                 </div>
               </div>
@@ -253,7 +254,8 @@
                     <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
-                   <div class="course_price_div"><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}</span></div>
+                   <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
+                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
                   </div>
                 </div>
               </div>
@@ -933,7 +935,7 @@ export default {
 }
 .course_price_div {
 
-  margin: 15px 0px 0px 10px;
+  margin: 19px 0px 0px 10px;
   color: #fff;
   transition: all ease-in-out 0.3s;
   animation: course_name_div 1.5s;
@@ -947,7 +949,7 @@ export default {
     font-size: 12px;
 }
 .course_price_span {
-  font-size: 27px;
+  font-size: 20px;
 }
 .course_price_div_no_price {
   font-size: 20px;

@@ -1,8 +1,6 @@
 <template>
   <div id="SignUpPay">
     <div clsss="pay-online" v-show="notPay">
-      
-
       <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
         <el-table :data="tableData" border max-height="400" style="width: 100%">
           <el-table-column prop="empname" label="姓名" width="100"></el-table-column>
@@ -26,39 +24,62 @@
 
       <el-dialog title="汇款信息" :visible.sync="showAccountDialog" width="600px" center>
         <div class="offline-context">
-
-         
           <p>
-            <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
+            <span style="color:#e4393c">汇款须知：</span>请在下单后
+            <span style="color:#e4393c" v-if="typeflag=='0'">24小时内支付</span><span style="color:#e4393c" v-if="typeflag=='1'">48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，
+            <span style="color:#e4393c">汇款备注</span>信息为订单号
+            <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
           <p>&nbsp;</p>
-
+          
+          <div v-if="typeflag=='0'">
           <p>
-                        <span>户名：</span>上海汇绿电子商务有限公司
-                      </p>
-                      <!-- <p>
-                        <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-                      </p>
-                      <p>
-                        <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-                      </p>
-                      <p>
-                        <span>电 话：</span>0513-81055866
-                      </p> -->
-                      <p>
-                        <span>开户银行：</span>建设银行上海市第二支行
-                      </p>
-                      <p>
-                        <span>账 号：</span>31001502500050057342
-                      </p>
+            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+          </p>
+          <p>
+            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+          </p>
+          <p>
+            <span>地    址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+          </p>
+          <p>
+            <span>电    话：</span>0513-81055866
+          </p>
+          <p>
+            <span>开户银行：</span>中国银行南通经济技术开发区支行
+          </p>
+          <p>
+            <span>账    号：</span>484571289748
+          </p>
+          </div>
+
+          <div v-if="typeflag=='1'">
+          <p>
+            <span>户名：</span>上海汇绿电子商务有限公司
+          </p>
+          <p>
+            <span>开户银行：</span>建设银行上海市第二支行
+          </p>
+          <p>
+            <span>账 号：</span>31001502500050057342
+          </p>
+          </div>
           <p id="last_line_notice">
-             <span style="color:#e4393c">汇款须知：</span>请在下单后<span style="color:#e4393c"> 48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，<span style="color:#e4393c">汇款备注 </span>信息为订单号 <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
+            <span style="color:#e4393c">汇款须知：</span>请在下单后
+            <span style="color:#e4393c" v-if="typeflag=='0'">24小时内支付</span><span style="color:#e4393c" v-if="typeflag=='1'">48小时内支付</span>，超时订单自动失效! 汇款请务必填写备注，
+            <span style="color:#e4393c">汇款备注</span>信息为订单号
+            <span class="notice_must" style="color:#e4393c">{{needOrderno}}</span> ，便于本公司财务核实。
           </p>
         </div>
         <div class="check_operation">
-          
           <el-button type="primary" class="sign-submit" @click="showAccountDialog=false">稍等一会</el-button>
-          <el-button type="primary" plain class="sign-submit" @click="payWait"  v-if="allowOperation">我已确认</el-button>
+          <el-button
+            type="primary"
+            plain
+            class="sign-submit"
+            @click="payWait"
+            v-if="allowOperation"
+          >我已确认</el-button>
           <el-button
             type="primary"
             plain
@@ -79,7 +100,7 @@
             购买帐号：
             <span>{{userName}}</span>
           </div>
-          <div class="info-notice">注意：请仔细确认报名人员，并在48小时内支付，超时订单自动失效。付款成功后，人员无法更换！</div>
+          <div class="info-notice">注意：请仔细确认报名人员，并在<span v-if="typeflag=='0'">24</span><span v-if="typeflag=='1'">48</span>小时内支付，超时订单自动失效。付款成功后，人员无法更换！</div>
         </div>
 
         <div class="meal-body">
@@ -166,13 +187,13 @@
         </div>
 
         <div class="pay-type">支付方式</div>
-        <el-collapse accordion id="pay_choose">
-          <el-collapse-item>
+        <el-collapse accordion v-model="activeName" id="pay_choose">
+          <el-collapse-item name="1">
             <template slot="title">
-              <!-- <div v-if="radio2==3" class="choose-zhifubao">
-                <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
+              <div v-if="radio2==3" class="choose-zhifubao">
+                <img src="../../assets/zhifubao_mini.png" class="icon-mini" />支付宝
               </div>
-              <div v-if="radio2==6" class="choose-weixin">
+              <!-- <div v-if="radio2==6" class="choose-weixin">
                 <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
               </div>-->
               <div v-if="radio2==9" class="choose-bank">
@@ -181,14 +202,14 @@
             </template>
             <div class="pay-choose">
               <el-radio-group v-model="radio2">
-                <!-- <div class="pay-zhifubao">
+                <div class="pay-zhifubao" v-if="typeflag=='0'">
                   <el-col :span="24">
                     <el-radio :label="3">
-                      <img src="../../assets/zhifubao.jpg" class="pay-img">
+                      <img src="../../assets/zhifubao.jpg" class="pay-img" />
                     </el-radio>
                   </el-col>
                 </div>
-                <div class="pay-weixin">
+                <!-- <div class="pay-weixin">
                   <el-radio :label="6">
                     <img src="../../assets/weixin.jpg" class="pay-img">
                   </el-radio>
@@ -283,11 +304,12 @@ export default {
       orderID: "",
       orderName: "",
       payHtml: "",
-     
-      timer:false,
-      timeCount:0,
+      activeName: '1',
+      timer: false,
+      timeCount: 0,
       allowOperation: false,
-      needOrderno:""
+      needOrderno: "",
+      typeflag:"",
     };
   },
 
@@ -305,17 +327,18 @@ export default {
       })
         .then(res => {
           that.orderDetail = res.data.data;
+          that.typeflag = that.orderDetail.dlist[0].typeflag[0];
           that.needOrderno = that.orderDetail.orderno;
-         
         })
         .catch(function(err) {
           console.log(err);
         });
     });
+     
   },
   watch: {
     showAccountDialog: function(val) {
-      if(!val) {
+      if (!val) {
         clearInterval(this.timer);
         this.timer = null;
       }
@@ -323,21 +346,21 @@ export default {
   },
   methods: {
     clickWait() {
-      this.showAccountDialog=true;
+      this.showAccountDialog = true;
       const TIME_COUNT = 10;
-          if (!this.timer) {
-            this.timeCount = TIME_COUNT;
-            this.allowOperation = false;
-            this.timer = setInterval(() => {
-              if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
-                this.timeCount--;
-              } else {
-                this.allowOperation = true;
-                clearInterval(this.timer);
-                this.timer = null;
-              }
-            }, 1000);
+      if (!this.timer) {
+        this.timeCount = TIME_COUNT;
+        this.allowOperation = false;
+        this.timer = setInterval(() => {
+          if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+            this.timeCount--;
+          } else {
+            this.allowOperation = true;
+            clearInterval(this.timer);
+            this.timer = null;
           }
+        }, 1000);
+      }
     },
     checkEmp(empList) {
       this.$ajax({
@@ -353,32 +376,25 @@ export default {
       this.showTable = true;
     },
     payNow() {
-      console.log(this.orderDetail.dlist.length);
-      for (var i = 0; i < this.orderDetail.dlist.length; i++) {
-        if (i == this.orderDetail.dlist.length - 1) {
-          this.orderName +=
-            this.orderDetail.dlist[i].coursename +
-            "（" +
-            this.orderDetail.dlist[i].menuname +
-            "）";
-        } else {
-          this.orderName +=
-            this.orderDetail.dlist[i].coursename +
-            "（" +
-            this.orderDetail.dlist[i].menuname +
-            "）" +
-            "，";
-        }
-      }
-      console.log(this.orderName);
+     
+      this.orderName +=
+        this.orderDetail.dlist[0].coursename +
+        "（" +
+        this.orderDetail.dlist[0].menuname +
+        "）";
+        
       this.$ajax({
-        method: "get",
-        async: false,
-        url: `${this.baseURL}/zjsxpt/alipay.trade.page.pay.jsp?WIDout_trade_no=${this.orderID}&WIDtotal_amount=0.01&WIDsubject=${this.orderName}&WIDbody=测试123`
+        method: "post",
+        url: `${this.baseURL}/zjsxpt/course_doPost.do?WIDout_trade_no=${this.orderDetail.orderno}&WIDtotal_amount=${this.orderDetail.summoney}&WIDsubject=${this.orderName}&WIDbody=`
       })
-        .then(res => {})
+        .then(res => {
+          const div = document.createElement('div'); // 创建div
+                            div.innerHTML = res.data; // 将返回的form 放入div
+                            document.body.appendChild(div);
+                            document.forms[0].submit();
+        })
         .catch(function(err) {
-          console.log(err);
+         
         });
     },
     payWait() {
@@ -687,7 +703,7 @@ export default {
   font-family: "微软雅黑";
   font-size: 12px;
   color: #ee5f5b;
-  margin-top:2px;
+  margin-top: 2px;
 }
 #last_line_notice {
   margin: 30px 0px 0px 0px;

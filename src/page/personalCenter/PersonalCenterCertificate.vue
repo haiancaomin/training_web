@@ -19,6 +19,7 @@
         <el-breadcrumb-item>实训证书</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+    <!-- <div class="notice_shixun">注意：只有通过本平台实操课程的学员才可以查询到相应的实训证书，制作证书需要一些时间，耐心等待几日，您可以。</div> -->
     <div class="fifter_term_show">
       <el-form :model="ruleForm" ref="ruleForm" :rules="rules" class="demo-ruleForm">
         <div class="select_course">
@@ -363,6 +364,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   line-height: 40px;
   margin: 0px 0px 0px 2px;
+}
+.notice_shixun {
+  position: absolute;
+  margin:0px 0px 0px 20px;
+  font-size: 12px;
+  color:#999;
+  font-weight: bold;
 }
 </style>
 <style>
