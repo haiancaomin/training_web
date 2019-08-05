@@ -1,5 +1,16 @@
 <template>
   <div id="PersonalCenterUncompletedOrder">
+    <div class="wx_pay_div" v-if="showWXPay"></div>
+    <div class="wx_pay_img" v-if="showWXPay">
+      <div class="el-icon-close" @click="closeWXPay()"></div>
+      <div class="pay_money_need">
+        实付金额：¥
+        <span>{{orderDetail.summoney}}</span>
+      </div>
+      <img :src="payImg" />
+      <div class="pay_money_notice">请使用微信扫描</div>
+      <div class="pay_money_notice">二维码以完成支付</div>
+    </div>
     <div class="order-dialog" id="orderDialog">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：0513-81055866</p>
@@ -146,9 +157,9 @@
                     <div v-if="radio2==3" class="choose-zhifubao">
                       <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
                     </div>
-                    <!-- <span v-if="radio2==6" class="choose-weixin">
+                    <span v-if="radio2==6" class="choose-weixin">
                       <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
-                    </span> -->
+                    </span>
                     <span v-if="radio2==9" class="choose-bank">
                       <img src="../../assets/zhuanzhuang.png" class="icon-mini" />转账汇款
                     </span>
@@ -162,11 +173,11 @@
                           </el-radio>
                         </el-col>
                       </div>
-                      <!-- <div class="pay-weixin">
+                      <div class="pay-weixin">
                         <el-radio :label="6">
                           <img src="../../assets/weixin.jpg" class="pay-img">
                         </el-radio>
-                      </div> -->
+                      </div>
                       <div class="pay-bank">
                         <el-radio :label="9">
                           <img src="../../assets/huikuan_big.png" class="pay-img" />
@@ -178,7 +189,7 @@
               </el-collapse>
             </div>
 
-            <div class="payment-body" v-if="radio2==3||radio2==6">
+            <div class="payment-body" v-if="radio2==3">
               <div class="payment-sub-body-zhifubao">
                 <div class="agreement_check">
                   完成支付则表示您同意
@@ -197,6 +208,29 @@
                       </span>
                     </div>
                     <span class="pay-price-btn_btn" @click="payNow">立即支付</span>
+                  </div>
+                </el-col>
+              </div>
+            </div>
+            <div class="payment-body" v-if="radio2==6">
+              <div class="payment-sub-body-zhifubao">
+                <div class="agreement_check">
+                  完成支付则表示您同意
+                  <span class="agreement" @click="showProtocol=true">《智聚用户付费协议》</span>
+                </div>
+                <el-col :span="18">
+                  <div class="agreement-con">&nbsp;</div>
+                </el-col>
+                <el-col :span="6">
+                  <div class="pay-price-btn f-fr">
+                    <div class="pay-price-btn_price_zhifubao">
+                      <span class="price_title">待付款:</span>
+                      <span class="price_account">
+                        <span class="price_account_icon">￥</span>
+                        {{orderDetail.summoney}}
+                      </span>
+                    </div>
+                    <span class="pay-price-btn_btn" @click="payWeixin()">立即支付</span>
                   </div>
                 </el-col>
               </div>
@@ -288,7 +322,7 @@
         <div class="order-head">
           <img src="../../assets/favicon.png" alt class="order-head-img" />
           <span class="order-head-title">智聚实训</span>
-          <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
+          <span class="el-icon-delete" @click="showNotice(orderItem.orderid)" v-if="orderItem.status==0"></span>
         </div>
         <div class="order-picture">
           <el-col :span="7">
@@ -388,6 +422,10 @@ export default {
       activeName: '1',
       orderNameZhifubao:"",
       typeflag:"",
+      payImg: "",
+      showWXPay: false,
+      wxPaySuccess: false,
+      waitPayTimer:""
     };
   },
   watch: {
@@ -396,9 +434,59 @@ export default {
         clearInterval(this.timer);
         this.timer = null;
       }
+    },
+    showWXPay: function(val) {
+      if(val&&!this.wxPaySuccess) {
+        this.waitPayTimer = setInterval(() => {
+                this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/wxpay_wechatOrderQuery.do?orderno=${this.orderDetail.orderno}`
+      })
+        .then(res => {
+          console.log("wait_pay");
+          if (res.data.data == "SUCCESS") {
+            clearInterval(this.waitPayTimer);
+            this.showWXPay = false;
+            console.log("pay_success")
+            this.$router.push({ path: `/SignUpSuccess` });
+          } 
+        })
+        .catch(function(err) {});
+              }, 5000);
+      } else if(!val) {
+        clearInterval(this.waitPayTimer);
+      }
     }
   },
   methods: {
+    closeWXPay() {
+      this.payShow=true;
+      this.showWXPay = false;
+    },
+    payWeixin() {
+      this.payShow=false;
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+      if (userInfo) {
+        this.userid = userInfo.userid;
+      }
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/wxpay_wechatPay.do?orderno=${this.orderDetail.orderno}&userid=${this.userid}`
+      })
+        .then(res => {
+          if (res.data.data == "error") {
+            this.$message({
+              message: "访问异常！",
+              type: "error",
+              center: true
+            });
+          } else {
+            this.showWXPay = true;
+            this.payImg = res.data.data;
+          }
+        })
+        .catch(function(err) {});
+    },
     getLoseEfficacyTime(timeString) {
       var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000*2;
       var d = new Date(loseEfficacyTime);   
@@ -1025,6 +1113,49 @@ var loseTime = year + "-" +
   text-align: right;
   margin-bottom: 5px;
   margin-top:25px;
+}
+.wx_pay_div {
+  position: fixed;
+  width: 1000%;
+  height: 1200px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 998;
+  margin: -200px 0 0 -3000px;
+}
+.wx_pay_img {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  z-index: 999;
+}
+.wx_pay_img img {
+  width: 250px;
+  height: 250px;
+  margin: 30px 0px 30px 225px;
+}
+.pay_money_need {
+  color: #fff;
+  width: 300px;
+  margin: 0px 0px 0px 200px;
+  text-align: center;
+  font-size: 18px;
+}
+.pay_money_need span {
+  color: #fff;
+  font-size: 28px;
+}
+.pay_money_notice {
+  color: #fff;
+  width: 300px;
+  margin: 0px 0px 0px 200px;
+  text-align: center;
+}
+.el-icon-close {
+  position: absolute;
+  color: #fff;
+  font-size: 50px;
+  margin: -100px 0px 0px 800px;
+  cursor: pointer;
 }
 </style>
 <style>

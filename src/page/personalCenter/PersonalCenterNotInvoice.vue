@@ -332,7 +332,7 @@
         <div class="order-head">
           <img src="../../assets/favicon.png" alt class="order-head-img" />
           <span class="order-head-title">智聚实训</span>
-          <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span>
+          <!-- <span class="el-icon-delete" @click="showNotice(orderItem.orderid)"></span> -->
         </div>
         <div class="order-picture">
           <el-col :span="7">
