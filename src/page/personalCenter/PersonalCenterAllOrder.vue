@@ -199,7 +199,7 @@
                           </el-radio>
                         </el-col>
                       </div>
-                      <div class="pay-weixin">
+                      <div class="pay-weixin" v-if="typeflag=='0'">
                         <el-radio :label="6">
                           <img src="../../assets/weixin.jpg" class="pay-img">
                         </el-radio>
