@@ -373,7 +373,7 @@ export default {
       })
         .then(res => {
           that.orderDetail = res.data.data;
-          that.typeflag = that.orderDetail.dlist[0].typeflag[0];
+          that.typeflag = that.orderDetail.dlist[0].typeflag;
           that.needOrderno = that.orderDetail.orderno;
         })
         .catch(function(err) {
