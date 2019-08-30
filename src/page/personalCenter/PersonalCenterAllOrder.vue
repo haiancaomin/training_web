@@ -1,64 +1,106 @@
 <template>
   <div id="PersonalCenterAllOrder">
-    <div class="wx_pay_div" v-if="showWXPay"></div>
-    <div class="wx_pay_img" v-if="showWXPay">
-      <div class="el-icon-close" @click="closeWXPay()"></div>
-      <div class="pay_money_need">
-        实付金额：¥
-        <span>{{orderDetail.summoney}}</span>
+    <el-dialog :visible.sync="showWXPay" width="800px" id="wx_pay_dialog">
+      <div class="logo_wx_div">
+        <img src="../../assets/favicon.png" alt class="wx_logo_img" />
+        <span class="wx_logo_title">智聚实训收银台</span>
       </div>
-      <img :src="payImg" />
-      <div class="pay_money_notice">请使用微信扫描</div>
-      <div class="pay_money_notice">二维码以完成支付</div>
-    </div>
-    <el-dialog :visible.sync="deleteOrderShow" width="400px" class="deleteOrderNotice">
-        <p>是否确认删除，删除执行后将无法撤销</p>
-        <div class="delete-order-operation">
-          <el-button type="primary" @click="deleteOrderShow=false">取消</el-button>
-          <el-button type="primary" plain @click="deleteOrder">确认</el-button>
+      <div class="pay_dialog_detail">
+        <div class="pay_money_need">
+          实付金额：
+          <span class="wx_pay_money_icon">¥</span>
+          <span class="wx_pay_money">{{orderDetail.summoney}}</span>
         </div>
-      </el-dialog>
-      
-      <el-dialog title="汇款须知" :visible.sync="noticeComment" width="600px" center class="noticeComment_dialog">
-        <p class="noticeComment_p">您汇款时是否备注了订单号 <span class="noticeComment_span">{{payCommentOrderID}}</span> </p>
-        <p class="noticeComment_p">如您忘记备注，请联系电话 0513-81055866！！</p>
-        <div class="noticeComment_operation">
-          <el-button type="primary"  class="operation_left"  @click="noticeComment=false">忘备注了</el-button>
-          <el-button type="primary" plain class="operation_right" @click="havaComment()">我备注了</el-button>
+        <div v-for="orderItem in orderDetail.dlist" :key="orderItem.detailid">
+          <div class="wx_pay_orderno">订单编号：{{orderDetail.orderno}}</div>
+          <div class="wx_pay_coursename">订单名称：{{orderItem.coursename}}（{{orderItem.menuname}}）</div>
         </div>
-      </el-dialog>
+      </div>
+      <div class="pay_wx_image_body">
+        <div class="pay_wx_wx_logo_div">
+          <img src="../../assets/WePayLogo.png" class="pay_wx_wx_logo_img" />
+        </div>
+        <div class="pay_wx_img_div">
+          <img :src="payImg" class="pay_wx_img" />
+        </div>
+        <div class="pay_money_notice">
+          <img src="../../assets/notice_wx.png" class="pay_money_notice_img" />
+        </div>
+      </div>
+    </el-dialog>
 
-      <el-dialog title="汇款须知" :visible.sync="noticeOnce" width="600px" center class="noticeOnce_dialog">
-        <p class="noticeOnce_p">如您使用转账汇款方式支付，请在</p>
-        <p class="noticeOnce_p">
-          汇款时备注订单编号
-          <span class="noticeOnce_span">{{noticeOrderNum}}</span>。
-        </p>
-        <p class="noticeOnce_p">如果您未备注此订单编号，汇款可能被退回，</p>
-        <p class="noticeOnce_p"><span class="noticeOnce_span">{{noticeLeftDay}}天{{noticeLeftHour}}小时{{noticeLeftMinute}}分{{noticeLeftSecond}}秒后未支付</span>, 
-     您的订单将被自动取消。</p>
-        <div class="noticeOnce_operation">
-          <el-button type="primary" @click="noticeOnce=false" class="operation_left">稍后再付</el-button>
-          <el-button type="primary" plain @click="IKnowOnce()" v-if="allowOperation" class="operation_right">我知道了</el-button>
-          <el-button
-            type="primary"
-            plain
-            disabled
-            v-if="!allowOperation"
-            class="operation_right"
-          >等待{{timeCount}}秒</el-button>
-        </div>
-      </el-dialog>
+    <el-dialog :visible.sync="deleteOrderShow" width="400px" class="deleteOrderNotice">
+      <p>是否确认删除，删除执行后将无法撤销</p>
+      <div class="delete-order-operation">
+        <el-button type="primary" @click="deleteOrderShow=false">取消</el-button>
+        <el-button type="primary" plain @click="deleteOrder">确认</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog
+      title="汇款须知"
+      :visible.sync="noticeComment"
+      width="600px"
+      center
+      class="noticeComment_dialog"
+    >
+      <p class="noticeComment_p">
+        您汇款时是否备注了订单号
+        <span class="noticeComment_span">{{payCommentOrderID}}</span>
+      </p>
+      <p class="noticeComment_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+      <div class="noticeComment_operation">
+        <el-button type="primary" class="operation_left" @click="noticeComment=false">忘备注了</el-button>
+        <el-button type="primary" plain class="operation_right" @click="havaComment()">我备注了</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog
+      title="汇款须知"
+      :visible.sync="noticeOnce"
+      width="600px"
+      center
+      class="noticeOnce_dialog"
+    >
+      <p class="noticeOnce_p">如您使用转账汇款方式支付，请在</p>
+      <p class="noticeOnce_p">
+        汇款时备注订单编号
+        <span class="noticeOnce_span">{{noticeOrderNum}}</span>。
+      </p>
+      <p class="noticeOnce_p">如果您未备注此订单编号，汇款可能被退回，</p>
+      <p class="noticeOnce_p">
+        <span
+          class="noticeOnce_span"
+        >{{noticeLeftDay}}天{{noticeLeftHour}}小时{{noticeLeftMinute}}分{{noticeLeftSecond}}秒后未支付</span>,
+        您的订单将被自动取消。
+      </p>
+      <div class="noticeOnce_operation">
+        <el-button type="primary" @click="noticeOnce=false" class="operation_left">稍后再付</el-button>
+        <el-button
+          type="primary"
+          plain
+          @click="IKnowOnce()"
+          v-if="allowOperation"
+          class="operation_right"
+        >我知道了</el-button>
+        <el-button
+          type="primary"
+          plain
+          disabled
+          v-if="!allowOperation"
+          class="operation_right"
+        >等待{{timeCount}}秒</el-button>
+      </div>
+    </el-dialog>
 
     <el-dialog title="物流单号" :visible.sync="expressShow" width="400px" center>
-        <div class="expressShow">
-          <p>物流单号：{{expressID}}</p>
-        </div>
-      </el-dialog>
+      <div class="expressShow">
+        <p>物流单号：{{expressID}}</p>
+      </div>
+    </el-dialog>
 
     <div class="order-dialog" id="orderDialog" center>
       <el-dialog :visible.sync="checkAgain" width="400px" class="checkAgain">
-        
         <p>开具发票上传后将无法修改，是否再次确认发票信息</p>
         <div class="delete-order-operation">
           <el-button type="primary" @click="checkAgainMore">再次确认</el-button>
@@ -126,15 +168,25 @@
           <p>4、如有公司需要变更参训学员的，请最晚在培训日前3个工作日，邮件通知变更，培训前3个工作日内变更的，需另支付保险费用。</p>
           <p>5、主办方收到报名信息后将尽快与您取得联系，在收到“付款通知书”五个工作日内将培训费用汇入指定账户</p>
         </el-dialog>
-        <el-dialog title="汇款须知" :visible.sync="noticeTwice" width="600px" append-to-body center class="noticeTwice_dialog">
-        <p class="noticeTwice_p">您汇款时是否备注了订单号 <span class="noticeTwice_span">{{noticeOrderNum}}</span> </p>
-        <p class="noticeTwice_p">如您忘记备注，请联系电话 0513-81055866！！</p>
+        <el-dialog
+          title="汇款须知"
+          :visible.sync="noticeTwice"
+          width="600px"
+          append-to-body
+          center
+          class="noticeTwice_dialog"
+        >
+          <p class="noticeTwice_p">
+            您汇款时是否备注了订单号
+            <span class="noticeTwice_span">{{noticeOrderNum}}</span>
+          </p>
+          <p class="noticeTwice_p">如您忘记备注，请联系电话 0513-81055866！！</p>
 
-        <div class="noticeTwice_operation">
-          <el-button type="primary"  class="operation_left" @click="noticeTwice=false">忘备注了</el-button>
-          <el-button type="primary" plain class="operation_right" @click="pay_and_comment()">我备注了</el-button>
-        </div>
-      </el-dialog>
+          <div class="noticeTwice_operation">
+            <el-button type="primary" class="operation_left" @click="noticeTwice=false">忘备注了</el-button>
+            <el-button type="primary" plain class="operation_right" @click="pay_and_comment()">我备注了</el-button>
+          </div>
+        </el-dialog>
         <div class="pay">
           <div class="pay-online">
             <div class="pay-online-body">
@@ -147,7 +199,11 @@
                   购买帐号：
                   <span>{{userName}}</span>
                 </div>
-                <div class="pay-online-tips">注意：购买后不支持转让，请确认订单信息后再支付，并在<span v-if="typeflag=='0'">24</span><span v-if="typeflag=='1'">48</span>小时内支付。</div>
+                <div class="pay-online-tips">
+                  注意：购买后不支持转让，请确认订单信息后再支付，并在
+                  <span v-if="typeflag=='0'">24</span>
+                  <span v-if="typeflag=='1'">48</span>小时内支付。
+                </div>
                 <p class="info-notice">注：请仔细确认报名人员，付款成功后，无法更换！</p>
               </div>
 
@@ -174,17 +230,17 @@
                   </div>
                   <div class="meal_price">￥{{orderItem.money}}</div>
                 </div>
-              </div> -->
+              </div>-->
 
               <div class="pay-type">支付方式</div>
               <el-collapse accordion v-model="activeName" id="pay_choose">
                 <el-collapse-item name="1">
                   <template slot="title">
                     <div v-if="radio2==3" class="choose-zhifubao">
-                      <img src="../../assets/zhifubao_mini.png" class="icon-mini">支付宝
+                      <img src="../../assets/zhifubao_mini.png" class="icon-mini" />支付宝
                     </div>
                     <span v-if="radio2==6" class="choose-weixin">
-                      <img src="../../assets/weixin_mini.png" class="icon-mini">微信支付
+                      <img src="../../assets/weixin_mini.png" class="icon-mini" />微信支付
                     </span>
                     <span v-if="radio2==9" class="choose-bank">
                       <img src="../../assets/zhuanzhuang.png" class="icon-mini" />转账汇款
@@ -195,13 +251,13 @@
                       <div class="pay-zhifubao" v-if="typeflag=='0'">
                         <el-col :span="24">
                           <el-radio :label="3">
-                            <img src="../../assets/zhifubao.jpg" class="pay-img">
+                            <img src="../../assets/zhifubao.jpg" class="pay-img" />
                           </el-radio>
                         </el-col>
                       </div>
                       <div class="pay-weixin" v-if="typeflag=='0'">
                         <el-radio :label="6">
-                          <img src="../../assets/weixin.jpg" class="pay-img">
+                          <img src="../../assets/weixin.jpg" class="pay-img" />
                         </el-radio>
                       </div>
                       <div class="pay-bank">
@@ -271,50 +327,60 @@
                   <div class="agreement-con">
                     <div class="offline-context">
                       <p style="margin-top:40px">
-                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号
+                        <span
+                          class="notice_must"
+                          style="color:#e4393c"
+                        >{{noticeOrderNum}}</span> ，便于财务核实。
                       </p>
-                     
+
                       <p>&nbsp;</p>
 
-                      <div v-if="typeflag=='0'">
-          <p>
-            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
-          </p>
-          <p>
-            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-          </p>
-          <p>
-            <span>地    址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-          </p>
-          <p>
-            <span>电    话：</span>0513-81055866
-          </p>
-          <p>
-            <span>开户银行：</span>中国银行南通经济技术开发区支行
-          </p>
-          <p>
-            <span>账    号：</span>484571289748
-          </p>
-          </div>
+                      <div>
+                        <p
+                          v-if="accountCompany!=''&&accountCompany!=undefined&&accountCompany!='undefined'"
+                        >
+                          <span>公司名称：</span>
+                          {{accountCompany}}
+                        </p>
+                        <p
+                          v-if="accountCreditcode!=''&&accountCreditcode!=undefined&&accountCreditcode!='undefined'"
+                        >
+                          <span>统一社会信用代码：</span>
+                          {{accountCreditcode}}
+                        </p>
+                        <p
+                          v-if="accountAddress!=''&&accountAddress!=undefined&&accountAddress!='undefined'"
+                        >
+                          <span>地 址：</span>
+                          {{accountAddress}}
+                        </p>
+                        <p
+                          v-if="accountPhone!=''&&accountPhone!=undefined&&accountPhone!='undefined'"
+                        >
+                          <span>电 话：</span>
+                          {{accountPhone}}
+                        </p>
+                        <p v-if="accountBank!=''&&accountBank!=undefined&&accountBank!='undefined'">
+                          <span>开户银行：</span>
+                          {{accountBank}}
+                        </p>
+                        <p
+                          v-if="accountAccount!=''&&accountAccount!=undefined&&accountAccount!='undefined'"
+                        >
+                          <span>账 号：</span>
+                          {{accountAccount}}
+                        </p>
+                      </div>
 
-          <div v-if="typeflag=='1'">
-          <p>
-            <span>户名：</span>上海汇绿电子商务有限公司
-          </p>
-          <p>
-            <span>开户银行：</span>建设银行上海市第二支行
-          </p>
-          <p>
-            <span>账 号：</span>31001502500050057342
-          </p>
-          </div>
-                     
                       <p>&nbsp;</p>
-                       <p >
-                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号 <span class="notice_must" style="color:#e4393c">{{noticeOrderNum}}</span> ，便于财务核实。
+                      <p>
+                        <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号
+                        <span
+                          class="notice_must"
+                          style="color:#e4393c"
+                        >{{noticeOrderNum}}</span> ，便于财务核实。
                       </p>
-                     
-                      
                     </div>
                   </div>
                 </el-col>
@@ -355,7 +421,11 @@
         <div class="order-head">
           <img src="../../assets/favicon.png" alt class="order-head-img" />
           <span class="order-head-title">智聚实训</span>
-          <span class="el-icon-delete" @click="showNotice(orderItem.orderid)" v-if="orderItem.status==0"></span>
+          <span
+            class="el-icon-delete"
+            @click="showNotice(orderItem.orderid)"
+            v-if="orderItem.status==0"
+          ></span>
         </div>
         <div class="order-picture">
           <el-col :span="7">
@@ -388,9 +458,19 @@
           <router-link :to="'/PersonalCenterOrderDetail/'+orderItem.orderid">
             <el-button type="primary" round plain>订单详情</el-button>
           </router-link>
-          <el-button type="primary" round @click="payNowShow(orderItem.orderid)"  v-if="orderItem.status==0">立即支付</el-button>
-          <el-button type="success" round v-if="orderItem.status==0" @click="payComment(orderItem.orderno,orderItem.orderid)">我已汇款</el-button>
-          
+          <el-button
+            type="primary"
+            round
+            @click="payNowShow(orderItem.orderid)"
+            v-if="orderItem.status==0"
+          >立即支付</el-button>
+          <el-button
+            type="success"
+            round
+            v-if="orderItem.status==0"
+            @click="payComment(orderItem.orderno,orderItem.orderid)"
+          >我已汇款</el-button>
+
           <el-button type="success" round disabled v-if="orderItem.status==1">等待确认</el-button>
           <el-button type="success" round @click="schedule = true" v-if="orderItem.status==2">开票进度</el-button>
           <el-button
@@ -461,32 +541,38 @@ export default {
       noticeOrderNum: "",
       noticeOnce: false,
       allowOperation: false,
-      timeCount:0,
-      timer:false,
-      noticeTwice:false,
-      payAndCommentOrderID:"",
-      account_info:false,
-      accountInfoOrderId:"",
-      noticeComment:false,
-      payCommentOrderID:"",
-      userSubmitOrderID:"",
-      noticeCreateDate:"",
-      noticeLeftDay:"",
-      noticeLeftHour:"",
-      noticeLeftMinute:"",
-      noticeLeftSecond:"",
-      activeName: '1',
-      orderNameZhifubao:"",
-      typeflag:"",
+      timeCount: 0,
+      timer: false,
+      noticeTwice: false,
+      payAndCommentOrderID: "",
+      account_info: false,
+      accountInfoOrderId: "",
+      noticeComment: false,
+      payCommentOrderID: "",
+      userSubmitOrderID: "",
+      noticeCreateDate: "",
+      noticeLeftDay: "",
+      noticeLeftHour: "",
+      noticeLeftMinute: "",
+      noticeLeftSecond: "",
+      activeName: "1",
+      orderNameZhifubao: "",
+      typeflag: "",
       payImg: "",
       showWXPay: false,
       wxPaySuccess: false,
-      waitPayTimer:""
+      waitPayTimer: "",
+      accountCompany: "",
+      accountBank: "",
+      accountAccount: "",
+      accountCreditcode: "",
+      accountAddress: "",
+      accountPhone: ""
     };
   },
   watch: {
     noticeOnce: function(val) {
-      if(!val) {
+      if (!val) {
         clearInterval(this.timer);
         this.timer = null;
       }
@@ -504,35 +590,36 @@ export default {
       }
     },
     showWXPay: function(val) {
-      if(val&&!this.wxPaySuccess) {
+      if (val && !this.wxPaySuccess) {
         this.waitPayTimer = setInterval(() => {
-                this.$ajax({
-        method: "get",
-        url: `${this.baseURL}/zjsxpt/wxpay_wechatOrderQuery.do?orderno=${this.orderDetail.orderno}`
-      })
-        .then(res => {
-          console.log("wait_pay");
-          if (res.data.data == "SUCCESS") {
-            clearInterval(this.waitPayTimer);
-            this.showWXPay = false;
-            console.log("pay_success")
-            this.$router.push({ path: `/SignUpSuccess` });
-          } 
-        })
-        .catch(function(err) {});
-              }, 5000);
-      } else if(!val) {
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/wxpay_wechatOrderQuery.do?orderno=${this.orderDetail.orderno}`
+          })
+            .then(res => {
+              console.log("wait_pay");
+              if (res.data.data == "SUCCESS") {
+                clearInterval(this.waitPayTimer);
+                this.showWXPay = false;
+                console.log("pay_success");
+                this.$router.push({ path: `/SignUpSuccess` });
+              }
+            })
+            .catch(function(err) {});
+        }, 5000);
+      } else if (!val) {
+        this.payShow = true;
         clearInterval(this.waitPayTimer);
       }
     }
   },
   methods: {
     closeWXPay() {
-      this.payShow=true;
+      this.payShow = true;
       this.showWXPay = false;
     },
     payWeixin() {
-      this.payShow=false;
+      this.payShow = false;
       var userInfo = JSON.parse(sessionStorage.getItem("user"));
       if (userInfo) {
         this.userid = userInfo.userid;
@@ -556,37 +643,43 @@ export default {
         .catch(function(err) {});
     },
     getLoseEfficacyTime(timeString) {
-      var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000*2;
-      var d = new Date(loseEfficacyTime);   
+      var loseEfficacyTime = Date.parse(new Date(timeString)) + 86400000 * 2;
+      var d = new Date(loseEfficacyTime);
       var year = d.getFullYear();
-      var month = d.getMonth()+1;
-     
-       if(month<10) {
-        month = "0"+month;
+      var month = d.getMonth() + 1;
+
+      if (month < 10) {
+        month = "0" + month;
       }
       var day = d.getDate();
-      if(day<10) {
+      if (day < 10) {
         day += "0";
       }
       var hour = d.getHours();
-      if(hour<10) {
+      if (hour < 10) {
         hour += "0";
       }
       var minute = d.getMinutes();
-      if(minute<10) {
+      if (minute < 10) {
         minute += "0";
       }
       var second = d.getSeconds();
-      if(second<10) {
+      if (second < 10) {
         second += "0";
       }
 
-var loseTime = year + "-" + 
-           month + "-" +
-           day + " " + 
-          hour + ":" + 
-           minute + ":" + 
-           second;
+      var loseTime =
+        year +
+        "-" +
+        month +
+        "-" +
+        day +
+        " " +
+        hour +
+        ":" +
+        minute +
+        ":" +
+        second;
       return loseTime;
     },
     havaComment() {
@@ -610,13 +703,12 @@ var loseTime = year + "-" +
           console.log(err);
         });
     },
-    payComment(orderno,orderid) {
-      
-      this.noticeComment=true;
+    payComment(orderno, orderid) {
+      this.noticeComment = true;
       this.userSubmitOrderID = orderid;
       this.payCommentOrderID = orderno;
     },
-   
+
     pay_and_comment() {
       this.$ajax({
         method: "post",
@@ -643,8 +735,35 @@ var loseTime = year + "-" +
       this.noticeTwice = true;
     },
     IKnowOnce() {
-      this.payShow=true;
-      this.noticeOnce=false;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/account_getAccountByParams.do?courseid=${this.orderDetail.dlist[0].courseid}&city=${this.orderDetail.dlist[0].city}&trainaddress=${this.orderDetail.dlist[0].address}`
+      })
+        .then(res => {
+          if (res.data.data.company) {
+            this.accountCompany = res.data.data.company;
+          }
+          if (res.data.data.bank) {
+            this.accountBank = res.data.data.bank;
+          }
+          if (res.data.data.account) {
+            this.accountAccount = res.data.data.account;
+          }
+          if (res.data.data.creditcode) {
+            this.accountCreditcode = res.data.data.creditcode;
+          }
+          if (res.data.data.address) {
+            this.accountAddress = res.data.data.address;
+          }
+          if (res.data.data.phone) {
+            this.accountPhone = res.data.data.phone;
+          }
+          this.payShow = true;
+          this.noticeOnce = false;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     getInvoiceInfo(chooseid) {
       this.$ajax({
@@ -686,34 +805,43 @@ var loseTime = year + "-" +
         url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${orderid}`
       })
         .then(res => {
-          this.payAndCommentOrderID=orderid;
+          this.payAndCommentOrderID = orderid;
           this.orderDetail = res.data.data;
-   
+
           this.noticeOnce = true;
           this.noticeOrderNum = this.orderDetail.orderno;
           this.noticeCreateDate = this.orderDetail.createdate;
-          this.typeflag= this.orderDetail.dlist[0].typeflag;
+          this.typeflag = this.orderDetail.dlist[0].typeflag;
           console.log(this.typeflag);
-          var loseEfficacyTime='';
-          if(this.typeflag == "0") {
-            loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000;
-          } else if(this.typeflag == "1"){
-            loseEfficacyTime = Date.parse(new Date(this.orderDetail.createdate)) + 86400000*2;
+          var loseEfficacyTime = "";
+          if (this.typeflag == "0") {
+            loseEfficacyTime =
+              Date.parse(new Date(this.orderDetail.createdate)) + 86400000;
+          } else if (this.typeflag == "1") {
+            loseEfficacyTime =
+              Date.parse(new Date(this.orderDetail.createdate)) + 86400000 * 2;
           }
-           
-           var now = (new Date()).getTime();
+
+          var now = new Date().getTime();
           var leftTime = loseEfficacyTime - now;
-          var leftDay = parseInt(leftTime/(3600*24*1000));
-          var leftHour = parseInt(leftTime/(3600*1000)-leftDay*24);
-          var leftMinute = parseInt(leftTime/(60*1000)-leftDay*24*60-leftHour*60);
-          var leftSecond = parseInt(leftTime/1000-leftDay*24*3600-leftHour*3600-leftMinute*60);
-     
-           this.noticeLeftDay = leftDay;
-      this.noticeLeftHour= leftHour;
-      this.noticeLeftMinute=leftMinute;
-      this.noticeLeftSecond=leftSecond;
+          var leftDay = parseInt(leftTime / (3600 * 24 * 1000));
+          var leftHour = parseInt(leftTime / (3600 * 1000) - leftDay * 24);
+          var leftMinute = parseInt(
+            leftTime / (60 * 1000) - leftDay * 24 * 60 - leftHour * 60
+          );
+          var leftSecond = parseInt(
+            leftTime / 1000 -
+              leftDay * 24 * 3600 -
+              leftHour * 3600 -
+              leftMinute * 60
+          );
+
+          this.noticeLeftDay = leftDay;
+          this.noticeLeftHour = leftHour;
+          this.noticeLeftMinute = leftMinute;
+          this.noticeLeftSecond = leftSecond;
           const TIME_COUNT = 5;
-          
+
           if (!this.timer) {
             this.timeCount = TIME_COUNT;
             this.allowOperation = false;
@@ -852,26 +980,23 @@ var loseTime = year + "-" +
       this.checkAgain = true;
     },
     payNow() {
-     
       this.orderNameZhifubao +=
         this.orderDetail.dlist[0].coursename +
         "（" +
         this.orderDetail.dlist[0].menuname +
         "）";
-        
+
       this.$ajax({
         method: "post",
         url: `${this.baseURL}/zjsxpt/course_doPost.do?WIDout_trade_no=${this.orderDetail.orderno}&WIDtotal_amount=${this.orderDetail.summoney}&WIDsubject=${this.orderNameZhifubao}&WIDbody=`
       })
         .then(res => {
-          const div = document.createElement('div'); // 创建div
-                            div.innerHTML = res.data; // 将返回的form 放入div
-                            document.body.appendChild(div);
-                            document.forms[0].submit();
+          const div = document.createElement("div"); // 创建div
+          div.innerHTML = res.data; // 将返回的form 放入div
+          document.body.appendChild(div);
+          document.forms[0].submit();
         })
-        .catch(function(err) {
-         
-        });
+        .catch(function(err) {});
     }
   },
   mounted() {
@@ -1647,7 +1772,7 @@ table {
   text-align: center;
 }
 .notice20190702 {
-  color:#F56C6C;
+  color: #f56c6c;
 }
 .info-notice {
   font-family: "微软雅黑";
@@ -1669,7 +1794,7 @@ table {
 .notice_must {
   font-size: 16px;
 }
-.noticeTwice_dialog p{
+.noticeTwice_dialog p {
   text-align: center;
   font-size: 16px;
 }
@@ -1677,29 +1802,29 @@ table {
   color: #f56c6c;
   font-weight: bold;
 }
-.noticeTwice_operation .operation_left{
+.noticeTwice_operation .operation_left {
   margin-left: 125px;
 }
-.noticeTwice_operation{
+.noticeTwice_operation {
   margin-top: 50px;
 }
-.account_info_operation .el-button{
-  margin-right:100px;
+.account_info_operation .el-button {
+  margin-right: 100px;
 }
 .account_info_operation {
-  margin-left:140px;
-  margin-top:40px;
+  margin-left: 140px;
+  margin-top: 40px;
 }
 .noticeComment_p {
   text-align: center;
   font-size: 16px;
 }
-.noticeComment_p span{
+.noticeComment_p span {
   color: #f56c6c;
   font-weight: bold;
 }
 .noticeComment_operation {
-  margin:40px 0px 0px 120px;
+  margin: 40px 0px 0px 120px;
 }
 .noticeOnce_operation {
   margin: 40px 0px 0px 120px;
@@ -1707,7 +1832,7 @@ table {
 .pay-price-btn_price_zhifubao {
   text-align: right;
   margin-bottom: 5px;
-  margin-top:25px;
+  margin-top: 25px;
 }
 .wx_pay_div {
   position: fixed;
@@ -1728,29 +1853,82 @@ table {
   height: 250px;
   margin: 30px 0px 30px 225px;
 }
-.pay_money_need {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 200px;
-  text-align: center;
-  font-size: 18px;
+.wx_logo_img {
+  width: 25px;
+  height: 25px;
 }
-.pay_money_need span {
-  color: #fff;
-  font-size: 28px;
+.wx_logo_title {
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logo_wx_div {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 20px;
+}
+.pay_dialog_detail {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: #f1f1f1;
+}
+.pay_money_need {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 16px;
+  color: #333;
+}
+.wx_pay_money_icon {
+  font-size: 16px;
+  color: #ff6600;
+}
+.wx_pay_money {
+  font-size: 30px;
+  color: #ff6600;
+  font-weight: bold;
+}
+.wx_pay_coursename {
+  position: absolute;
+  top: 56px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.wx_pay_orderno {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.pay_wx_img {
+  width: 170px;
+  height: 170px;
+}
+.pay_wx_img_div {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 0;
 }
 .pay_money_notice {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 200px;
+  width: 100%;
   text-align: center;
+  margin: 5px auto 0;
 }
-.el-icon-close {
+.pay_money_notice_img {
+  width: 150px;
+}
+.pay_wx_image_body {
+  position: relative;
+}
+.pay_wx_wx_logo_div {
   position: absolute;
-  color: #fff;
-  font-size: 50px;
-  margin: -100px 0px 0px 800px;
-  cursor: pointer;
+  left: 30px;
+}
+.pay_wx_wx_logo_img {
+  width: 100px;
 }
 </style>
 <style>
@@ -1767,5 +1945,8 @@ table {
 }
 .el-button + .el-button {
   margin-left: 0px;
+}
+#wx_pay_dialog .el-dialog__body {
+  padding: 0 0 30px;
 }
 </style>

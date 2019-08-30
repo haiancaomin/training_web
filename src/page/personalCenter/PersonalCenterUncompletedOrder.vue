@@ -1,16 +1,33 @@
 <template>
   <div id="PersonalCenterUncompletedOrder">
-    <div class="wx_pay_div" v-if="showWXPay"></div>
-    <div class="wx_pay_img" v-if="showWXPay">
-      <div class="el-icon-close" @click="closeWXPay()"></div>
-      <div class="pay_money_need">
-        实付金额：¥
-        <span>{{orderDetail.summoney}}</span>
+    <el-dialog :visible.sync="showWXPay" width="800px" id="wx_pay_dialog">
+      <div class="logo_wx_div">
+        <img src="../../assets/favicon.png" alt class="wx_logo_img" />
+        <span class="wx_logo_title">智聚实训收银台</span>
       </div>
-      <img :src="payImg" />
-      <div class="pay_money_notice">请使用微信扫描</div>
-      <div class="pay_money_notice">二维码以完成支付</div>
-    </div>
+      <div class="pay_dialog_detail">
+        <div class="pay_money_need">
+          实付金额：
+          <span class="wx_pay_money_icon">¥</span>
+          <span class="wx_pay_money">{{orderDetail.summoney}}</span>
+        </div>
+        <div v-for="orderItem in orderDetail.dlist" :key="orderItem.detailid">
+          <div class="wx_pay_orderno">订单编号：{{orderDetail.orderno}}</div>
+          <div class="wx_pay_coursename">订单名称：{{orderItem.coursename}}（{{orderItem.menuname}}）</div>
+        </div>
+      </div>
+      <div class="pay_wx_image_body">
+        <div class="pay_wx_wx_logo_div">
+          <img src="../../assets/WePayLogo.png" class="pay_wx_wx_logo_img" />
+        </div>
+        <div class="pay_wx_img_div">
+          <img :src="payImg" class="pay_wx_img" />
+        </div>
+        <div class="pay_money_notice">
+          <img src="../../assets/notice_wx.png" class="pay_money_notice_img" />
+        </div>
+      </div>
+    </el-dialog>
     <div class="order-dialog" id="orderDialog">
       <el-dialog title="联系方式" :visible.sync="contact" width="400px" id="contact">
         <p>电话：0513-81055866</p>
@@ -251,38 +268,42 @@
 
                       <p>&nbsp;</p>
 
-                      <div v-if="typeflag=='0'">
-          <p>
-            <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
-          </p>
-          <p>
-            <span>统一社会信用代码：</span>91320691MA1W0DXN1N
-          </p>
-          <p>
-            <span>地    址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
-          </p>
-          <p>
-            <span>电    话：</span>0513-81055866
-          </p>
-          <p>
-            <span>开户银行：</span>中国银行南通经济技术开发区支行
-          </p>
-          <p>
-            <span>账    号：</span>484571289748
-          </p>
-          </div>
-
-          <div v-if="typeflag=='1'">
-          <p>
-            <span>户名：</span>上海汇绿电子商务有限公司
-          </p>
-          <p>
-            <span>开户银行：</span>建设银行上海市第二支行
-          </p>
-          <p>
-            <span>账 号：</span>31001502500050057342
-          </p>
-          </div>
+                      <div>
+                        <p
+                          v-if="accountCompany!=''&&accountCompany!=undefined&&accountCompany!='undefined'"
+                        >
+                          <span>公司名称：</span>
+                          {{accountCompany}}
+                        </p>
+                        <p
+                          v-if="accountCreditcode!=''&&accountCreditcode!=undefined&&accountCreditcode!='undefined'"
+                        >
+                          <span>统一社会信用代码：</span>
+                          {{accountCreditcode}}
+                        </p>
+                        <p
+                          v-if="accountAddress!=''&&accountAddress!=undefined&&accountAddress!='undefined'"
+                        >
+                          <span>地 址：</span>
+                          {{accountAddress}}
+                        </p>
+                        <p
+                          v-if="accountPhone!=''&&accountPhone!=undefined&&accountPhone!='undefined'"
+                        >
+                          <span>电 话：</span>
+                          {{accountPhone}}
+                        </p>
+                        <p v-if="accountBank!=''&&accountBank!=undefined&&accountBank!='undefined'">
+                          <span>开户银行：</span>
+                          {{accountBank}}
+                        </p>
+                        <p
+                          v-if="accountAccount!=''&&accountAccount!=undefined&&accountAccount!='undefined'"
+                        >
+                          <span>账 号：</span>
+                          {{accountAccount}}
+                        </p>
+                      </div>
                       <p>&nbsp;</p>
                       <p>
                         <span style="color:#e4393c">汇款须知：</span>汇款请务必填写备注，备注信息为订单号
@@ -425,7 +446,13 @@ export default {
       payImg: "",
       showWXPay: false,
       wxPaySuccess: false,
-      waitPayTimer:""
+      waitPayTimer:"",
+      accountCompany: "",
+      accountBank: "",
+      accountAccount: "",
+      accountCreditcode: "",
+      accountAddress: "",
+      accountPhone: ""
     };
   },
   watch: {
@@ -454,6 +481,7 @@ export default {
         .catch(function(err) {});
               }, 5000);
       } else if(!val) {
+        this.payShow = true;
         clearInterval(this.waitPayTimer);
       }
     }
@@ -574,8 +602,35 @@ var loseTime = year + "-" +
       this.noticeTwice = true;
     },
     IKnowOnce() {
-      this.payShow = true;
-      this.noticeOnce = false;
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/account_getAccountByParams.do?courseid=${this.orderDetail.dlist[0].courseid}&city=${this.orderDetail.dlist[0].city}&trainaddress=${this.orderDetail.dlist[0].address}`
+      })
+        .then(res => {
+          if (res.data.data.company) {
+            this.accountCompany = res.data.data.company;
+          }
+          if (res.data.data.bank) {
+            this.accountBank = res.data.data.bank;
+          }
+          if (res.data.data.account) {
+            this.accountAccount = res.data.data.account;
+          }
+          if (res.data.data.creditcode) {
+            this.accountCreditcode = res.data.data.creditcode;
+          }
+          if (res.data.data.address) {
+            this.accountAddress = res.data.data.address;
+          }
+          if (res.data.data.phone) {
+            this.accountPhone = res.data.data.phone;
+          }
+          this.payShow = true;
+          this.noticeOnce = false;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     payNowShow(orderid) {
       this.$ajax({
@@ -1133,29 +1188,82 @@ var loseTime = year + "-" +
   height: 250px;
   margin: 30px 0px 30px 225px;
 }
-.pay_money_need {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 200px;
-  text-align: center;
-  font-size: 18px;
+.wx_logo_img {
+  width: 25px;
+  height: 25px;
 }
-.pay_money_need span {
-  color: #fff;
-  font-size: 28px;
+.wx_logo_title {
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logo_wx_div {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 20px;
+}
+.pay_dialog_detail {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: #f1f1f1;
+}
+.pay_money_need {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 16px;
+  color: #333;
+}
+.wx_pay_money_icon {
+  font-size: 16px;
+  color: #ff6600;
+}
+.wx_pay_money {
+  font-size: 30px;
+  color: #ff6600;
+  font-weight: bold;
+}
+.wx_pay_coursename {
+  position: absolute;
+  top: 56px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.wx_pay_orderno {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.pay_wx_img {
+  width: 170px;
+  height: 170px;
+}
+.pay_wx_img_div {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 0;
 }
 .pay_money_notice {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 200px;
+  width: 100%;
   text-align: center;
+  margin: 5px auto 0;
 }
-.el-icon-close {
+.pay_money_notice_img {
+  width: 150px;
+}
+.pay_wx_image_body {
+  position: relative;
+}
+.pay_wx_wx_logo_div {
   position: absolute;
-  color: #fff;
-  font-size: 50px;
-  margin: -100px 0px 0px 800px;
-  cursor: pointer;
+  left: 30px;
+}
+.pay_wx_wx_logo_img {
+  width: 100px;
 }
 </style>
 <style>
@@ -1172,5 +1280,8 @@ var loseTime = year + "-" +
 }
 .el-button + .el-button {
   margin-left: 0px;
+}
+#wx_pay_dialog .el-dialog__body {
+  padding: 0 0 30px;
 }
 </style>

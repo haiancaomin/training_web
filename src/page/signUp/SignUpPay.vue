@@ -1,16 +1,33 @@
 <template>
   <div id="SignUpPay">
-    <div class="wx_pay_div" v-if="showWXPay"></div>
-    <div class="wx_pay_img" v-if="showWXPay">
-      <div class="el-icon-close" @click="showWXPay=false"></div>
-      <div class="pay_money_need">
-        实付金额：¥
-        <span>{{orderDetail.summoney}}</span>
+    <el-dialog :visible.sync="showWXPay" width="800px" id="wx_pay_dialog">
+      <div class="logo_wx_div">
+        <img src="../../assets/favicon.png" alt class="wx_logo_img" />
+        <span class="wx_logo_title">智聚实训收银台</span>
       </div>
-      <img :src="payImg" />
-      <div class="pay_money_notice">请使用微信扫描</div>
-      <div class="pay_money_notice">二维码以完成支付</div>
-    </div>
+      <div class="pay_dialog_detail">
+        <div class="pay_money_need">
+          实付金额：
+          <span class="wx_pay_money_icon">¥</span>
+          <span class="wx_pay_money">{{orderDetail.summoney}}</span>
+        </div>
+        <div v-for="orderItem in orderDetail.dlist" :key="orderItem.detailid">
+          <div class="wx_pay_orderno">订单编号：{{orderDetail.orderno}}</div>
+          <div class="wx_pay_coursename">订单名称：{{orderItem.coursename}}（{{orderItem.menuname}}）</div>
+        </div>
+      </div>
+      <div class="pay_wx_image_body">
+        <div class="pay_wx_wx_logo_div">
+          <img src="../../assets/WePayLogo.png" class="pay_wx_wx_logo_img" />
+        </div>
+        <div class="pay_wx_img_div">
+          <img :src="payImg" class="pay_wx_img" />
+        </div>
+        <div class="pay_money_notice">
+          <img src="../../assets/notice_wx.png" class="pay_money_notice_img" />
+        </div>
+      </div>
+    </el-dialog>
     <div clsss="pay-online" v-show="notPay">
       <el-dialog title="报名人员信息" :visible.sync="showTable" width="500px" center>
         <el-table :data="tableData" border max-height="400" style="width: 100%">
@@ -44,36 +61,32 @@
           </p>
           <p>&nbsp;</p>
 
-          <div v-if="typeflag=='0'">
-            <p>
-              <span>公司名称：</span>智聚装配式绿色建筑创新中心南通有限公司
+          <div>
+            <p v-if="accountCompany!=''&&accountCompany!=undefined&&accountCompany!='undefined'">
+              <span>公司名称：</span>
+              {{accountCompany}}
             </p>
-            <p>
-              <span>统一社会信用代码：</span>91320691MA1W0DXN1N
+            <p
+              v-if="accountCreditcode!=''&&accountCreditcode!=undefined&&accountCreditcode!='undefined'"
+            >
+              <span>统一社会信用代码：</span>
+              {{accountCreditcode}}
             </p>
-            <p>
-              <span>地 址：</span>南通市开发区通盛大道188号创业外包服务中心C座606室
+            <p v-if="accountAddress!=''&&accountAddress!=undefined&&accountAddress!='undefined'">
+              <span>地 址：</span>
+              {{accountAddress}}
             </p>
-            <p>
-              <span>电 话：</span>0513-81055866
+            <p v-if="accountPhone!=''&&accountPhone!=undefined&&accountPhone!='undefined'">
+              <span>电 话：</span>
+              {{accountPhone}}
             </p>
-            <p>
-              <span>开户银行：</span>中国银行南通经济技术开发区支行
+            <p v-if="accountBank!=''&&accountBank!=undefined&&accountBank!='undefined'">
+              <span>开户银行：</span>
+              {{accountBank}}
             </p>
-            <p>
-              <span>账 号：</span>484571289748
-            </p>
-          </div>
-
-          <div v-if="typeflag=='1'">
-            <p>
-              <span>户名：</span>上海汇绿电子商务有限公司
-            </p>
-            <p>
-              <span>开户银行：</span>建设银行上海市第二支行
-            </p>
-            <p>
-              <span>账 号：</span>31001502500050057342
+            <p v-if="accountAccount!=''&&accountAccount!=undefined&&accountAccount!='undefined'">
+              <span>账 号：</span>
+              {{accountAccount}}
             </p>
           </div>
           <p id="last_line_notice">
@@ -355,7 +368,13 @@ export default {
       payImg: "",
       showWXPay: false,
       wxPaySuccess: false,
-      waitPayTimer:""
+      waitPayTimer: "",
+      accountCompany: "",
+      accountBank: "",
+      accountAccount: "",
+      accountCreditcode: "",
+      accountAddress: "",
+      accountPhone: ""
     };
   },
 
@@ -372,6 +391,7 @@ export default {
         url: `${this.baseURL}/zjsxpt/course_findOrderInfoByOrderid.do?orderid=${val.orderID}`
       })
         .then(res => {
+          console.log(res.data.data);
           that.orderDetail = res.data.data;
           that.typeflag = that.orderDetail.dlist[0].typeflag[0];
           that.needOrderno = that.orderDetail.orderno;
@@ -389,24 +409,24 @@ export default {
       }
     },
     showWXPay: function(val) {
-      if(val&&!this.wxPaySuccess) {
+      if (val && !this.wxPaySuccess) {
         this.waitPayTimer = setInterval(() => {
-                this.$ajax({
-        method: "get",
-        url: `${this.baseURL}/zjsxpt/wxpay_wechatOrderQuery.do?orderno=${this.orderDetail.orderno}`
-      })
-        .then(res => {
-          console.log("wait_pay");
-          if (res.data.data == "SUCCESS") {
-            clearInterval(this.waitPayTimer);
-            this.showWXPay = false;
-            console.log("pay_success")
-            this.$router.push({ path: `/SignUpSuccess` });
-          } 
-        })
-        .catch(function(err) {});
-              }, 5000);
-      } else if(!val) {
+          this.$ajax({
+            method: "get",
+            url: `${this.baseURL}/zjsxpt/wxpay_wechatOrderQuery.do?orderno=${this.orderDetail.orderno}`
+          })
+            .then(res => {
+              console.log("wait_pay");
+              if (res.data.data == "SUCCESS") {
+                clearInterval(this.waitPayTimer);
+                this.showWXPay = false;
+                console.log("pay_success");
+                this.$router.push({ path: `/SignUpSuccess` });
+              }
+            })
+            .catch(function(err) {});
+        }, 5000);
+      } else if (!val) {
         clearInterval(this.waitPayTimer);
       }
     }
@@ -436,21 +456,52 @@ export default {
         .catch(function(err) {});
     },
     clickWait() {
-      this.showAccountDialog = true;
-      const TIME_COUNT = 10;
-      if (!this.timer) {
-        this.timeCount = TIME_COUNT;
-        this.allowOperation = false;
-        this.timer = setInterval(() => {
-          if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
-            this.timeCount--;
-          } else {
-            this.allowOperation = true;
-            clearInterval(this.timer);
-            this.timer = null;
+      console.log(this.orderDetail.dlist[0].courseid);
+      console.log(this.orderDetail.dlist[0].city);
+      console.log(this.orderDetail.dlist[0].address);
+      this.$ajax({
+        method: "get",
+        url: `${this.baseURL}/zjsxpt/account_getAccountByParams.do?courseid=${this.orderDetail.dlist[0].courseid}&city=${this.orderDetail.dlist[0].city}&trainaddress=${this.orderDetail.dlist[0].address}`
+      })
+        .then(res => {
+          console.log(res.data.data);
+          if (res.data.data.company) {
+            this.accountCompany = res.data.data.company;
           }
-        }, 1000);
-      }
+          if (res.data.data.bank) {
+            this.accountBank = res.data.data.bank;
+          }
+          if (res.data.data.account) {
+            this.accountAccount = res.data.data.account;
+          }
+          if (res.data.data.creditcode) {
+            this.accountCreditcode = res.data.data.creditcode;
+          }
+          if (res.data.data.address) {
+            this.accountAddress = res.data.data.address;
+          }
+          if (res.data.data.phone) {
+            this.accountPhone = res.data.data.phone;
+          }
+          this.showAccountDialog = true;
+          const TIME_COUNT = 10;
+          if (!this.timer) {
+            this.timeCount = TIME_COUNT;
+            this.allowOperation = false;
+            this.timer = setInterval(() => {
+              if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                this.timeCount--;
+              } else {
+                this.allowOperation = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     checkEmp(empList) {
       this.$ajax({
@@ -795,14 +846,6 @@ export default {
 #last_line_notice {
   margin: 30px 0px 0px 0px;
 }
-.wx_pay_div {
-  position: fixed;
-  width: 1000%;
-  height: 1200px;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 998;
-  margin: -200px 0 0 -3000px;
-}
 .wx_pay_img {
   position: fixed;
   width: 300px;
@@ -814,29 +857,82 @@ export default {
   height: 250px;
   margin: 30px 0px 30px 325px;
 }
-.pay_money_need {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 300px;
-  text-align: center;
-  font-size: 18px;
+.wx_logo_img {
+  width: 25px;
+  height: 25px;
 }
-.pay_money_need span {
-  color: #fff;
-  font-size: 28px;
+.wx_logo_title {
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logo_wx_div {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 20px;
+}
+.pay_dialog_detail {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: #f1f1f1;
+}
+.pay_money_need {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 16px;
+  color: #333;
+}
+.wx_pay_money_icon {
+  font-size: 16px;
+  color: #ff6600;
+}
+.wx_pay_money {
+  font-size: 30px;
+  color: #ff6600;
+  font-weight: bold;
+}
+.wx_pay_coursename {
+  position: absolute;
+  top: 56px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.wx_pay_orderno {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 13px;
+  color: #333;
+}
+.pay_wx_img {
+  width: 170px;
+  height: 170px;
+}
+.pay_wx_img_div {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 0;
 }
 .pay_money_notice {
-  color: #fff;
-  width: 300px;
-  margin: 0px 0px 0px 300px;
+  width: 100%;
   text-align: center;
+  margin: 5px auto 0;
 }
-.el-icon-close {
+.pay_money_notice_img {
+  width: 150px;
+}
+.pay_wx_image_body {
+  position: relative;
+}
+.pay_wx_wx_logo_div {
   position: absolute;
-  color: #fff;
-  font-size: 50px;
-  margin: -100px 0px 0px 900px;
-  cursor: pointer;
+  left: 30px;
+}
+.pay_wx_wx_logo_img {
+  width: 100px;
 }
 </style>
 <style>
@@ -849,5 +945,8 @@ export default {
 }
 #pay_choose .el-collapse-item__content {
   padding-bottom: 15px;
+}
+#wx_pay_dialog .el-dialog__body {
+  padding: 0 0 30px;
 }
 </style>
