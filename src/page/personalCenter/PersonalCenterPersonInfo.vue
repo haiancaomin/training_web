@@ -33,7 +33,7 @@
       </div>
       <div class="emp_add_img_operation">
         <el-button type="primary" @click="submitEmpImg" class="submit_emp_img">上传</el-button>
-        <el-button type="primary" plain @click="addEmpImgShow=false" class="cancel_emp_img">取消</el-button>
+        <el-button type="primary" plain @click="addEmpImgShow=false" id="cancel_emp_img">取消</el-button>
       </div>
     </el-dialog>
     <el-dialog :visible.sync="deleteCheckDialog" width="300px" class="deleteCheck_dialog">
@@ -291,7 +291,9 @@ export default {
   },
   computed: {
     uploadUrl: function() {
-      return this.baseURL + "/zjsxpt/attachment_uploadFileForPhoto.do";
+      var userInfo = JSON.parse(sessionStorage.getItem("user"));
+     
+      return this.baseURL + "/zjsxpt/attachment_uploadFileForPhoto.do?name=&userid="+userInfo.userid;
     }
   },
   watch: {
@@ -638,7 +640,7 @@ export default {
 .submit_emp_img {
   margin-left: 150px;
 }
-.cancel_emp_img {
+#cancel_emp_img {
   margin-left: 100px;
 }
 .notice_detail1 {
