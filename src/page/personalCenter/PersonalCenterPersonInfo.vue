@@ -152,7 +152,7 @@
     <el-table
       :data="tableData"
       border
-      max-height="500"
+      max-height="450"
       stripe
       v-loading="loading"
       id="personal_info_el_table"
