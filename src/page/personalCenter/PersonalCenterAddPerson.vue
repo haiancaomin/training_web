@@ -29,80 +29,95 @@
     <div v-if="oneAdd" class="form-body">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" id="form_box">
         <div class="div_left">
-        <el-form-item prop="empname">
-          <el-input
-            v-model="ruleForm.empname"
-            placeholder="请输入姓名"
-            class="person-add-input"
-            id="empNameFocus"
-          >
-            <i slot="prefix" class="iconfont" id="iconName">&#xe614;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="empname">
+            <el-input
+              v-model="ruleForm.empname"
+              placeholder="请输入姓名"
+              class="person-add-input"
+              id="empNameFocus"
+            >
+              <i slot="prefix" class="iconfont" id="iconName">&#xe614;</i>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item prop="sex">
-          <el-select v-model="ruleForm.sex" placeholder="请选择性别" class="person-add-select">
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
-            <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
-          </el-select>
-        </el-form-item>
+          <el-form-item prop="sex">
+            <el-select v-model="ruleForm.sex" placeholder="请选择性别" class="person-add-select">
+              <el-option label="男" value="0"></el-option>
+              <el-option label="女" value="1"></el-option>
+              <i slot="prefix" class="iconfont" id="iconSex">&#xe65c;</i>
+            </el-select>
+          </el-form-item>
 
-        <el-form-item prop="age">
-          <el-input v-model="ruleForm.age" placeholder="请输入年龄" class="person-add-input" type="number">
-            <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="age">
+            <el-input
+              v-model="ruleForm.age"
+              placeholder="请输入年龄"
+              class="person-add-input"
+              type="number"
+            >
+              <i slot="prefix" class="iconfont" id="iconAge">&#xe73b;</i>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item prop="worktype">
-          <el-input v-model="ruleForm.worktype" placeholder="请输入工种" class="person-add-input">
-            <i slot="prefix" class="iconfont" id="iconWorktype">&#xe626;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="worktype">
+            <el-select v-model="ruleForm.worktype" placeholder="请输入工种" class="person-add-select">
+              <el-option label="施工员（测量员）" value="施工员（测量员）"></el-option>
+              <el-option label="质量员" value="质量员"></el-option>
+              <el-option label="安全员" value="安全员"></el-option>
+              <el-option label="标准员" value="标准员"></el-option>
+              <el-option label="材料员" value="材料员"></el-option>
+              <el-option label="机械员" value="机械员"></el-option>
+              <el-option label="劳务员(预算员)" value="劳务员(预算员)"></el-option>
+              <el-option label="资料员" value="资料员"></el-option>
+              <el-option label="项目经理" value="项目经理"></el-option>
+              <el-option label="其它" value="其它"></el-option>
+              <i slot="prefix" class="iconfont" id="iconWorktype">&#xe626;</i>
+            </el-select>
+          </el-form-item>
         </div>
         <div class="div_right">
-        <el-form-item prop="education">
-          <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
-            <el-option label="小学及以下" value="小学及以下"></el-option>
-            <el-option label="初中" value="初中"></el-option>
-            <el-option label="中专" value="中专"></el-option>
-            <el-option label="高中" value="高中"></el-option>
-            <el-option label="大专" value="大专"></el-option>
-            <el-option label="本科" value="本科"></el-option>
-            <el-option label="硕士" value="硕士"></el-option>
-            <el-option label="博士及以上" value="博士及以上"></el-option>
-            <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
-          </el-select>
-        </el-form-item>
+          <el-form-item prop="education">
+            <el-select v-model="ruleForm.education" placeholder="请输入学历" class="person-add-select">
+              <el-option label="小学及以下" value="小学及以下"></el-option>
+              <el-option label="初中" value="初中"></el-option>
+              <el-option label="中专" value="中专"></el-option>
+              <el-option label="高中" value="高中"></el-option>
+              <el-option label="大专" value="大专"></el-option>
+              <el-option label="本科" value="本科"></el-option>
+              <el-option label="硕士" value="硕士"></el-option>
+              <el-option label="博士及以上" value="博士及以上"></el-option>
+              <i slot="prefix" class="iconfont" id="iconSex">&#xe8c8;</i>
+            </el-select>
+          </el-form-item>
 
-        <el-form-item prop="cardno">
-          <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
-            <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="cardno">
+            <el-input v-model="ruleForm.cardno" placeholder="请输入身份证号" class="person-add-input">
+              <i slot="prefix" class="iconfont" id="iconCardno">&#xe7de;</i>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item prop="phone">
-          <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
-            <i slot="prefix" class="iconfont" id="iconPhone">&#xe745;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="phone">
+            <el-input v-model="ruleForm.phone" placeholder="请输入手机号码" class="person-add-input">
+              <i slot="prefix" class="iconfont" id="iconPhone">&#xe745;</i>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item prop="address">
-          <el-input v-model="ruleForm.address" placeholder="请输入工作地" class="person-add-input">
-            <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
-          </el-input>
-        </el-form-item>
+          <el-form-item prop="address">
+            <el-input v-model="ruleForm.address" placeholder="请输入工作地" class="person-add-input">
+              <i slot="prefix" class="iconfont" id="iconAddress">&#xe601;</i>
+            </el-input>
+          </el-form-item>
         </div>
         <div class="add_person_div">
-        <el-form-item>
-          <div class="worker-add">
-            <el-button
-              type="primary"
-              @click="submitForm('ruleForm')"
-              class="login-self"
-            >添&nbsp;&nbsp;&nbsp;&nbsp;加</el-button>
-          </div>
-        </el-form-item>
+          <el-form-item>
+            <div class="worker-add">
+              <el-button
+                type="primary"
+                @click="submitForm('ruleForm')"
+                class="login-self"
+              >添&nbsp;&nbsp;&nbsp;&nbsp;加</el-button>
+            </div>
+          </el-form-item>
         </div>
       </el-form>
     </div>
@@ -165,7 +180,6 @@ export default {
         education: [{ required: true, message: "请选择学历", trigger: "blur" }],
         worktype: [
           { required: true, message: "请输入工种", trigger: "blur" },
-          { min: 1, max: 5, message: "长度在 1 到 5个字符", trigger: "blur" }
         ],
         cardno: [
           { required: true, message: "请输入身份证号", trigger: "blur" },
@@ -251,17 +265,7 @@ export default {
         if (valid) {
           this.$ajax({
             method: "post",
-            url: `${
-              this.baseURL
-            }/zjsxpt/employee_saveEmployee.do?employee={empname:'${
-              this.ruleForm.empname
-            }',sex:${this.ruleForm.sex},age:'${this.ruleForm.age}',worktype:'${
-              this.ruleForm.worktype
-            }',cardno:'${this.ruleForm.cardno}',phone:'${
-              this.ruleForm.phone
-            }',address:'${this.ruleForm.address}',education:'${
-              this.ruleForm.education
-            }'}&userid=${userid}`
+            url: `${this.baseURL}/zjsxpt/employee_saveEmployee.do?employee={empname:'${this.ruleForm.empname}',sex:${this.ruleForm.sex},age:'${this.ruleForm.age}',worktype:'${this.ruleForm.worktype}',cardno:'${this.ruleForm.cardno}',phone:'${this.ruleForm.phone}',address:'${this.ruleForm.address}',education:'${this.ruleForm.education}'}&userid=${userid}`
           })
             .then(res => {
               if (res.data.data == "0") {
@@ -418,15 +422,14 @@ export default {
 }
 .div_left {
   position: absolute;
-  margin:-260px 0px 0px -200px;
+  margin: -260px 0px 0px -200px;
 }
 .div_right {
   position: absolute;
-  margin:-260px 0px 0px 200px;
+  margin: -260px 0px 0px 200px;
 }
 .add_person_div {
-  
-  margin:300px 0px 0px 0px;
+  margin: 300px 0px 0px 0px;
 }
 </style>
 <style>
