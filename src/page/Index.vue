@@ -140,7 +140,8 @@
               </el-col>
             </el-row>
             <div class="index-contact">
-              <span class="contact-mobile">电话：0513-81055866</span>
+              <span class="contact-mobile">魏经理：18061809490</span>
+              <span class="contact-mobile">固话：0513-81055866</span>
               <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
               <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
             </div>

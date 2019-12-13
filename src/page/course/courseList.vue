@@ -59,7 +59,10 @@
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                     <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
+                    <div class="course_price_div" v-else>
+                      <sapn class="reminbi">￥</sapn>
+                      <span class="course_price_span">{{val.price}}/人</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,8 +123,11 @@
                     <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
-                   <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
+                    <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
+                    <div class="course_price_div" v-else>
+                      <sapn class="reminbi">￥</sapn>
+                      <span class="course_price_span">{{val.price}}/人</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -188,7 +194,10 @@
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
                     <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
+                    <div class="course_price_div" v-else>
+                      <sapn class="reminbi">￥</sapn>
+                      <span class="course_price_span">{{val.price}}/人</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -254,8 +263,11 @@
                     <div class="hava_no_course" v-if="val.flag=='false'">暂未开课</div>
                     <div class="course_name_div">{{val.coursename}}</div>
                     <div class="course_introdtction_div">{{val.introdtction}}</div>
-                   <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
-                    <div class="course_price_div" v-else><sapn class="reminbi">￥</sapn><span class="course_price_span">{{val.price}}/人</span></div>
+                    <div class="course_price_div_no_price" v-if="val.price=='待定'">价格待定</div>
+                    <div class="course_price_div" v-else>
+                      <sapn class="reminbi">￥</sapn>
+                      <span class="course_price_span">{{val.price}}/人</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -381,6 +393,12 @@ export default {
 </script>
 
 <style scoped>
+.course_name_div,
+.course_introdtction_div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 #course_body {
   width: 100%;
   min-width: 1220px;
@@ -857,7 +875,8 @@ export default {
   transition: all ease-in-out 0.3s;
   cursor: not-allowed;
 }
-.course_list_body:hover .signup_now,.course_list_body:hover .hava_no_course {
+.course_list_body:hover .signup_now,
+.course_list_body:hover .hava_no_course {
   color: rgba(94, 69, 255, 0.9);
 }
 .outline_body {
@@ -934,7 +953,6 @@ export default {
   }
 }
 .course_price_div {
-
   margin: 19px 0px 0px 10px;
   color: #fff;
   transition: all ease-in-out 0.3s;
@@ -946,7 +964,7 @@ export default {
   -webkit-animation-iteration-count: 1;
 }
 .reminbi {
-    font-size: 12px;
+  font-size: 12px;
 }
 .course_price_span {
   font-size: 20px;
