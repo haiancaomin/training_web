@@ -808,6 +808,7 @@ export default {
   margin: 30px 0px 0px 0px;
 }
 .teacher_div {
+  min-height: 250px;
   display: none;
   width: 1200px;
   margin: 40px 0px 0px -130px;
