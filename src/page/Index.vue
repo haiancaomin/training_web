@@ -143,7 +143,7 @@
               <span class="contact-mobile">魏经理：18061809490</span>
               <span class="contact-mobile">固话：0513-81055866</span>
               <span class="contact-mail">邮箱：MKT_Dept@zhjcx.cn</span>
-              <span class="contact-address">地址：南通市开发区通盛大道188号C座6楼</span>
+              <span class="contact-address">地址：江苏省南通市崇川区新开街道紫琅科技城16号楼8层</span>
             </div>
             <div id="map"></div>
           </div>
@@ -194,7 +194,7 @@
             >©2018-2019 All Rights Reserved 智聚装配式绿色建筑创新中心南通有限公司 版权所有</a>
           </p>
           <p>
-            <span class="our_company_address">地址：南通市开发区通盛大道188号C座6楼</span>
+            <span class="our_company_address">地址：江苏省南通市崇川区新开街道紫琅科技城16号楼8层</span>
             <span>联系电话： 0513-81055866</span>
             <span>(工作时间：工作日10点--17点)</span>
           </p>
@@ -355,7 +355,7 @@ export default {
     },
     initMap() {
       var map = new BMap.Map("map");
-      var point = new BMap.Point(120.9622853521, 31.9312175342);
+      var point = new BMap.Point(120.935266, 31.973797);
       map.centerAndZoom(point, 17);
       var marker = new BMap.Marker(point);
       map.addOverlay(marker);
@@ -375,10 +375,10 @@ export default {
 <style scoped>
 .font {
 
-  background:  url(../assets/font.png) no-repeat right
-    top;
+  background:  url(../assets/font.png) no-repeat center top;;
+  background-size: 50% 100%;
   width: 800px;
-  height: 300px;
+  height: 150px;
   float: left;
   margin: 150px 0px 0px 100px;
 }
